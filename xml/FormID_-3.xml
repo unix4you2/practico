@@ -2,42 +2,42 @@
 <objetos_practicos>
 	<descripcion>
 		<tipo_objeto>Formulario</tipo_objeto>
-		<version_practico>19.2</version_practico>
-		<tipo_exportacion>XML_IdDinamico</tipo_exportacion>
-		<sistema_origen>App</sistema_origen>
-		<version>1.0</version>
-		<usuario_generador>admin</usuario_generador>
-		<fecha_exportacion>2019-04-18</fecha_exportacion>
-		<hora_exportacion>20:48</hora_exportacion>
+		<version_practico></version_practico>
+		<tipo_exportacion>XML_IdEstatico</tipo_exportacion>
+		<sistema_origen></sistema_origen>
+		<version></version>
+		<usuario_generador></usuario_generador>
+		<fecha_exportacion>2019-08-26</fecha_exportacion>
+		<hora_exportacion>10:53</hora_exportacion>
 	</descripcion>
 	<core_formulario>
-	<id>LTE0</id>
-	<titulo>eyRNVUxUSUxBTkdfSW5mUGFyYW19</titulo>
+	<id>LTM=</id>
+	<titulo>eyRNVUxUSUxBTkdfQlRSZXBvcnRlQnVnc30=</titulo>
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
-	<tabla_datos>Y29yZV9pbmZvcm1l</tabla_datos>
+	<tabla_datos>Y29yZV9idWd0cmFja2Vy</tabla_datos>
 	<columnas>Mg==</columnas>
-	<javascript>ZnVuY3Rpb24gRnJtQXV0b1J1bigpDQogICAgew0KICAgICAgICAvL09jdWx0YSBib3RvbiBkZSBncmFmaWNvcyBzaSBlbCBmb3JtYXRvIGVzIHRhYmxhDQogICAgICAgIGlmKCQoIiNmb3JtYXRvX2ZpbmFsIikudmFsKCk9PSJUIikNCiAgICAgICAgICAgICQoIiNidG5fZ3JhZmljbyIpLmFkZENsYXNzKCdkaXNhYmxlZCcpOw0KICAgICAgICAvL09jdWx0YSBib3RvbiBkZSBhY2Npb25lcyBzaSBlbCBmb3JtYXRvIGVzIGdyYWZpY29zDQogICAgICAgIGlmKCQoIiNmb3JtYXRvX2ZpbmFsIikudmFsKCk9PSJHIikNCiAgICAgICAgICAgIHsNCiAgICAgICAgICAgICAgICAkKCIjYnRuX2FjY2lvbmVzX2FncmVnYXIiKS5hZGRDbGFzcygnZGlzYWJsZWQnKTsNCiAgICAgICAgICAgICAgICAkKCIjYnRuX2FjY2lvbmVzX2VkaXRhciIpLmFkZENsYXNzKCdkaXNhYmxlZCcpOw0KICAgICAgICAgICAgfQ0KICAgIH0NCg==</javascript>
+	<javascript>ZnVuY3Rpb24gRnJtQXV0b1J1bigpDQogICAgew0KICAgICAgICAvL0FjdHVhbGl6YSBlbCBtYXJjbyBkZSBsYSBpbWFnZW4gZGUgY2FwdHVyYSBjb24gbGEgcmVjaWJpZGENCiAgICAgICAgJCggZG9jdW1lbnQgKS5yZWFkeShmdW5jdGlvbigpIHsNCiAgICAgICAgICAgICAgICAkKCcjSW1hZ2VuVmlzdGFQcmV2aWFDYXB0dXJhJykuaHRtbCgnPGltZyBzcmM9IicrZG9jdW1lbnQuZGF0b3NidWcuYWRqdW50by52YWx1ZSsnIiB3aWR0aD0iMTAwJSIgYm9yZGVyPTA+Jyk7DQogICAgICAgIH0pOw0KICAgIH0NCg==</javascript>
 	<borde_visible>MA==</borde_visible>
 	<estilo_pestanas>bmF2LXRhYnM=</estilo_pestanas>
-	<id_html>ZGF0b3M=</id_html>
+	<id_html>ZGF0b3NidWc=</id_html>
 	<tipo_maquetacion>dHJhZGljaW9uYWw=</tipo_maquetacion>
 	<css_columnas></css_columnas>
 	</core_formulario>
 	<core_formulario_objeto>
-	<id>MTIzOTI=</id>
+	<id>MTQ3ODI=</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
-	<titulo>SUQ=</titulo>
-	<campo>aWQ=</campo>
+	<titulo>eyRNVUxUSUxBTkdfQlRGZWNoYUFwZXJ0dXJhfQ==</titulo>
+	<campo>ZmVjaGFfYXBlcnR1cmE=</campo>
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
-	<formulario>LTE0</formulario>
+	<formulario>LTM=</formulario>
 	<peso>MQ==</peso>
-	<columna>MQ==</columna>
-	<obligatorio>MQ==</obligatorio>
+	<columna>Mg==</columna>
+	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
-	<validacion_datos>bnVtZXJpY29fZW50ZXJv</validacion_datos>
+	<valor_predeterminado>eyRQQ09fRmVjaGFPcGVyYWNpb25HdWlvbmVzfSB7JFBDT19Ib3JhT3BlcmFjaW9uUHVudG9zfTowMA==</valor_predeterminado>
+	<validacion_datos></validacion_datos>
 	<etiqueta_busqueda></etiqueta_busqueda>
 	<ajax_busqueda>MA==</ajax_busqueda>
 	<valor_unico>MA==</valor_unico>
@@ -66,7 +66,7 @@
 	<formulario_campo_vinculo></formulario_campo_vinculo>
 	<formulario_campo_foraneo></formulario_campo_foraneo>
 	<condicion_filtrado_listas></condicion_filtrado_listas>
-	<pestana_objeto></pestana_objeto>
+	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
 	<personalizacion_tag></personalizacion_tag>
 	<modo_inline>MA==</modo_inline>
 	<imagen></imagen>
@@ -76,84 +76,29 @@
 	<valor_check_inactivo></valor_check_inactivo>
 	<valor_placeholder></valor_placeholder>
 	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>aWQ=</id_html>
+	<id_html>ZmVjaGFfYXBlcnR1cmE=</id_html>
 	<validacion_extras></validacion_extras>
-	<clase_contenedor></clase_contenedor>
+	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>MTIzOTM=</id>
-	<tipo>ZXRpcXVldGE=</tipo>
-	<titulo></titulo>
-	<campo></campo>
+	<id>MTQ3ODM=</id>
+	<tipo>dGV4dG9fY29ydG8=</tipo>
+	<titulo>eyRNVUxUSUxBTkdfQlRQcm95ZWN0b0Fzb2NpYWRvfQ==</titulo>
+	<campo>cHJveWVjdG8=</campo>
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
-	<formulario>LTE0</formulario>
+	<formulario>LTM=</formulario>
 	<peso>MQ==</peso>
-	<columna>MQ==</columna>
+	<columna>Mg==</columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
+	<valor_predeterminado>JE5vbWJyZV9BcGxpY2FjaW9u</valor_predeterminado>
 	<validacion_datos></validacion_datos>
 	<etiqueta_busqueda></etiqueta_busqueda>
 	<ajax_busqueda>MA==</ajax_busqueda>
 	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
-	<ancho>MA==</ancho>
-	<alto>MA==</alto>
-	<barra_herramientas>MA==</barra_herramientas>
-	<fila_unica>MQ==</fila_unica>
-	<lista_opciones></lista_opciones>
-	<origen_lista_opciones></origen_lista_opciones>
-	<origen_lista_valores></origen_lista_valores>
-	<valor_etiqueta>eyRNVUxUSUxBTkdfSW5mU1FMfQ==</valor_etiqueta>
-	<url_iframe></url_iframe>
-	<objeto_en_ventana>MA==</objeto_en_ventana>
-	<informe_vinculado>MA==</informe_vinculado>
-	<maxima_longitud>MA==</maxima_longitud>
-	<valor_minimo>MA==</valor_minimo>
-	<valor_maximo>MA==</valor_maximo>
-	<valor_salto>MA==</valor_salto>
-	<formato_salida></formato_salida>
-	<plantilla_archivo></plantilla_archivo>
-	<peso_archivo>NTA=</peso_archivo>
-	<tamano_pincel>MQ==</tamano_pincel>
-	<color_trazo>IzAwMDAwMA==</color_trazo>
-	<formulario_vinculado>MA==</formulario_vinculado>
-	<formulario_campo_vinculo></formulario_campo_vinculo>
-	<formulario_campo_foraneo></formulario_campo_foraneo>
-	<condicion_filtrado_listas></condicion_filtrado_listas>
-	<pestana_objeto>eyRNVUxUSUxBTkdfTW9uQ29tbVNRTH0=</pestana_objeto>
-	<personalizacion_tag></personalizacion_tag>
-	<modo_inline>MA==</modo_inline>
-	<imagen></imagen>
-	<tipo_accion></tipo_accion>
-	<accion_usuario></accion_usuario>
-	<valor_check_activo></valor_check_activo>
-	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder></valor_placeholder>
-	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>ZXRpcXVldGFfY29uc3VsdGFfc3Fs</id_html>
-	<validacion_extras></validacion_extras>
-	<clase_contenedor></clase_contenedor>
-	</core_formulario_objeto>
-	<core_formulario_objeto>
-	<id>MTIzOTQ=</id>
-	<tipo>ZXRpcXVldGE=</tipo>
-	<titulo></titulo>
-	<campo></campo>
-	<ayuda_titulo></ayuda_titulo>
-	<ayuda_texto></ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>MQ==</peso>
-	<columna>MQ==</columna>
-	<obligatorio>MA==</obligatorio>
-	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
-	<validacion_datos></validacion_datos>
-	<etiqueta_busqueda></etiqueta_busqueda>
-	<ajax_busqueda>MA==</ajax_busqueda>
-	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
+	<solo_lectura>UkVBRE9OTFk=</solo_lectura>
 	<ancho>MA==</ancho>
 	<alto>MA==</alto>
 	<barra_herramientas>MA==</barra_herramientas>
@@ -161,7 +106,7 @@
 	<lista_opciones></lista_opciones>
 	<origen_lista_opciones></origen_lista_opciones>
 	<origen_lista_valores></origen_lista_valores>
-	<valor_etiqueta>PHA+PHNwYW4gc3R5bGU9ImZvbnQtd2VpZ2h0OiBib2xkOyBmb250LXNpemU6IDE4cHg7Ij57JE1VTFRJTEFOR19JbmZGb3Jtc1VzYW59Ojwvc3Bhbj48L3A+</valor_etiqueta>
+	<valor_etiqueta></valor_etiqueta>
 	<url_iframe></url_iframe>
 	<objeto_en_ventana>MA==</objeto_en_ventana>
 	<informe_vinculado>MA==</informe_vinculado>
@@ -178,7 +123,7 @@
 	<formulario_campo_vinculo></formulario_campo_vinculo>
 	<formulario_campo_foraneo></formulario_campo_foraneo>
 	<condicion_filtrado_listas></condicion_filtrado_listas>
-	<pestana_objeto>eyRNVUxUSUxBTkdfRm9ybXVsYXJpb3N9</pestana_objeto>
+	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
 	<personalizacion_tag></personalizacion_tag>
 	<modo_inline>MA==</modo_inline>
 	<imagen></imagen>
@@ -188,24 +133,82 @@
 	<valor_check_inactivo></valor_check_inactivo>
 	<valor_placeholder></valor_placeholder>
 	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>ZXRpcXVldGFfZm9ybXNfdXNhbl9pbmZvcm1lcw==</id_html>
+	<id_html>cHJveWVjdG8=</id_html>
 	<validacion_extras></validacion_extras>
-	<clase_contenedor></clase_contenedor>
+	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>MTIzOTU=</id>
+	<id>MTQ3ODQ=</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mVGl0dWxvfQ==</titulo>
+	<titulo>eyRNVUxUSUxBTkdfQlRWZXJzaW9ufQ==</titulo>
+	<campo>cHJveWVjdG9fdmVyc2lvbg==</campo>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>MQ==</peso>
+	<columna>MQ==</columna>
+	<obligatorio>MA==</obligatorio>
+	<visible>MQ==</visible>
+	<valor_predeterminado>JFZlcnNpb25fQXBsaWNhY2lvbg==</valor_predeterminado>
+	<validacion_datos></validacion_datos>
+	<etiqueta_busqueda></etiqueta_busqueda>
+	<ajax_busqueda>MA==</ajax_busqueda>
+	<valor_unico>MA==</valor_unico>
+	<solo_lectura>UkVBRE9OTFk=</solo_lectura>
+	<ancho>MA==</ancho>
+	<alto>MA==</alto>
+	<barra_herramientas>MA==</barra_herramientas>
+	<fila_unica>MA==</fila_unica>
+	<lista_opciones></lista_opciones>
+	<origen_lista_opciones></origen_lista_opciones>
+	<origen_lista_valores></origen_lista_valores>
+	<valor_etiqueta></valor_etiqueta>
+	<url_iframe></url_iframe>
+	<objeto_en_ventana>MA==</objeto_en_ventana>
+	<informe_vinculado>MA==</informe_vinculado>
+	<maxima_longitud>MA==</maxima_longitud>
+	<valor_minimo>MA==</valor_minimo>
+	<valor_maximo>MA==</valor_maximo>
+	<valor_salto>MA==</valor_salto>
+	<formato_salida></formato_salida>
+	<plantilla_archivo></plantilla_archivo>
+	<peso_archivo>NTA=</peso_archivo>
+	<tamano_pincel>MQ==</tamano_pincel>
+	<color_trazo>IzAwMDAwMA==</color_trazo>
+	<formulario_vinculado>MA==</formulario_vinculado>
+	<formulario_campo_vinculo></formulario_campo_vinculo>
+	<formulario_campo_foraneo></formulario_campo_foraneo>
+	<condicion_filtrado_listas></condicion_filtrado_listas>
+	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
+	<personalizacion_tag></personalizacion_tag>
+	<modo_inline>MA==</modo_inline>
+	<imagen></imagen>
+	<tipo_accion></tipo_accion>
+	<accion_usuario></accion_usuario>
+	<valor_check_activo></valor_check_activo>
+	<valor_check_inactivo></valor_check_inactivo>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>cHJveWVjdG9fdmVyc2lvbg==</id_html>
+	<validacion_extras></validacion_extras>
+	<clase_contenedor>Y29sLWxnLTQgY29sLW1kLTQgY29sLXNtLTQgY29sLXhzLTQ=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
+	</core_formulario_objeto>
+	<core_formulario_objeto>
+	<id>MTQ3ODU=</id>
+	<tipo>dGV4dG9fY29ydG8=</tipo>
+	<titulo>eyRNVUxUSUxBTkdfVGl0dWxvfQ==</titulo>
 	<campo>dGl0dWxv</campo>
-	<ayuda_titulo>IA==</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGVzVGl0dWxvfQ==</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>Mg==</peso>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>MQ==</peso>
 	<columna>MQ==</columna>
 	<obligatorio>MQ==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
-	<validacion_datos></validacion_datos>
+	<validacion_datos>YWxmYW51bWVyaWNv</validacion_datos>
 	<etiqueta_busqueda></etiqueta_busqueda>
 	<ajax_busqueda>MA==</ajax_busqueda>
 	<valor_unico>MA==</valor_unico>
@@ -242,34 +245,35 @@
 	<accion_usuario></accion_usuario>
 	<valor_check_activo></valor_check_activo>
 	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder>eyRNVUxUSUxBTkdfSW5mVGl0dWxvfQ==</valor_placeholder>
-	<ocultar_etiqueta>MQ==</ocultar_etiqueta>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
 	<id_html>dGl0dWxv</id_html>
-	<validacion_extras></validacion_extras>
+	<validacion_extras>LV8u</validacion_extras>
 	<clase_contenedor></clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>MTIzOTY=</id>
-	<tipo>dGV4dG9fbGFyZ28=</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mU1FMfQ==</titulo>
-	<campo>Y29uc3VsdGFfc3Fs</campo>
+	<id>MTQ3ODY=</id>
+	<tipo>dGV4dG9fY29ydG8=</tipo>
+	<titulo>eyRNVUxUSUxBTkdfQlRVc3VhcmlvUmVwb3J0ZX0=</titulo>
+	<campo>cmVwb3J0YWRvX3Bvcg==</campo>
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>Mg==</peso>
+	<formulario>LTM=</formulario>
+	<peso>MQ==</peso>
 	<columna>MQ==</columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
+	<valor_predeterminado>JFBDT1NFU1NfTG9naW5Vc3Vhcmlv</valor_predeterminado>
 	<validacion_datos></validacion_datos>
 	<etiqueta_busqueda></etiqueta_busqueda>
 	<ajax_busqueda>MA==</ajax_busqueda>
 	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
-	<ancho>OTUw</ancho>
-	<alto>NDUw</alto>
+	<solo_lectura>UkVBRE9OTFk=</solo_lectura>
+	<ancho>MA==</ancho>
+	<alto>MA==</alto>
 	<barra_herramientas>MA==</barra_herramientas>
-	<fila_unica>MQ==</fila_unica>
+	<fila_unica>MA==</fila_unica>
 	<lista_opciones></lista_opciones>
 	<origen_lista_opciones></origen_lista_opciones>
 	<origen_lista_valores></origen_lista_valores>
@@ -290,8 +294,8 @@
 	<formulario_campo_vinculo></formulario_campo_vinculo>
 	<formulario_campo_foraneo></formulario_campo_foraneo>
 	<condicion_filtrado_listas></condicion_filtrado_listas>
-	<pestana_objeto>eyRNVUxUSUxBTkdfTW9uQ29tbVNRTH0=</pestana_objeto>
-	<personalizacion_tag>ZGF0YS1lZGl0b3I9c3FsIGNsYXNzPWZvcm0tY29udHJvbCBzdHlsZT0id2lkdGg6IDgwMHB4OyBoZWlnaHQ6IDMxMHB4OyI=</personalizacion_tag>
+	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
+	<personalizacion_tag></personalizacion_tag>
 	<modo_inline>MA==</modo_inline>
 	<imagen></imagen>
 	<tipo_accion></tipo_accion>
@@ -299,20 +303,78 @@
 	<valor_check_activo></valor_check_activo>
 	<valor_check_inactivo></valor_check_inactivo>
 	<valor_placeholder></valor_placeholder>
-	<ocultar_etiqueta>MQ==</ocultar_etiqueta>
-	<id_html>Y29uc3VsdGFfc3Fs</id_html>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>cmVwb3J0YWRvX3Bvcg==</id_html>
 	<validacion_extras></validacion_extras>
-	<clase_contenedor></clase_contenedor>
+	<clase_contenedor>Y29sLWxnLTQgY29sLW1kLTQgY29sLXNtLTQgY29sLXhzLTQ=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>MTIzOTc=</id>
+	<id>MTQ3ODc=</id>
+	<tipo>dGV4dG9fY29ydG8=</tipo>
+	<titulo>eyRNVUxUSUxBTkdfQlRPcmlnZW59</titulo>
+	<campo>c2lzdGVtYV9vcmlnZW4=</campo>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>MQ==</peso>
+	<columna>MQ==</columna>
+	<obligatorio>MA==</obligatorio>
+	<visible>MQ==</visible>
+	<valor_predeterminado></valor_predeterminado>
+	<validacion_datos></validacion_datos>
+	<etiqueta_busqueda></etiqueta_busqueda>
+	<ajax_busqueda>MA==</ajax_busqueda>
+	<valor_unico>MA==</valor_unico>
+	<solo_lectura>UkVBRE9OTFk=</solo_lectura>
+	<ancho>MA==</ancho>
+	<alto>MA==</alto>
+	<barra_herramientas>MA==</barra_herramientas>
+	<fila_unica>MA==</fila_unica>
+	<lista_opciones></lista_opciones>
+	<origen_lista_opciones></origen_lista_opciones>
+	<origen_lista_valores></origen_lista_valores>
+	<valor_etiqueta></valor_etiqueta>
+	<url_iframe></url_iframe>
+	<objeto_en_ventana>MA==</objeto_en_ventana>
+	<informe_vinculado>MA==</informe_vinculado>
+	<maxima_longitud>MA==</maxima_longitud>
+	<valor_minimo>MA==</valor_minimo>
+	<valor_maximo>MA==</valor_maximo>
+	<valor_salto>MA==</valor_salto>
+	<formato_salida></formato_salida>
+	<plantilla_archivo></plantilla_archivo>
+	<peso_archivo>NTA=</peso_archivo>
+	<tamano_pincel>MQ==</tamano_pincel>
+	<color_trazo>IzAwMDAwMA==</color_trazo>
+	<formulario_vinculado>MA==</formulario_vinculado>
+	<formulario_campo_vinculo></formulario_campo_vinculo>
+	<formulario_campo_foraneo></formulario_campo_foraneo>
+	<condicion_filtrado_listas></condicion_filtrado_listas>
+	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
+	<personalizacion_tag></personalizacion_tag>
+	<modo_inline>MA==</modo_inline>
+	<imagen></imagen>
+	<tipo_accion></tipo_accion>
+	<accion_usuario></accion_usuario>
+	<valor_check_activo></valor_check_activo>
+	<valor_check_inactivo></valor_check_inactivo>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>c2lzdGVtYV9vcmlnZW4=</id_html>
+	<validacion_extras></validacion_extras>
+	<clase_contenedor>Y29sLWxnLTQgY29sLW1kLTQgY29sLXNtLTQgY29sLXhzLTQ=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
+	</core_formulario_objeto>
+	<core_formulario_objeto>
+	<id>MTQ3ODg=</id>
 	<tipo>aW5mb3JtZQ==</tipo>
 	<titulo></titulo>
 	<campo></campo>
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>Mg==</peso>
+	<formulario>LTM=</formulario>
+	<peso>MQ==</peso>
 	<columna>MQ==</columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
@@ -332,7 +394,7 @@
 	<valor_etiqueta></valor_etiqueta>
 	<url_iframe></url_iframe>
 	<objeto_en_ventana>MA==</objeto_en_ventana>
-	<informe_vinculado>LTE5</informe_vinculado>
+	<informe_vinculado>LTEw</informe_vinculado>
 	<maxima_longitud>MA==</maxima_longitud>
 	<valor_minimo>MA==</valor_minimo>
 	<valor_maximo>MA==</valor_maximo>
@@ -346,7 +408,7 @@
 	<formulario_campo_vinculo></formulario_campo_vinculo>
 	<formulario_campo_foraneo></formulario_campo_foraneo>
 	<condicion_filtrado_listas></condicion_filtrado_listas>
-	<pestana_objeto>eyRNVUxUSUxBTkdfRm9ybXVsYXJpb3N9</pestana_objeto>
+	<pestana_objeto>eyRNVUxUSUxBTkdfQlRQcmV2aW9zfQ==</pestana_objeto>
 	<personalizacion_tag></personalizacion_tag>
 	<modo_inline>MA==</modo_inline>
 	<imagen></imagen>
@@ -356,23 +418,138 @@
 	<valor_check_inactivo></valor_check_inactivo>
 	<valor_placeholder></valor_placeholder>
 	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>aW5mb3JtZV9mb3JtdWxhcmlvc191c29fZW1iZWJpZG8=</id_html>
+	<id_html></id_html>
 	<validacion_extras></validacion_extras>
-	<clase_contenedor></clase_contenedor>
+	<clase_contenedor>Y29sIGNvbC1sZy0xMiBjb2wtbWQtMTIgY29sLXNtLTEyIGNvbC14cy0xMg==</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>MTIzOTg=</id>
-	<tipo>Y2FzaWxsYV9jaGVjaw==</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mVG9vdGlwVGl0dWxvfQ==</titulo>
-	<campo>dG9vbHRpcF90aXR1bG8=</campo>
+	<id>MTQ3ODk=</id>
+	<tipo>dGV4dG9fY29ydG8=</tipo>
+	<titulo>eyRNVUxUSUxBTkdfQlRVbHRpbWFBY3R1YWxpemFjaW9ufQ==</titulo>
+	<campo>ZmVjaGFfYWN0dWFsaXphY2lvbg==</campo>
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>Mw==</peso>
+	<formulario>LTM=</formulario>
+	<peso>Mg==</peso>
 	<columna>MQ==</columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
-	<valor_predeterminado>Tg==</valor_predeterminado>
+	<valor_predeterminado>JFBDT19GZWNoYU9wZXJhY2lvbkd1aW9uZXM=</valor_predeterminado>
+	<validacion_datos></validacion_datos>
+	<etiqueta_busqueda></etiqueta_busqueda>
+	<ajax_busqueda>MA==</ajax_busqueda>
+	<valor_unico>MA==</valor_unico>
+	<solo_lectura>UkVBRE9OTFk=</solo_lectura>
+	<ancho>MA==</ancho>
+	<alto>MA==</alto>
+	<barra_herramientas>MA==</barra_herramientas>
+	<fila_unica>MA==</fila_unica>
+	<lista_opciones></lista_opciones>
+	<origen_lista_opciones></origen_lista_opciones>
+	<origen_lista_valores></origen_lista_valores>
+	<valor_etiqueta></valor_etiqueta>
+	<url_iframe></url_iframe>
+	<objeto_en_ventana>MA==</objeto_en_ventana>
+	<informe_vinculado>MA==</informe_vinculado>
+	<maxima_longitud>MA==</maxima_longitud>
+	<valor_minimo>MA==</valor_minimo>
+	<valor_maximo>MA==</valor_maximo>
+	<valor_salto>MA==</valor_salto>
+	<formato_salida></formato_salida>
+	<plantilla_archivo></plantilla_archivo>
+	<peso_archivo>NTA=</peso_archivo>
+	<tamano_pincel>MQ==</tamano_pincel>
+	<color_trazo>IzAwMDAwMA==</color_trazo>
+	<formulario_vinculado>MA==</formulario_vinculado>
+	<formulario_campo_vinculo></formulario_campo_vinculo>
+	<formulario_campo_foraneo></formulario_campo_foraneo>
+	<condicion_filtrado_listas></condicion_filtrado_listas>
+	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
+	<personalizacion_tag></personalizacion_tag>
+	<modo_inline>MA==</modo_inline>
+	<imagen></imagen>
+	<tipo_accion></tipo_accion>
+	<accion_usuario></accion_usuario>
+	<valor_check_activo></valor_check_activo>
+	<valor_check_inactivo></valor_check_inactivo>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>ZmVjaGFfYWN0dWFsaXphY2lvbg==</id_html>
+	<validacion_extras></validacion_extras>
+	<clase_contenedor>Y29sLWxnLTQgY29sLW1kLTQgY29sLXNtLTQgY29sLXhzLTQ=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
+	</core_formulario_objeto>
+	<core_formulario_objeto>
+	<id>MTQ3OTA=</id>
+	<tipo>dGV4dG9fY29ydG8=</tipo>
+	<titulo>eyRNVUxUSUxBTkdfQlRGZWNoYUNpZXJyZX0=</titulo>
+	<campo>ZmVjaGFfY2llcnJl</campo>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>Mg==</peso>
+	<columna>MQ==</columna>
+	<obligatorio>MA==</obligatorio>
+	<visible>MQ==</visible>
+	<valor_predeterminado></valor_predeterminado>
+	<validacion_datos></validacion_datos>
+	<etiqueta_busqueda></etiqueta_busqueda>
+	<ajax_busqueda>MA==</ajax_busqueda>
+	<valor_unico>MA==</valor_unico>
+	<solo_lectura>UkVBRE9OTFk=</solo_lectura>
+	<ancho>MA==</ancho>
+	<alto>MA==</alto>
+	<barra_herramientas>MA==</barra_herramientas>
+	<fila_unica>MA==</fila_unica>
+	<lista_opciones></lista_opciones>
+	<origen_lista_opciones></origen_lista_opciones>
+	<origen_lista_valores></origen_lista_valores>
+	<valor_etiqueta></valor_etiqueta>
+	<url_iframe></url_iframe>
+	<objeto_en_ventana>MA==</objeto_en_ventana>
+	<informe_vinculado>MA==</informe_vinculado>
+	<maxima_longitud>MA==</maxima_longitud>
+	<valor_minimo>MA==</valor_minimo>
+	<valor_maximo>MA==</valor_maximo>
+	<valor_salto>MA==</valor_salto>
+	<formato_salida></formato_salida>
+	<plantilla_archivo></plantilla_archivo>
+	<peso_archivo>NTA=</peso_archivo>
+	<tamano_pincel>MQ==</tamano_pincel>
+	<color_trazo>IzAwMDAwMA==</color_trazo>
+	<formulario_vinculado>MA==</formulario_vinculado>
+	<formulario_campo_vinculo></formulario_campo_vinculo>
+	<formulario_campo_foraneo></formulario_campo_foraneo>
+	<condicion_filtrado_listas></condicion_filtrado_listas>
+	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
+	<personalizacion_tag></personalizacion_tag>
+	<modo_inline>MA==</modo_inline>
+	<imagen></imagen>
+	<tipo_accion></tipo_accion>
+	<accion_usuario></accion_usuario>
+	<valor_check_activo></valor_check_activo>
+	<valor_check_inactivo></valor_check_inactivo>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>ZmVjaGFfY2llcnJl</id_html>
+	<validacion_extras></validacion_extras>
+	<clase_contenedor>Y29sLWxnLTQgY29sLW1kLTQgY29sLXNtLTQgY29sLXhzLTQ=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
+	</core_formulario_objeto>
+	<core_formulario_objeto>
+	<id>MTQ3OTE=</id>
+	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
+	<titulo>eyRNVUxUSUxBTkdfRXN0YWRvfQ==</titulo>
+	<campo>ZXN0YWRv</campo>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>Mg==</peso>
+	<columna>MQ==</columna>
+	<obligatorio>MQ==</obligatorio>
+	<visible>MQ==</visible>
+	<valor_predeterminado></valor_predeterminado>
 	<validacion_datos></validacion_datos>
 	<etiqueta_busqueda></etiqueta_busqueda>
 	<ajax_busqueda>MA==</ajax_busqueda>
@@ -382,7 +559,7 @@
 	<alto>MA==</alto>
 	<barra_herramientas>MA==</barra_herramientas>
 	<fila_unica>MA==</fila_unica>
-	<lista_opciones></lista_opciones>
+	<lista_opciones>eyRNVUxUSUxBTkdfQlRFc3RhZG9OdWV2b30seyRNVUxUSUxBTkdfQlRFc3RhZG9Qcm9ncmVzb30seyRNVUxUSUxBTkdfQlRFc3RhZG9DZXJyYWRvfQ==</lista_opciones>
 	<origen_lista_opciones></origen_lista_opciones>
 	<origen_lista_valores></origen_lista_valores>
 	<valor_etiqueta></valor_etiqueta>
@@ -408,24 +585,196 @@
 	<imagen></imagen>
 	<tipo_accion></tipo_accion>
 	<accion_usuario></accion_usuario>
-	<valor_check_activo>Uw==</valor_check_activo>
-	<valor_check_inactivo>Tg==</valor_check_inactivo>
+	<valor_check_activo></valor_check_activo>
+	<valor_check_inactivo></valor_check_inactivo>
 	<valor_placeholder></valor_placeholder>
 	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>dG9vbHRpcF90aXR1bG8=</id_html>
+	<id_html>ZXN0YWRv</id_html>
 	<validacion_extras></validacion_extras>
-	<clase_contenedor></clase_contenedor>
+	<clase_contenedor>emluZGV4LXRvb2x0aXAgY29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>MTIzOTk=</id>
+	<id>MTQ3OTI=</id>
 	<tipo>dGV4dG9fY29ydG8=</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mRGVzY3JpcGNpb259</titulo>
-	<campo>ZGVzY3JpcGNpb24=</campo>
-	<ayuda_titulo>IA==</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGVzRGVzY3JpcH0=</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>NA==</peso>
+	<titulo>eyRNVUxUSUxBTkdfQlRBc2lnbmFkb0F9</titulo>
+	<campo>YXNpZ25hZG9fYQ==</campo>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>Mg==</peso>
 	<columna>MQ==</columna>
+	<obligatorio>MA==</obligatorio>
+	<visible>MQ==</visible>
+	<valor_predeterminado></valor_predeterminado>
+	<validacion_datos></validacion_datos>
+	<etiqueta_busqueda></etiqueta_busqueda>
+	<ajax_busqueda>MA==</ajax_busqueda>
+	<valor_unico>MA==</valor_unico>
+	<solo_lectura>UkVBRE9OTFk=</solo_lectura>
+	<ancho>MA==</ancho>
+	<alto>MA==</alto>
+	<barra_herramientas>MA==</barra_herramientas>
+	<fila_unica>MA==</fila_unica>
+	<lista_opciones></lista_opciones>
+	<origen_lista_opciones></origen_lista_opciones>
+	<origen_lista_valores></origen_lista_valores>
+	<valor_etiqueta></valor_etiqueta>
+	<url_iframe></url_iframe>
+	<objeto_en_ventana>MA==</objeto_en_ventana>
+	<informe_vinculado>MA==</informe_vinculado>
+	<maxima_longitud>MA==</maxima_longitud>
+	<valor_minimo>MA==</valor_minimo>
+	<valor_maximo>MA==</valor_maximo>
+	<valor_salto>MA==</valor_salto>
+	<formato_salida></formato_salida>
+	<plantilla_archivo></plantilla_archivo>
+	<peso_archivo>NTA=</peso_archivo>
+	<tamano_pincel>MQ==</tamano_pincel>
+	<color_trazo>IzAwMDAwMA==</color_trazo>
+	<formulario_vinculado>MA==</formulario_vinculado>
+	<formulario_campo_vinculo></formulario_campo_vinculo>
+	<formulario_campo_foraneo></formulario_campo_foraneo>
+	<condicion_filtrado_listas></condicion_filtrado_listas>
+	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
+	<personalizacion_tag></personalizacion_tag>
+	<modo_inline>MA==</modo_inline>
+	<imagen></imagen>
+	<tipo_accion></tipo_accion>
+	<accion_usuario></accion_usuario>
+	<valor_check_activo></valor_check_activo>
+	<valor_check_inactivo></valor_check_inactivo>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>YXNpZ25hZG9fYQ==</id_html>
+	<validacion_extras></validacion_extras>
+	<clase_contenedor>Y29sLWxnLTQgY29sLW1kLTQgY29sLXNtLTQgY29sLXhzLTQ=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
+	</core_formulario_objeto>
+	<core_formulario_objeto>
+	<id>MTQ3OTM=</id>
+	<tipo>dGV4dG9fbGFyZ28=</tipo>
+	<titulo>eyRNVUxUSUxBTkdfQlRIaXN0b3JpYWx9</titulo>
+	<campo>aGlzdG9yaWFsX2dlc3Rpb24=</campo>
+	<ayuda_titulo>eyRNVUxUSUxBTkdfSGlzdG9yaWNvfQ==</ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>Mg==</peso>
+	<columna>Mg==</columna>
+	<obligatorio>MA==</obligatorio>
+	<visible>MQ==</visible>
+	<valor_predeterminado></valor_predeterminado>
+	<validacion_datos></validacion_datos>
+	<etiqueta_busqueda></etiqueta_busqueda>
+	<ajax_busqueda>MA==</ajax_busqueda>
+	<valor_unico>MA==</valor_unico>
+	<solo_lectura>UkVBRE9OTFk=</solo_lectura>
+	<ancho>MA==</ancho>
+	<alto>MA==</alto>
+	<barra_herramientas>MA==</barra_herramientas>
+	<fila_unica>MA==</fila_unica>
+	<lista_opciones></lista_opciones>
+	<origen_lista_opciones></origen_lista_opciones>
+	<origen_lista_valores></origen_lista_valores>
+	<valor_etiqueta></valor_etiqueta>
+	<url_iframe></url_iframe>
+	<objeto_en_ventana>MA==</objeto_en_ventana>
+	<informe_vinculado>MA==</informe_vinculado>
+	<maxima_longitud>MA==</maxima_longitud>
+	<valor_minimo>MA==</valor_minimo>
+	<valor_maximo>MA==</valor_maximo>
+	<valor_salto>MA==</valor_salto>
+	<formato_salida></formato_salida>
+	<plantilla_archivo></plantilla_archivo>
+	<peso_archivo>NTA=</peso_archivo>
+	<tamano_pincel>MQ==</tamano_pincel>
+	<color_trazo>IzAwMDAwMA==</color_trazo>
+	<formulario_vinculado>MA==</formulario_vinculado>
+	<formulario_campo_vinculo></formulario_campo_vinculo>
+	<formulario_campo_foraneo></formulario_campo_foraneo>
+	<condicion_filtrado_listas></condicion_filtrado_listas>
+	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
+	<personalizacion_tag></personalizacion_tag>
+	<modo_inline>MA==</modo_inline>
+	<imagen></imagen>
+	<tipo_accion></tipo_accion>
+	<accion_usuario></accion_usuario>
+	<valor_check_activo></valor_check_activo>
+	<valor_check_inactivo></valor_check_inactivo>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>aGlzdG9yaWFsX2dlc3Rpb24=</id_html>
+	<validacion_extras></validacion_extras>
+	<clase_contenedor></clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
+	</core_formulario_objeto>
+	<core_formulario_objeto>
+	<id>MTQ3OTQ=</id>
+	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
+	<titulo>eyRNVUxUSUxBTkdfSW5mQ2F0ZWdvcmlhfQ==</titulo>
+	<campo>Y2F0ZWdvcmlh</campo>
+	<ayuda_titulo>eyRNVUxUSUxBTkdfQXl1ZGF9</ayuda_titulo>
+	<ayuda_texto>eyRNVUxUSUxBTkdfQlRDYXRlZ29yaWFEZXN9</ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>Mw==</peso>
+	<columna>MQ==</columna>
+	<obligatorio>MQ==</obligatorio>
+	<visible>MQ==</visible>
+	<valor_predeterminado></valor_predeterminado>
+	<validacion_datos></validacion_datos>
+	<etiqueta_busqueda></etiqueta_busqueda>
+	<ajax_busqueda>MA==</ajax_busqueda>
+	<valor_unico>MA==</valor_unico>
+	<solo_lectura></solo_lectura>
+	<ancho>MA==</ancho>
+	<alto>MA==</alto>
+	<barra_herramientas>MA==</barra_herramientas>
+	<fila_unica>MA==</fila_unica>
+	<lista_opciones>LEVycm9yLE1lam9yYSxQcmVndW50YQ==</lista_opciones>
+	<origen_lista_opciones></origen_lista_opciones>
+	<origen_lista_valores></origen_lista_valores>
+	<valor_etiqueta></valor_etiqueta>
+	<url_iframe></url_iframe>
+	<objeto_en_ventana>MA==</objeto_en_ventana>
+	<informe_vinculado>MA==</informe_vinculado>
+	<maxima_longitud>MA==</maxima_longitud>
+	<valor_minimo>MA==</valor_minimo>
+	<valor_maximo>MA==</valor_maximo>
+	<valor_salto>MA==</valor_salto>
+	<formato_salida></formato_salida>
+	<plantilla_archivo></plantilla_archivo>
+	<peso_archivo>NTA=</peso_archivo>
+	<tamano_pincel>MQ==</tamano_pincel>
+	<color_trazo>IzAwMDAwMA==</color_trazo>
+	<formulario_vinculado>MA==</formulario_vinculado>
+	<formulario_campo_vinculo></formulario_campo_vinculo>
+	<formulario_campo_foraneo></formulario_campo_foraneo>
+	<condicion_filtrado_listas></condicion_filtrado_listas>
+	<pestana_objeto></pestana_objeto>
+	<personalizacion_tag>ZGF0YS1zdHlsZT1idG4taW5mbw==</personalizacion_tag>
+	<modo_inline>MA==</modo_inline>
+	<imagen></imagen>
+	<tipo_accion></tipo_accion>
+	<accion_usuario></accion_usuario>
+	<valor_check_activo></valor_check_activo>
+	<valor_check_inactivo></valor_check_inactivo>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>Y2F0ZWdvcmlh</id_html>
+	<validacion_extras></validacion_extras>
+	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
+	</core_formulario_objeto>
+	<core_formulario_objeto>
+	<id>MTQ3OTU=</id>
+	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
+	<titulo>eyRNVUxUSUxBTkdfUHJpb3JpZGFkfQ==</titulo>
+	<campo>cHJpb3JpZGFk</campo>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>Mw==</peso>
+	<columna>Mg==</columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -438,7 +787,7 @@
 	<alto>MA==</alto>
 	<barra_herramientas>MA==</barra_herramientas>
 	<fila_unica>MA==</fila_unica>
-	<lista_opciones></lista_opciones>
+	<lista_opciones>Tm9ybWFsLEJham8sQWx0bw==</lista_opciones>
 	<origen_lista_opciones></origen_lista_opciones>
 	<origen_lista_valores></origen_lista_valores>
 	<valor_etiqueta></valor_etiqueta>
@@ -466,21 +815,79 @@
 	<accion_usuario></accion_usuario>
 	<valor_check_activo></valor_check_activo>
 	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder>eyRNVUxUSUxBTkdfSW5mRGVzY3JpcGNpb259</valor_placeholder>
-	<ocultar_etiqueta>MQ==</ocultar_etiqueta>
-	<id_html>ZGVzY3JpcGNpb24=</id_html>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>cHJpb3JpZGFk</id_html>
 	<validacion_extras></validacion_extras>
-	<clase_contenedor></clase_contenedor>
+	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>MTI0MDA=</id>
-	<tipo>dGV4dG9fY29ydG8=</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mQ2F0ZWdvcmlhfQ==</titulo>
-	<campo>Y2F0ZWdvcmlh</campo>
-	<ayuda_titulo>IA==</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGVzQ2F0ZWd9</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>NQ==</peso>
+	<id>MTQ3OTY=</id>
+	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
+	<titulo>eyRNVUxUSUxBTkdfQlRTZXZlcmlkYWR9</titulo>
+	<campo>c2V2ZXJpZGFk</campo>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>Mw==</peso>
+	<columna>Mg==</columna>
+	<obligatorio>MQ==</obligatorio>
+	<visible>MQ==</visible>
+	<valor_predeterminado></valor_predeterminado>
+	<validacion_datos></validacion_datos>
+	<etiqueta_busqueda></etiqueta_busqueda>
+	<ajax_busqueda>MA==</ajax_busqueda>
+	<valor_unico>MA==</valor_unico>
+	<solo_lectura></solo_lectura>
+	<ancho>MA==</ancho>
+	<alto>MA==</alto>
+	<barra_herramientas>MA==</barra_herramientas>
+	<fila_unica>MA==</fila_unica>
+	<lista_opciones>LENyw610aWNvLFNldmVybyxNb2RlcmFkbyxNZW5vcixBcGFyaWVuY2lh</lista_opciones>
+	<origen_lista_opciones></origen_lista_opciones>
+	<origen_lista_valores></origen_lista_valores>
+	<valor_etiqueta></valor_etiqueta>
+	<url_iframe></url_iframe>
+	<objeto_en_ventana>MA==</objeto_en_ventana>
+	<informe_vinculado>MA==</informe_vinculado>
+	<maxima_longitud>MA==</maxima_longitud>
+	<valor_minimo>MA==</valor_minimo>
+	<valor_maximo>MA==</valor_maximo>
+	<valor_salto>MA==</valor_salto>
+	<formato_salida></formato_salida>
+	<plantilla_archivo></plantilla_archivo>
+	<peso_archivo>NTA=</peso_archivo>
+	<tamano_pincel>MQ==</tamano_pincel>
+	<color_trazo>IzAwMDAwMA==</color_trazo>
+	<formulario_vinculado>MA==</formulario_vinculado>
+	<formulario_campo_vinculo></formulario_campo_vinculo>
+	<formulario_campo_foraneo></formulario_campo_foraneo>
+	<condicion_filtrado_listas></condicion_filtrado_listas>
+	<pestana_objeto></pestana_objeto>
+	<personalizacion_tag>ZGF0YS1zdHlsZT1idG4td2FybmluZw==</personalizacion_tag>
+	<modo_inline>MA==</modo_inline>
+	<imagen></imagen>
+	<tipo_accion></tipo_accion>
+	<accion_usuario></accion_usuario>
+	<valor_check_activo></valor_check_activo>
+	<valor_check_inactivo></valor_check_inactivo>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>c2V2ZXJpZGFk</id_html>
+	<validacion_extras></validacion_extras>
+	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
+	</core_formulario_objeto>
+	<core_formulario_objeto>
+	<id>MTQ3OTc=</id>
+	<tipo>dGV4dG9fbGFyZ28=</tipo>
+	<titulo>eyRNVUxUSUxBTkdfQlREZXNjcmlwY2lvbn0=</titulo>
+	<campo>ZGVzY3JpcGNpb24=</campo>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>NA==</peso>
 	<columna>MQ==</columna>
 	<obligatorio>MQ==</obligatorio>
 	<visible>MQ==</visible>
@@ -522,88 +929,33 @@
 	<accion_usuario></accion_usuario>
 	<valor_check_activo></valor_check_activo>
 	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder>eyRNVUxUSUxBTkdfSW5mQ2F0ZWdvcmlhfQ==</valor_placeholder>
-	<ocultar_etiqueta>MQ==</ocultar_etiqueta>
-	<id_html>Y2F0ZWdvcmlh</id_html>
-	<validacion_extras></validacion_extras>
-	<clase_contenedor></clase_contenedor>
-	</core_formulario_objeto>
-	<core_formulario_objeto>
-	<id>MTI0MDE=</id>
-	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mRm9ybWF0b30=</titulo>
-	<campo>Zm9ybWF0b19maW5hbA==</campo>
-	<ayuda_titulo>eyRNVUxUSUxBTkdfSW5mVGl0Rm9ybWF0b30=</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGVzRm9ybWF0b30=</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>Ng==</peso>
-	<columna>MQ==</columna>
-	<obligatorio>MA==</obligatorio>
-	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
-	<validacion_datos></validacion_datos>
-	<etiqueta_busqueda></etiqueta_busqueda>
-	<ajax_busqueda>MA==</ajax_busqueda>
-	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
-	<ancho>MA==</ancho>
-	<alto>MA==</alto>
-	<barra_herramientas>MA==</barra_herramientas>
-	<fila_unica>MA==</fila_unica>
-	<lista_opciones></lista_opciones>
-	<origen_lista_opciones>Y29yZV9vcGNpb25saXN0YS52YWxvcl92aXN1YWw=</origen_lista_opciones>
-	<origen_lista_valores>Y29yZV9vcGNpb25saXN0YS52YWxvcl9pbnRlcm5v</origen_lista_valores>
-	<valor_etiqueta></valor_etiqueta>
-	<url_iframe></url_iframe>
-	<objeto_en_ventana>MA==</objeto_en_ventana>
-	<informe_vinculado>MA==</informe_vinculado>
-	<maxima_longitud>MA==</maxima_longitud>
-	<valor_minimo>MA==</valor_minimo>
-	<valor_maximo>MA==</valor_maximo>
-	<valor_salto>MA==</valor_salto>
-	<formato_salida></formato_salida>
-	<plantilla_archivo></plantilla_archivo>
-	<peso_archivo>NTA=</peso_archivo>
-	<tamano_pincel>MQ==</tamano_pincel>
-	<color_trazo>IzAwMDAwMA==</color_trazo>
-	<formulario_vinculado>MA==</formulario_vinculado>
-	<formulario_campo_vinculo></formulario_campo_vinculo>
-	<formulario_campo_foraneo></formulario_campo_foraneo>
-	<condicion_filtrado_listas>Y29yZV9vcGNpb25saXN0YS5pZGVudGlmaWNhZG9yX2xpc3RhPSJ0aXBvc19ncmFmaWNvIiBPUkRFUiBCWSBvcmRlbmFtaWVudG8=</condicion_filtrado_listas>
-	<pestana_objeto></pestana_objeto>
-	<personalizacion_tag></personalizacion_tag>
-	<modo_inline>MA==</modo_inline>
-	<imagen></imagen>
-	<tipo_accion></tipo_accion>
-	<accion_usuario></accion_usuario>
-	<valor_check_activo></valor_check_activo>
-	<valor_check_inactivo></valor_check_inactivo>
 	<valor_placeholder></valor_placeholder>
 	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>Zm9ybWF0b19maW5hbA==</id_html>
+	<id_html>ZGVzY3JpcGNpb24=</id_html>
 	<validacion_extras></validacion_extras>
 	<clase_contenedor></clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>MTI0MDI=</id>
-	<tipo>dGV4dG9fY29ydG8=</tipo>
-	<titulo>eyRNVUxUSUxBTkdfRnJtQW5jaG99</titulo>
-	<campo>YW5jaG8=</campo>
-	<ayuda_titulo>eyRNVUxUSUxBTkdfSW5mVGl0QW5jaG99</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGVzQW5jaG99</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>OA==</peso>
+	<id>MTQ3OTg=</id>
+	<tipo>dGV4dG9fbGFyZ28=</tipo>
+	<titulo>eyRNVUxUSUxBTkdfQlRUcmF6YXN9</titulo>
+	<campo>dHJhemFz</campo>
+	<ayuda_titulo>eyRNVUxUSUxBTkdfRGV0YWxsZXN9</ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>NA==</peso>
 	<columna>MQ==</columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
+	<valor_predeterminado>eyRQQ09fQ2FwdHVyYVRyYXphc30=</valor_predeterminado>
 	<validacion_datos></validacion_datos>
 	<etiqueta_busqueda></etiqueta_busqueda>
 	<ajax_busqueda>MA==</ajax_busqueda>
 	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
+	<solo_lectura>UkVBRE9OTFk=</solo_lectura>
 	<ancho>MA==</ancho>
-	<alto>MA==</alto>
+	<alto>MTA=</alto>
 	<barra_herramientas>MA==</barra_herramientas>
 	<fila_unica>MA==</fila_unica>
 	<lista_opciones></lista_opciones>
@@ -626,119 +978,7 @@
 	<formulario_campo_vinculo></formulario_campo_vinculo>
 	<formulario_campo_foraneo></formulario_campo_foraneo>
 	<condicion_filtrado_listas></condicion_filtrado_listas>
-	<pestana_objeto></pestana_objeto>
-	<personalizacion_tag></personalizacion_tag>
-	<modo_inline>MA==</modo_inline>
-	<imagen></imagen>
-	<tipo_accion></tipo_accion>
-	<accion_usuario></accion_usuario>
-	<valor_check_activo></valor_check_activo>
-	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder>eyRNVUxUSUxBTkdfRnJtQW5jaG99</valor_placeholder>
-	<ocultar_etiqueta>MQ==</ocultar_etiqueta>
-	<id_html>YW5jaG8=</id_html>
-	<validacion_extras></validacion_extras>
-	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
-	</core_formulario_objeto>
-	<core_formulario_objeto>
-	<id>MTI0MDM=</id>
-	<tipo>dGV4dG9fY29ydG8=</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mQWx0b30=</titulo>
-	<campo>YWx0bw==</campo>
-	<ayuda_titulo>eyRNVUxUSUxBTkdfSW5mVGl0QWx0b30=</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGVzQWx0b30=</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>OQ==</peso>
-	<columna>MQ==</columna>
-	<obligatorio>MA==</obligatorio>
-	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
-	<validacion_datos></validacion_datos>
-	<etiqueta_busqueda></etiqueta_busqueda>
-	<ajax_busqueda>MA==</ajax_busqueda>
-	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
-	<ancho>MA==</ancho>
-	<alto>MA==</alto>
-	<barra_herramientas>MA==</barra_herramientas>
-	<fila_unica>MA==</fila_unica>
-	<lista_opciones></lista_opciones>
-	<origen_lista_opciones></origen_lista_opciones>
-	<origen_lista_valores></origen_lista_valores>
-	<valor_etiqueta></valor_etiqueta>
-	<url_iframe></url_iframe>
-	<objeto_en_ventana>MA==</objeto_en_ventana>
-	<informe_vinculado>MA==</informe_vinculado>
-	<maxima_longitud>MA==</maxima_longitud>
-	<valor_minimo>MA==</valor_minimo>
-	<valor_maximo>MA==</valor_maximo>
-	<valor_salto>MA==</valor_salto>
-	<formato_salida></formato_salida>
-	<plantilla_archivo></plantilla_archivo>
-	<peso_archivo>NTA=</peso_archivo>
-	<tamano_pincel>MQ==</tamano_pincel>
-	<color_trazo>IzAwMDAwMA==</color_trazo>
-	<formulario_vinculado>MA==</formulario_vinculado>
-	<formulario_campo_vinculo></formulario_campo_vinculo>
-	<formulario_campo_foraneo></formulario_campo_foraneo>
-	<condicion_filtrado_listas></condicion_filtrado_listas>
-	<pestana_objeto></pestana_objeto>
-	<personalizacion_tag></personalizacion_tag>
-	<modo_inline>MA==</modo_inline>
-	<imagen></imagen>
-	<tipo_accion></tipo_accion>
-	<accion_usuario></accion_usuario>
-	<valor_check_activo></valor_check_activo>
-	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder>eyRNVUxUSUxBTkdfSW5mQWx0b30=</valor_placeholder>
-	<ocultar_etiqueta>MQ==</ocultar_etiqueta>
-	<id_html>YWx0bw==</id_html>
-	<validacion_extras></validacion_extras>
-	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
-	</core_formulario_objeto>
-	<core_formulario_objeto>
-	<id>MTI0MDQ=</id>
-	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mR2VuZXJhUERGfQ==</titulo>
-	<campo>Z2VuZXJhX3BkZg==</campo>
-	<ayuda_titulo>eyRNVUxUSUxBTkdfSW5mR2VuZXJhUERGSW5mb1RpdH0=</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mR2VuZXJhUERGSW5mb0Rlc2N9</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>OQ==</peso>
-	<columna>Mg==</columna>
-	<obligatorio>MA==</obligatorio>
-	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
-	<validacion_datos></validacion_datos>
-	<etiqueta_busqueda></etiqueta_busqueda>
-	<ajax_busqueda>MA==</ajax_busqueda>
-	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
-	<ancho>MA==</ancho>
-	<alto>MA==</alto>
-	<barra_herramientas>MA==</barra_herramientas>
-	<fila_unica>MA==</fila_unica>
-	<lista_opciones></lista_opciones>
-	<origen_lista_opciones>Y29yZV9vcGNpb25saXN0YS52YWxvcl92aXN1YWw=</origen_lista_opciones>
-	<origen_lista_valores>Y29yZV9vcGNpb25saXN0YS52YWxvcl9pbnRlcm5v</origen_lista_valores>
-	<valor_etiqueta></valor_etiqueta>
-	<url_iframe></url_iframe>
-	<objeto_en_ventana>MA==</objeto_en_ventana>
-	<informe_vinculado>MA==</informe_vinculado>
-	<maxima_longitud>MA==</maxima_longitud>
-	<valor_minimo>MA==</valor_minimo>
-	<valor_maximo>MA==</valor_maximo>
-	<valor_salto>MA==</valor_salto>
-	<formato_salida></formato_salida>
-	<plantilla_archivo></plantilla_archivo>
-	<peso_archivo>NTA=</peso_archivo>
-	<tamano_pincel>MQ==</tamano_pincel>
-	<color_trazo>IzAwMDAwMA==</color_trazo>
-	<formulario_vinculado>MA==</formulario_vinculado>
-	<formulario_campo_vinculo></formulario_campo_vinculo>
-	<formulario_campo_foraneo></formulario_campo_foraneo>
-	<condicion_filtrado_listas>aWRlbnRpZmljYWRvcl9saXN0YT0iZGljb3RvbWljb19ub3NpIiBPUkRFUiBCWSBvcmRlbmFtaWVudG8=</condicion_filtrado_listas>
-	<pestana_objeto></pestana_objeto>
+	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
 	<personalizacion_tag></personalizacion_tag>
 	<modo_inline>MA==</modo_inline>
 	<imagen></imagen>
@@ -748,75 +988,20 @@
 	<valor_check_inactivo></valor_check_inactivo>
 	<valor_placeholder></valor_placeholder>
 	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>Z2VuZXJhX3BkZg==</id_html>
-	<validacion_extras></validacion_extras>
-	<clase_contenedor></clase_contenedor>
-	</core_formulario_objeto>
-	<core_formulario_objeto>
-	<id>MTI0MDU=</id>
-	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
-	<titulo>eyRNVUxUSUxBTkdfQ29ubk9yaWdlbkRhdG9zfQ==</titulo>
-	<campo>Y29uZXhpb25fb3JpZ2VuX2RhdG9z</campo>
-	<ayuda_titulo>eyRNVUxUSUxBTkdfQ29ubkFkdkNhbWJpb09yaWdlbn0=</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfQ29ubk9yaWdlbkRhdG9zRGVzfQ==</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>MTA=</peso>
-	<columna>MQ==</columna>
-	<obligatorio>MA==</obligatorio>
-	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
-	<validacion_datos></validacion_datos>
-	<etiqueta_busqueda></etiqueta_busqueda>
-	<ajax_busqueda>MA==</ajax_busqueda>
-	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
-	<ancho>MA==</ancho>
-	<alto>MA==</alto>
-	<barra_herramientas>MA==</barra_herramientas>
-	<fila_unica>MA==</fila_unica>
-	<lista_opciones>eyRNVUxUSUxBTkdfQ29ublByZWRldGVybWluYWRhfQ==</lista_opciones>
-	<origen_lista_opciones>Y29yZV9yZXBsaWNhc2JkLm5vbWJyZQ==</origen_lista_opciones>
-	<origen_lista_valores>Y29yZV9yZXBsaWNhc2JkLm5vbWJyZQ==</origen_lista_valores>
-	<valor_etiqueta></valor_etiqueta>
-	<url_iframe></url_iframe>
-	<objeto_en_ventana>MA==</objeto_en_ventana>
-	<informe_vinculado>MA==</informe_vinculado>
-	<maxima_longitud>MA==</maxima_longitud>
-	<valor_minimo>MA==</valor_minimo>
-	<valor_maximo>MA==</valor_maximo>
-	<valor_salto>MA==</valor_salto>
-	<formato_salida></formato_salida>
-	<plantilla_archivo></plantilla_archivo>
-	<peso_archivo>NTA=</peso_archivo>
-	<tamano_pincel>MQ==</tamano_pincel>
-	<color_trazo>IzAwMDAwMA==</color_trazo>
-	<formulario_vinculado>MA==</formulario_vinculado>
-	<formulario_campo_vinculo></formulario_campo_vinculo>
-	<formulario_campo_foraneo></formulario_campo_foraneo>
-	<condicion_filtrado_listas>dGlwb19yZXBsaWNhPTAgT1JERVIgQlkgbm9tYnJl</condicion_filtrado_listas>
-	<pestana_objeto></pestana_objeto>
-	<personalizacion_tag></personalizacion_tag>
-	<modo_inline>MA==</modo_inline>
-	<imagen></imagen>
-	<tipo_accion></tipo_accion>
-	<accion_usuario></accion_usuario>
-	<valor_check_activo></valor_check_activo>
-	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder></valor_placeholder>
-	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>Y29uZXhpb25fb3JpZ2VuX2RhdG9z</id_html>
+	<id_html>dHJhemFz</id_html>
 	<validacion_extras></validacion_extras>
 	<clase_contenedor>Y29sLWxnLTEyIGNvbC1tZC0xMiBjb2wtc20tMTIgY29sLXhzLTEy</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>MTI0MDY=</id>
-	<tipo>dGV4dG9fY29ydG8=</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mVmJsZXNGaWx0cm99</titulo>
-	<campo>dmFyaWFibGVzX2ZpbHRybw==</campo>
-	<ayuda_titulo>IA==</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mVmJsZXNEZXNGaWx0cm99</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>MTA=</peso>
+	<id>MTQ3OTk=</id>
+	<tipo>dGV4dG9fbGFyZ28=</tipo>
+	<titulo>eyRNVUxUSUxBTkdfQlRQYXNvc30=</titulo>
+	<campo>cGFzb3NfcmVwcm9kdWNjaW9u</campo>
+	<ayuda_titulo>eyRNVUxUSUxBTkdfQXl1ZGF9</ayuda_titulo>
+	<ayuda_texto>eyRNVUxUSUxBTkdfQlRDb21wbGVtZW50b0Rlc30=</ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>NQ==</peso>
 	<columna>Mg==</columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
@@ -827,7 +1012,7 @@
 	<valor_unico>MA==</valor_unico>
 	<solo_lectura></solo_lectura>
 	<ancho>MA==</ancho>
-	<alto>MA==</alto>
+	<alto>Ng==</alto>
 	<barra_herramientas>MA==</barra_herramientas>
 	<fila_unica>MA==</fila_unica>
 	<lista_opciones></lista_opciones>
@@ -858,20 +1043,78 @@
 	<accion_usuario></accion_usuario>
 	<valor_check_activo></valor_check_activo>
 	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder>eyRNVUxUSUxBTkdfSW5mVmJsZXNGaWx0cm99</valor_placeholder>
-	<ocultar_etiqueta>MQ==</ocultar_etiqueta>
-	<id_html>dmFyaWFibGVzX2ZpbHRybw==</id_html>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>cGFzb3NfcmVwcm9kdWNjaW9u</id_html>
 	<validacion_extras></validacion_extras>
-	<clase_contenedor></clase_contenedor>
+	<clase_contenedor>Y29sLWxnLTEyIGNvbC1tZC0xMiBjb2wtc20tMTIgY29sLXhzLTEy</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>MTI0MDc=</id>
-	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mRm9ybUZpbHRyYWRvfQ==</titulo>
-	<campo>Zm9ybXVsYXJpb19maWx0cmFkbw==</campo>
-	<ayuda_titulo>IA==</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRm9ybUZpbHRyYWRvRGVzfQ==</ayuda_texto>
-	<formulario>LTE0</formulario>
+	<id>MTQ4MDA=</id>
+	<tipo>dGV4dG9fY29ydG8=</tipo>
+	<titulo>eyRNVUxUSUxBTkdfRnJtVGlwbzEyfQ==</titulo>
+	<campo>YWRqdW50bw==</campo>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
+	<peso>OA==</peso>
+	<columna>Mg==</columna>
+	<obligatorio>MA==</obligatorio>
+	<visible>MQ==</visible>
+	<valor_predeterminado>eyRQQ09fQ2FwdHVyYVBhbnRhbGxhfQ==</valor_predeterminado>
+	<validacion_datos></validacion_datos>
+	<etiqueta_busqueda></etiqueta_busqueda>
+	<ajax_busqueda>MA==</ajax_busqueda>
+	<valor_unico>MA==</valor_unico>
+	<solo_lectura>UkVBRE9OTFk=</solo_lectura>
+	<ancho>MA==</ancho>
+	<alto>MA==</alto>
+	<barra_herramientas>MA==</barra_herramientas>
+	<fila_unica>MA==</fila_unica>
+	<lista_opciones></lista_opciones>
+	<origen_lista_opciones></origen_lista_opciones>
+	<origen_lista_valores></origen_lista_valores>
+	<valor_etiqueta></valor_etiqueta>
+	<url_iframe></url_iframe>
+	<objeto_en_ventana>MA==</objeto_en_ventana>
+	<informe_vinculado>MA==</informe_vinculado>
+	<maxima_longitud>MA==</maxima_longitud>
+	<valor_minimo>MA==</valor_minimo>
+	<valor_maximo>MA==</valor_maximo>
+	<valor_salto>MA==</valor_salto>
+	<formato_salida></formato_salida>
+	<plantilla_archivo></plantilla_archivo>
+	<peso_archivo>NTA=</peso_archivo>
+	<tamano_pincel>MQ==</tamano_pincel>
+	<color_trazo>IzAwMDAwMA==</color_trazo>
+	<formulario_vinculado>MA==</formulario_vinculado>
+	<formulario_campo_vinculo></formulario_campo_vinculo>
+	<formulario_campo_foraneo></formulario_campo_foraneo>
+	<condicion_filtrado_listas></condicion_filtrado_listas>
+	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
+	<personalizacion_tag></personalizacion_tag>
+	<modo_inline>MA==</modo_inline>
+	<imagen></imagen>
+	<tipo_accion></tipo_accion>
+	<accion_usuario></accion_usuario>
+	<valor_check_activo></valor_check_activo>
+	<valor_check_inactivo></valor_check_inactivo>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>YWRqdW50bw==</id_html>
+	<validacion_extras></validacion_extras>
+	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
+	</core_formulario_objeto>
+	<core_formulario_objeto>
+	<id>MTQ4MDE=</id>
+	<tipo>ZXRpcXVldGE=</tipo>
+	<titulo></titulo>
+	<campo></campo>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTM=</formulario>
 	<peso>MTE=</peso>
 	<columna>Mg==</columna>
 	<obligatorio>MA==</obligatorio>
@@ -886,10 +1129,10 @@
 	<alto>MA==</alto>
 	<barra_herramientas>MA==</barra_herramientas>
 	<fila_unica>MA==</fila_unica>
-	<lista_opciones>LA==</lista_opciones>
-	<origen_lista_opciones>Y29yZV9mb3JtdWxhcmlvLnRpdHVsbw==</origen_lista_opciones>
-	<origen_lista_valores>Y29yZV9mb3JtdWxhcmlvLmlk</origen_lista_valores>
-	<valor_etiqueta></valor_etiqueta>
+	<lista_opciones></lista_opciones>
+	<origen_lista_opciones></origen_lista_opciones>
+	<origen_lista_valores></origen_lista_valores>
+	<valor_etiqueta>W0NhcHR1cmFQYW50YWxsYV0=</valor_etiqueta>
 	<url_iframe></url_iframe>
 	<objeto_en_ventana>MA==</objeto_en_ventana>
 	<informe_vinculado>MA==</informe_vinculado>
@@ -905,8 +1148,8 @@
 	<formulario_vinculado>MA==</formulario_vinculado>
 	<formulario_campo_vinculo></formulario_campo_vinculo>
 	<formulario_campo_foraneo></formulario_campo_foraneo>
-	<condicion_filtrado_listas>aWQ+MCBPUkRFUiBCWSB0aXR1bG8=</condicion_filtrado_listas>
-	<pestana_objeto></pestana_objeto>
+	<condicion_filtrado_listas></condicion_filtrado_listas>
+	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
 	<personalizacion_tag></personalizacion_tag>
 	<modo_inline>MA==</modo_inline>
 	<imagen></imagen>
@@ -916,307 +1159,43 @@
 	<valor_check_inactivo></valor_check_inactivo>
 	<valor_placeholder></valor_placeholder>
 	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>Zm9ybXVsYXJpb19maWx0cmFkbw==</id_html>
+	<id_html>SW1hZ2VuVmlzdGFQcmV2aWFDYXB0dXJh</id_html>
 	<validacion_extras></validacion_extras>
 	<clase_contenedor></clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
 	</core_formulario_objeto>
-	<core_formulario_objeto>
-	<id>MTI0MDg=</id>
-	<tipo>ZXRpcXVldGE=</tipo>
-	<titulo></titulo>
-	<campo></campo>
-	<ayuda_titulo></ayuda_titulo>
-	<ayuda_texto></ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>MTU=</peso>
-	<columna>Mg==</columna>
-	<obligatorio>MA==</obligatorio>
-	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
-	<validacion_datos></validacion_datos>
-	<etiqueta_busqueda></etiqueta_busqueda>
-	<ajax_busqueda>MA==</ajax_busqueda>
-	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
-	<ancho>MA==</ancho>
-	<alto>MA==</alto>
-	<barra_herramientas>MA==</barra_herramientas>
-	<fila_unica>MA==</fila_unica>
-	<lista_opciones></lista_opciones>
-	<origen_lista_opciones></origen_lista_opciones>
-	<origen_lista_valores></origen_lista_valores>
-	<valor_etiqueta>PGg0IHN0eWxlPSJ0ZXh0LWFsaWduOiBjZW50ZXI7ICI+PHNwYW4gc3R5bGU9ImZvbnQtd2VpZ2h0OiBib2xkOyI+eyRNVUxUSUxBTkdfSW5mRGF0YVRhYmxlVGl0fTwvc3Bhbj48L2g0Pg==</valor_etiqueta>
-	<url_iframe></url_iframe>
-	<objeto_en_ventana>MA==</objeto_en_ventana>
-	<informe_vinculado>MA==</informe_vinculado>
-	<maxima_longitud>MA==</maxima_longitud>
-	<valor_minimo>MA==</valor_minimo>
-	<valor_maximo>MA==</valor_maximo>
-	<valor_salto>MA==</valor_salto>
-	<formato_salida></formato_salida>
-	<plantilla_archivo></plantilla_archivo>
-	<peso_archivo>NTA=</peso_archivo>
-	<tamano_pincel>MQ==</tamano_pincel>
-	<color_trazo>IzAwMDAwMA==</color_trazo>
-	<formulario_vinculado>MA==</formulario_vinculado>
-	<formulario_campo_vinculo></formulario_campo_vinculo>
-	<formulario_campo_foraneo></formulario_campo_foraneo>
-	<condicion_filtrado_listas></condicion_filtrado_listas>
-	<pestana_objeto></pestana_objeto>
-	<personalizacion_tag></personalizacion_tag>
-	<modo_inline>MA==</modo_inline>
-	<imagen></imagen>
-	<tipo_accion></tipo_accion>
-	<accion_usuario></accion_usuario>
-	<valor_check_activo></valor_check_activo>
-	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder></valor_placeholder>
-	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>TGFiZWxEYXRhVGFibGU=</id_html>
-	<validacion_extras></validacion_extras>
-	<clase_contenedor>Y29sLWxnLTEyIGNvbC1tZC0xMiBjb2wtc20tMTIgY29sLXhzLTEy</clase_contenedor>
-	</core_formulario_objeto>
-	<core_formulario_objeto>
-	<id>MTI0MDk=</id>
-	<tipo>bGlzdGFfc2VsZWNjaW9u</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSGFiaWxpdGFyfQ==</titulo>
-	<campo>c29wb3J0ZV9kYXRhdGFibGU=</campo>
-	<ayuda_titulo>eyRNVUxUSUxBTkdfQXl1ZGF9</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGF0YVRhYmxlRGVzfQ==</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>MTY=</peso>
-	<columna>Mg==</columna>
-	<obligatorio>MA==</obligatorio>
-	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
-	<validacion_datos></validacion_datos>
-	<etiqueta_busqueda></etiqueta_busqueda>
-	<ajax_busqueda>MA==</ajax_busqueda>
-	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
-	<ancho>MA==</ancho>
-	<alto>MA==</alto>
-	<barra_herramientas>MA==</barra_herramientas>
-	<fila_unica>MA==</fila_unica>
-	<lista_opciones></lista_opciones>
-	<origen_lista_opciones>Y29yZV9vcGNpb25saXN0YS52YWxvcl92aXN1YWw=</origen_lista_opciones>
-	<origen_lista_valores>Y29yZV9vcGNpb25saXN0YS52YWxvcl9pbnRlcm5v</origen_lista_valores>
-	<valor_etiqueta></valor_etiqueta>
-	<url_iframe></url_iframe>
-	<objeto_en_ventana>MA==</objeto_en_ventana>
-	<informe_vinculado>MA==</informe_vinculado>
-	<maxima_longitud>MA==</maxima_longitud>
-	<valor_minimo>MA==</valor_minimo>
-	<valor_maximo>MA==</valor_maximo>
-	<valor_salto>MA==</valor_salto>
-	<formato_salida></formato_salida>
-	<plantilla_archivo></plantilla_archivo>
-	<peso_archivo>NTA=</peso_archivo>
-	<tamano_pincel>MQ==</tamano_pincel>
-	<color_trazo>IzAwMDAwMA==</color_trazo>
-	<formulario_vinculado>MA==</formulario_vinculado>
-	<formulario_campo_vinculo></formulario_campo_vinculo>
-	<formulario_campo_foraneo></formulario_campo_foraneo>
-	<condicion_filtrado_listas>aWRlbnRpZmljYWRvcl9saXN0YT0iZGljb3RvbWljb19ub3NpIiBPUkRFUiBCWSBvcmRlbmFtaWVudG8=</condicion_filtrado_listas>
-	<pestana_objeto></pestana_objeto>
-	<personalizacion_tag></personalizacion_tag>
-	<modo_inline>MA==</modo_inline>
-	<imagen></imagen>
-	<tipo_accion></tipo_accion>
-	<accion_usuario></accion_usuario>
-	<valor_check_activo></valor_check_activo>
-	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder></valor_placeholder>
-	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>c29wb3J0ZV9kYXRhdGFibGU=</id_html>
-	<validacion_extras></validacion_extras>
-	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
-	</core_formulario_objeto>
-	<core_formulario_objeto>
-	<id>MTI0MTA=</id>
-	<tipo>dGV4dG9fY29ydG8=</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mUGFnaW5hY2lvbkRhdGF0YWJsZX0=</titulo>
-	<campo>dGFtYW5vX3BhZ2luYWNpb24=</campo>
-	<ayuda_titulo>IA==</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mUGFnaW5hY2lvbkRhdGF0YWJsZURlc30=</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>MTc=</peso>
-	<columna>Mg==</columna>
-	<obligatorio>MA==</obligatorio>
-	<visible>MQ==</visible>
-	<valor_predeterminado>MTA=</valor_predeterminado>
-	<validacion_datos>bnVtZXJpY29fZW50ZXJv</validacion_datos>
-	<etiqueta_busqueda></etiqueta_busqueda>
-	<ajax_busqueda>MA==</ajax_busqueda>
-	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
-	<ancho>MA==</ancho>
-	<alto>MA==</alto>
-	<barra_herramientas>MA==</barra_herramientas>
-	<fila_unica>MA==</fila_unica>
-	<lista_opciones></lista_opciones>
-	<origen_lista_opciones></origen_lista_opciones>
-	<origen_lista_valores></origen_lista_valores>
-	<valor_etiqueta></valor_etiqueta>
-	<url_iframe></url_iframe>
-	<objeto_en_ventana>MA==</objeto_en_ventana>
-	<informe_vinculado>MA==</informe_vinculado>
-	<maxima_longitud>MA==</maxima_longitud>
-	<valor_minimo>MA==</valor_minimo>
-	<valor_maximo>MA==</valor_maximo>
-	<valor_salto>MA==</valor_salto>
-	<formato_salida></formato_salida>
-	<plantilla_archivo></plantilla_archivo>
-	<peso_archivo>NTA=</peso_archivo>
-	<tamano_pincel>MQ==</tamano_pincel>
-	<color_trazo>IzAwMDAwMA==</color_trazo>
-	<formulario_vinculado>MA==</formulario_vinculado>
-	<formulario_campo_vinculo></formulario_campo_vinculo>
-	<formulario_campo_foraneo></formulario_campo_foraneo>
-	<condicion_filtrado_listas></condicion_filtrado_listas>
-	<pestana_objeto></pestana_objeto>
-	<personalizacion_tag></personalizacion_tag>
-	<modo_inline>MA==</modo_inline>
-	<imagen></imagen>
-	<tipo_accion></tipo_accion>
-	<accion_usuario></accion_usuario>
-	<valor_check_activo></valor_check_activo>
-	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder></valor_placeholder>
-	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>dGFtYW5vX3BhZ2luYWNpb24=</id_html>
-	<validacion_extras></validacion_extras>
-	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
-	</core_formulario_objeto>
-	<core_formulario_objeto>
-	<id>MTI0MTE=</id>
-	<tipo>dGV4dG9fY29ydG8=</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mU3VidG90YWxlc0NvbHVtbmF9</titulo>
-	<campo>c3VidG90YWxlc19jb2x1bW5h</campo>
-	<ayuda_titulo>IA==</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mU3VidG90YWxlc0NvbHVtbmFEZXN9</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>MTg=</peso>
-	<columna>Mg==</columna>
-	<obligatorio>MA==</obligatorio>
-	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
-	<validacion_datos>bnVtZXJpY29fZW50ZXJv</validacion_datos>
-	<etiqueta_busqueda></etiqueta_busqueda>
-	<ajax_busqueda>MA==</ajax_busqueda>
-	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
-	<ancho>MA==</ancho>
-	<alto>MA==</alto>
-	<barra_herramientas>MA==</barra_herramientas>
-	<fila_unica>MA==</fila_unica>
-	<lista_opciones></lista_opciones>
-	<origen_lista_opciones></origen_lista_opciones>
-	<origen_lista_valores></origen_lista_valores>
-	<valor_etiqueta></valor_etiqueta>
-	<url_iframe></url_iframe>
-	<objeto_en_ventana>MA==</objeto_en_ventana>
-	<informe_vinculado>MA==</informe_vinculado>
-	<maxima_longitud>MA==</maxima_longitud>
-	<valor_minimo>MA==</valor_minimo>
-	<valor_maximo>MA==</valor_maximo>
-	<valor_salto>MA==</valor_salto>
-	<formato_salida></formato_salida>
-	<plantilla_archivo></plantilla_archivo>
-	<peso_archivo>NTA=</peso_archivo>
-	<tamano_pincel>MQ==</tamano_pincel>
-	<color_trazo>IzAwMDAwMA==</color_trazo>
-	<formulario_vinculado>MA==</formulario_vinculado>
-	<formulario_campo_vinculo></formulario_campo_vinculo>
-	<formulario_campo_foraneo></formulario_campo_foraneo>
-	<condicion_filtrado_listas></condicion_filtrado_listas>
-	<pestana_objeto></pestana_objeto>
-	<personalizacion_tag></personalizacion_tag>
-	<modo_inline>MA==</modo_inline>
-	<imagen></imagen>
-	<tipo_accion></tipo_accion>
-	<accion_usuario></accion_usuario>
-	<valor_check_activo></valor_check_activo>
-	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder></valor_placeholder>
-	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>c3VidG90YWxlc19jb2x1bW5h</id_html>
-	<validacion_extras></validacion_extras>
-	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
-	</core_formulario_objeto>
-	<core_formulario_objeto>
-	<id>MTI0MTI=</id>
-	<tipo>dGV4dG9fY29ydG8=</tipo>
-	<titulo>eyRNVUxUSUxBTkdfSW5mU3VidG90YWxlc0Zvcm1hdG99</titulo>
-	<campo>c3VidG90YWxlc19mb3JtYXRv</campo>
-	<ayuda_titulo>IA==</ayuda_titulo>
-	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mU3VidG90YWxlc0Zvcm1hdG9EZXN9</ayuda_texto>
-	<formulario>LTE0</formulario>
-	<peso>MTk=</peso>
-	<columna>Mg==</columna>
-	<obligatorio>MA==</obligatorio>
-	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
-	<validacion_datos></validacion_datos>
-	<etiqueta_busqueda></etiqueta_busqueda>
-	<ajax_busqueda>MA==</ajax_busqueda>
-	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
-	<ancho>MA==</ancho>
-	<alto>MA==</alto>
-	<barra_herramientas>MA==</barra_herramientas>
-	<fila_unica>MA==</fila_unica>
-	<lista_opciones></lista_opciones>
-	<origen_lista_opciones></origen_lista_opciones>
-	<origen_lista_valores></origen_lista_valores>
-	<valor_etiqueta></valor_etiqueta>
-	<url_iframe></url_iframe>
-	<objeto_en_ventana>MA==</objeto_en_ventana>
-	<informe_vinculado>MA==</informe_vinculado>
-	<maxima_longitud>MA==</maxima_longitud>
-	<valor_minimo>MA==</valor_minimo>
-	<valor_maximo>MA==</valor_maximo>
-	<valor_salto>MA==</valor_salto>
-	<formato_salida></formato_salida>
-	<plantilla_archivo></plantilla_archivo>
-	<peso_archivo>NTA=</peso_archivo>
-	<tamano_pincel>MQ==</tamano_pincel>
-	<color_trazo>IzAwMDAwMA==</color_trazo>
-	<formulario_vinculado>MA==</formulario_vinculado>
-	<formulario_campo_vinculo></formulario_campo_vinculo>
-	<formulario_campo_foraneo></formulario_campo_foraneo>
-	<condicion_filtrado_listas></condicion_filtrado_listas>
-	<pestana_objeto></pestana_objeto>
-	<personalizacion_tag></personalizacion_tag>
-	<modo_inline>MA==</modo_inline>
-	<imagen></imagen>
-	<tipo_accion></tipo_accion>
-	<accion_usuario></accion_usuario>
-	<valor_check_activo></valor_check_activo>
-	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder></valor_placeholder>
-	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>c3VidG90YWxlc19mb3JtYXRv</id_html>
-	<validacion_extras></validacion_extras>
-	<clase_contenedor>Y29sLWxnLTYgY29sLW1kLTYgY29sLXNtLTYgY29sLXhzLTY=</clase_contenedor>
-	</core_formulario_objeto>
-	<total_core_formulario_objeto><cantidad_objetos>21</cantidad_objetos></total_core_formulario_objeto>
+	<total_core_formulario_objeto><cantidad_objetos>20</cantidad_objetos></total_core_formulario_objeto>
 	<total_core_evento_objeto><cantidad_objetos>0</cantidad_objetos></total_core_evento_objeto>
 	<core_formulario_boton>
-	<id>NDc3</id>
-	<titulo>eyRNVUxUSUxBTkdfSW5mQWN0dWFsaXphcn0=</titulo>
-	<estilo>IGJ0biBidG4tc3VjY2VzcyA=</estilo>
-	<formulario>LTE0</formulario>
-	<tipo_accion>ZXh0ZXJuYV9mb3JtdWxhcmlv</tipo_accion>
-	<accion_usuario>UENPX0FjdHVhbGl6YXJJbmZvcm1l</accion_usuario>
+	<id>NTMy</id>
+	<titulo>IHskTVVMVElMQU5HX0d1YXJkYXJ9</titulo>
+	<estilo>IGZhIGZhLWJ1ZyBidG4gYnRuLXN1Y2Nlc3Mg</estilo>
+	<formulario>LTM=</formulario>
+	<tipo_accion>aW50ZXJuYV9ndWFyZGFy</tipo_accion>
+	<accion_usuario></accion_usuario>
 	<visible>MQ==</visible>
 	<peso>MQ==</peso>
+	<retorno_titulo>eyRNVUxUSUxBTkdfQlRSZXBvcnRlQnVnc30=</retorno_titulo>
+	<retorno_texto>eyRNVUxUSUxBTkdfQlRSZXRvcm5vTXNqfQ==</retorno_texto>
+	<confirmacion_texto>eyRNVUxUSUxBTkdfQlRDb25maXJtYWNpb25Nc2p9</confirmacion_texto>
+	<retorno_icono>ZmEgZmEtYnVn</retorno_icono>
+	<retorno_estilo>YWxlcnQtc3VjY2Vzcw==</retorno_estilo>
+	</core_formulario_boton>
+	<core_formulario_boton>
+	<id>NTMz</id>
+	<titulo>IENhbmNlbGFy</titulo>
+	<estilo>ZmEgZmEtdGltZXMgYnRuIGJ0bi13YXJuaW5nICBidG4tc20g</estilo>
+	<formulario>LTM=</formulario>
+	<tipo_accion>aW50ZXJuYV9lc2NyaXRvcmlv</tipo_accion>
+	<accion_usuario></accion_usuario>
+	<visible>MQ==</visible>
+	<peso>Mg==</peso>
 	<retorno_titulo></retorno_titulo>
 	<retorno_texto></retorno_texto>
 	<confirmacion_texto></confirmacion_texto>
 	<retorno_icono></retorno_icono>
 	<retorno_estilo></retorno_estilo>
 	</core_formulario_boton>
-	<total_core_formulario_boton><cantidad_objetos>1</cantidad_objetos></total_core_formulario_boton>
+	<total_core_formulario_boton><cantidad_objetos>2</cantidad_objetos></total_core_formulario_boton>
 	<total_core_menu><cantidad_objetos>0</cantidad_objetos></total_core_menu>
 </objetos_practicos>
