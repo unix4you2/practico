@@ -5511,7 +5511,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
 	{
 		global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 		global $PCO_ScriptsListaCombosPostCarga,$PCO_ListaCombosMultiplesJoin;
-		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_SeleccioneUno,$MULTILANG_FrmActualizaAjax;
+		global $MULTILANG_Cargando,$MULTILANG_Buscar,$MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_SeleccioneUno,$MULTILANG_FrmActualizaAjax;
 
         //Busca datos del formulario
         $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
@@ -5812,8 +5812,16 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                                   PCO_CondicionFiltrado: "'.$CondicionFiltradoConsulta.'"
                                 }
                               },
+                              minLength: 3,
                               locale: {
-                                emptyTitle: "Seleccione y digite para buscar"
+                                emptyTitle: "Seleccione y digite para buscar",
+                                statusInitialized: "Empiece a digitar para recuperar registros",
+                                statusSearching: "'.$MULTILANG_Cargando.'...",
+                                currentlySelected: "Actualmente seleccionado(s):",
+                                errorText: "No se pueden recuperar registros",
+                                statusTooShort: "Ingrese al menos tres caracteres",
+                                statusNoResults: "No se encuentran resultados",
+                                searchPlaceholder: "'.$MULTILANG_Buscar.'..."
                               },
                               log: 0, //Nivel de console.log del combo
                               preprocessData: function(data) {

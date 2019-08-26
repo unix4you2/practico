@@ -234,18 +234,13 @@ if (@$PCO_Accion=="PCO_ObtenerOpcionesAjaxSelect")
                 $Resultados = substr($Resultados, 0, -1);
                 $Resultados.=']';
             }
-        
+
         if (!$HayResultados)
             $Resultados='
                 [
-                    {
-                        "V": "",
-                        "T": "Error:SinParametros",
-                        "S": "(Consulte a su desarrollador)",
-                        "I": "glyphicon glyphicon-ban-circle"
-                    }
                 ]';
-        
+
         //Devuelve el JSON generado con los resultados
         echo $Resultados;
+        die();
 	}
