@@ -49,20 +49,20 @@ matrix:
       - mysql
       - postgresql
 
-    - php: 5.4
-      dist: trusty
-      env:
-      - DB=MySQL
-      - VER=5.7
-      sudo: required
-      services:
-      - mysql
-      addons:
-        apt:
-          sources:
-          - mysql-5.7-trusty
-          packages:
-          - mysql-server
+#    - php: 5.4
+#      dist: trusty
+#      env:
+#      - DB=MySQL
+#      - VER=5.7
+#      sudo: required
+#      services:
+#      - mysql
+#      addons:
+#        apt:
+#          sources:
+#          - mysql-5.7-trusty
+#          packages:
+#          - mysql-server
 
     - php: 5.5
       dist: trusty
