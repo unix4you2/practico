@@ -17,6 +17,7 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/ajax.php
+mod/pmydb/index.php
 
 xml/*
 inc/practico/idiomas/*
@@ -34,6 +35,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 
+* Enhan [INFORMES]: Actualizada la versión base de PMyDB a 19.6
 "
 
 ########################################################################
