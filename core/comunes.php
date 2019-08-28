@@ -7045,8 +7045,14 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
     					</div>
             		    <div class="collapse navbar-collapse" id="MENU_FORMULARIO_'.$formulario.'">';
                             $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu WHERE formulario_vinculado='$formulario' AND padre=0 ORDER BY peso");
+                            $ConteoOpciones=1;
                             while($registro = $resultado->fetch())
-                                PCO_ImprimirOpcionMenu($registro,'formulario');
+                                {
+                                    echo '<div style="display:inline !important;" id="MENU_FORMULARIO_OPCION_'.$ConteoOpciones.'">';
+                                    PCO_ImprimirOpcionMenu($registro,'formulario');
+                                    echo '</div>';
+                                    $ConteoOpciones++;
+                                }
         		echo '  </div>
         		    </nav>';
             }
