@@ -1399,7 +1399,6 @@ editor.commands.addCommand({
 		readOnly: true
 	});
 
-
 //Genera una nueva sesion del editor ACE
 function ClonarSesionEditor(session)
 	{

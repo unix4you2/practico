@@ -18,6 +18,8 @@ index.php
 core/comunes.php
 core/ajax.php
 mod/pmydb/index.php
+mod/pcoder/*
+inc/ace/*
 
 xml/*
 inc/practico/idiomas/*
@@ -37,6 +39,7 @@ LogCambios="
 * Added [FORMS]: Ahora los formularios identifican de manera unica los elementos de sus menues superiores como MENU_FORMULARIO_OPCION_XXX de acuerdo a su orden de aparicion con el fin de brindar mayor control sobre los mismos en tiempo de ejecucion.
 * Enhan [CORE]: Actualizada la versión base de PMyDB a 19.6
 * Enhan [FORMS]: Mejorada presentacion grafica y estilos para listas con carga dinámica
+* Enhan [PCODER]: Actualizada la versión de PCoder a la 19.6
 "
 
 ########################################################################

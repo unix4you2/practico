@@ -377,15 +377,12 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 	</script>
 	<script type="text/javascript" src="js/pcoder.min.js?<?php echo filemtime('js/pcoder.min.js'); ?>"></script>
 
-
     <?php
         //Agrega snippets propios al editor en caso de existir
         if (file_exists('../../inc/ace_practico/snippets_practico.js')) {
             echo '<script type="text/javascript" src="../../inc/ace_practico/snippets_practico.js?'.filemtime('../../inc/ace_practico/snippets_practico.js').'"></script>';
         }
     ?>
-
-
 
 	<script language="JavaScript">
 		function RecargarToolTipsEnlaces()
