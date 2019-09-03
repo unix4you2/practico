@@ -172,7 +172,10 @@ if ($PCO_Accion=="PCOMOD_GuardarArchivo")
         $ContenidoArchivo = preg_replace('~\r\n?~', "\n", $ContenidoArchivo); //Normaliza los saltos de linea dentro del archivo
         $PCODER_Respuesta = file_put_contents($PCODER_archivo, $ContenidoArchivo) or die("No se puede abrir el archivo para escritura");
         //Vuelve a cargar el archivo para continuar con su edicion
-        auditar("Modifica archivo $PCODER_archivo");
+	    if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+            PCO_Auditar("Modifica archivo $PCODER_archivo","PCoder:$PCOSESS_LoginUsuario");
+        echo '<script type="" language="JavaScript"> console.log("PCODER: Archivo guardado");  </script>';
+
         //Continua presentando todo el editor solo si se pide el echo
         if ($PCO_ECHO==1)
             echo '

@@ -605,3 +605,25 @@ CREATE TABLE core_tareascron (
   historial_ejecucion text,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_pcoderhistorial;
+CREATE TABLE core_pcoderhistorial (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  archivo text,
+  fecha_edicion date,
+  lineas int(11),
+  caracteres int(11),
+  contenido mediumtext,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_pcoder;
+CREATE TABLE core_pcoder (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  archivo text,
+  ultima_edicion datetime,
+  usuario varchar(255),
+  abierto int(1),
+  direccion_origen varchar(255),
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

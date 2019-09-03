@@ -81,26 +81,26 @@
 					echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
 					die();
 		        }
+		    else
+		        $EsUnAdmin=1;
 		}
 
 	//Crea variable se sesion usada por la consola de comandos
 	$_SESSION['PCONSOLE_KEY']="23456789abcdefghijkmnpqrstuvwxyz";
 	$_SESSION['PEXPLORER_KEY']="23456789abcdefghijkmnpqrstuvwxyz";
-
     // FIN BLOQUE BASICO DE INCLUSION ##################################
 
-
-
-
-
-
-
-    // Datos de fecha, hora y direccion IP para algunas operaciones
+    // Datos de fecha, hora y direccion IP para algunas operaciones asi como variables de compatibilidad para modulo de Practico
     $PCO_PCODER_FechaOperacion=date("Ymd");
     $PCO_PCODER_FechaOperacionGuiones=date("Y-m-d");
     $PCO_PCODER_HoraOperacion=date("His");
     $PCO_PCODER_HoraOperacionPuntos=date("H:i");
     $PCO_PCODER_DireccionAuditoria=$_SERVER ['REMOTE_ADDR'];
+    $PCO_FechaOperacion=$PCO_PCODER_FechaOperacion;
+    $PCO_FechaOperacionGuiones=$PCO_PCODER_FechaOperacionGuiones;
+    $PCO_HoraOperacion=$PCO_PCODER_HoraOperacion;
+    $PCO_HoraOperacionPuntos=$PCO_PCODER_HoraOperacionPuntos;
+    $PCO_DireccionAuditoria=$PCO_PCODER_DireccionAuditoria;
 
 	// Establece version actual del sistema
 	$PCO_PCODER_VersionActual = file("inc/version_actual.txt");
@@ -126,7 +126,7 @@
     }
 
 
-if (@$PCOSESS_LoginUsuario="admin" || $PCO_PCODER_StandAlone==1)
+if (@$EsUnAdmin==1 || $PCO_PCODER_StandAlone==1)
 {
     //Carga el archivo recibido, si no recibe nada carga un demo
     if (@$PCODER_archivo=="")
