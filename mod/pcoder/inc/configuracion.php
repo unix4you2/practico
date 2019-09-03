@@ -40,14 +40,5 @@
 							$_SERVER['DOCUMENT_ROOT']	-> Raiz de Todo el servidor web  */
 	$PCO_PCODER_RaizExploracionArchivos=$_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR;
 
-
-
-	$ServidorBD='';
-	$BaseDatos='bdd/pcoder.sqlite';
-	$UsuarioBD='';
-	$PasswordBD='';
-	$MotorBD='sqlite';
-	$PuertoBD='';
-
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';

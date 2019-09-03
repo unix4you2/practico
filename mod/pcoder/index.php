@@ -39,12 +39,28 @@
             error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_DEPRECATED | E_STRICT | E_USER_DEPRECATED | E_USER_ERROR | E_USER_WARNING); //Otras disponibles | E_PARSE | E_CORE_ERROR | E_CORE_WARNING |
         }
 
-    //Incluye archivo inicial de configuracion
-	include_once("inc/configuracion.php");
+    include_once("inc/configuracion.php");
+    //Incluye librerias basicas de trabajo
+    @require('inc/variables.php');
+    @require('inc/comunes.php');
+    @require('inc/comunes_bd.php');
+    if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+        {
+            // Incluye archivo de configuracion de base
+            include_once '../../core/configuracion.php';
+            // Inicia las conexiones con la BD y las deja listas para las operaciones
+            include_once '../../core/conexiones.php';
+            // Incluye definiciones comunes de la base de datos
+            include_once '../../inc/practico/def_basedatos.php';
+            // Incluye archivo con algunas funciones comunes usadas por la herramienta
+            include_once '../../core/comunes.php';
+        }
 
-	//Si esta como modulo de practico intenta incluir sus configuraciones
-	if ($PCO_PCODER_StandAlone==0)
-		include_once("../../core/configuracion.php");
+    //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario
+    include("idiomas/es.php");
+    include("idiomas/".$IdiomaPredeterminado.".php");
+    // Establece la zona horaria por defecto para la aplicacion
+    date_default_timezone_set($ZonaHoraria);
 
 	// Determina si no se trabaja en modo StandAlone y verifica entonces credenciales
 	if ($PCO_PCODER_StandAlone==0)
@@ -56,58 +72,28 @@
 					die();
 				}
 		}
-		
-	// Determina si es un usuario administrador para poder abrir el editor
-	if ($PCO_PCODER_StandAlone==0)
+
+	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
 		{
-			$ArregloAdmins=explode(",",$PCOVAR_Administradores);
-			//Recorre el arreglo de super-usuarios
-			$Resultado = 0;
-			if ($PCOSESS_LoginUsuario!="")
-				foreach ($ArregloAdmins as $UsuarioAdmin)
-					{
-						if (trim($UsuarioAdmin)==$PCOSESS_LoginUsuario)
-							$Resultado = 1;
-					}
-			//Anula el acceso
-			if ($Resultado == 0)
-				{
+		    // Determina si es un usuario administrador para poder abrir el editor
+		    if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+		        {
 					echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
 					die();
-				}
+		        }
 		}
-		
+
 	//Crea variable se sesion usada por la consola de comandos
 	$_SESSION['PCONSOLE_KEY']="23456789abcdefghijkmnpqrstuvwxyz";
 	$_SESSION['PEXPLORER_KEY']="23456789abcdefghijkmnpqrstuvwxyz";
 
-    //Incluye librerias basicas de trabajo
-    @require('inc/variables.php');
-    @require('inc/comunes.php');
-    @require('inc/comunes_bd.php');
-
-
-    //##### Si es MODULO DE PRACTICO FRAMEWORK #####
-    if ($PCO_PCODER_StandAlone==0)
-        {
-            // Inicia las conexiones con la BD y las deja listas para las operaciones
-            include_once '../../core/conexiones.php';
-            // Incluye definiciones comunes de la base de datos
-            include_once '../../inc/practico/def_basedatos.php';
-            // Incluye archivo con algunas funciones comunes usadas por la herramienta
-            //include_once '../../core/comunes.php';
-        }
-
-
-
-    //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario
-    include("idiomas/es.php");
-    include("idiomas/".$IdiomaPredeterminado.".php");
     // FIN BLOQUE BASICO DE INCLUSION ##################################
 
 
-    // Establece la zona horaria por defecto para la aplicacion
-    date_default_timezone_set($ZonaHoraria);
+
+
+
+
 
     // Datos de fecha, hora y direccion IP para algunas operaciones
     $PCO_PCODER_FechaOperacion=date("Ymd");

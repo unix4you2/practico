@@ -1,8 +1,8 @@
 {
-  "lang": "es",
+  "lang": "en",
   "short_name": "App",
   "name": "App 1.0 (Dev)",
-  "description": "Aplicacion Web Progresiva generada automaticamente por Practico Framework",
+  "description": "Progressive Web Application generated automatically by Practico Framework",
   "icons": [
     {
       "src": "launcher-icon.png",
