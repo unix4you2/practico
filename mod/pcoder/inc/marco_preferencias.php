@@ -22,7 +22,7 @@
 
     // PREFERENCIAS
 	
-	abrir_dialogo_modal("myModalPREFERENCIAS",$MULTILANG_PCODER_Preferencias); ?>
+	PCODER_AbrirDialogoModal("myModalPREFERENCIAS",$MULTILANG_PCODER_Preferencias); ?>
 
 			<div class="row">
 				<div class="col-lg-6">
@@ -106,4 +106,4 @@
     <?php 
         $barra_herramientas_modal='
         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_PCODER_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-        cerrar_dialogo_modal($barra_herramientas_modal);
+        PCODER_CerrarDialogoModal($barra_herramientas_modal);

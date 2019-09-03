@@ -85,7 +85,19 @@
     @require('inc/variables.php');
     @require('inc/comunes.php');
     @require('inc/comunes_bd.php');
-    @require('inc/conexiones.php');
+
+
+    //##### Si es MODULO DE PRACTICO FRAMEWORK #####
+    if ($PCO_PCODER_StandAlone==0)
+        {
+            // Inicia las conexiones con la BD y las deja listas para las operaciones
+            include_once '../../core/conexiones.php';
+            // Incluye definiciones comunes de la base de datos
+            include_once '../../inc/practico/def_basedatos.php';
+            // Incluye archivo con algunas funciones comunes usadas por la herramienta
+            //include_once '../../core/comunes.php';
+        }
+
 
 
     //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario

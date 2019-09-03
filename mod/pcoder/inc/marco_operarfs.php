@@ -22,7 +22,7 @@
 
     // PREFERENCIAS
 	
-	abrir_dialogo_modal("myModalOPERARFS",$MULTILANG_PCODER_OperacionesFS); ?>
+	PCODER_AbrirDialogoModal("myModalOPERARFS",$MULTILANG_PCODER_OperacionesFS); ?>
 
 			<div class="row">
 				<div id="cuadro_entrada_path_operacion_elemento">
@@ -75,4 +75,4 @@
         $barra_herramientas_modal='
         <button OnClick="EjecutarOperacionFS();" type="button" class="btn btn-success"><i class="fa fa-check fa-fw"></i> '.$MULTILANG_PCODER_Aceptar.'</button>
         <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times fa-fw"></i> '.$MULTILANG_PCODER_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-        cerrar_dialogo_modal($barra_herramientas_modal);
+        PCODER_CerrarDialogoModal($barra_herramientas_modal);
