@@ -25,7 +25,7 @@
 	/*	Define si PCoder se ejecuta en modo StandAlone (Independiente)
 		para cualquier proyecto o servidor o como un modulo de Practico
 		Posibles Valores:  1=StandAlone   0=Modulo de Practico        */
-	$PCO_PCODER_StandAlone=1;
+	$PCO_PCODER_StandAlone=0;
 
 
 	/*	Define el Path inicial sobre el cual el usuario puede navegar
