@@ -169,7 +169,6 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
     <!-- CSS Core de Bootstrap -->
     <link href="../../inc/bootstrap/css/tema_bootstrap.min.css" rel="stylesheet"  media="screen">
-    <link href="../../inc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">
 
     <!-- Custom Fonts -->
     <link href="../../inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -181,6 +180,9 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
     <link rel="stylesheet" href="../../inc/jquery/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
 
     <link href="../../inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
+
+    <!-- incluye estilos para cajas de chat -->
+	<link type="text/css" rel="stylesheet" media="all" href="../../inc/chat/css/chat.css" />
 
     <!-- jQuery -->
 	<script type="text/javascript" src="../../inc/jquery/jquery-2.1.0.min.js"></script>
@@ -242,6 +244,11 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 	</div><!-- /.modal -->
 
 	<?php include_once ("inc/marco_operarfs.php");	?>
+
+
+
+<!-- INICIA MARCO DE CHAT -->
+<!--<div id="main_container wrapper"  >  style="overflow: auto;"-->
 
 	<!-- ################# INICIO DE LA MAQUETACION ################ -->
 		<?php include_once ("inc/panel_superior.php"); 	?>
@@ -337,6 +344,17 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 		</DIV>
 		<?php include_once ("inc/panel_inferior.php"); ?>
 	<!-- ################## FIN DE LA MAQUETACION ################## -->
+
+<!--</div>  FINALIZA MARCO DE CHAT -->
+
+
+<?php
+	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+		{
+		    // Agrega scripts de chat
+			echo '<script type="text/javascript" src="../../inc/chat/js/chat.js"></script>';
+		}
+?>
 
 
     <!-- Bootstrap Core JavaScript -->

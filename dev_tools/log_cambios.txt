@@ -20,6 +20,7 @@ core/ajax.php
 mod/pmydb/index.php
 mod/pcoder/*
 inc/ace/*
+inc/chat/*
 
 xml/*
 inc/practico/idiomas/*

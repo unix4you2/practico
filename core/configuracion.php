@@ -105,7 +105,7 @@
 
 	// Especifica si desea activar o no el modulo de chat para usuarios asi:
 	// 0=No, 1=Solo usuarios internos, 2=Solo usuarios externos, 3=Todos los usuarios, 4=Exclusivo para admin (podra iniciar conversacion y chat con cualquier otro usuario aun con modulo desactivado)
-	$Activar_ModuloChat=4;
+	$Activar_ModuloChat=3;
 	
 	// Especifica si desea activar o no el registro de la aplicacion como una Aplicacion web progresiva PWA y algunos permisos de usuario
 	$PWA_Activa=1;
@@ -118,7 +118,7 @@
 	$PWA_AutorizacionFCM='0';
 	$PWA_AutorizacionCAM='0';
 	$PWA_AutorizacionMIC='0';
-	$PWA_OcultarBarrasHerramientas='1';
+	$PWA_OcultarBarrasHerramientas='0';
 
 	// Define cadena usada para separar campos en operaciones de bases de datos
 	$_SeparadorCampos_='||_||';

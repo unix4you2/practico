@@ -21,11 +21,24 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 session_start();
 
-//███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
-//███▓▓▓▒▒▒ UNA COPIA DE ESTE ARCHIVO EXISTE SOLO POR COMPATIBILIDAD CON INCLUSIONES DEL  ▒▒▒▓▓▓███
-//███▓▓▓▒▒▒ FRAMEWORK SOBRE EL MODULO DE PCODER/INC ALTERANDO LA VARIABLE DE PATH         ▒▒▒▓▓▓███
 
-$PathRaizPCO="../..";
+
+
+
+//███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
+//███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
+//███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
+//███▓▓▓▒▒▒ ESTE ARCHIVO EXISTE SOLO POR COMPATIBILIDAD CON INCLUSIONES DEL FRAMEWORK Y   ▒▒▒▓▓▓███
+//███▓▓▓▒▒▒ ES SOLO UNA COPIA DEL ARCHIVO DE MODULO DE CHAT ALTERANDO LA VARIABLE DE PATH ▒▒▒▓▓▓███
+$PathRaizPCO="../../../..";
+//███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
+//███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
+//███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
+
+
+
+
+
 
 //Antes de seguir adelante valida una sesion activa
 if ($_SESSION['username']=="") die();
