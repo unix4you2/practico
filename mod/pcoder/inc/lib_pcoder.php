@@ -173,7 +173,14 @@ if ($PCO_Accion=="PCOMOD_GuardarArchivo")
         $PCODER_Respuesta = file_put_contents($PCODER_archivo, $ContenidoArchivo) or die("No se puede abrir el archivo para escritura");
         //Vuelve a cargar el archivo para continuar con su edicion
 	    if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
-            PCO_Auditar("Modifica archivo $PCODER_archivo","PCoder:$PCOSESS_LoginUsuario");
+	        {
+                PCO_Auditar("Modifica archivo $PCODER_archivo","PCoder:$PCOSESS_LoginUsuario");
+                //Lleva el historial de revision
+
+                $CantidadLineas=100;
+                $CantidadCaracteres=200;
+		        PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."pcoder_historial (archivo,fecha_edicion,lineas,caracteres,contenido) VALUES (?,?,?,?,?)","$PCODER_archivo$_SeparadorCampos_$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00$_SeparadorCampos_$CantidadLineas$_SeparadorCampos_$CantidadCaracteres$_SeparadorCampos_$ContenidoArchivo","",0,0);
+	        }
         echo '<script type="" language="JavaScript"> console.log("PCODER: Archivo guardado");  </script>';
 
         //Continua presentando todo el editor solo si se pide el echo

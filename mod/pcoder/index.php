@@ -181,8 +181,10 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
     <link href="../../inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
 
-    <!-- incluye estilos para cajas de chat -->
-	<link type="text/css" rel="stylesheet" media="all" href="../../inc/chat/css/chat.css" />
+    <?php
+    	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+    		echo '<link type="text/css" rel="stylesheet" media="all" href="../../inc/chat/css/chat.css" />  <!-- incluye estilos para cajas de chat -->';
+    ?>
 
     <!-- jQuery -->
 	<script type="text/javascript" src="../../inc/jquery/jquery-2.1.0.min.js"></script>
@@ -347,15 +349,10 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
 <!--</div>  FINALIZA MARCO DE CHAT -->
 
-
-<?php
-	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
-		{
-		    // Agrega scripts de chat
-			echo '<script type="text/javascript" src="../../inc/chat/js/chat.js"></script>';
-		}
-?>
-
+    <?php
+    	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+    		echo '<script type="text/javascript" src="../../inc/chat/js/chat.js"></script>';  // Agrega scripts de chat
+    ?>
 
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="../../inc/bootstrap/js/bootstrap.min.js"></script>

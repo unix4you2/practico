@@ -610,7 +610,7 @@ DROP TABLE IF EXISTS core_pcoderhistorial;
 CREATE TABLE core_pcoderhistorial (
   id int(10) NOT NULL AUTO_INCREMENT,
   archivo text,
-  fecha_edicion date,
+  fecha_edicion datetime,
   lineas int(11),
   caracteres int(11),
   contenido mediumtext,
@@ -627,3 +627,4 @@ CREATE TABLE core_pcoder (
   direccion_origen varchar(255),
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
