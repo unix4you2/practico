@@ -872,6 +872,10 @@ function ActualizarBarraEstado()
 		//Actualiza la barra de estado del editor
 		var NroLineasDocumento=editor.session.getLength();
 		var NroCaracteresDocumento=editor.session.getValue().length;
+		//Actualiza formulario de envio de archivo por posible almacenamiento de estadisticas
+		document.form_archivo_editado.PCODER_NroLineasDocumento.value=NroLineasDocumento;
+		document.form_archivo_editado.PCODER_NroCaracteresDocumento.value=NroCaracteresDocumento;
+
 		//Actualiza los contenedores con la informacion de estado
 		$("#NroLineasDocumento").html(MULTILANG_PCODER_Linea +": " + (ListaArchivos[IndiceArchivoActual].LineaActual+1) +" / "+NroLineasDocumento);
 		$("#NroColumnaDocumento").html(MULTILANG_PCODER_Columna +": "+ (ListaArchivos[IndiceArchivoActual].ColumnaActual+1));

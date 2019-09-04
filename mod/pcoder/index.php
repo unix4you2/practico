@@ -204,6 +204,8 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 		<textarea id="PCODER_AreaTexto" name="PCODER_AreaTexto" style="visibility:hidden; display:none;"></textarea>
 		<input name="PCODER_TokenEdicion" type="Hidden" value="">
 		<input name="PCODER_archivo" type="Hidden" value="">
+		<input name="PCODER_NroLineasDocumento" type="Hidden" value="0">
+		<input name="PCODER_NroCaracteresDocumento" type="Hidden" value="0">
 		<input type="Hidden" name="PCO_ECHO" value="0"> <!-- Determina si la respuesta debe ser con o sin eco -->
 		<input name="PCO_Accion" type="hidden" value="PCOMOD_GuardarArchivo">
 	</form>
