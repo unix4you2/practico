@@ -606,11 +606,12 @@ CREATE TABLE core_tareascron (
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-DROP TABLE IF EXISTS core_pcoderhistorial;
-CREATE TABLE core_pcoderhistorial (
+DROP TABLE IF EXISTS core_pcoder_historial;
+CREATE TABLE core_pcoder_historial (
   id int(10) NOT NULL AUTO_INCREMENT,
   archivo text,
   fecha_edicion datetime,
+  usuario varchar(255),
   lineas int(11),
   caracteres int(11),
   contenido mediumtext,

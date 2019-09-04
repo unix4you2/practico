@@ -176,10 +176,9 @@ if ($PCO_Accion=="PCOMOD_GuardarArchivo")
 	        {
                 PCO_Auditar("Modifica archivo $PCODER_archivo","PCoder:$PCOSESS_LoginUsuario");
                 //Lleva el historial de revision
-
                 $CantidadLineas=100;
                 $CantidadCaracteres=200;
-		        PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."pcoder_historial (archivo,fecha_edicion,lineas,caracteres,contenido) VALUES (?,?,?,?,?)","$PCODER_archivo$_SeparadorCampos_$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00$_SeparadorCampos_$CantidadLineas$_SeparadorCampos_$CantidadCaracteres$_SeparadorCampos_$ContenidoArchivo","",0,0);
+		        PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."pcoder_historial (archivo,fecha_edicion,usuario,lineas,caracteres,contenido) VALUES (?,?,?,?,?,?)","$PCODER_archivo$_SeparadorCampos_$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00$_SeparadorCampos_$PCOSESS_LoginUsuario$_SeparadorCampos_$CantidadLineas$_SeparadorCampos_$CantidadCaracteres$_SeparadorCampos_$ContenidoArchivo","",0,0);
 	        }
         echo '<script type="" language="JavaScript"> console.log("PCODER: Archivo guardado");  </script>';
 
