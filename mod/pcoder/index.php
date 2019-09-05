@@ -54,11 +54,14 @@
             include_once '../../inc/practico/def_basedatos.php';
             // Incluye archivo con algunas funciones comunes usadas por la herramienta
             include_once '../../core/comunes.php';
+            //Agrega idiomas de Practico Framework
+            include_once("../../inc/practico/idiomas/es.php");
+            include_once("../../inc/practico/idiomas/".$IdiomaPredeterminado.".php");
         }
-
     //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario
     include("idiomas/es.php");
     include("idiomas/".$IdiomaPredeterminado.".php");
+
     // Establece la zona horaria por defecto para la aplicacion
     date_default_timezone_set($ZonaHoraria);
 
@@ -209,6 +212,13 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 		<input type="Hidden" name="PCO_ECHO" value="0"> <!-- Determina si la respuesta debe ser con o sin eco -->
 		<input name="PCO_Accion" type="hidden" value="PCOMOD_GuardarArchivo">
 	</form>
+
+    <!--Formulario de compatibilidad para aciones heredadas de Practico -->
+    <form name="FRMBASEINFORME" id="FRMBASEINFORME" action="index.php" method="POST" target="_self">
+        <input type="Hidden" name="PCO_Accion" value="">
+        <input type="Hidden" name="PCO_Valor" value="">
+    </form>
+
 	<!-- Zona de TextAreas ocultas segun los archivos abiertos -->
 	<form id="form_textareas_archivos" name="form_textareas_archivos" method="POST" style="visibility: hidden; display:none; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">					
 	</form>
@@ -389,6 +399,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 		var MULTILANG_PCODER_Permisos="<?php echo $MULTILANG_PCODER_Permisos; ?>";
 		var MULTILANG_PCODER_Eliminado="<?php echo $MULTILANG_PCODER_Eliminado; ?>";
 		var MULTILANG_PCODER_ExtensionNoSoportada="<?php echo $MULTILANG_PCODER_ExtensionNoSoportada; ?>";
+		var MULTILANG_PCODER_HistorialVersiones="<?php echo $MULTILANG_PCODER_HistorialVersiones; ?>";
 	</script>
 	<script type="text/javascript" src="js/pcoder.min.js?<?php echo filemtime('js/pcoder.min.js'); ?>"></script>
 

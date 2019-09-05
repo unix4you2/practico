@@ -60,6 +60,8 @@
 									<li><a id="boton_buscador_archivos1" style="cursor:pointer;" OnClick="BuscadorArchivosVisible=0; PCODER_ActivarPanelIzquierdo(); ActivarBuscadorArchivos();">		<i class="fa fa-search fa-fw"></i> <?php echo $MULTILANG_PCODER_Buscar; ?>			</a></li>
 									<li><a id="boton_guardar"            style="cursor:pointer;" OnClick="Guardar();">							<i class="fa fa-floppy-o fa-fw"></i> <?php echo $MULTILANG_PCODER_Guardar; ?>			<span class="pull-right text-muted small"><i>Ctrl+S</i></span></a></li>
 									<li role="separator" class="divider"></li>
+									<li><a style="cursor:pointer;" id="boton_historialversiones"       OnClick="PCODER_HistorialArchivoActual();">		<i class="fa fa-history fa-fw"></i> <?php echo $MULTILANG_PCODER_HistorialVersiones; ?>				<span class="pull-right text-muted small"><i></i></span></a></li>
+									<li role="separator" class="divider"></li>
 									<li><a style="cursor:pointer;" id="boton_cerraractual"       OnClick="PCODER_CerrarArchivoActual();">		<i class="fa fa-times fa-fw"></i> <?php echo $MULTILANG_PCODER_Cerrar; ?>				<span class="pull-right text-muted small"><i>Ctrl+Q</i></span></a></li>
 									<li role="separator" class="divider"></li>
 									<li><a style="cursor:pointer;" OnClick="self.close();"><i class="fa fa-sign-out fa-fw"></i> <?php echo $MULTILANG_PCODER_Salir; ?>: <?php echo $MULTILANG_PCODER_CerrarVentana; ?></a></li>

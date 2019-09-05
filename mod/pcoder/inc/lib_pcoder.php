@@ -159,6 +159,37 @@ if ($PCO_Accion=="PCODER_CrearArchivo")
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: PCOMOD_CargarInformexID
+	Carga uno de los informes asociados del framework por su ID unico
+*/
+if ($PCO_Accion=="PCOMOD_CargarInformexID") 
+	{
+        @ob_clean();
+	    if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+            PCO_CargarInforme($IDInforme,0,"htm","Informes",1,0,1,0,"");
+	    else
+	        echo "<center><b>OPCION INACTIVA!!! - FEATURE DISABLED!!!</b></center><HR>Su instalacion de {P}Coder no se encuentra integrada a <a href='https://www.practico.org'>Practico Framework</a><br>El historial de versiones y muchas otras caracteristicas solo son habilitadas cuando PCoder se integra de manera nativa con Practico Framework<br><br>Your {P}Coder setup its not embeded into <a href='https://www.practico.org'>Practico Framework</a><br>The version history and many other features are available when your PCoder is embeded into a Practico Framework setup";
+        die();
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCOMOD_EliminarHistorial
+	Elimina una version o historial de archivo por u ID unico
+*/
+if ($PCO_Accion=="PCOMOD_EliminarHistorial") 
+	{
+        @ob_clean();
+        PCO_EjecutarSQLUnaria("DELETE FROM core_pcoder_historial WHERE id='$IDHistorial' ");
+        die();
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: PCOMOD_GuardarArchivo
 	Almacena un archivo previamente abierto con el PCODER
 

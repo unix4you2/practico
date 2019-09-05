@@ -156,3 +156,4 @@
 	$MULTILANG_PCODER_HerramientaDiferencias='Ferramenta de diferenças';
 	$MULTILANG_PCODER_SensibleMayusculas='Maiúsculas e minúsculas';
 	$MULTILANG_PCODER_Autocompletado='Autocomplete enquanto você digita';
+	$MULTILANG_PCODER_HistorialVersiones='Version history';

@@ -47,10 +47,27 @@
 			$ArchivoViejo=file_get_contents(dirname(__FILE__).'/demo_limpio.txt');
 			//$ArchivoViejo=file_get_contents(dirname(__FILE__).'/demo_viejo.txt');
 			if ($_GET["ArchivoViejo"]!="") $ArchivoViejo=file_get_contents($_GET["ArchivoViejo"]);
-
-			$ArchivoNuevo=file_get_contents(dirname(__FILE__).'/demo_limpio.txt');
-			//$ArchivoNuevo=file_get_contents(dirname(__FILE__).'/demo_nuevo.txt');
-			if ($_GET["ArchivoNuevo"]!="") $ArchivoNuevo=file_get_contents($_GET["ArchivoNuevo"]);
+			
+			if ($_GET["Archivo2DesdeHistorial"]!="1")
+			    {
+        			$ArchivoNuevo=file_get_contents(dirname(__FILE__).'/demo_limpio.txt');
+        			//$ArchivoNuevo=file_get_contents(dirname(__FILE__).'/demo_nuevo.txt');
+        			if ($_GET["ArchivoNuevo"]!="") $ArchivoNuevo=file_get_contents($_GET["ArchivoNuevo"]);			        
+			    }
+		    else
+		        {
+		            //Toma el texto desde un historial de version
+		            //TENER EN CUENTA QUE PARA LLEGAR AQUI SE TUVO QUE USAR LA OPCION DE INFORME EMBEBIDO.  LUEGO SE INCLUYEN LIBRERIAS DE PRACTICO
+                    // Incluye archivo de configuracion de base
+                    include_once '../../../../../core/configuracion.php';
+                    // Inicia las conexiones con la BD y las deja listas para las operaciones
+                    include_once '../../../../../core/conexiones.php';
+                    // Incluye definiciones comunes de la base de datos
+                    include_once '../../../../../inc/practico/def_basedatos.php';
+                    // Incluye archivo con algunas funciones comunes usadas por la herramienta
+                    include_once '../../../../../core/comunes.php';
+                    $ArchivoNuevo=PCO_EjecutarSQL("SELECT contenido FROM core_pcoder_historial WHERE id='".$_GET["ArchivoNuevo"]."'")->fetchColumn();
+		        }
 		}
 	if ($TipoEntrada=="cadenas")
 		{
