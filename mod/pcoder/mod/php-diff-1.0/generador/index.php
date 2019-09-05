@@ -83,7 +83,7 @@
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
 		<title>Diff: <?php echo $ModoVisual; ?></title>
-		<link rel="stylesheet" href="estilo_<?php echo $EstiloCSS; ?>.css" type="text/css" charset="utf-8"/>
+		<link rel="stylesheet" href="estilo_<?php echo $EstiloCSS; ?>.css?<?php echo filemtime('estilo_'.$EstiloCSS.'.css'); ?>" type="text/css" charset="utf-8"/>
 	</head>
 	<body>
 		<script language="JavaScript">
