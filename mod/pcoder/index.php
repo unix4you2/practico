@@ -348,8 +348,11 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 							<iframe name="frame_diferencias" id="frame_diferencias" src="mod/php-diff-1.0/generador" style="border:0px;"></iframe>
 						</div>
 
-						<div id="pestana_chat_together" class="tab-pane fade">
-							<iframe name="frame_exploradorss" id="frame_exploradorss" src="https://ellago.colmedicos.com" width="100%" height="100%"  scrolling="yes" style="border:0px;"></iframe>
+						<div  id="pestana_chat_together" class="tab-pane fade" align=center>
+							<button style="margin:10px;" class="btn btn-primary" id="IniciarPMeetings" onclick="TogetherJS(this); return false;"><i class="fa fa-group fa-fw"></i> Activar/Desactivar Practico Meetings</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<button class="btn btn-info" id="TableroCompartido" onclick="$('#frame_pboard').css('visibility', 'visible');"><i class="fa fa-slideshare fa-fw"></i> Activar Pizarra compartida</button>
+							<iframe name="frame_pboard" id="frame_pboard" src="mod/pboard" style="display:block; visibility:hidden; width:100%; height:100vh;" width="100%" height="100%"  scrolling="yes" style="border:0px;"></iframe>
 						</div>
 
 					</div>
@@ -454,10 +457,59 @@ $('#pestana_consola_comandos').trigger('click');
     });
 */
 }
-
-
-
 </script>
+
+<?php
+    //Incluye sistema de chat para desarrolladores
+	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+		{
+		    if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+		        {
+                ?>
+                    <script>
+                        // TogetherJS configuration would go here, but we'll talk about that
+                        // later
+                        TogetherJSConfig_siteName="PRACTICO FRAMEWORK";
+                        TogetherJSConfig_toolName="Practico-Meetings";
+                        //TogetherJSConfig_hubBase=""; //Servidor de conferencia
+                        TogetherJSConfig_dontShowClicks = false; //Deshabilitar la vista de clics de participantes
+                        //TogetherJSConfig_findRoom = "Cuarto_de_Desarrolladores";  //Crea un cuarto especifico y loguea en el a todos los participantes
+                        //TogetherJSConfig_findRoom = {prefix: "Cuarto_de_Desarrolladores", max: 5} //Crea un cuarto y ademas asigna un maximo de participantes
+                        TogetherJSConfig_autoStart = true; //Reinicia la sesion de un usuario
+                        TogetherJSConfig_suppressJoinConfirmation=true; //Evita la confirmacion de ingreso a un cuarto para los invitados
+                        TogetherJSConfig_suppressInvite=true;
+                        TogetherJSConfig_inviteFromRoom=false;
+                        TogetherJSConfig_includeHashInUrl=true; //Util en aplicaciones de una sola pagina para indicar que una misma URL no quiere decir que cada persona ve lo mismo
+                        TogetherJSConfig_disableWebRTC=true; //Deshabilita boton de llamada de audio
+                        TogetherJSConfig_ignoreForms=false; //Define si ignora los formularios
+                        
+                        TogetherJSConfig_getUserName = function () {return '<?php echo "$Nombre_usuario ($PCOSESS_LoginUsuario)"; ?>';};   //Funcion que establece el nombre de usuario, debe retornar null en caso que no lo pueda establecer
+                        //TogetherJSConfig_getUserAvatar = function () {return avatarUrl;}; //Establece la URL utilizada para el avatar del usuario
+                        //TogetherJSConfig_getUserColor = function () {return '#ff00ff';}; Retorna el color que diferencia al usuario
+                    
+                        //Retira opciones innecesarias de PMeetings y hace la traduccion forzada a espanol
+                        function LimpiarInterfaz()
+                            {
+                                $("#togetherjs-menu-help").hide();
+                                $("#togetherjs-menu-feedback").hide();
+                                $("#togetherjs-share-button").hide();
+                                $("#togetherjs-share-button").css("display", "none");
+                                $("#togetherjs-share-button").css("visibility", "hidden");
+                                //Traduce cadenas basicas
+                                $("#togetherjs-menu-update-name").html('<img src="https://togetherjs.com/togetherjs/images/button-pencil.png" alt=""> Actualizar tu nombre');
+                                $("#togetherjs-menu-update-avatar").html('<img src="https://togetherjs.com/togetherjs/images/btn-menu-change-avatar.png" alt=""> Cambiar avatar');
+                                $("#togetherjs-menu-update-color").html('<span class="togetherjs-person-bgcolor-self" style="background-color: rgb(255, 0, 255);"></span> Actualizar tu color');
+                                $("#togetherjs-menu-end").html('<img src="https://togetherjs.com/togetherjs/images/button-end-session.png" alt=""> Cerrar sesion');
+                            }
+                        TogetherJSConfig_on_ready = function () {
+                            LimpiarInterfaz(); };
+                    </script>
+                    <script src="https://togetherjs.com/togetherjs-min.js"></script>
+                <?php
+		        }
+		}
+?>
+
 </body>
 </html>
 <?php
