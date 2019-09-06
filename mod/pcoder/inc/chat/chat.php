@@ -31,7 +31,7 @@ session_start();
 //███▓▓▓▒▒▒ ESTE ARCHIVO EXISTE SOLO POR COMPATIBILIDAD CON INCLUSIONES DEL FRAMEWORK Y   ▒▒▒▓▓▓███
 //███▓▓▓▒▒▒ ES SOLO UNA COPIA DEL ARCHIVO DE MODULO DE CHAT ALTERANDO LA VARIABLE DE PATH ▒▒▒▓▓▓███
 $PathRaizPCO="../../../..";
-$PosfijoTablaPCO="_pcoder";
+$PosfijoTablaPCO="pcoder_";
 //███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
 //███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
 //███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
@@ -74,7 +74,7 @@ function chatHeartbeat() {
 	global $TablasCore,$ZonaHoraria,$PosfijoTablaPCO;
 	
 	$usuario_chat=$_SESSION['username'];
-	$consulta=PCO_EjecutarSQL("select * from ".$TablasCore."chat".$PosfijoTablaPCO." where (".$TablasCore."chat".$PosfijoTablaPCO.".destinatario = ? AND recd = 0) order by id ASC","$usuario_chat");
+	$consulta=PCO_EjecutarSQL("select * from ".$TablasCore."".$PosfijoTablaPCO."chat where (".$TablasCore."".$PosfijoTablaPCO."chat.destinatario = ? AND recd = 0) order by id ASC","$usuario_chat");
 	
 	$items = '';
 
@@ -147,7 +147,7 @@ EOD;
 }
 
 	$usuario_chat=$_SESSION['username'];
-	PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."chat".$PosfijoTablaPCO." SET recd = 1 WHERE ".$TablasCore."chat".$PosfijoTablaPCO.".destinatario = ? and recd = 0","$usuario_chat");
+	PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."".$PosfijoTablaPCO."chat SET recd = 1 WHERE ".$TablasCore."".$PosfijoTablaPCO."chat.destinatario = ? and recd = 0","$usuario_chat");
 
 	if ($items != '') {
 		$items = substr($items, 0, -1);
@@ -229,7 +229,7 @@ EOD;
 
 	unset($_SESSION['tsChatBoxes'.$PosfijoTablaPCO][$_POST['destinatario']]);
 
-	PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."chat".$PosfijoTablaPCO." (".$TablasCore."chat".$PosfijoTablaPCO.".remitente,".$TablasCore."chat".$PosfijoTablaPCO.".destinatario,message,sent) values (?,?,?,NOW());","$remitente$_SeparadorCampos_$destinatario$_SeparadorCampos_$message");
+	PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."".$PosfijoTablaPCO."chat (".$TablasCore."".$PosfijoTablaPCO."chat.remitente,".$TablasCore."".$PosfijoTablaPCO."chat.destinatario,message,sent) values (?,?,?,NOW());","$remitente$_SeparadorCampos_$destinatario$_SeparadorCampos_$message");
 	echo "1";
 	exit(0);
 }

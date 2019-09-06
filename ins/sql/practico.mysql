@@ -618,8 +618,8 @@ CREATE TABLE core_pcoder_historial (
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-DROP TABLE IF EXISTS core_pcoder;
-CREATE TABLE core_pcoder (
+DROP TABLE IF EXISTS core_pcoder_bloqueos;
+CREATE TABLE core_pcoder_bloqueos (
   id int(10) NOT NULL AUTO_INCREMENT,
   archivo text,
   ultima_edicion datetime,
@@ -629,8 +629,8 @@ CREATE TABLE core_pcoder (
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-DROP TABLE IF EXISTS core_chat_pcoder;
-CREATE TABLE core_chat_pcoder (
+DROP TABLE IF EXISTS core_pcoder_chat;
+CREATE TABLE core_pcoder_chat (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   remitente VARCHAR(255) NOT NULL DEFAULT '',
   destinatario VARCHAR(255) NOT NULL DEFAULT '',
