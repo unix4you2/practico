@@ -629,3 +629,13 @@ CREATE TABLE core_pcoder (
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+DROP TABLE IF EXISTS core_chat_pcoder;
+CREATE TABLE core_chat_pcoder (
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  remitente VARCHAR(255) NOT NULL DEFAULT '',
+  destinatario VARCHAR(255) NOT NULL DEFAULT '',
+  message TEXT NOT NULL,
+  sent DATETIME,
+  recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

@@ -158,3 +158,4 @@
 	$MULTILANG_PCODER_SensibleMayusculas='Distinguir May&uacute;sculas / Min&uacute;sculas';
 	$MULTILANG_PCODER_Autocompletado='Autocompletado mientras se escribe';
 	$MULTILANG_PCODER_HistorialVersiones='Historial de versiones';
+	$MULTILANG_PCODER_ChatDesarrolladores='Herramientas de colaboracion<br>para desarrolladores';

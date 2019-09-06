@@ -157,3 +157,4 @@
 	$MULTILANG_PCODER_SensibleMayusculas='अक्षर संवेदनशील';
 	$MULTILANG_PCODER_Autocompletado='स्वत: पूर्ण रूप में आप टाइप';
 	$MULTILANG_PCODER_HistorialVersiones='Version history';
+	$MULTILANG_PCODER_ChatDesarrolladores='Developers chat only';

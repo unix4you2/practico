@@ -31,6 +31,7 @@
 				<li><a id="pestana_consola" data-toggle="tooltip" data-placement="bottom" title="<?php echo $MULTILANG_PCODER_TerminalRemota; ?>" OnClick="$('#pestana_consola').attr('href', '#pestana_consola_comandos'); $('#pestana_consola').attr('data-toggle', 'tab');"><i class="fa fa-terminal fa-fw fa-2x text-warning"></i></a></li>
 				<li><a id="pestana_explorador" data-toggle="tooltip" data-placement="bottom" title="<?php echo $MULTILANG_PCODER_NavegadorEmbebido; ?>" OnClick="$('#pestana_explorador').attr('href', '#pestana_explorador_web'); $('#pestana_explorador').attr('data-toggle', 'tab');"><i class="fa fa-globe fa-fw fa-2x text-info"></i></a></li>
 				<li><a id="pestana_diferencias" data-toggle="tooltip" data-placement="bottom" title="<?php echo $MULTILANG_PCODER_HerramientaDiferencias; ?>" OnClick="$('#pestana_diferencias').attr('href', '#pestana_diferencias_archivos'); $('#pestana_diferencias').attr('data-toggle', 'tab');"><i class="fa fa-eye-slash fa-fw fa-2x text-danger"></i></a></li>
+				<li><a id="pestana_chat" data-toggle="tooltip" data-html="true" data-placement="bottom" title="<?php echo $MULTILANG_PCODER_ChatDesarrolladores; ?>" OnClick="$('#pestana_chat').attr('href', '#pestana_chat_together'); $('#pestana_chat').attr('data-toggle', 'tab');"><i class="fa fa-comment-o fa-fw fa-2x text-yellow"></i></a></li>
 			</ul>
 
 		</div>

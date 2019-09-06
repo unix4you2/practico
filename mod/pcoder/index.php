@@ -347,7 +347,11 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 							</div>
 							<iframe name="frame_diferencias" id="frame_diferencias" src="mod/php-diff-1.0/generador" style="border:0px;"></iframe>
 						</div>
-						
+
+						<div id="pestana_chat_together" class="tab-pane fade">
+							<iframe name="frame_exploradorss" id="frame_exploradorss" src="https://ellago.colmedicos.com" width="100%" height="100%"  scrolling="yes" style="border:0px;"></iframe>
+						</div>
+
 					</div>
 				</div>
 

@@ -157,3 +157,4 @@
 	$MULTILANG_PCODER_SensibleMayusculas='Case sensitive';
 	$MULTILANG_PCODER_Autocompletado='Autocomplete as you type';
 	$MULTILANG_PCODER_HistorialVersiones='Version history';
+	$MULTILANG_PCODER_ChatDesarrolladores='Developers chat only';

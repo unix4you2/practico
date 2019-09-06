@@ -31,6 +31,7 @@ session_start();
 //███▓▓▓▒▒▒ ESTE ARCHIVO EXISTE SOLO POR COMPATIBILIDAD CON INCLUSIONES DEL FRAMEWORK Y   ▒▒▒▓▓▓███
 //███▓▓▓▒▒▒ ES SOLO UNA COPIA DEL ARCHIVO DE MODULO DE CHAT ALTERANDO LA VARIABLE DE PATH ▒▒▒▓▓▓███
 $PathRaizPCO="../../../..";
+$PosfijoTablaPCO="_pcoder";
 //███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
 //███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
 //███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
@@ -60,20 +61,20 @@ if ($_GET['action'] == "sendchat") { sendChat(); }
 if ($_GET['action'] == "closechat") { closeChat(); } 
 if ($_GET['action'] == "startchatsession") { startChatSession(); } 
 
-if (!isset($_SESSION['chatHistory'])) {
-	$_SESSION['chatHistory'] = array();	
+if (!isset($_SESSION['chatHistory'.$PosfijoTablaPCO])) {
+	$_SESSION['chatHistory'.$PosfijoTablaPCO] = array();	
 }
 
-if (!isset($_SESSION['openChatBoxes'])) {
-	$_SESSION['openChatBoxes'] = array();	
+if (!isset($_SESSION['openChatBoxes'.$PosfijoTablaPCO])) {
+	$_SESSION['openChatBoxes'.$PosfijoTablaPCO] = array();	
 }
 
 function chatHeartbeat() {
 	
-	global $TablasCore,$ZonaHoraria;
+	global $TablasCore,$ZonaHoraria,$PosfijoTablaPCO;
 	
 	$usuario_chat=$_SESSION['username'];
-	$consulta=PCO_EjecutarSQL("select * from ".$TablasCore."chat where (".$TablasCore."chat.destinatario = ? AND recd = 0) order by id ASC","$usuario_chat");
+	$consulta=PCO_EjecutarSQL("select * from ".$TablasCore."chat".$PosfijoTablaPCO." where (".$TablasCore."chat".$PosfijoTablaPCO.".destinatario = ? AND recd = 0) order by id ASC","$usuario_chat");
 	
 	$items = '';
 
@@ -81,8 +82,8 @@ function chatHeartbeat() {
 
 	while ($chat = $consulta->fetch()) {
 
-		if (!isset($_SESSION['openChatBoxes'][$chat['remitente']]) && isset($_SESSION['chatHistory'][$chat['remitente']])) {
-			$items = $_SESSION['chatHistory'][$chat['remitente']];
+		if (!isset($_SESSION['openChatBoxes'.$PosfijoTablaPCO][$chat['remitente']]) && isset($_SESSION['chatHistory'.$PosfijoTablaPCO][$chat['remitente']])) {
+			$items = $_SESSION['chatHistory'.$PosfijoTablaPCO][$chat['remitente']];
 		}
 
 		$chat['message'] = sanitize($chat['message']);
@@ -95,11 +96,11 @@ function chatHeartbeat() {
 	   },
 EOD;
 
-	if (!isset($_SESSION['chatHistory'][$chat['remitente']])) {
-		$_SESSION['chatHistory'][$chat['remitente']] = '';
+	if (!isset($_SESSION['chatHistory'.$PosfijoTablaPCO][$chat['remitente']])) {
+		$_SESSION['chatHistory'.$PosfijoTablaPCO][$chat['remitente']] = '';
 	}
 
-	$_SESSION['chatHistory'][$chat['remitente']] .= <<<EOD
+	$_SESSION['chatHistory'.$PosfijoTablaPCO][$chat['remitente']] .= <<<EOD
 						   {
 			"s": "0",
 			"f": "{$chat['remitente']}",
@@ -107,13 +108,13 @@ EOD;
 	   },
 EOD;
 		
-		unset($_SESSION['tsChatBoxes'][$chat['remitente']]);
-		$_SESSION['openChatBoxes'][$chat['remitente']] = $chat['sent'];
+		unset($_SESSION['tsChatBoxes'.$PosfijoTablaPCO][$chat['remitente']]);
+		$_SESSION['openChatBoxes'.$PosfijoTablaPCO][$chat['remitente']] = $chat['sent'];
 	}
 
-	if (!empty($_SESSION['openChatBoxes'])) {
-	foreach ($_SESSION['openChatBoxes'] as $chatbox => $time) {
-		if (!isset($_SESSION['tsChatBoxes'][$chatbox])) {
+	if (!empty($_SESSION['openChatBoxes'.$PosfijoTablaPCO])) {
+	foreach ($_SESSION['openChatBoxes'.$PosfijoTablaPCO] as $chatbox => $time) {
+		if (!isset($_SESSION['tsChatBoxes'.$PosfijoTablaPCO][$chatbox])) {
 			date_default_timezone_set($ZonaHoraria);
 			$now = time()-strtotime($time);
 			$time = date('g:iA M dS', strtotime($time));
@@ -128,25 +129,25 @@ EOD;
 },
 EOD;
 
-	if (!isset($_SESSION['chatHistory'][$chatbox])) {
-		$_SESSION['chatHistory'][$chatbox] = '';
+	if (!isset($_SESSION['chatHistory'.$PosfijoTablaPCO][$chatbox])) {
+		$_SESSION['chatHistory'.$PosfijoTablaPCO][$chatbox] = '';
 	}
 
-	$_SESSION['chatHistory'][$chatbox] .= <<<EOD
+	$_SESSION['chatHistory'.$PosfijoTablaPCO][$chatbox] .= <<<EOD
 		{
 "s": "2",
 "f": "$chatbox",
 "m": "{$message}"
 },
 EOD;
-			$_SESSION['tsChatBoxes'][$chatbox] = 1;
+			$_SESSION['tsChatBoxes'.$PosfijoTablaPCO][$chatbox] = 1;
 		}
 		}
 	}
 }
 
 	$usuario_chat=$_SESSION['username'];
-	PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."chat SET recd = 1 WHERE ".$TablasCore."chat.destinatario = ? and recd = 0","$usuario_chat");
+	PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."chat".$PosfijoTablaPCO." SET recd = 1 WHERE ".$TablasCore."chat".$PosfijoTablaPCO.".destinatario = ? and recd = 0","$usuario_chat");
 
 	if ($items != '') {
 		$items = substr($items, 0, -1);
@@ -164,20 +165,21 @@ header('Content-type: application/json');
 }
 
 function chatBoxSession($chatbox) {
-	
+	global $PosfijoTablaPCO;
 	$items = '';
 	
-	if (isset($_SESSION['chatHistory'][$chatbox])) {
-		$items = $_SESSION['chatHistory'][$chatbox];
+	if (isset($_SESSION['chatHistory'.$PosfijoTablaPCO][$chatbox])) {
+		$items = $_SESSION['chatHistory'.$PosfijoTablaPCO][$chatbox];
 	}
 
 	return $items;
 }
 
 function startChatSession() {
+    global $PosfijoTablaPCO;
 	$items = '';
-	if (!empty($_SESSION['openChatBoxes'])) {
-		foreach ($_SESSION['openChatBoxes'] as $chatbox => $void) {
+	if (!empty($_SESSION['openChatBoxes'.$PosfijoTablaPCO])) {
+		foreach ($_SESSION['openChatBoxes'.$PosfijoTablaPCO] as $chatbox => $void) {
 			$items .= chatBoxSession($chatbox);
 		}
 	}
@@ -203,20 +205,20 @@ $UsuarioChat = @$_SESSION['username'];
 }
 
 function sendChat() {
-	global $TablasCore,$_SeparadorCampos_,$ZonaHoraria;
+	global $TablasCore,$_SeparadorCampos_,$ZonaHoraria,$PosfijoTablaPCO;
 	$remitente = $_SESSION['username'];
 	$destinatario = $_POST['destinatario'];
 	$message = $_POST['message'];
 	date_default_timezone_set($ZonaHoraria);
-	$_SESSION['openChatBoxes'][$_POST['destinatario']] = date('Y-m-d H:i:s', time());
+	$_SESSION['openChatBoxes'.$PosfijoTablaPCO][$_POST['destinatario']] = date('Y-m-d H:i:s', time());
 	
 	$messagesan = sanitize($message);
 
-	if (!isset($_SESSION['chatHistory'][$_POST['destinatario']])) {
-		$_SESSION['chatHistory'][$_POST['destinatario']] = '';
+	if (!isset($_SESSION['chatHistory'.$PosfijoTablaPCO][$_POST['destinatario']])) {
+		$_SESSION['chatHistory'.$PosfijoTablaPCO][$_POST['destinatario']] = '';
 	}
 
-	$_SESSION['chatHistory'][$_POST['destinatario']] .= <<<EOD
+	$_SESSION['chatHistory'.$PosfijoTablaPCO][$_POST['destinatario']] .= <<<EOD
 					   {
 			"s": "1",
 			"f": "{$destinatario}",
@@ -225,16 +227,16 @@ function sendChat() {
 EOD;
 
 
-	unset($_SESSION['tsChatBoxes'][$_POST['destinatario']]);
+	unset($_SESSION['tsChatBoxes'.$PosfijoTablaPCO][$_POST['destinatario']]);
 
-	PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."chat (".$TablasCore."chat.remitente,".$TablasCore."chat.destinatario,message,sent) values (?,?,?,NOW());","$remitente$_SeparadorCampos_$destinatario$_SeparadorCampos_$message");
+	PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."chat".$PosfijoTablaPCO." (".$TablasCore."chat".$PosfijoTablaPCO.".remitente,".$TablasCore."chat".$PosfijoTablaPCO.".destinatario,message,sent) values (?,?,?,NOW());","$remitente$_SeparadorCampos_$destinatario$_SeparadorCampos_$message");
 	echo "1";
 	exit(0);
 }
 
 function closeChat() {
-
-	unset($_SESSION['openChatBoxes'][$_POST['chatbox']]);
+    global $PosfijoTablaPCO;
+	unset($_SESSION['openChatBoxes'.$PosfijoTablaPCO][$_POST['chatbox']]);
 	
 	echo "1";
 	exit(0);
