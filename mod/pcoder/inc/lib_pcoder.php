@@ -191,15 +191,25 @@ if ($PCO_Accion=="PCOMOD_ActivarBloqueoArchivo")
                 //Si no existe lo crea, sino lo actualiza
                 if ($RegistroBloqueo["id"]=="")
                     {
-                        PCO_EjecutarSQLUnaria("INSERT INTO core_pcoder_bloqueos (archivo,ultima_edicion,usuario,abierto,direccion_origen,agente) VALUES ('$PCODER_archivo','$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00','$PCOSESS_LoginUsuario','1','$PCO_PCODER_DireccionAuditoria','".$_SERVER['HTTP_USER_AGENT']."');")->fetch();
+                        PCO_EjecutarSQLUnaria("INSERT INTO core_pcoder_bloqueos (archivo,ultima_edicion,usuario,abierto,direccion_origen,agente) VALUES ('$PCODER_archivo','$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00','$PCOSESS_LoginUsuario','1','$PCO_PCODER_DireccionAuditoria','".$_SERVER['HTTP_USER_AGENT']."');");
                     }
                 else
                     {
                         //Verifica si el bloqueo es de otro usuario o del mismo
                         if ($RegistroBloqueo["usuario"]!=$PCOSESS_LoginUsuario)
-                            echo "[ERR]: ".$MULTILANG_PCODER_ErrorRO."<br><br><li>Usuario/User: <b>".$RegistroBloqueo["usuario"]."</b></li><li>Fecha de apertura/Opened date: <b>".$RegistroBloqueo["ultima_edicion"]."</b></li><li>Origen/Origin: <b>".$RegistroBloqueo["direccion_origen"]."</b> <i>(".$RegistroBloqueo["agente"].")</i></li>";
+                            {
+                                echo "[ERR]: ".$MULTILANG_PCODER_ErrorRO."<br><br><li>Usuario/User: <b>".$RegistroBloqueo["usuario"]."</b></li><li>Fecha de apertura/Opened date: <b>".$RegistroBloqueo["ultima_edicion"]."</b></li><li>Origen/Origin: <b>".$RegistroBloqueo["direccion_origen"]."</b> <i>(".$RegistroBloqueo["agente"].")</i></li>";
+                                //Envia a si mismo un mensaje de advertencia a posible estacion abierta
+                                PCO_EjecutarSQLUnaria("INSERT INTO core_pcoder_chat (remitente,destinatario,message,sent,recd) VALUES ('$PCOSESS_LoginUsuario','".$RegistroBloqueo["usuario"]."','He intentado abrir el archivo $PCODER_archivo pero se encuentra bloqueado por ti (mensaje automatico)','$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00','0');");
+                            }
                         else
-                            echo "[ADV]: ".$MULTILANG_PCODER_AdvertenciaCierre."<br><br><li>Fecha de apertura/Opened date: <b>".$RegistroBloqueo["ultima_edicion"]."</b></li><li>Origen/Origin: <b>".$RegistroBloqueo["direccion_origen"]."</b> <i>(".$RegistroBloqueo["agente"].")</i></li>";
+                            {
+                                echo "[ADV]: ".$MULTILANG_PCODER_AdvertenciaCierre."<br><br><li>Fecha de apertura/Opened date: <b>".$RegistroBloqueo["ultima_edicion"]."</b></li><li>Origen/Origin: <b>".$RegistroBloqueo["direccion_origen"]."</b> <i>(".$RegistroBloqueo["agente"].")</i></li><hr>".$MULTILANG_PCODER_AdvConcurrencia;
+                                //Despues de generar advertencia actualiza ultima fecha apertura, direccion y agente como la actual
+                                PCO_EjecutarSQLUnaria("UPDATE core_pcoder_bloqueos SET ultima_edicion='$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00',direccion_origen='$PCO_PCODER_DireccionAuditoria',agente='".$_SERVER['HTTP_USER_AGENT']."' WHERE archivo='$PCODER_archivo' ");
+                                //Envia a si mismo un mensaje de advertencia a posible estacion abierta
+                                PCO_EjecutarSQLUnaria("INSERT INTO core_pcoder_chat (remitente,destinatario,message,sent,recd) VALUES ('$PCOSESS_LoginUsuario','".$RegistroBloqueo["usuario"]."','He abierto el archivo $PCODER_archivo con advertencia de apertura desde $PCO_PCODER_DireccionAuditoria (mensaje automatico)','$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00','0');");
+                            }
                     }
             }
         die();

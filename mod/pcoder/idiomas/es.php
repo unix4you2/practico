@@ -159,5 +159,6 @@
 	$MULTILANG_PCODER_Autocompletado='Autocompletado mientras se escribe';
 	$MULTILANG_PCODER_HistorialVersiones='Historial de versiones';
 	$MULTILANG_PCODER_ChatDesarrolladores='Herramientas de colaboracion<br>para desarrolladores';
-	$MULTILANG_PCODER_ErrorRO='ERROR: El archivo se encuentra bloqueado contra apertura simultanea';
-	$MULTILANG_PCODER_AdvertenciaCierre='ADVERTENCIA: El archivo fue abierto anteriormente por usted pero no fue cerrado adecuadamente.  Se le recomienda cerrar correctamente sus archivos y sesion para evitar bloqueos de apertura simultanea para otros usuarios.';
+	$MULTILANG_PCODER_ErrorRO='ERROR: El archivo se encuentra bloqueado contra apertura simult&aacute;nea. S&oacute;lo el usuario asociado o el super usuario (admin) pueden desbloquear su acceso.';
+	$MULTILANG_PCODER_AdvertenciaCierre='ADVERTENCIA: El archivo fue abierto anteriormente por usted pero no fue cerrado adecuadamente.  Se le recomienda cerrar correctamente sus archivos y sesi&oacute;n para evitar bloqueos de apertura simult&aacute;nea para otros usuarios.';
+	$MULTILANG_PCODER_AdvConcurrencia='<font color=red>CUIDADO CUIDADO CUIDADO !!!</font><br>Esto tambi&eacute;n puede indicar que incluso usted mismo tiene abierto este archivo desde otra estaci&oacute;n de trabajo.  El archivo ser&aacute; abierto pero tenga cuidado de no sobreescribir cambios al cargar desde diferentes computadoras el mismo archivo de trabajo o utilice la opci&oacute;n <b>Archivo->Historial de versiones</b> para verificar cualquier cambio.';
