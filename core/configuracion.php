@@ -127,4 +127,4 @@
 	$ModoDesarrolladorPractico=-10000; // [0=Inactivo|-10000=Activo]
 
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
-	$PCOVAR_Administradores='admin';
+	$PCOVAR_Administradores='admin,john.arroyave';
