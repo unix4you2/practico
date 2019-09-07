@@ -349,9 +349,12 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 						</div>
 
 						<div  id="pestana_chat_together" class="tab-pane fade" align=center>
-							<button style="margin:10px;" class="btn btn-primary" id="IniciarPMeetings" onclick="TogetherJS(this); return false;"><i class="fa fa-group fa-fw"></i> Activar/Desactivar Practico Meetings</button>
+							<button style="margin:10px;" class="btn btn-info" id="TableroCompartido" onclick="$('#frame_pboard').css('visibility', 'visible');"><i class="fa fa-slideshare fa-fw"></i> Activar Pizarra</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;
-							<button class="btn btn-info" id="TableroCompartido" onclick="$('#frame_pboard').css('visibility', 'visible');"><i class="fa fa-slideshare fa-fw"></i> Activar Pizarra compartida</button>
+							<button style="margin:10px;" class="btn btn-default" id="ChatPCoderSimple" onclick="PCODER_CargarUsuariosChatEstandar();"><i class="fa fa-comments fa-fw"></i> Chat est&aacute;ndar</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<button style="margin:10px;" class="btn btn-primary" id="IniciarPMeetings" onclick="PCODER_PracticoMeetings();"><i class="fa fa-group fa-fw"></i> Activar/Desactivar Practico Meetings</button>
+
 							<iframe name="frame_pboard" id="frame_pboard" src="mod/pboard" style="display:block; visibility:hidden; width:100%; height:100vh;" width="100%" height="100%"  scrolling="yes" style="border:0px;"></iframe>
 						</div>
 
@@ -408,6 +411,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 		var MULTILANG_PCODER_ExtensionNoSoportada="<?php echo $MULTILANG_PCODER_ExtensionNoSoportada; ?>";
 		var MULTILANG_PCODER_HistorialVersiones="<?php echo $MULTILANG_PCODER_HistorialVersiones; ?>";
 		var PCO_PCODER_StandAlone="<?php echo $PCO_PCODER_StandAlone; ?>";
+		var PCOSESS_LoginUsuario="<?php echo $PCOSESS_LoginUsuario; ?>";
 	</script>
 	<script type="text/javascript" src="js/pcoder.min.js?<?php echo filemtime('js/pcoder.min.js'); ?>"></script>
 
