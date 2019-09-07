@@ -358,6 +358,11 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 							<iframe name="frame_pboard" id="frame_pboard" src="mod/pboard" style="display:block; visibility:hidden; width:100%; height:100vh;" width="100%" height="100%"  scrolling="yes" style="border:0px;"></iframe>
 						</div>
 
+						<div  id="pestana_estado_general" class="tab-pane fade" align=center>
+    						<div  id="MarcoEstadoYBloqueos">
+    						</div>
+						</div>
+
 					</div>
 				</div>
 
