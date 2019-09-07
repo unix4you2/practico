@@ -158,3 +158,5 @@
 	$MULTILANG_PCODER_Autocompletado='स्वत: पूर्ण रूप में आप टाइप';
 	$MULTILANG_PCODER_HistorialVersiones='Version history';
 	$MULTILANG_PCODER_ChatDesarrolladores='Developers chat only';
+	$MULTILANG_PCODER_ErrorRO='ERROR: This file is locked for open it simultaneously';
+	$MULTILANG_PCODER_AdvertenciaCierre='WARNING: This file was opened by you in the past but this was not closed propertly.  We advice you to close your sessions and files correctly to avoid simultaneous file locks for other users.';

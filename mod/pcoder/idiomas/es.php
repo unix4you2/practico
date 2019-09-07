@@ -159,3 +159,5 @@
 	$MULTILANG_PCODER_Autocompletado='Autocompletado mientras se escribe';
 	$MULTILANG_PCODER_HistorialVersiones='Historial de versiones';
 	$MULTILANG_PCODER_ChatDesarrolladores='Herramientas de colaboracion<br>para desarrolladores';
+	$MULTILANG_PCODER_ErrorRO='ERROR: El archivo se encuentra bloqueado contra apertura simultanea';
+	$MULTILANG_PCODER_AdvertenciaCierre='ADVERTENCIA: El archivo fue abierto anteriormente por usted pero no fue cerrado adecuadamente.  Se le recomienda cerrar correctamente sus archivos y sesion para evitar bloqueos de apertura simultanea para otros usuarios.';

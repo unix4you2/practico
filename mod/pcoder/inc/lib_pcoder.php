@@ -195,7 +195,11 @@ if ($PCO_Accion=="PCOMOD_ActivarBloqueoArchivo")
                     }
                 else
                     {
-                        
+                        //Verifica si el bloqueo es de otro usuario o del mismo
+                        if ($RegistroBloqueo["usuario"]!=$PCOSESS_LoginUsuario)
+                            echo "[ERR]: ".$MULTILANG_PCODER_ErrorRO."<br><br><li>Usuario/User: <b>".$RegistroBloqueo["usuario"]."</b></li><li>Fecha de apertura/Opened date: <b>".$RegistroBloqueo["ultima_edicion"]."</b></li><li>Origen/Origin: <b>".$RegistroBloqueo["direccion_origen"]."</b> <i>(".$RegistroBloqueo["agente"].")</i></li>";
+                        else
+                            echo "[ADV]: ".$MULTILANG_PCODER_AdvertenciaCierre."<br><br><li>Fecha de apertura/Opened date: <b>".$RegistroBloqueo["ultima_edicion"]."</b></li><li>Origen/Origin: <b>".$RegistroBloqueo["direccion_origen"]."</b> <i>(".$RegistroBloqueo["agente"].")</i></li>";
                     }
             }
         die();
