@@ -173,6 +173,35 @@ if ($PCO_Accion=="PCOMOD_CargarInformexID")
 	}
 
 
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCOMOD_ActivarBloqueoArchivo
+	Activa un archivo abierto como bloqueado por el usuario para su escritura
+*/
+if ($PCO_Accion=="PCOMOD_ActivarBloqueoArchivo") 
+	{
+        @ob_clean();
+        //PCO_CargarInforme($IDInforme,0,"htm","Informes",1,0,1,0,"");
+        if ($PCODER_archivo!="demos/demo.txt")
+            {
+                //Busca si ya existe el registro
+                $RegistroBloqueo=PCO_EjecutarSQL("SELECT * FROM core_pcoder_bloqueos WHERE archivo='$PCODER_archivo' ")->fetch();
+                //Si no existe lo crea, sino lo actualiza
+                if ($RegistroBloqueo["id"]=="")
+                    {
+                        PCO_EjecutarSQLUnaria("INSERT INTO core_pcoder_bloqueos (archivo,ultima_edicion,usuario,abierto,direccion_origen,agente) VALUES ('$PCODER_archivo','$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00','$PCOSESS_LoginUsuario','1','$PCO_PCODER_DireccionAuditoria','".$_SERVER['HTTP_USER_AGENT']."');")->fetch();
+                    }
+                else
+                    {
+                        
+                    }
+            }
+        die();
+	}
+
+
 /* ################################################################## */
 /* ################################################################## */
 /*

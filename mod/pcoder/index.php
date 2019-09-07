@@ -407,6 +407,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 		var MULTILANG_PCODER_Eliminado="<?php echo $MULTILANG_PCODER_Eliminado; ?>";
 		var MULTILANG_PCODER_ExtensionNoSoportada="<?php echo $MULTILANG_PCODER_ExtensionNoSoportada; ?>";
 		var MULTILANG_PCODER_HistorialVersiones="<?php echo $MULTILANG_PCODER_HistorialVersiones; ?>";
+		var PCO_PCODER_StandAlone="<?php echo $PCO_PCODER_StandAlone; ?>";
 	</script>
 	<script type="text/javascript" src="js/pcoder.min.js?<?php echo filemtime('js/pcoder.min.js'); ?>"></script>
 

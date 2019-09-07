@@ -625,6 +625,7 @@ CREATE TABLE core_pcoder_bloqueos (
   usuario varchar(255),
   abierto int(1),
   direccion_origen varchar(255),
+  agente varchar(255),
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
