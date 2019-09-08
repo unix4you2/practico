@@ -393,6 +393,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
 	<!-- Funciones especificas de PCoder -->
 	<script language="JavaScript">
+	    var MensajeFuncionalidadNoDisponible="<center><b>OPCION INACTIVA!!! - FEATURE DISABLED!!!</b></center><HR>Su instalacion de {P}Coder no se encuentra integrada a <a href='https://www.practico.org'>Practico Framework</a><br>Muchas de las caracteristicas solo son habilitadas cuando PCoder se integra de manera nativa con Practico Framework<br><br>Your {P}Coder setup its not embeded into <a href='https://www.practico.org'>Practico Framework</a><br>Many features are available when your PCoder is embeded into a Practico Framework setup";
 		//Convierte variables de idioma desde PHP a JS
 		var MULTILANG_PCODER_Linea="<?php echo $MULTILANG_PCODER_Linea; ?>";
 		var MULTILANG_PCODER_Columna="<?php echo $MULTILANG_PCODER_Columna; ?>";
