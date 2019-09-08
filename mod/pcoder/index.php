@@ -359,7 +359,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 						</div>
 
 						<div  id="pestana_estado_general" class="tab-pane fade" align=center>
-    						<div  id="MarcoEstadoYBloqueos">
+    						<div  id="MarcoEstadoYBloqueos" style="padding:30px;">
     						</div>
 						</div>
 

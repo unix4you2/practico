@@ -1175,46 +1175,65 @@ function PCODER_CargarArchivo(path_archivo)
 				//Si el modo es uno de los soportados sigue adelante
 				if(ValorModoEditor!="")
 					{
-						ValorTipoElemento=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerTipoElemento&PCODER_archivo="+path_archivo);
-						ValorTamanoDocumento=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerTamanoDocumento&PCODER_archivo="+path_archivo);
-						ValorFechaModificadoDocumento=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerFechaElemento&PCODER_archivo="+path_archivo);
-						ValorTokenEdicion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerTokenEdicion&PCODER_archivo="+path_archivo);
-						ValorNombreArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerNombreArchivo&PCODER_archivo="+path_archivo);
-						ValorContenidoArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerContenidoArchivo&PCODER_archivo="+path_archivo);
-						ValorPermisosRW=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_VerificarPermisosRW&PCODER_archivo="+path_archivo);
-						ValorPermisosArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPermisosArchivo&PCODER_archivo="+path_archivo);
-						ValorVistaSplit=""; //Valor inicial de la vista dividida (sin dividir)
-						ValorAdministradorDeshacer=new ace.UndoManager(); //Inicia un administrador de Deshacer/Hacer especifico para el archivo
-						ValorInicioLineaRenderizadaMiniMap=0; //Inicia un administrador de Deshacer/Hacer especifico para el archivo
+					    //Verifica que el archivo no se encuentre bloqueado
+					    ResultadoBloqueoArchivo="";
+			            //Intenta hacer el bloqueo de archivo y Actualiza el registro de archivo como abierto
+			            if (PCO_PCODER_StandAlone=="0")
+    				        ResultadoBloqueoArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ActivarBloqueoArchivo&PCODER_archivo="+path_archivo);
 
-						//Agrega nuevo elemento al arreglo
-						ListaArchivos[IndiceAperturaArchivo] = {    TipoDocumento: ValorTipoElemento, 
-						                                            TamanoDocumento: ValorTamanoDocumento,
-						                                            FechaModificadoDocumento: ValorFechaModificadoDocumento,
-						                                            RutaDocumento: path_archivo,
-						                                            TokenEdicion: ValorTokenEdicion,
-						                                            ModoEditor: ValorModoEditor,
-						                                            NombreArchivo: ValorNombreArchivo,
-						                                            LineaActual: 1,
-						                                            ColumnaActual: 0,
-						                                            PermisosRW: ValorPermisosRW,
-						                                            PermisosArchivo: ValorPermisosArchivo,
-						                                            VistaSplit: ValorVistaSplit,
-						                                            AdministradorDeshacer: ValorAdministradorDeshacer,
-						                                            InicioLineaRenderizadaMiniMap: ValorInicioLineaRenderizadaMiniMap
-						                                       };
-						
-						//Crea dinamicamente el textarea con el numero de indice y con su valor predeterminado
-						AgregarNuevoTextarea(document.form_textareas_archivos,"PCODER_AreaTexto"+IndiceAperturaArchivo,ValorContenidoArchivo);
-						
-						//Actualiza los indices de posiciones en el vector
-						IndiceUltimoArchivoAbierto=IndiceAperturaArchivo;
-						IndiceArchivoActual=IndiceAperturaArchivo;
-						IndiceAperturaArchivo++;
+					    if (ResultadoBloqueoArchivo.length<10 || ResultadoBloqueoArchivo.includes("[ADV]"))
+					        {
+					            //Se visualiza mensaje de advertencia si aplica
+					            if (ResultadoBloqueoArchivo.includes("[ADV]"))
+					                PCOJS_MostrarMensaje("Abrir archivo / Open file", ResultadoBloqueoArchivo);
 
-						//Actualiza todo el editor con el archivo recier cargado
-						PCODER_CambiarArchivoActual(IndiceArchivoActual,1);
-						CambiarModoEditor("ace/mode/"+ListaArchivos[IndiceArchivoActual].ModoEditor); //Hace cambio forzado de tipo de editor cuando se abre un nuevo archivo
+        						ValorTipoElemento=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerTipoElemento&PCODER_archivo="+path_archivo);
+        						ValorTamanoDocumento=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerTamanoDocumento&PCODER_archivo="+path_archivo);
+        						ValorFechaModificadoDocumento=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerFechaElemento&PCODER_archivo="+path_archivo);
+        						ValorTokenEdicion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerTokenEdicion&PCODER_archivo="+path_archivo);
+        						ValorNombreArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerNombreArchivo&PCODER_archivo="+path_archivo);
+        						ValorContenidoArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerContenidoArchivo&PCODER_archivo="+path_archivo);
+        						ValorPermisosRW=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_VerificarPermisosRW&PCODER_archivo="+path_archivo);
+        						ValorPermisosArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ObtenerPermisosArchivo&PCODER_archivo="+path_archivo);
+        						ValorVistaSplit=""; //Valor inicial de la vista dividida (sin dividir)
+        						ValorAdministradorDeshacer=new ace.UndoManager(); //Inicia un administrador de Deshacer/Hacer especifico para el archivo
+        						ValorInicioLineaRenderizadaMiniMap=0; //Inicia un administrador de Deshacer/Hacer especifico para el archivo
+        
+        						//Agrega nuevo elemento al arreglo
+        						ListaArchivos[IndiceAperturaArchivo] = {    TipoDocumento: ValorTipoElemento, 
+        						                                            TamanoDocumento: ValorTamanoDocumento,
+        						                                            FechaModificadoDocumento: ValorFechaModificadoDocumento,
+        						                                            RutaDocumento: path_archivo,
+        						                                            TokenEdicion: ValorTokenEdicion,
+        						                                            ModoEditor: ValorModoEditor,
+        						                                            NombreArchivo: ValorNombreArchivo,
+        						                                            LineaActual: 1,
+        						                                            ColumnaActual: 0,
+        						                                            PermisosRW: ValorPermisosRW,
+        						                                            PermisosArchivo: ValorPermisosArchivo,
+        						                                            VistaSplit: ValorVistaSplit,
+        						                                            AdministradorDeshacer: ValorAdministradorDeshacer,
+        						                                            InicioLineaRenderizadaMiniMap: ValorInicioLineaRenderizadaMiniMap
+        						                                       };
+        						
+        						//Crea dinamicamente el textarea con el numero de indice y con su valor predeterminado
+        						AgregarNuevoTextarea(document.form_textareas_archivos,"PCODER_AreaTexto"+IndiceAperturaArchivo,ValorContenidoArchivo);
+        						
+        						//Actualiza los indices de posiciones en el vector
+        						IndiceUltimoArchivoAbierto=IndiceAperturaArchivo;
+        						IndiceArchivoActual=IndiceAperturaArchivo;
+        						IndiceAperturaArchivo++;
+        
+        						//Actualiza todo el editor con el archivo recier cargado
+        						PCODER_CambiarArchivoActual(IndiceArchivoActual,1);
+        						CambiarModoEditor("ace/mode/"+ListaArchivos[IndiceArchivoActual].ModoEditor); //Hace cambio forzado de tipo de editor cuando se abre un nuevo archivo
+					        }
+					    else
+					        {
+					            //Se visualiza mensaje de error de bloqueo de aarchivo
+					        	//TODO: Preguntar por cargue de solo lectura
+					        	PCOJS_MostrarMensaje("Abrir archivo / Open file", ResultadoBloqueoArchivo);
+					        }
 					}
 				else
 					{
@@ -1302,15 +1321,61 @@ function PCODER_ObtenerLineaMinimap(Minimap,e)
 
 function PCODER_HistorialArchivoActual()
     {
-        if(ListaArchivos[IndiceArchivoActual].NombreArchivo!="demo.txt")
+        if (PCO_PCODER_StandAlone==0)
             {
-        		ResultadoOperacion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-23&RutaDocumento="+ListaArchivos[IndiceArchivoActual].RutaDocumento+"&NombreArchivo="+ListaArchivos[IndiceArchivoActual].NombreArchivo);
-        		PCOJS_MostrarMensaje(MULTILANG_PCODER_HistorialVersiones, ResultadoOperacion," modal modal-wide ");                
+                if(ListaArchivos[IndiceArchivoActual].NombreArchivo!="demo.txt")
+                    {
+                		ResultadoOperacion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-23&RutaDocumento="+ListaArchivos[IndiceArchivoActual].RutaDocumento+"&NombreArchivo="+ListaArchivos[IndiceArchivoActual].NombreArchivo);
+                		PCOJS_MostrarMensaje(MULTILANG_PCODER_HistorialVersiones, ResultadoOperacion," modal modal-wide ");                
+                    }
+                else
+                    {
+                		PCOJS_MostrarMensaje(MULTILANG_PCODER_HistorialVersiones, "Cargue primero un archivo para revisar su historial de cambios<br><br>Please load a file to see the version history");
+                    }
             }
         else
+        	PCOJS_MostrarMensaje("ERROR", MensajeFuncionalidadNoDisponible," modal modal-wide ");
+    }
+
+
+function PCODER_CargarUsuariosChatEstandar()
+    {
+        if (PCO_PCODER_StandAlone==0)
             {
-        		PCOJS_MostrarMensaje(MULTILANG_PCODER_HistorialVersiones, "Cargue primero un archivo para revisar su historial de cambios<br><br>Please load a file to see the version history");
+        		ResultadoOperacion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-24");
+        		PCOJS_MostrarMensaje("Chat estandar", ResultadoOperacion," modal modal-wide ");
             }
+        else
+        	PCOJS_MostrarMensaje("ERROR", MensajeFuncionalidadNoDisponible," modal modal-wide ");
+    }
+
+
+function PCODER_CargarMarcoEstadoYBloqueos()
+    {
+        if (PCO_PCODER_StandAlone==0)
+            {
+                $("#MarcoEstadoYBloqueos").html("<font color=white><br><br>Espere... <i class='fa fa-refresh fa-spin'></i> Wait...</font>");
+        		//Consulta los bloqueos especificos del usuario, sino como admin busca los bloqueos de todos los usuarios
+        		if (PCOSESS_LoginUsuario!="admin")
+        		    ResultadoConsultaBloqueos=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-25&EnVentana=1");
+                else
+        		    ResultadoConsultaBloqueos=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-26&EnVentana=1");
+                
+                $("#MarcoEstadoYBloqueos").html(ResultadoConsultaBloqueos);
+            }
+        else
+        	PCOJS_MostrarMensaje("ERROR", MensajeFuncionalidadNoDisponible," modal modal-wide ");
+    }
+
+
+function PCODER_PracticoMeetings()
+    {
+        if (PCO_PCODER_StandAlone==0)
+            {
+                TogetherJS(this); return false;
+            }
+        else
+        	PCOJS_MostrarMensaje("ERROR", MensajeFuncionalidadNoDisponible," modal modal-wide ");
     }
 
 
