@@ -137,7 +137,7 @@
 	$MULTILANG_PCODER_TerminalRemota='Terminal remota';
 	$MULTILANG_PCODER_EditorArchivos='Editor de archivos';
 	$MULTILANG_PCODER_NavegadorEmbebido='Navegador web embebido';
-	$MULTILANG_PCODER_AdvertenciaCierre='Esta intentando cerrar todo el editor {P}Coder y sus archivos actuales seran liberados del bloqueo de apertura.\n\n\nLa edicion de archivos que haya realizado y no haya almacenado todavia se puede perder.  Se requiere su confirmacion para continuar.';
+	$MULTILANG_PCODER_AdvertenciaCierre='Esta intentando cerrar todo el editor {P}Coder y sus archivos actuales seran liberados del bloqueo de apertura. Esto tomara un momento segun el numero de archivos abiertos actualmente.\n\n\nLa edicion de archivos que haya realizado y no haya almacenado todavia se puede perder.  Se requiere su confirmacion para continuar.';
 	$MULTILANG_PCODER_ErrGuardarDefecto='Debe especificar o abrir un arcihvo diferente al predeterminado del editor!';
 	$MULTILANG_PCODER_ErrGuardarNoPermiso='No tiene permisos de escritura sobre este archivo!.  Verifique los permisos del mismo e intente nuevamente';
 	$MULTILANG_PCODER_CrearArchivo='Nuevo Archivo';
