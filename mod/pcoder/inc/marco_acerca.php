@@ -22,7 +22,7 @@
 
     // ACERCA DE PCODER
 	
-    abrir_dialogo_modal("myModalACERCADEPCODER",$MULTILANG_PCODER_Acerca); ?>
+    PCODER_AbrirDialogoModal("myModalACERCADEPCODER",$MULTILANG_PCODER_Acerca); ?>
 		<div align="center">
 			<br><h2><b>{P}Coder </b><i>ver <?php echo $PCO_PCODER_VersionActual; ?></i></h2>
 			Practico CODe EditoR<br><br>
@@ -35,4 +35,4 @@
     <?php 
         $barra_herramientas_modal='
         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_PCODER_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-        cerrar_dialogo_modal($barra_herramientas_modal);
+        PCODER_CerrarDialogoModal($barra_herramientas_modal);

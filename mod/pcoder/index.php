@@ -39,12 +39,31 @@
             error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_DEPRECATED | E_STRICT | E_USER_DEPRECATED | E_USER_ERROR | E_USER_WARNING); //Otras disponibles | E_PARSE | E_CORE_ERROR | E_CORE_WARNING |
         }
 
-    //Incluye archivo inicial de configuracion
-	include_once("inc/configuracion.php");
+    include_once("inc/configuracion.php");
+    //Incluye librerias basicas de trabajo
+    @require('inc/variables.php');
+    @require('inc/comunes.php');
+    @require('inc/comunes_bd.php');
+    if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+        {
+            // Incluye archivo de configuracion de base
+            include_once '../../core/configuracion.php';
+            // Inicia las conexiones con la BD y las deja listas para las operaciones
+            include_once '../../core/conexiones.php';
+            // Incluye definiciones comunes de la base de datos
+            include_once '../../inc/practico/def_basedatos.php';
+            // Incluye archivo con algunas funciones comunes usadas por la herramienta
+            include_once '../../core/comunes.php';
+            //Agrega idiomas de Practico Framework
+            include_once("../../inc/practico/idiomas/es.php");
+            include_once("../../inc/practico/idiomas/".$IdiomaPredeterminado.".php");
+        }
+    //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario
+    include("idiomas/es.php");
+    include("idiomas/".$IdiomaPredeterminado.".php");
 
-	//Si esta como modulo de practico intenta incluir sus configuraciones
-	if ($PCO_PCODER_StandAlone==0)
-		include_once("../../core/configuracion.php");
+    // Establece la zona horaria por defecto para la aplicacion
+    date_default_timezone_set($ZonaHoraria);
 
 	// Determina si no se trabaja en modo StandAlone y verifica entonces credenciales
 	if ($PCO_PCODER_StandAlone==0)
@@ -56,53 +75,35 @@
 					die();
 				}
 		}
-		
-	// Determina si es un usuario administrador para poder abrir el editor
-	if ($PCO_PCODER_StandAlone==0)
+
+	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
 		{
-			$ArregloAdmins=explode(",",$PCOVAR_Administradores);
-			//Recorre el arreglo de super-usuarios
-			$Resultado = 0;
-			if ($PCOSESS_LoginUsuario!="")
-				foreach ($ArregloAdmins as $UsuarioAdmin)
-					{
-						if (trim($UsuarioAdmin)==$PCOSESS_LoginUsuario)
-							$Resultado = 1;
-					}
-			//Anula el acceso
-			if ($Resultado == 0)
-				{
+		    // Determina si es un usuario administrador para poder abrir el editor
+		    if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+		        {
 					echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
 					die();
-				}
+		        }
+		    else
+		        $EsUnAdmin=1;
 		}
-		
+
 	//Crea variable se sesion usada por la consola de comandos
 	$_SESSION['PCONSOLE_KEY']="23456789abcdefghijkmnpqrstuvwxyz";
 	$_SESSION['PEXPLORER_KEY']="23456789abcdefghijkmnpqrstuvwxyz";
-
-    //Incluye librerias basicas de trabajo
-    @require('inc/variables.php');
-    @require('inc/comunes.php');
-    @require('inc/comunes_bd.php');
-    @require('inc/conexiones.php');
-
-
-    //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario
-    include("idiomas/es.php");
-    include("idiomas/".$IdiomaPredeterminado.".php");
     // FIN BLOQUE BASICO DE INCLUSION ##################################
 
-
-    // Establece la zona horaria por defecto para la aplicacion
-    date_default_timezone_set($ZonaHoraria);
-
-    // Datos de fecha, hora y direccion IP para algunas operaciones
+    // Datos de fecha, hora y direccion IP para algunas operaciones asi como variables de compatibilidad para modulo de Practico
     $PCO_PCODER_FechaOperacion=date("Ymd");
     $PCO_PCODER_FechaOperacionGuiones=date("Y-m-d");
     $PCO_PCODER_HoraOperacion=date("His");
     $PCO_PCODER_HoraOperacionPuntos=date("H:i");
     $PCO_PCODER_DireccionAuditoria=$_SERVER ['REMOTE_ADDR'];
+    $PCO_FechaOperacion=$PCO_PCODER_FechaOperacion;
+    $PCO_FechaOperacionGuiones=$PCO_PCODER_FechaOperacionGuiones;
+    $PCO_HoraOperacion=$PCO_PCODER_HoraOperacion;
+    $PCO_HoraOperacionPuntos=$PCO_PCODER_HoraOperacionPuntos;
+    $PCO_DireccionAuditoria=$PCO_PCODER_DireccionAuditoria;
 
 	// Establece version actual del sistema
 	$PCO_PCODER_VersionActual = file("inc/version_actual.txt");
@@ -128,7 +129,7 @@
     }
 
 
-if (@$PCOSESS_LoginUsuario="admin" || $PCO_PCODER_StandAlone==1)
+if (@$EsUnAdmin==1 || $PCO_PCODER_StandAlone==1)
 {
     //Carga el archivo recibido, si no recibe nada carga un demo
     if (@$PCODER_archivo=="")
@@ -171,7 +172,6 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
     <!-- CSS Core de Bootstrap -->
     <link href="../../inc/bootstrap/css/tema_bootstrap.min.css" rel="stylesheet"  media="screen">
-    <link href="../../inc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">
 
     <!-- Custom Fonts -->
     <link href="../../inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -184,6 +184,11 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
     <link href="../../inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
 
+    <?php
+    	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+    		echo '<link type="text/css" rel="stylesheet" media="all" href="../../inc/chat/css/chat.css" />  <!-- incluye estilos para cajas de chat -->';
+    ?>
+
     <!-- jQuery -->
 	<script type="text/javascript" src="../../inc/jquery/jquery-2.1.0.min.js"></script>
 	<!-- Plugins adicionales JQuery -->
@@ -195,16 +200,25 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 	<script type="text/javascript" src="../../inc/jquery/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
 </head>
-<body onbeforeunload="return '<?php echo $MULTILANG_PCODER_AdvertenciaCierre; ?>';">
+<body onbeforeunload="return VerificarCierreTotalPCoder();">
 
 	<!-- ######### FORMULARIOS Y MARCOS DE TRABAJO OCULTOS ######### -->
 	<form name="form_archivo_editado" action="index.php" method="POST" target="frame_almacenamiento" style="visibility: hidden; display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 		<textarea id="PCODER_AreaTexto" name="PCODER_AreaTexto" style="visibility:hidden; display:none;"></textarea>
 		<input name="PCODER_TokenEdicion" type="Hidden" value="">
 		<input name="PCODER_archivo" type="Hidden" value="">
+		<input name="PCODER_NroLineasDocumento" type="Hidden" value="0">
+		<input name="PCODER_NroCaracteresDocumento" type="Hidden" value="0">
 		<input type="Hidden" name="PCO_ECHO" value="0"> <!-- Determina si la respuesta debe ser con o sin eco -->
 		<input name="PCO_Accion" type="hidden" value="PCOMOD_GuardarArchivo">
 	</form>
+
+    <!--Formulario de compatibilidad para aciones heredadas de Practico -->
+    <form name="FRMBASEINFORME" id="FRMBASEINFORME" action="index.php" method="POST" target="_self">
+        <input type="Hidden" name="PCO_Accion" value="">
+        <input type="Hidden" name="PCO_Valor" value="">
+    </form>
+
 	<!-- Zona de TextAreas ocultas segun los archivos abiertos -->
 	<form id="form_textareas_archivos" name="form_textareas_archivos" method="POST" style="visibility: hidden; display:none; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">					
 	</form>
@@ -245,9 +259,14 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
 	<?php include_once ("inc/marco_operarfs.php");	?>
 
+
+
+<!-- INICIA MARCO DE CHAT -->
+<!--<div id="main_container wrapper"  >  style="overflow: auto;"-->
+
 	<!-- ################# INICIO DE LA MAQUETACION ################ -->
 		<?php include_once ("inc/panel_superior.php"); 	?>
-		<DIV class="row">
+		<DIV class="row" id="MarcoContenedorCentral">
 			<?php include_once ("inc/panel_izquierdo.php");	?>
 			<div class="col-md-8" style="margin:0px;" id="panel_central">
 				
@@ -328,7 +347,24 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 							</div>
 							<iframe name="frame_diferencias" id="frame_diferencias" src="mod/php-diff-1.0/generador" style="border:0px;"></iframe>
 						</div>
-						
+
+						<div  id="pestana_chat_together" class="tab-pane fade" align=center>
+							<button style="margin:10px;" class="btn btn-info" id="TableroCompartido" onclick="$('#frame_pboard').css('display', 'block'); $('#frame_pboard').css('visibility', 'visible');"><i class="fa fa-slideshare fa-fw"></i> Activar Pizarra</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<button style="margin:10px;" class="btn btn-success" id="EditorDiagramas" onclick="PCO_VentanaPopup('mod/mxgraph/javascript/scripts/grapheditor/www/');"><i class="fa fa-sitemap fa-fw"></i> Editor de diagramas</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<button style="margin:10px;" class="btn btn-default" id="ChatPCoderSimple" onclick="PCODER_CargarUsuariosChatEstandar();"><i class="fa fa-comments fa-fw"></i> Chat est&aacute;ndar</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<button style="margin:10px;" class="btn btn-primary" id="IniciarPMeetings" onclick="PCODER_PracticoMeetings();"><i class="fa fa-group fa-fw"></i> Activar/Desactivar Practico Meetings</button>
+
+							<iframe name="frame_pboard" id="frame_pboard" src="mod/pboard" style="display:block; visibility:hidden; width:100%; height:100vh;" width="100%" height="100%"  scrolling="yes" style="border:0px;"></iframe>
+						</div>
+
+						<div  id="pestana_estado_general" class="tab-pane fade" align=center style="overflow:auto;">
+    						<div  id="MarcoEstadoYBloqueos" style="padding:30px; overflow:auto;">
+    						</div>
+						</div>
+
 					</div>
 				</div>
 
@@ -340,6 +376,12 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 		<?php include_once ("inc/panel_inferior.php"); ?>
 	<!-- ################## FIN DE LA MAQUETACION ################## -->
 
+<!--</div>  FINALIZA MARCO DE CHAT -->
+
+    <?php
+    	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+    		echo '<script type="text/javascript" src="../../inc/chat/js/chat.js"></script>';  // Agrega scripts de chat
+    ?>
 
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="../../inc/bootstrap/js/bootstrap.min.js"></script>
@@ -353,6 +395,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
 	<!-- Funciones especificas de PCoder -->
 	<script language="JavaScript">
+	    var MensajeFuncionalidadNoDisponible="<center><b>OPCION INACTIVA!!! - FEATURE DISABLED!!!</b></center><HR>Su instalacion de {P}Coder no se encuentra integrada a <a href='https://www.practico.org'>Practico Framework</a><br>Muchas de las caracteristicas solo son habilitadas cuando PCoder se integra de manera nativa con Practico Framework<br><br>Your {P}Coder setup its not embeded into <a href='https://www.practico.org'>Practico Framework</a><br>Many features are available when your PCoder is embeded into a Practico Framework setup";
 		//Convierte variables de idioma desde PHP a JS
 		var MULTILANG_PCODER_Linea="<?php echo $MULTILANG_PCODER_Linea; ?>";
 		var MULTILANG_PCODER_Columna="<?php echo $MULTILANG_PCODER_Columna; ?>";
@@ -374,6 +417,10 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 		var MULTILANG_PCODER_Permisos="<?php echo $MULTILANG_PCODER_Permisos; ?>";
 		var MULTILANG_PCODER_Eliminado="<?php echo $MULTILANG_PCODER_Eliminado; ?>";
 		var MULTILANG_PCODER_ExtensionNoSoportada="<?php echo $MULTILANG_PCODER_ExtensionNoSoportada; ?>";
+		var MULTILANG_PCODER_HistorialVersiones="<?php echo $MULTILANG_PCODER_HistorialVersiones; ?>";
+		var PCO_PCODER_StandAlone="<?php echo $PCO_PCODER_StandAlone; ?>";
+		var PCOSESS_LoginUsuario="<?php echo $PCOSESS_LoginUsuario; ?>";
+		var MULTILANG_PCODER_AdvertenciaCierre="<?php echo $MULTILANG_PCODER_AdvertenciaCierre; ?>";
 	</script>
 	<script type="text/javascript" src="js/pcoder.min.js?<?php echo filemtime('js/pcoder.min.js'); ?>"></script>
 
@@ -424,10 +471,59 @@ $('#pestana_consola_comandos').trigger('click');
     });
 */
 }
-
-
-
 </script>
+
+<?php
+    //Incluye sistema de chat para desarrolladores
+	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+		{
+		    if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+		        {
+                ?>
+                    <script>
+                        // TogetherJS configuration would go here, but we'll talk about that
+                        // later
+                        TogetherJSConfig_siteName="PRACTICO FRAMEWORK";
+                        TogetherJSConfig_toolName="Practico-Meetings";
+                        //TogetherJSConfig_hubBase=""; //Servidor de conferencia
+                        TogetherJSConfig_dontShowClicks = false; //Deshabilitar la vista de clics de participantes
+                        //TogetherJSConfig_findRoom = "Cuarto_de_Desarrolladores";  //Crea un cuarto especifico y loguea en el a todos los participantes
+                        //TogetherJSConfig_findRoom = {prefix: "Cuarto_de_Desarrolladores", max: 5} //Crea un cuarto y ademas asigna un maximo de participantes
+                        TogetherJSConfig_autoStart = false; //Reinicia la sesion de un usuario
+                        TogetherJSConfig_suppressJoinConfirmation=true; //Evita la confirmacion de ingreso a un cuarto para los invitados
+                        TogetherJSConfig_suppressInvite=true;
+                        TogetherJSConfig_inviteFromRoom=false;
+                        TogetherJSConfig_includeHashInUrl=true; //Util en aplicaciones de una sola pagina para indicar que una misma URL no quiere decir que cada persona ve lo mismo
+                        TogetherJSConfig_disableWebRTC=true; //Deshabilita boton de llamada de audio
+                        TogetherJSConfig_ignoreForms=false; //Define si ignora los formularios
+                        
+                        TogetherJSConfig_getUserName = function () {return '<?php echo "$Nombre_usuario ($PCOSESS_LoginUsuario)"; ?>';};   //Funcion que establece el nombre de usuario, debe retornar null en caso que no lo pueda establecer
+                        //TogetherJSConfig_getUserAvatar = function () {return avatarUrl;}; //Establece la URL utilizada para el avatar del usuario
+                        //TogetherJSConfig_getUserColor = function () {return '#ff00ff';}; Retorna el color que diferencia al usuario
+                    
+                        //Retira opciones innecesarias de PMeetings y hace la traduccion forzada a espanol
+                        function LimpiarInterfaz()
+                            {
+                                $("#togetherjs-menu-help").hide();
+                                $("#togetherjs-menu-feedback").hide();
+                                $("#togetherjs-share-button").hide();
+                                $("#togetherjs-share-button").css("display", "none");
+                                $("#togetherjs-share-button").css("visibility", "hidden");
+                                //Traduce cadenas basicas
+                                $("#togetherjs-menu-update-name").html('<img src="https://togetherjs.com/togetherjs/images/button-pencil.png" alt=""> Actualizar tu nombre');
+                                $("#togetherjs-menu-update-avatar").html('<img src="https://togetherjs.com/togetherjs/images/btn-menu-change-avatar.png" alt=""> Cambiar avatar');
+                                $("#togetherjs-menu-update-color").html('<span class="togetherjs-person-bgcolor-self" style="background-color: rgb(255, 0, 255);"></span> Actualizar tu color');
+                                $("#togetherjs-menu-end").html('<img src="https://togetherjs.com/togetherjs/images/button-end-session.png" alt=""> Cerrar sesion');
+                            }
+                        TogetherJSConfig_on_ready = function () {
+                            LimpiarInterfaz(); };
+                    </script>
+                    <script src="https://togetherjs.com/togetherjs-min.js"></script>
+                <?php
+		        }
+		}
+?>
+
 </body>
 </html>
 <?php

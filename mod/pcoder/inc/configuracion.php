@@ -25,7 +25,7 @@
 	/*	Define si PCoder se ejecuta en modo StandAlone (Independiente)
 		para cualquier proyecto o servidor o como un modulo de Practico
 		Posibles Valores:  1=StandAlone   0=Modulo de Practico        */
-	$PCO_PCODER_StandAlone=1;
+	$PCO_PCODER_StandAlone=0;
 
 
 	/*	Define el Path inicial sobre el cual el usuario puede navegar
@@ -39,15 +39,6 @@
 							Otros						-> Agregue aqui tantos niveles superiores como desee segun su ruta de instalacion
 							$_SERVER['DOCUMENT_ROOT']	-> Raiz de Todo el servidor web  */
 	$PCO_PCODER_RaizExploracionArchivos=$_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR;
-
-
-
-	$ServidorBD='';
-	$BaseDatos='bdd/pcoder.sqlite';
-	$UsuarioBD='';
-	$PasswordBD='';
-	$MotorBD='sqlite';
-	$PuertoBD='';
 
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';

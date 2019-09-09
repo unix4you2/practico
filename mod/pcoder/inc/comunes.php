@@ -21,81 +21,39 @@
 	*/
 
 
+
 /* ################################################################## */
+/* #####  CLON de PCO_AbrirDialogoModal                          #### */
 /* ################################################################## */
-/*
-	// Function: PCO_EsAdministrador
-	Determina si un login de usuario es administrador de plataforma o no (si es super usuario)
-	
-	Variables de entrada:
+function PCODER_AbrirDialogoModal($identificador,$titulo="",$estilo_modal="",$impresion_directa=1,$subtitulo="")
+    {
+        $salida= '
+            <div class="modal fade '.$estilo_modal.'" id="'.$identificador.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title" id="myModalLabel">'.$titulo.'</h4>';
 
-		Usuario - Login de usuario a verificar
+        //Si se recibe un subtitulo lo agrega al modal
+        if ($subtitulo!="")
+            $salida.='<h6 id="myModalLabelSubtitulo"><i>'.$subtitulo.'</i></h6>';
 
-	Salida:
-		Cero (0) o uno (1) segun la pertenencia o no del usuario al grupo de admins
-*/
-	function PCO_EsAdministrador($Usuario)
-		{
-			global $PCOVAR_Administradores;
-			$ArregloAdmins=explode(",",$PCOVAR_Administradores);
-
-			//Recorre el arreglo de super-usuarios
-			$Resultado = 0;
-			if ($Usuario!="")
-				foreach ($ArregloAdmins as $UsuarioAdmin)
-					{
-						if (trim($UsuarioAdmin)==$Usuario)
-							$Resultado = 1;
-					}
-			return $Resultado;
-		}
+        $salida.='                </div>
+                        <div class="modal-body mdl-primary">';
+        if($impresion_directa==1)
+            echo $salida;
+        else
+            return $salida;
+    }
 
 
 /* ################################################################## */
+/* #####  CLON de PCO_CerrarDialogoModal                         #### */
 /* ################################################################## */
-    function abrir_dialogo_modal($identificador,$titulo="",$estilo_modal="")
-        {
-            /*
-            Procedure: abrir_modal
-            Crea un dialogo modal que puede ser activado luego por un anchor <a>
-
-            Variables de entrada:
-
-            titulo - Nombre de la ventana a visualizar en la parte superior.
-            tipo_panel - Recibe el tipo de panel bootstrap a crear: 
-
-            * panel-primary,panel-success,panel-info,panel-warning,panel-danger
-            * col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-
-            * Otros asociados a clases de bootstrap
-            
-            Ver tambien:
-            <cerrar_modal>
-            */
-            echo '
-                <div class="modal fade '.$estilo_modal.'" id="'.$identificador.'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myModalLabel">'.$titulo.'</h4>
-                            </div>
-                            <div class="modal-body mdl-primary">';
-        }
-
-
-
-/* ################################################################## */
-/* ################################################################## */
-	function cerrar_dialogo_modal($contenido_piepagina)
-	  {
-		/*
-			Function: cerrar_modal
-			Cierra los espacios de trabajo por <abrir_modal>	
-
-			Ver tambien:
-			<abrir_modal>	
-		*/
-        echo '
+function PCODER_CerrarDialogoModal($contenido_piepagina,$impresion_directa=1)
+    {
+        $salida= '
                             </div>
                             <div class="modal-footer">
                                 '.$contenido_piepagina.'
@@ -103,34 +61,26 @@
                         </div>
                     </div>
                 </div>';
-	  }
-
+        if($impresion_directa==1)
+            echo $salida;
+        else
+            return $salida;
+    }
 
 
 /* ################################################################## */
+/* #####  CLON de PCO_Mensaje                                    #### */
 /* ################################################################## */
-/*
-    Function: mensaje
-    Funcion generica para la presentacion de mensajes.  Ver variables para personalizacion.
-
-    Variables de entrada:
-
-        titulo - Texto que aparece en resaltado como encabezado del texto.  Acepta modificadores HTML.
-        texto - Mensaje completo a desplegar en formato de texto normal.  Acepta modificadores HTML.
-        icono - Formato Awesome Fonts o Iconos de Bootstrap
-        ancho - Ancho del espacio de trabajo definido en pixels o porcentaje sobre el contenedor principal.
-        estilo - Especifica el punto donde sera publicado el mensaje para definir la hoja de estilos correspondiente.
-*/
-	function mensaje($titulo,$texto,$DEPRECATED_ancho="",$icono,$estilo)
-	  {
-        global $MULTILANG_PCODER_Cerrar;
+$MULTILANG_Cerrar=$MULTILANG_PCODER_Cerrar;
+function PCODER_Mensaje($titulo,$texto,$DEPRECATED_ancho="",$icono,$estilo)
+    {
+        global $MULTILANG_Cerrar;
         echo '<div class="'.$estilo.'" role="alert">
-                <i class="'.$icono.' pull-left"></i>
-                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">'.$MULTILANG_PCODER_Cerrar.'</span></button>
-                <strong>'.$titulo.'</strong><br>'.$texto.'
-            </div>';
-	  }
-
+            <i class="'.$icono.' pull-left"></i>
+            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">'.$MULTILANG_Cerrar.'</span></button>
+            <strong>'.$titulo.'</strong><br>'.$texto.'
+        </div>';
+    }
 
 
 /* ################################################################## */
@@ -139,7 +89,7 @@
     Function: Presentar_KeyBindings
     Presenta la inforamcion de ayuda de atajos de teclado
 */
-function Presentar_KeyBindings()
+function PCODER_PresentarKeyBindings()
     {
         global $MULTILANG_PCODER_Basicos,$MULTILANG_PCODER_Otros,$MULTILANG_PCODER_Desplazar,$MULTILANG_PCODER_Seleccionar;
         echo '
@@ -574,8 +524,8 @@ function Presentar_KeyBindings()
                         <td>Expandir todo</td>
                     </tr>
                     <tr>
-                        <td>Ctrl-</td>
-                        <td>Command-</td>
+                        <td>Ctrl- ,</td>
+                        <td>Command- ,</td>
                         <td>Ver menu de configuraci&oacute;n</td>
                     </tr>
                 </tbody>

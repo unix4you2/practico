@@ -23,7 +23,7 @@
     // BARRA DE ESTADO DEL APLICATIVO
 ?>
 
-<div class="row">
+<div class="row" id="MarcoContenedorInferior">
 	<div class="col-md-12">
 
 		<div id="panel_inferior">

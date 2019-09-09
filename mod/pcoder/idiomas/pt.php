@@ -156,3 +156,8 @@
 	$MULTILANG_PCODER_HerramientaDiferencias='Ferramenta de diferenças';
 	$MULTILANG_PCODER_SensibleMayusculas='Maiúsculas e minúsculas';
 	$MULTILANG_PCODER_Autocompletado='Autocomplete enquanto você digita';
+	$MULTILANG_PCODER_HistorialVersiones='Version history';
+	$MULTILANG_PCODER_ChatDesarrolladores='Developers chat only';
+	$MULTILANG_PCODER_ErrorRO='ERROR: This file is locked for open it simultaneously. Only the user or super user (admin) can unlock it.';
+	$MULTILANG_PCODER_AdvertenciaCierre='WARNING: This file was opened by you in the past but this was not closed propertly.  We advice you to close your sessions and files correctly to avoid simultaneous file locks for other users.';
+	$MULTILANG_PCODER_AdvConcurrencia='<font color=red>WARNING WARNING WARNING !!!</font><br>This may also indicate that even you have this file open from another workstation. The file will be open but be careful not to overwrite changes when loading the same work file from different computers or use the <b> File-> Version History </b> option to verify any changes.';

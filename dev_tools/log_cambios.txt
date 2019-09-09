@@ -16,10 +16,16 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/marco_dev.php
 core/ajax.php
+core/sesion.php
 mod/pmydb/index.php
 mod/pcoder/*
 inc/ace/*
+inc/chat/*
+
+https://modeling-languages.com/javascript-drawing-libraries-diagrams/
+
 
 xml/*
 inc/practico/idiomas/*
@@ -39,13 +45,49 @@ LogCambios="
 * Added [FORMS]: Ahora los formularios identifican de manera unica los elementos de sus menues superiores como MENU_FORMULARIO_OPCION_XXX de acuerdo a su orden de aparicion con el fin de brindar mayor control sobre los mismos en tiempo de ejecucion.
 * Enhan [CORE]: Actualizada la versión base de PMyDB a 19.6
 * Enhan [FORMS]: Mejorada presentacion grafica y estilos para listas con carga dinámica
-* Enhan [PCODER]: Actualizada la versión de PCoder a la 19.6
+* Enhan [PCODER]: Actualizada la versión de PCoder a la 19.7 con soporte para interaccion entre desarrolladores, bloqueos, etc.
+* Enhan [GENERAL]: Agregada nueva variable de sesion PCOSESS_NombreUsuario
+
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 # RECORDAR EN OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
+
+DROP TABLE IF EXISTS core_pcoder_historial;
+CREATE TABLE core_pcoder_historial (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  archivo text,
+  fecha_edicion datetime,
+  usuario varchar(255),
+  lineas int(11),
+  caracteres int(11),
+  contenido mediumtext,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_pcoder_bloqueos;
+CREATE TABLE core_pcoder_bloqueos (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  archivo text,
+  ultima_edicion datetime,
+  usuario varchar(255),
+  abierto int(1),
+  direccion_origen varchar(255),
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_pcoder_chat;
+CREATE TABLE core_pcoder_chat (
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  remitente VARCHAR(255) NOT NULL DEFAULT '',
+  destinatario VARCHAR(255) NOT NULL DEFAULT '',
+  message TEXT NOT NULL,
+  sent DATETIME,
+  recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
+  PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

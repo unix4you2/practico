@@ -21,21 +21,27 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 session_start();
 
+//███▓▓▓▒▒▒        IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!  IMPORTANTE !!!         ▒▒▒▓▓▓███
+//███▓▓▓▒▒▒ UNA COPIA DE ESTE ARCHIVO EXISTE SOLO POR COMPATIBILIDAD CON INCLUSIONES DEL  ▒▒▒▓▓▓███
+//███▓▓▓▒▒▒ FRAMEWORK SOBRE EL MODULO DE PCODER/INC ALTERANDO LA VARIABLE DE PATH         ▒▒▒▓▓▓███
+
+$PathRaizPCO="../..";
+$PosfijoTablaPCO="";
+
 //Antes de seguir adelante valida una sesion activa
 if ($_SESSION['username']=="") die();
 
-
 //Incluye los archivos de configuracion de Practico y define vbles de conexion
-include_once("../../core/configuracion.php");
+include_once("$PathRaizPCO/core/configuracion.php");
 
 // Inicia las conexiones con la BD y las deja listas para las operaciones
-include_once("../../core/conexiones.php");
+include_once("$PathRaizPCO/core/conexiones.php");
 
 // Incluye definiciones comunes de la base de datos
-include_once("../../inc/practico/def_basedatos.php");
+include_once("$PathRaizPCO/inc/practico/def_basedatos.php");
 
 // Incluye archivo con algunas funciones comunes usadas por la herramienta
-include_once("../../core/comunes.php");
+include_once("$PathRaizPCO/core/comunes.php");
 
 if ($_GET['action'] == "chatheartbeat") { chatHeartbeat(); } 
 if ($_GET['action'] == "sendchat") { sendChat(); } 
@@ -52,10 +58,10 @@ if (!isset($_SESSION['openChatBoxes'])) {
 
 function chatHeartbeat() {
 	
-	global $TablasCore,$ZonaHoraria;
+	global $TablasCore,$ZonaHoraria,$PosfijoTablaPCO;
 	
 	$usuario_chat=$_SESSION['username'];
-	$consulta=PCO_EjecutarSQL("select * from ".$TablasCore."chat where (".$TablasCore."chat.destinatario = ? AND recd = 0) order by id ASC","$usuario_chat");
+	$consulta=PCO_EjecutarSQL("select * from ".$TablasCore."chat".$PosfijoTablaPCO." where (".$TablasCore."chat".$PosfijoTablaPCO.".destinatario = ? AND recd = 0) order by id ASC","$usuario_chat");
 	
 	$items = '';
 
@@ -128,7 +134,7 @@ EOD;
 }
 
 	$usuario_chat=$_SESSION['username'];
-	PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."chat SET recd = 1 WHERE ".$TablasCore."chat.destinatario = ? and recd = 0","$usuario_chat");
+	PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."chat".$PosfijoTablaPCO." SET recd = 1 WHERE ".$TablasCore."chat".$PosfijoTablaPCO.".destinatario = ? and recd = 0","$usuario_chat");
 
 	if ($items != '') {
 		$items = substr($items, 0, -1);
@@ -185,7 +191,7 @@ $UsuarioChat = @$_SESSION['username'];
 }
 
 function sendChat() {
-	global $TablasCore,$_SeparadorCampos_,$ZonaHoraria;
+	global $TablasCore,$_SeparadorCampos_,$ZonaHoraria,$PosfijoTablaPCO;
 	$remitente = $_SESSION['username'];
 	$destinatario = $_POST['destinatario'];
 	$message = $_POST['message'];
@@ -209,7 +215,7 @@ EOD;
 
 	unset($_SESSION['tsChatBoxes'][$_POST['destinatario']]);
 
-	PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."chat (".$TablasCore."chat.remitente,".$TablasCore."chat.destinatario,message,sent) values (?,?,?,NOW());","$remitente$_SeparadorCampos_$destinatario$_SeparadorCampos_$message");
+	PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."chat".$PosfijoTablaPCO." (".$TablasCore."chat".$PosfijoTablaPCO.".remitente,".$TablasCore."chat".$PosfijoTablaPCO.".destinatario,message,sent) values (?,?,?,NOW());","$remitente$_SeparadorCampos_$destinatario$_SeparadorCampos_$message");
 	echo "1";
 	exit(0);
 }

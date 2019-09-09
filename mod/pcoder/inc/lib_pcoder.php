@@ -159,6 +159,99 @@ if ($PCO_Accion=="PCODER_CrearArchivo")
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: PCOMOD_CargarInformexID
+	Carga uno de los informes asociados del framework por su ID unico
+*/
+if ($PCO_Accion=="PCOMOD_CargarInformexID") 
+	{
+        @ob_clean();
+        $Ventana=0;
+        if($EnVentana==1) $Ventana=1;
+	    if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+            PCO_CargarInforme($IDInforme,$Ventana,"htm","Informes",1,0,1,0,"");
+	    else
+	        echo "<center><b>OPCION INACTIVA!!! - FEATURE DISABLED!!!</b></center><HR>Su instalacion de {P}Coder no se encuentra integrada a <a href='https://www.practico.org'>Practico Framework</a><br>El historial de versiones y muchas otras caracteristicas solo son habilitadas cuando PCoder se integra de manera nativa con Practico Framework<br><br>Your {P}Coder setup its not embeded into <a href='https://www.practico.org'>Practico Framework</a><br>The version history and many other features are available when your PCoder is embeded into a Practico Framework setup";
+        die();
+	}
+
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCOMOD_ActivarBloqueoArchivo
+	Activa un archivo abierto como bloqueado por el usuario para su escritura
+*/
+if ($PCO_Accion=="PCOMOD_ActivarBloqueoArchivo") 
+	{
+        @ob_clean();
+        //PCO_CargarInforme($IDInforme,0,"htm","Informes",1,0,1,0,"");
+        if ($PCODER_archivo!="demos/demo.txt")
+            {
+                //Busca si ya existe el registro
+                $RegistroBloqueo=PCO_EjecutarSQL("SELECT * FROM core_pcoder_bloqueos WHERE archivo='$PCODER_archivo' ")->fetch();
+                //Si no existe lo crea, sino lo actualiza
+                if ($RegistroBloqueo["id"]=="")
+                    {
+                        PCO_EjecutarSQLUnaria("INSERT INTO core_pcoder_bloqueos (archivo,ultima_edicion,usuario,abierto,direccion_origen,agente) VALUES ('$PCODER_archivo','$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00','$PCOSESS_LoginUsuario','1','$PCO_PCODER_DireccionAuditoria','".$_SERVER['HTTP_USER_AGENT']."');");
+                    }
+                else
+                    {
+                        //Verifica si el bloqueo es de otro usuario o del mismo
+                        if ($RegistroBloqueo["usuario"]!=$PCOSESS_LoginUsuario)
+                            {
+                                echo "[ERR]: ".$MULTILANG_PCODER_ErrorRO."<br><br><li>Usuario/User: <b>".$RegistroBloqueo["usuario"]."</b></li><li>Fecha de apertura/Opened date: <b>".$RegistroBloqueo["ultima_edicion"]."</b></li><li>Origen/Origin: <b>".$RegistroBloqueo["direccion_origen"]."</b> <i>(".$RegistroBloqueo["agente"].")</i></li>";
+                                //Envia a si mismo un mensaje de advertencia a posible estacion abierta
+                                PCO_EjecutarSQLUnaria("INSERT INTO core_pcoder_chat (remitente,destinatario,message,sent,recd) VALUES ('$PCOSESS_LoginUsuario','".$RegistroBloqueo["usuario"]."','He intentado abrir el archivo $PCODER_archivo pero se encuentra bloqueado por ti (mensaje automatico)','$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00','0');");
+                            }
+                        else
+                            {
+                                echo "[ADV]: ".$MULTILANG_PCODER_AdvertenciaMalCierre."<br><br><li>Fecha de apertura/Opened date: <b>".$RegistroBloqueo["ultima_edicion"]."</b></li><li>Origen/Origin: <b>".$RegistroBloqueo["direccion_origen"]."</b> <i>(".$RegistroBloqueo["agente"].")</i></li><hr>".$MULTILANG_PCODER_AdvConcurrencia;
+                                //Despues de generar advertencia actualiza ultima fecha apertura, direccion y agente como la actual
+                                PCO_EjecutarSQLUnaria("UPDATE core_pcoder_bloqueos SET ultima_edicion='$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00',direccion_origen='$PCO_PCODER_DireccionAuditoria',agente='".$_SERVER['HTTP_USER_AGENT']."' WHERE archivo='$PCODER_archivo' ");
+                                //Envia a si mismo un mensaje de advertencia a posible estacion abierta
+                                PCO_EjecutarSQLUnaria("INSERT INTO core_pcoder_chat (remitente,destinatario,message,sent,recd) VALUES ('$PCOSESS_LoginUsuario','".$RegistroBloqueo["usuario"]."','He abierto el archivo $PCODER_archivo con advertencia de apertura desde $PCO_PCODER_DireccionAuditoria (mensaje automatico)','$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00','0');");
+                            }
+                    }
+            }
+        die();
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCOMOD_EliminarHistorial
+	Elimina una version o historial de archivo por u ID unico
+*/
+if ($PCO_Accion=="PCOMOD_EliminarHistorial") 
+	{
+        @ob_clean();
+        PCO_EjecutarSQLUnaria("DELETE FROM core_pcoder_historial WHERE id='$IDHistorial' ");
+        die();
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCOMOD_EliminarHistorial
+	Elimina una version o historial de archivo por u ID unico
+*/
+if ($PCO_Accion=="PCODER_LiberarBloqueo") 
+	{
+        @ob_clean();
+        if ($IDArchivo!="")
+            PCO_EjecutarSQLUnaria("DELETE FROM core_pcoder_bloqueos WHERE id='$IDArchivo' ");
+        if ($RutaArchivo!="")
+            PCO_EjecutarSQLUnaria("DELETE FROM core_pcoder_bloqueos WHERE archivo='$RutaArchivo' AND usuario='$PCOSESS_LoginUsuario' ");
+        die();
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: PCOMOD_GuardarArchivo
 	Almacena un archivo previamente abierto con el PCODER
 
@@ -172,7 +265,16 @@ if ($PCO_Accion=="PCOMOD_GuardarArchivo")
         $ContenidoArchivo = preg_replace('~\r\n?~', "\n", $ContenidoArchivo); //Normaliza los saltos de linea dentro del archivo
         $PCODER_Respuesta = file_put_contents($PCODER_archivo, $ContenidoArchivo) or die("No se puede abrir el archivo para escritura");
         //Vuelve a cargar el archivo para continuar con su edicion
-        auditar("Modifica archivo $PCODER_archivo");
+	    if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
+	        {
+                PCO_Auditar("Modifica archivo $PCODER_archivo","PCoder:$PCOSESS_LoginUsuario");
+                //Lleva el historial de revision
+                $CantidadLineas=$_POST["PCODER_NroLineasDocumento"];
+                $CantidadCaracteres=$_POST["PCODER_NroCaracteresDocumento"];
+		        PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."pcoder_historial (archivo,fecha_edicion,usuario,lineas,caracteres,contenido) VALUES (?,?,?,?,?,?)","$PCODER_archivo$_SeparadorCampos_$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00$_SeparadorCampos_$PCOSESS_LoginUsuario$_SeparadorCampos_$CantidadLineas$_SeparadorCampos_$CantidadCaracteres$_SeparadorCampos_$ContenidoArchivo","",0,0);
+	        }
+        echo '<script type="" language="JavaScript"> console.log("PCODER: Archivo guardado");  </script>';
+
         //Continua presentando todo el editor solo si se pide el echo
         if ($PCO_ECHO==1)
             echo '

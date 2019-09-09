@@ -2,7 +2,7 @@ body {
 	color:#FFFFFF;
 	background: #222222;
 	font-family: Arial;
-	font-size: 12px;
+	font-size: 10px;
 	margin-top:0;
 }
 .Differences {
@@ -30,14 +30,14 @@ body {
 	padding: 1px 2px;
 	border-right: 1px solid #000;
 	vertical-align: top;
-	font-size: 12px;
+	font-size: 10px;
 }
 
 .Differences td {
 	color: #e6e1dc;
 	padding: 1px 2px;
 	font-family: Consolas, monospace;
-	font-size: 12px;
+	font-size: 10px;
 }
 
 .DifferencesSideBySide .ChangeInsert td.Left {
