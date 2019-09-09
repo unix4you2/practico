@@ -349,7 +349,9 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 						</div>
 
 						<div  id="pestana_chat_together" class="tab-pane fade" align=center>
-							<button style="margin:10px;" class="btn btn-info" id="TableroCompartido" onclick="$('#frame_pboard').css('visibility', 'visible');"><i class="fa fa-slideshare fa-fw"></i> Activar Pizarra</button>
+							<button style="margin:10px;" class="btn btn-info" id="TableroCompartido" onclick="$('#frame_pboard').css('display', 'block'); $('#frame_pboard').css('visibility', 'visible');"><i class="fa fa-slideshare fa-fw"></i> Activar Pizarra</button>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<button style="margin:10px;" class="btn btn-success" id="EditorDiagramas" onclick="PCO_VentanaPopup('mod/mxgraph/javascript/scripts/grapheditor/www/');"><i class="fa fa-sitemap fa-fw"></i> Editor de diagramas</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;
 							<button style="margin:10px;" class="btn btn-default" id="ChatPCoderSimple" onclick="PCODER_CargarUsuariosChatEstandar();"><i class="fa fa-comments fa-fw"></i> Chat est&aacute;ndar</button>
 							&nbsp;&nbsp;&nbsp;&nbsp;
