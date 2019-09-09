@@ -16,12 +16,16 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/marco_dev.php
 core/ajax.php
 core/sesion.php
 mod/pmydb/index.php
 mod/pcoder/*
 inc/ace/*
 inc/chat/*
+
+https://modeling-languages.com/javascript-drawing-libraries-diagrams/
+
 
 xml/*
 inc/practico/idiomas/*

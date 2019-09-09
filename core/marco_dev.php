@@ -132,7 +132,7 @@
                         			if ($PCO_ModoDEMO==1)
 									   $PCO_EnlacePCODER="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";
 								?>
-								<a class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: PCoder</a>
+								<a class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: {P}Coder</a>
 								
 								<!-- Formulario para la carga directa de PMyDB -->
 								<form target="_blank" action='mod/pmydb/index.php' method='post' name="PMyDB" style="display:inline;">
@@ -162,13 +162,18 @@
                         			if ($PCO_ModoDEMO==1)
 									   $PCO_EnlacePMyDB="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";
 								?>
-								<a class="btn btn-warning btn-block" href="<?php echo $PCO_EnlacePMyDB; ?>"><i class="fa fa-database fa-fw"></i> <?php echo $MULTILANG_DefPMyDB; ?>: PMyDB</a>
+								<a class="btn btn-warning btn-block" href="<?php echo $PCO_EnlacePMyDB; ?>"><i class="fa fa-database fa-fw"></i> <?php echo $MULTILANG_DefPMyDB; ?>: {P}MyDB</a>
                                 <br>
                                 
 								<a class="btn btn-info btn-block" href="javascript:document.PCO_ExplorarTablerosKanban.submit();"><i class="fa fa-thumb-tack fa-fw"></i> <?php echo $MULTILANG_TablerosKanban; ?></a>
                                 <br>
                                 
 								<a class="btn btn-danger btn-block" href="javascript:document.PCO_BugTrackingForm.submit();"><i class="fa fa-bug fa-fw"></i> <?php echo $MULTILANG_BTPanel; ?></a>
+                                <br>
+
+								<a class="btn btn-default btn-block" href="javascript:PCO_VentanaPopup('mod/pcoder/mod/pboard','PBoard','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=1024, height=700')"><i class="fa fa-paint-brush fa-fw"></i> Editor gr&aacute;fico y pizarra: {P}Board</a>
+								
+
 							</div> <!--well-->
 						</div>
 						<!-- FIN TAB AVANZADAS 1 -->
