@@ -7,6 +7,25 @@
             |___/ 
 ```
 
+
+
+## Versión 19.7 (2019-09-10)
+
+* Added [FORMS]: Ahora los formularios identifican de manera unica los elementos de sus menues superiores como MENU_FORMULARIO_OPCION_XXX de acuerdo a su orden de aparicion con el fin de brindar mayor control sobre los mismos en tiempo de ejecucion.
+* Enhan [CORE]: Actualizada la versión base de PMyDB a 19.6
+* Enhan [FORMS]: Mejorada presentacion grafica y estilos para listas con carga dinámica
+* Enhan [GENERAL]: Agregada nueva variable de sesion PCOSESS_NombreUsuario
+* Enhan [PCODER]: Actualizada la versión de PCoder a la 19.7 con las siguientes mejoras:
+* Added [PCODER]: Copias de seguridad automaticas en cada edición de archivo.
+* Added [PCODER]: Comparación dinámica entre versiones anteriores de código y la versión actual de archivo tomadas desde el historial de versiones automático.
+* Added [PCODER]: Control de concurrencia y cierre adecuado de archivos cuando varios desarrolladores trabajan al tiempo.
+* Added [PCODER]: Mensajería entre desarrolladores heredada de Práctico Framework permite una interacción simplificada además de emitir mensajes automáticos de advertencia sobre ciertos eventos.
+* Added [PCODER]: Inclusión de {P}Board (beta).  Una característica que permite al desarrollador editar además de código, archivos gráficos en diferentes formatos con retoques, filtros y otras posibilidades.  Se proyecta a {P}Board como herramienta de pizarra compartida entre desarrolladores para futuras versiones.
+* Added [PCODER]: Inclusión de {P}Diagram (beta).  Un editor de diagramas multipropósito tanto para documentación del sistema bajo UML, flujogramas, etc.  Como la documentación para modelos de BPM.  Se proyectará como herramienta para el almacenamiento de diagramas complementarios por Formulario e informes del Framework.
+* Added [PCODER]: Inclusión de {P}Mettings (beta).  Herramienta que permite interacción más completa entre desarrolladores.  Por ahora se incluye solamente el chat y el seguimiento de punteros.  Se proyecta como herramienta de audioconferencia Peer-to-Peer entre desarrolladores y herramienta para compartir pantalla en versiones futuras.
+* Added [PCODER]: Mejoradas algunas funcionalidades internas del editor en recuperación y almacenamiento de archivos.
+
+
 ## Versión 19.6 (2019-08-15)
 
 * Added [INFORMES]: Los informes con DataTables activado permiten ahora ser exportados directamente del lado del usuario en diferentes formatos (Portapapeles, CSV, XLS y PDF)
