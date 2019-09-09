@@ -266,7 +266,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
 	<!-- ################# INICIO DE LA MAQUETACION ################ -->
 		<?php include_once ("inc/panel_superior.php"); 	?>
-		<DIV class="row">
+		<DIV class="row" id="MarcoContenedorCentral">
 			<?php include_once ("inc/panel_izquierdo.php");	?>
 			<div class="col-md-8" style="margin:0px;" id="panel_central">
 				

@@ -28,7 +28,7 @@
 	include_once ("inc/marco_teclado.php");
 ?>
 
-<div class="row">
+<div class="row" id="MarcoContenedorSuperior">
 	<div class="col-md-12">
 
 		<div id="panel_superior" >
