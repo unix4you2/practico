@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno=""
-VersionCompatibleMes=""
+VersionCompatibleAno="19"
+VersionCompatibleMes="6"
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno=""
-VersionFinalMes=""
+VersionFinalAno="19"
+VersionFinalMes="7"
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -23,9 +23,6 @@ mod/pmydb/index.php
 mod/pcoder/*
 inc/ace/*
 inc/chat/*
-
-https://modeling-languages.com/javascript-drawing-libraries-diagrams/
-
 
 xml/*
 inc/practico/idiomas/*
@@ -45,9 +42,16 @@ LogCambios="
 * Added [FORMS]: Ahora los formularios identifican de manera unica los elementos de sus menues superiores como MENU_FORMULARIO_OPCION_XXX de acuerdo a su orden de aparicion con el fin de brindar mayor control sobre los mismos en tiempo de ejecucion.
 * Enhan [CORE]: Actualizada la versión base de PMyDB a 19.6
 * Enhan [FORMS]: Mejorada presentacion grafica y estilos para listas con carga dinámica
-* Enhan [PCODER]: Actualizada la versión de PCoder a la 19.7 con soporte para interaccion entre desarrolladores, bloqueos, etc.
 * Enhan [GENERAL]: Agregada nueva variable de sesion PCOSESS_NombreUsuario
-
+* Enhan [PCODER]: Actualizada la versión de PCoder a la 19.7 con las siguientes mejoras:
+* Added [PCODER]: Copias de seguridad automaticas en cada edición de archivo.
+* Added [PCODER]: Comparación dinámica entre versiones anteriores de código y la versión actual de archivo tomadas desde el historial de versiones automático.
+* Added [PCODER]: Control de concurrencia y cierre adecuado de archivos cuando varios desarrolladores trabajan al tiempo.
+* Added [PCODER]: Mensajería entre desarrolladores heredada de Práctico Framework permite una interacción simplificada además de emitir mensajes automáticos de advertencia sobre ciertos eventos.
+* Added [PCODER]: Inclusión de {P}Board (beta).  Una característica que permite al desarrollador editar además de código, archivos gráficos en diferentes formatos con retoques, filtros y otras posibilidades.  Se proyecta a {P}Board como herramienta de pizarra compartida entre desarrolladores para futuras versiones.
+* Added [PCODER]: Inclusión de {P}Diagram (beta).  Un editor de diagramas multipropósito tanto para documentación del sistema bajo UML, flujogramas, etc.  Como la documentación para modelos de BPM.  Se proyectará como herramienta para el almacenamiento de diagramas complementarios por Formulario e informes del Framework.
+* Added [PCODER]: Inclusión de {P}Mettings (beta).  Herramienta que permite interacción más completa entre desarrolladores.  Por ahora se incluye solamente el chat y el seguimiento de punteros.  Se proyecta como herramienta de audioconferencia Peer-to-Peer entre desarrolladores y herramienta para compartir pantalla en versiones futuras.
+* Added [PCODER]: Mejoradas algunas funcionalidades internas del editor en recuperación y almacenamiento de archivos.
 "
 
 ########################################################################
@@ -75,6 +79,7 @@ CREATE TABLE core_pcoder_bloqueos (
   usuario varchar(255),
   abierto int(1),
   direccion_origen varchar(255),
+  agente varchar(255),
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
