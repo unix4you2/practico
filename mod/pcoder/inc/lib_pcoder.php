@@ -206,7 +206,7 @@ if ($PCO_Accion=="PCOMOD_ActivarBloqueoArchivo")
                             }
                         else
                             {
-                                echo "[ADV]: ".$MULTILANG_PCODER_AdvertenciaCierre."<br><br><li>Fecha de apertura/Opened date: <b>".$RegistroBloqueo["ultima_edicion"]."</b></li><li>Origen/Origin: <b>".$RegistroBloqueo["direccion_origen"]."</b> <i>(".$RegistroBloqueo["agente"].")</i></li><hr>".$MULTILANG_PCODER_AdvConcurrencia;
+                                echo "[ADV]: ".$MULTILANG_PCODER_AdvertenciaMalCierre."<br><br><li>Fecha de apertura/Opened date: <b>".$RegistroBloqueo["ultima_edicion"]."</b></li><li>Origen/Origin: <b>".$RegistroBloqueo["direccion_origen"]."</b> <i>(".$RegistroBloqueo["agente"].")</i></li><hr>".$MULTILANG_PCODER_AdvConcurrencia;
                                 //Despues de generar advertencia actualiza ultima fecha apertura, direccion y agente como la actual
                                 PCO_EjecutarSQLUnaria("UPDATE core_pcoder_bloqueos SET ultima_edicion='$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00',direccion_origen='$PCO_PCODER_DireccionAuditoria',agente='".$_SERVER['HTTP_USER_AGENT']."' WHERE archivo='$PCODER_archivo' ");
                                 //Envia a si mismo un mensaje de advertencia a posible estacion abierta
@@ -241,7 +241,10 @@ if ($PCO_Accion=="PCOMOD_EliminarHistorial")
 if ($PCO_Accion=="PCODER_LiberarBloqueo") 
 	{
         @ob_clean();
-        PCO_EjecutarSQLUnaria("DELETE FROM core_pcoder_bloqueos WHERE id='$IDArchivo' ");
+        if ($IDArchivo!="")
+            PCO_EjecutarSQLUnaria("DELETE FROM core_pcoder_bloqueos WHERE id='$IDArchivo' ");
+        if ($RutaArchivo!="")
+            PCO_EjecutarSQLUnaria("DELETE FROM core_pcoder_bloqueos WHERE archivo='$RutaArchivo' AND usuario='$PCOSESS_LoginUsuario' ");
         die();
 	}
 

@@ -64,7 +64,7 @@
 									<li role="separator" class="divider"></li>
 									<li><a style="cursor:pointer;" id="boton_cerraractual"       OnClick="PCODER_CerrarArchivoActual();">		<i class="fa fa-times fa-fw"></i> <?php echo $MULTILANG_PCODER_Cerrar; ?>				<span class="pull-right text-muted small"><i>Ctrl+Q</i></span></a></li>
 									<li role="separator" class="divider"></li>
-									<li><a style="cursor:pointer;" OnClick="self.close();"><i class="fa fa-sign-out fa-fw"></i> <?php echo $MULTILANG_PCODER_Salir; ?>: <?php echo $MULTILANG_PCODER_CerrarVentana; ?></a></li>
+									<li><a style="cursor:pointer;" OnClick="VerificarCierreTotalPCoder();"><i class="fa fa-sign-out fa-fw"></i> <?php echo $MULTILANG_PCODER_Salir; ?>: <?php echo $MULTILANG_PCODER_CerrarVentana; ?></a></li>
 								</ul>
 							</li>
 

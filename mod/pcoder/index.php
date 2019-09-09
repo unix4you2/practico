@@ -200,7 +200,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 	<script type="text/javascript" src="../../inc/jquery/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 
 </head>
-<body onbeforeunload="return '<?php echo $MULTILANG_PCODER_AdvertenciaCierre; ?>';">
+<body onbeforeunload="return VerificarCierreTotalPCoder();">
 
 	<!-- ######### FORMULARIOS Y MARCOS DE TRABAJO OCULTOS ######### -->
 	<form name="form_archivo_editado" action="index.php" method="POST" target="frame_almacenamiento" style="visibility: hidden; display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
@@ -358,8 +358,8 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 							<iframe name="frame_pboard" id="frame_pboard" src="mod/pboard" style="display:block; visibility:hidden; width:100%; height:100vh;" width="100%" height="100%"  scrolling="yes" style="border:0px;"></iframe>
 						</div>
 
-						<div  id="pestana_estado_general" class="tab-pane fade" align=center>
-    						<div  id="MarcoEstadoYBloqueos" style="padding:30px;">
+						<div  id="pestana_estado_general" class="tab-pane fade" align=center style="overflow:auto;">
+    						<div  id="MarcoEstadoYBloqueos" style="padding:30px; overflow:auto;">
     						</div>
 						</div>
 
@@ -418,6 +418,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 		var MULTILANG_PCODER_HistorialVersiones="<?php echo $MULTILANG_PCODER_HistorialVersiones; ?>";
 		var PCO_PCODER_StandAlone="<?php echo $PCO_PCODER_StandAlone; ?>";
 		var PCOSESS_LoginUsuario="<?php echo $PCOSESS_LoginUsuario; ?>";
+		var MULTILANG_PCODER_AdvertenciaCierre="<?php echo $MULTILANG_PCODER_AdvertenciaCierre; ?>";
 	</script>
 	<script type="text/javascript" src="js/pcoder.min.js?<?php echo filemtime('js/pcoder.min.js'); ?>"></script>
 
@@ -486,7 +487,7 @@ $('#pestana_consola_comandos').trigger('click');
                         TogetherJSConfig_dontShowClicks = false; //Deshabilitar la vista de clics de participantes
                         //TogetherJSConfig_findRoom = "Cuarto_de_Desarrolladores";  //Crea un cuarto especifico y loguea en el a todos los participantes
                         //TogetherJSConfig_findRoom = {prefix: "Cuarto_de_Desarrolladores", max: 5} //Crea un cuarto y ademas asigna un maximo de participantes
-                        TogetherJSConfig_autoStart = true; //Reinicia la sesion de un usuario
+                        TogetherJSConfig_autoStart = false; //Reinicia la sesion de un usuario
                         TogetherJSConfig_suppressJoinConfirmation=true; //Evita la confirmacion de ingreso a un cuarto para los invitados
                         TogetherJSConfig_suppressInvite=true;
                         TogetherJSConfig_inviteFromRoom=false;
