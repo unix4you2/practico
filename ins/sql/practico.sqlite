@@ -617,35 +617,35 @@ CREATE TABLE core_tareascron (
 
 DROP TABLE IF EXISTS core_pcoder_historial;
 CREATE TABLE core_pcoder_historial (
-  id int(10) NOT NULL AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   archivo text,
-  fecha_edicion datetime,
-  usuario varchar(255),
-  lineas int(11),
-  caracteres int(11),
-  contenido mediumtext,
-  PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  fecha_edicion text,
+  usuario text,
+  lineas integer,
+  caracteres integer,
+  contenido text
+
+);
 
 DROP TABLE IF EXISTS core_pcoder_bloqueos;
 CREATE TABLE core_pcoder_bloqueos (
-  id int(10) NOT NULL AUTO_INCREMENT,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
   archivo text,
-  ultima_edicion datetime,
-  usuario varchar(255),
-  abierto int(1),
-  direccion_origen varchar(255),
-  agente varchar(255),
-  PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  ultima_edicion text,
+  usuario text,
+  abierto integer,
+  direccion_origen text,
+  agente text
+
+);
 
 DROP TABLE IF EXISTS core_pcoder_chat;
 CREATE TABLE core_pcoder_chat (
-  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  remitente VARCHAR(255) NOT NULL DEFAULT '',
-  destinatario VARCHAR(255) NOT NULL DEFAULT '',
-  message TEXT NOT NULL,
-  sent DATETIME,
-  recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
-  PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  remitente text DEFAULT '',
+  destinatario text DEFAULT '',
+  message TEXT,
+  sent text,
+  recd INTEGER DEFAULT 0
+
+);

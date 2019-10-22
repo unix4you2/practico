@@ -611,8 +611,8 @@ CREATE TABLE core_pcoder_historial (
   archivo text,
   fecha_edicion datetime,
   usuario varchar(255),
-  lineas int(11),
-  caracteres int(11),
+  lineas integer,
+  caracteres integer,
   contenido mediumtext,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -623,7 +623,7 @@ CREATE TABLE core_pcoder_bloqueos (
   archivo text,
   ultima_edicion datetime,
   usuario varchar(255),
-  abierto int(1),
+  abierto integer,
   direccion_origen varchar(255),
   agente varchar(255),
   PRIMARY KEY (id)

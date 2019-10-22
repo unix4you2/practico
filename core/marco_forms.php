@@ -90,7 +90,10 @@
 	<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarInformes">
 </form>
 <form name="PCO_ListarUsuarios"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="PCO_Accion" value="PCO_ListarUsuarios">
+	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto"> <!-- PCO_ListarUsuarios-->
+	<input type="Hidden" name="PCO_Objeto" value="frm:-8:1">
+    <input type="Hidden" name="FiltroLoginUsuario" value="_|_">
+    <input type="Hidden" name="FiltroNombreUsuario" value="_|_">
 </form>
 <form name="PCO_PanelAuditoriaMovimientos"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="PCO_PanelAuditoriaMovimientos">

@@ -47,7 +47,10 @@ if ($PCO_Accion=="actualizar_practico")
             <br><br>
             <?php
                 PCO_Mensaje($MULTILANG_ActMsj1,$MULTILANG_ActMsj2,'100%','fa fa-exclamation-triangle fa-5x','TextosVentana');
+                echo "<hr>";
+                PCO_Mensaje("Recuerda / Remember","<font size=1>Llamado manual / Manual call: URL_PRACTICO/index.php?PCO_Accion=analizar_parche&archivo_cargado=tmp/SuArchivo.zip </font>",'100%','fa fa-info-circle fa-2x text-info','TextosVentana');
             ?>
+
             <div align="center">
                 <br>
                 <i class="fa fa-inbox fa-2x fa-fw"></i><b> <?php echo $MULTILANG_ActUsando; ?>: <?php include("inc/version_actual.txt"); ?></b><br>

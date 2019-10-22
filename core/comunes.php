@@ -2648,8 +2648,9 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "PCO_CambiarContrasena")				$retorno = 1;
         if ($PCO_Accion== "PCO_ActualizarPerfilUsuario")		$retorno = 1;
         if ($PCO_Accion== "PCO_GuardarPerfilUsuario")			$retorno = 1;
-		if ($PCO_Accion== "PCO_ResetearContrasena")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
 		if ($PCO_Accion== "PCO_ActualizarContrasena")			$retorno = PCO_PermisoHeredadoAccion("PCO_CambiarContrasena");
+/*
+		if ($PCO_Accion== "PCO_ResetearContrasena")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
 		if ($PCO_Accion== "PCO_AgregarUsuario")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
 		if ($PCO_Accion== "PCO_GuardarUsuario")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
 		if ($PCO_Accion== "PCO_EliminarUsuario")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
@@ -2662,6 +2663,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "PCO_EliminarInformeUsuario")			$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
         if ($PCO_Accion== "PCO_CopiarPermisos")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
         if ($PCO_Accion== "PCO_CopiarInformes")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
+*/
         if ($PCO_Accion== "PCO_AgregarUsuarioAutoregistro")		$retorno = 1;
         if ($PCO_Accion== "PCO_GuardarUsuarioAutoregistro")		$retorno = 1;
 
@@ -5090,7 +5092,7 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 						$cadena_ID_datepickerEspecifica="
 								pickDate: false,
 								pickTime: true";
-						$cadena_complementaria_datepicker=' data="DateTimePicker" data-date-format="HH:mm:ss" ';
+						$cadena_complementaria_datepicker=' data="DateTimePicker" data-date-format="HH:mm:00" ';
 					}
 				if ($registro_campos["validacion_datos"]=="fechahora")
 					{
@@ -8153,9 +8155,9 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
         //Determina si se deben ocultar elementos por banderas o porque el informe asi lo obliga
         $ComplementoAnulacionPiePagina='';
-        if ($anular_piepagina==1 || $registro_informe["ocultar_piepagina"]==1) $ComplementoAnulacionPiePagina=' style="visibility:hidden;" ';
+        if ($anular_piepagina==1 || $registro_informe["ocultar_piepagina"]==1) $ComplementoAnulacionPiePagina=' style="display:none; visibility:hidden;" ';
         $ComplementoAnulacionEncabezado='';
-        if ($anular_encabezado==1 || $registro_informe["ocultar_encabezado"]==1) $ComplementoAnulacionEncabezado=' style="visibility:hidden;" ';
+        if ($anular_encabezado==1 || $registro_informe["ocultar_encabezado"]==1) $ComplementoAnulacionEncabezado=' style="display:none; visibility:hidden;" ';
         if ($anular_acciones==0 && $registro_informe["anular_acciones"]==1) $anular_acciones=1;
 
         //Si el informe usa una conexion externa busca su configuracion
@@ -8258,7 +8260,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 						    @$PCO_InformesDataTableExrpotaPDF.=$registro_informe["exportar_dtpdf"]."|";
 					    }
 					$SalidaFinalInforme.= '<!--<div class="table-responsive">-->
-											<table width="100%" class="btn-xs table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead '.$ComplementoAnulacionEncabezado.'>';
+											<table width="100%" class="btn-xs table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead id="PCO_EncabezadosInforme_'.$registro_informe["id"].'" '.$ComplementoAnulacionEncabezado.'>';
 
                     //if ($registro_informe["personalizacion_encabezados"]!="")
 					$SalidaFinalInforme.= '
@@ -8383,7 +8385,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 							$numero_filas++;
 						}
 
-					$SalidaFinalInforme.= '</tbody><tfoot '.$ComplementoAnulacionPiePagina.'>';
+					$SalidaFinalInforme.= '</tbody><tfoot id="PCO_PiePaginaInforme_'.$registro_informe["id"].'" '.$ComplementoAnulacionPiePagina.'>';
 
 					//Cuando es embebido (=1) no agrega los totales de registro
 					//if (!$embebido)

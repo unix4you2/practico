@@ -111,8 +111,10 @@
 				<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
 				<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
 				<input type="Hidden" name="PCO_ErrorTitulo" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorTitulo).'">
-				<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">
-			<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_EliminarDatos.submit();  </script>';
+				<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@PCO_ReemplazarVariablesPHPEnCadena($PCO_ErrorDescripcion).'">';
+            //Redirecciona al siguiente flujo de aplicacion a menos que la PostAccion indique paso directamente
+            if ($PCO_PostAccionDirecta!="1")
+			    echo '<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_EliminarDatos.submit();  </script>';
 		}
 
 
@@ -340,8 +342,9 @@
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						</form>';
 				}
-            //Redirecciona al siguiente flujo de aplicacion
-			echo '<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_ActualizarDatos.submit();  </script>';
+            //Redirecciona al siguiente flujo de aplicacion a menos que la PostAccion indique paso directamente
+            if ($PCO_PostAccionDirecta!="1")
+			    echo '<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_ActualizarDatos.submit();  </script>';
 		}
 
 
@@ -651,8 +654,9 @@
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						</form>';
 				}
-            //Redirecciona al siguiente flujo de aplicacion
-			echo '<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_GuardarDatos.submit();  </script>';
+            //Redirecciona al siguiente flujo de aplicacion a menos que la PostAccion indique paso directamente
+            if ($PCO_PostAccionDirecta!="1")
+			    echo '<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_GuardarDatos.submit();  </script>';
 		}
 
 

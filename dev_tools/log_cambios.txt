@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno="19"
-VersionCompatibleMes="6"
+VersionCompatibleAno=""
+VersionCompatibleMes=""
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="19"
-VersionFinalMes="7"
+VersionFinalAno=""
+VersionFinalMes=""
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -15,14 +15,14 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
+core/actualizacion.php
 core/comunes.php
-core/marco_dev.php
-core/ajax.php
-core/sesion.php
-mod/pmydb/index.php
-mod/pcoder/*
-inc/ace/*
-inc/chat/*
+core/conexiones.php
+core/formularios.php
+core/marco_forms.php
+core/usuarios.php
+mod/pcoder/index.php
+mod/pcoder/js/pcoder.min.js
 
 xml/*
 inc/practico/idiomas/*
@@ -39,19 +39,23 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added [FORMS]: Ahora los formularios identifican de manera unica los elementos de sus menues superiores como MENU_FORMULARIO_OPCION_XXX de acuerdo a su orden de aparicion con el fin de brindar mayor control sobre los mismos en tiempo de ejecucion.
-* Enhan [CORE]: Actualizada la versión base de PMyDB a 19.6
-* Enhan [FORMS]: Mejorada presentacion grafica y estilos para listas con carga dinámica
-* Enhan [GENERAL]: Agregada nueva variable de sesion PCOSESS_NombreUsuario
-* Enhan [PCODER]: Actualizada la versión de PCoder a la 19.7 con las siguientes mejoras:
-* Added [PCODER]: Copias de seguridad automaticas en cada edición de archivo.
-* Added [PCODER]: Comparación dinámica entre versiones anteriores de código y la versión actual de archivo tomadas desde el historial de versiones automático.
-* Added [PCODER]: Control de concurrencia y cierre adecuado de archivos cuando varios desarrolladores trabajan al tiempo.
-* Added [PCODER]: Mensajería entre desarrolladores heredada de Práctico Framework permite una interacción simplificada además de emitir mensajes automáticos de advertencia sobre ciertos eventos.
-* Added [PCODER]: Inclusión de {P}Board (beta).  Una característica que permite al desarrollador editar además de código, archivos gráficos en diferentes formatos con retoques, filtros y otras posibilidades.  Se proyecta a {P}Board como herramienta de pizarra compartida entre desarrolladores para futuras versiones.
-* Added [PCODER]: Inclusión de {P}Diagram (beta).  Un editor de diagramas multipropósito tanto para documentación del sistema bajo UML, flujogramas, etc.  Como la documentación para modelos de BPM.  Se proyectará como herramienta para el almacenamiento de diagramas complementarios por Formulario e informes del Framework.
-* Added [PCODER]: Inclusión de {P}Mettings (beta).  Herramienta que permite interacción más completa entre desarrolladores.  Por ahora se incluye solamente el chat y el seguimiento de punteros.  Se proyecta como herramienta de audioconferencia Peer-to-Peer entre desarrolladores y herramienta para compartir pantalla en versiones futuras.
-* Added [PCODER]: Mejoradas algunas funcionalidades internas del editor en recuperación y almacenamiento de archivos.
+
+ADVERTENCIA:  Algunas funciones internas asociadas a la gestión de usuarios del framework han sido optimizadas y cambiadas por objetos diferentes. Si usted hace manipulación manual o alteración de algunas de las funciones de usuarios se recomienda hacer una revisión de las acciones involucradas y realizar los ajustes previo a aplicar esta actualización.  Algunass funciones internas asociadas son:  PCO_ListarUsuarios.    Si usted no ejecuta rutinas propias que alteran el comportamiento de estas funciones ignore este mensaje y aplique directamente
+
+* Fixed: Scripts de despliegue para tablas de PCoder sobre PostgreSQL y SQLite
+* Fixed: Durante la asignación de permisos a usuarios solamente son desplegadas las opciones de menu externas. Aquellas asociadas a formularios son ocultadas pues son controladas por el acceso al formulario que las contiene.
+* Enahn: Mejorada presentacion de estadisticas sobre PCoder en informes y maquetacion
+* Enahn: Cambiado el modo SQL por defecto para conexiones MariaDB y MySQL evitando el STRICT_TRANS_TABLES para aquellos que tengan problemas de compatibilidad.  Si usted desea mantener activado el STRICT_TRANS_TABLES en su motor posterior a esta actualizacion puede comentar la linea relacionada sobre core/conexiones.php
+* Enahn: Muchas de las funciones internas de gestión de usuarios han sido reemplazadas por objetos propios del framework ahorrando varios cientos de líneas de código.
+* Enhan: El ocultamiento de encabezados o pies de pagina en informes tambien ahorra el espacio asociado a éstos en la maquetación.
+* Added: Los encabezados y pies de pagina de los informes tabulars pueden ser ahora manipulados en el DOM mediante los ID HTML PCO_EncabezadosInforme_XXX y PCO_PiePaginaInforme_XXX reemplazando XXX por el ID de informe correspondiente.
+* Added: Agregada una nueva variable de control de flujo llamada PCO_PostAccionDirecta.  Combinada con las variables de la familia PCO_PostAccion permite definir en las operaciones automaticas de Alacenamiento, Actualización y eliminación de registros que no se haga la redirección y carga de la PostAccion en un nuevo flujo sino que se continúe en el mismo flujo actual.  Esto permite procesar variables ilimitadas preguntando en cualquier módulo personalizado por éstas en la entrada asociada a la PCO_PostAccion (En lugar de PCO_Accion).
+* Added: Texto aclaratorio en el asistente de actualizciones recuerda al usuario que para instalaciones o servidores restringidos para carga de archivos grandes puede lanzar el proceso manualmente mediante URL y ciertos parámetros.
+
+
+EN COMUNES CAMBIO LA ACL.    BUSCAR POR COINCIDENCIASS DE PCO_ListarUsuarios
+
+
 "
 
 ########################################################################
@@ -59,40 +63,6 @@ LogCambios="
 # RECORDAR EN OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
 
-DROP TABLE IF EXISTS core_pcoder_historial;
-CREATE TABLE core_pcoder_historial (
-  id int(10) NOT NULL AUTO_INCREMENT,
-  archivo text,
-  fecha_edicion datetime,
-  usuario varchar(255),
-  lineas int(11),
-  caracteres int(11),
-  contenido mediumtext,
-  PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-DROP TABLE IF EXISTS core_pcoder_bloqueos;
-CREATE TABLE core_pcoder_bloqueos (
-  id int(10) NOT NULL AUTO_INCREMENT,
-  archivo text,
-  ultima_edicion datetime,
-  usuario varchar(255),
-  abierto int(1),
-  direccion_origen varchar(255),
-  agente varchar(255),
-  PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-DROP TABLE IF EXISTS core_pcoder_chat;
-CREATE TABLE core_pcoder_chat (
-  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  remitente VARCHAR(255) NOT NULL DEFAULT '',
-  destinatario VARCHAR(255) NOT NULL DEFAULT '',
-  message TEXT NOT NULL,
-  sent DATETIME,
-  recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
-  PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
