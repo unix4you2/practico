@@ -132,6 +132,8 @@
 							$ConexionPDO->exec("SET NAMES 'utf8';");
 							$ConexionPDO->exec("SET NAMES utf8;"); //Forzado UTF8 - Collation recomendada: utf8_general_ci
 
+                            $ConexionPDO->exec("SET session group_concat_max_len=15000;"); //Opcional
+
                             //Apaga el modo transaccional par autilizar solo el modo estandar del motor (evita el STRICT_TRANS_TABLES)
                             $ConexionPDO->exec("SET sql_mode='ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';");
 							

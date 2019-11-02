@@ -20,6 +20,8 @@ core/comunes.php
 core/conexiones.php
 core/formularios.php
 core/marco_forms.php
+core/documentador.php
+core/marco_abajo.php
 core/usuarios.php
 mod/pcoder/index.php
 mod/pcoder/js/pcoder.min.js
@@ -51,6 +53,10 @@ ADVERTENCIA:  Algunas funciones internas asociadas a la gestión de usuarios del
 * Added: Los encabezados y pies de pagina de los informes tabulars pueden ser ahora manipulados en el DOM mediante los ID HTML PCO_EncabezadosInforme_XXX y PCO_PiePaginaInforme_XXX reemplazando XXX por el ID de informe correspondiente.
 * Added: Agregada una nueva variable de control de flujo llamada PCO_PostAccionDirecta.  Combinada con las variables de la familia PCO_PostAccion permite definir en las operaciones automaticas de Alacenamiento, Actualización y eliminación de registros que no se haga la redirección y carga de la PostAccion en un nuevo flujo sino que se continúe en el mismo flujo actual.  Esto permite procesar variables ilimitadas preguntando en cualquier módulo personalizado por éstas en la entrada asociada a la PCO_PostAccion (En lugar de PCO_Accion).
 * Added: Texto aclaratorio en el asistente de actualizciones recuerda al usuario que para instalaciones o servidores restringidos para carga de archivos grandes puede lanzar el proceso manualmente mediante URL y ciertos parámetros.
+* Enhan:  En los informes exportables a excel directamente por datatables se elimina la primera fila correspondiente al título para que los datos salgan crudos solamente con sus títulos de columna y sea más fácil su manipulación.
+* Added: Scripts iniciales para la capa de soporte a las fases de documentación automática del proyecto
+* Enhan:  Aumentada la longitud máxima de caracteres por defecto para los resultados de las funciones group_concat a un total de 15Kb
+
 
 
 EN COMUNES CAMBIO LA ACL.    BUSCAR POR COINCIDENCIASS DE PCO_ListarUsuarios
