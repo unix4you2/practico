@@ -65,12 +65,27 @@ function PCO_ObtenerBloquesDocumentacion($CodigoAnalizado="",$Lenguaje="PHP")
 
 function PCO_ObtenerBloquesDocumentacionDEPRECATED_ONLYPHP($CodigoAnalizado="",$Lenguaje="PHP")
     {
-        $tokens = token_get_all('/* comentario */');
+        $tokens = token_get_all('Cadena de codigo analizada');
         $tokens = token_get_all(file_get_contents( __FILE__ ));
         $tokens = token_get_all(file_get_contents( "../inc/bootstrap/js/practico.js" ));
         return $tokens;
     }
 
+
+########################################################################
+########################################################################
+/*
+    C12 - 
+    @Seccion@ Funciones principales - Usadas durante toda la ejecucion
+	@Funcion@ stripWhitespace
+	Utilizada para quitar algunos espacios en blanco dentro de una cadena
+
+	Variables de entrada:
+
+		ArregloComentarios - Arreglo que contiene todos los comentarios de un codigo fuente analizado
+		@Var@ Edad - Edad del trabajador al que se desea liquidar vacaciones
+		@Var@ Salario - Salario base del trabajador
+*/
 function stripWhitespace($source)
      {
          if (!function_exists('token_get_all')) {
@@ -98,6 +113,34 @@ function stripWhitespace($source)
          return $output;
      }
 
+
+########################################################################
+########################################################################
+/*
+    C12 - 
+    @seccion@ Alternas - Llamadas durante __procesos__ especificos __**no**__ criticos dentro de **todo** el programa °°Tener en cuenta todos los exportados °°Guardar logs 
+	@Funcion@ parse
+	Recorre diferentes elementos hasta obtener una cadena esperada
+    °°Tener en cuenta todos los exportados°°
+	Variables de entrada:
+
+		ArregloComentarios - Arreglo que contiene todos los comentarios de un codigo fuente analizado
+		@Var@ Edad - Edad del trabajador al que se desea liquidar vacaciones
+		@Var@ Salario - Salario base del trabajador
+	>>
+	function PCO_ObtenerBloquesDocumentacionDEPRECATED_ONLYPHP($CodigoAnalizado="",$Lenguaje="PHP")
+            {
+                $tokens = token_get_all('Cadena de codigo analizada');
+                $tokens = token_get_all(file_get_contents( __FILE__ ));
+                $tokens = token_get_all(file_get_contents( "../inc/bootstrap/js/practico.js" ));
+                return $tokens;
+            }	
+	
+	<<
+	
+	
+	@menu@ Detalles - www.google.com
+*/
 function parse($src, $interestedClass = null)
      {
          $this->tokens = token_get_all($src);

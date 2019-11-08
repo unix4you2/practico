@@ -496,7 +496,7 @@
 													    $valor_de_campo_query=${"PCO_ComboMultiple_".$registro_campos["campo"]};
 
 													//Compresion previa para campos especiales (MUY experimental por cuanto puede generar errores de query)
-														if ($registro_campos["tipo"]=="objeto_canvas" || $registro_campos["tipo"]=="objeto_camara")
+														if ($registro_campos["tipo"]=="objeto_canvasDEPRECATED" || $registro_campos["tipo"]=="objeto_camara")
 															$valor_de_campo_query=gzencode($valor_de_campo_query,9);
 													//Agrega el campo y su valor a la lista de campos para el query
 													$lista_campos.=$nombre_de_campo_query;
@@ -581,7 +581,7 @@
                         													    $valor_de_campo_query=${"PCO_ComboMultiple_".$registro_campos_subformulario["campo"]};
                         
                         													//Compresion previa para campos especiales (MUY experimental por cuanto puede generar errores de query)
-                        														if ($registro_campos_subformulario["tipo"]=="objeto_canvas" || $registro_campos_subformulario["tipo"]=="objeto_camara")
+                        														if ($registro_campos_subformulario["tipo"]=="objeto_canvasDEPRECATED" || $registro_campos_subformulario["tipo"]=="objeto_camara")
                         															$valor_de_campo_query=gzencode($valor_de_campo_query,9);
                         													//Agrega el campo y su valor a la lista de campos para el query
                         													$lista_campos.=$nombre_de_campo_query;

@@ -6474,20 +6474,65 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
 		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="" && $registro_datos_formulario["$nombre_campo"]!="")
 			{
 				$cadena_decodificada=$registro_datos_formulario["$nombre_campo"];
-				$cadena_decodificada=gzdecode($cadena_decodificada);
-				$salida.='<a href="javascript:AbrirPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\');"><i class="fa fa-picture-o"></i><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
-					<!-- INICIO DE MARCOS POPUP -->
-					<div id="CANVASPrevio'.$registro_campos["campo"].'" class="FormularioPopUps">
-						<div align=center>
-							<table bgcolor="#FFFFFF"><tr><td>
-								<img src="'.$cadena_decodificada.'" border=1>
-							</td></tr></table>
-						</br>
-						<input type="Button"  class="Botones" value=" -- '.$MULTILANG_Cerrar.' -- " onClick="OcultarPopUp(\'CANVASPrevio'.$registro_campos["campo"].'\')">
-						</div>
-					<!-- FIN DE MARCOS POPUP -->
-					</div>';
+				//$cadena_decodificada=gzdecode($cadena_decodificada);
+				$salida.='
+				<a href="javascript:CargarImagenCANVAS_'.$registro_campos["id_html"].'();"><i class="fa fa-picture-o"></i><b>'.$MULTILANG_FrmCanvasLink.'</b></a><br>
+					<script language="JavaScript">
+					    function CargarImagenCANVAS_'.$registro_campos["id_html"].'()
+					        {
+                                PCOJS_MostrarMensaje("'.$MULTILANG_FrmCanvasLink.'","Cargando...","modal-wide");
+                                $("#PCO_Modal_MensajeCuerpo").html(\'<img src="'.$cadena_decodificada.'" border=1>\');
+					        }
+					</script>';
 			}
+
+				$salida.='
+					<script language="JavaScript">
+                        // returns true if all color channels in each pixel are 0 (or "blank")
+                        function isCanvasBlank(canvas) {
+                          return !canvas.getContext("2d")
+                            .getImageData(0, 0, canvas.width, canvas.height).data
+                            .some(channel => channel !== 0);
+                        }
+                        					
+                        var RecortarCANVAS_'.$registro_campos["id_html"].' = (function() {
+                            function rowBlank(imageData, width, y) {
+                                for (var x = 0; x < width; ++x) {
+                                    if (imageData.data[y * width * 4 + x * 4 + 3] !== 0) return false;
+                                }
+                                return true;
+                            }
+                        
+                            function columnBlank(imageData, width, x, top, bottom) {
+                                for (var y = top; y < bottom; ++y) {
+                                    if (imageData.data[y * width * 4 + x * 4 + 3] !== 0) return false;
+                                }
+                                return true;
+                            }
+                        
+                            return function(canvas) {
+                                var ctx = canvas.getContext("2d");
+                                var width = canvas.width;
+                                var imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                                var top = 0, bottom = imageData.height, left = 0, right = imageData.width;
+                        
+                                while (top < bottom && rowBlank(imageData, width, top)) ++top;
+                                while (bottom - 1 > top && rowBlank(imageData, width, bottom - 1)) --bottom;
+                                while (left < right && columnBlank(imageData, width, left, top, bottom)) ++left;
+                                while (right - 1 > left && columnBlank(imageData, width, right - 1, top, bottom)) --right;
+                        
+                                var trimmed = ctx.getImageData(left, top, right - left, bottom - top);
+                                var copy = canvas.ownerDocument.createElement("canvas");
+                                var copyCtx = copy.getContext("2d");
+                                copy.width = trimmed.width;
+                                copy.height = trimmed.height;
+                                copyCtx.putImageData(trimmed, 0, 0);
+                        
+                                return copy;
+                            };
+                        })();
+					</script>';
+
 
         //Agrega etiqueta del campo si es diferente de vacio
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
@@ -6496,7 +6541,6 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
 		$salida.='
-			<!--<a href="javascript:" id="upload" style="width: 100px;">Upload</a>-->
 			<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" style="border: 1px solid #acc;">Su navegador no soporta Canvas</canvas>
 			<a href="javascript:limpiar_CANVAS_'.$registro_campos["campo"].'();"><i class="fa fa-times fa-2x"></i></a>
 
@@ -6544,12 +6588,17 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
 				function actualizar_CANVAS_'.$registro_campos["campo"].'()
 					{
 						// Pasa el valor del canvas al campo que se usa en almacenamiento
-						var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
-						var strDataURI = oCanvas.toDataURL();
-						document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value=strDataURI;
+						if (!isCanvasBlank(CANVAS_'.$registro_campos["campo"].'))
+						    {
+                				oCanvas=RecortarCANVAS_'.$registro_campos["campo"].'(CANVAS_'.$registro_campos["campo"].');
+                				document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value=oCanvas.toDataURL();	
+						    }
 						window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
 					}
-				window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1500);
+
+				$( document ).ready(function() {
+				    actualizar_CANVAS_'.$registro_campos["campo"].'();
+				});
 			</script>
 			<input type="hidden" name="'.$registro_campos["campo"].'">';
 
