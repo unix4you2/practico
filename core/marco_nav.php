@@ -191,7 +191,7 @@
 						</li>
 						<li class="divider"></li>
 						<li>
-							<a data-toggle="modal" href="https://saythanks.io/to/unix4you2" target="_blank">
+							<a data-toggle="modal" href="https://www.practico.org/agradecimientos" target="_blank">
 								<div>
 									<i class="fa fa-smile-o fa-fw"></i> Da las gracias!&nbsp; <img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg">
 								</div>

@@ -20,6 +20,7 @@ core/comunes.php
 core/conexiones.php
 core/formularios.php
 core/marco_forms.php
+core/marco_nav.php
 core/documentador.php
 core/marco_abajo.php
 core/usuarios.php
@@ -57,7 +58,7 @@ ADVERTENCIA:  Algunas funciones internas asociadas a la gestión de usuarios del
 * Added: Scripts iniciales para la capa de soporte a las fases de documentación automática del proyecto
 * Enhan:  Aumentada la longitud máxima de caracteres por defecto para los resultados de las funciones group_concat a un total de 15Kb
 * Enhan: Mejorado el almacenamiento de objetos gráficos canvas.  Ahora se hace directamente en formato PNG para ser fácilmente recuperado.
-
+* Otros: Generada pagina como formulario publico en el sitio web para reemplazo del proyecto (ahora extinto) de SayThanks
 
 
 EN COMUNES CAMBIO LA ACL.    BUSCAR POR COINCIDENCIASS DE PCO_ListarUsuarios
