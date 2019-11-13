@@ -100,7 +100,8 @@ CREATE TABLE core_formulario (
   estilo_pestanas text default 'nav-tabs',
   id_html text DEFAULT '',
   tipo_maquetacion text DEFAULT 'tradicional',
-  css_columnas text
+  css_columnas text,
+  estilo_ventana text default 'panel-primary'
 
 );
 
@@ -333,7 +334,8 @@ CREATE TABLE core_informe (
   exportar_dtpdf char(1) DEFAULT 'N',
   ocultar_encabezado integer DEFAULT '0',
   ocultar_piepagina integer DEFAULT '0',
-  anular_acciones integer DEFAULT '0'
+  anular_acciones integer DEFAULT '0',
+  encabezado_html text
 
 );
 

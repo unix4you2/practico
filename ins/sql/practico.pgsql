@@ -101,6 +101,7 @@ CREATE TABLE core_formulario (
   id_html varchar(255) DEFAULT '',
   tipo_maquetacion varchar(11) DEFAULT 'tradicional',
   css_columnas text,
+  estilo_ventana varchar(50) default 'panel-primary',
   PRIMARY KEY  (id)
 );
 
@@ -324,6 +325,7 @@ CREATE TABLE core_informe (
   ocultar_encabezado integer DEFAULT '0',
   ocultar_piepagina integer DEFAULT '0',
   anular_acciones integer DEFAULT '0',
+  encabezado_html text,
   PRIMARY KEY  (id)
 );
 

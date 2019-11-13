@@ -2739,6 +2739,16 @@ $ContenidoBarraFlotante_EditForm.='
                 			<button type="button" class="btn btn-success" onclick="javascript:document.datosact.submit();">'.$MULTILANG_Actualizar.' JS <i class="fa fa-floppy-o"></i></button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
                     $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
+        
+        //Define el estilo activo de la ventana
+        if($registro_form["estilo_ventana"]=="panel") $SeleccionEstilo1="SELECTED";
+        if($registro_form["estilo_ventana"]=="panel-default") $SeleccionEstilo2="SELECTED";
+        if($registro_form["estilo_ventana"]=="panel-primary") $SeleccionEstilo3="SELECTED";
+        if($registro_form["estilo_ventana"]=="panel-success") $SeleccionEstilo4="SELECTED";
+        if($registro_form["estilo_ventana"]=="panel-info") $SeleccionEstilo5="SELECTED";
+        if($registro_form["estilo_ventana"]=="panel-warning") $SeleccionEstilo6="SELECTED";
+        if($registro_form["estilo_ventana"]=="panel-danger") $SeleccionEstilo7="SELECTED";
+        
         $ContenidoBarraFlotante_EditForm.='
                     <!-- Fin Modal EditorJavascript -->
 
@@ -2774,6 +2784,25 @@ $ContenidoBarraFlotante_EditForm.='
                                     <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDesTxt.': '.$MULTILANG_TblDesNombre.'"><i class="fa fa-question-circle  fa-fw "></i></a>
                                 </span>
                             </div>
+						</td>
+					</tr>
+					<tr>
+						<td valign="top" align=center>
+							<label for="estilo_ventana">'.$MULTILANG_FrmEstilo.':</label>
+							<div class="form-group input-group">
+								<select id="estilo_ventana" name="estilo_ventana" class="form-control">
+									<option value="panel"          '.$SeleccionEstilo1.'     >'.$MULTILANG_Ninguno.'</option>
+									<option value="panel-default"  '.$SeleccionEstilo2.'     >'.$MULTILANG_BtnEstiloPredeterminado.'</option>
+									<option value="panel-primary"  '.$SeleccionEstilo3.'     >'.$MULTILANG_BtnEstiloPrimario.'</option>
+									<option value="panel-success"  '.$SeleccionEstilo4.'     >'.$MULTILANG_BtnEstiloFinalizado.'</option>
+									<option value="panel-info"     '.$SeleccionEstilo5.'     >'.$MULTILANG_BtnEstiloInformacion.'</option>
+									<option value="panel-warning"  '.$SeleccionEstilo6.'     >'.$MULTILANG_BtnEstiloAdvertencia.'</option>
+									<option value="panel-danger"   '.$SeleccionEstilo7.'     >'.$MULTILANG_BtnEstiloPeligro.'</option>
+								</select>
+                                <span class="input-group-addon">
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="Estilo grafico para el borde de la ventana<br><br>Graphic style for window border"><i class="fa fa-info-circle  fa-fw"></i></a>
+                                </span>
+							</div>
 						</td>
 					</tr>
 					<tr>
@@ -3075,7 +3104,7 @@ $ContenidoBarraFlotante_EditForm.='
 
 			if ($mensaje_error=="")
 				{
-					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario SET titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=?,estilo_pestanas=?,id_html=?,tipo_maquetacion=?,css_columnas=? WHERE id= ? ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$formulario");
+					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario SET estilo_ventana=?,titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=?,estilo_pestanas=?,id_html=?,tipo_maquetacion=?,css_columnas=? WHERE id= ? ","$estilo_ventana$_SeparadorCampos_$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$formulario");
 					PCO_Auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
@@ -3124,7 +3153,8 @@ $ContenidoBarraFlotante_EditForm.='
 
 			if ($mensaje_error=="")
 				{
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas");
+				    $estilo_ventana='panel-primary';
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana");
 					$id=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 					PCO_Auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
