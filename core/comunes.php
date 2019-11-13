@@ -1293,9 +1293,10 @@ function PCO_ImportarXMLInforme($xml_importado)
 				$ocultar_encabezado=base64_decode($xml_importado->core_informe[0]->ocultar_encabezado);
 				$ocultar_piepagina=base64_decode($xml_importado->core_informe[0]->ocultar_piepagina);
 				$anular_acciones=base64_decode($xml_importado->core_informe[0]->anular_acciones);
+				$encabezado_html=base64_decode($xml_importado->core_informe[0]->encabezado_html);
 
 				// Inserta el nuevo informe
-				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones");
+				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html");
 
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
@@ -1475,9 +1476,10 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							$ocultar_encabezado=$registro["ocultar_encabezado"];
 							$ocultar_piepagina=$registro["ocultar_piepagina"];
 							$anular_acciones=$registro["anular_acciones"];
+							$encabezado_html=$registro["encabezado_html"];
 
 							// Inserta el nuevo informe
-							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones");
+							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html");
 
 							$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
@@ -8309,6 +8311,11 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 						    @$PCO_InformesDataTableExrpotaXLS.=$registro_informe["exportar_dtxls"]."|";
 						    @$PCO_InformesDataTableExrpotaPDF.=$registro_informe["exportar_dtpdf"]."|";
 					    }
+
+                    //Agrega titulo o encabezado si esta definido
+                    if ( $registro_informe["encabezado_html"] != '' )
+                        $SalidaFinalInforme.= '<div id="titulo-informe-ID'.$registro_informe["id"].'">'.$registro_informe["encabezado_html"].'</div>';
+
 					$SalidaFinalInforme.= '<!--<div class="table-responsive">-->
 											<table width="100%" class="btn-xs table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead id="PCO_EncabezadosInforme_'.$registro_informe["id"].'" '.$ComplementoAnulacionEncabezado.'>';
 
@@ -8578,6 +8585,10 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                 $CadenaComplementoToolTipTitulo="";
                 if ( $registro_informe["tooltip_titulo"] == 'S' )
                     $CadenaComplementoToolTipTitulo='title="'.PCO_ReemplazarVariablesPHPEnCadena($registro_informe["titulo"]).'" data-toggle="tooltip"';
+
+                //Agrega titulo o encabezado si esta definido
+                if ( $registro_informe["encabezado_html"] != '' )
+                    echo '<div id="titulo-informe-ID'.$registro_informe["id"].'">'.$registro_informe["encabezado_html"].'</div>';
             ?>
                 <div <?php echo $CadenaComplementoToolTipTitulo; ?> id="marco-informe-grafico-ID<?php echo $registro_informe["id"]; ?>" style="height: auto !important;"></div>
                 <script language="JavaScript">

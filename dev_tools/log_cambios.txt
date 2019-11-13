@@ -19,6 +19,7 @@ core/actualizacion.php
 core/comunes.php
 core/conexiones.php
 core/formularios.php
+core/informes.php
 core/marco_forms.php
 core/marco_nav.php
 core/documentador.php
@@ -60,7 +61,7 @@ ADVERTENCIA:  Algunas funciones internas asociadas a la gestión de usuarios del
 * Enhan: Mejorado el almacenamiento de objetos gráficos canvas.  Ahora se hace directamente en formato PNG para ser fácilmente recuperado.
 * Otros: Generada pagina como formulario publico en el sitio web para reemplazo del proyecto (ahora extinto) de SayThanks
 * Added: Informes: Ahora los informes tio grafico que no contengan datos y puedan arrojar un valor visual NaN son reemplazados por un mensaje informativo automatico que indica al usuario que los datos para generar el grafico no están disponibles o no son adecuados.
-
+* Added:  Los informes permiten definir un texto o encabezado enriquecido o en HTML que permite ser agregado en la parte superior del informe tabular o de gráfico.
 
 EN COMUNES CAMBIO LA ACL.    BUSCAR POR COINCIDENCIASS DE PCO_ListarUsuarios
 
@@ -72,6 +73,7 @@ EN COMUNES CAMBIO LA ACL.    BUSCAR POR COINCIDENCIASS DE PCO_ListarUsuarios
 # RECORDAR EN OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
 
+ALTER TABLE core_informe ADD encabezado_html text NULL;
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

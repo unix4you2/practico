@@ -855,6 +855,9 @@
     $MULTILANG_InfBotonPpio='Ubicar en la primera columna';
     $MULTILANG_ExportaDT=' Exportaci&oacute;n del lado del cliente?';
     $MULTILANG_ExportaDTDes='Permite habilitar opciones adicionales en la parte superior derecha del informe para que el usuario pueda exportar sus datos en diferentes formatos.  La exportaci&oacute;n se hace solamente sobre los datos contenidos por la tabla.  Si el usuario realiza alg&uacute;n filtro o b&uacute;squeda din&aacute;mica sobre &eacute;sta los datos a exportar ser&aacute;n los filtrados por el usuario solamente.';
+    $MULTILANG_InfEncabezado='Texto enriquecido para el encabezado';
+    $MULTILANG_InfEncabezadoDes='Aqui puede agregar cualquier texto enriquecido, imagen, enlaces y demás elementos que serán agregados como encabezado en la parte superior del informe tabular o de gráfico';
+    $MULTILANG_InfSinDatos='No hay datos para el gr&aacute;fico';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';

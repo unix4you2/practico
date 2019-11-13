@@ -858,6 +858,9 @@
     $MULTILANG_InfBotonPpio='Put in the first column';
     $MULTILANG_ExportaDT=' client side export tools?';
     $MULTILANG_ExportaDTDes='Allow to enable some options to this report to export its data in different formats.  The process will take only the data filtered by the user in the data table.';
+    $MULTILANG_InfEncabezado='Rich text for the header';
+    $MULTILANG_InfEncabezadoDes='In this field you can enter any rich text, links, images or another elements that will be used in the top of the report as a header or title';
+    $MULTILANG_InfSinDatos='There is no data for this graph';
 
 
 	//Menus
