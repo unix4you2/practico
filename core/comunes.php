@@ -8188,6 +8188,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 		global $IdiomaPredeterminado;
         global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF;
         global $ModoDepuracion,$ModoDesarrolladorPractico;
+        global $PCO_InformesGraficosSinDatos;
         
         //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
         $BotonSaltoEdicion='
@@ -8656,7 +8657,10 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                                             }
                                     }
                                 $cadena_datos = substr($cadena_datos, 0, -1);
-                                echo $cadena_datos;
+                                if ($cadena_datos!="")
+                                    echo $cadena_datos;
+                                if ($cadena_datos=="")
+                                    $PCO_InformesGraficosSinDatos.='marco-informe-grafico-ID'.$registro_informe["id"].'|'; //Si no tiene datos lo lleva al arreglo para cambiar luego su valor html y evitar el NaN
                             ?>
                             ],
                             xkey: ['etiqueta_ejex'],

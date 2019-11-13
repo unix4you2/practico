@@ -380,6 +380,17 @@
             });
         });
 
+        //Busca por posibles graficos sin datos
+        $(document).ready(function() {
+            <?php
+                //Desglosa la cadena de posibles graficos sin datos
+                $PCO_MarcosGraficosSinDatos=@explode("|",$PCO_InformesGraficosSinDatos);
+                for ($i=0; $i<count($PCO_MarcosGraficosSinDatos);$i++)
+                    if (trim($PCO_MarcosGraficosSinDatos[$i])!="")
+                        echo '$("#'.$PCO_MarcosGraficosSinDatos[$i].'").html("<div align=center style=\'color:lightgray; text-shadow: 1px 1px 2px gray;\'><i class=\'fa fa-bar-chart-o fa-fw fa-3x\'></i> &nbsp; <i class=\'fa fa-pie-chart fa-fw fa-3x\'></i><br><i>Sin datos para el gr&aacute;fico <br> There is no data for this graph</i></div>");';
+            ?>
+        });
+
 		//Si hay tablas con propiedad de editables espera por eventos sobre sus campos
 		$(function(){
 			$("td[contenteditable=true]").blur(function(){
@@ -400,32 +411,6 @@
 		});
 
     </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     <?php
