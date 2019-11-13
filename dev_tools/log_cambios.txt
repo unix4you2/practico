@@ -63,7 +63,7 @@ ADVERTENCIA:  Algunas funciones internas asociadas a la gestión de usuarios del
 * Added: Informes: Ahora los informes tio grafico que no contengan datos y puedan arrojar un valor visual NaN son reemplazados por un mensaje informativo automatico que indica al usuario que los datos para generar el grafico no están disponibles o no son adecuados.
 * Added:  Los informes permiten definir un texto o encabezado enriquecido o en HTML que permite ser agregado en la parte superior del informe tabular o de gráfico.
 * Added: Ahora la funcion de generacion de informes permite su llamado con simplemente una sentencia SQL generando la tabla correspondiente de registros.  Ejemplo de llamado:  PCO_CargarInforme(0,0,"","",0,0,0,0,"SELECT * FROM MiTabla LIMIT 0,10");  Tener en cuenta que esto es sólo un llamado a la tabla que puede ser realizado directamente por código, su formateo y presentación dependen del programador.
-
+* Enhan: Por defecto el chequeo dinámico de sintaxis se encuentra desactivado para efectos de compatibilidad y velocidad.  Quienes deseen activarlo pueden agregar a su archivo de configucación la variable $ PCO_ChequeoDinamicoSintaxis=1
 
 
 EN COMUNES CAMBIO LA ACL.    BUSCAR POR COINCIDENCIASS DE PCO_ListarUsuarios

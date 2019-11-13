@@ -1811,14 +1811,17 @@ function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
 			}
 		else
 			{
-				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles;
+				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$PCO_ChequeoDinamicoSintaxis;
 				$SalidaFuncion=0;
-				@exec('php -l '.escapeshellarg($ArchivoFuente), $Salida, $Codigo);
-				if ($Codigo)  //Si se tiene un valor diferente de cero retornado por el comando
-					{
-						PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion,"<b>".$MULTILANG_Detalles."</b>: Se deberia evitar la inclusion del archivo $ArchivoFuente pues PHP retorna el mensaje: <i>".$Salida[0].$Salida[1].$Salida[2]."<i>.  Se recomienda validar su sintaxis para que pueda ser incluido sin problemas.", '', 'fa fa-exclamation-triangle fa-3x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
-						$SalidaFuncion=1;
-					}
+				if ($PCO_ChequeoDinamicoSintaxis=="1")
+				    {
+        				@exec('php -l '.escapeshellarg($ArchivoFuente), $Salida, $Codigo);
+        				if ($Codigo)  //Si se tiene un valor diferente de cero retornado por el comando
+        					{
+        						PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion,"<b>".$MULTILANG_Detalles."</b>: Se deberia evitar la inclusion del archivo $ArchivoFuente pues PHP retorna el mensaje: <i>".$Salida[0].$Salida[1].$Salida[2]."<i>.  Se recomienda validar su sintaxis para que pueda ser incluido sin problemas.", '', 'fa fa-exclamation-triangle fa-3x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
+        						$SalidaFuncion=1;
+        					}
+				    }
 				return $SalidaFuncion;
 			}
     }
