@@ -8197,13 +8197,17 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                     <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=PCO_EditarInforme&informe='.$informe.'">
                         <div><i class="fa fa-pencil-square"></i> '.$MULTILANG_Editar.' '.$MULTILANG_Informes.' <i>[ID='.$informe.']</i></div>
                     </a>';
-		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $informe>=0)
-		    $ComplementoIdObjetoEnTitulo="  $BotonSaltoEdicion";
 
-		// Busca datos del informe
-		$consulta_informe=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
-		$registro_informe=$consulta_informe->fetch();
-		$Identificador_informe=$registro_informe["id"];
+        if ($SQLPuro=="")
+            {
+        		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $informe>=0)
+        		    $ComplementoIdObjetoEnTitulo="  $BotonSaltoEdicion";
+
+        		// Busca datos del informe
+        		$consulta_informe=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
+        		$registro_informe=$consulta_informe->fetch();
+        		$Identificador_informe=$registro_informe["id"];
+            }
 
         //Determina si se deben ocultar elementos por banderas o porque el informe asi lo obliga
         $ComplementoAnulacionPiePagina='';
@@ -8212,15 +8216,17 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         if ($anular_encabezado==1 || $registro_informe["ocultar_encabezado"]==1) $ComplementoAnulacionEncabezado=' style="display:none; visibility:hidden;" ';
         if ($anular_acciones==0 && $registro_informe["anular_acciones"]==1) $anular_acciones=1;
 
-        //Si el informe usa una conexion externa busca su configuracion
-        if($registro_informe["conexion_origen_datos"]!="")
+        if ($SQLPuro=="")
             {
-		        $registro_conexiones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE nombre='".$registro_informe["conexion_origen_datos"]."' ")->fetch();
-            	global ${$registro_conexiones["nombre"]};
+                //Si el informe usa una conexion externa busca su configuracion
+                if($registro_informe["conexion_origen_datos"]!="")
+                    {
+        		        $registro_conexiones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE nombre='".$registro_informe["conexion_origen_datos"]."' ")->fetch();
+                    	global ${$registro_conexiones["nombre"]};
+                    }
+        		//Si no encuentra informe presenta error
+        		if ($registro_informe["id"]=="") PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
             }
-
-		//Si no encuentra informe presenta error
-		if ($registro_informe["id"]=="") PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
 		//Identifica si el informe requiere un formulario de filtrado previo
 		if ($registro_informe["formulario_filtrado"]!="")
@@ -8255,12 +8261,18 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
 		//Si no hay SQL explicito entonces Genera la consulta en SQL para el informe a partir de los parametros
 		if (strlen($registro_informe["consulta_sql"])<5)
-		    $consulta=PCO_ConstruirConsultaInforme($informe,0); //Construye query del informe sin evitar campos ocultos (0)
+		    {
+		        if ($SQLPuro=="")
+    		        $consulta=PCO_ConstruirConsultaInforme($informe,0); //Construye query del informe sin evitar campos ocultos (0)
+		        else
+		            $consulta=PCO_ReemplazarVariablesPHPEnCadena($SQLPuro);
+		    }
 		else
 		    $consulta=PCO_ReemplazarVariablesPHPEnCadena($registro_informe["consulta_sql"]);
 
+
 		// Si el informe tiene formato_final = T (tabla de datos)
-		if ($registro_informe["formato_final"]=="T")
+		if ($registro_informe["formato_final"]=="T" || $SQLPuro!="")
 			{
 				$SalidaFinalInforme='';
 				if ($en_ventana)

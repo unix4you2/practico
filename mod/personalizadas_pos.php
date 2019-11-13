@@ -38,7 +38,6 @@
             Please consider to build a new module before to deploy rutines in this file
             */
 
-
 if ($PCO_Accion=="Mi_AccionPoscarga_XYZ") 
 	{
 
