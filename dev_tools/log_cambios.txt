@@ -24,13 +24,10 @@ core/informes.php
 core/marco_forms.php
 core/marco_nav.php
 core/marco_abajo.php
-core/marco_arriba_bs.php
 core/usuarios.php
 mod/pcoder/index.php
 mod/pcoder/js/pcoder.min.js
-inc/bootstrap/css/plugins/*
-inc/bootstrap/js/plugins/*
-
+mod/pmydb/*
 
 xml/*
 inc/practico/idiomas/*
@@ -70,7 +67,7 @@ ADVERTENCIA:  Algunas funciones internas asociadas a la gestión de usuarios del
 * Enhan: Por defecto el chequeo dinámico de sintaxis se encuentra desactivado para efectos de compatibilidad y velocidad.  Quienes deseen activarlo pueden agregar a su archivo de configucación la variable $ PCO_ChequeoDinamicoSintaxis=1
 * Added: El diseñador de formularios permite establecer estilos de ventna diferentes para cada uno
 * Added: Los informes soportan ahora su maquetación y despliegue con tablas 100% responsive.  Cuando las columnas no quepan dentro de la pantalla o dispositivo éstas serán reducidas de manera automática y aquellas ocultas (incluyendo posibles botones) podrán ser desplegadas por el usuario a voluntad.
-
+* Enhan: Actualizada la versión de PMyDB a 19.8 permitiendo mejoras visuales en maquetación y realstado de código SQL
 
 
 EN COMUNES CAMBIO LA ACL.    BUSCAR POR COINCIDENCIASS DE PCO_ListarUsuarios
