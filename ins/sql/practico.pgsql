@@ -326,6 +326,7 @@ CREATE TABLE core_informe (
   ocultar_piepagina integer DEFAULT '0',
   anular_acciones integer DEFAULT '0',
   encabezado_html text,
+  tabla_responsive char(1) DEFAULT 'N',
   PRIMARY KEY  (id)
 );
 

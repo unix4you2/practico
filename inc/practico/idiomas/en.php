@@ -860,6 +860,8 @@
     $MULTILANG_InfEncabezado='Rich text for the header';
     $MULTILANG_InfEncabezadoDes='In this field you can enter any rich text, links, images or another elements that will be used in the top of the report as a header or title';
     $MULTILANG_InfSinDatos='There is no data for this graph';
+    $MULTILANG_InfTablaResponsive='Use a responsive layout';
+    $MULTILANG_InfTablaResponsiveDes='Allow to draw a table in a 100% responsive format hidding the columns that overflow the content and converting them to a new child row.  Important: This mode disable any footer section for the table.';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edit menu item';

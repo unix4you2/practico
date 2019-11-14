@@ -1294,9 +1294,10 @@ function PCO_ImportarXMLInforme($xml_importado)
 				$ocultar_piepagina=base64_decode($xml_importado->core_informe[0]->ocultar_piepagina);
 				$anular_acciones=base64_decode($xml_importado->core_informe[0]->anular_acciones);
 				$encabezado_html=base64_decode($xml_importado->core_informe[0]->encabezado_html);
+				$tabla_responsive=base64_decode($xml_importado->core_informe[0]->tabla_responsive);
 
 				// Inserta el nuevo informe
-				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html");
+				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive");
 
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
@@ -1477,9 +1478,10 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							$ocultar_piepagina=$registro["ocultar_piepagina"];
 							$anular_acciones=$registro["anular_acciones"];
 							$encabezado_html=$registro["encabezado_html"];
+							$tabla_responsive=$registro["tabla_responsive"];
 
 							// Inserta el nuevo informe
-							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html");
+							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive");
 
 							$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
@@ -8331,8 +8333,13 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                     if ( $registro_informe["encabezado_html"] != '' )
                         $SalidaFinalInforme.= '<div id="titulo-informe-ID'.$registro_informe["id"].'">'.$registro_informe["encabezado_html"].'</div>';
 
+                    //Agrega clases para convertir la tabla a responsive si aplica
+                    $ComplementoResponsiveTabla='';
+                    if ( $registro_informe["tabla_responsive"] == 'S' )
+                        $ComplementoResponsiveTabla= 'responsive nowrap';
+
 					$SalidaFinalInforme.= '<!--<div class="table-responsive">-->
-											<table width="100%" class="btn-xs table table-condensed table-hover table-striped table-unbordered '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead id="PCO_EncabezadosInforme_'.$registro_informe["id"].'" '.$ComplementoAnulacionEncabezado.'>';
+											<table width="100%" class="btn-xs table table-condensed table-hover table-striped table-unbordered  '.$ComplementoResponsiveTabla.'  '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead id="PCO_EncabezadosInforme_'.$registro_informe["id"].'" '.$ComplementoAnulacionEncabezado.'>';
 
                     //if ($registro_informe["personalizacion_encabezados"]!="")
 					$SalidaFinalInforme.= '
@@ -8457,17 +8464,24 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 							$numero_filas++;
 						}
 
-					$SalidaFinalInforme.= '</tbody><tfoot id="PCO_PiePaginaInforme_'.$registro_informe["id"].'" '.$ComplementoAnulacionPiePagina.'>';
+					$SalidaFinalInforme.= '</tbody>';
+					
+					//Si se desea tabla responsive oculta el pie de pagina (libreria datatables no soporta responsive con tfooter)
+			        if ( $registro_informe["tabla_responsive"] == 'N' )
+			            {
+        					$SalidaFinalInforme.= '<tfoot id="PCO_PiePaginaInforme_'.$registro_informe["id"].'" '.$ComplementoAnulacionPiePagina.'>';
+        					//Cuando es embebido (=1) no agrega los totales de registro
+        					//if (!$embebido)
+        					@$SalidaFinalInforme.= '
+        						<tr><td colspan='.$numero_columnas.'>
+        							<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
+        						</td></tr>';
 
-					//Cuando es embebido (=1) no agrega los totales de registro
-					//if (!$embebido)
-					@$SalidaFinalInforme.= '
-						<tr><td colspan='.$numero_columnas.'>
-							<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
-						</td></tr>';
-
-					//Cierra pie de pagina, tabla y marco responsive para la tabla
-					$SalidaFinalInforme.= '</tfoot>
+        					//Cierra pie de pagina, tabla y marco responsive para la tabla
+        					$SalidaFinalInforme.= '</tfoot>';
+			            }
+					
+					$SalidaFinalInforme.= '
 							</table>
 							<!--</div>-->';
 				// DEPRECATED $SalidaFinalInforme.= '</body></html>';

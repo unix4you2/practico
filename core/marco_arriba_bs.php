@@ -93,12 +93,8 @@
     <link href="inc/bootstrap/css/plugins/simple-sidebar.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/toggle/bootstrap-toggle.css" rel="stylesheet">
 
-<!--
-    <link href="inc/bootstrap/css/plugins/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="inc/bootstrap/css/plugins/buttons.bootstrap.min.css" rel="stylesheet">
-
-
--->
+    <!-- CSS Plugins DataTables -->
+    <link href="inc/bootstrap/css/plugins/responsive.dataTables.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/buttons.dataTables.min.css" rel="stylesheet">
 
     <!-- Estilos especificos para botones de exportacion de informes y paginador -->
@@ -134,35 +130,6 @@
             color:red !important;
             }
     </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <link href="inc/summernote/summernote.css" rel="stylesheet">
     <!-- CSS Personalizado (Plantilla y Practico) -->

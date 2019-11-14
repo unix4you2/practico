@@ -154,35 +154,15 @@
             include_once("core/marco_admin_morris.php");
     ?>
 
-
-
-
-
-
     <!-- DataTables JavaScript -->
     <script src="inc/bootstrap/js/plugins/dataTables/jquery.dataTables.min.js"></script>
     <script src="inc/bootstrap/js/plugins/dataTables/dataTables.buttons.min.js"></script><!--N-->
-    <!-- <script src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.flash.min.js"></script>--> <!--N-->
     <script src="inc/bootstrap/js/plugins/dataTables/buttons.html5.min.js"></script><!--N-->
-
-
-<!--
-    <script src="http://cdn.datatables.net/buttons/1.2.1/js/buttons.print.min.js"></script>--><!--N-->
-
-
-
 
     <script src="inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.min.js"></script>
 
-<!--
-    <script src="inc/bootstrap/js/plugins/dataTables/buttons.bootstrap.min.js"></script>
--->
-
-
-
-
-
-
+    <!-- DataTables Responsive -->
+    <script src="inc/bootstrap/js/plugins/dataTables/dataTables.responsive.min.js"></script><!--N-->
 
 	<!-- Canvas -->
     <script type="text/javascript" src="inc/jquery/plugins/sketch.js"></script>
@@ -309,7 +289,7 @@
                                     ],
 
                                     "pageLength": '.$Paginacion.',
-
+                                    //"responsive": true, //Opcional, no necesario activarlo si la tabla ya tiene la clase nowrap y responsive
                                     "scrollX": true,
                                     "bAutoWidth": true,
                                     //"bSort": false,
