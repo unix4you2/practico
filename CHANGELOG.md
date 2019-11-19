@@ -8,6 +8,37 @@
 ```
 
 
+## Versión 19.8 (2019-11-21)
+* Fixed [CORE]: Scripts de despliegue para tablas de PCoder sobre PostgreSQL y SQLite
+* Fixed [MENUS]: Durante la asignación de permisos a usuarios solamente son desplegadas las opciones de menu externas. Aquellas asociadas a formularios son ocultadas pues son controladas por el acceso al formulario que las contiene.
+* Enahn [PCODER]: Mejorada presentación de estadísticas sobre PCoder en informes y maquetación
+* Enahn [INFORMES]: Cambiado el modo SQL por defecto para conexiones MariaDB y MySQL evitando el STRICT_TRANS_TABLES para aquellos que tengan problemas de compatibilidad.  Si usted desea mantener activado el STRICT_TRANS_TABLES en su motor posterior a esta actualizacion puede comentar la linea relacionada sobre core/conexiones.php
+* Enahn [CORE]: Muchas de las funciones internas de gestión de usuarios han sido reemplazadas por objetos propios del framework ahorrando varios cientos de líneas de código.
+* Enhan [INFORMES]: El ocultamiento de encabezados o pies de pagina en informes también ahorra el espacio asociado a éstos en la maquetación.
+* Added [INFORMES]: Los encabezados y pies de pagina de los informes tabulares pueden ser ahora manipulados en el DOM mediante los ID HTML PCO_EncabezadosInforme_XXX y PCO_PiePaginaInforme_XXX reemplazando XXX por el ID de informe correspondiente.
+* Added [CORE]: Agregada una nueva variable de control de flujo llamada PCO_PostAccionDirecta.  Combinada con las variables de la familia PCO_PostAccion permite definir en las operaciones automaticas de Almacenamiento, Actualización y eliminación de registros que no se haga la redirección y carga de la PostAccion en un nuevo flujo sino que se continúe en el mismo flujo actual.  Esto permite procesar variables ilimitadas preguntando en cualquier módulo personalizado por éstas en la entrada asociada a la PCO_PostAccion (En lugar de PCO_Accion).
+* Added [GENERAL]: Texto aclaratorio en el asistente de actualizaciones recuerda al usuario que para instalaciones o servidores restringidos para carga de archivos grandes puede lanzar el proceso manualmente mediante URL y ciertos parámetros.
+* Enhan [INFORMES]: En los informes exportables a excel directamente por datatables se elimina la primera fila correspondiente al título para que los datos salgan crudos solamente con sus títulos de columna y sea más fácil su manipulación.
+* Added [GENERAL]: Scripts iniciales para la capa de soporte a las fases de documentación automática del proyecto
+* Enhan [INFORMES]: Aumentada la longitud máxima de caracteres por defecto para los resultados de las funciones group_concat a un total de 15Kb
+* Enhan [FORMS]: Mejorado el almacenamiento de objetos gráficos canvas.  Ahora se hace directamente en formato PNG para ser fácilmente recuperado.
+* Enhan [FORMS]: Los objetos tipo canvas cambian su formato de comprimido a PNG nativos y automáticamente se recortan para eliminar áreas sin utilizar en el objeto.
+* Otros [CORE]: Generada pagina como formulario público en el sitio web para reemplazo del proyecto (ahora extinto) de SayThanks
+* Added [INFORMES]: Ahora los informes tipo gráfico que no contengan datos y puedan arrojar un valor visual NaN son reemplazados por un mensaje informativo automatico que indica al usuario que los datos para generar el grafico no están disponibles o no son adecuados.
+* Added [INFORMES]: Los informes permiten definir un texto o encabezado enriquecido o en HTML que permite ser agregado en la parte superior del informe tabular o de gráfico.
+* Added [INFORMES]: Ahora la función de generación de informes permite su llamado con simplemente una sentencia SQL generando la tabla correspondiente de registros.  Ejemplo de llamado:  PCO_CargarInforme(0,0,"","",0,0,0,0,"SELECT * FROM MiTabla LIMIT 0,10");  Tener en cuenta que esto es sólo un llamado a la tabla que puede ser realizado directamente por código, su formateo y presentación dependen del programador.
+* Enhan [CORE]: Por defecto el chequeo dinámico de sintaxis se encuentra desactivado para efectos de compatibilidad y velocidad.  Quienes deseen activarlo pueden agregar a su archivo de configucación la variable $ PCO_ChequeoDinamicoSintaxis=1
+* Added [FORMS]: El diseñador de formularios permite establecer estilos de ventna diferentes para cada uno de los formularios de la aplicación.
+* Added [INFORMES]: Los informes soportan ahora su maquetación y despliegue con tablas 100% responsive.  Cuando las columnas no quepan dentro de la pantalla o dispositivo éstas serán reducidas de manera automática y aquellas ocultas (incluyendo posibles botones) podrán ser desplegadas por el usuario a voluntad.
+* Enhan [CORE]: Actualizada la versión de PMyDB a 19.8 permitiendo mejoras visuales en maquetación y recuperando el resaltado de código SQL
+* Added [FORMS]: Ahora para elementos tipo canvas se permite agregar en el ancho y el alto el porcentaje final o proporción que debe ser aplicado al dibujo o elemento canvas separado por una barra de canalización. Ej:  300|50  Especifica que se debe crear el objeto con un ancho en pantalla de 300 pixels; pero que al guardarlo se debe redimensionar a un 50% de ancho.  Igual aplica para el alto.  En caso de no encontrarse un segundo valor se asume que la escala es al 100%
+* Enhan [MENUS]: Los menues generados para el sistema central, así como los creados dependientes de formularios cuentan ahora con un hash único que los identifica para que puedan ser fácilmente clonados y transportados entre sistemas sin perder sus vínculos o propiedades.
+* Enhan [GENERAL]: El administrador de archivos es reubicado al menú de configuración de le harremienta, de esa manera se deja el menú izquierdo como exclusivo para opciones de aplicación para los usuarios.
+* Enhan [CORE]: Se confinan los formularios asociados a operaciones de adminitración para que sólo sean generados cuando el usuario activo sea un administrador de plataforma haciendo mas rápido y seguro el cargue de la herramienta por parte de usuarios estándar.
+* Enhan [MENUS]: Se mejora la selección de permisos para usuarios indicando cuando algunos de éstos se encuentren como opciones de segundo nivel de otras ya que antes eran desplegados al mismo nivel y orden de las demás.
+* Enhan [CORE]: Se sustituyen más de 350 líneas de código dentro de los módulos de permisos y usuarios por objetos internos del framework.  
+* Added [FORMS]: En modo de diseño de formularios cuenta en la barra de edición de cada objeto con un botón que permite desplazar de manera general todos los elementos de la columna aumentando el peso en una unidad.  De esta manera se facilita la adición de nuevos elementos cuando los pesos de los elementos ya se encuentran totalmente ocupados.
+
 
 ## Versión 19.7 (2019-09-10)
 
