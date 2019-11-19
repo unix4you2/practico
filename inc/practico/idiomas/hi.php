@@ -473,7 +473,7 @@
 	$MULTILANG_FrmDesTeclado='फॉर्म में सक्षम होने पर जानकारी दर्ज करने के लिए एक आभासी कीबोर्ड प्रदर्शित करता है,. सत्यापन का उल्लंघन हो सकता है अब कीबोर्ड का उपयोग करने के लिए';
 	$MULTILANG_FrmAncho='चौड़ाई';
 	$MULTILANG_FrmTitAncho='कैसे विस्तृत अंतरिक्ष नियंत्रण ले लेना चाहिए';
-	$MULTILANG_FrmDesAncho='महत्वपूर्ण: साधारण पाठ क्षेत्र और पिक्सल अमीर-पाठ क्षेत्रों के लिए अक्षरों में नंबर। स्तंभों की संख्या दर्ज करें, हालांकि, पिक्सल में चौड़ाई वर्तमान विषय द्वारा प्रयुक्त फ़ॉन्ट के प्रकार के अनुसार अलग अलग होंगे कि ध्यान दें। छवि या बार कोड क्षेत्रों के लिए यह मान चित्र के आकार के लिए है.';
+	$MULTILANG_FrmDesAncho='IMPORTANT: in characters number for simple text fields and pixels rich-text fields. Enter a number of columns, however, note that the width in pixels will vary according to the type of font used by the current theme.  For image or bar code fields this value is for the size of the picture.  For canvas objects you can specify the width and the final scale percent using a pipe character. IE: 400|0.3 will create a 400 pixels object but it will save it as 30% of scale.';
 	$MULTILANG_FrmDesAncho2='अमीर-पाठ प्रारूप क्षेत्रों के लिए अनुशंसित न्यूनतम: 350';
 	$MULTILANG_FrmAlto='ऊँचाई (पंक्तियां)';
 	$MULTILANG_FrmTitAlto='नियंत्रण में दिखाई दे कितने पंक्तियों होना चाहिए?';

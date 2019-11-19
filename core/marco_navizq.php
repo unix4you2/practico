@@ -68,22 +68,6 @@
                             <li>
                                 <a href="javascript:document.PCO_MisInformes.submit();"><i class="fa fa-pie-chart fa-fw"></i> <?php echo $MULTILANG_UsrInfDisp; ?></a>
                             </li>
-
-                            <?php
-									$PCO_EnlaceExplorador="javascript:document.fileman_admin_embebido.submit();";
-                        			//Verifica si esta o no en modo DEMO para hacer la operacion
-                        			if ($PCO_ModoDEMO==1)
-									   $PCO_EnlaceExplorador="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";
-                                //Siempre presenta el administrador de archivos al superusuario
-                                if($PCOSESS_SesionAbierta && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="")
-                                    {
-                            ?>
-                                        <li>
-                                            <a href="<?php echo $PCO_EnlaceExplorador; ?>"><i class="fa fa fa-cloud-upload fa-fw"></i> <?php echo $MULTILANG_AdminArchivos; ?></a>
-                                        </li>
-                            <?php
-                                    }
-                            ?>
                             
                             <?php
                                 //Busca las posibles opciones del lado izquierdo
@@ -91,9 +75,9 @@
                                 if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
                                     {
                                         $Complemento_tablas=",".$TablasCore."usuario_menu";
-                                        $Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+                                        $Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
                                     }
-                                $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE padre=0 AND posible_izquierda=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
+                                $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_izquierda=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
                                 while($registro = $resultado->fetch())
                                     PCO_ImprimirOpcionMenu($registro,'lateral');
                             ?>
@@ -138,4 +122,3 @@
             echo '$("#boton_menu_izquierdo").hide();';
     ?>
 </script>
-

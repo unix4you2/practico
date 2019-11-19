@@ -473,7 +473,7 @@
 	$MULTILANG_FrmDesTeclado='Lorsqu il est activé sur le formulaire, il affiche un clavier virtuel pour la saisie des informations. Pour l instant, l utilisation du clavier peut violer les validations';
 	$MULTILANG_FrmAncho='Largeur';
 	$MULTILANG_FrmTitAncho='Quelle largeur devrait occuper le contrôle de l espace';
-	$MULTILANG_FrmDesAncho='IMPORTANT: en nombre de caractères pour les champs de texte simples et les champs de texte riche en pixels. Entrez un certain nombre de colonnes, cependant, notez que la largeur en pixels varie en fonction du type de police utilisé par le thème actuel. Pour les champs d image ou de code à barres, cette valeur correspond à la taille de l image.';
+	$MULTILANG_FrmDesAncho='IMPORTANT: in characters number for simple text fields and pixels rich-text fields. Enter a number of columns, however, note that the width in pixels will vary according to the type of font used by the current theme.  For image or bar code fields this value is for the size of the picture.  For canvas objects you can specify the width and the final scale percent using a pipe character. IE: 400|0.3 will create a 400 pixels object but it will save it as 30% of scale.';
 	$MULTILANG_FrmDesAncho2='Minimum recommandé pour les champs de format texte enrichi: 350';
 	$MULTILANG_FrmAlto='Hauteur (lignes)';
 	$MULTILANG_FrmTitAlto='Combien de lignes doivent être visibles dans le contrôle?';

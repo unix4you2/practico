@@ -54,16 +54,25 @@ if ($PCO_Accion=="PCO_EliminarMenu")
 			Ver tambien:
 			<PCOFUNC_AdministrarMenu> | <detalles_menu>
 		*/
+		
+		//Obtiene el hash de la opcion
+		$RegistroMenu=PCO_EjecutarSQL("SELECT hash_unico,texto FROM ".$TablasCore."menu WHERE id=? ","$id")->fetch();
+		
+		//Si hay un formulario activo lo agrega a la condicion de eliminado para evitar borrar otros que tienen mismo hash de otro formulario
+		$CondicionFormulario='';
+		if ($PCO_FormularioActivoEdicionMenu!="") $CondicionFormulario=" AND formulario_vinculado='$PCO_FormularioActivoEdicionMenu' ";
+		
+		
 		// Elimina los datos de la opcion
-		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE id=? ","$id");
+		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE id=? $CondicionFormulario ","$id");
 
 		// Elimina opciones hijas
-		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE padre=? ","$id");
+		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE padre='".$RegistroMenu["hash_unico"]."' $CondicionFormulario ","$id");
 		
 		// Elimina el enlace para todos los usuarios que utilizan esa opcion
-		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? ","$id");
+		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? ",$RegistroMenu["hash_unico"]);
 
-		PCO_Auditar("Elimina en menu $id");
+		PCO_Auditar("Elimina menu $id ".$RegistroMenu["texto"]);
         //Redirecciona nuevamente a la edicion del menu
 		echo '<script type="" language="JavaScript">
 		    document.PCOFUNC_AdministrarMenu.PCO_FormularioActivoEdicionMenu.value='.$PCO_FormularioActivoEdicionMenu.';
@@ -86,10 +95,10 @@ if ($PCO_Accion=="PCO_EliminarMenu")
 	Ver tambien:
 	<PCOFUNC_AdministrarMenu>
 */
-function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
+function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0,$CondicionFormulario='')
     {
         global $PCO_FormularioActivoEdicionMenu,$TablasCore,$ListaCamposSinID_menu,$MULTILANG_MnuAdvElimina,$MULTILANG_Editar,$MULTILANG_Eliminar,$ArchivoCORE;
-		$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE 1=1 AND $CondicionFiltrado ORDER BY seccion,peso");
+		$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE 1=1 AND $CondicionFiltrado $CondicionFormulario ORDER BY seccion,peso");
 		while($registro = $resultado->fetch())
 			{
 				echo '<tr>';
@@ -143,7 +152,7 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0)
 					</tr>';
 				//Si la opcion es una agrupadora busca sus opciones hijas
 				if ($registro["tipo_menu"]=='grp')
-				    PCO_PresentarOpcionesArbolMenu('padre='.$registro["id"],40);
+				    PCO_PresentarOpcionesArbolMenu('padre="'.$registro["hash_unico"].'"',40,$CondicionFormulario);
 			}
     }
 
@@ -211,8 +220,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 			</tr>
             </thead>
             <tbody>';
-        
-                PCO_PresentarOpcionesArbolMenu('padre=0 AND formulario_vinculado='.$PCO_FormularioActivoEdicionMenu,0);
+                PCO_PresentarOpcionesArbolMenu(' (padre="0" OR padre="") ',0,' AND formulario_vinculado='.$PCO_FormularioActivoEdicionMenu);
 		echo '</tbody>
         </table>';
 		 PCO_CerrarVentana();
@@ -426,9 +434,9 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
-					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE padre=0 AND posible_escritorio=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
+			$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_escritorio=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
 
 			// Imprime las opciones con sus formularios
 			while($registro = $resultado->fetch())
@@ -441,9 +449,9 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{
 					$Complemento_tablas=",".$TablasCore."usuario_menu";
-					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			$ResultadoConteoSecciones=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE padre=0 AND posible_centro=1 AND formulario_vinculado=0 ".@$Complemento_condicion." GROUP BY seccion ORDER BY seccion");
+			$ResultadoConteoSecciones=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_centro=1 AND formulario_vinculado=0 ".@$Complemento_condicion." GROUP BY seccion ORDER BY seccion");
 			// Imprime las secciones encontradas para el usuario
 			while($RegistroConteoSecciones = $ResultadoConteoSecciones->fetch())
 				{
@@ -457,9 +465,9 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 					if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 						{
 							$Complemento_tablas=",".$TablasCore."usuario_menu";
-							$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+							$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 						}
-					$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE padre=0 AND posible_centro=1 AND formulario_vinculado=0 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso");
+					$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_centro=1 AND formulario_vinculado=0 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso");
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						PCO_ImprimirOpcionMenu($registro_opciones_acordeon,'centro');

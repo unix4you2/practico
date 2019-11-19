@@ -182,13 +182,26 @@
 						<li>
 							<a data-toggle="modal" href="javascript:document.actualizarad.submit();">
 								<div>
-									<form name="actualizarad" action="<?php echo $ArchivoCORE; ?>" method="POST">
-										<input type="Hidden" name="PCO_Accion" value="actualizar_practico">
-									</form>
 									<i class="fa fa-download fa-fw"></i> <?php echo $MULTILANG_Actualizacion; ?>/<?php echo $MULTILANG_Copias; ?>
 								</div>
 							</a>
 						</li>
+                        <?php
+								$PCO_EnlaceExplorador="javascript:document.fileman_admin_embebido.submit();";
+                    			//Verifica si esta o no en modo DEMO para hacer la operacion
+                    			if ($PCO_ModoDEMO==1)
+								   $PCO_EnlaceExplorador="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";
+                            //Siempre presenta el administrador de archivos al superusuario
+                            if($PCOSESS_SesionAbierta && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="")
+                                {
+                        ?>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="<?php echo $PCO_EnlaceExplorador; ?>"><i class="fa fa fa-cloud-upload fa-fw"></i> <?php echo $MULTILANG_AdminArchivos; ?></a>
+                                    </li>
+                        <?php
+                                }
+                        ?>
 						<li class="divider"></li>
 						<li>
 							<a data-toggle="modal" href="https://www.practico.org/agradecimientos" target="_blank">

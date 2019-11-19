@@ -23,13 +23,14 @@ $SaltoLinea=PHP_EOL;
 $Tabulacion="\t";
 $HabilitarDepuracion=FALSE; //Habilita o deshabilita la depuracion haciendo un eco del analisis
 
-include_once '../../core/configuracion.php';
+$PrefijoInclusion='../../core/';
+include_once 'configuracion.php';
 // Inicia las conexiones con la BD y las deja listas para las operaciones
-include_once '../../core/conexiones.php';
+include_once 'conexiones.php';
 // Incluye definiciones comunes de la base de datos
-include_once '../../inc/practico/def_basedatos.php';
+include_once '../inc/practico/def_basedatos.php';
 // Incluye archivo con algunas funciones comunes usadas por la herramienta
-include_once '../../core/comunes.php';
+include_once 'comunes.php';
 
 
 ########################################################################
@@ -245,9 +246,6 @@ function DetectarFormatoEspecial($CadenaBusqueda)
         if ($EstadoBusqueda===FALSE && strstr($CadenaBusqueda, '__')!==FALSE) $EstadoBusqueda=TRUE; //__Subrayado__
         if ($EstadoBusqueda===FALSE && strstr($CadenaBusqueda, '**')!==FALSE) $EstadoBusqueda=TRUE; //**Resaltado**
         if ($EstadoBusqueda===FALSE && strstr($CadenaBusqueda, '°°')!==FALSE) $EstadoBusqueda=TRUE; //ºº Viñeta
-        if ($EstadoBusqueda===FALSE && strstr($CadenaBusqueda, '>>')!==FALSE) $EstadoBusqueda=TRUE; //>>Codigo<<
-        if ($EstadoBusqueda===FALSE && strstr($CadenaBusqueda, '(start code)')!==FALSE) $EstadoBusqueda=TRUE; //Alias de $$Codigo$$
-        if ($EstadoBusqueda===FALSE && strstr($CadenaBusqueda, '(end)')!==FALSE) $EstadoBusqueda=TRUE; //Alias de $$Codigo$$
         if ($EstadoBusqueda===FALSE && strstr($CadenaBusqueda, '!!')!==FALSE) $EstadoBusqueda=TRUE; //!!Imagen-AnchoxAlto!!
         if ($EstadoBusqueda===FALSE && strstr($CadenaBusqueda, '%%')!==FALSE) $EstadoBusqueda=TRUE; //%%Clase%%
         if ($EstadoBusqueda===FALSE && strstr($CadenaBusqueda, '@@')!==FALSE) $EstadoBusqueda=TRUE; //@@Enlace-URL@@
@@ -394,14 +392,13 @@ function FormatearCadenaEnHTML($CadenaBase)
     __Subrayado__           Reemplazados como <u> </u> sobre el mismo parrafo o linea hasta el siguiente salto de linea
     **Resaltado**           Reemplazados como <b> </b> sobre el mismo parrafo o linea hasta el siguiente salto de linea
     ººViñeta                Reemplazados como <li> sobre el mismo parrafo o linea hasta el siguiente salto de linea
-    (start code) y (end)    Formato de codigo de una o multiples lineas
-    >>Codigo<<              Alias de (start code)Codigo(end)
+    (start code) y (end)    Formato de codigo de una o multiples lineas.  Puede manejar un alias mediante >>Codigo<<
     !!Imagen-AnchoxAlto!!   Path hacia imagen que se desea agregar. Puede incluir dimensiones
     %%Clase%%               Reemplazado por un item con la clase indicada: <i class="Clase"></i>
     @@Enlace-URL@@          Reemplazado por enlaces hacia la URL indicada
     
     Nota: El guion es utilizado como separador en muchas de las propiedades, si su codigo posee
-    ===== caracteres de guión inmersos en los comentarios con otro significado podrían malintepretarse 
+          caracteres de guión inmersos en los comentarios con otro significado podrían malintepretarse 
 */
 function PCO_ParsearBloquesDocumentacion($ArregloComentarios)
     {
@@ -436,6 +433,7 @@ function PCO_ParsearBloquesDocumentacion($ArregloComentarios)
                                 //Agrega al arreglo de comentarios parseados el elemento de seccion
                                 $ArregloParseado[] = ["tipo_elemento" => "seccion", "nombre_seccion" => $SeccionActiva, "nombre_funcion" => "", "nombre_menu" => "", "hash_md5" => md5("SECCION".$SeccionActiva), "descripcion" => FormatearCadenaEnHTML($SeccionActivaDes), "lista_parametros" => FormatearCadenaEnHTML(""), "descripcion_salida" => FormatearCadenaEnHTML(""), "ver_tambien" => "" ];
                                 continue; //Pasa al siguiente elemento del arreglo
+
                             }
                         
                         //Busca posibles menues
@@ -449,6 +447,11 @@ function PCO_ParsearBloquesDocumentacion($ArregloComentarios)
                                 $ArregloParseado[] = ["tipo_elemento" => "menu", "nombre_seccion" => $SeccionActiva, "nombre_funcion" => "", "nombre_menu" => $NombreMenu, "hash_md5" => md5("MENU".$SeccionActiva.$NombreMenu), "descripcion" => $EnlaceMenu, "lista_parametros" => FormatearCadenaEnHTML(""), "descripcion_salida" => FormatearCadenaEnHTML(""), "ver_tambien" => "" ];
                                 continue; //Pasa al siguiente elemento del arreglo
                             }
+
+
+                        //Agregar registro de documentacion a BD
+                        PCO_EjecutarSQLUnaria("INSERT INTO core_devdoc (hash,tipo,seccion,funcion,origen,detalle_origen,documentacion) VALUES ('$hash','$tipo','$SeccionActiva','$FuncionActiva','$origen','$detalle_origen','$documentacion') ");
+
                     }
 
                 //la seccion se puede repetir por registro.  la funcion ES EL REGISTRO mismo con:
@@ -461,8 +464,7 @@ function PCO_ParsearBloquesDocumentacion($ArregloComentarios)
                 //Generar enlaces unicos
                 //2.Definir cambios de secciones o funciones activas
                 //3.Formatear cadenas de descripcion
-                //4.Agregar registro de BD
-
+                
                 
                 ###############################  DEPURACION  #############################
                 if ($HabilitarDepuracion)  echo "<hr>".$Comentario["comentario"]."<br><b>Tipo:</b>".$Comentario["tipo_origen"]."<br><b>Origen:</b>".$Comentario["detalle_origen"];
@@ -475,5 +477,12 @@ function PCO_ParsearBloquesDocumentacion($ArregloComentarios)
 if ($HabilitarDepuracion)
     $CodigoEntrada=file_get_contents( "../dev_tools/tests/t_documentador.php" );
 
+//Limpia cualquier documentacion previa antes de regenerar
+$Resultado=PCO_EjecutarSQLUnaria("DELETE FROM core_devdoc WHERE 1=1");
+
 $ArregloComentariosIdentificados=PCO_ObtenerBloquesDocumentacion($CodigoEntrada,"Arch","../dev_tools/tests/t_documentador.php");
 $ComentariosParseados=PCO_ParsearBloquesDocumentacion($ArregloComentariosIdentificados);
+
+
+
+print_r($ComentariosParseados);

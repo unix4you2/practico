@@ -473,7 +473,7 @@
 	$MULTILANG_FrmDesTeclado='Quando habilitado no formul&aacute;rio exibe um teclado virtual para inserir informações,. Por enquanto o uso do teclado pode violar validações';
 	$MULTILANG_FrmAncho='Largura';
 	$MULTILANG_FrmTitAncho='Qual a largura deve ocupar controle do espaço';
-	$MULTILANG_FrmDesAncho='IMPORTANTE: em caracteres n&uacute;mero de campos de texto simples e pixels campos rich-text. Introduzir um n&uacute;mero de colunas, no entanto, notar que a largura em pixels ir&aacute; variar de acordo com o tipo de fonte utilizada pelo tema atual. Para os campos de imagem de c&oacute;digo de barras ou esse valor &eacute; que o tamanho da imagem.';
+	$MULTILANG_FrmDesAncho='IMPORTANT: in characters number for simple text fields and pixels rich-text fields. Enter a number of columns, however, note that the width in pixels will vary according to the type of font used by the current theme.  For image or bar code fields this value is for the size of the picture.  For canvas objects you can specify the width and the final scale percent using a pipe character. IE: 400|0.3 will create a 400 pixels object but it will save it as 30% of scale.';
 	$MULTILANG_FrmDesAncho2='M&iacute;nimo recomendado para campos de formato rich-text: 350';
 	$MULTILANG_FrmAlto='Altura (linhas)';
 	$MULTILANG_FrmTitAlto='Quantas linhas deve ser vis&iacute;vel no controle?';

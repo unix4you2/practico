@@ -173,9 +173,9 @@
 						if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 							{
 								$Complemento_tablas=",".$TablasCore."usuario_menu";
-								$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+								$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 							}
-						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE padre=0 AND posible_arriba=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
+						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_arriba=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
 
 						while($registro = $resultado->fetch())
 							PCO_ImprimirOpcionMenu($registro,'arriba');

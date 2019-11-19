@@ -59,7 +59,7 @@ DROP TABLE IF EXISTS core_menu;
 CREATE TABLE core_menu (
   id serial,
   texto varchar(250) default '',
-  padre integer default '0',
+  padre varchar(15) default '0',
   peso integer default '0',
   url text,
   destino varchar(250) default '',
@@ -76,6 +76,7 @@ CREATE TABLE core_menu (
   tipo_menu varchar(10) default 'opc',
   formulario_vinculado integer default '0',
   clase_contenedor varchar(250) default '',
+  hash_unico varchar(15) default '',
   PRIMARY KEY  (id)
 );
 
@@ -83,7 +84,7 @@ DROP TABLE IF EXISTS core_usuario_menu;
 CREATE TABLE core_usuario_menu (
   id serial,
   usuario varchar(250) NOT NULL default '',
-  menu integer NOT NULL default '0',
+  menu varchar(15) NOT NULL default '0',
   PRIMARY KEY  (id)
 );
 
@@ -124,8 +125,8 @@ CREATE TABLE core_formulario_objeto (
   ajax_busqueda integer default '1',
   valor_unico integer default '0',
   solo_lectura varchar(10) default '',
-  ancho integer default '0',
-  alto integer default '0',
+  ancho varchar(10) default '0',
+  alto varchar(10) default '0',
   barra_herramientas integer,
   fila_unica integer,
   lista_opciones text,

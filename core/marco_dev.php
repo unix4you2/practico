@@ -100,7 +100,7 @@
                         <td>
                             <form action="" method="post">
                                 <input type="hidden" name="PCO_Accion" value="PCO_ListarUsuarios">
-                                <button type="submit" class="btn btn-warning"><i class="fa fa-user fa-fw fa-4x"></i></button>
+                                <button type="button" class="btn btn-warning" onclick="document.PCO_ListarUsuarios.submit();" ><i class="fa fa-user fa-fw fa-4x"></i></button>
                             </form>
                         </td>
                     </tr>

@@ -21,9 +21,13 @@ core/conexiones.php
 core/documentador.php
 core/formularios.php
 core/informes.php
+core/marco_dev.php
 core/marco_forms.php
 core/marco_nav.php
+core/marco_navizq.php
 core/marco_abajo.php
+core/marco_arriba.php
+core/menus.php
 core/usuarios.php
 mod/pcoder/index.php
 mod/pcoder/js/pcoder.min.js
@@ -60,6 +64,7 @@ ADVERTENCIA:  Algunas funciones internas asociadas a la gestión de usuarios del
 * Added: Scripts iniciales para la capa de soporte a las fases de documentación automática del proyecto
 * Enhan:  Aumentada la longitud máxima de caracteres por defecto para los resultados de las funciones group_concat a un total de 15Kb
 * Enhan: Mejorado el almacenamiento de objetos gráficos canvas.  Ahora se hace directamente en formato PNG para ser fácilmente recuperado.
+* Enhan:  Los objetos tipo canvas cambian su formato de comprimido a PNG nativos y automáticamente se recortan para eliminar áreas sin utilizar en el objeto.
 * Otros: Generada pagina como formulario publico en el sitio web para reemplazo del proyecto (ahora extinto) de SayThanks
 * Added: Informes: Ahora los informes tio grafico que no contengan datos y puedan arrojar un valor visual NaN son reemplazados por un mensaje informativo automatico que indica al usuario que los datos para generar el grafico no están disponibles o no son adecuados.
 * Added:  Los informes permiten definir un texto o encabezado enriquecido o en HTML que permite ser agregado en la parte superior del informe tabular o de gráfico.
@@ -68,10 +73,14 @@ ADVERTENCIA:  Algunas funciones internas asociadas a la gestión de usuarios del
 * Added: El diseñador de formularios permite establecer estilos de ventna diferentes para cada uno
 * Added: Los informes soportan ahora su maquetación y despliegue con tablas 100% responsive.  Cuando las columnas no quepan dentro de la pantalla o dispositivo éstas serán reducidas de manera automática y aquellas ocultas (incluyendo posibles botones) podrán ser desplegadas por el usuario a voluntad.
 * Enhan: Actualizada la versión de PMyDB a 19.8 permitiendo mejoras visuales en maquetación y realstado de código SQL
+* Added: Ahora para elementos tipo canvas se permite agregar en el ancho y el alto el porcentaje final o proporción que debe ser aplicado al dibujo o elemento canvas separado por una barra de canalización. Ej:  300|50  Especifica que se debe crear el objeto con un ancho en pantalla de 300 pixels; pero que al guardarlo se debe redimensionar a un 50% de ancho.  Igual aplica para el alto.  En caso de no encontrarse un segundo valor se asume que la escala es al 100%
+* Enhan:  Los menues generados para el sistema central, así como los creados dependientes de formularios cuentan ahora con un hash único que los identifica para que puedan ser fácilmente clonados y transportados entre sistemas sin perder sus vínculos o propiedades.
+* Enhan: El administrador de archivos es reubicado al menú de configuración de le harremienta, de esa manera se deja el menú izquierdo como exclusivo para opciones de aplicación para los usuarios.
+* Enhan: Se confinan los formularios asociados a operaciones de adminitración para que sólo sean generados cuando el usuario activo sea un administrador de plataforma haciendo mas rápido y seguro el cargue de la herramienta por parte de usuarios estándar.
+* Enhan: Se mejora la selección de permisos para usuarios indicando cuando algunos de éstos se encuentren como opciones de segundo nivel de otras ya que antes eran desplegados al mismo nivel y orden de las demás.
+* Enhan: Se sustituyen casi 350 líneas de código dentro de los módulos de permisos y usuarios por objetos internos del framework.  
 
-
-EN COMUNES CAMBIO LA ACL.    BUSCAR POR COINCIDENCIASS DE PCO_ListarUsuarios
-
+Se recomeinda a las aplicaciones que utilizan funciones propias del framework para abstraer y gestionar permisos de usuario propios que hagan una revisión de su funcionalidad asociada.
 
 "
 
@@ -84,6 +93,15 @@ ALTER TABLE core_informe ADD encabezado_html text NULL;
 UPDATE core_formulario SET estilo_ventana='panel-primary';
 ALTER TABLE core_formulario ADD estilo_ventana varchar(50) DEFAULT 'panel-primary';
 ALTER TABLE core_informe ADD tabla_responsive char(1) DEFAULT 'N';
+ALTER TABLE core_formulario_objeto CHANGE ancho ancho varchar(10) NULL DEFAULT '0';
+ALTER TABLE core_formulario_objeto CHANGE alto alto varchar(10) NULL DEFAULT '0';
+
+ALTER TABLE core_menu ADD hash_unico varchar(15);
+UPDATE core_menu SET hash_unico = CRC32(CONCAT(texto,padre,tipo_comando,comando,formulario_vinculado));
+ALTER TABLE core_menu CHANGE padre padre varchar(15) DEFAULT '0';
+UPDATE core_menu AS C INNER JOIN ( SELECT id,hash_unico FROM core_menu AS P ) AS A on C.padre = A.id SET C.padre = A.hash_unico;
+ALTER TABLE core_usuario_menu CHANGE menu menu varchar(15) DEFAULT '0';
+UPDATE core_usuario_menu AS C INNER JOIN ( SELECT id,hash_unico FROM core_menu AS P ) AS A on C.menu = A.id SET C.menu = A.hash_unico;
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
@@ -92,5 +110,9 @@ UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$')
 ########################################################################
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
+hacer trazabilidad a todas las rutinass de menues.  creacion con hash nuevo, eliminacion, modificacion, asignaciona  usuarios, submenues, etc
+Validar exportacion e importacion de forms con menues de segundo nivel
+EN COMUNES CAMBIO LA ACL.    BUSCAR POR COINCIDENCIASS DE PCO_ListarUsuarios
 Objetos de tipo informe en formulario se encuentran listos para aplicar propiedades de ocultamiento de elementos.
+Usar el hash sumando todos los permisos de un usuario para ver si el crc32 da diferente de lo que tiene a la plantilla entonces lo asigne o regenere.
 "

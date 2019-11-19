@@ -116,9 +116,13 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
     			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $Ubicacion!='formulario')
     				{
     					$Complemento_tablas=",".$TablasCore."usuario_menu";
-    					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+    					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
     				}
-    			$ResultadoOpcionesAnidadas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE padre='".$RegistroOpcion['id']."' ".@$Complemento_condicion." ORDER BY peso");
+
+    			if ($Ubicacion=='formulario')
+    				$Complemento_condicion=" AND ".$TablasCore."menu.formulario_vinculado=".$RegistroOpcion["formulario_vinculado"]."";  // AND nivel>0
+    				
+    			$ResultadoOpcionesAnidadas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE padre='".$RegistroOpcion['hash_unico']."' ".@$Complemento_condicion." ORDER BY peso");
     			$CadenaPreOpcion='
                     <div class="btn-group">
                       <button type="button" class="btn dropdown-toggle '.$RegistroOpcion["clase_contenedor"].' " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -830,8 +834,9 @@ function PCO_ImportarXMLFormulario($xml_importado)
 				$id_html=base64_decode($xml_importado->core_formulario[0]->id_html);
 				$tipo_maquetacion=base64_decode($xml_importado->core_formulario[0]->tipo_maquetacion);
 				$css_columnas=base64_decode($xml_importado->core_formulario[0]->css_columnas);
+				$estilo_ventana=base64_decode($xml_importado->core_formulario[0]->estilo_ventana);
 				// Inserta el nuevo objeto al form
-				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposParaID.$ListaCamposSinID_formulario.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas");
+				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposParaID.$ListaCamposSinID_formulario.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana");
 
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
@@ -991,8 +996,9 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$id_html=$registro["id_html"];
 							$tipo_maquetacion=$registro["tipo_maquetacion"];
 							$css_columnas=$registro["css_columnas"];
+							$estilo_ventana=$registro["estilo_ventana"];
 							// Inserta el nuevo objeto al form
-							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas");
+							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana");
 							$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
 							// Busca los elementos que componen el formulario para hacerles la copia
@@ -1070,7 +1076,8 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$ArregloCampos=explode(',',$ListaCamposSinID_menu);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de formulario_boton
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu WHERE formulario_vinculado=? AND padre=0 ORDER BY peso,id","$formulario");
+							//$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu WHERE formulario_vinculado=? AND padre=0 ORDER BY peso,id","$formulario");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu WHERE formulario_vinculado=? ORDER BY peso,id","$formulario");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -3131,6 +3138,7 @@ function PCO_CodigoQR($contenido,$recuperacion_errores="L",$ancho_pixeles=3,$mar
 		') or ('1'='1--
 		1' and ''='
 		' OR 'A'='A
+		$username = 1' or '1' = '1
 */
 function PCO_FiltrarCadenaSQL($cadena)
 	{
@@ -6501,7 +6509,22 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
                             .getImageData(0, 0, canvas.width, canvas.height).data
                             .some(channel => channel !== 0);
                         }
-                        					
+
+
+                        function RedimensionarCanvas(canvas,PorcentajeAncho,PorcentajeAlto){
+                          var tempCanvas = canvas.ownerDocument.createElement("canvas");
+                          var tctx=tempCanvas.getContext("2d");
+                          var cw=canvas.width;
+                          var ch=canvas.height;
+                          tempCanvas.width=cw;
+                          tempCanvas.height=ch;
+                          tctx.drawImage(canvas,0,0);
+                          canvas.width*=PorcentajeAncho;
+                          canvas.height*=PorcentajeAlto;
+                          var ctx=canvas.getContext("2d");
+                          ctx.drawImage(tempCanvas,0,0,cw,ch,0,0,cw*PorcentajeAncho,ch*PorcentajeAlto);
+                        }
+
                         var RecortarCANVAS_'.$registro_campos["id_html"].' = (function() {
                             function rowBlank(imageData, width, y) {
                                 for (var x = 0; x < width; ++x) {
@@ -6546,9 +6569,18 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
             $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
+		
+		//Verifica si el ancho o el alto tienen alguna barra de proporcion indicando porcentaje final de escalado
+		$PartesAncho=explode("|",$registro_campos["ancho"]);
+		$AnchoCanvas=$PartesAncho[0]; //Toma el ancho inicial del canvas
+		$ProporcionFinalAnchoCanvas=$PartesAncho[1]; if ($ProporcionFinalAnchoCanvas=="") $ProporcionFinalAnchoCanvas=1; //Define Proporcion final (0.5,2,1.5,etc)
+		$PartesAlto=explode("|",$registro_campos["alto"]);
+		$AltoCanvas=$PartesAlto[0]; //Toma el ancho inicial del canvas
+		$ProporcionFinalAltoCanvas=$PartesAlto[1]; if ($ProporcionFinalAltoCanvas=="") $ProporcionFinalAltoCanvas=1; //Define Proporcion final (0.5,2,1.5,etc)
+
 		// Muestra el campo
 		$salida.='
-			<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.$registro_campos["ancho"].'" height="'.$registro_campos["alto"].'" style="border: 1px solid #acc;">Su navegador no soporta Canvas</canvas>
+			<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.$AnchoCanvas.'" height="'.$AltoCanvas.'" style="border: 1px solid #acc;">Su navegador no soporta Canvas</canvas>
 			<a href="javascript:limpiar_CANVAS_'.$registro_campos["campo"].'();"><i class="fa fa-times fa-2x"></i></a>
 
 			<script type="text/javascript">';
@@ -6598,7 +6630,11 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
 						if (!isCanvasBlank(CANVAS_'.$registro_campos["campo"].'))
 						    {
                 				oCanvas=RecortarCANVAS_'.$registro_campos["campo"].'(CANVAS_'.$registro_campos["campo"].');
-                				document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value=oCanvas.toDataURL();	
+                				//document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value=oCanvas.toDataURL();	 //Almacena imagen al 100%
+
+                                //Redimensiona el canvas sobre otro (Si aplica)
+                                RedimensionarCanvas(oCanvas,'.$ProporcionFinalAnchoCanvas.','.$ProporcionFinalAltoCanvas.');
+                				document.'.$IdHTMLFormulario.'.'.$registro_campos["campo"].'.value=oCanvas.toDataURL();	     //Almacena imagen redimensionada
 						    }
 						window.setTimeout("actualizar_CANVAS_'.$registro_campos["campo"].'()",1000);
 					}

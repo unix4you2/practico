@@ -954,9 +954,14 @@ if ($PCO_Accion=="PCO_InformesUsuario")
 */
 if ($PCO_Accion=="PCO_EliminarPermiso")
 	{
+	    //Divide las partes recibidas
+	    $PartesCampos=explode("|",$PCO_Valor);
+	    $menu=$PartesCampos[0];
+	    $usuario=$PartesCampos[1];
 		// Elimina los datos de la opcion
 		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? AND usuario=? ","$menu$_SeparadorCampos_$usuario");
 		PCO_Auditar("Elimina permiso $menu a $usuario");
+
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_PermisosUsuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
 	}
@@ -1067,10 +1072,20 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
                 <select name="menu"  class="selectpicker " data-live-search=true data-size=10 data-style="btn btn-default btn-xs ">
 					<?php
 						//Despliega opciones de menu para agregar, Solamente las que no pertenecen a formularios
-						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE formulario_vinculado=0 ");
+						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE (padre=0 OR padre='') AND formulario_vinculado=0 ");
 						while($registro = $resultado->fetch())
 							{
-								echo '<option data-icon="'.$registro["imagen"].' fa-fw" value="'.$registro["id"].'">'.$registro["texto"].'</option>';
+								echo '<option data-icon="'.$registro["imagen"].' fa-fw" value="'.$registro["hash_unico"].'">'.$registro["texto"].'</option>';
+								//Busca posibles opciones de segundo nivel y las agrega
+								$resultadohijas=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE (padre='".$registro["hash_unico"]."') AND formulario_vinculado=0 ");
+								if ($resultadohijas->rowCount()>0)
+								    echo '<optgroup label="Opciones de/Childs of: '.$registro["texto"].'">';
+        						while($registrohija = $resultadohijas->fetch())
+        							{
+        								echo '<option data-icon="'.$registrohija["imagen"].' fa-fw" value="'.$registrohija["hash_unico"].'">'.$registrohija["texto"].'</option>';
+        							}
+								if ($resultadohijas->rowCount()>0)
+								    echo '</optgroup>';
 							}
 					?>
 				</select>
@@ -1081,44 +1096,7 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
             </form>
             <hr>
 
-		<font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrSecc; ?></b></font>
-		<?php
-			echo '
-			<table class="table table-responsive btn-xs table-unbordered table-hover">
-				<thead>
-                <tr>
-					<th><b>ID</b></th>
-					<th></th>
-					<th><b>'.$MULTILANG_Etiqueta.'</b></th>
-					<th><b>'.$MULTILANG_Tipo.'</b></th>
-					<th><b>'.$MULTILANG_MnuComando.'</b></th>
-					<th></th>
-				</tr>
-                </thead>
-                <tbody>
-                ';
-
-			$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario=? ","$usuario");
-			while($registro = $resultado->fetch())
-				{
-					echo '<tr>
-							<td>'.$registro["id"].'</td>
-							<td align=right><i class="'.$registro["imagen"].'"></i></td>
-							<td><strong>'.$registro["texto"].'</strong></td>
-							<td>'.$registro["tipo_comando"].'</td>
-							<td>'.$registro["comando"].'</td>
-							<td align="center">
-									<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
-											<input type="hidden" name="PCO_Accion" value="PCO_EliminarPermiso">
-											<input type="hidden" name="usuario" value="'.$usuario.'">
-											<input type="hidden" name="menu" value="'.$registro["id"].'">
-                                            <a  href="javascript:confirmar_evento(\''.$MULTILANG_UsrAdvDel.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"><i class="fa fa-times fa-fw"></i> '.$MULTILANG_Eliminar.'</a>
-									</form>
-							</td>
-						</tr>';
-				}
-			echo '</tbody>
-            </table>';
+<?php
 		PCO_CargarInforme(-30,1,"","",1);
 
         PCO_CerrarVentana();
@@ -1605,4 +1583,3 @@ if ($PCO_Accion=="PCO_PanelAuditoriaMovimientos")
 			PCO_Auditar("Carga modulo de auditoria");
 			PCO_CargarFormulario("-7",1);
 	}
-
