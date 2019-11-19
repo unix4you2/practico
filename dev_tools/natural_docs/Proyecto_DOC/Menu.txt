@@ -106,6 +106,7 @@ Group: Modulos Principales  {
       File: Seccion con formularios comunes  (core/marco_forms.php)
       File: Modulo kanban  (core/kanban.php)
       File: Modulo tareas programadas  (core/cron.php)
+      File: documentador.php  (core/documentador.php)
       }  # Group: Modulos
 
    Group: Inc  {
