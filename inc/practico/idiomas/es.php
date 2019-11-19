@@ -674,6 +674,8 @@
     $MULTILANG_FrmTipoMaquetacionDes='Determina la forma en que Practico maquetara formularios de multiples columnas.  Tradicional: utiliza tablas y columnas estandar en HTML.  Responsive: utiliza columnas basadas en clases col de bootstrap, para las cuales debera especificar la clase de cada una en los campos correspondientes.';
     $MULTILANG_FrmTradicional='Tradicional';
     $MULTILANG_FrmCampoHuerfano='Los siguientes campos existen en la tabla principal asociada al formulario y aun no han sido vinculados a ningun control del formulario o alguno de sus formularios embebidos';
+    $MULTILANG_FrmDesplazarObjetos='Desplazar hacia abajo una posici&oacute;n todos los objetos de esta columna a partir de este elemento';
+    $MULTILANG_FrmEstaSeguro='Esta seguro?';
 
 	//Informes
 	$MULTILANG_InfErr1='Se debe indicar los valores para los campos correspondientes al menos a una serie de datos.<br>Si no desea generar un gr&aacute;fico entonces debe cambiar el tipo de informe a tabla de datos';

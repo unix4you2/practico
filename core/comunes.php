@@ -2722,6 +2722,8 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "PCO_ConfirmarImportacionFormulario")	$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_AnalizarImportacionFormulario")	$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_ImportarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
+		if ($PCO_Accion== "PCO_DesplazarObjetosForm")			$retorno = PCO_PermisoAgregadoAccion("PCO_EditarFormulario");
+
 		// Funciones en core/sesion.php
 		if ($PCO_Accion== "Iniciar_login")						$retorno = 1;
 		if ($PCO_Accion== "Terminar_sesion")					$retorno = 1;
@@ -6900,7 +6902,7 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
 */
 function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario,$tipo_elemento)
 	{
-	    global $MULTILANG_SaltoEdicion,$MULTILANG_Embebido,$MULTILANG_FrmValida,$MULTILANG_FrmPredeterminado,$MULTILANG_FrmCampo,$MULTILANG_MnuPropiedad,$MULTILANG_Detalles,$MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
+	    global $MULTILANG_FrmEstaSeguro,$MULTILANG_FrmDesplazarObjetos,$MULTILANG_SaltoEdicion,$MULTILANG_Embebido,$MULTILANG_FrmValida,$MULTILANG_FrmPredeterminado,$MULTILANG_FrmCampo,$MULTILANG_MnuPropiedad,$MULTILANG_Detalles,$MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
 		$salida='';
         if ($tipo_elemento=="ComplementoDisenoElemento")
             {
@@ -6957,6 +6959,8 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                             <div style="display: inline-block; vertical-align:top;">
                                 <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-pencil"></i></a>
                                 '.$ComplementoBotonEventos.'
+                                <br><br>
+                                <a onclick=\'return confirm("'.$MULTILANG_FrmDesplazarObjetos.'\n\n'.$MULTILANG_FrmEstaSeguro.'");\' class="btn btn-xs btn-success" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDesplazarObjetos.'" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_DesplazarObjetosForm&idObjetoForm='.$registro_campos["id"].'&accion_retorno=PCO_EditarFormulario&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-step-forward fa-rotate-90"></i></a>                                
                             </div>
                             <div style="display: inline-block;">
                                 <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["columna"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-left"></i></a>
@@ -6969,6 +6973,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                             <div style="display: inline-block;">
                                 <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
                             </div>
+                            
                             <div style="display: inline-block; vertical-align:top;">
                                 <a class="btn btn-xs" data-toggle="tooltip" data-html="true"  data-placement="top" title="<div align=left><font color=yellow>'.$MULTILANG_Detalles.' <i>('.$MULTILANG_MnuPropiedad.')</i></font><br>ID HTML: <b>'.$registro_campos["id_html"].'</b><br>'.$MULTILANG_FrmCampo.': <b>'.$registro_campos["campo"].'</b><br>'.$MULTILANG_FrmPredeterminado.': <b>'.$registro_campos["valor_predeterminado"].'</b><br>'.$MULTILANG_FrmValida.': <b>'.$registro_campos["validacion_datos"].'</b> Extra: <b>'.$registro_campos["validacion_extras"].'</b></div>" href=\'#\'><i class="fa fa-info-circle"></i></a>';
                             //Si el objeto es un formulario o informe embebido agrega enlace para su edicion directa

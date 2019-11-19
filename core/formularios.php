@@ -997,6 +997,66 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Section: Acciones a ser ejecutadas (si aplica) en cada cargue de la herramienta
+*/
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCO_DesplazarObjetosForm
+	Cambia el peso de todos los elementos de un formulario sumando uno +1 para dejar un espacio donde se pueda insertar un nuevo elemento
+
+	Variables de entrada:
+
+		idObjetoForm - Valor Identificador unico del objeto
+		nombre_tabla - Nombre de la tabla del formulario al que se retorna
+
+	Salida:
+
+		Valor de paso actualizado para todos los elementos del formulario por debajo del indicado
+*/
+if (@$PCO_Accion=="PCO_DesplazarObjetosForm")
+	{		
+		$mensaje_error="";
+		if ($idObjetoForm=="") $mensaje_error="ID de elemento base no especificado / Base element ID nos specified";
+		if ($mensaje_error=="")
+			{
+			    $RegistroObjetoBase=PCO_EjecutarSQL("SELECT id,$ListaCamposSinID_formulario_objeto FROM {$TablasCore}formulario_objeto WHERE id='{$idObjetoForm}' ")->fetch();
+			    $peso=$RegistroObjetoBase["peso"];
+			    $columna=$RegistroObjetoBase["columna"];
+			    $pestana=$RegistroObjetoBase["pestana_objeto"];
+			    $formulario=$RegistroObjetoBase["formulario"];
+				PCO_EjecutarSQLUnaria("UPDATE {$TablasCore}formulario_objeto  SET peso=peso+1  WHERE formulario='{$formulario}' AND columna='{$columna}' AND pestana_objeto='{$pestana}' AND peso>={$peso} ");
+				@PCO_Auditar("Desplaza elementos de formulario ");
+				
+				if (@$PCO_CambioEstado_NegarRetorno=="")
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+							<input type="Hidden" name="PCO_Accion" value="'.$accion_retorno.'">
+							<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+							<input type="Hidden" name="formulario" value="'.@$formulario.'">
+							<input type="Hidden" name="informe" value="'.@$informe.'">
+							<input type="Hidden" name="popup_activo" value="'.$popup_activo.'">
+						</form>
+						<script type="" language="JavaScript">
+						    document.cancelar.submit();
+						</script>';
+			}
+		else
+			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+					<input type="Hidden" name="PCO_Accion" value="PCO_VerMenu">
+					<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
+					<input type="Hidden" name="formulario" value="'.$formulario.'">
+					<input type="Hidden" name="informe" value="'.$informe.'">
+					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+				</form>
+				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: PCO_EditarFormulario
 	Despliega las ventanas requeridas para agregar los diferentes elementos al formulario como campos, etiquetas, marcos y acciones
 

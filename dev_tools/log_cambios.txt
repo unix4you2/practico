@@ -27,11 +27,14 @@ core/marco_nav.php
 core/marco_navizq.php
 core/marco_abajo.php
 core/marco_arriba.php
+core/marco_arriba_bs.php
 core/menus.php
 core/usuarios.php
 mod/pcoder/index.php
 mod/pcoder/js/pcoder.min.js
 mod/pmydb/*
+inc/bootstrap/js/*
+inc/bootstrap/css/*
 
 xml/*
 inc/practico/idiomas/*
@@ -78,7 +81,8 @@ ADVERTENCIA:  Algunas funciones internas asociadas a la gestión de usuarios del
 * Enhan: El administrador de archivos es reubicado al menú de configuración de le harremienta, de esa manera se deja el menú izquierdo como exclusivo para opciones de aplicación para los usuarios.
 * Enhan: Se confinan los formularios asociados a operaciones de adminitración para que sólo sean generados cuando el usuario activo sea un administrador de plataforma haciendo mas rápido y seguro el cargue de la herramienta por parte de usuarios estándar.
 * Enhan: Se mejora la selección de permisos para usuarios indicando cuando algunos de éstos se encuentren como opciones de segundo nivel de otras ya que antes eran desplegados al mismo nivel y orden de las demás.
-* Enhan: Se sustituyen casi 350 líneas de código dentro de los módulos de permisos y usuarios por objetos internos del framework.  
+* Enhan: Se sustituyen más de 350 líneas de código dentro de los módulos de permisos y usuarios por objetos internos del framework.  
+* Added: En modo de diseño de formularios cuenta en la barra de edición de cada objeto con un botón que permite desplazar de manera general todos los elementos de la columna aumentando el peso en una unidad.  De esta manera se facilita la adición de nuevos elementos cuando los pesos de los elementos ya se encuentran totalmente ocupados.
 
 Se recomeinda a las aplicaciones que utilizan funciones propias del framework para abstraer y gestionar permisos de usuario propios que hagan una revisión de su funcionalidad asociada.
 
@@ -90,8 +94,8 @@ Se recomeinda a las aplicaciones que utilizan funciones propias del framework pa
 ScriptBasedatos="
 
 ALTER TABLE core_informe ADD encabezado_html text NULL;
-UPDATE core_formulario SET estilo_ventana='panel-primary';
 ALTER TABLE core_formulario ADD estilo_ventana varchar(50) DEFAULT 'panel-primary';
+UPDATE core_formulario SET estilo_ventana='panel-primary';
 ALTER TABLE core_informe ADD tabla_responsive char(1) DEFAULT 'N';
 ALTER TABLE core_formulario_objeto CHANGE ancho ancho varchar(10) NULL DEFAULT '0';
 ALTER TABLE core_formulario_objeto CHANGE alto alto varchar(10) NULL DEFAULT '0';
@@ -110,8 +114,6 @@ UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$')
 ########################################################################
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
-hacer trazabilidad a todas las rutinass de menues.  creacion con hash nuevo, eliminacion, modificacion, asignaciona  usuarios, submenues, etc
-Validar exportacion e importacion de forms con menues de segundo nivel
 EN COMUNES CAMBIO LA ACL.    BUSCAR POR COINCIDENCIASS DE PCO_ListarUsuarios
 Objetos de tipo informe en formulario se encuentran listos para aplicar propiedades de ocultamiento de elementos.
 Usar el hash sumando todos los permisos de un usuario para ver si el crc32 da diferente de lo que tiene a la plantilla entonces lo asigne o regenere.

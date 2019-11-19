@@ -676,6 +676,8 @@
     $MULTILANG_FrmTipoMaquetacionDes='Determine how Practico will make multi-column forms. Traditional: use tables and standard columns in HTML. Responsive: use columns based on bootstrap col classes, for which you must specify the class of each in the corresponding fields.';
     $MULTILANG_FrmTradicional='Traditional';
     $MULTILANG_FrmCampoHuerfano='This fields exists in the table linked to the form and doesnt have any field or object linked to them in the form or embeded forms';
+    $MULTILANG_FrmDesplazarObjetos='Move down one position all the objects in the column below this element';
+    $MULTILANG_FrmEstaSeguro='Are you sure?';
 
 
 	//Informes
