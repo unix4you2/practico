@@ -1007,6 +1007,7 @@
 	$MULTILANG_UsrErrPW1='You forgot to enter any of the requested data';
 	$MULTILANG_UsrErrPW2='You have entered two different passwords';
 	$MULTILANG_UsrErrPW3='The key for you entered does not meet the minimum safety recommendations';
+	$MULTILANG_UsrErrPW4='The actual password doesnt match with the password registered in the system.  For security reasons your password wont change until you enter your actual password as verification.';
 	$MULTILANG_UsrErrInf='The user already has the selected permission';
 	$MULTILANG_UsrAdmInf='User reports Administration';
 	$MULTILANG_UsrAgreInf='Add a report to the user menu';

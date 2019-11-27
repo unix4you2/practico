@@ -1009,6 +1009,7 @@
 	$MULTILANG_UsrErrPW1='आप का अनुरोध किया डेटा के किसी भी दाखिल करना भूल गए';
 	$MULTILANG_UsrErrPW2='आप दो अलग-अलग पासवर्ड दर्ज किया है';
 	$MULTILANG_UsrErrPW3='आपके द्वारा दर्ज के लिए कुंजी न्यूनतम सुरक्षा सिफारिशों को पूरा नहीं करता';
+	$MULTILANG_UsrErrPW4='The actual password doesnt match with the password registered in the system.  For security reasons your password wont change until you enter your actual password as verification.';
 	$MULTILANG_UsrErrInf='उपयोगकर्ता पहले से ही चयनित अनुमति है';
 	$MULTILANG_UsrAdmInf='उपयोगकर्ता रिपोर्ट प्रशासन';
 	$MULTILANG_UsrAgreInf='उपयोगकर्ता मेनू के लिए एक रिपोर्ट में जोड़ें';

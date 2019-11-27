@@ -1009,6 +1009,7 @@
 	$MULTILANG_UsrErrPW1='Vous avez oublié d entrer l une des données demandées';
 	$MULTILANG_UsrErrPW2='Vous avez entré deux mots de passe différents';
 	$MULTILANG_UsrErrPW3='La clé que vous avez entrée ne correspond pas aux recommandations de sécurité minimales';
+	$MULTILANG_UsrErrPW4='The actual password doesnt match with the password registered in the system.  For security reasons your password wont change until you enter your actual password as verification.';
 	$MULTILANG_UsrErrInf='L utilisateur a déjà l autorisation sélectionnée';
 	$MULTILANG_UsrAdmInf='Administration des rapports utilisateur';
 	$MULTILANG_UsrAgreInf='Ajouter un rapport au menu de l utilisateur';

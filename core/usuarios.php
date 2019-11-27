@@ -598,81 +598,17 @@ if ($PCO_Accion=="PCO_CopiarPermisos")
 		Variables pasadas a la accion <PCO_ActualizarContrasena>
 
 	Ver tambien:
-		<PCO_ActualizarContrasena> | <muestra_seguridad_clave> | <seguridad_clave>
+		<PCO_ActualizarContrasena>
 
 */
 if ($PCO_Accion=="PCO_CambiarContrasena")
 	{
-?>
-                <?php
-                    //Permite cambio solamente si es admin o el motor de autenticacion es practico
-                    if ($Auth_TipoMotor=="practico" || PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-                        {
-                ?>
-
-
-			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
-			<?php
-				PCO_Mensaje($MULTILANG_Importante, $MULTILANG_UsrDesPW, '', 'fa fa-info fa-4x', 'alert alert-info alert-dismissible');
-
-                //Continua las Banderas recibidas para el tipo de carga de contenido
-                if (@$Presentar_FullScreen==1)  echo '<input type="Hidden" name="Presentar_FullScreen" value="1">';
-                if (@$Precarga_EstilosBS==1)    echo '<input type="Hidden" name="Precarga_EstilosBS" value="1">';
-			?>
-                <input type="hidden" name="PCO_Accion" value="PCO_ActualizarContrasena">
-                <br><font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrCambioPW; ?></b></font>
-
-                <div class="form-group input-group">
-                    <span class="input-group-addon">
-                        <?php echo $MULTILANG_UsrAnteriorPW; ?>:
-                    </span>
-                    <input type="password" class="form-control" value="****************" readonly>
-                </div>
-
-                <div class="form-group input-group">
-                    <span class="input-group-addon">
-                        <?php echo $MULTILANG_UsrNuevoPW; ?>:
-                    </span>
-                    <input name="clave1"   onkeyup="muestra_seguridad_clave(this.value, this.form)" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>">
-                    <span class="input-group-addon">
-                        <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    </span>
-                    <span class="input-group-addon">
-                        <?php echo $MULTILANG_UsrNivelPW; ?>:
-                    </span>
-                    <input id="seguridad" value="0" size="3" name="seguridad" class="form-control" type="text" readonly onfocus="blur()">
-                    <span class="input-group-addon">
-                        %
-                    </span>
-                </div>
-
-                <div class="form-group input-group">
-                    <span class="input-group-addon">
-                        <?php echo $MULTILANG_UsrVerificaPW; ?>:
-                    </span>
-                    <input name="clave2" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?> (Confirma)">
-                    <span class="input-group-addon">
-                        <a href="#"  data-toggle="tooltip" data-html="true"  data-placement="top" title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange  fa-fw "></i></a>
-                    </span>
-                </div>            
-
-            </form>
-            <div align=center>
-                <hr>
-                <?php
-                            echo '
-                                <a class="btn btn-success" href="javascript:document.datos.submit();"><i class="fa fa-floppy-o"></i> '.$MULTILANG_Actualizar.'</a>
-                                <a class="btn btn-default" href="javascript:document.PCO_FormVerMenu.submit();"><i class="fa fa-home"></i> '.$MULTILANG_IrEscritorio.'</a>';
-                        }
-                    else
-                        {
-                            PCO_Mensaje($MULTILANG_Atencion, $MULTILANG_UsrHlpNoPW.' (<b>'.$MULTILANG_TipoMotor.': '.$Auth_TipoMotor.'</b>)', '', 'fa fa-remove fa-5x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
-                        }
-                ?>
-            </div>
-<?php
+        //Permite cambio solamente si es admin o el motor de autenticacion es practico
+        if ($Auth_TipoMotor=="practico" || PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+            PCO_CargarFormulario("-18",1);
+        else
+            PCO_Mensaje($MULTILANG_Atencion, $MULTILANG_UsrHlpNoPW.' (<b>'.$MULTILANG_TipoMotor.': '.$Auth_TipoMotor.'</b>)', '', 'fa fa-remove fa-5x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
 	}
-
 
 
 /* ################################################################## */
@@ -706,6 +642,11 @@ if ($PCO_Accion=="PCO_ActualizarContrasena")
 			}
 
 		$mensaje_error="";
+        //Verifica que la contrasena actual recibida si sea
+    	$ClaveEnMD5=hash("md5", $clave0);
+    	$LoginValido=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario WHERE estado=1 AND login='$PCOSESS_LoginUsuario' AND clave='$ClaveEnMD5' ")->fetchColumn();
+		if ($LoginValido=="")
+			$mensaje_error=$MULTILANG_UsrErrPW4.".<br>";
 		// Verifica campos nulos
 		if ($clave1=="" || $clave2=="")
 			$mensaje_error=$MULTILANG_UsrErrPW1.".<br>";

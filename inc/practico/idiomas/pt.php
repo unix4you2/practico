@@ -1009,6 +1009,7 @@
 	$MULTILANG_UsrErrPW1='Você esqueceu de digitar qualquer um dos dados solicitados';
 	$MULTILANG_UsrErrPW2='Você digitou duas senhas diferentes';
 	$MULTILANG_UsrErrPW3='A chave para que você inseriu não atende as recomendações m&iacute;nimas de segurança';
+	$MULTILANG_UsrErrPW4='The actual password doesnt match with the password registered in the system.  For security reasons your password wont change until you enter your actual password as verification.';
 	$MULTILANG_UsrErrInf='O usu&aacute;rio j&aacute; tem a permissão selecionada';
 	$MULTILANG_UsrAdmInf='Relat&oacute;rios de usu&aacute;rios Administração';
 	$MULTILANG_UsrAgreInf='Adicionar um relat&oacute;rio ao menu do usu&aacute;rio';

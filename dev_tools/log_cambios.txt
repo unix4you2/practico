@@ -16,7 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
-
+core/usuarios.php
 
 xml/*
 inc/practico/idiomas/*
@@ -33,7 +33,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-
+* Enhan: Cambios de clave para usuarios han sido reemplazados por objetos internos
 "
 
 ########################################################################

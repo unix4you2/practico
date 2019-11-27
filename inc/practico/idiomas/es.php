@@ -1007,6 +1007,7 @@
 	$MULTILANG_UsrErrPW1='Usted ha olvidado ingresar alguno de los datos solicitados';
 	$MULTILANG_UsrErrPW2='Usted ha ingresado dos contrase&ntilde;as diferentes';
 	$MULTILANG_UsrErrPW3='La clave por usted ingresada no cumple con las recomendaciones minimas de seguridad';
+	$MULTILANG_UsrErrPW4='La clave actual ingresada no coincide con la registrada en el sistema.  Por razones de seguridad no se actualiza su clave por una nueva si no ingresa su clave actual como verificacion.';
 	$MULTILANG_UsrErrInf='El usuario ya posee el permiso seleccionado';
 	$MULTILANG_UsrAdmInf='Administraci&oacute;n de informes del usuario';
 	$MULTILANG_UsrAgreInf='Agregar informe al men&uacute; del usuario';
