@@ -312,7 +312,7 @@
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nOS CLIENTE: <?php echo PCO_DetectarSistemaOperativoCliente(); ?>"+"\n";
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_BROWSER: <?php ImprimirArregloVariablesInternas('get_browser'); ?>"+"\n";
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_DEFINED_VARS: <?php ImprimirArregloVariablesInternas('request'); ?>"+"\n";
-            document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_ALL_HEADERS: <?php ImprimirArregloVariablesInternas('getallheaders'); ?>"+"\n";
+            //document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_ALL_HEADERS: <?php /*ImprimirArregloVariablesInternas('getallheaders');*/ ?>"+"\n"; //Removido compatibilidad GAE
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_LOADED_EXTENSIONS: <?php ImprimirArregloVariablesInternas('get_loaded_extensions'); ?>"+"\n";
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nDEBUG_TRACE: <?php ImprimirArregloVariablesInternas('debug_backtrace'); ?>"+"\n";
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nINI_GET_ALL: <?php ImprimirArregloVariablesInternas('ini_get_all'); ?>"+"\n";

@@ -39,6 +39,7 @@ LogCambios="
 * Enhan: Reajustado el menu de configuracion
 * Added: Se ha agregado un generador y consumidor nativo de URLs cortas
 * Enhan: Las opciones agregadas al menú izquierdo en formatos dropdown son agregadas dentro de items independientes con su propio salto de línea y clasificadas automáticamente según su sección
+* Fixed: Se retira la recoleccion de informacion mediante getallheaders() para el reporte automático de Bugs por compatibilidad con despliegues elásticos sobre Google Application Engine.
 
 "
 
