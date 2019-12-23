@@ -653,3 +653,14 @@ CREATE TABLE core_pcoder_chat (
   recd INTEGER DEFAULT 0
 
 );
+
+CREATE TABLE core_acortadorurls (
+  id INTEGER  PRIMARY KEY AUTO_INCREMENT,
+  url_larga text,
+  url_corta text,
+  usuario text,
+  fecha_creacion date,
+  hora_creacion time,
+  contador_uso INTEGER DEFAULT '0'
+
+);

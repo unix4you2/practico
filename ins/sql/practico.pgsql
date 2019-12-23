@@ -611,7 +611,7 @@ CREATE TABLE core_tareascron (
 
 DROP TABLE IF EXISTS core_pcoder_historial;
 CREATE TABLE core_pcoder_historial (
-  id int(10) NOT NULL AUTO_INCREMENT,
+  id serial,
   archivo text,
   fecha_edicion datetime,
   usuario varchar(255),
@@ -623,7 +623,7 @@ CREATE TABLE core_pcoder_historial (
 
 DROP TABLE IF EXISTS core_pcoder_bloqueos;
 CREATE TABLE core_pcoder_bloqueos (
-  id int(10) NOT NULL AUTO_INCREMENT,
+  id serial,
   archivo text,
   ultima_edicion datetime,
   usuario varchar(255),
@@ -635,11 +635,22 @@ CREATE TABLE core_pcoder_bloqueos (
 
 DROP TABLE IF EXISTS core_pcoder_chat;
 CREATE TABLE core_pcoder_chat (
-  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  id serial,
   remitente VARCHAR(255) NOT NULL DEFAULT '',
   destinatario VARCHAR(255) NOT NULL DEFAULT '',
-  message TEXT NOT NULL,
+  message TEXT,
   sent DATETIME,
   recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE core_acortadorurls (
+  id serial,
+  url_larga varchar(1024) NOT NULL,
+  url_corta varchar(10) NOT NULL,
+  usuario varchar(255) NOT NULL,
+  fecha_creacion date NOT NULL,
+  hora_creacion time NOT NULL,
+  contador_uso integer NOT NULL DEFAULT '0',
+  PRIMARY KEY (id)
+);

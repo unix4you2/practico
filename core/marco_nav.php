@@ -113,11 +113,13 @@
 			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 			{
     ?>
+
 				<li class="dropdown">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						<i class="fa fa-cog fa-fw text-danger"></i> <i class="fa fa-caret-down text-danger"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-alerts">
+                        <h6 class="dropdown-header"><?php echo ($MULTILANG_Configuracion); ?>:</h6>
 						<li>
 							<a data-toggle="modal" href="#myModalCONFIGURACION">
 								<div>
@@ -125,7 +127,24 @@
 								</div>
 							</a>
 						</li>
+						<li>
+							<a href="javascript:document.PCO_EditarConfiguracionOAuth.submit();">
+								<div>
+									<i class="fa fa-soundcloud fa-fw"></i> <?php echo $MULTILANG_OauthButt; ?>
+									<span class="pull-right badge"><?php echo PCO_ContarProveedoresOAuthConfigurados(); ?></span>
+								</div>
+							</a>
+						</li>
+						<li>
+							<a data-toggle="modal" href="javascript:document.PCO_VerReplicaciones.submit();">
+								<div>
+									<i class="fa fa-cubes fa-fw"></i> <?php echo $MULTILANG_ReplicaTitulo; ?>
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."replicasbd",""); ?></span>
+								</div>
+							</a>
+						</li>
 						<li class="divider"></li>
+                        <h6 class="dropdown-header"><?php echo $MULTILANG_Aplicacion; ?>:</h6>
 						<li>
 							<a data-toggle="modal" href="#myModalPARAMETROS">
 								<div>
@@ -133,59 +152,32 @@
 								</div>
 							</a>
 						</li>
-						<li class="divider"></li>
-						<li>
-							<a href="javascript:document.PCO_EditarConfiguracionOAuth.submit();">
-								<div>
-									<i class="fa fa-soundcloud fa-fw"></i> <?php echo $MULTILANG_OauthButt; ?>
-									<span class="pull-right text-muted small"><?php echo PCO_ContarProveedoresOAuthConfigurados(); ?></span>
-								</div>
-							</a>
-						</li>
-						<li class="divider"></li>
 						<li>
 							<a data-toggle="modal" href="#myModalWEBSERVICES">
 								<div>
 									<i class="fa fa-link fa-fw"></i> <?php echo $MULTILANG_WSConfigButt; ?>
-									<span class="pull-right text-muted small"><?php echo PCO_ContarRegistrosTabla($TablasCore."llaves_api",""); ?></span>
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."llaves_api",""); ?></span>
 								</div>
 							</a>
 						</li>
-						<li class="divider"></li>
 						<li>
 							<a data-toggle="modal" href="javascript:document.PCO_VerTareasCron.submit();">
 								<div>
 									<i class="fa fa-clock-o fa-fw"></i> <?php echo $MULTILANG_CronTitulo; ?>
-									<span class="pull-right text-muted small"><?php echo PCO_ContarRegistrosTabla($TablasCore."tareascron",""); ?></span>
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."tareascron",""); ?></span>
 								</div>
 							</a>
 						</li>
-						<li class="divider"></li>
-						<li>
-							<a data-toggle="modal" href="javascript:document.PCO_VerReplicaciones.submit();">
-								<div>
-									<i class="fa fa-cubes fa-fw"></i> <?php echo $MULTILANG_ReplicaTitulo; ?>
-									<span class="pull-right text-muted small"><?php echo PCO_ContarRegistrosTabla($TablasCore."replicasbd",""); ?></span>
-								</div>
-							</a>
-						</li>
-						<li class="divider"></li>
 						<li>
 							<a data-toggle="modal" href="javascript:document.PCO_VerMonitoreo.submit();">
 								<div>
 									<i class="fa fa-lightbulb-o fa-fw"></i> <?php echo $MULTILANG_MonTitulo; ?>
-									<span class="pull-right text-muted small"><?php echo PCO_ContarRegistrosTabla($TablasCore."monitoreo",""); ?></span>
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."monitoreo",""); ?></span>
 								</div>
 							</a>
 						</li>
 						<li class="divider"></li>
-						<li>
-							<a data-toggle="modal" href="javascript:document.actualizarad.submit();">
-								<div>
-									<i class="fa fa-download fa-fw"></i> <?php echo $MULTILANG_Actualizacion; ?>/<?php echo $MULTILANG_Copias; ?>
-								</div>
-							</a>
-						</li>
+                        <h6 class="dropdown-header"><?php echo ($MULTILANG_Otros); ?>:</h6>
                         <?php
 								$PCO_EnlaceExplorador="javascript:document.fileman_admin_embebido.submit();";
                     			//Verifica si esta o no en modo DEMO para hacer la operacion
@@ -195,14 +187,19 @@
                             if($PCOSESS_SesionAbierta && PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="")
                                 {
                         ?>
-                                    <li class="divider"></li>
                                     <li>
                                         <a href="<?php echo $PCO_EnlaceExplorador; ?>"><i class="fa fa fa-cloud-upload fa-fw"></i> <?php echo $MULTILANG_AdminArchivos; ?></a>
                                     </li>
                         <?php
                                 }
                         ?>
-						<li class="divider"></li>
+						<li>
+							<a data-toggle="modal" href="javascript:document.actualizarad.submit();">
+								<div>
+									<i class="fa fa-download fa-fw"></i> <?php echo $MULTILANG_Actualizacion; ?>/<?php echo $MULTILANG_Copias; ?>
+								</div>
+							</a>
+						</li>
 						<li>
 							<a data-toggle="modal" href="https://www.practico.org/agradecimientos" target="_blank">
 								<div>
@@ -210,7 +207,6 @@
 								</div>
 							</a>
 						</li>
-						<li class="divider"></li>
 						<li>
 							<a data-toggle="modal" href="https://gitter.im/unix4you2/practico/" target="_blank">
 								<div>

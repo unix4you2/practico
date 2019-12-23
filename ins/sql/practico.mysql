@@ -636,11 +636,22 @@ CREATE TABLE core_pcoder_bloqueos (
 
 DROP TABLE IF EXISTS core_pcoder_chat;
 CREATE TABLE core_pcoder_chat (
-  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
+  id int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   remitente VARCHAR(255) NOT NULL DEFAULT '',
   destinatario VARCHAR(255) NOT NULL DEFAULT '',
   message TEXT NOT NULL,
   sent DATETIME,
-  recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
+  recd int(11) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+CREATE TABLE core_acortadorurls (
+  id int(11) unsigned NOT NULL AUTO_INCREMENT,
+  url_larga varchar(1024) NOT NULL,
+  url_corta varchar(10) NOT NULL,
+  usuario varchar(255) NOT NULL,
+  fecha_creacion date NOT NULL,
+  hora_creacion time NOT NULL,
+  contador_uso int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (id)
+);

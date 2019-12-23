@@ -17,6 +17,8 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/usuarios.php
+core/marco_nav.php
+core/marco_navizq.php
 
 xml/*
 inc/practico/idiomas/*
@@ -34,12 +36,26 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 * Enhan: Cambios de clave para usuarios han sido reemplazados por objetos internos
+* Enhan: Reajustado el menu de configuracion
+* Added: Se ha agregado un generador y consumidor nativo de URLs cortas
+* Enhan: Las opciones agregadas al menú izquierdo en formatos dropdown son agregadas dentro de items independientes con su propio salto de línea y clasificadas automáticamente según su sección
+
 "
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 # RECORDAR EN OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
+
+CREATE TABLE core_acortadorurls (
+  id int(11) unsigned NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  url_larga varchar(1024) NOT NULL,
+  url_corta varchar(10) NOT NULL,
+  usuario varchar(255) NOT NULL,
+  fecha_creacion date NOT NULL,
+  hora_creacion time NOT NULL,
+  contador_uso int(11) NOT NULL DEFAULT '0'
+);
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

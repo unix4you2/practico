@@ -121,12 +121,17 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
 
     			if ($Ubicacion=='formulario')
     				$Complemento_condicion=" AND ".$TablasCore."menu.formulario_vinculado=".$RegistroOpcion["formulario_vinculado"]."";  // AND nivel>0
-    				
+
+    			if ($Ubicacion=='lateral')
+    				$Complemento_AnchoLateral=' style="width: 100%; font-size:0.95em;" ';  // Agrega porcentaje de 100% ancho a las opciones laterales
+
     			$ResultadoOpcionesAnidadas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE padre='".$RegistroOpcion['hash_unico']."' ".@$Complemento_condicion." ORDER BY peso");
     			$CadenaPreOpcion='
-                    <div class="btn-group">
-                      <button type="button" class="btn dropdown-toggle '.$RegistroOpcion["clase_contenedor"].' " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).' <span class="caret"></span>
+                    <div class="btn-group" '.$Complemento_AnchoLateral.'>
+                      <button type="button" '.$Complemento_AnchoLateral.' class="btn dropdown-toggle '.$RegistroOpcion["clase_contenedor"].' " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div align=left>
+                            <i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).' <span class="caret"></span>
+                        </div>
                       </button>
                       <ul class="dropdown-menu">';
                 $CadenaPosOpcion='
@@ -272,7 +277,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
                 //Imprime opciones ubicadas en la barra lateral de navegacion (izquierda)
                 if ($Ubicacion=='lateral')
                     {
-                        echo '<li>';
+                        echo '<li style="text-align: left; font-size:0.95em;">';
                         echo $CadenaPreOpcion;
                         echo $CadenaInOpcion;
                         echo $CadenaPosOpcion;
@@ -280,6 +285,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
                     }
 			}
     }
+
 
 
 /*#################################################################################
@@ -6570,7 +6576,7 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
             $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
 		//Abre el marco del control de datos
-		$salida.='<div class="form-group input-group">';
+		$salida.='<div class="form-group input-group" style="display: block !important; ">';
 		
 		//Verifica si el ancho o el alto tienen alguna barra de proporcion indicando porcentaje final de escalado
 		$PartesAncho=explode("|",$registro_campos["ancho"]);
@@ -6581,8 +6587,7 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
 		$ProporcionFinalAltoCanvas=$PartesAlto[1]; if ($ProporcionFinalAltoCanvas=="") $ProporcionFinalAltoCanvas=1; //Define Proporcion final (0.5,2,1.5,etc)
 
 		// Muestra el campo
-		$salida.='
-			<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.$AnchoCanvas.'" height="'.$AltoCanvas.'" style="border: 1px solid #acc;">Su navegador no soporta Canvas</canvas>
+		$salida.='<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.$AnchoCanvas.'" height="'.$AltoCanvas.'" style="border: 1px solid #acc; display: inline;">Su navegador no soporta Canvas</canvas>
 			<a href="javascript:limpiar_CANVAS_'.$registro_campos["campo"].'();"><i class="fa fa-times fa-2x"></i></a>
 
 			<script type="text/javascript">';
