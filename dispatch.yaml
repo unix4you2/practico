@@ -1,0 +1,5 @@
+dispatch:
+
+# Envia cualquier solicitud al otro servicio previamente registrado.
+- url: "*/mod/pmydb/*"
+  service: practico-framework-pmydb
