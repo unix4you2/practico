@@ -19,6 +19,7 @@ core/comunes.php
 core/usuarios.php
 core/marco_nav.php
 core/marco_navizq.php
+mod/pcoder/inc/variables.php
 
 xml/*
 inc/practico/idiomas/*
@@ -38,6 +39,8 @@ LogCambios="
 * Enhan: Cambios de clave para usuarios han sido reemplazados por objetos internos
 * Enhan: Reajustado el menu de configuracion
 * Added: Se ha agregado un generador y consumidor nativo de URLs cortas
+* Added: Soporte de editor para archivos gcloudignore
+* Added: Agregadas directivas en app.yaml para despliegue rápido en GAE
 * Enhan: Las opciones agregadas al menú izquierdo en formatos dropdown son agregadas dentro de items independientes con su propio salto de línea y clasificadas automáticamente según su sección
 * Fixed: Se retira la recoleccion de informacion mediante getallheaders() para el reporte automático de Bugs por compatibilidad con despliegues elásticos sobre Google Application Engine.
 

@@ -71,7 +71,7 @@
 	$PCODER_Modos[]=array(Nombre => "FTL",	Extensiones => "ftl");
 	$PCODER_Modos[]=array(Nombre => "Gcode",	Extensiones => "gcode");
 	$PCODER_Modos[]=array(Nombre => "Gherkin",	Extensiones => "feature");
-	$PCODER_Modos[]=array(Nombre => "Gitignore",	Extensiones => "gitignore");
+	$PCODER_Modos[]=array(Nombre => "Gitignore",	Extensiones => "gitignore|gcloudignore");
 	$PCODER_Modos[]=array(Nombre => "Glsl",	Extensiones => "glsl|frag|vert");
 	$PCODER_Modos[]=array(Nombre => "golang",	Extensiones => "go");
 	$PCODER_Modos[]=array(Nombre => "Groovy",	Extensiones => "groovy");

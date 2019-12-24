@@ -20,6 +20,7 @@
 #   Referencia: https://cloud.google.com/appengine/docs/standard/python/config/appref
 
 runtime: php72  # Reemplazar con php73 tpara dicha version
+service: practico-framework
 #api_version: 1 # Obsoleto GAE version 7.2 PHP no requiere API Version
 
 handlers:
@@ -28,9 +29,9 @@ handlers:
   static_dir: inc/bootstrap/css
 
 # Sirve todas las imagenes como recursos estaticos
-- url: /(.+\.(gif|png|jpg))$
+- url: /(.+\.(gif|png|jpg|ico))$
   static_files: \1
-  upload: .+\.(gif|png|jpg)$
+  upload: .+\.(gif|png|jpg|ico)$
 
 # Sirve otras extensiones como estaticas
 - url: /(.+\.(js|css|less|scss|svg|eot|ttf|woff|woff2|otf|json|xml|htm|html|txt))$
@@ -40,3 +41,9 @@ handlers:
 # Sirve la aplicacion en general como index.php o public/index.php.
 - url: .*
   script: auto  # Antes: index.php
+
+- url: /mod/pmydb
+  script: auto
+
+# Para evitar el despliegue de archivos y directorios especificos (ver archivo .gcloudignore)
+
