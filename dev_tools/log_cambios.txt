@@ -43,6 +43,8 @@ LogCambios="
 * Added: Agregadas directivas en app.yaml para despliegue rápido en GAE
 * Enhan: Las opciones agregadas al menú izquierdo en formatos dropdown son agregadas dentro de items independientes con su propio salto de línea y clasificadas automáticamente según su sección
 * Fixed: Se retira la recoleccion de informacion mediante getallheaders() para el reporte automático de Bugs por compatibilidad con despliegues elásticos sobre Google Application Engine.
+* Enhan: Aumentado el tamano del campo ancho para la tabla de informes de manera que permita establecer el ancho según una clase CSS de Bootstrap para informes disponibles en el home de ususario y ajustadas las ayudas correspondientes en formulario de edicion de informes.
+
 
 "
 
@@ -60,6 +62,9 @@ CREATE TABLE core_acortadorurls (
   hora_creacion time NOT NULL,
   contador_uso int(11) NOT NULL DEFAULT '0'
 );
+
+ALTER TABLE core_informe CHANGE ancho ancho varchar(250) COLLATE 'utf8_general_ci' NULL;
+
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
