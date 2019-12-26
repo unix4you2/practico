@@ -425,7 +425,17 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 
 	if ($PCO_Accion=="PCO_VerMenu" && $PCOSESS_SesionAbierta)
 		{ 
-			
+            //Presenta informes marcados como de publicacion automatica en el home para el usuario actual.  PILAS. esto no aplica para el admin a menos que -por debajo- se haga la insercion del registro de permisos a modo pruebas
+            $InformesHome=PCO_EjecutarSQL("SELECT ".$TablasCore."informe.id,ancho FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario' AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND permitido_home='S' ORDER BY titulo ");
+            while ($RegistroInformeHome=$InformesHome->fetch())
+                {
+                    if ($RegistroInformeHome["ancho"]!="")
+                        echo "<div class='".$RegistroInformeHome["ancho"]."'>";
+                    PCO_CargarInforme($RegistroInformeHome["id"],0);
+                    if ($RegistroInformeHome["ancho"]!="")
+                        echo "</div>";
+                }
+
 			// Carga las opciones del ESCRITORIO
 			echo '
 			<div id="PCODIV_ArribaEscritorio"></div>
