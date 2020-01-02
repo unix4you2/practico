@@ -279,6 +279,7 @@
                             //alert(" '.$TablasDataTable[$i].' Paginacion:'.$Paginacion.'  ColumnaTotales:'.$ColumnaTotales.'  CadenaFormateadaTotales:'.$CadenaFormateadaTotales.'  "); //Depuracion solamente
                             var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
                                 {
+                                    destroy: true,   //Habilita autodestruccion de objeto si se necesita reinicializar
                                     dom: "Blfrtip",  //Ej:  Blfrtip  Da formato a la tabla: Ver https://datatables.net/reference/option/dom
                                     buttons: [
                                         '.$CadenaExportaCLP.'

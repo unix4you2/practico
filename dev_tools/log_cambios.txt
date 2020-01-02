@@ -19,6 +19,7 @@ core/comunes.php
 core/informes.php
 core/menus.php
 core/usuarios.php
+core/marco_abajo.php
 core/marco_nav.php
 core/marco_navizq.php
 mod/pcoder/inc/variables.php
@@ -47,6 +48,8 @@ LogCambios="
 * Fixed: Se retira la recoleccion de informacion mediante getallheaders() para el reporte automático de Bugs por compatibilidad con despliegues elásticos sobre Google Application Engine.
 * Enhan: Aumentado el tamano del campo ancho para la tabla de informes de manera que permita establecer el ancho según una clase CSS de Bootstrap para informes disponibles en el home de ususario y ajustadas las ayudas correspondientes en formulario de edicion de informes.
 * Added: Ahora sobre los informes se puede definir si éstos estarán o no disponibles para publicar directamente en el home como una forma rápida de generación de tableros de mando de usuario.  Un informe podrá entonces ser visualizado por medio del embebido de un formulario (forma tradicional) o la activación de disponibilidad en el home y posterior asignación como permiso al usuario.  Práctico automáticamente buscará informes de home asignados directamente al usuario y los presentará automáticamente en el escritorio.
+* Enhan: Actualizada clase para elementos ocultos en impresion que sobreescribe el estado previo de visibilidad como !important para garantizar su ocultamiento.
+* Enhan: Habilitada bandera de autodestruccion automatica de objetos tipo DataTable para cuando estos requieran ser reinicializados.  Si no existe el objeto lo inicializa, caso contrario lo elimina y reinicializa.
 
 "
 

@@ -25,7 +25,7 @@ ESTILOS ADICIONALES PARA BOOTSTRAP
 @media print {
 *.oculto_impresion
     {
-        display: none;
+        display: none !important;
         width: 0px;
     }
 }
