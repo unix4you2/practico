@@ -38,14 +38,13 @@
             <div id="boton_menu_izquierdo" style="position: absolute; left: 1px; top: 60px;  z-index: 2;">
                 <i class="fa fa-indent fa-border texto-negro texto-blink" OnClick="javascript:barra_navegacion_izquierda_toggle('<?php if (@$ModoBarraMenuRecibido=="flotante") echo "flotante"; else echo "responsive"; ?>');"></i>
             </div>
-            <div id="barra_navegacion_izquierda" class="navbar-default sidebar" role="navigation">
+            <div id="barra_navegacion_izquierda" class="navbar-default sidebar" role="navigation" style="z-indexxxx:1000;">
                 <!-- DEPRECATED para el marco inferior <div class="sidebar-nav navbar-collapse">-->
                 <div id="PCO_BarraNavegacionIzquierda">
                     <!--INICIO DE OPCIONES BARRA LATERAL-->
                         <ul class="nav" id="side-menu">
                             
-
-                            <div id="PCODIV_ArribaMenuLateral" align=right></div>
+                            <div id="PCODIV_ArribaMenuLateral"></div>
                             
                             <form name="datos_busqueda_home" action="<?php echo $ArchivoCORE; ?>" method="POST">
                             <li class="sidebar-search">
@@ -68,10 +67,11 @@
                             <li>
                                 <a href="javascript:document.PCO_MisInformes.submit();"><i class="fa fa-pie-chart fa-fw"></i> <?php echo $MULTILANG_UsrInfDisp; ?></a>
                             </li>
-                            
+
+							
                             <?php
                             	// Carga las opciones del ACORDEON
-                            	echo '<li><div align="center">';
+                            	echo '<li>';
                             	// Si el usuario es diferente al administrador agrega condiciones al query
                             	if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
                             		{
@@ -86,7 +86,7 @@
                             			$seccion_menu_activa=$RegistroConteoSecciones["seccion"];
                             			$conteo_opciones=$RegistroConteoSecciones["conteo"];
                             
-                            			echo '<div style="background: darkgray !important; margin:0px; paddign:0px; width: 100%; font-size:0.95em; font-weight:bold;" class="well well-sm">'.$seccion_menu_activa.'</div>';
+                            			echo '<div style="background: darkgray !important; margin:0px; paddign:0px; width: 100%; font-size:0.95em; font-weight:bold;" class="well well-sm" align=center>'.$seccion_menu_activa.'</div>';
                             
                             			//PCO_AbrirVentana($seccion_menu_activa.' ('.$conteo_opciones.')', 'panel-primary');
                             			// Busca las opciones dentro de la seccion
@@ -101,33 +101,37 @@
                             			while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
                             				PCO_ImprimirOpcionMenu($registro_opciones_acordeon,'lateral');
                             		}
-                            	echo '</div></li>';
+                            	echo '</li>';
                             ?>
 
-							<div id="PCODIV_AbajoMenuLateral"></div>
+                            <li>
+                                <div id="PCODIV_AbajoMenuLateral"></div>
+
+                                <div class="alert alert-info btn-xs">
+                                    <strong><i class='fa fa-bolt fa-fw'></i> 
+                                    <?php 
+                                    //Presenta informacion de carga del aplicativo
+                                    echo $MULTILANG_Instante; ?>:</strong>&nbsp;&nbsp;<?php echo $PCO_FechaOperacionGuiones;?>&nbsp;&nbsp;<?php echo $PCO_HoraOperacionPuntos;?>
+                                    <br>
+                                    <?php
+                                        // Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
+                                        if(PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="")
+                                            {
+                                                echo "<strong><i class='fa fa-cog fa-fw'></i> $MULTILANG_Accion:</strong> $PCO_Accion <br>";
+                                                echo "<strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga:</strong> <div id='PCO_TCarga' name='PCO_TCarga' style='display: inline-block;'></div> s<br>";
+                                                echo "<strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga (JS):</strong> <div id='PCO_TCargaJS' name='PCO_TCargaJS' style='display: inline-block;'></div> s<br>";
+                                                echo "<strong><i class='fa fa-file-code-o fa-fw'></i> Inclusiones:</strong> ".(count(get_included_files()))."<hr>"; // Retorna arreglo con cantidad de archivos incluidos
+                                            }
+                                    ?>
+                                    <div align=center>
+            							<font size=1><i class="fa fa-copyright"></i> <i><?php echo $MULTILANG_GeneradoPor; ?> <a href="http://www.practico.org" target="_BLANK">Pr&aacute;ctico</a></i></font>
+                                    </div>
+                                </div>
+                            </li>
+
                         </ul>
                     <!--FIN DE OPCIONES BARRA LATERAL-->
 
-                    <div class="alert alert-info btn-xs" role="alert">
-                        <strong><i class='fa fa-bolt fa-fw'></i> 
-                        <?php 
-                        //Presenta informacion de carga del aplicativo
-                        echo $MULTILANG_Instante; ?>:</strong>&nbsp;&nbsp;<?php echo $PCO_FechaOperacionGuiones;?>&nbsp;&nbsp;<?php echo $PCO_HoraOperacionPuntos;?>
-                        <br>
-                        <?php
-                            // Muestra la accion actual si el usuario es administrador y la accion no es vacia - Sirve como guia a la hora de crear objetos
-                            if(PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion!="")
-                                {
-                                    echo "<strong><i class='fa fa-cog fa-fw'></i> $MULTILANG_Accion:</strong> $PCO_Accion <br>";
-                                    echo "<strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga:</strong> <div id='PCO_TCarga' name='PCO_TCarga' style='display: inline-block;'></div> s<br>";
-                                    echo "<strong><i class='fa fa-clock-o fa-fw'></i> $MULTILANG_TiempoCarga (JS):</strong> <div id='PCO_TCargaJS' name='PCO_TCargaJS' style='display: inline-block;'></div> s<br>";
-                                    echo "<strong><i class='fa fa-file-code-o fa-fw'></i> Inclusiones:</strong> ".(count(get_included_files()))."<hr>"; // Retorna arreglo con cantidad de archivos incluidos
-                                }
-                        ?>
-                        <div align=center>
-							<font size=1><i class="fa fa-copyright"></i> <i><?php echo $MULTILANG_GeneradoPor; ?> <a href="http://www.practico.org" target="_BLANK">Pr&aacute;ctico</a></i></font>
-                        </div>
-                    </div>
                 </div>
                 <!-- DEPRECATED </div> FIN DEL /.sidebar-collapse -->
             </div>

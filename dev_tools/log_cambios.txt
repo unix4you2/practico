@@ -50,6 +50,7 @@ LogCambios="
 * Added: Ahora sobre los informes se puede definir si éstos estarán o no disponibles para publicar directamente en el home como una forma rápida de generación de tableros de mando de usuario.  Un informe podrá entonces ser visualizado por medio del embebido de un formulario (forma tradicional) o la activación de disponibilidad en el home y posterior asignación como permiso al usuario.  Práctico automáticamente buscará informes de home asignados directamente al usuario y los presentará automáticamente en el escritorio.
 * Enhan: Actualizada clase para elementos ocultos en impresion que sobreescribe el estado previo de visibilidad como !important para garantizar su ocultamiento.
 * Enhan: Habilitada bandera de autodestruccion automatica de objetos tipo DataTable para cuando estos requieran ser reinicializados.  Si no existe el objeto lo inicializa, caso contrario lo elimina y reinicializa.
+* Fixed: Corregido ocultamiento de menues laterales sobre dispositivos móviles.
 
 "
 
