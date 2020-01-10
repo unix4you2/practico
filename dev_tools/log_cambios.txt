@@ -51,7 +51,7 @@ LogCambios="
 * Enhan: Actualizada clase para elementos ocultos en impresion que sobreescribe el estado previo de visibilidad como !important para garantizar su ocultamiento.
 * Enhan: Habilitada bandera de autodestruccion automatica de objetos tipo DataTable para cuando estos requieran ser reinicializados.  Si no existe el objeto lo inicializa, caso contrario lo elimina y reinicializa.
 * Fixed: Corregido ocultamiento de menues laterales sobre dispositivos móviles.
-
+* Enhan: Funciones de generacion de paneles PCO_ImprimirPanelSimpleDashboard() soportan la especificacion de la clase CSS usada para sus titulos
 "
 
 ########################################################################

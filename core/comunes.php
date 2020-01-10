@@ -460,11 +460,12 @@ function PCO_DecodificarCadena_Binario($input)
 		SubTitulo - Texto corto explicativo del cuadro a ser impreso debajo del titulo en letra pequena.
 		EnlaceTexto - Texto a presentar al usuario para hacer clic sobre el.
 		EnlaceURL - URL para agregar al elemento Anchor.  Soporta los modificadores estandar de HTML.
+		ClaseTextoTitulo - Clase CSS para ser aplicada al texto del titulo
 
 	Salida:
 		Impresion del codigo HTML correspondiente
 */
-function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIconoFA,$Titulo,$SubTitulo,$EnlaceTexto,$EnlaceURL)
+function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIconoFA,$Titulo,$SubTitulo,$EnlaceTexto,$EnlaceURL,$ClaseTextoTitulo="huge")
     {
         $SalidaFuncion="
             <div class='$ClaseColumnas'>
@@ -475,7 +476,7 @@ function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIcon
                                 <i class='fa $ClaseIconoFA'></i>
                             </div>
                             <div class='col-xs-9 text-right'>
-                                <div class='huge'>
+                                <div class='$ClaseTextoTitulo'>
                                     $Titulo
                                 </div>
                                 <div>$SubTitulo</div>
