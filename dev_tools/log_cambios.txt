@@ -55,7 +55,8 @@ LogCambios="
 * Added: El editor de codigo {P}Coder almacena el tipo de origen del codigo operado: A=rchivo F=ormulario I=nforme
 * Added: La funcion de CallBack para reemplazo de variables en cadenas PHP ha cambiado y permite ahora utilizar parametros para obtener valores directos desde un registro de datos del formulario que se esta cargando en el momento.  Para obtener valores de campos del formulario cargado actualmente directamente desde su variable PHP utilice la notacion {$ PCO_RegistroDatosActivo[PosicionONombreCampo]} lo que retorna el valor del campo para el registro que actualmente se esta recuperando sobre el formulario.  Puede ser utilizada en:  Campos texto corto (placeholder, valor, label y ayudas), Campos texto largo (placeholder, valor, label y ayudas), Campos de texto con formato no responsive (ayudas), Listas de selección (label, valores de opciones, etiquetas de opciones, condiciones de filtrado y ayudas), Etiquetas (valor), Valor de campo como etiqueta (ayudas), Listas tipo radio (label, valor del elemento, etiqueta del elemento y ayudas), Campos tipo check (label, tag personalizado), Deslizadores (label y ayudas), Archivos adjuntos (label y ayudas), Objetos canvas (label y ayudas), Objetos webcam (label y ayudas), Botones de comando (mensajes de confirmación, label),
 * Enhan: Las opciones del menu de navegacion izquierdo son presentadas de acuerdo a su peso de manera ascendente
-
+* Enhan: Eliminado acceso a Waffle para seguimiento de Issues y PR. Agregado indicador de listo para PHP7.  Eliminado acceso a Hackpad para control de actividades e ideas por ejecutar.
+* Fixed: Corregido script en fallo durante pruebas unitarias de SQLite.
 "
 
 ########################################################################

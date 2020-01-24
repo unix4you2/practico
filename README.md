@@ -1,7 +1,7 @@
 ![PRACTICO](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/LogoHorizontal.png)
-
-[![Desplegar](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)    [![HackPad](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/hackpad.png)](https://practico.hackpad.com/)  [![Build Status](https://travis-ci.org/unix4you2/practico.svg?branch=master)](https://travis-ci.org/unix4you2/practico)
-[![Stories in Ready](https://badge.waffle.io/unix4you2/practico.svg?label=ready&title=Ready)](http://waffle.io/unix4you2/practico)
+![PHP7](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/php7.svg)
+[![Desplegar](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)
+[![Build Status](https://travis-ci.org/unix4you2/practico.svg?branch=master)](https://travis-ci.org/unix4you2/practico)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Estadisticas del proyecto](https://www.openhub.net/p/practicoframework/widgets/project_thin_badge.gif)](https://www.openhub.net/p/practicoframework)
 [![Da las gracias!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://www.practico.org/agradecimientos)
