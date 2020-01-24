@@ -1,10 +1,10 @@
 ![PRACTICO](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/LogoHorizontal.png)
 ![PHP7](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/php7.png)
-[![Desplegar](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)
 [![Build Status](https://travis-ci.org/unix4you2/practico.svg?branch=master)](https://travis-ci.org/unix4you2/practico)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Estadisticas del proyecto](https://www.openhub.net/p/practicoframework/widgets/project_thin_badge.gif)](https://www.openhub.net/p/practicoframework)
 [![Da las gracias!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://www.practico.org/agradecimientos)
+[![Desplegar](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)
 
 Practico es una herramienta de codigo abierto para el diseño automatico de aplicaciones web de manera agil y sin digitar codigo
 
@@ -40,22 +40,16 @@ Practico es una herramienta de codigo abierto para el diseño automatico de apli
 ## Documentación para desarrolladores
 Junto con un manual completo en formato Google Docs y puede ser encontrada en el sitio web sobre el enlace del menú superior "Documentación" o en:
 
- * https://www.practico.org/documentaci%C3%B3n
+ * [Manuales y Documentación](https://www.practico.org/documentaci%C3%B3n)
 
 ### Ideas y puntos de contacto
 
  * Espacios de discusión en nuestro [Grupo de Google](https://groups.google.com/forum/#!forum/practicodev)
  * Ayuda a mejorar la documentación existente [Manuales](https://www.practico.org/documentaci%C3%B3n)
 
-### Despliegue y construcción rápida
-
- * [![Desplegar](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master) Para aquellos usuarios de Heroku que deseen hacer un despliegue de Práctico sobre su perfil
-
- * [![Travis](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/travis.png)](https://travis-ci.org/unix4you2/practico) para quienes deseen ver el estado actual de la construcción para la rama principal del proyecto.  Reportada también arriba.
-
 #### Métricas del proyecto
 
- * https://www.practico.org/documentaci%C3%B3n/estad%C3%ADsticas-de-uso
+ * [Quienes nos usan](https://www.practico.org/documentaci%C3%B3n/estad%C3%ADsticas-de-uso)
 
 #### Soporte y donaciones al proyecto
 
