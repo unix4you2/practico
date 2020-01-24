@@ -1,5 +1,5 @@
 ![PRACTICO](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/LogoHorizontal.png)
-![PHP7](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/php7.svg)
+![PHP7](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/php7.png)
 [![Desplegar](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)
 [![Build Status](https://travis-ci.org/unix4you2/practico.svg?branch=master)](https://travis-ci.org/unix4you2/practico)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -40,13 +40,12 @@ Practico es una herramienta de codigo abierto para el diseño automatico de apli
 ## Documentación para desarrolladores
 Junto con un manual completo en formato Google Docs y puede ser encontrada en el sitio web sobre el enlace del menú superior "Documentación" o en:
 
- * https://github.com/unix4you2/practico/wiki
+ * https://www.practico.org/documentaci%C3%B3n
 
 ### Ideas y puntos de contacto
 
- * Comparte tus ideas de mejora en nuestro [Hackpad](https://practico.hackpad.com/)
  * Espacios de discusión en nuestro [Grupo de Google](https://groups.google.com/forum/#!forum/practicodev)
- * Ayuda a mejorar la documentación existente en nuestra [Wiki](https://github.com/unix4you2/practico/wiki)
+ * Ayuda a mejorar la documentación existente [Manuales](https://www.practico.org/documentaci%C3%B3n)
 
 ### Despliegue y construcción rápida
 
@@ -56,7 +55,7 @@ Junto con un manual completo en formato Google Docs y puede ser encontrada en el
 
 #### Métricas del proyecto
 
-[![Throughput Graph](https://graphs.waffle.io/unix4you2/practico/throughput.svg)](https://waffle.io/unix4you2/practico/metrics)
+ * https://www.practico.org/documentaci%C3%B3n/estad%C3%ADsticas-de-uso
 
 #### Soporte y donaciones al proyecto
 
