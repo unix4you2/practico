@@ -337,7 +337,8 @@ CREATE TABLE core_informe (
   ocultar_piepagina integer DEFAULT '0',
   anular_acciones integer DEFAULT '0',
   encabezado_html text,
-  tabla_responsive text DEFAULT 'N'
+  tabla_responsive text DEFAULT 'N',
+  permitido_home text DEFAULT 'N'
 
 );
 
@@ -627,7 +628,8 @@ CREATE TABLE core_pcoder_historial (
   usuario text,
   lineas integer,
   caracteres integer,
-  contenido text
+  contenido text,
+  tipo_origen text NULL DEFAULT 'A'
 
 );
 
@@ -655,7 +657,7 @@ CREATE TABLE core_pcoder_chat (
 );
 
 CREATE TABLE core_acortadorurls (
-  id INTEGER  PRIMARY KEY AUTO_INCREMENT,
+  id INTEGER  PRIMARY KEY AUTOINCREMENT,
   url_larga text,
   url_corta text,
   usuario text,

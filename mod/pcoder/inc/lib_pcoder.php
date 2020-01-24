@@ -271,7 +271,7 @@ if ($PCO_Accion=="PCOMOD_GuardarArchivo")
                 //Lleva el historial de revision
                 $CantidadLineas=$_POST["PCODER_NroLineasDocumento"];
                 $CantidadCaracteres=$_POST["PCODER_NroCaracteresDocumento"];
-		        PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."pcoder_historial (archivo,fecha_edicion,usuario,lineas,caracteres,contenido) VALUES (?,?,?,?,?,?)","$PCODER_archivo$_SeparadorCampos_$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00$_SeparadorCampos_$PCOSESS_LoginUsuario$_SeparadorCampos_$CantidadLineas$_SeparadorCampos_$CantidadCaracteres$_SeparadorCampos_$ContenidoArchivo","",0,0);
+		        PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."pcoder_historial (archivo,fecha_edicion,usuario,lineas,caracteres,contenido,tipo_origen) VALUES (?,?,?,?,?,?,'A')","$PCODER_archivo$_SeparadorCampos_$PCO_PCODER_FechaOperacionGuiones $PCO_PCODER_HoraOperacionPuntos:00$_SeparadorCampos_$PCOSESS_LoginUsuario$_SeparadorCampos_$CantidadLineas$_SeparadorCampos_$CantidadCaracteres$_SeparadorCampos_$ContenidoArchivo","",0,0);
 	        }
         echo '<script type="" language="JavaScript"> console.log("PCODER: Archivo guardado");  </script>';
 

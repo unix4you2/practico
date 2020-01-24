@@ -52,6 +52,10 @@ LogCambios="
 * Enhan: Habilitada bandera de autodestruccion automatica de objetos tipo DataTable para cuando estos requieran ser reinicializados.  Si no existe el objeto lo inicializa, caso contrario lo elimina y reinicializa.
 * Fixed: Corregido ocultamiento de menues laterales sobre dispositivos móviles.
 * Enhan: Funciones de generacion de paneles PCO_ImprimirPanelSimpleDashboard() soportan la especificacion de la clase CSS usada para sus titulos
+* Added: El editor de codigo {P}Coder almacena el tipo de origen del codigo operado: A=rchivo F=ormulario I=nforme
+* Added: La funcion de CallBack para reemplazo de variables en cadenas PHP ha cambiado y permite ahora utilizar parametros para obtener valores directos desde un registro de datos del formulario que se esta cargando en el momento.  Para obtener valores de campos del formulario cargado actualmente directamente desde su variable PHP utilice la notacion {$ PCO_RegistroDatosActivo[PosicionONombreCampo]} lo que retorna el valor del campo para el registro que actualmente se esta recuperando sobre el formulario.  Puede ser utilizada en:  Campos texto corto (placeholder, valor, label y ayudas), Campos texto largo (placeholder, valor, label y ayudas), Campos de texto con formato no responsive (ayudas), Listas de selección (label, valores de opciones, etiquetas de opciones, condiciones de filtrado y ayudas), Etiquetas (valor), Valor de campo como etiqueta (ayudas), Listas tipo radio (label, valor del elemento, etiqueta del elemento y ayudas), Campos tipo check (label, tag personalizado), Deslizadores (label y ayudas), Archivos adjuntos (label y ayudas), Objetos canvas (label y ayudas), Objetos webcam (label y ayudas), Botones de comando (mensajes de confirmación, label),
+* Enhan: Las opciones del menu de navegacion izquierdo son presentadas de acuerdo a su peso de manera ascendente
+
 "
 
 ########################################################################
@@ -69,8 +73,9 @@ CREATE TABLE core_acortadorurls (
   contador_uso int(11) NOT NULL DEFAULT '0'
 );
 
-ALTER TABLE core_informe CHANGE ancho ancho varchar(250) COLLATE 'utf8_general_ci' NULL;
-ALTER TABLE core_informe ADD permitido_home char(1) COLLATE 'utf8_general_ci' NULL DEFAULT 'N';
+ALTER TABLE core_informe CHANGE ancho ancho varchar(250);
+ALTER TABLE core_informe ADD permitido_home char(1) NULL DEFAULT 'N';
+ALTER TABLE core_pcoder_historial ADD tipo_origen char(1) NULL DEFAULT 'A';
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

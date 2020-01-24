@@ -1848,25 +1848,6 @@ function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: PCO_CallBack_ReemplazarVariablesPHPEnCadena
-	Devuelve una cadena evaluada donde se reemplazan las expresiones de variables PHP con el formato {$variable} por su valor definido
-
-	Ver tambien:
-		<PCO_ReemplazarVariablesPHPEnCadena>
-*/
-function PCO_CallBack_ReemplazarVariablesPHPEnCadena($ocurrencia)
-	{
-        //Declara la variable como global, pues no se sabe qué variable y en qué ambito se encuentra
-        global ${$ocurrencia[1]};
-        //Obtiene el valor de la variable
-        //return eval('return $' . $ocurrencia[1] . ';');  //Funcion eval reemplazada por seguridad
-        return ${$ocurrencia[1]};
-	}
-
-
-/* ################################################################## */
-/* ################################################################## */
-/*
 	Function: PCO_ReemplazarVariablesPHPEnCadena
 	Devuelve una cadena evaluada donde se reemplazan las expresiones de variables PHP con el formato {$variable} por su valor definido
 
@@ -1879,12 +1860,36 @@ function PCO_CallBack_ReemplazarVariablesPHPEnCadena($ocurrencia)
 		Cadena con las variables reemplazadas
 
 	Ver tambien:
-		<PCO_ConstruirConsultaInforme> | <PCO_CallBack_ReemplazarVariablesPHPEnCadena>
+		<PCO_ConstruirConsultaInforme>
 */
-function PCO_ReemplazarVariablesPHPEnCadena($cadena_original)
+function PCO_ReemplazarVariablesPHPEnCadena($cadena_original,$PCO_RegistroDatosFormulario="")
 	{
 	    //Reemplaza todas las ocurrencias de variables por el valor de la misma en su variable global
-        $cadena_final = preg_replace_callback('~\{\$(.*?)\}~si',"PCO_CallBack_ReemplazarVariablesPHPEnCadena",$cadena_original);
+        $cadena_final = preg_replace_callback('~\{\$(.*?)\}~si',    //Aqui sigue la funcion de CallBack (ANTES de vers. 19.9 era funcion independiente sin recepcion de parametros)
+                                                                    function  ($ocurrencia) use ($PCO_RegistroDatosFormulario)
+                                                                    	{
+                                                                            //Declara la variable como global, pues no se sabe qué variable y en qué ambito se encuentra
+                                                                            //Busca si tiene corchetes (porque puede ser un arreglo)
+                                                                            if (strpos ($ocurrencia[1] , "[") !== false && strpos ($ocurrencia[1] , "]") !== false)
+                                                                                {
+                                                                                    $VariableRealArreglo=strstr ( $ocurrencia[1]  , "[", TRUE );
+                                                                                    $PosicionArreglo=str_replace ( $VariableRealArreglo."[" , "" , $ocurrencia[1] );
+                                                                                    $PosicionArreglo=strstr ( $PosicionArreglo  , "]", TRUE );
+                                                                                    //Si la variable es la de contenido de registros de practico
+                                                                                    if ($VariableRealArreglo=="PCO_RegistroDatosActivo")
+                                                                                        return $PCO_RegistroDatosFormulario[$PosicionArreglo];
+                                                                                    else
+                                                                                        return;
+                                                                                }
+                                                                            else
+                                                                                {
+                                                                                    global ${$ocurrencia[1]};
+                                                                                    //Obtiene el valor de la variable
+                                                                                    //return eval('return $' . $ocurrencia[1] . ';');  //Funcion eval reemplazada por seguridad
+                                                                                    return ${$ocurrencia[1]};                
+                                                                                }
+                                                                    	}  
+                                                                    ,$cadena_original);
 		return $cadena_final;
 	}
 
@@ -5059,13 +5064,13 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 		// Especifica textos de placeholder si existen
 		$cadena_placeholder='';
 		if ($registro_campos["valor_placeholder"]!="")
-			$cadena_placeholder=' placeholder="'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_placeholder"]).'" ';
+			$cadena_placeholder=' placeholder="'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_placeholder"],$registro_datos_formulario).'" ';
 
 		// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 		$cadena_valor='';
 		if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=' value="'.$registro_campos["valor_predeterminado"].'" ';
 		//Reemplaza segundas variables sobre valores predeterminados
-		$cadena_valor=' value="'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_predeterminado"]).'" ';
+		$cadena_valor=' value="'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_predeterminado"],$registro_datos_formulario).'" ';
 		//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.
 		//Conserva compatibilidad hacia atras en versiones donde las variables comienzan solamente con el signo pesos y se permite solo una
 		if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
@@ -5155,7 +5160,7 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 
         //Agrega etiqueta del campo si es diferente de vacio
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-            $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+            $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).':</label>';
 		//Abre el marco del control de datos style="display:inline;"
 		$salida.='<div class="form-group input-group '.$cadena_clase_datepicker.'" '.$cadena_ID_datepicker.'>';
         // Muestra el campo
@@ -5189,7 +5194,7 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
                 $salida.= '<span class="input-group-addon">';
                 if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitValorUnico.'</b><br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"],$registro_datos_formulario).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"],$registro_datos_formulario).'"><i class="fa fa-question-circle"></i></a>';
                 $salida.= '</span>';
             }
         //Cierra marco del control de datos
@@ -5279,11 +5284,11 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
 		// Especifica textos de placeholder si existen
 		$cadena_placeholder='';
 		if ($registro_campos["valor_placeholder"]!="")
-			$cadena_placeholder=' placeholder="'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_placeholder"]).'" ';
+			$cadena_placeholder=' placeholder="'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_placeholder"],$registro_datos_formulario).'" ';
 
 		// Define cadena en caso de tener valor predeterminado o el valor tomado desde el registro buscado
 		$cadena_valor='';
-		if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_predeterminado"]);
+		if ($registro_campos["valor_predeterminado"]!="") $cadena_valor=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_predeterminado"],$registro_datos_formulario);
 		//Evalua si el valor predeterminado tiene signo $ al comienzo y ademas es una variable definida para poner su valor.  COMPATIBILIDAD HACIA ATRAS
 		if (substr($registro_campos["valor_predeterminado"], 0,1)=="$")
 			{
@@ -5304,7 +5309,7 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
 
         //Agrega etiqueta del campo si es diferente de vacio
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).':</label>';
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
@@ -5315,7 +5320,7 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"],$registro_datos_formulario).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"],$registro_datos_formulario).'"><i class="fa fa-question-circle"></i></a>';
                 $salida.= '</span>';
             }
         //Cierra marco del control de datos
@@ -5509,7 +5514,7 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
 
 		// Muestra indicadores de obligatoriedad o ayuda
 		if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-		if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+		if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"],$registro_datos_formulario).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"],$registro_datos_formulario).'"><i class="fa fa-question-circle"></i></a>';
 
 		//Activa booleana de existencia de tipo de campo para evitar doble inclusion de javascript
 		$existe_campo_textoformato=1;
@@ -5568,7 +5573,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
 
         //Agrega etiqueta del campo si es diferente de vacio
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-            $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+            $salida.='<label id="PCOEtiqueta_'.$registro_campos["campo"].'" for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).':</label>';
 
 		// Define si el control es solo lectura o no
 		$EstadoLecturaControl="";
@@ -5791,7 +5796,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                             else
                                 $salida.= "</optgroup>";  //Si no se encuentra valor de etiqueta alguno entonces cierra el grupo
                         else
-                            $salida.= "<option value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i])."' ".$cadena_predeterminado.">".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i])."</option>";
+                            $salida.= "<option value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i],$registro_datos_formulario)."' ".$cadena_predeterminado.">".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i],$registro_datos_formulario)."</option>";
                     }
 
             //Cierra DIV para cambio de opciones en caliente
@@ -5819,7 +5824,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                             $CondicionFiltradoConsulta=" AND ".$CondicionFiltradoConsulta;
                             //Si encuentra comillas dobles las reemplaza por simples pues son las aceptadas en JS
                             $CondicionFiltradoConsulta=str_replace('"',"'",$CondicionFiltradoConsulta);
-                            $CondicionFiltradoConsulta=PCO_ReemplazarVariablesPHPEnCadena($CondicionFiltradoConsulta);
+                            $CondicionFiltradoConsulta=PCO_ReemplazarVariablesPHPEnCadena($CondicionFiltradoConsulta,$registro_datos_formulario);
                         }
                     
                     echo '<script type="text/javascript">
@@ -5908,7 +5913,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                 if ($registro_campos["ajax_busqueda"] == "1") $salida.= '<a  data-toggle="tooltip" data-html="true"  data-placement="top" title="<b>'.$MULTILANG_FrmActualizaAjax.'</b>" class="btn btn-success btn-xs" href="javascript:PCO_ObtenerListaOpciones_'.$registro_campos["campo"].'();"><i class="fa fa-refresh"></i></a>&nbsp;&nbsp;&nbsp;';
                 if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitValorUnico.'</b><br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true" data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"  data-toggle="tooltip" data-html="true" data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"],$registro_datos_formulario).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"],$registro_datos_formulario).'"><i class="fa fa-question-circle"></i></a>';
                 $salida.= '</span>';
             }
         //Cierra marco del control de datos
@@ -5964,7 +5969,7 @@ function PCO_CargarObjetoEtiqueta($registro_campos,$registro_datos_formulario)
 	{
 		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
         $salida.= '<div id="'.$registro_campos["id_html"].'">';
-		$salida.=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_etiqueta"]);
+		$salida.=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["valor_etiqueta"],$registro_datos_formulario);
         $salida.= '</div>';
 		return $salida;
 	}
@@ -6057,7 +6062,7 @@ function PCO_CargarObjetoCampoEtiqueta($registro_campos,$registro_datos_formular
 
         //Agrega marco bootstrap antes de devolver contenidos
 		if ($registro_campos["ocultar_etiqueta"]=="0")
-			$salida='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+			$salida='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).':</label>';
         $salida.='<div id="'.$registro_campos["campo"].'">'.$cadena_valor.'</div>';
 		return $salida;
 	}
@@ -6201,7 +6206,7 @@ function PCO_CargarObjetoListaRadio($registro_campos,$registro_datos_formulario,
 
         //Agrega etiqueta del campo si es diferente de vacio
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).':</label>';
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
@@ -6211,7 +6216,7 @@ function PCO_CargarObjetoListaRadio($registro_campos,$registro_datos_formulario,
 				$cadena_predeterminado='';
 				if ($valores_lista[$i]==$cadena_valor)
 					$cadena_predeterminado=' CHECKED ';
-				$salida.= "<input class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i])."' ".$cadena_predeterminado." ".$registro_campos["personalizacion_tag"]." >".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i])."<br>";
+				$salida.= "<input class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i],$registro_datos_formulario)."' ".$cadena_predeterminado." ".$registro_campos["personalizacion_tag"]." >".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i],$registro_datos_formulario)."<br>";
 			}
 		//Si hay algun indicador adicional del campo abre los add-ons
         if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
@@ -6220,7 +6225,7 @@ function PCO_CargarObjetoListaRadio($registro_campos,$registro_datos_formulario,
                 // Muestra indicadores de obligatoriedad o ayuda
                 if ($registro_campos["valor_unico"] == "1") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitValorUnico.'</b><br>'.$MULTILANG_DesValorUnico.'"><i class="fa fa-key fa-flip-horizontal texto-rojo"></i></a>';
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"],$registro_datos_formulario).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"],$registro_datos_formulario).'"><i class="fa fa-question-circle"></i></a>';
                 $salida.= '</span>';
             }
         //Cierra marco del control de datos
@@ -6285,14 +6290,14 @@ function PCO_CargarObjetoCasillaCheck($registro_campos,$registro_datos_formulari
 			}
 
         // Muestra el campo
-        $CadenaEtiquetaCheck=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]);
+        $CadenaEtiquetaCheck=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario);
         if($registro_campos["ocultar_etiqueta"]=="1") $CadenaEtiquetaCheck="";
 
         $salida.= '
 			<input type="hidden" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor_almacenada.'">
 			<div class="checkbox">
 				<label>
-					<input onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["personalizacion_tag"]).' > '.$CadenaEtiquetaCheck.'
+					<input onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["personalizacion_tag"],$registro_datos_formulario).' > '.$CadenaEtiquetaCheck.'
 				</label>
 			</div>
 			<script language="JavaScript">
@@ -6350,7 +6355,7 @@ function PCO_CargarObjetoDeslizador($registro_campos,$registro_datos_formulario)
 
         //Agrega etiqueta del campo si es diferente de vacio
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).':</label>';
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
@@ -6374,7 +6379,7 @@ function PCO_CargarObjetoDeslizador($registro_campos,$registro_datos_formulario)
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"],$registro_datos_formulario).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"],$registro_datos_formulario).'"><i class="fa fa-question-circle"></i></a>';
                 $salida.= '</span>';
             }
         //Cierra marco del control de datos
@@ -6444,7 +6449,7 @@ function PCO_CargarObjetoArchivoAdjunto($registro_campos,$registro_datos_formula
 
         //Agrega etiqueta del campo si es diferente de vacio
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).':</label>';
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
@@ -6456,7 +6461,7 @@ function PCO_CargarObjetoArchivoAdjunto($registro_campos,$registro_datos_formula
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"],$registro_datos_formulario).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"],$registro_datos_formulario).'"><i class="fa fa-question-circle"></i></a>';
                 $salida.= '</span>';
             }
         //Cierra marco del control de datos
@@ -6577,7 +6582,7 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
 
         //Agrega etiqueta del campo si es diferente de vacio
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).':</label>';
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group" style="display: block !important; ">';
 		
@@ -6661,7 +6666,7 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"],$registro_datos_formulario).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"],$registro_datos_formulario).'"><i class="fa fa-question-circle"></i></a>';
                 $salida.= '</span>';
             }
         //Cierra marco del control de datos
@@ -6723,7 +6728,7 @@ function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$for
 		$escala_reduccion=1;
         //Agrega etiqueta del campo si es diferente de vacio
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
-            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).':</label>';
+            $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).':</label>';
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
 		$salida.='
@@ -6803,7 +6808,7 @@ function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$for
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
                 if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"]).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"]).'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"],$registro_datos_formulario).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"],$registro_datos_formulario).'"><i class="fa fa-question-circle"></i></a>';
                 $salida.= '</span>';
             }
         //Cierra marco del control de datos
@@ -6867,7 +6872,7 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
 		$cadena_confirmacion_accion_pos="";
 		if (@$registro_campos["confirmacion_texto"]!="")
 			{
-				$cadena_confirmacion_accion_pre=" if (confirm('".PCO_ReemplazarVariablesPHPEnCadena($registro_campos["confirmacion_texto"])."')) {";
+				$cadena_confirmacion_accion_pre=" if (confirm('".PCO_ReemplazarVariablesPHPEnCadena($registro_campos["confirmacion_texto"],$registro_datos_formulario)."')) {";
 				$cadena_confirmacion_accion_pos=" } else {} ";
 			}
 
@@ -6882,7 +6887,7 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
         //Abre el marco del control de datos style="display:inline;"
 		$salida.='<div '.$cadena_identificador.' style="'.$cadena_modo_inline.'" class="form-group input-group">';
         // Muestra el campo
-		$salida.='<a id="'.$registro_campos["id_html"].'" class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"]).'</a>';
+		$salida.='<a id="'.$registro_campos["id_html"].'" class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).'</a>';
         //Cierra marco del control de datos
         $salida.= '</div>';
 

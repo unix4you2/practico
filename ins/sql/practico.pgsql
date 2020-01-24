@@ -305,7 +305,7 @@ CREATE TABLE core_informe (
   categoria varchar(250), 
   agrupamiento varchar(250),
   ordenamiento varchar(250),
-  ancho varchar(5),
+  ancho varchar(250),
   alto varchar(5),
   formato_final char(1), 
   formato_grafico text, 
@@ -328,6 +328,7 @@ CREATE TABLE core_informe (
   anular_acciones integer DEFAULT '0',
   encabezado_html text,
   tabla_responsive char(1) DEFAULT 'N',
+  permitido_home char(1) DEFAULT 'N',
   PRIMARY KEY  (id)
 );
 
@@ -618,6 +619,7 @@ CREATE TABLE core_pcoder_historial (
   lineas integer,
   caracteres integer,
   contenido mediumtext,
+  tipo_origen char(1) NULL DEFAULT 'A',
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

@@ -78,7 +78,7 @@
                             			$Complemento_tablas=",".$TablasCore."usuario_menu";
                             			$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
                             		}
-                            	$ResultadoConteoSecciones=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_izquierda=1 AND formulario_vinculado=0 ".@$Complemento_condicion." GROUP BY seccion ORDER BY seccion,peso");
+                            	$ResultadoConteoSecciones=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_izquierda=1 AND formulario_vinculado=0 ".@$Complemento_condicion." GROUP BY seccion ORDER BY peso,seccion");
                             	// Imprime las secciones encontradas para el usuario
                             	while($RegistroConteoSecciones = $ResultadoConteoSecciones->fetch())
                             		{
@@ -97,7 +97,7 @@
                             					$Complemento_tablas=",".$TablasCore."usuario_menu";
                             					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
                             				}
-                            			$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_izquierda=1 AND formulario_vinculado=0 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso");
+                            			$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_izquierda=1 AND formulario_vinculado=0 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso,texto");
                             			while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
                             				PCO_ImprimirOpcionMenu($registro_opciones_acordeon,'lateral');
                             		}
