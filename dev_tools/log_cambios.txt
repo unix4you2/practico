@@ -57,6 +57,7 @@ LogCambios="
 * Enhan: Las opciones del menu de navegacion izquierdo son presentadas de acuerdo a su peso de manera ascendente
 * Enhan: Eliminado acceso a Waffle para seguimiento de Issues y PR. Agregado indicador de listo para PHP7.  Eliminado acceso a Hackpad para control de actividades e ideas por ejecutar.
 * Fixed: Corregido script en fallo durante pruebas unitarias de SQLite.
+
 "
 
 ########################################################################

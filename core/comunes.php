@@ -5702,7 +5702,8 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                             $campo_valores=$registro_campos["origen_lista_valores"];
                             $campo_opciones=$registro_campos["origen_lista_opciones"];
                             //Define si los registros a mostrar en la lista deben estar filtrados por alguna condicion
-                            $condicion_filtrado_listas=$registro_campos["condicion_filtrado_listas"];
+                            $condicion_filtrado_listas=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["condicion_filtrado_listas"],$registro_datos_formulario);
+                            
                             if ($condicion_filtrado_listas=="")
     							$condicion_filtrado_listas="1";
                             else
