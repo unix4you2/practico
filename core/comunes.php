@@ -7737,7 +7737,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 	Ver tambien:
 		<PCO_CargarInforme>
 */
-function PCO_GenerarBotonesInforme($informe,$Ubicacion)
+function PCO_GenerarBotonesInforme($informe,$Ubicacion=0)
 	{
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
@@ -8329,7 +8329,6 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 		    }
 		else
 		    $consulta=PCO_ReemplazarVariablesPHPEnCadena($registro_informe["consulta_sql"]);
-
 
 		// Si el informe tiene formato_final = T (tabla de datos)
 		if ($registro_informe["formato_final"]=="T" || $SQLPuro!="")
