@@ -36,7 +36,7 @@
 	$hay_error=0;
 
     //Define un arreglo con los motores a probar
-    $MotoresPruebas=array("mysql", "pgsql", "sqlite");
+    $MotoresPruebas=array("mysql"); // Deprecated: "pgsql", "sqlite"
 
     //Recorre el arreglo de motores y ejecuta el script en cada uno
     foreach ($MotoresPruebas as $MotorEvaluado)

@@ -166,6 +166,8 @@ CREATE TABLE core_formulario_objeto (
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+ALTER TABLE core_formulario_objeto ADD INDEX formulario (formulario);
+
 DROP TABLE IF EXISTS core_evento_objeto;
 CREATE TABLE core_evento_objeto (
   id int(10) AUTO_INCREMENT,

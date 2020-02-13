@@ -45,10 +45,10 @@
         <select id="MotorBDNEW" name="MotorBDNEW" class="form-control" >
 				<option value="mysql">MySQL - MariaDB (3.x/4.x/5.x)</option>
 				<optgroup label="Soporte de segundo nivel / Second level support">
-    				<option value="pgsql">PostgreSQL</option>
-    				<option value="sqlite">SQLite v2 - SQLite v3</option>
 				</optgroup>
 				<optgroup label="Disponibles despues de instalar / Available after install">
+    				<option value="pgsql" disabled>PostgreSQL</option>
+    				<option value="sqlite" disabled>SQLite v2 - SQLite v3</option>
     				<option value="sqlsrv" disabled>FreeTDS/Microsoft SQL Server: Win32 [max version 2008]</option>
     				<option value="mssql" disabled>FreeTDS/Microsoft SQL Server: Win32&Linux, [max version 2000]</option>
     				<option value="dblib_mssql" disabled>DBLIB: Microsoft SQL Server via FreeTDS (requiere indicar puerto)</option>

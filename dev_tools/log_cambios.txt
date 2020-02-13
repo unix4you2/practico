@@ -58,6 +58,8 @@ LogCambios="
 * Enhan: Eliminado acceso a Waffle para seguimiento de Issues y PR. Agregado indicador de listo para PHP7.  Eliminado acceso a Hackpad para control de actividades e ideas por ejecutar.
 * Fixed: Corregido script en fallo durante pruebas unitarias de SQLite.
 * Fixed: Valor por defecto en parametro de ubicacion para función PCO_GenerarBotonesInforme
+* Enhan: Agregadas llaves foraneas entre objetos internos para aumentar velocidad en recuperacion de elementos durante el diseño.
+* Enhan: Eliminado el soporte de Postgresql y SQLite para operación del framework.  En adelante todo el framework corre internamente con MySQL o MariaDB.  El soporte para Postgresql y SQlite sigue operativo desde las conexiones extra que pueden ser creadas posterior a la instalación.  Aquellos que utilicen alguno de estos motores pueden hacer una migración directa de sus tablas a MySQL y crear una conexión extra para el motor actualmente trabajado bajo la opción Conexiones Extra y Replicación.
 
 "
 
@@ -80,6 +82,8 @@ CREATE TABLE core_acortadorurls (
 ALTER TABLE core_informe CHANGE ancho ancho varchar(250);
 ALTER TABLE core_informe ADD permitido_home char(1) NULL DEFAULT 'N';
 ALTER TABLE core_pcoder_historial ADD tipo_origen char(1) NULL DEFAULT 'A';
+
+ALTER TABLE core_formulario_objeto ADD INDEX formulario (formulario);
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
