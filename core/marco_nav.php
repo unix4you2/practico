@@ -176,6 +176,14 @@
 								</div>
 							</a>
 						</li>
+						<li>
+							<a data-toggle="modal" href="javascript:document.PCO_AcortadorDirecciones.submit();">
+								<div>
+									<i class="fa fa-external-link fa-fw"></i> Generador de URLs cortas
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."acortadorurls",""); ?></span>
+								</div>
+							</a>
+						</li>
 						<li class="divider"></li>
                         <h6 class="dropdown-header"><?php echo ($MULTILANG_Otros); ?>:</h6>
                         <?php
@@ -201,20 +209,19 @@
 							</a>
 						</li>
 						<li>
-							<a data-toggle="modal" href="https://www.practico.org/agradecimientos" target="_blank">
-								<div>
-									<i class="fa fa-smile-o fa-fw"></i> Da las gracias!&nbsp; <img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg">
-								</div>
-							</a>
-						</li>
-						<li>
 							<a data-toggle="modal" href="https://gitter.im/unix4you2/practico/" target="_blank">
 								<div>
 									<i class="fa fa-comment-o fa-fw"></i> <?php echo $MULTILANG_ChatDevel; ?>
 								</div>
 							</a>
 						</li>
-
+						<li>
+							<a data-toggle="modal" href="https://www.practico.org/agradecimientos" target="_blank">
+								<div>
+									<i class="fa fa-smile-o fa-fw"></i> Da las gracias!&nbsp; <img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg">
+								</div>
+							</a>
+						</li>
 					</ul>
 					<!-- /.dropdown-alerts -->
 				</li>

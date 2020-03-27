@@ -21,6 +21,7 @@ core/menus.php
 core/usuarios.php
 core/marco_abajo.php
 core/marco_nav.php
+core/marco_forms.php
 core/marco_navizq.php
 mod/pcoder/inc/variables.php
 
@@ -77,7 +78,7 @@ CREATE TABLE core_acortadorurls (
   fecha_creacion date NOT NULL,
   hora_creacion time NOT NULL,
   contador_uso int(11) NOT NULL DEFAULT '0'
-);
+) COLLATE 'utf8_bin';
 
 ALTER TABLE core_informe CHANGE ancho ancho varchar(250);
 ALTER TABLE core_informe ADD permitido_home char(1) NULL DEFAULT 'N';

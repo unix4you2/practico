@@ -123,6 +123,10 @@ if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
         	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
         	<input type="Hidden" name="PCO_Objeto" value="frm:-11:1">
         </form>
+        <form name="PCO_AcortadorDirecciones"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+        	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+        	<input type="Hidden" name="PCO_Objeto" value="frm:-19:1">
+        </form>
 <?php
 	}
 ?>
