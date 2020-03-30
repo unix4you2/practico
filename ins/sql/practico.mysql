@@ -296,6 +296,7 @@ CREATE TABLE core_formulario_boton (
   confirmacion_texto varchar(250) default '',
   retorno_icono VARCHAR(50) NULL DEFAULT '',
   retorno_estilo VARCHAR(50) NULL DEFAULT '',
+  id_html varchar(250) default '',
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

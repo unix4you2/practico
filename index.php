@@ -130,6 +130,24 @@
     include_once 'core/comunes.php';
     @include_once 'inc/practico_se/core/comunes.php';
 
+    //Ejecuta cualquier posible enlace corto que se reciba
+    if ($_GET["q"]!=""  || $_POST["q"]!="")
+        {
+            $URLCorta=$_GET["q"]; if ($URLCorta=="") $URLCorta=$_POST["q"];
+            //Busca posible URL corta con ese codigo
+            $PCO_RegistroURLCorta=PCO_EjecutarSQL("SELECT id,{$ListaCamposSinID_acortadorurls} FROM {$TablasCore}acortadorurls WHERE url_corta=? ","$URLCorta")->fetch(); //http://192.168.0.63/practico/?q=g
+            if ($PCO_RegistroURLCorta["id"]!="")
+                {
+                    PCO_EjecutarSQLUnaria("UPDATE core_acortadorurls SET contador_uso=contador_uso+1 WHERE id='".$PCO_RegistroURLCorta["id"]."' ");
+                    header("Location: ".$PCO_RegistroURLCorta["url_larga"]);
+                }
+            else
+                {
+                    $PCO_ErrorTitulo="ERROR en enlace $URLCorta";
+                    $PCO_ErrorDescripcion="<hr><li>El enlace corto solicitado no existe<li>The shortened link that you are asking for doesnt exists";
+                }
+        }
+
     // Genera conexiones individuales o conexiones para replicacion de transacciones
     include_once 'core/conexiones_extra.php';
 
