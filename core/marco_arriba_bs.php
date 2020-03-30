@@ -199,6 +199,10 @@
     <link  rel="stylesheet" href="inc/bootstrap/css/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.css" rel="stylesheet">
     <script src="inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js'); ?>"></script>
 
+    <!-- ReactJS -->
+    <script src="inc/reactjs/react.production.min.js"></script>
+    <script src="inc/reactjs/react-dom.production.min.js"></script>
+
     <?php
         // Agrega soporte para PWA si aplica
         if ($PWA_Activa=="1")

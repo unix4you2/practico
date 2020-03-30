@@ -25,6 +25,7 @@ core/marco_nav.php
 core/marco_forms.php
 core/marco_navizq.php
 mod/pcoder/inc/variables.php
+inc/reactjs/*
 
 xml/*
 inc/practico/idiomas/*
@@ -41,12 +42,13 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Added: Agregado el soporte nativo para ReactJS.
 * Enhan: Cambios de clave para usuarios han sido reemplazados por objetos internos
 * Enhan: Reajustado el menu de configuracion
 * Added: Se ha agregado un generador y consumidor nativo de URLs cortas disponible en el menú de configuración.  Puede ser utilizado para consumos internos o incluso para sistemas de reventa de direcciones.  Cualquier variable recibida en los parámetros como q (letra cu, q) será interpretada como variable de enlace corto y será procesada como tal.
 * Added: Soporte de editor para archivos gcloudignore
 * Added: Los botones de acción agregados a los formularios en su barra inferior permiten ahora definir un ID de HTML único, lo que permitirá su fácil manipulación en tiempo de ejecución mediante JS o JQuery 
-* Added: Agregadas directivas en app.yaml para despliegue rápido en GAE
+* Added: Agregadas directivas en app.yaml para despliegues rápidos y elásticos sobre GAE (Google Application Engine)
 * Enhan: Las opciones agregadas al menú izquierdo en formatos dropdown son agregadas dentro de items independientes con su propio salto de línea y clasificadas automáticamente según su sección
 * Fixed: Se retira la recoleccion de informacion mediante getallheaders() para el reporte automático de Bugs por compatibilidad con despliegues elásticos sobre Google Application Engine.
 * Enhan: Aumentado el tamano del campo ancho para la tabla de informes de manera que permita establecer el ancho según una clase CSS de Bootstrap para informes disponibles en el home de ususario y ajustadas las ayudas correspondientes en formulario de edicion de informes.
