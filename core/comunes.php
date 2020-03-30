@@ -7624,7 +7624,10 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 
 					//Si no se especifica un estilo para el boton entonces se usa el predeterminado
                     $estilo_basico_boton="btn btn-default";
-                    echo '<a class="'.$estilo_basico_boton.' '.$registro_botones["estilo"].'" '.@$cadena_javascript.'>'.PCO_ReemplazarVariablesPHPEnCadena($registro_botones["titulo"]).'</a>';
+                    //Si el boton tiene definido un ID lo agrega
+                    $CadenaIDHtml='';
+                    if ($registro_botones["id_html"]!="") $CadenaIDHtml=' id="'.$registro_botones["id_html"].'" ';
+                    echo '<a '.$CadenaIDHtml.' class="'.$estilo_basico_boton.' '.$registro_botones["estilo"].'" '.@$cadena_javascript.'>'.PCO_ReemplazarVariablesPHPEnCadena($registro_botones["titulo"]).'</a>';
 
                     echo '&nbsp;&nbsp;'; //Agrega espacio temporal entre controles
 				}

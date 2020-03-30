@@ -913,7 +913,7 @@
 			if ($mensaje_error=="")
 				{
 					//$accion_usuario=addslashes($accion_usuario); //DEPRECATED Version 15.1-
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$retorno_icono$_SeparadorCampos_$retorno_estilo");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_boton (".$ListaCamposSinID_formulario_boton.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)","$titulo$_SeparadorCampos_$estilo$_SeparadorCampos_$formulario$_SeparadorCampos_$tipo_accion$_SeparadorCampos_$accion_usuario$_SeparadorCampos_$visible$_SeparadorCampos_$peso$_SeparadorCampos_$retorno_titulo$_SeparadorCampos_$retorno_texto$_SeparadorCampos_$confirmacion_texto$_SeparadorCampos_$retorno_icono$_SeparadorCampos_$retorno_estilo$_SeparadorCampos_$id_html");
 					$id=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 					PCO_Auditar("Crea boton $id para formulario $formulario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
@@ -2254,6 +2254,13 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                         <span class="input-group-addon">
                             <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                             <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmDesBot; ?>"><i class="fa fa-question-circle text-info"></i></a>
+                        </span>
+                    </div>
+
+                    <div class="form-group input-group">
+                        <input type="text" name="id_html" class="form-control" placeholder="ID HTML">
+                        <span class="input-group-addon">
+                            <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmIdHTML; ?>"><i class="fa fa-question-circle text-info"></i></a>
                         </span>
                     </div>
 

@@ -17,6 +17,7 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/informes.php
+core/formularios.php
 core/menus.php
 core/usuarios.php
 core/marco_abajo.php
@@ -85,6 +86,8 @@ ALTER TABLE core_informe ADD permitido_home char(1) NULL DEFAULT 'N';
 ALTER TABLE core_pcoder_historial ADD tipo_origen char(1) NULL DEFAULT 'A';
 
 ALTER TABLE core_formulario_objeto ADD INDEX formulario (formulario);
+
+ALTER TABLE core_formulario_boton ADD id_html varchar(250) NULL DEFAULT '';
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
