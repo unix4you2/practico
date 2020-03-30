@@ -79,7 +79,8 @@ CREATE TABLE core_acortadorurls (
   usuario varchar(255) NOT NULL,
   fecha_creacion date NOT NULL,
   hora_creacion time NOT NULL,
-  contador_uso int(11) NOT NULL DEFAULT '0'
+  contador_uso int(11) NOT NULL DEFAULT '0',
+  tipo_redireccion char(3) NOT NULL DEFAULT '301'
 ) COLLATE 'utf8_bin';
 
 ALTER TABLE core_informe CHANGE ancho ancho varchar(250);

@@ -658,5 +658,6 @@ CREATE TABLE core_acortadorurls (
   fecha_creacion date NOT NULL,
   hora_creacion time NOT NULL,
   contador_uso int(11) NOT NULL DEFAULT '0',
+  tipo_redireccion char(3) NOT NULL DEFAULT '301',
   PRIMARY KEY (id)
 );

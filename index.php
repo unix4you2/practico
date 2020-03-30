@@ -139,6 +139,8 @@
             if ($PCO_RegistroURLCorta["id"]!="")
                 {
                     PCO_EjecutarSQLUnaria("UPDATE core_acortadorurls SET contador_uso=contador_uso+1 WHERE id='".$PCO_RegistroURLCorta["id"]."' ");
+                    if ($PCO_RegistroURLCorta["tipo_redireccion"]=="301")
+                        header("HTTP/1.1 301 Moved Permanently");
                     header("Location: ".$PCO_RegistroURLCorta["url_larga"]);
                 }
             else
