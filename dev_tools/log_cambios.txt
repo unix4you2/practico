@@ -45,6 +45,7 @@ LogCambios="
 * Enhan: Reajustado el menu de configuracion
 * Added: Se ha agregado un generador y consumidor nativo de URLs cortas disponible en el menú de configuración.  Puede ser utilizado para consumos internos o incluso para sistemas de reventa de direcciones.  Cualquier variable recibida en los parámetros como q (letra cu, q) será interpretada como variable de enlace corto y será procesada como tal.
 * Added: Soporte de editor para archivos gcloudignore
+* Added: Los botones de acción agregados a los formularios en su barra inferior permiten ahora definir un ID de HTML único, lo que permitirá su fácil manipulación en tiempo de ejecución mediante JS o JQuery 
 * Added: Agregadas directivas en app.yaml para despliegue rápido en GAE
 * Enhan: Las opciones agregadas al menú izquierdo en formatos dropdown son agregadas dentro de items independientes con su propio salto de línea y clasificadas automáticamente según su sección
 * Fixed: Se retira la recoleccion de informacion mediante getallheaders() para el reporte automático de Bugs por compatibilidad con despliegues elásticos sobre Google Application Engine.
