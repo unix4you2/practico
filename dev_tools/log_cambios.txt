@@ -42,7 +42,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Agregado el soporte nativo para ReactJS.
+* Added: Agregado el soporte nativo para ReactJS.  Las librerías de base se encuentran incluidas en el core del aplicativo y pueden ser aplicadas desde cualquier JS de formularios, eventos o personalizado.  Más información de cómo integrar fácilmente ReactJS a su proyecto puede ser encontrada en la documentación oficial aquí:  https://es.reactjs.org/docs/add-react-to-a-website.html
 * Enhan: Cambios de clave para usuarios han sido reemplazados por objetos internos
 * Enhan: Reajustado el menu de configuracion
 * Added: Se ha agregado un generador y consumidor nativo de URLs cortas disponible en el menú de configuración.  Puede ser utilizado para consumos internos o incluso para sistemas de reventa de direcciones.  Cualquier variable recibida en los parámetros como q (letra cu, q) será interpretada como variable de enlace corto y será procesada como tal.
