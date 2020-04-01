@@ -200,8 +200,8 @@
     <script src="inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js'); ?>"></script>
 
     <!-- ReactJS -->
-    <script src="inc/reactjs/react.production.min.js"></script>
-    <script src="inc/reactjs/react-dom.production.min.js"></script>
+    <script src="inc/reactjs/react.production.min.js" crossorigin></script>  <!-- react.production.min.js | react.development.js -->
+    <script src="inc/reactjs/react-dom.production.min.js" crossorigin></script>
 
     <?php
         // Agrega soporte para PWA si aplica
