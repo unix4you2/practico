@@ -18,6 +18,7 @@ index.php
 core/comunes.php
 core/informes.php
 core/formularios.php
+core/kanban.php
 core/menus.php
 core/usuarios.php
 core/marco_abajo.php
@@ -42,11 +43,11 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
-* Added: Agregado el soporte nativo para ReactJS.  Las librerías de base de producción de ReactJS se encuentran incluidas en el core del aplicativo y pueden ser aplicadas desde cualquier JS de formularios, eventos o personalizado. Si se cuenta con entornos separados de desarrollo y produccion podrá utilizar lass versiones de desarrollo de ReactJS reemplazando directamente las librerías en su entorno de desarrollo si así lo desea.  Más información de cómo integrar fácilmente ReactJS a su proyecto puede ser encontrada en la documentación oficial aquí:  https://es.reactjs.org/docs/add-react-to-a-website.html
+* Added: Agregado el soporte nativo para ReactJS.  Las librerías de base de producción de ReactJS se encuentran incluidas en el core del aplicativo y pueden ser aplicadas desde cualquier JS de formularios, eventos o personalizado. Si se cuenta con entornos separados de desarrollo y produccion podrá utilizar lass versiones de desarrollo de ReactJS reemplazando directamente las librerías en su entorno de desarrollo si así lo desea.  Más información de cómo integrar fácilmente ReactJS a su proyecto puede ser encontrada en la documentación oficial aquí:  https://es.reactjs.org/docs/add-react-to-a-website.html  No se soporta JSX por defecto, si lo desea el desarrollador podrá incluirlo por su cuenta. 
 * Enhan: Cambios de clave para usuarios han sido reemplazados por objetos internos
 * Enhan: Reajustado el menu de configuracion
 * Added: Se ha agregado un generador y consumidor nativo de URLs cortas disponible en el menú de configuración.  Puede ser utilizado para consumos internos o incluso para sistemas de reventa de direcciones.  Cualquier variable recibida en los parámetros como q (letra cu, q) será interpretada como variable de enlace corto y será procesada como tal.
-* Added: Soporte de editor para archivos gcloudignore
+* Added: Soporte de editor {P}Coder para archivos gcloudignore
 * Added: Los botones de acción agregados a los formularios en su barra inferior permiten ahora definir un ID de HTML único, lo que permitirá su fácil manipulación en tiempo de ejecución mediante JS o JQuery 
 * Added: Agregadas directivas en app.yaml para despliegues rápidos y elásticos sobre GAE (Google Application Engine)
 * Enhan: Las opciones agregadas al menú izquierdo en formatos dropdown son agregadas dentro de items independientes con su propio salto de línea y clasificadas automáticamente según su sección
@@ -65,6 +66,9 @@ LogCambios="
 * Fixed: Valor por defecto en parametro de ubicacion para función PCO_GenerarBotonesInforme
 * Enhan: Agregadas llaves foraneas entre objetos internos para aumentar velocidad en recuperacion de elementos durante el diseño.
 * Enhan: Eliminado el soporte de Postgresql y SQLite para operación del framework.  En adelante todo el framework corre internamente con MySQL o MariaDB.  El soporte para Postgresql y SQlite sigue operativo desde las conexiones extra que pueden ser creadas posterior a la instalación.  Aquellos que utilicen alguno de estos motores pueden hacer una migración directa de sus tablas a MySQL y crear una conexión extra para el motor actualmente trabajado bajo la opción Conexiones Extra y Replicación.
+* Added: Tableros Kanban presentan ahora cantidad de tareas total sobre el tablero y cantidad de tareas archivadas
+* Added: Tableros kanban presentan una barra de progreso indicando el avance total del tablero frente a las tareas activas y las archivadas
+* Added: Las columnas de tareas sobre tableros Kanban presentan el total de peso porcentual de su número de tareas frente al número de tareas total del tablero activo.
 
 "
 

@@ -362,7 +362,7 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
             global $funciones_activacion_datepickers,$IdiomaPredeterminado,$MULTILANG_FrmEstilo,$MULTILANG_InfCategoria,$MULTILANG_Finalizado;
             global $MULTILANG_BtnEstiloPredeterminado,$MULTILANG_BtnEstiloPrimario,$MULTILANG_BtnEstiloFinalizado,$MULTILANG_BtnEstiloInformacion,$MULTILANG_BtnEstiloAdvertencia,$MULTILANG_BtnEstiloPeligro;
             global $MULTILANG_AsignadoA,$MULTILANG_SeleccioneUno,$MULTILANG_AsignadoADes,$MULTILANG_Peso,$MULTILANG_Prioridad;
-            global $CadenaTablerosDisponibles,$MULTILANG_Actualizar;
+            global $CadenaTablerosDisponibles,$MULTILANG_Actualizar,$MULTILANG_InfDataTableRegTotal,$MULTILANG_Tareas;
 
             //Busca las columnas definidas en el tablero
             $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo FROM ".$TablasCore."kanban WHERE id='$ID_TableroKanban' ")->fetch();
@@ -584,9 +584,20 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
         if ($PCOSESS_LoginUsuario==$ResultadoColumnas["login_admintablero"])
             $ComplementoHerramientasEliminacion='<div class="pull-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick=\'return confirm(" '.$MULTILANG_Atencion.'  '.$MULTILANG_Atencion.'  '.$MULTILANG_Atencion.' \\n---------------------------------------------\\n '.$MULTILANG_Eliminar.' '.$MULTILANG_TablerosKanban.'\\n\\n\\n'.$MULTILANG_Confirma.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=EliminarTableroKanban&ID_TableroKanban='.$ID_TableroKanban.'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_ZonaPeligro.'!!!<br><b>'.$MULTILANG_Eliminar.' '.$MULTILANG_TablerosKanban.'</b>"><i class="fa fa-trash"></i></a></div>';
 
+        //Cuenta el numero de tareas en el tablero
+        $CantidadTareasTotal=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' AND categoria<>'[PRACTICO][CategoriasTareas]' ")->fetchColumn();
+        $CantidadTareasArchivadas=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE archivado=1 AND tablero='$ID_TableroKanban' ")->fetchColumn();
+        $PorcentajeTotalAvance=0;
+        if ($CantidadTareasTotal!=0)
+            $PorcentajeTotalAvance=round($CantidadTareasArchivadas*100/$CantidadTareasTotal);
+
         $ComplementoHerramientasArchivadas="";
         if ($ID_TableroKanban!="")
-            $ComplementoHerramientasArchivadas="<div class='pull-left'><a class='btn btn-inverse btn-xs' href='".$ArchivoCORE."?PCO_Accion=VerTareasArchivadas&ID_TableroKanban=$ID_TableroKanban'><i class='fa fa-archive fa-fw fa-1x'></i> $MULTILANG_TareasArchivadas </a></div>";
+            $ComplementoHerramientasArchivadas="<div class='pull-left'>
+                                                    <a class='btn btn-default btn-xs' href='".$ArchivoCORE."?PCO_Accion=VerTareasArchivadas&ID_TableroKanban=$ID_TableroKanban'>
+                                                        <i class='fa fa-archive fa-fw fa-1x'></i> $MULTILANG_TareasArchivadas <b>($CantidadTareasArchivadas $MULTILANG_InfDataTableRegTotal)</b>
+                                                    </a>
+                                                </div>";
 
         $ComplementoHerramientasPersonalizacion="";
         if ($ID_TableroKanban!="" && $PCOSESS_LoginUsuario==$ResultadoColumnas["login_admintablero"])
@@ -594,18 +605,29 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
 
         echo "
             <!-- Barra de herramientas del tablero -->
-            <div class='row well well-sm'>
-                <div class='col col-md-3 col-sm-3 col-lg-3 col-xs-3'>
-                    <div class='pull-left btn-xs'> <a class='btn btn-inverse btn-xs' onclick='document.recarga_tablero_kanban.CadenaTablerosAVisualizar.value=$ID_TableroKanban; document.recarga_tablero_kanban.submit();'><i class='fa fa-refresh'></i> $MULTILANG_Actualizar</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                    $ComplementoHerramientasArchivadas
+            <div class='well well-sm'>
+                <div class='row'>
+                    <div align=center style='font-size:18px;' class='col col-md-12 col-sm-12 col-lg-12 col-xs-12'>
+                        <i class='fa fa-sticky-note text-orange' style='color:orange'></i> Kanban <b>".$ResultadoColumnas["titulo"]." </b><i>(ID: $ID_TableroKanban $MULTILANG_Tareas: $CantidadTareasTotal)</i>
+                    </div>
                 </div>
-                <div align=center style='font-size:18px;' class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
-                    <i class='fa fa-sticky-note text-orange' style='color:orange'></i> Kanban <b>".$ResultadoColumnas["titulo"]." </b><i>(ID: $ID_TableroKanban)</i>
-                </div>
-                <div class='col col-md-3 col-sm-3 col-lg-3 col-xs-3'>
-                    $ComplementoHerramientasEliminacion
-                    <div class='pull-right'></div>
-                    $ComplementoHerramientasPersonalizacion
+                <div class='row'>
+                    <div class='col col-md-5 col-sm-5 col-lg-5 col-xs-5'>
+                        <div class='pull-left btn-xs'> <a class='btn btn-primary btn-xs' onclick='document.recarga_tablero_kanban.CadenaTablerosAVisualizar.value=$ID_TableroKanban; document.recarga_tablero_kanban.submit();'><i class='fa fa-refresh'></i> $MULTILANG_Actualizar</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        $ComplementoHerramientasArchivadas
+                    </div>
+                    <div class='col col-md-2 col-sm-2 col-lg-2 col-xs-2'>
+                        <div class='progress'>
+                            <div class='progress-bar progress-bar-info progress-bar-striped active' role='progressbar' aria-valuenow='{$PorcentajeTotalAvance}' aria-valuemin='0' aria-valuemax='100' style='width: 100%'>
+                                <b>{$PorcentajeTotalAvance}%</b> {$MULTILANG_Finalizado}
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col col-md-5 col-sm-5 col-lg-5 col-xs-5'>
+                        $ComplementoHerramientasEliminacion
+                        <div class='pull-right'></div>
+                        $ComplementoHerramientasPersonalizacion
+                    </div>
                 </div>
             </div>
 
@@ -618,9 +640,18 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                             $ColumnasDisponibles=count($ArregloColumnasTablero);
                             $AnchoColumnas=round(100/$ColumnasDisponibles);
                             foreach ($ArregloColumnasTablero as $NombreColumna) {
+                                //Cuenta el numero de tareas en esta columna VS la cantidad de tareas activas en el tablero para obtener el porcentaje de representacion en el tablero
+                                $CantidadTareasColumna=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE columna=$ConteoColumna AND archivado=0 AND tablero='$ID_TableroKanban' ")->fetchColumn();
+                                $PorcentajeTotalAvanceColumna=0;
+                                if ($CantidadTareasTotal-$CantidadTareasArchivadas!=0)
+                                    $PorcentajeTotalAvanceColumna=round($CantidadTareasColumna*100/($CantidadTareasTotal-$CantidadTareasArchivadas));
+                                
                                 echo "<td  valign=top width='$AnchoColumnas%'>";
-                                echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='".$MULTILANG_ArrastrarTarea."' class='btn pull-left' id='MarcoBotonOcultar".$ConteoColumna."' ondrop='Soltar(event,$ConteoColumna)' ondragover='PermitirSoltar(event,$ConteoColumna)'><i class='fa-1x'><i class='fa fa-stack-overflow'></i> <b>".$NombreColumna."</b></i></div>";
+                                echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='".$MULTILANG_ArrastrarTarea."' class='btn pull-left' id='MarcoBotonOcultar".$ConteoColumna."' ondrop='Soltar(event,$ConteoColumna)' ondragover='PermitirSoltar(event,$ConteoColumna)'><i class='fa-1x'><i class='fa fa-stack-overflow'></i> <b>".$NombreColumna."</b> {$PorcentajeTotalAvanceColumna}%</i></div>";
                                 echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='$(\"#myModalActividadKanban$ID_TableroKanban\").modal(\"show\"); document.datosfield$ID_TableroKanban.columna.value=$ConteoColumna;'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
+                                
+                                echo "<br>";
+                                
                                 echo "<div id='MarcoTareasColumna$ConteoColumna'>
                                 <br><br><div id='ColumnaKanbanMarcoArrastre".$ConteoColumna."'></div>";
                                 //Busca las tarjetas de la columna siempre y cuando no esten ya archivadas
