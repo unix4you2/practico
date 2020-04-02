@@ -25,8 +25,10 @@ core/marco_abajo.php
 core/marco_nav.php
 core/marco_forms.php
 core/marco_navizq.php
-mod/pcoder/inc/variables.php
+mod/pcoder/*
+mod/pmydb/*
 inc/reactjs/*
+inc/ace/*
 
 xml/*
 inc/practico/idiomas/*
@@ -69,7 +71,7 @@ LogCambios="
 * Added: Tableros Kanban presentan ahora cantidad de tareas total sobre el tablero y cantidad de tareas archivadas
 * Added: Tableros kanban presentan una barra de progreso indicando el avance total del tablero frente a las tareas activas y las archivadas
 * Added: Las columnas de tareas sobre tableros Kanban presentan el total de peso porcentual de su número de tareas frente al número de tareas total del tablero activo.
-
+* Enhan: Actualizacion de PMyDB y PCoder a versiones 20.4
 "
 
 

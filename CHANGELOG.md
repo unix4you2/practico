@@ -8,6 +8,8 @@
 ```
 
 
+
+.
 ## Versión 19.8 (2019-11-21)
 * Fixed [CORE]: Scripts de despliegue para tablas de PCoder sobre PostgreSQL y SQLite
 * Fixed [MENUS]: Durante la asignación de permisos a usuarios solamente son desplegadas las opciones de menu externas. Aquellas asociadas a formularios son ocultadas pues son controladas por el acceso al formulario que las contiene.
