@@ -77,6 +77,8 @@ LogCambios="
 * Enhan: La creación de tableros Kanban se restringe sólo a usuarios administradores.
 * Fixed: Creación de tablero kanban redirige automáticamente al usuario al tablero recién creado para finalizar su configuración o realizar actividades en él.
 * Fixed: Eliminación de tableros kanban redirigirá al usuario al resumen de tableros definidos para éste.
+* Added: Informes extra sobre cada tablero Kanban presentan districución de tareas por usuario y por categoría.
+* Added: Diseñador de formularios permite introducción de valores manuales para orígenes de valores y etiquetas en controles de lista de selección.
 "
 
 

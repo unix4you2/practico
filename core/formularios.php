@@ -760,6 +760,8 @@
 
 			//Concatena el campo manual en caso de encontrar alguno
 			$campo=$campo.$campo_manual;
+			$origen_lista_opciones=$origen_lista_opciones_manual;
+			$origen_lista_valores=$origen_lista_valores_manual;
 
 			if (@$valor_unico=="on") $valor_unico=1; else $valor_unico=0;
 			if (@$ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
@@ -836,6 +838,8 @@
 
 			//Concatena el campo manual en caso de encontrar alguno
 			$campo=$campo.$campo_manual;
+			$origen_lista_opciones=$origen_lista_opciones_manual;
+			$origen_lista_valores=$origen_lista_valores_manual;
 
 			if (@$valor_unico=="on") $valor_unico=1; else $valor_unico=0;
 			if (@$ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
@@ -1419,7 +1423,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 						<div id='campo19' style="display:none;">
                             <label for="origen_lista_opciones"><?php echo $MULTILANG_FrmOrigen; ?>:</label>
                             <div class="form-group input-group">
-                                <select id="origen_lista_opciones" name="origen_lista_opciones" class="form-control input-sm" >
+                                <select id="origen_lista_opciones" name="origen_lista_opciones" onchange="document.datosform.origen_lista_opciones_manual.value=document.datosform.origen_lista_opciones.value;" class="form-control input-sm" >
                                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                     <?php
                                         $resultado=PCO_ConsultarTablas();
@@ -1449,13 +1453,19 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitOrigen2; ?></b><br><?php echo $MULTILANG_FrmDesOrigen; ?>"><i class="fa fa-question-circle icon-info"></i></a>
                                 </span>
                             </div>
+
+                            <div class="form-group input-group">
+                                <input name="origen_lista_opciones_manual" value="<?php echo @htmlentities($registro_campo_editar["origen_lista_opciones"]); ?>" type="text" class="form-control input-sm" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>: ExpresionSQL o Tabla.Campo">
+                                <span class="input-group-addon">
+                                </span>
+                            </div>
 						</div>
 
 
 						<div id='campo20' style="display:none;">
                             <label for="origen_lista_valores"><?php echo $MULTILANG_FrmOrigenVal; ?>:</label>
                             <div class="form-group input-group">
-                                <select id="origen_lista_valores" name="origen_lista_valores" class="form-control input-sm" >
+                                <select id="origen_lista_valores" name="origen_lista_valores" class="form-control input-sm" onchange="document.datosform.origen_lista_valores_manual.value=document.datosform.origen_lista_valores_manual.value;">
                                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                     <?php
                                         $resultado=PCO_ConsultarTablas();
@@ -1483,6 +1493,12 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                                 <span class="input-group-addon">
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_FrmTitOrigenVal; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_FrmTitOrigen2; ?></b><br><?php echo $MULTILANG_FrmDesOrigenVal; ?>"><i class="fa fa-question-circle icon-info"></i></a>
+                                </span>
+                            </div>
+                            
+                            <div class="form-group input-group">
+                                <input name="origen_lista_valores_manual" value="<?php echo @htmlentities($registro_campo_editar["origen_lista_valores"]); ?>" type="text" class="form-control input-sm" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>: ExpresionSQL o Tabla.Campo">
+                                <span class="input-group-addon">
                                 </span>
                             </div>
 						</div>
