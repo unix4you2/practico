@@ -67,7 +67,7 @@
 </form>
 
 <form name="PCO_ExplorarTablerosKanban"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="PCO_Accion" value="PCO_ExplorarTablerosKanban">
+	<input type="Hidden" name="PCO_Accion" value="PCO_ExplorarTablerosKanbanResumido">
 </form>
 <form name="PCO_BugTrackingForm"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">

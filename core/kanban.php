@@ -45,7 +45,31 @@
 		die();
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCO_RedireccionATableroKanbanResumido
+	Lleva al usuario hasta las lista de tableros kanban
 
+	Ver tambien:
+		<PCO_ExplorarTablerosKanban>
+*/
+	function PCO_RedireccionATableroKanbanResumido()
+		{
+			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+				<input type="Hidden" name="PCO_Accion" value="PCO_ExplorarTablerosKanbanResumido">
+                <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
+				<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
+				<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
+				<input type="Hidden" name="PCO_ErrorTitulo" value="'.@$PCO_ErrorTitulo.'">
+				<input type="Hidden" name="ID_TableroKanban" value="'.@$ID_TableroKanban.'">
+				<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@$PCO_ErrorDescripcion.'">
+				</form>
+			<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+		}
+		
+	
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -177,6 +201,7 @@
 			$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw,tablero) VALUES ('$PCOSESS_LoginUsuario','','$titulos_categorias','','[PRACTICO][CategoriasTareas]','-2','0','','20000101','0','',$idObjetoInsertado) ");
 			PCO_Auditar("Agrega Tablero Kanban $titulo_tablero Id:$idObjetoInsertado");
+			$_SESSION["PCOSESS_TableroKanbanActivo"]=(string)$idObjetoInsertado;
 			PCO_RedireccionATableroKanban($idObjetoInsertado);
 		}
 
@@ -200,7 +225,7 @@
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."kanban WHERE id=$ID_TableroKanban ");
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."kanban WHERE tablero=$ID_TableroKanban ");
 			PCO_Auditar("Elimina Tablero Kanban $ID_TableroKanban");
-			PCO_RedireccionATableroKanban("");
+			PCO_RedireccionATableroKanbanResumido();
 		}
 
 
@@ -362,7 +387,7 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
             global $funciones_activacion_datepickers,$IdiomaPredeterminado,$MULTILANG_FrmEstilo,$MULTILANG_InfCategoria,$MULTILANG_Finalizado;
             global $MULTILANG_BtnEstiloPredeterminado,$MULTILANG_BtnEstiloPrimario,$MULTILANG_BtnEstiloFinalizado,$MULTILANG_BtnEstiloInformacion,$MULTILANG_BtnEstiloAdvertencia,$MULTILANG_BtnEstiloPeligro;
             global $MULTILANG_AsignadoA,$MULTILANG_SeleccioneUno,$MULTILANG_AsignadoADes,$MULTILANG_Peso,$MULTILANG_Prioridad;
-            global $CadenaTablerosDisponibles,$MULTILANG_Actualizar,$MULTILANG_InfDataTableRegTotal,$MULTILANG_Tareas;
+            global $CadenaTablerosDisponibles,$MULTILANG_Actualizar,$MULTILANG_InfDataTableRegTotal,$MULTILANG_Tareas,$MULTILANG_ListaCategorias;
 
             //Busca las columnas definidas en el tablero
             $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo FROM ".$TablasCore."kanban WHERE id='$ID_TableroKanban' ")->fetch();
@@ -629,9 +654,25 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                         $ComplementoHerramientasPersonalizacion
                     </div>
                 </div>
-            </div>
+            </div>";
 
-            <!-- Tareas definidas en el tablero -->
+        //Estadisticas basicas del tablero 
+        echo "
+                <table width='100%' border=0 cellspacing=15 cellpadding=15>
+                    <tr>
+                        <td valign=top align=center>
+                            <b><i class='fa fa-tags fa-fw fa-2x'></i>Actividades por categor&iacute;a / Activities by cathegory</b><br>";
+                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT categoria as '{$MULTILANG_ListaCategorias}', COUNT(*) as '{$MULTILANG_Tareas}'  FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' AND categoria<>'[PRACTICO][CategoriasTareas]' GROUP BY categoria ORDER BY categoria ");
+        echo "          </td>
+                        <td>&nbsp;&nbsp;</td>
+                        <td valign=top align=center>
+                            <b><i class='fa fa-user fa-fw fa-2x'></i>Tareas por usuario / Tasks by user</b><br>";
+                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT asignado_a as '{$MULTILANG_AsignadoA}', COUNT(*) as '{$MULTILANG_Tareas}' FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' AND categoria<>'[PRACTICO][CategoriasTareas]' GROUP BY asignado_a ORDER BY asignado_a ");
+        echo "          </td>
+                    </tr>
+                </table>";
+
+        echo "<!-- Tareas definidas en el tablero -->
             <div class='panel panel-default well'>
                 <table border=1 width='100%' class='table table-responsive table-condensed btn-xs' style='border: 1px solid lightgray;'><tr>";
 
@@ -647,7 +688,7 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                                     $PorcentajeTotalAvanceColumna=round($CantidadTareasColumna*100/($CantidadTareasTotal-$CantidadTareasArchivadas));
                                 
                                 echo "<td  valign=top width='$AnchoColumnas%'>";
-                                echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='".$MULTILANG_ArrastrarTarea."' class='btn pull-left' id='MarcoBotonOcultar".$ConteoColumna."' ondrop='Soltar(event,$ConteoColumna)' ondragover='PermitirSoltar(event,$ConteoColumna)'><i class='fa-1x'><i class='fa fa-stack-overflow'></i> <b>".$NombreColumna."</b> {$PorcentajeTotalAvanceColumna}%</i></div>";
+                                echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='".$MULTILANG_ArrastrarTarea."' class='btn pull-left' id='MarcoBotonOcultar".$ConteoColumna."' ondrop='Soltar(event,$ConteoColumna)' ondragover='PermitirSoltar(event,$ConteoColumna)'><i class='fa-1x'><i class='fa fa-stack-overflow'></i> <b>".$NombreColumna."</b> <font color=red>{$PorcentajeTotalAvanceColumna}%</font></i></div>";
                                 echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='$(\"#myModalActividadKanban$ID_TableroKanban\").modal(\"show\"); document.datosfield$ID_TableroKanban.columna.value=$ConteoColumna;'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
                                 
                                 echo "<br>";
@@ -683,62 +724,30 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
 */
 if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
     {
+        //Si recibe un ID de tablero desde el informe de resumen entonces lo usa para ser visualizado
+        if ($PCO_Valor!="" || $PCOSESS_TableroKanbanActivo!="")
+            {
+                if ($PCO_Valor!="") { $CadenaTablerosAVisualizar=$PCO_Valor; $_SESSION["PCOSESS_TableroKanbanActivo"]=(string)$PCO_Valor; }
+                if ($PCOSESS_TableroKanbanActivo!="" && $PCO_Valor=="") $CadenaTablerosAVisualizar=$PCOSESS_TableroKanbanActivo;
+                //Establece una variable de sesion para saber en que tablero esta trabajando en el momento
+            }
+        //Agrega boton de regreso al escritorio
+        echo '<div align=center>
+                <a href="index.php" class="btn btn-warning"><i class="fa fa-fw fa-chevron-circle-left"></i>'.$MULTILANG_FrmAccionRegresar.'</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="javascript:document.PCO_ExplorarTablerosKanban.submit();" class="btn btn-success"><i class="fa fa-fw fa-eye"></i>'.$MULTILANG_TodosLosTableros.'</a>
+                <br><br>
+            </div>';
+
+
         echo "<form name='recarga_tablero_kanban' action='$ArchivoCORE' method='POST' style='display: inline!important;'>
             <input type='Hidden' name='PCO_Accion' value='PCO_ExplorarTablerosKanban'>
             <input type='Hidden' name='CadenaTablerosAVisualizar' value=''>
             </form>";
-
-        //Busca la lista de tableros
-        $CadenaTablerosDisponibles="<select class='btn-warning btn-xs ' id='ID_TableroKanban' name='ID_TableroKanban' onchange='document.recarga_tablero_kanban.CadenaTablerosAVisualizar.value=this.value; document.recarga_tablero_kanban.submit();' >";
-        //Opciones fijas
-        $CadenaTablerosDisponibles.="<option value='*'></option>";
-        $CadenaTablerosDisponibles.="<option value='' $EstadoSeleccion>".$MULTILANG_TodosLosTableros."</option>";
-        
-        //Tableros propios
-        $ResultadoTableros=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND login_admintablero='$PCOSESS_LoginUsuario' ORDER BY titulo ASC ");
-        while ($RegistroTableros=$ResultadoTableros->fetch())
-            {
-                $EstadoSeleccion="";
-                if ($RegistroTableros["id"]==$ID_TableroKanban) $EstadoSeleccion=" SELECTED ";
-                $CadenaTablerosDisponibles.="<option value='".$RegistroTableros["id"]."' $EstadoSeleccion>".$RegistroTableros["titulo"]."</option>";
-                //Si no hay un tablero Kanban definido entonces usa el primero que encuentra para el usuario
-                if ($ID_TableroKanban=="") $ID_TableroKanban=$RegistroTableros["id"];
-            }
-        
-        $CadenaTablerosCompartidos="";
-        //Tableros compartidos
-        $ResultadoTablerosCompartidos=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%' ORDER BY titulo ASC ");
-        while ($RegistroTablerosCompartidos=$ResultadoTablerosCompartidos->fetch())
-            {
-                $EstadoSeleccion="";
-                if ($RegistroTablerosCompartidos["id"]==$ID_TableroKanban) $EstadoSeleccion=" SELECTED ";
-                $CadenaTablerosCompartidos.="<option value='".$RegistroTablerosCompartidos["id"]."' $EstadoSeleccion>".$RegistroTablerosCompartidos["titulo"]."</option>";
-                //Si no hay un tablero Kanban definido entonces usa el primero que encuentra para el usuario
-                if ($ID_TableroKanban=="") $ID_TableroKanban=$RegistroTablerosCompartidos["id"];
-            }
-        if ($CadenaTablerosCompartidos!="")
-            $CadenaTablerosDisponibles.="<optgroup label='$MULTILANG_CompartidosConmigo'>".$CadenaTablerosCompartidos."</optgroup>";
-
-        $CadenaTablerosDisponibles.="</select>";
-
-        echo "      
-            <div class='row'>
-                <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
-                    <div class='pull-left btn-xs'>$MULTILANG_TablerosKanban: $CadenaTablerosDisponibles&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                </div>
-                <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
-                    <div class='pull-right'><div class='btn btn-inverse btn-xs' onclick='CargarCreacionTablero();'><i class='fa fa-plus fa-fw fa-1x'></i> $MULTILANG_CrearTablero</div></div>
-                </div>
-            </div><br>";
     ?>
 
 		<script type="" language="JavaScript">
 		    var TareaArrastrarActiva=0;
-		    function CargarCreacionTablero()
-		        {
-            		// Se muestra el cuadro modal
-            		$('#myModalCreacionTablero').modal('show');
-		        }
 		    function CargarCrearTarea(Columna,Tablero)
 		        {
             		// Se muestra el cuadro modal
@@ -775,9 +784,64 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
                 }
 		</script>
 
+<?php
+        //Busca la lista de tableros si no recibe la cadena de tableros.  Sino entonces presenta la recibida
+        if ($CadenaTablerosAVisualizar=="")
+            {
+                //Tableros propios
+                $ResultadoTableros=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND login_admintablero='$PCOSESS_LoginUsuario' ORDER BY titulo ASC ");
+                while ($RegistroTableros=$ResultadoTableros->fetch())
+                    $CadenaTablerosAVisualizar.=$RegistroTableros["id"]."|";
+                //Tableros compartidos
+                $ResultadoTablerosCompartidos=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%' ORDER BY titulo ASC ");
+                while ($RegistroTablerosCompartidos=$ResultadoTablerosCompartidos->fetch())
+                    $CadenaTablerosAVisualizar.=$RegistroTablerosCompartidos["id"]."|";
+            }
 
+        //Recorre la lista de tableros encontrados
+        $TablerosEncontrados=explode("|",$CadenaTablerosAVisualizar);
+        $HayTableroKanban=0;
+        foreach ($TablerosEncontrados as $ID_TableroKanban)
+            {
+                if (trim($ID_TableroKanban)!="")
+                    {
+                        echo PCO_PresentarTableroKanban($ID_TableroKanban);
+                        $HayTableroKanban=1;
+                    }
+            }
+        
+        if (!$HayTableroKanban)
+            echo "<center>".$MULTILANG_NoTablero."<br><br><BR></center>";
+
+    }
+
+
+
+
+//#################################################################################
+//#################################################################################
+/*
+	Function: PCO_ExplorarTablerosKanbanResumido
+	PResenta la lista de tableros kanban a los que el usuario tiene acceso con sus estadisticas basicas
+
+	Salida:
+		Tablero predeterminado en pantalla, junto con lista de seleccion para cargar otros tableros
+*/
+if (@$PCO_Accion=="PCO_ExplorarTablerosKanbanResumido")
+    {
+?>
         <!-- INICIO MODAL CREACION DE TABLERO -->
             <?php PCO_AbrirDialogoModal("myModalCreacionTablero",$MULTILANG_TablerosKanban." ".$MULTILANG_Personalizado); ?>
+
+        		<script type="" language="JavaScript">
+        		    var TareaArrastrarActiva=0;
+        		    function CargarCreacionTablero()
+        		        {
+                    		// Se muestra el cuadro modal
+                    		$('#myModalCreacionTablero').modal('show');
+        		        }
+        		</script>
+		
     			<form name="datoscreacion" id="datoscreacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     				<input type="Hidden" name="PCO_Accion" value="GuardarCreacionKanban">
     				<input type="Hidden" name="ID_TableroKanban" value="<?php echo $ID_TableroKanban; ?>">
@@ -819,39 +883,31 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
         <!-- FIN MODAL CREACION DE TABLERO -->
 
 
-
 <?php
-        //Busca la lista de tableros si no recibe la cadena de tableros.  Sino entonces presenta la recibida
-        if ($CadenaTablerosAVisualizar=="")
+        $ResultadoTablerosPropios=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND login_admintablero='$PCOSESS_LoginUsuario' ")->fetchColumn();
+        $ResultadoTablerosCompartidos=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%' ")->fetchColumn();
+
+        //Si hay tableros carga el informe, sino presenta mensaje de que no hay tableros
+        if ($ResultadoTablerosPropios!=0 || $ResultadoTablerosCompartidos!=0)
             {
-                //Tableros propios
-                $ResultadoTableros=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND login_admintablero='$PCOSESS_LoginUsuario' ORDER BY titulo ASC ");
-                while ($RegistroTableros=$ResultadoTableros->fetch())
-                    $CadenaTablerosAVisualizar.=$RegistroTableros["id"]."|";
-                //Tableros compartidos
-                $ResultadoTablerosCompartidos=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%' ORDER BY titulo ASC ");
-                while ($RegistroTablerosCompartidos=$ResultadoTablerosCompartidos->fetch())
-                    $CadenaTablerosAVisualizar.=$RegistroTablerosCompartidos["id"]."|";
+                PCO_CargarInforme(-32,1);
+                
+            }
+        else
+            {
+                echo "<center>".$MULTILANG_NoTablero."<br><br><BR></center>";
             }
 
-        //Recorre la lista de tableros encontrados
-        $TablerosEncontrados=explode("|",$CadenaTablerosAVisualizar);
-        $HayTableroKanban=0;
-        foreach ($TablerosEncontrados as $ID_TableroKanban)
-            {
-                if (trim($ID_TableroKanban)!="")
-                    {
-                        echo PCO_PresentarTableroKanban($ID_TableroKanban);
-                        $HayTableroKanban=1;
-                    }
-            }
-        
-        if (!$HayTableroKanban)
-            echo "<center>".$MULTILANG_NoTablero."<br><br><BR></center>";
-
-        //Agrega boton de regreso al escritorio
-        echo '<div align=center><a href="index.php" class="btn btn-warning"><i class="fa fa-fw fa-chevron-circle-left"></i>'.$MULTILANG_FrmAccionRegresar.'</a></div><br><br>';
+        if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+            echo "      
+                <div class='row'>
+                    <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
+                        <div class='pull-left'><div class='btn btn-success btn-xs' onclick='CargarCreacionTablero();'><i class='fa fa-plus fa-fw fa-1x'></i> [KANBAN] $MULTILANG_CrearTablero</div></div>
+                    </div>
+                    <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
+                        <div class='pull-left btn-xs'></div>
+                    </div>
+                </div><br>";
     }
-
 
 ?>

@@ -23,6 +23,7 @@ core/menus.php
 core/usuarios.php
 core/marco_abajo.php
 core/marco_nav.php
+core/marco_dev.php
 core/marco_forms.php
 core/marco_navizq.php
 mod/pcoder/*
@@ -72,6 +73,10 @@ LogCambios="
 * Added: Tableros kanban presentan una barra de progreso indicando el avance total del tablero frente a las tareas activas y las archivadas
 * Added: Las columnas de tareas sobre tableros Kanban presentan el total de peso porcentual de su número de tareas frente al número de tareas total del tablero activo.
 * Enhan: Actualizacion de PMyDB y PCoder a versiones 20.4
+* Added: El acceso a los tableros Kanban presenta ahora un estado resumido de todos los tableros a los cuales el usuario tiene acceso y solamente deja realizar su navegación a través de un solo tablero al tiempo para agilizar operaciones de gestión de tareas mediante arrastre-soltar y facilitar visualización a tableros complejos.
+* Enhan: La creación de tableros Kanban se restringe sólo a usuarios administradores.
+* Fixed: Creación de tablero kanban redirige automáticamente al usuario al tablero recién creado para finalizar su configuración o realizar actividades en él.
+* Fixed: Eliminación de tableros kanban redirigirá al usuario al resumen de tableros definidos para éste.
 "
 
 
