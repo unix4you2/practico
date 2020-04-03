@@ -1457,6 +1457,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                             <div class="form-group input-group">
                                 <input name="origen_lista_opciones_manual" value="<?php echo @htmlentities($registro_campo_editar["origen_lista_opciones"]); ?>" type="text" class="form-control input-sm" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>: ExpresionSQL o Tabla.Campo">
                                 <span class="input-group-addon">
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="Este campo permite comillas dobles para su uso con parametros o valores fijos.  This field allow double cuotes for parameters or fixed values"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
@@ -1499,6 +1500,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                             <div class="form-group input-group">
                                 <input name="origen_lista_valores_manual" value="<?php echo @htmlentities($registro_campo_editar["origen_lista_valores"]); ?>" type="text" class="form-control input-sm" placeholder="<?php echo $MULTILANG_InfCampoManual; ?>: ExpresionSQL o Tabla.Campo">
                                 <span class="input-group-addon">
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="Este campo permite comillas dobles para su uso con parametros o valores fijos.  This field allow double cuotes for parameters or fixed values"><i class="fa fa-question-circle text-info"></i></a>
                                 </span>
                             </div>
 						</div>
