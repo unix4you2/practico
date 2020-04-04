@@ -570,7 +570,10 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'30 17 * * 1,2,3,4,5',	'De lunes a viernes, 5:30 PM / Lun-Fri 5:30PM',	17);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'00 12 1,15 * *',	'Dias 1 y 15 a las 12M / Days 1 and 5 at 12M',	18);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_planificacion',	'_OPTGROUP_',	'',	19);
-
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('vistas_informe',	'N',	'{$MULTILANG_No}',	1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('vistas_informe',	'E',	'{$MULTILANG_Si}, {$MULTILANG_Escritorio}',	2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('vistas_informe',	'B',	'{$MULTILANG_Si}, {$MULTILANG_InfBarraSuperior}',	3);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('vistas_informe',	'A',	'{$MULTILANG_Si}, {$MULTILANG_Ambos}',	4);
 
 DROP TABLE IF EXISTS core_bugtracker;
 CREATE TABLE core_bugtracker (

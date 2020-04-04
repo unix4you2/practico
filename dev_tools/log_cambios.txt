@@ -84,7 +84,6 @@ LogCambios="
 
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
-# RECORDAR EN OPCIONES MULTI-IDIOMA:  UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 ScriptBasedatos="
 
 CREATE TABLE core_acortadorurls (
@@ -105,6 +104,12 @@ ALTER TABLE core_pcoder_historial ADD tipo_origen char(1) NULL DEFAULT 'A';
 ALTER TABLE core_formulario_objeto ADD INDEX formulario (formulario);
 
 ALTER TABLE core_formulario_boton ADD id_html varchar(250) NULL DEFAULT '';
+
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('vistas_informe',	'N',	'{ $ MULTILANG_No}',	1);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('vistas_informe',	'E',	'{ $ MULTILANG_Si}, { $ MULTILANG_Escritorio}',	2);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('vistas_informe',	'B',	'{ $ MULTILANG_Si}, { $ MULTILANG_InfBarraSuperior}',	3);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('vistas_informe',	'A',	'{ $ MULTILANG_Si}, { $ MULTILANG_Ambos}',	4);
+
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

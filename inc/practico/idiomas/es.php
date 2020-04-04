@@ -862,7 +862,8 @@
     $MULTILANG_InfSinDatos='No hay datos para el gr&aacute;fico';
     $MULTILANG_InfTablaResponsive='Usar distribucion responsive';
     $MULTILANG_InfTablaResponsiveDes='Permite diagramar la tabla en un formato 100% responsive ocultando automaticamente las columnas que no quepan en pantalla y convirtiendolas automaticamente en una fila hija debajo de la actual.  Importante: El uso de este formato anula la seccion de pie de pagina de la tabla.';
-    $MULTILANG_InfEnHome='Publicar en el escritorio a usuarios autorizados';
+    $MULTILANG_InfEnHome='Publicaci&oacute;n directa para usuarios autorizados';
+    $MULTILANG_InfBarraSuperior='En alertas de barra de navegacion superior';
 
 	//Menus
 	$MULTILANG_MnuTitEditar='Edici&oacute;n del item de menu';
