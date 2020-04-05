@@ -46,6 +46,10 @@
     header('Access-Control-Allow-Origin: *');
     //header('X-Frame-Options: deny: sameorigin');  // Acepta:  deny|sameorigin|allow-from https://example.com/  Por defecto es ALLOWALL
     //header('Content-Security-Policy: frame-ancestors <source> <source>;');  //Si no esta permite todo.  A diferencia de X-Frame-Options puede permitir varios origenes
+        //header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
+        //header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
+        //header("Allow: GET, POST, OPTIONS, PUT, DELETE");
+        //if($_SERVER['REQUEST_METHOD'] == "OPTIONS") { die(); }
 	header('Content-type: text/html; charset=utf-8');
     
     // Inicio de la sesion
