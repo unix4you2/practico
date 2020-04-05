@@ -109,6 +109,43 @@
 			if ($PCO_Accion!="PCO_VerMenu")
 				echo '<a class="btn btn-success btn-xs" href="javascript:document.location=\'index.php\';"><i class="fa fa-home"></i></a>&nbsp;';
 
+
+    ?>
+				<li class="dropdown" id="PCODIV_IconoAlertasBarraSuperior">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+						<i class="fa fa-bell fa-fw text-success"></i> <span class="badge" id="PCODIV_ConteoAlertasBarraSuperior"></span> <i class="fa fa-caret-down text-success pull-right"></i>
+						
+					</a>
+					<ul class="dropdown-menu dropdown-alerts">
+						<li id="PCODIV_MarcoContenidoAlertas">
+                            <?php
+                                //Presenta informes marcados como de publicacion automatica en el home para el usuario actual.  PILAS. esto no aplica para el admin a menos que -por debajo- se haga la insercion del registro de permisos a modo pruebas
+                                $InformesHome=PCO_EjecutarSQL("SELECT ".$TablasCore."informe.id,ancho FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario' AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND (permitido_home='B' OR permitido_home='A') ORDER BY titulo ");
+                                $PCO_ConteoRegistrosAlertas=0;
+                                while ($RegistroInformeHome=$InformesHome->fetch())
+                                    {
+                                        if ($RegistroInformeHome["ancho"]!="")
+                                            echo "<div class='".$RegistroInformeHome["ancho"]."'>";
+                                        PCO_CargarInforme($RegistroInformeHome["id"],0);
+                                        $PCO_ConteoRegistrosAlertas+=$PCOVAR_ConteoRegistrosUltimoInforme;
+                                        if ($RegistroInformeHome["ancho"]!="")
+                                            echo "</div>";
+                                    }
+                            ?>
+						</li>
+					</ul>
+					<!-- /.dropdown-alerts -->
+				</li>
+				<script language="javascript">
+				    //Asigna el numero albadget de alertas segun la cantidad de registros en los informes superiores, sino oculta el icono de alertas
+				    var PCO_ConteoRegistrosAlertas=<?php echo $PCO_ConteoRegistrosAlertas; ?>;
+				    if (PCO_ConteoRegistrosAlertas>0)
+				        $("#PCODIV_ConteoAlertasBarraSuperior").html(PCO_ConteoRegistrosAlertas);
+				    else
+				        $("#PCODIV_IconoAlertasBarraSuperior").hide();
+				</script>
+
+    <?php
 			//Despliega opciones de configuracion
 			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 			{

@@ -8253,7 +8253,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 		global $IdiomaPredeterminado;
         global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF;
         global $ModoDepuracion,$ModoDesarrolladorPractico;
-        global $PCO_InformesGraficosSinDatos;
+        global $PCO_InformesGraficosSinDatos,$PCOVAR_ConteoRegistrosUltimoInforme;
         
         //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
         $BotonSaltoEdicion='
@@ -8467,6 +8467,9 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                         $consulta_ejecucion=PCO_EjecutarSQL($consulta,"",${$registro_conexiones["nombre"]});
                     else
                         $consulta_ejecucion=PCO_EjecutarSQL($consulta);
+                        
+                    //Asigna el total dde registros a variable global para posible uso fuera de la funcion
+                    $PCOVAR_ConteoRegistrosUltimoInforme=$consulta_ejecucion->rowCount();
 
 					//Procesa resultados solo si es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch(), rowCount() y demas metodos
 					while($consulta_ejecucion!="1" && $registro_informe=$consulta_ejecucion->fetch())

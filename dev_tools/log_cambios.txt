@@ -79,6 +79,8 @@ LogCambios="
 * Fixed: Eliminación de tableros kanban redirigirá al usuario al resumen de tableros definidos para éste.
 * Added: Informes extra sobre cada tablero Kanban presentan districución de tareas por usuario y por categoría.
 * Added: Diseñador de formularios permite introducción de valores manuales para orígenes de valores y etiquetas en controles de lista de selección.
+* Added: Agregada nuevo botón de alertas en la barra de navegación superior.  Dicho botón presenta automáticamente los informes asignados al usuario y que puedan entregar algún registro.  Adicionalmente cuenta los registros resultantes de cada informe (el usuario puede tener varios) y los presenta como conteo al lado del botón de campana de alertas.
+* Added: Nuevos identificadores de ID de marco HTML para manipular sección de alertas y sus conteos:  PCODIV_IconoAlertasBarraSuperior, PCODIV_ConteoAlertasBarraSuperior y PCODIV_MarcoContenidoAlertas
 "
 
 
