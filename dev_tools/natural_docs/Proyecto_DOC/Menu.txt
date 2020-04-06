@@ -107,6 +107,7 @@ Group: Modulos Principales  {
       File: Modulo kanban  (core/kanban.php)
       File: Modulo tareas programadas  (core/cron.php)
       File: documentador.php  (core/documentador.php)
+      File: Modulo ajax  (core/ajax_bkpDT.php)
       }  # Group: Modulos
 
    Group: Inc  {
@@ -147,6 +148,7 @@ Group: Mod  {
    File: convertidor_pdf_funcion_predeterminada  (mod/pdf/index.php)
    File: fileman_admin_embebido  (mod/fileman/index.php)
    File: Funciones personalizadas  (mod/personalizadas_pos.php)
+   File: Funciones personalizadas  (mod/personalizadas_pos_bkpDT.php)
    File: Funciones personalizadas en precarga  (mod/personalizadas_pre.php)
    File: Funciones personalizadas para WebServices  (mod/personalizadas_ws.php)
    File: ldap/.../lib/schema_functions.php  (mod/ldap/phpldapadmin-1.2.3/lib/schema_functions.php)

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<objetos_practicos>
+	<descripcion>
+		<tipo_objeto>Formulario</tipo_objeto>
+		<version_practico></version_practico>
+		<tipo_exportacion>XML_IdEstatico</tipo_exportacion>
+		<sistema_origen></sistema_origen>
+		<version></version>
+		<usuario_generador></usuario_generador>
+		<fecha_exportacion>2020-04-06</fecha_exportacion>
+		<hora_exportacion>17:11</hora_exportacion>
+	</descripcion>
+	<core_formulario>
+	<id>LTI=</id>
+	<titulo>W1N1YkZvcm1dIHtDcmVhY2lvbiBpbmZvcm1lc30=</titulo>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<tabla_datos>Y29yZV90YWJsYV9jb21vZGlu</tabla_datos>
+	<columnas>Mg==</columnas>
+	<javascript>ZnVuY3Rpb24gRnJtQXV0b1J1bigpDQogICAgew0KICAgICAgICAvL0FxdWkgc3VzIGluc3RydWNjaW9uZXMNCiAgICB9DQo=</javascript>
+	<borde_visible>MA==</borde_visible>
+	<estilo_pestanas>bmF2LXRhYnM=</estilo_pestanas>
+	<id_html>ZGF0b3NzdWJpbmY=</id_html>
+	<tipo_maquetacion>dHJhZGljaW9uYWw=</tipo_maquetacion>
+	<css_columnas></css_columnas>
+	<estilo_ventana>cGFuZWwtcHJpbWFyeQ==</estilo_ventana>
+	</core_formulario>
+	<total_core_formulario_objeto><cantidad_objetos>0</cantidad_objetos></total_core_formulario_objeto>
+	<total_core_evento_objeto><cantidad_objetos>0</cantidad_objetos></total_core_evento_objeto>
+	<total_core_formulario_boton><cantidad_objetos>0</cantidad_objetos></total_core_formulario_boton>
+	<total_core_menu><cantidad_objetos>0</cantidad_objetos></total_core_menu>
+</objetos_practicos>
