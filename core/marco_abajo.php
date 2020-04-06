@@ -290,7 +290,7 @@
                                     ],
 
                                     "pageLength": '.$Paginacion.',
-                                    //"responsive": true, //Opcional, no necesario activarlo si la tabla ya tiene la clase nowrap y responsive
+                                    //"responsive": true, //Opcional, no necesario activarlo si la tabla ya tiene la clase nowrap y responsive (y ya esto se hace en la generacion del informe)
                                     "scrollX": true,
                                     "bAutoWidth": true,
                                     //"bSort": false,
