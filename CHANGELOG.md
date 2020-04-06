@@ -7,10 +7,47 @@
             |___/ 
 ```
 
+## Versión 20.3 (2020-04-04)
+
+* Added [CORE]: Agregado el soporte nativo para ReactJS.  Las librerías de base de producción de ReactJS se encuentran incluidas en el core del aplicativo y pueden ser aplicadas desde cualquier JS de formularios, eventos o personalizado. Si se cuenta con entornos separados de desarrollo y produccion podrá utilizar lass versiones de desarrollo de ReactJS reemplazando directamente las librerías en su entorno de desarrollo si así lo desea.  Más información de cómo integrar fácilmente ReactJS a su proyecto puede ser encontrada en la documentación oficial aquí:  https://es.reactjs.org/docs/add-react-to-a-website.html  No se soporta JSX por defecto, si lo desea el desarrollador podrá incluirlo por su cuenta. 
+* Enhan [CORE]: Cambios de clave para usuarios han sido reemplazados por objetos internos
+* Enhan [CORE]: Reajustado el menu de configuracion
+* Added [CORE]: Se ha agregado un generador y consumidor nativo de URLs cortas disponible en el menú de configuración.  Puede ser utilizado para consumos internos o incluso para sistemas de reventa de direcciones.  Cualquier variable recibida en los parámetros como q (letra cu, q) será interpretada como variable de enlace corto y será procesada como tal.
+* Added [PCODER]: Soporte de editor {P}Coder para archivos gcloudignore
+* Added [FORMS]: Los botones de acción agregados a los formularios en su barra inferior permiten ahora definir un ID de HTML único, lo que permitirá su fácil manipulación en tiempo de ejecución mediante JS o JQuery 
+* Added [CORE]: Agregadas directivas en app.yaml para despliegues rápidos y elásticos sobre GAE (Google Application Engine)
+* Enhan [MENUS]: Las opciones agregadas al menú izquierdo en formatos dropdown son agregadas dentro de items independientes con su propio salto de línea y clasificadas automáticamente según su sección
+* Fixed [CORE]: Se retira la recoleccion de informacion mediante getallheaders() para el reporte automático de Bugs por compatibilidad con despliegues elásticos sobre Google Application Engine.
+* Enhan [INFORMES]: Aumentado el tamano del campo ancho para la tabla de informes de manera que permita establecer el ancho según una clase CSS de Bootstrap para informes disponibles en el home de ususario y ajustadas las ayudas correspondientes en formulario de edicion de informes.
+* Added [INFORMES]: Ahora sobre los informes se puede definir si éstos estarán o no disponibles para publicar directamente en el home como una forma rápida de generación de tableros de mando de usuario.  Un informe podrá entonces ser visualizado por medio del embebido de un formulario (forma tradicional) o la activación de disponibilidad en el home y posterior asignación como permiso al usuario.  Práctico automáticamente buscará informes de home asignados directamente al usuario y los presentará automáticamente en el escritorio.
+* Enhan [CORE]: Actualizada clase para elementos ocultos en impresion que sobreescribe el estado previo de visibilidad como !important para garantizar su ocultamiento.
+* Enhan [INFORMES]: Habilitada bandera de autodestruccion automatica de objetos tipo DataTable para cuando estos requieran ser reinicializados.  Si no existe el objeto lo inicializa, caso contrario lo elimina y reinicializa.
+* Fixed [MENUS]: Corregido ocultamiento de menues laterales sobre dispositivos móviles.
+* Enhan [CORE]: Funciones de generacion de paneles PCO_ImprimirPanelSimpleDashboard() soportan la especificacion de la clase CSS usada para sus titulos
+* Added [PCODER]: El editor de codigo {P}Coder almacena el tipo de origen del codigo operado: A=rchivo F=ormulario I=nforme
+* Added [CORE]: La funcion de CallBack para reemplazo de variables en cadenas PHP ha cambiado y permite ahora utilizar parametros para obtener valores directos desde un registro de datos del formulario que se esta cargando en el momento.  Para obtener valores de campos del formulario cargado actualmente directamente desde su variable PHP utilice la notacion {$ PCO_RegistroDatosActivo[PosicionONombreCampo]} lo que retorna el valor del campo para el registro que actualmente se esta recuperando sobre el formulario.  Puede ser utilizada en:  Campos texto corto (placeholder, valor, label y ayudas), Campos texto largo (placeholder, valor, label y ayudas), Campos de texto con formato no responsive (ayudas), Listas de selección (label, valores de opciones, etiquetas de opciones, condiciones de filtrado y ayudas), Etiquetas (valor), Valor de campo como etiqueta (ayudas), Listas tipo radio (label, valor del elemento, etiqueta del elemento y ayudas), Campos tipo check (label, tag personalizado), Deslizadores (label y ayudas), Archivos adjuntos (label y ayudas), Objetos canvas (label y ayudas), Objetos webcam (label y ayudas), Botones de comando (mensajes de confirmación, label),
+* Enhan [MENUS]: Las opciones del menu de navegacion izquierdo son presentadas de acuerdo a su peso de manera ascendente
+* Enhan [CORE]: Eliminado acceso a Waffle para seguimiento de Issues y PR. Agregado indicador de listo para PHP7.  Eliminado acceso a Hackpad para control de actividades e ideas por ejecutar.
+* Fixed [CORE]: Corregido script en fallo durante pruebas unitarias de SQLite.
+* Fixed [INFORMES]: Valor por defecto en parametro de ubicacion para función PCO_GenerarBotonesInforme
+* Enhan [CORE]: Agregadas llaves foraneas entre objetos internos para aumentar velocidad en recuperacion de elementos durante el diseño.
+* Enhan [CORE]: Eliminado el soporte de Postgresql y SQLite para operación del framework.  En adelante todo el framework corre internamente con MySQL o MariaDB.  El soporte para Postgresql y SQlite sigue operativo desde las conexiones extra que pueden ser creadas posterior a la instalación.  Aquellos que utilicen alguno de estos motores pueden hacer una migración directa de sus tablas a MySQL y crear una conexión extra para el motor actualmente trabajado bajo la opción Conexiones Extra y Replicación.
+* Added [KANBAN]: Tableros Kanban presentan ahora cantidad de tareas total sobre el tablero y cantidad de tareas archivadas
+* Added [KANBAN]: Tableros kanban presentan una barra de progreso indicando el avance total del tablero frente a las tareas activas y las archivadas
+* Added [KANBAN]: Las columnas de tareas sobre tableros Kanban presentan el total de peso porcentual de su número de tareas frente al número de tareas total del tablero activo.
+* Enhan [PCODER]: Actualizacion de PMyDB y PCoder a versiones 20.4
+* Added [KANBAN]: El acceso a los tableros Kanban presenta ahora un estado resumido de todos los tableros a los cuales el usuario tiene acceso y solamente deja realizar su navegación a través de un solo tablero al tiempo para agilizar operaciones de gestión de tareas mediante arrastre-soltar y facilitar visualización a tableros complejos.
+* Enhan [KANBAN]: La creación de tableros Kanban se restringe sólo a usuarios administradores.
+* Fixed [KANBAN]: Creación de tablero kanban redirige automáticamente al usuario al tablero recién creado para finalizar su configuración o realizar actividades en él.
+* Fixed [KANBAN]: Eliminación de tableros kanban redirigirá al usuario al resumen de tableros definidos para éste.
+* Added [KANBAN]: Informes extra sobre cada tablero Kanban presentan districución de tareas por usuario y por categoría.
+* Added [FORMS]: Diseñador de formularios permite introducción de valores manuales para orígenes de valores y etiquetas en controles de lista de selección.
+* Added [CORE]: Agregada nuevo botón de alertas en la barra de navegación superior.  Dicho botón presenta automáticamente los informes asignados al usuario y que puedan entregar algún registro.  Adicionalmente cuenta los registros resultantes de cada informe (el usuario puede tener varios) y los presenta como conteo al lado del botón de campana de alertas.
+* Added [CORE]: Nuevos identificadores de ID de marco HTML para manipular sección de alertas y sus conteos:  PCODIV_IconoAlertasBarraSuperior, PCODIV_ConteoAlertasBarraSuperior y PCODIV_MarcoContenidoAlertas
 
 
-.
 ## Versión 19.8 (2019-11-21)
+
 * Fixed [CORE]: Scripts de despliegue para tablas de PCoder sobre PostgreSQL y SQLite
 * Fixed [MENUS]: Durante la asignación de permisos a usuarios solamente son desplegadas las opciones de menu externas. Aquellas asociadas a formularios son ocultadas pues son controladas por el acceso al formulario que las contiene.
 * Enahn [PCODER]: Mejorada presentación de estadísticas sobre PCoder en informes y maquetación
