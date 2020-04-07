@@ -44,6 +44,9 @@
 * Added [FORMS]: Diseñador de formularios permite introducción de valores manuales para orígenes de valores y etiquetas en controles de lista de selección.
 * Added [CORE]: Agregada nuevo botón de alertas en la barra de navegación superior.  Dicho botón presenta automáticamente los informes asignados al usuario y que puedan entregar algún registro.  Adicionalmente cuenta los registros resultantes de cada informe (el usuario puede tener varios) y los presenta como conteo al lado del botón de campana de alertas.
 * Added [CORE]: Nuevos identificadores de ID de marco HTML para manipular sección de alertas y sus conteos:  PCODIV_IconoAlertasBarraSuperior, PCODIV_ConteoAlertasBarraSuperior y PCODIV_MarcoContenidoAlertas
+* Added [CORE]: Agregados otros elementos a vista de panel de administracion de aplicacion
+* Added [CORE]: Incluidos resumenes del uso de aplicación en los últimos días al panel central del diseñador.
+* Added [FORMS]: Ahora todos los controles de formulario permiten especificar una etiqueta para ser colapsables (soporta variables en notacion { $ PHP } y HTML básico.  Cuando es detectado un valor de etiqueta para un control en el formlario es graficada su etiqueta y al pulsarla se desplegará el control en ella embebido. 
 
 
 ## Versión 19.8 (2019-11-21)
