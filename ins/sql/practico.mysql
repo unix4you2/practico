@@ -163,6 +163,7 @@ CREATE TABLE core_formulario_objeto (
   validacion_extras varchar(255) DEFAULT '',
   clase_contenedor varchar(255) DEFAULT '',
   ajax_busqueda_dinamica int(1) default '0',
+  etiqueta_colapsable varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

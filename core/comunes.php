@@ -477,7 +477,7 @@ function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIcon
                             </div>
                             <div class='col-xs-9 text-right'>
                                 <div class='$ClaseTextoTitulo'>
-                                    $Titulo
+                                    <b>$Titulo</b>
                                 </div>
                                 <div>$SubTitulo</div>
                             </div>
@@ -7347,6 +7347,11 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                     $ClaseCSSContenedor="";
                                                                     if ($registro_campos["clase_contenedor"]!="") $ClaseCSSContenedor=$registro_campos["clase_contenedor"];
                                                                     echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="'.$ClaseCSSContenedor.'" > '.$ComplementoDisenoMarcoOpciones;
+                                                                    
+                                                                    //Agrega etiqueta para colapsar el control si aplica
+                                                                    if ($registro_campos["etiqueta_colapsable"]!="") 
+                                                                        echo '<details><summary>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["etiqueta_colapsable"]).'</summary>';
+                                                                    
                                                                     // Formatea cada campo de acuerdo a su tipo
                                                                     // CUIDADO!!! Modificando las lineas de tipo siguientes debe modificar las lineas de tipo un poco mas abajo tambien
                                                                     $tipo_de_objeto=@$registro_campos["tipo"];
@@ -7409,6 +7414,11 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                     //Imprime el objeto siempre y cuando no sea uno preformateado por practico (informes, formularios, etc)
                                                                     if ($registro_campos["tipo"]!="informe" && $registro_campos["tipo"]!="form_consulta")
                                                                         echo $objeto_formateado;
+
+                                                                    //Cierra la etiqueta colapsable en caso de haber abierto una
+                                                                    if ($registro_campos["etiqueta_colapsable"]!="") 
+                                                                        echo '</details>';
+                                                                        
                                                                     echo '</div>'; //Marco contenedor
                                                                 }
 
@@ -7466,6 +7476,10 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 
                                                 echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="'.$ClaseCSSContenedor.'" style="margin-top:0px; margin-bottom:0px; margin-left:0; margin-right:0;  padding: 0px; spacing: 0px;">'.$ComplementoDisenoMarcoOpciones.'';
 
+                                                //Agrega etiqueta para colapsar el control si aplica
+                                                if ($registro_campos["etiqueta_colapsable"]!="") 
+                                                    echo '<details><summary>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["etiqueta_colapsable"]).'</summary>';
+                                                    
                                                 //Define tipo_maquetacion
                                                 if($registro_formulario["tipo_maquetacion"]=="responsive")
                                                     {
@@ -7548,6 +7562,10 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                     {
                                                         echo '</td></tr></table>';
                                                     }
+
+                                                //Cierra la etiqueta colapsable en caso de haber abierto una
+                                                if ($registro_campos["etiqueta_colapsable"]!="") 
+                                                    echo '</details>';
 
                                                 echo '</div>';
                                             }
