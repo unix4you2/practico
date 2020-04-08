@@ -135,9 +135,9 @@
     @include_once 'inc/practico_se/core/comunes.php';
 
     //Ejecuta cualquier posible enlace corto que se reciba
-    if ($_GET["q"]!=""  || $_POST["q"]!="")
+    if ($_GET["e"]!=""  || $_POST["e"]!="")
         {
-            $URLCorta=$_GET["q"]; if ($URLCorta=="") $URLCorta=$_POST["q"];
+            $URLCorta=$_GET["e"]; if ($URLCorta=="") $URLCorta=$_POST["e"];
             //Busca posible URL corta con ese codigo
             $PCO_RegistroURLCorta=PCO_EjecutarSQL("SELECT id,{$ListaCamposSinID_acortadorurls} FROM {$TablasCore}acortadorurls WHERE url_corta=? ","$URLCorta")->fetch(); //http://192.168.0.63/practico/?q=g
             if ($PCO_RegistroURLCorta["id"]!="")
