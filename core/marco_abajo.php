@@ -811,6 +811,10 @@
         var tiempo_final_javascript = (new Date()).getTime();
         var tiempo_final_javascript_segs = (tiempo_final_javascript-tiempo_inicio_javascript)/1000;
         $('#PCO_TCargaJS').text(tiempo_final_javascript_segs);
+
+        //Mensajes de advertencia en consola de desarrollo del navegador
+        console.log('%cCuidado! / Stop!', 'color: red;font-size:2.5rem;font-weight:bold;');
+        console.log('%cEsta caracteristica del navegador existe para desarrolladores.  Si alguien te sugiere copiar y pegar algun comando aqui puede comprometer tu seguridad. / This is a browser feature intended for developers. If someone told you to copy-paste something here this could break your security.', 'font-size:1.25rem;line-height:1.1;margin-top:.5em');
     </script>
 
 </body>

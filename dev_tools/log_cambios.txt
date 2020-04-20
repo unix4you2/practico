@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/marco_abajo.php
 
 xml/*
 inc/practico/idiomas/*
@@ -33,6 +34,8 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 * Enhan [KANBAN]: El informe resumido de tableros Kanban tiene activado el soporte para datatables de manera que se pueda filtrar y ordenr rápidamente por algún criterio así como exportar su información.
+* Added [CORE]: La consola de navegador presenta una advertencia cuando el usuario intenta abrirla para ejecutar alguna depuracion o comando.
+
 "
 
 
