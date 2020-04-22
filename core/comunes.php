@@ -2763,6 +2763,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
         if ($PCO_Accion=="GuardarTareaKanban")                  $retorno = 1;
         if ($PCO_Accion=="EliminarTareaKanban")                 $retorno = 1;
         if ($PCO_Accion=="GuardarPersonalizacionKanban")        $retorno = 1;
+        if ($PCO_Accion=="PCO_ExplorarTablerosKanbanResumido")  $retorno = 1;
 
         //VALIDA OTRAS ACCOIONES ESPECIALES
 
