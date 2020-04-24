@@ -17,6 +17,7 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/marco_abajo.php
+core/marco_arriba_bs.php
 
 xml/*
 inc/practico/idiomas/*
@@ -36,6 +37,8 @@ LogCambios="
 * Enhan [KANBAN]: El informe resumido de tableros Kanban tiene activado el soporte para datatables de manera que se pueda filtrar y ordenr rápidamente por algún criterio así como exportar su información.
 * Added [CORE]: La consola de navegador presenta una advertencia cuando el usuario intenta abrirla para ejecutar alguna depuracion o comando.
 * Fixed [KANBAN]: Ajuste de permisos para usuarios no desarrolladores Invitados a tableros Kanban
+* Added [CORE]: Sooprte de modo oscuro por inversion de colores
+
 "
 
 

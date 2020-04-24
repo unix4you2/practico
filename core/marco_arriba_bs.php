@@ -131,6 +131,43 @@
             }
     </style>
 
+
+
+
+
+    <style>
+        html {
+            filter: invert(100%);
+            background: black;
+        }
+        
+        html img,video,iframe {
+            filter: invert(100%);
+        }
+    </style>
+
+	<script language="JavaScript">
+	/*
+        html.dark-mode {
+            filter: invert(100%);
+            background: black;
+        }
+        
+        html.dark-mode img,video,iframe {
+            filter: invert(100%);
+        }
+	
+	*/
+	
+		//document.documentElement.classList.toggle('dark-mode');   
+	</script>
+
+
+
+
+
+
+
     <link href="inc/summernote/summernote.css" rel="stylesheet">
     <!-- CSS Personalizado (Plantilla y Practico) -->
     <?php 
