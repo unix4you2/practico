@@ -137,8 +137,10 @@
 
     <style>
         html {
-            filter: invert(100%);
-            background: black;
+            filter: grayscale(1);
+            /*filter: invert(100%);*/
+            /*filter: sepia(1);*/
+            /*background: black;*/
         }
         
         html img,video,iframe {
