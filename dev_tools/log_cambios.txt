@@ -39,10 +39,19 @@ LogCambios="
 * Fixed [KANBAN]: Ajuste de permisos para usuarios no desarrolladores Invitados a tableros Kanban
 * Added [CORE]: Sooprte de modo oscuro, noche o de ahorro de energía por inversion de paletas de colores. Se incluye posibilidad de inversión, escalas de grises y sepias como paletas alternativas.
 * Added [KANBAN]: Informe resumido de Tableros Kanban presenta columna con la cantidad de tareas activas.  Util para determinar en dónde hay pendientes.
+* Added [MENUS]: Opciones de menu que hagan uso de URLs específicas pueden ahora reemplazar dinámicamente valores de cadenas en notación {$ VariablePHP} 
 
 
 * Enhan [CORE]: Las configuraciones base son movidas desde un archivo a registro en base de datos facilitando el despliegue y actualización de parámetros en GAE
 
+
+
+TODO:  crear campos en script instalacion para paramentros
+crear formulario de configuracion de paramentros
+cambiar rutinas de configuraicon.php desde BD
+agregar parametro de modo noche
+escribir script que pase php a tabla bd
+revisar ampliaciond e tiempo de script php cuando regenera xmls ver archivo de aplicacion parches o instalcaion que aumenta variable de tiempos
 
 "
 

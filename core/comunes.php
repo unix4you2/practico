@@ -177,9 +177,9 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
 		if ($RegistroOpcion["url"]!="")
 		    {
 		        if ($Ubicacion=='submenu')
-		        	$CadenaPreOpcion= '<a href="'.$RegistroOpcion["url"].'" target="'.$RegistroOpcion["destino"].'"><i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]);
+		        	$CadenaPreOpcion= '<a href="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["url"]).'" target="'.$RegistroOpcion["destino"].'"><i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]);
 		        else
-		        	$CadenaPreOpcion= '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'" href="'.$RegistroOpcion["url"].'" target="'.$RegistroOpcion["destino"].'">';
+		        	$CadenaPreOpcion= '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'" href="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["url"]).'" target="'.$RegistroOpcion["destino"].'">';
 		    }
 		else
 			{
