@@ -7348,6 +7348,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                     $ClaseCSSContenedor="";
                                                                     if ($registro_campos["clase_contenedor"]!="") $ClaseCSSContenedor=$registro_campos["clase_contenedor"];
                                                                     echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="'.$ClaseCSSContenedor.'" > '.$ComplementoDisenoMarcoOpciones;
+                                                                    echo '<div id="PCOPre_'.$registro_campos["id_html"].'"></div>';
                                                                     
                                                                     //Agrega etiqueta para colapsar el control si aplica
                                                                     if ($registro_campos["etiqueta_colapsable"]!="") 
@@ -7420,7 +7421,8 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                     if ($registro_campos["etiqueta_colapsable"]!="") 
                                                                         echo '</details>';
                                                                         
-                                                                    echo '</div>'; //Marco contenedor
+                                                                    echo '<div id="PCOPos_'.$registro_campos["id_html"].'"></div>';
+                                                                    echo '</div>'; //Marco PCOContenedor
                                                                 }
 
                                                             //Cierra el marco para el estilo inline del objeto
@@ -7476,6 +7478,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                 if ($registro_campos["clase_contenedor"]!="") $ClaseCSSContenedor=$registro_campos["clase_contenedor"];
 
                                                 echo '<div '.$ComplementoDisenoElemento.' id="PCOContenedor_'.$registro_campos["id_html"].'" class="'.$ClaseCSSContenedor.'" style="margin-top:0px; margin-bottom:0px; margin-left:0; margin-right:0;  padding: 0px; spacing: 0px;">'.$ComplementoDisenoMarcoOpciones.'';
+                                                echo '<div id="PCOPre_'.$registro_campos["id_html"].'"></div>';
 
                                                 //Agrega etiqueta para colapsar el control si aplica
                                                 if ($registro_campos["etiqueta_colapsable"]!="") 
@@ -7568,7 +7571,8 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                 if ($registro_campos["etiqueta_colapsable"]!="") 
                                                     echo '</details>';
 
-                                                echo '</div>';
+                                                echo '<div id="PCOPos_'.$registro_campos["id_html"].'"></div>';
+                                                echo '</div>'; //Marco PCOContenedor
                                             }
 
                                         //Actualiza limite inferior para siguiente lista de campos
@@ -7710,14 +7714,14 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 					$PCO_FuncionesJSInternasFORM .= '
 					    <script language=\'JavaScript\'>
                             $( "#'.$registro_eventos_definidos["id_html"].'" ).'.$MetodoJQuery.'(function(PCOJS_Evento) {
-                              '.$registro_eventos_definidos["javascript"].'
+                              '.PCO_ReemplazarVariablesPHPEnCadena($registro_eventos_definidos["javascript"]).'
                             });
 					    </script>';
 			    }
 		}
 
         //Carga las funciones JavaScript asociadas al formulario y llama la funcion FrmAutoRun()
-        $JavaScriptFormulario=$registro_formulario["javascript"];
+        $JavaScriptFormulario=PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["javascript"]);
         //Reemplaza la funcion de FrmAutoRun() del formulario por FrmAutoRun_IDFormulario() para garantizar que es unica
         $NumeroIdFormulario=$registro_formulario["id"];
         if ($NumeroIdFormulario<0) $NumeroIdFormulario="LTZ".($NumeroIdFormulario*-1);

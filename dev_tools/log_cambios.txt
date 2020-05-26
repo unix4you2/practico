@@ -37,10 +37,15 @@ LogCambios="
 * Enhan [KANBAN]: El informe resumido de tableros Kanban tiene activado el soporte para datatables de manera que se pueda filtrar y ordenr rápidamente por algún criterio así como exportar su información.
 * Added [CORE]: La consola de navegador presenta una advertencia cuando el usuario intenta abrirla para ejecutar alguna depuracion o comando.
 * Fixed [KANBAN]: Ajuste de permisos para usuarios no desarrolladores Invitados a tableros Kanban
-* Added [CORE]: Sooprte de modo oscuro, noche o de ahorro de energía por inversion de paletas de colores. Se incluye posibilidad de inversión, escalas de grises y sepias como paletas alternativas.
 * Added [KANBAN]: Informe resumido de Tableros Kanban presenta columna con la cantidad de tareas activas.  Util para determinar en dónde hay pendientes.
 * Added [MENUS]: Opciones de menu que hagan uso de URLs específicas pueden ahora reemplazar dinámicamente valores de cadenas en notación {$ VariablePHP} 
+* Added [FORMS]: Los controles de formulario cuentan ahora con marcos antes y despues que permiten agregar información complementaria dinamicamente al control.  Los nombres de esos marcos son PCOPre_IDELEMENTO y PCOPos_IDELEMENTO donde IDELEMENTO es el valor definido como id del tag html correspondiente.
+* Added [CORE]: Todos los scrips JS en formularios y eventos de controles en formularios pueden tomar valores de variables PHP en notacion {$ Variable}.  Tenga en cuenta que la variable PHP _Debe_ que estar definida en el contexto en que se hace llamado a la funcion JS para que ésta la pueda reconocer y agregar a su código, en caso contrario serán reemplazadas por una cadena vacía.
 
+
+
+
+* Added [CORE]: Soporte de modo oscuro, noche o de ahorro de energía por inversion de paletas de colores. Se incluye posibilidad de inversión, escalas de grises y sepias como paletas alternativas.
 
 * Enhan [CORE]: Las configuraciones base son movidas desde un archivo a registro en base de datos facilitando el despliegue y actualización de parámetros en GAE
 

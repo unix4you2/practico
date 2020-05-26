@@ -137,8 +137,8 @@
 
     <style>
         html {
-            filter: grayscale(1);
-            /*filter: invert(100%);*/
+            /*filter: grayscale(1);*/
+            filter: invert(100%);
             /*filter: sepia(1);*/
             /*background: black;*/
         }
@@ -146,7 +146,14 @@
         html img,video,iframe {
             filter: invert(100%);
         }
+
+        .modal-backdrop {
+           filter: invert(100%);
+        }
     </style>
+
+
+
 
 	<script language="JavaScript">
 	/*
