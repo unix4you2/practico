@@ -132,50 +132,74 @@
     </style>
 
 
+    <?php
+        //Determina si se tiene algun filtro de color POR DEFECTO en toda la plataforma y lo aplica
+        $PCOVAR_CadenaFiltroColores="";
+        if ($PCO_TransformacionColores!="")
+            {
+                switch ($PCO_TransformacionColores) {
+                    //Inverso para modos dia y noche
+                    case 'inverso':
+                        $PCOVAR_CadenaFiltroColores="
+                            <style>
+                                html {
+                                    filter: invert(100%);
+                                }
+                                
+                                html img,video,iframe {
+                                    filter: invert(100%);
+                                }
+                        
+                                .modal-backdrop {
+                                   filter: invert(100%);
+                                }
+                            </style>";
+                        break;
 
+                    //Escala de grises
+                    case 'grises':
+                        $PCOVAR_CadenaFiltroColores="
+                            <style>
+                                html {
+                                    filter: grayscale(100%);
+                                }
+                            </style>";
+                        break;
+                    //Tonos Sepia
 
+                    case 'sepia':
+                        $PCOVAR_CadenaFiltroColores="
+                            <style>
+                                html {
+                                    filter: sepia(85%);
+                                }
+                            </style>";                        
+                        break;
 
-    <style>
-        html {
-            /*filter: grayscale(1);*/
-            filter: invert(100%);
-            /*filter: sepia(1);*/
-            /*background: black;*/
-        }
-        
-        html img,video,iframe {
-            filter: invert(100%);
-        }
-
-        .modal-backdrop {
-           filter: invert(100%);
-        }
-    </style>
-
-
-
+                     //Sin cambios - predeterminado
+                    default:
+                        $PCOVAR_CadenaFiltroColores="";
+                        break;
+                }
+            }
+        echo $PCOVAR_CadenaFiltroColores;
+    ?>
 
 	<script language="JavaScript">
-	/*
-        html.dark-mode {
-            filter: invert(100%);
-            background: black;
-        }
-        
-        html.dark-mode img,video,iframe {
-            filter: invert(100%);
-        }
-	
-	*/
-	
+	    //TODO: Para cambiar dinamicamente por el usuario
+    	/*
+            html.dark-mode {
+                filter: invert(100%);
+                background: black;
+            }
+            
+            html.dark-mode img,video,iframe {
+                filter: invert(100%);
+            }
+    	
+    	*/
 		//document.documentElement.classList.toggle('dark-mode');   
 	</script>
-
-
-
-
-
-
 
     <link href="inc/summernote/summernote.css" rel="stylesheet">
     <!-- CSS Personalizado (Plantilla y Practico) -->

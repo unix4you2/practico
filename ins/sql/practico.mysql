@@ -19,6 +19,67 @@ CREATE TABLE core_parametros (
   federado_campoclave varchar(255) NULL DEFAULT '',
   federado_encripcion varchar(255) NULL DEFAULT '',
   federado_puerto varchar(255) NULL DEFAULT '',
+
+
+
+
+    <input type="hidden" name="Auth_TipoMotorNEW" value="practico">
+    <input type="hidden" name="Auth_ProtoTransporteNEW" value="">
+    <input type="hidden" name="Auth_TipoEncripcionNEW" value="plano">
+    <input type="hidden" name="Auth_LDAPServidorNEW" value="">
+    <input type="hidden" name="Auth_LDAPPuertoNEW" value="">
+    <input type="hidden" name="Auth_LDAPDominioNEW" value="">
+    <input type="hidden" name="Auth_LDAPOUNEW" value="">
+    <input type="hidden" name="TipoCaptchaLoginNEW" value="visual">
+    <input type="hidden" name="VersionAplicacion" value="1.0">
+
+
+
+  NombreRAD	varchar(255) NULL DEFAULT 'Practico',
+  ArchivoCORE	varchar(255) NULL DEFAULT '',	
+  TablasCore	varchar(255) NULL DEFAULT 'core_',	
+  TablasApp	varchar(255) NULL DEFAULT 'app_',	
+**LlaveDePaso	varchar(255) NULL DEFAULT 'INSTALL',
+  ModoDepuracion	varchar(255) NULL DEFAULT '0',
+  PermitirReporteBugs	varchar(255) NULL	 DEFAULT '0',
+  DepuracionSQL	varchar(255) NULL	 DEFAULT '0',
+  BuscarActualizaciones	varchar(255) NULL DEFAULT '0',	
+  ZonaHoraria	varchar(255) NULL	
+  IdiomaPredeterminado	varchar(255) NULL	
+  IdiomaEnLogin	varchar(255) NULL	
+  Tema_PracticoFramework	varchar(255) NULL	
+  PCO_ArchivoImagenFondo	varchar(255) NULL	
+  PCO_TransformacionColores	varchar(255) NULL	
+  TipoCaptchaLogin	varchar(255) NULL	
+  CaracteresCaptcha	varchar(255) NULL DEFAULT '4',	
+  CodigoGoogleAnalytics	varchar(255) NULL	
+  Auth_TipoMotor	varchar(255) NULL	Tipo de motor usado para la autenticacion de usuarios
+  Auth_ProtoTransporte	varchar(255) NULL	
+  Auth_PermitirReseteoClaves	varchar(255) NULL	
+  Auth_PermitirAutoRegistro	varchar(255) NULL	
+  Auth_PlantillaAutoRegistro	varchar(255) NULL	
+  Auth_PresentarOauthInicio	varchar(255) NULL	
+  Auth_TipoEncripcion	varchar(255) NULL	Configuracion LDAP - Auth_TipoMotor=ldap
+  Auth_LDAPServidor	varchar(255) NULL	
+  Auth_LDAPPuerto	varchar(255) NULL	
+  Auth_LDAPDominio	varchar(255) NULL	
+  Auth_LDAPOU	varchar(255) NULL	
+  Activar_ModuloChat	varchar(255) NULL	Especifica si desea activar o no el modulo de chat para usuarios asi: 0=No, 1=Solo usuarios internos, 2=Solo usuarios externos, 3=Todos los usuarios, 4=Exclusivo para admin (podra iniciar conversacion y chat con cualquier otro usuario aun con modulo desactivado)
+
+  PWA_Activa	varchar(255) NULL DEFAULT '0',	
+  PWA_DireccionTexto	varchar(255) NULL	DEFAULT 'ltr',	
+  PWA_Display	varchar(255) NULL		DEFAULT 'fullscreen',	
+  PWA_Orientacion	varchar(255) NULL	DEFAULT 'portrait',	
+  PWA_FCMSenderID	varchar(255) NULL		DEFAULT '103953800507',	
+  PWA_Scope	varchar(255) NULL		DEFAULT '',	
+  PWA_AutorizacionGPS	varchar(255) NULL	DEFAULT '0',	
+  PWA_AutorizacionFCM	varchar(255) NULL	DEFAULT '0',	
+  PWA_AutorizacionCAM	varchar(255) NULL	DEFAULT '0',	
+  PWA_AutorizacionMIC	varchar(255) NULL	DEFAULT '0',	
+  PWA_OcultarBarrasHerramientas	varchar(255) NULL	DEFAULT '0',	
+  _SeparadorCampos_	varchar(255) NULL DEFAULT '||_||',	
+  ModoDesarrolladorPractico	varchar(255) NULL DEFAULT '0',	
+  PCOVAR_Administradores	varchar(255) NULL DEFAULT 'admin',	
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -38,6 +99,7 @@ CREATE TABLE core_usuario (
   es_plantilla int(1) DEFAULT 0,
   plantilla_permisos varchar(250) default '',
   descripcion varchar(250) NULL,
+  transformacion_colores varchar(10) NULL,
   PRIMARY KEY  (login)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

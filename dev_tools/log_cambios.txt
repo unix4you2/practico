@@ -18,6 +18,8 @@ index.php
 core/comunes.php
 core/marco_abajo.php
 core/marco_arriba_bs.php
+core/marco_conf.php
+core/objetos.php
 
 xml/*
 inc/practico/idiomas/*
@@ -41,11 +43,9 @@ LogCambios="
 * Added [MENUS]: Opciones de menu que hagan uso de URLs específicas pueden ahora reemplazar dinámicamente valores de cadenas en notación {$ VariablePHP} 
 * Added [FORMS]: Los controles de formulario cuentan ahora con marcos antes y despues que permiten agregar información complementaria dinamicamente al control.  Los nombres de esos marcos son PCOPre_IDELEMENTO y PCOPos_IDELEMENTO donde IDELEMENTO es el valor definido como id del tag html correspondiente.
 * Added [CORE]: Todos los scrips JS en formularios y eventos de controles en formularios pueden tomar valores de variables PHP en notacion {$ Variable}.  Tenga en cuenta que la variable PHP _Debe_ que estar definida en el contexto en que se hace llamado a la funcion JS para que ésta la pueda reconocer y agregar a su código, en caso contrario serán reemplazadas por una cadena vacía.
-
-
-
-
+* Enhan [AUDIT]: Mejorada la maquetacion general del módulo de auditorías y distribución responsive en informes de auditoria para permitir visualizar claramente eventos de auditoría extensos como resultados de queries o similares.
 * Added [CORE]: Soporte de modo oscuro, noche o de ahorro de energía por inversion de paletas de colores. Se incluye posibilidad de inversión, escalas de grises y sepias como paletas alternativas.
+* Added [CORE]: Los usuarios pueden activar/desactivar modos de inversión o modo noche en sus aplicaciones según decisión del administrador de plataforma.
 
 * Enhan [CORE]: Las configuraciones base son movidas desde un archivo a registro en base de datos facilitando el despliegue y actualización de parámetros en GAE
 
@@ -109,6 +109,11 @@ ADD `PWA_OcultarBarrasHerramientas` varchar(255) COLLATE 'utf8_general_ci' NULL 
 ADD `_SeparadorCampos_` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Define cadena usada para separar campos en operaciones de bases de datos' AFTER `PWA_OcultarBarrasHerramientas`,
 ADD `ModoDesarrolladorPractico` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Define si la plataforma se encuentra activa para realizar desarrollo interno de PracticoFramework [0=Inactivo|-10000=Activo]' AFTER `_SeparadorCampos_`,
 ADD `PCOVAR_Administradores` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Define cadena separada por comas con usuarios administradores de la aplicacion' AFTER `ModoDesarrolladorPractico`;
+
+ALTER TABLE `core_parametros`
+ADD `PCO_TransformacionColores` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PCO_ArchivoImagenFondo`;
+
+ALTER TABLE `core_usuario` ADD `transformacion_colores` varchar(15) COLLATE 'utf8_general_ci' NOT NULL DEFAULT '' COMMENT 'vacio|inverso|grises|sepia';
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

@@ -350,6 +350,8 @@
 													<a  href="#" data-toggle="tooltip" data-html="true"  title="Tema bootstrap / Bootstrap theme"><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
+											
+											<!-- TODO: Permitir cambiar a usuarios  tema -->
 
 											<div class="form-group input-group">
 												<span class="input-group-addon">
@@ -358,6 +360,30 @@
 												<input name="PCO_ArchivoImagenFondoNEW" value="<?php if (@$PCO_ArchivoImagenFondo!="") echo $PCO_ArchivoImagenFondo; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_ImagenDefecto; ?>">
 												<span class="input-group-addon">
 													<a  href="#" data-toggle="tooltip" data-html="true"  title="<b><?php echo $MULTILANG_Ayuda; ?></b><br><?php echo $MULTILANG_ImagenFondoDes; ?>"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
+											<label for="PCO_TransformacionColoresNEW"><i class="fa fa-low-vision fa-2x fa-fw"></i>  Transformaci&oacute;n de colores (Color filter):</label>
+											<div class="form-group input-group">
+												<select id="PCO_TransformacionColoresNEW" name="PCO_TransformacionColoresNEW" class="selectpicker" data-size=7>
+													<option value="" <?php if ($PCO_TransformacionColores=="") echo "SELECTED"; ?> >Sin cambios - predeterminado (None - default)</option>
+													<option value="inverso" <?php if ($PCO_TransformacionColores=="inverso") echo "SELECTED"; ?> >Inverso para modos dia y noche - (Inverted)</option>
+													<option value="grises" <?php if ($PCO_TransformacionColores=="grises") echo "SELECTED"; ?> >Escala de grises (Grayscale)</option>
+													<option value="sepia" <?php if ($PCO_TransformacionColores=="sepia") echo "SELECTED"; ?> >Tonos Sepia (Sepia)</option>
+												</select>
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="Permite aplicar cambios o filtros a los colores del tema seleccionado / Allow to apply filter to the colors"><i class="fa fa-question-circle fa-fw text-info"></i></a>
+												</span>
+											</div>
+
+											<label for="PCO_PermitirUsuariosModoNocheNEW"><i class="fa fa-low-vision fa-2x fa-fw"></i>  Permitir a usuarios activar/desactivar filtro de modo noche:</label>
+											<div class="form-group input-group">
+												<select id="PCO_PermitirUsuariosModoNocheNEW" name="PCO_PermitirUsuariosModoNocheNEW" class="selectpicker" data-size=7>
+													<option value="1" <?php if (@$PCO_PermitirUsuariosModoNoche=="1") echo "SELECTED"; ?> ><?php echo $MULTILANG_Si; ?></option>
+													<option value="0" <?php if (@$PCO_PermitirUsuariosModoNoche=="0" || @$PCO_PermitirUsuariosModoNoche=="") echo "SELECTED"; ?> ><?php echo $MULTILANG_No; ?></option>
+												</select>
+												<span class="input-group-addon">
+													<a  href="#" data-toggle="tooltip" data-html="true"  title="Permite a los usuarios habilitar o no la inversi&oacute;n de colores en su perfil, de manera que cada usuario pueda ajustar la vista de su aplicativo como m&aacute;s le guste."><i class="fa fa-question-circle fa-fw text-info"></i></a>
 												</span>
 											</div>
 

@@ -83,6 +83,8 @@
 	$IdiomaEnLogin=0;
 	$Tema_PracticoFramework='bootstrap';
 	$PCO_ArchivoImagenFondo='';
+	$PCO_TransformacionColores='inverso';
+    $PCO_PermitirUsuariosModoNoche='1';
 
 	$TipoCaptchaLogin='visual';
 	$CaracteresCaptcha=4;
