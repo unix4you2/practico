@@ -4,7 +4,7 @@ CREATE TABLE core_parametros (
   nombre_empresa_largo varchar(250) NOT NULL,
   nombre_empresa_corto varchar(50) NOT NULL,
   nombre_aplicacion varchar(100) NOT NULL,
-  version varchar(20),
+  version varchar(20) NULL DEFAULT '1.0',
   fecha_lanzamiento date,
   licencia text,
   creditos text,
@@ -23,15 +23,6 @@ CREATE TABLE core_parametros (
 
 
 
-    <input type="hidden" name="Auth_TipoMotorNEW" value="practico">
-    <input type="hidden" name="Auth_ProtoTransporteNEW" value="">
-    <input type="hidden" name="Auth_TipoEncripcionNEW" value="plano">
-    <input type="hidden" name="Auth_LDAPServidorNEW" value="">
-    <input type="hidden" name="Auth_LDAPPuertoNEW" value="">
-    <input type="hidden" name="Auth_LDAPDominioNEW" value="">
-    <input type="hidden" name="Auth_LDAPOUNEW" value="">
-    <input type="hidden" name="TipoCaptchaLoginNEW" value="visual">
-    <input type="hidden" name="VersionAplicacion" value="1.0">
 
 
 
@@ -50,22 +41,23 @@ CREATE TABLE core_parametros (
   Tema_PracticoFramework	varchar(255) NULL	
   PCO_ArchivoImagenFondo	varchar(255) NULL	
   PCO_TransformacionColores	varchar(255) NULL	
-  TipoCaptchaLogin	varchar(255) NULL	
+  TipoCaptchaLogin	varchar(255) NULL	DEFAULT 'visual',	
   CaracteresCaptcha	varchar(255) NULL DEFAULT '4',	
   CodigoGoogleAnalytics	varchar(255) NULL	
-  Auth_TipoMotor	varchar(255) NULL	Tipo de motor usado para la autenticacion de usuarios
-  Auth_ProtoTransporte	varchar(255) NULL	
+  
+  Auth_TipoMotor	varchar(255) NULL DEFAULT 'practico',
+  Auth_ProtoTransporte	varchar(255) NULL	 DEFAULT '',	
   Auth_PermitirReseteoClaves	varchar(255) NULL	
   Auth_PermitirAutoRegistro	varchar(255) NULL	
   Auth_PlantillaAutoRegistro	varchar(255) NULL	
   Auth_PresentarOauthInicio	varchar(255) NULL	
-  Auth_TipoEncripcion	varchar(255) NULL	Configuracion LDAP - Auth_TipoMotor=ldap
-  Auth_LDAPServidor	varchar(255) NULL	
-  Auth_LDAPPuerto	varchar(255) NULL	
-  Auth_LDAPDominio	varchar(255) NULL	
-  Auth_LDAPOU	varchar(255) NULL	
-  Activar_ModuloChat	varchar(255) NULL	Especifica si desea activar o no el modulo de chat para usuarios asi: 0=No, 1=Solo usuarios internos, 2=Solo usuarios externos, 3=Todos los usuarios, 4=Exclusivo para admin (podra iniciar conversacion y chat con cualquier otro usuario aun con modulo desactivado)
-
+  
+  Auth_TipoEncripcion	varchar(255) NULL DEFAULT 'plano',	
+  Auth_LDAPServidor	varchar(255) NULL	DEFAULT '',	
+  Auth_LDAPPuerto	varchar(255) NULL	DEFAULT '',	
+  Auth_LDAPDominio	varchar(255) NULL	DEFAULT '',	
+  Auth_LDAPOU	varchar(255) NULL	 DEFAULT '',	
+  Activar_ModuloChat	varchar(255) NULL DEFAULT '0',	
   PWA_Activa	varchar(255) NULL DEFAULT '0',	
   PWA_DireccionTexto	varchar(255) NULL	DEFAULT 'ltr',	
   PWA_Display	varchar(255) NULL		DEFAULT 'fullscreen',	
