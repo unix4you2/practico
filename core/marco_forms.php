@@ -52,7 +52,7 @@
     <input type="Hidden" name="PCO_CapturaTrazas" id="PCO_CapturaTrazas" value="">
 </form>
 
-<form name="FRMBASEINFORME" id="FRMBASEINFORME"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" target="_self">
+<form name="FRMBASEINFORME" id="FRMBASEINFORME"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" target="_self" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="">
     <input type="Hidden" name="tabla" value="">  <!-- Compatibilidad hacia atras -->
     <input type="Hidden" name="campo" value="">  <!-- Compatibilidad hacia atras -->

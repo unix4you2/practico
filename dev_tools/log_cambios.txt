@@ -19,6 +19,8 @@ core/comunes.php
 core/marco_abajo.php
 core/marco_arriba_bs.php
 core/marco_conf.php
+core/marco_forms.php
+core/menus.php
 core/objetos.php
 
 xml/*
@@ -48,6 +50,7 @@ LogCambios="
 * Added [CORE]: Los usuarios pueden activar/desactivar modos de inversión o modo noche en sus aplicaciones según decisión del administrador de plataforma.
 
 * Enhan [CORE]: Las configuraciones base son movidas desde un archivo a registro en base de datos facilitando el despliegue y actualización de parámetros en GAE
+* Enhan [CORE]: Formulario de base para informes y transporte de datos ahora no ocupa espacio en pantalla para mejorar estética de maquetación.
 
 
 

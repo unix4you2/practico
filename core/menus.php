@@ -437,9 +437,8 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
                 }
 
 			// Carga las opciones del ESCRITORIO
-			echo '
-			<div id="PCODIV_ArribaEscritorio"></div>
-			<table class="table table-unbordered table-condensed"><tr><td>';
+			echo '<div id="PCODIV_ArribaEscritorio"></div>';
+
 			// Si el usuario es diferente al administrador agrega condiciones al query
 			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{
@@ -447,11 +446,15 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
 			$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_escritorio=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
-
-			// Imprime las opciones con sus formularios
-			while($registro = $resultado->fetch())
-				PCO_ImprimirOpcionMenu($registro,'escritorio');
-			echo '</td></tr></table><br>';
+            //Crea la tabla para disponer los resultados solamente si encuentra opciones para el usuario
+			if($resultado->rowCount()>0) 
+			    {
+        			echo '<table class="table table-unbordered table-condensed"><tr><td>';
+        			// Imprime las opciones con sus formularios
+        			while($registro = $resultado->fetch())
+        				PCO_ImprimirOpcionMenu($registro,'escritorio');
+        			echo '</td></tr></table><br>';			        
+			    }
 
 			// Carga las opciones del ACORDEON
 			echo '<div align="center">';
