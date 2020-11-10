@@ -687,8 +687,10 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                                 if ($CantidadTareasTotal-$CantidadTareasArchivadas!=0)
                                     $PorcentajeTotalAvanceColumna=round($CantidadTareasColumna*100/($CantidadTareasTotal-$CantidadTareasArchivadas));
                                 
-                                echo "<td  valign=top width='$AnchoColumnas%'>";
-                                echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='".$MULTILANG_ArrastrarTarea."' class='btn pull-left' id='MarcoBotonOcultar".$ConteoColumna."' ondrop='Soltar(event,$ConteoColumna)' ondragover='PermitirSoltar(event,$ConteoColumna)'><i class='fa-1x'><i class='fa fa-stack-overflow'></i> <b>".$NombreColumna."</b> <font color=red>{$PorcentajeTotalAvanceColumna}%</font></i></div>";
+
+                                echo "<td valign=top width='$AnchoColumnas%' ondrop='Soltar(event,$ConteoColumna)' ondragover='PermitirSoltar(event,$ConteoColumna)' id='MarcoBotonOcultar".$ConteoColumna."'>";
+                                echo "<div data-toggle='tooltip' data-html='true' data-placement='top' title='".$MULTILANG_ArrastrarTarea."' class='btn pull-left' ><i class='fa-1x'><i class='fa fa-stack-overflow'></i> <b>".$NombreColumna."</b> <font color=red>{$PorcentajeTotalAvanceColumna}%</font></i></div>";
+
                                 echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='$(\"#myModalActividadKanban$ID_TableroKanban\").modal(\"show\"); document.datosfield$ID_TableroKanban.columna.value=$ConteoColumna;'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
                                 
                                 echo "<br>";
