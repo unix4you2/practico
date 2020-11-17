@@ -473,6 +473,7 @@ CREATE TABLE core_chat (
   recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+ALTER TABLE core_chat ADD INDEX destinatario (destinatario);
 
 DROP TABLE IF EXISTS core_monitoreo;
 CREATE TABLE core_monitoreo (

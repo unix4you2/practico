@@ -53,6 +53,7 @@ LogCambios="
 
 * Enhan [CORE]: Las configuraciones base son movidas desde un archivo a registro en base de datos facilitando el despliegue y actualización de parámetros en GAE
 * Enhan [CORE]: Formulario de base para informes y transporte de datos ahora no ocupa espacio en pantalla para mejorar estética de maquetación.
+* Enhan [CORE]: Mejorado rendimiento en tablas de chat para organizaciones con usuarios cuyo uso es frecuente.
 
 
 
@@ -119,6 +120,8 @@ ALTER TABLE `core_parametros`
 ADD `PCO_TransformacionColores` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PCO_ArchivoImagenFondo`;
 
 ALTER TABLE `core_usuario` ADD `transformacion_colores` varchar(15) COLLATE 'utf8_general_ci' NOT NULL DEFAULT '' COMMENT 'vacio|inverso|grises|sepia';
+
+ALTER TABLE `core_chat` ADD INDEX `destinatario` (`destinatario`);
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
