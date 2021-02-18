@@ -49,3 +49,5 @@
 
     //Exporta los informes
     PCO_ExportarDefinicionesXML("Inf","-10000-0","XML_IdEstatico");
+    
+    //21.2

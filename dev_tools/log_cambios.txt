@@ -24,6 +24,12 @@ core/kanban.php
 core/menus.php
 core/objetos.php
 
+mod/pmydb/index.php
+inc/ace/src-min-noconflict/*
+
+
+
+
 xml/*
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
@@ -56,6 +62,7 @@ LogCambios="
 * Enhan [CORE]: Formulario de base para informes y transporte de datos ahora no ocupa espacio en pantalla para mejorar estética de maquetación.
 * Enhan [CORE]: Mejorado rendimiento en tablas de chat para organizaciones con usuarios cuyo uso es frecuente.
 * Enhan [CORE]: Reemplazado PMyDB 20.3 por Adminer 4.8.0
+* Enhan [PCODER]: Actualizacion Ace 1.4.9 a 1.4.12
 
 
 
