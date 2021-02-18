@@ -63,6 +63,7 @@ LogCambios="
 * Enhan [CORE]: Mejorado rendimiento en tablas de chat para organizaciones con usuarios cuyo uso es frecuente.
 * Enhan [CORE]: Reemplazado PMyDB 20.3 por Adminer 4.8.0
 * Enhan [PCODER]: Actualizacion Ace 1.4.9 a 1.4.12
+* Enhan [PCODER]: Eliminacion workers innecesarios
 
 
 
