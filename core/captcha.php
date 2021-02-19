@@ -149,4 +149,4 @@ if ($TipoCaptchaLogin=="visual")
     	                }
     	      </script>';
     } //Fin si el tipo de captch es visual
-?>
+
