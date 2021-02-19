@@ -70,6 +70,7 @@ LogCambios="
 * Enhan [PCODER]: Actualizacion Ace 1.4.9 a 1.4.12
 * Enhan [PCODER]: Eliminacion workers innecesarios
 * Enhan [CORE]: Se eliminan tipos de proveedor de despacho de correo innecesarios como SendGrid.  En adelante despachos por proveedores de correo de este tipo pueden ser configurados directamente enlazando el SMTP del servidor con el del proveedor.
+* Enhan [CORE]: Realizadas optimizaciones generales de codigo en diferentes modulos
 
 
 
