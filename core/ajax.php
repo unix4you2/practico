@@ -117,7 +117,8 @@ if ($PCO_Accion=="valor_campo_tabla")
     {
         if($condicion=="") $condicion="1=1";
         $registro=PCO_EjecutarSQL("SELECT $campo FROM $tabla WHERE $condicion ")->fetch();
-        @ob_clean();
+
+        if (@ob_clean() === false) throw new \RuntimeException('Error no se pudo hacer ob_clean en funcion de valor_campo_tabla.');
         if ($registro[0]!="")
             echo trim($registro[0]);
         else
@@ -169,8 +170,8 @@ if (@$PCO_Accion=="cambiar_estado_campo")
 				if ($PCO_CambioEstado_NoUsarCore==1) $PrefijoTablas="";
 				
 				PCO_EjecutarSQLUnaria("UPDATE ".$PrefijoTablas."$tabla SET $campo = '$valor' WHERE $PCO_CambioEstado_CampoLlave = ? ","$id");
-				@PCO_Auditar("Cambia estado del campo $campo en objetoID $TipoCampo");
-				
+		        if (@PCO_Auditar("Cambia estado del campo $campo en objetoID $TipoCampo") === false) throw new \RuntimeException('Error no se pudo llevar un registro de auditoria en funcion cambiar_estado_campo');
+
 				if (@$PCO_CambioEstado_NegarRetorno=="")
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="PCO_Accion" value="'.$accion_retorno.'">
