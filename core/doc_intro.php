@@ -110,4 +110,4 @@ Section: Detalles de licenciamiento (AUTHORS)
 	(end)
 
 */
-?>
+

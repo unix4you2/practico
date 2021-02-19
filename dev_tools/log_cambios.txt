@@ -17,6 +17,8 @@ ListaArchivos="
 index.php
 core/codigobarras.php
 core/comunes.php
+core/correos.php
+core/doc_intro.php
 core/marco_abajo.php
 core/marco_arriba_bs.php
 core/marco_conf.php
