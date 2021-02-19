@@ -42,7 +42,6 @@
 			die();
 		}
 
-
 	$texto_prefijo_correo = '<html>
 		<head>
 		<meta content="text/html;charset=UTF-8" http-equiv="Content-Type">
@@ -103,29 +102,6 @@
 		</html>'; 
 
 
-
-
-
-
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-Configuraciones de provvedor favorito para envio de correos
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -166,59 +142,6 @@ function PCO_EnviarCorreo($remitente,$destinatario,$asunto,$cuerpo_mensaje,$dest
 				$estado_envio = mail($destinatario,$asunto,$mensaje_final,$headers);
 			}
 
-		//Usa proveedor externo de correo
-// 		if ($PCOVAR_ProvedorSMTP=="SendGrid")
-// 			{
-				
-// 				$PCOVAR_APIKeySendGrid="XXXXX"; //Tomar este valor desde configuraciones
-// 				//Pendiente:  parametrizar el envio de mensajes de solo texto si se desea.
-
-// 				// REVISAR ESTE COMPOSER require 'vendor/autoload.php';
-// 				Dotenv::load(__DIR__);
-// 				$sendgrid_apikey = getenv($PCOVAR_APIKeySendGrid);
-// 				$sendgrid = new SendGrid($sendgrid_apikey);
-// 				$url = 'https://api.sendgrid.com/';
-// 				$pass = $sendgrid_apikey;
-// 				$template_id = '<your_template_id>';
-// 				$js = array(
-// 				  'sub' => array(':name' => array('Elmer')),
-// 				  'filters' => array('templates' => array('settings' => array('enable' => 1, 'template_id' => $template_id)))
-// 				);
-
-// 				$params = array(
-// 					'to'        => $destinatario,
-// 					'toname'    => $MULTILANG_Usuario." - ".$NombreRAD,
-// 					'from'      => $remitente,
-// 					'fromname'  => $NombreRAD,
-// 					'subject'   => $asunto,
-// 					'text'      => "I'm text!",
-// 					'html'      => $cuerpo_mensaje,
-// 					'x-smtpapi' => json_encode($js),
-// 				  );
-
-// 				$request =  $url.'api/mail.send.json';
-
-// 				// Generate curl request
-// 				$session = curl_init($request);
-// 				// Tell PHP not to use SSLv3 (instead opting for TLS)
-// 				curl_setopt($session, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
-// 				curl_setopt($session, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $sendgrid_apikey));
-// 				// Tell curl to use HTTP POST
-// 				curl_setopt ($session, CURLOPT_POST, true);
-// 				// Tell curl that this is the body of the POST
-// 				curl_setopt ($session, CURLOPT_POSTFIELDS, $params);
-// 				// Tell curl not to return headers, but do return the response
-// 				curl_setopt($session, CURLOPT_HEADER, false);
-// 				curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-
-// 				// obtain response
-// 				$response = curl_exec($session);
-// 				curl_close($session);
-
-// 				// print everything out
-// 				print_r($response);
-
-// 			}
 		return $estado_envio;
 	}
 
