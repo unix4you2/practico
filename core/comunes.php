@@ -1843,7 +1843,9 @@ function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
 				$SalidaFuncion=0;
 				if ($PCO_ChequeoDinamicoSintaxis=="1")
 				    {
-        				@exec('php -l '.escapeshellarg($ArchivoFuente), $Salida, $Codigo);
+        				if (@exec('php -l '.escapeshellarg($ArchivoFuente), $Salida, $Codigo)===false)
+                            throw new \RuntimeException('Detectado error de sintaxis en'.escapeshellarg($ArchivoFuente));
+
         				if ($Codigo)  //Si se tiene un valor diferente de cero retornado por el comando
         					{
         						PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion,"<b>".$MULTILANG_Detalles."</b>: Se deberia evitar la inclusion del archivo $ArchivoFuente pues PHP retorna el mensaje: <i>".$Salida[0].$Salida[1].$Salida[2]."<i>.  Se recomienda validar su sintaxis para que pueda ser incluido sin problemas.", '', 'fa fa-exclamation-triangle fa-3x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
@@ -7379,7 +7381,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                         case 'casilla_check': $objeto_formateado = @PCO_CargarObjetoCasillaCheck($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
                                                                         case 'etiqueta': $objeto_formateado = @PCO_CargarObjetoEtiqueta($registro_campos,@$registro_datos_formulario); break;
                                                                         case 'url_iframe': $objeto_formateado = @PCO_CargarObjetoIFrame($registro_campos,@$registro_datos_formulario); break;
-                                                                        case 'informe': @PCO_CargarInforme($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1,$registro_campos["anular_acciones"],$registro_campos["anular_piepagina"],$registro_campos["anular_encabezado"]); break;
+                                                                        case 'informe': $informe_formateado=@PCO_CargarInforme($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1,$registro_campos["anular_acciones"],$registro_campos["anular_piepagina"],$registro_campos["anular_encabezado"]); break;
                                                                         case 'deslizador': $objeto_formateado = @PCO_CargarObjetoDeslizador($registro_campos,@$registro_datos_formulario); break;
                                                                         case 'campo_etiqueta': $objeto_formateado = @PCO_CargarObjetoCampoEtiqueta($registro_campos,@$registro_datos_formulario); break;
                                                                         case 'archivo_adjunto': $objeto_formateado = @PCO_CargarObjetoArchivoAdjunto($registro_campos,@$registro_datos_formulario); break;
@@ -7414,7 +7416,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                             //Busca el ID de registro correspondiente en la tabla de datos para llamar con el valor coincidente
                                                                             $consulta_registro_subform=PCO_EjecutarSQL("SELECT $PCO_CampoForaneoSubform FROM $PCO_TablaSubform WHERE $PCO_CampoForaneoSubform=? ","$PCO_ValorCampoPadre")->fetch();
 
-                                                                            @PCO_CargarFormulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1,0,"Sub");
+                                                                            $formulario_formateado=@PCO_CargarFormulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1,0,"Sub");
                                                                         }
                                                                     else
 																		{
@@ -7519,7 +7521,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                     case 'casilla_check': $objeto_formateado = @PCO_CargarObjetoCasillaCheck($registro_campos,@$registro_datos_formulario,$formulario,$en_ventana); break;
                                                     case 'etiqueta': $objeto_formateado = PCO_CargarObjetoEtiqueta($registro_campos,@$registro_datos_formulario); break;
                                                     case 'url_iframe': $objeto_formateado = PCO_CargarObjetoIFrame($registro_campos,@$registro_datos_formulario); break;
-                                                    case 'informe': @PCO_CargarInforme($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1,$registro_campos["anular_acciones"],$registro_campos["anular_piepagina"],$registro_campos["anular_encabezado"]); break;
+                                                    case 'informe': $informe_formateado=@PCO_CargarInforme($registro_campos["informe_vinculado"],$registro_campos["objeto_en_ventana"],"htm","Informes",1,$registro_campos["anular_acciones"],$registro_campos["anular_piepagina"],$registro_campos["anular_encabezado"]); break;
                                                     case 'deslizador': $objeto_formateado = @PCO_CargarObjetoDeslizador($registro_campos,@$registro_datos_formulario); break;
                                                     case 'campo_etiqueta': $objeto_formateado = @PCO_CargarObjetoCampoEtiqueta($registro_campos,@$registro_datos_formulario); break;
                                                     case 'archivo_adjunto': $objeto_formateado = @PCO_CargarObjetoArchivoAdjunto($registro_campos,@$registro_datos_formulario); break;
@@ -7553,7 +7555,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                         //Busca el ID de registro correspondiente en la tabla de datos para llamar con el valor coincidente
                                                         $consulta_registro_subform=PCO_EjecutarSQL("SELECT $PCO_CampoForaneoSubform FROM $PCO_TablaSubform WHERE $PCO_CampoForaneoSubform=? ","$PCO_ValorCampoPadre")->fetch();
 
-                                                        @PCO_CargarFormulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1,0,"Sub");
+                                                        $formulario_formateado=@PCO_CargarFormulario($registro_campos["formulario_vinculado"],$registro_campos["objeto_en_ventana"],$registro_campos["formulario_campo_foraneo"],$PCO_ValorCampoPadre,1,0,"Sub");
                                                     }
 												else
 													{

@@ -15,6 +15,7 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
+core/codigobarras.php
 core/comunes.php
 core/marco_abajo.php
 core/marco_arriba_bs.php
