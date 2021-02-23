@@ -37,8 +37,316 @@
 	*/
 
 
-/* ################################################################## */
-/* ################################################################## */
+
+
+
+########################################################################
+########################################################################
+/*
+    Function: PCO_Minimizador_ObtenerSiguientePosicionMinimizacion
+	Dado el arrglo de secuencias minimizadas, busca la siguiente posicion de secuencia que se debe revisar
+
+	Salida:
+		Posicion objetivo
+
+	Vea tambien:
+	    <PCO_Minimizador_OptimizarJS> <PCO_Minimizador_OptimizarCSS>
+*/
+$ArregloSecuenciasMinimizadas = array();
+function PCO_Minimizador_ObtenerSiguientePosicionMinimizacion()
+    {
+        global $ArregloSecuenciasMinimizadas;
+        return '<-!!-' . sizeof($ArregloSecuenciasMinimizadas) . '-!!->';
+    }
+
+
+abstract class PCO_Minimizador_BuscadorSecuenciasMinimizacion
+    {
+        public $IndiceInicial;
+        public $IndiceFinal;
+        public $Tipo;
+        abstract protected function ObtenerPrimerValor($Cadena);
+        
+        public function isValid()
+            {
+                return $this->IndiceInicial !== false;
+            }
+    }
+
+
+class BuscadorSecuenciasCadenas extends PCO_Minimizador_BuscadorSecuenciasMinimizacion
+    {
+        protected $DelimitadorInicial;
+        protected $DelimitadorFinal;
+        
+        function __construct($DelimitadorInicial, $DelimitadorFinal)
+            {
+                $this->type = $DelimitadorInicial;
+                $this->start_delimiter = $DelimitadorInicial;
+                $this->end_delimiter = $DelimitadorFinal;
+            }
+            
+        public function ObtenerPrimerValor($Cadena)
+            {
+                $this->IndiceInicial = strpos($Cadena, $this->start_delimiter);
+                if ($this->isValid())
+                    {
+                        $this->IndiceFinal = strpos($Cadena, $this->end_delimiter, $this->IndiceInicial+1);
+                        // sanity check for non well formed lines
+                        $this->IndiceFinal = ($this->IndiceFinal === false ? strlen($Cadena) :
+                        $this->IndiceFinal + strlen($this->end_delimiter));
+                    }
+            }
+    }
+
+
+class PCO_Minimizador_BuscadorSecuenciasCadenas extends PCO_Minimizador_BuscadorSecuenciasMinimizacion
+    {
+        function __construct($Tipo)
+            {
+                $this->type = $Tipo;
+            }
+            
+        public function ObtenerPrimerValor($Cadena)
+            {
+                $this->IndiceInicial = strpos($Cadena, $this->type);
+                if ($this->isValid())
+                    {
+                        // busque la primera comilla final que no haya escapado
+                        $this->IndiceFinal = $this->IndiceInicial+1;
+                        while ($this->IndiceFinal < strlen($Cadena))
+                            {
+                                // encontrar el número de escapes antes de la comilla final
+                                if (preg_match('/(\\\\*)(' . preg_quote($this->type) . ')/', $Cadena, $ArregloEncontrados, PREG_OFFSET_CAPTURE, $this->IndiceFinal))
+                                    {
+                                        $this->IndiceFinal = $ArregloEncontrados[2][1] + 1;
+                                        // si un número impar de escapes antes de comilla, la comilla se escapa. Sigue adelante
+                                        if (!isset($ArregloEncontrados[1][0]) || strlen($ArregloEncontrados[1][0]) % 2 == 0)
+                                            {
+                                                return;
+                                            }
+                                    }
+                                else
+                                    {
+                                        // no match, not well formed
+                                        $this->IndiceFinal = strlen($Cadena);
+                                        return;
+                                    }
+                            }
+                    }
+            }
+    }
+
+
+function PCO_Minimizador_ObtenerSiguienteSecuenciaEspecial($Cadena, $Secuencias)
+    {
+        // $ArregloIndices es una matriz del índice más cercano para todos los caracteres especiales
+        $ArregloIndices = array();
+        foreach ($Secuencias as $Buscador)
+            {
+                $Buscador->ObtenerPrimerValor($Cadena);
+                if ($Buscador->isValid())
+                    {
+                        $ArregloIndices[$Buscador->IndiceInicial] = $Buscador;
+                    }
+            }
+        // Si no encuentra ninguno retorna
+        if (count($ArregloIndices) == 0) {return false;}
+        // Otiene el primer item que coincida
+        asort($ArregloIndices);
+        return $ArregloIndices[min(array_keys($ArregloIndices))];
+    }
+
+
+class PCO_Minimizador_BuscadorSecuenciasExpRegularesJS extends PCO_Minimizador_BuscadorSecuenciasMinimizacion
+    {
+        function __construct()
+            {
+                $this->type = 'regex';
+            }
+        
+        // verifica que este no sea el comienzo de un comentario o una división
+        public function BuscarPosibleInicio($Cadena, $Indice = 0)
+            {
+                $IndiceInicial = strpos($Cadena, '/', $Indice);
+                if ($IndiceInicial === false)
+                    {
+                        return false;
+                    }
+                if (substr($Cadena, $IndiceInicial, 2) === '//' || substr($Cadena, $IndiceInicial, 2) === '/*')
+                    {
+                        // comentario encontrado, no patrón, no se moleste en continuar
+                        return false;
+                    }
+                $IndiceTemporal = $IndiceInicial - 1;
+                // obtener el primer carácter anterior no espacial
+                while ($IndiceTemporal > 0 && substr($Cadena, $IndiceTemporal, 1) == ' ') {$IndiceTemporal--;}
+                if ($IndiceTemporal > 0)
+                    {
+                        $Caracter = substr($Cadena, $IndiceTemporal, 1);
+                        // si el carácter o el número es una división, ve más lejos
+                        if (is_numeric($Caracter) || ctype_alpha($Caracter) || $Caracter == ')' || $Caracter == ']')
+                            {
+                                return $this->BuscarPosibleInicio($Cadena, $IndiceInicial + 1);
+                            }
+                    }
+                return $IndiceInicial;
+            }
+            
+        public function ObtenerPrimerValor($Cadena)
+            {
+                $this->IndiceInicial = $this->BuscarPosibleInicio($Cadena);
+                if ($this->IndiceInicial === false)
+                    {
+                        return;
+                    }
+                // position of first newline after pattern
+                $NuevaLinea = strpos($Cadena, "\n", $this->IndiceInicial);
+                // look for first non escaped endquote
+                $IndiceFinal = $this->IndiceInicial+1;
+                while ($IndiceFinal < strlen($Cadena)
+                // if there's still room to explore in the string
+                && ($NuevaLinea === false || $IndiceFinal < $NuevaLinea)) // and we're not at a newline yet
+                    {
+                        // find number of escapes before endquote
+                        if (preg_match('/(\\\\*)(\/)/', $Cadena, $ArregloEncontrados, PREG_OFFSET_CAPTURE, $IndiceFinal))
+                                {
+                                    $IndiceFinal = $ArregloEncontrados[2][1] + 1;
+                                    // if odd number of escapes before endquote, endquote is escaped. Keep going
+                                    if (!isset($ArregloEncontrados[1][0]) || strlen($ArregloEncontrados[1][0]) % 2 == 0)
+                                        {
+                                            if ($NuevaLinea !== false && $IndiceFinal > $NuevaLinea) {return false;}
+                                            $this->IndiceFinal = $IndiceFinal;
+                                            return;
+                                        }
+                                    // no coincide o no esta bien formado el codigo
+                                }
+                            else
+                                {
+                                    $this->IndiceInicial = false;
+                                    return;
+                                }
+                    }
+            }
+    }
+
+
+########################################################################
+########################################################################
+/*
+    Function: PCO_Minimizador_OptimizarCSS
+	Toma un codigo CSS y lo miniminiza antes de ser publicado en produccion ayudando a disminuir tiempos de transferencia
+
+	Salida:
+		Codigo CSS equivalente pero minimizado
+
+	Vea tambien:
+		<PCO_CargarFormulario> <PCO_Minimizador_OptimizarJS>
+*/
+$BuscadorSecuenciasComillaSimple = new PCO_Minimizador_BuscadorSecuenciasCadenas('\'');
+$BuscadorSecuenciasComillaDoble = new PCO_Minimizador_BuscadorSecuenciasCadenas('"');
+$BuscadorComentariosDeBloque = new BuscadorSecuenciasCadenas('/*', '*/');
+function PCO_Minimizador_OptimizarCSS($CodigoCSS)
+    {
+        global $ArregloSecuenciasMinimizadas, $BuscadorSecuenciasComillaSimple, $BuscadorSecuenciasComillaDoble, $BuscadorComentariosDeBloque;
+        $CaracteresEspecialesCSS = array($BuscadorComentariosDeBloque, // Comentario CSS
+            $BuscadorSecuenciasComillaSimple, // Comilla simple de escape, ej :before{ content: '-';}
+            $BuscadorSecuenciasComillaDoble); // Comilla doble
+        // Elimina todo lo que haya que ser eliminado y conserva el resto
+        while ($Secuencia = PCO_Minimizador_ObtenerSiguienteSecuenciaEspecial($CodigoCSS, $CaracteresEspecialesCSS))
+            {
+                switch ($Secuencia->type)
+                    {
+                        case '/*': // Elimina comentarios
+                            $CodigoCSS = substr($CodigoCSS, 0, $Secuencia->IndiceInicial) . substr($CodigoCSS, $Secuencia->IndiceFinal);
+                            break;
+                        default: // Cadenas que deben ser conservadas
+                            $Posicion = PCO_Minimizador_ObtenerSiguientePosicionMinimizacion();
+                            $ArregloSecuenciasMinimizadas[$Posicion] = substr($CodigoCSS, $Secuencia->IndiceInicial, $Secuencia->IndiceFinal - $Secuencia->IndiceInicial);
+                            $CodigoCSS = substr($CodigoCSS, 0, $Secuencia->IndiceInicial) . $Posicion . substr($CodigoCSS, $Secuencia->IndiceFinal);
+                    }
+            }
+        // minimiza la cadena
+        $CodigoCSS = preg_replace('/\s{2,}/s', ' ', $CodigoCSS);
+        $CodigoCSS = preg_replace('/\s*([:;{}])\s*/', '$1', $CodigoCSS);
+        $CodigoCSS = preg_replace('/;}/', '}', $CodigoCSS);
+        // devuelve las cadenas que se deben conservar
+        foreach($ArregloSecuenciasMinimizadas as $Posicion => $Original)
+            {
+                $CodigoCSS = str_replace($Posicion, $Original, $CodigoCSS);
+            }
+        return trim($CodigoCSS);
+    }
+
+
+########################################################################
+########################################################################
+/*
+    Function: PCO_Minimizador_OptimizarJS
+	Toma un codigo JS y lo miniminiza antes de ser publicado en produccion ayudando a disminuir tiempos de transferencia y ocultando en parte alguna logica de negocio
+
+	Salida:
+		Codigo JS equivalente pero minimizado
+
+	Vea tambien:
+		<PCO_CargarFormulario> <PCO_Minimizador_OptimizarCSS>
+*/
+$BuscadorLineasComentarios = new BuscadorSecuenciasCadenas('//', "\n");
+function PCO_Minimizador_OptimizarJS($CodigoJS)
+    {
+        global $ArregloSecuenciasMinimizadas, $BuscadorSecuenciasComillaSimple, $BuscadorSecuenciasComillaDoble,
+        $BuscadorComentariosDeBloque, $BuscadorLineasComentarios;
+        $CaracteresEspecialesJava = array($BuscadorComentariosDeBloque, // Comentario de bloques JavaScript
+                $BuscadorLineasComentarios, // Comentario de lineas JavaScript
+                $BuscadorSecuenciasComillaSimple, // Comilla simple, ej :before{ content: '-';}
+                $BuscadorSecuenciasComillaDoble, // Comilla doble
+                new PCO_Minimizador_BuscadorSecuenciasExpRegularesJS() // Expresion regular JavaScript
+            );
+        // Elimina todo lo que haya que ser eliminado y conserva el resto
+        while ($Secuencia = PCO_Minimizador_ObtenerSiguienteSecuenciaEspecial($CodigoJS, $CaracteresEspecialesJava))
+            {
+                switch ($Secuencia->type)
+                    {
+                        case '/*':
+                        case '//':// Elimina comentarios
+                            $CodigoJS = substr($CodigoJS, 0, $Secuencia->IndiceInicial) . substr($CodigoJS, $Secuencia->IndiceFinal);
+                            break;
+                        default: // Cadenas con comillas o expresiones regulares que deben ser conservadas
+                            $IndiceInicial = $Secuencia->IndiceInicial;
+                            $IndiceFinal = $Secuencia->IndiceFinal;
+                            $Posicion = PCO_Minimizador_ObtenerSiguientePosicionMinimizacion();
+                            $ArregloSecuenciasMinimizadas[$Posicion] =substr($CodigoJS, $IndiceInicial, $IndiceFinal - $IndiceInicial);
+                            $CodigoJS = substr($CodigoJS, 0, $IndiceInicial) . $Posicion . substr($CodigoJS, $IndiceFinal);
+                    }
+            }
+        // Caso especial donde el + indica tratar la variable como numérica, p. ej. a = b + + c
+        $CodigoJS = preg_replace('/([-\+])\s+\+([^\s;]*)/', '$1 (+$2)', $CodigoJS);
+        // Condensar (unir) espacios
+        $CodigoJS = preg_replace("/\s*\n\s*/", "\n", $CodigoJS);
+        // Espacios alrededor de nuevas lineas
+        $CodigoJS = preg_replace("/\h+/", " ", $CodigoJS); // \h+ horizontal white space
+        // Remueve espacios horizontales innecesarios cerca a no variables (alfanumericos, underscore, signo pesos)
+        $CodigoJS = preg_replace("/\h([^A-Za-z0-9\_\$])/", '$1', $CodigoJS);
+        $CodigoJS = preg_replace("/([^A-Za-z0-9\_\$])\h/", '$1', $CodigoJS);
+        // Eliminar los espacios innecesarios entre corchetes y paréntesis
+        $CodigoJS = preg_replace("/\s?([\(\[{])\s?/", '$1', $CodigoJS);
+        $CodigoJS = preg_replace("/\s([\)\]}])/", '$1', $CodigoJS);
+        // Eliminar espacios innecesarios alrededor de los operadores que no necesitan ningún espacio (específicamente nuevas líneas)
+        $CodigoJS = preg_replace("/\s?([\.=:\-+,])\s?/", '$1', $CodigoJS);
+        // Caracteres innecesarios
+        $CodigoJS = preg_replace("/;\n/", ";", $CodigoJS); // punto y coma antes de una nueva linea
+        $CodigoJS = preg_replace('/;}/', '}', $CodigoJS); // punto y coma antes del corchete final
+        // Volver a poner las cadenas conservadas
+        foreach($ArregloSecuenciasMinimizadas as $Posicion => $Original)
+            {
+                $CodigoJS = str_replace($Posicion, $Original, $CodigoJS);
+            }
+        return trim($CodigoJS);
+    }
+
+
+########################################################################
+########################################################################
 /*
     Function: PCO_GenerarNombreAdjunto
 	Busca ocurrencias de las cadenas de formato de nombre de un archivo adjunto y las reemplaza por los valores correspondientes
@@ -77,8 +385,8 @@ function PCO_GenerarNombreAdjunto($nombre_archivo,$campo_tabla,$extension_archiv
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EvaluarCodigo
 	Ejecuta codigo PHP recibido dentro de una cadena.  Reemplazo para la funcion eval que pasa a ser obsoleta por seguridad
@@ -101,8 +409,8 @@ function PCO_EvaluarCodigo($CadenaCodigoPHP) {
 }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ImprimirOpcionMenu
 	Imprime en pantalla una opcion de menu, de acuerdo a su configuracion recibida en el registro y la ubicacion definida.
@@ -300,12 +608,12 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
 
 /*#################################################################################
 ###################################################################################*/
-function PCO_CodificarCadena_UUEncode($string)
+function PCO_CodificarCadena_UUEncode($Cadena)
     {
         // Sanity check
-        if (!is_scalar($string)) {
+        if (!is_scalar($Cadena)) {
             user_error('convert_uuencode() expects parameter 1 to be'
-                . ' string, ' . gettype($string) . ' given',
+                . ' string, ' . gettype($Cadena) . ' given',
                 E_USER_WARNING);
             return false;
         }
@@ -314,7 +622,7 @@ function PCO_CodificarCadena_UUEncode($string)
         $encoded = '';
 
         while ($c = count($bytes = unpack('c*',
-            substr($string, $u, 45)))) {
+            substr($Cadena, $u, 45)))) {
             $u += 45;
             $encoded .= pack('c', $c + 0x20);
 
@@ -347,24 +655,24 @@ function PCO_CodificarCadena_UUEncode($string)
 
 /*#################################################################################
 ###################################################################################*/
-function PCO_DecodificarCadena_UUEncode($string)
+function PCO_DecodificarCadena_UUEncode($Cadena)
     {
         // Sanity check
-        if (!is_scalar($string)) {
+        if (!is_scalar($Cadena)) {
             user_error('convert_uuencode() expects parameter 1 to be'
-                . ' string, ' . gettype($string) . ' given',
+                . ' string, ' . gettype($Cadena) . ' given',
                 E_USER_WARNING);
             return false;
         }
 
-        if (strlen($string) < 8) {
+        if (strlen($Cadena) < 8) {
             user_error('convert_uuencode() The given parameter is not'
                 . ' a valid uuencoded string', E_USER_WARNING);
             return false;
         }
 
         $decoded = '';
-        foreach (explode("\n", $string) as $line) {
+        foreach (explode("\n", $Cadena) as $line) {
 
             $c = count($bytes = unpack('c*', substr(trim($line), 1)));
 
@@ -455,8 +763,8 @@ function PCO_DecodificarCadena_Binario($input)
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: ImprimirMarcoPanelAdmin
 	Imprime un marco generico con informacion para el panel del administrador
@@ -506,8 +814,8 @@ function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIcon
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCOFUNC_EliminarInforme
 	Elimina un informe definido para la aplicacion incluyendo todos los objetos definidos en su interior
@@ -544,8 +852,8 @@ function PCOFUNC_EliminarInforme($informe="")
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EliminarFormulario
 	Elimina un formulario definido para la aplicacion incluyendo todos los objetos definidos en su interior
@@ -586,8 +894,8 @@ function PCO_EliminarFormulario($formulario="")
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ImportarDefinicionesXML
 	Busca definiciones de elementos XML almacenadas sobre xml/ y ejecuta el proceso de importacion de cada uno automaticamente durante cada cargue de pagina por algun usuario disenador de aplicacion.
@@ -623,8 +931,8 @@ function PCO_ImportarDefinicionesXML()
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ImportarScriptsPHP
 	Busca definiciones de scripts PHP almacenadas sobre xml/ (carpeta del sistema para importar elementos y ejecuta cada uno automaticamente durante cada cargue de pagina por algun usuario disenador de aplicacion.
@@ -655,8 +963,8 @@ function PCO_ImportarScriptsPHP()
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ExportarDefinicionesXML
 	Exporta masivamente a XML las definiciones de elementos de un tipo dado
@@ -718,8 +1026,8 @@ function PCO_ExportarDefinicionesXML($TipoElementos,$ListaElementos,$tipo_copia_
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ParsearListasElementos
 	Toma una cadena con la lista de elementos separados por comas y rangos por guiones y los genera uno a uno sobre un arreglo que se retorna luego para realizar operaciones individuales sobre ellos.  Ignora rangos invertidos o donde no sean numericos.
@@ -805,8 +1113,8 @@ function PCO_ParsearListasElementos($ListaElementos)
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ImportarXMLFormulario
 	Importa una cadena XML con la especificacion de un formulario al sistema
@@ -957,8 +1265,8 @@ function PCO_ImportarXMLFormulario($xml_importado)
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ExportarXMLFormulario
 	Exporta las especificaciones de un formulario a una cadena XML valida dentro de un archivo especificado
@@ -1257,8 +1565,8 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ImportarXMLInforme
 	Importa una cadena XML con la especificacion de un informe al sistema
@@ -1430,8 +1738,8 @@ function PCO_ImportarXMLInforme($xml_importado)
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ExportarXMLInforme
 	Exporta las especificaciones de un informe a una cadena XML valida dentro de un archivo especificado
@@ -1751,8 +2059,8 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_ManejadorExcepciones
 	Captura las excepciones generados por PHP durante la ejecucion y las presenta al usuario
@@ -1776,8 +2084,8 @@ function PCO_ManejadorExcepciones($DetalleExcepcion)
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_ManejadorErrores
 	Captura los errores generados por PHP durante la ejecucion y los presenta al usuario
@@ -1801,8 +2109,8 @@ function PCO_ManejadorErrores($DetalleExcepcion)
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_BuscarErroresSintaxisPHP
 	Verifica la sintaxis de un archivo PHP.  Utilizada normalmente antes de cualquier inclusion para evitar que se incluyan archivos con errores del lado del usuario.
@@ -1857,8 +2165,8 @@ function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ReemplazarVariablesPHPEnCadena
 	Devuelve una cadena evaluada donde se reemplazan las expresiones de variables PHP con el formato {$variable} por su valor definido
@@ -1906,8 +2214,8 @@ function PCO_ReemplazarVariablesPHPEnCadena($cadena_original,$PCO_RegistroDatosF
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_DistanciaDosCoordenadas
 	Retorna el nombre legible de una direccion (en lenguaje natural) indicados por latitud y longitud
@@ -1929,8 +2237,8 @@ function PCO_DireccionPorCoordenas($Latitud, $Longitud, $APIKey_GoogleMaps)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_DireccionPorIDSitio
 	Retorna el nombre legible de una direccion (en lenguaje natural) indicados por el PlaceID usado por Google
@@ -1952,8 +2260,8 @@ function PCO_DireccionPorIDSitio($PlaceID, $APIKey_GoogleMaps)
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_DistanciaDosCoordenadas
 	Retorna la distancia entre dos puntos indicados por latitud y longitud
@@ -1988,8 +2296,8 @@ function PCO_DistanciaCoordenadasSimple($Latitud1, $Longitud1, $Latitud2, $Longi
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_EsDispositivoMovil
 	Determina si la aplicacion esta corriendo en un dispositivo movil o PC de escritorio segun el agente reportado
@@ -2026,8 +2334,8 @@ function PCO_EsDispositivoMovil()
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_EsUsuarioInterno
 	Determina si un login de usuario es corresponde a un usuario interno o no
@@ -2047,8 +2355,8 @@ function PCO_EsUsuarioInterno($Usuario)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_EsAdministrador
 	Determina si un login de usuario es administrador de plataforma o no (si es super usuario)
@@ -2077,8 +2385,8 @@ function PCO_EsAdministrador($Usuario)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_BackupObtenerDatosTabla
 	Recupera los datos en formato Insert asociados a una tabla
@@ -2120,8 +2428,8 @@ function PCO_BackupObtenerDatosTabla($PCO_NombreTabla="",$codificacion_actual,$c
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_BackupObtenerColumnasTabla
 	Recupera los campos asociados a una tabla de datos
@@ -2141,8 +2449,8 @@ function PCO_BackupObtenerColumnasTabla($PCO_NombreTabla="")
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_BackupObtenerTablasBD
 	Recupera las tablas desde la base de datos
@@ -2177,8 +2485,8 @@ function PCO_BackupObtenerTablasBD($PCO_ListaTablas="",$TipoDeCopia="Estructura"
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_Backup
 	Ejecuta un respaldo parcial o total de la base de datos sobre un archivo determinado
@@ -2224,8 +2532,8 @@ function PCO_Backup($PCO_ListaTablas,$ArchivoDestino="",$TipoDeCopia="Estructura
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	// Function: PCO_SegmentarSQL
 	Divide una cadena completa en sentencias SQL independientes para ser ejecutadas una a una
@@ -2273,8 +2581,8 @@ function PCO_SegmentarSQL($sql)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CopiarPermisos
 	Copia los permisos definidos para un usuario origen en otro especificado por destino
@@ -2305,8 +2613,8 @@ function PCO_CopiarPermisos($usuario_origen="",$usuario_destino="")
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CopiarInformes
 	Copia los informes definidos para un usuario origen en otro especificado por destino
@@ -2337,8 +2645,8 @@ function PCO_CopiarInformes($usuario_origen="",$usuario_destino="")
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ListadoExploracionArchivos
 	Construye una lista de los archivos contenidos en una carpeta y que coinciden con un flitro determinado
@@ -2376,8 +2684,8 @@ function PCO_ListadoExploracionArchivos($RutaExploracion="",$Filtro_contenido=""
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ListadoExploracionArchivosVisual
 	Presenta una lista de los archivos contenidos en una carpeta con modificadores para las opciones
@@ -2446,8 +2754,8 @@ function PCO_ListadoExploracionArchivosVisual($RutaExploracion="",$Filtro_conten
             }
     }
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_OpcionesComboDesdeCSV
 	Genera una lista de seleccion con la variable recibida y los items separados por un caracter especifico
@@ -2472,8 +2780,8 @@ function PCO_OpcionesComboDesdeCSV($lista_opciones,$caracter_separador,$valor_co
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_AparearCamposTabla_vs_HojaCalculo
 	Abre un archivo de hoja de cálculo y lo compara frente a los campos de una tabla de datos para ver si existen, tipos de dato, etc.
@@ -2535,8 +2843,8 @@ function PCO_AparearCamposTabla_vs_HojaCalculo($NombreTabla,$PathArchivo)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ColumnasDesdeHojaCalculo
 	Abre un archivo de hoja de cálculo y busca las columnas definidas en la primera fila de la primera hoja
@@ -2573,8 +2881,8 @@ function PCO_ColumnasDesdeHojaCalculo($PathArchivo)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_DatatableDesdeHojaCalculo
 	Abre un archivo de hoja de cálculo y lo presenta en formato DataTable
@@ -2639,8 +2947,8 @@ function PCO_DatatableDesdeHojaCalculo($PathArchivo,$NroLineas)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_PermisoHeredadoAccion
 	Busca dentro de los permisos del usuario la accion a ejecutar cuando no se encuentra directamente como una opcion del usuario sino como una subrutina de otra de la que si tiene agregada de manera que valida si puede ingresar o no a ella.
@@ -2793,8 +3101,8 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_RestaurarEtiquetasHTML
 	Determina si hay etiquetas sin cerrar o abrir en un arbol de elementos HTML y las genera.
@@ -2849,8 +3157,8 @@ function PCO_RestaurarEtiquetasHTML($input)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_PermisoAgregadoAccion
 	Busca dentro de los permisos agregados de manera explicita al usuario.
@@ -2882,8 +3190,8 @@ function PCO_PermisoAgregadoAccion($PCO_Accion)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ConvertirRegistroXML
 	Traduce un registro de base de datos a notacion XML y retorna su cadena equivalente
@@ -2914,8 +3222,8 @@ function PCO_ConvertirRegistroXML($Registro_BD,$ListaCampos,$CodificarBase64=1)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_PermisoAccion
 	Busca dentro de los permisos del usuario la accion a ejecutar de manera que valida si puede ingresar o no a ella.
@@ -2964,8 +3272,8 @@ function PCO_PermisoAccion($PCO_Accion)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EscaparContenido
 	Limpia cadenas y URLs a ser impresas para evitar posibles ataques por XSS
@@ -2987,8 +3295,8 @@ function PCO_EscaparContenido($texto)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: gzdecode
 	Crea una funcion de descompresion en caso de no estar disponible en la instalacion de PHP actual
@@ -3002,8 +3310,8 @@ if (!function_exists('gzdecode'))
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_LimpiarEntradas
 	Limpia cadenas y URLs a ser impresas segun acciones para evitar XSS
@@ -3086,8 +3394,8 @@ function PCO_LimpiarEntradas()
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_TextoAleatorio
 	Genera un texto alfanumerico aleatorio de una longitud determinada
@@ -3111,8 +3419,8 @@ function PCO_TextoAleatorio($longitud)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CodigoQR
 	Genera un codigo QR a partir de los parametros recibidos
@@ -3142,8 +3450,8 @@ function PCO_CodigoQR($contenido,$recuperacion_errores="L",$ancho_pixeles=3,$mar
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_FiltrarCadenaSQL
 	Filtra los caracteres existentes en una cadena de manera que no permita comillas sencillas, backslash o cualquier otro caracter que genere problemas en las consultas o posibles fallos de seguridad derivados de un SQLInjection
@@ -3220,7 +3528,7 @@ function PCO_FiltrarCadenaSQL($cadena)
     Salida:
         Retorna la cadena de consulta con valores formateada para impresion
 */
-function PCO_CompletarParametros($string,$data)
+function PCO_CompletarParametros($Cadena,$data)
     {
         $indexed=$data==array_values($data);
         foreach($data as $k=>$v) {
@@ -3231,21 +3539,21 @@ function PCO_CompletarParametros($string,$data)
 	        $v="'$v'";
             if($indexed)
               if($v =='')
-		$string=preg_replace('/\?/','NULL',$string,1);
+		$Cadena=preg_replace('/\?/','NULL',$Cadena,1);
 	      else
-		$string=preg_replace('/\?/',$v,$string,1);
+		$Cadena=preg_replace('/\?/',$v,$Cadena,1);
             else
               if($v =='')
-		$string=str_replace(":$k","NULL",$string);
+		$Cadena=str_replace(":$k","NULL",$Cadena);
 	      else
-	        $string=str_replace(":$k",$v,$string);
+	        $Cadena=str_replace(":$k",$v,$Cadena);
         }
-        return $string;
+        return $Cadena;
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ObtenerUltimoIDInsertado
 	Segun el motor, obtiene el ultimo ID de registro insertado en la conexion especificada
@@ -3284,8 +3592,8 @@ function PCO_ObtenerUltimoIDInsertado($ConexionBD="")
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EjecutarSQL
 	Ejecuta consultas que retornan registros (SELECTs).
@@ -3375,8 +3683,8 @@ function PCO_EjecutarSQL($query,$lista_parametros="",$ConexionBD="",$EvitarLogSQ
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EjecutarNoSQL
 	Ejecuta consultas hacia motores NoSQL
@@ -3427,8 +3735,8 @@ function PCO_EjecutarNoSQL($ConexionNoSQL,$LlaveRegistro="")
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EjecutarSQLUnaria
 	Ejecuta consultas que no retornan registros tales como CREATE, INSERT, DELETE, UPDATE entre otros.
@@ -3527,8 +3835,8 @@ function PCO_EjecutarSQLUnaria($query,$lista_parametros="",$ConexionBD="",$Repli
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ProcedimientoSQL
 	Ejecuta procedimientos almacenados por la base de datos
@@ -3566,8 +3874,8 @@ function PCO_ProcedimientoSQL($procedimiento,$ConexionBD="")
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_Auditar
 	Lleva un registro de auditoria en el sistema
@@ -3599,8 +3907,8 @@ function PCO_Auditar($PCO_Accion,$usuario="")
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ExisteValor
 	Busca dentro de alguna tabla para verificar si existe o no un valor determinado.  Funcion utilizada para validacion de unicidad de valores en formularios de datos.
@@ -3633,13 +3941,13 @@ function PCO_ExisteValor($tabla,$campo,$valor)
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 	/*
 		Section: Funciones asociadas al retorno de informacion sobre la conexion y estructura de la BD
 	*/
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_InformacionConexionBD
 	Imprime la informacion asociada a la conexion establecida mediante PDO.
@@ -3659,8 +3967,8 @@ function PCO_InformacionConexionBD()
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ImprimirDriversDisponiblesnBD
 	Imprime el arreglo devuelto por la funcion getAvailableDrivers() para conocer los drivers soportados por la instalacion actual de PHP del lado del servidor.
@@ -3684,8 +3992,8 @@ function PCO_ImprimirDriversDisponiblesnBD()
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ConsultarTablas
 	Determina las tablas en la base de datos activa para la conexion dependiendo del motor utilizado.
@@ -3743,8 +4051,8 @@ function PCO_ConsultarTablas($prefijo="",$ConexionAlterna="",$MotorAlterno="",$B
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: consultar_nombres_columnas
 	Devuelve un arreglo escalar y asociativo con los nombres de las columnas de una tabla y sus datos generales
@@ -3888,8 +4196,8 @@ function PCO_ConsultarColumnas($tabla,$ConexionAlterna="",$MotorAlterno="",$Base
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ExisteCampoTabla
 	Determina si un campo dado existe dentro de una tabla especifica
@@ -3942,8 +4250,8 @@ function PCO_ExisteCampoTabla($campo,$tabla,$ConexionAlterna="",$MotorAlterno=""
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_FileGetContents_CURL
 	Un reemplazo para la funcion file_get_contents utilizando cURL
@@ -3973,8 +4281,8 @@ function PCO_FileGetContents_CURL($url)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_FileGetContents_SOCKET
 	Un reemplazo para la funcion file_get_contents utilizando Sockets
@@ -4009,8 +4317,8 @@ function PCO_FileGetContents_SOCKET($url)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_FileGetContents_NATIVO
 	Una personalizacion para la funcion file_get_contents de PHP agregando Agente de navegador y otros.
@@ -4038,8 +4346,8 @@ function PCO_FileGetContents_NATIVO($url)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarURL
 	Recibe una URL y pasa su contenido a una cadena de texto
@@ -4069,8 +4377,8 @@ function PCO_CargarURL($url)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_VerificarExtensionesPHP
 	Verifica si las extensiones minimas requeridas por la herramienta se encuentran activadas y despliega mensaje de error si aplica.
@@ -4139,8 +4447,8 @@ function PCO_VerificarExtensionesPHP()
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_BuscarActualizaciones
 	Compara la version actual del sistema frente a la ultima version publicada para determinar si existen o no actualizaciones
@@ -4170,8 +4478,8 @@ function PCO_BuscarActualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ConsultarBasesDeDatos
 	Determina las bases de datos existentes dependiendo del motor utilizado.
@@ -4214,8 +4522,8 @@ function PCO_ConsultarBasesDeDatos()
 }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ContarRegistrosTabla
 	Devuelve la cantidad de registros existentes dentro de una tabla con una condicion determinada
@@ -4241,13 +4549,13 @@ function PCO_ContarRegistrosTabla($tabla,$condicion="")
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 	/*
 		Section: Funciones asociadas a la creacion de elementos graficos (ventanas, etc)
 	*/
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 
 function PCO_CrearFormularioOauth($sitio)
     {
@@ -4714,8 +5022,8 @@ function PCO_VentanaLogin()
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
     Procedure: PCO_AbrirVentana
     Abre los espacios de trabajo dinamicos sobre el contenedor principal donde se despliega informacion
@@ -4747,8 +5055,8 @@ function PCO_AbrirVentana($titulo,$tipo_panel="panel-default",$css_personalizado
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CerrarVentana
 	Cierra los espacios de trabajo dinamicos generados por <PCO_AbrirVentana>
@@ -4765,8 +5073,8 @@ function PCO_CerrarVentana()
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Procedure: PCO_AbrirBarraEstado
 	Abre los espacios para despliegue de informacion en la parte inferior de los objetos tales como botones o mensajes
@@ -4781,8 +5089,8 @@ function PCO_AbrirBarraEstado($DEPRECATED_alineacion="CENTER")
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CerrarBarraEstado
 	Cierra los espacios de trabajo dinamicos generados por <PCO_AbrirBarraEstado>
@@ -4797,8 +5105,8 @@ function PCO_CerrarBarraEstado()
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
     Procedure: PCO_AbrirDialogoModal
     Crea un dialogo modal que puede ser activado luego por un anchor <a>
@@ -4839,8 +5147,8 @@ function PCO_AbrirDialogoModal($identificador,$titulo="",$estilo_modal="",$impre
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CerrarDialogoModal
 	Cierra los espacios de trabajo por <abrir_modal>
@@ -4866,8 +5174,8 @@ function PCO_CerrarDialogoModal($contenido_piepagina,$impresion_directa=1)
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ObtenerMicrotime
 	Obtiene un tiempo en microsegundos utilizado para calcular tiempos de inicio y fin de operaciones
@@ -4880,8 +5188,8 @@ function PCO_ObtenerMicrotime()
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
     Function: PCO_Mensaje
     Funcion generica para la presentacion de mensajes.  Ver variables para personalizacion.
@@ -4905,8 +5213,8 @@ function PCO_Mensaje($titulo,$texto,$DEPRECATED_ancho="",$icono,$estilo)
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_SelectorObjetosMenu
 	Despliega marco para seleccionar objetos de formulario e informes durante creacion de menues
@@ -4973,8 +5281,8 @@ function PCO_SelectorObjetosMenu()
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_SelectorIconosAwesome
 	Despliega marco para seleccionar iconos
@@ -5031,8 +5339,8 @@ function PCO_SelectorIconosAwesome()
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoTextoCorto
 	Genera el codigo HTML y CSS correspondiente a un campo de texto (text) vinculado a un campo de datos sobre un formulario
@@ -5217,8 +5525,8 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoOculto
 	Genera el codigo HTML y CSS correspondiente a un campo de texto pero oculto (hidden) vinculado a un campo de datos sobre un formulario
@@ -5263,8 +5571,8 @@ function PCO_CargarObjetoOculto($registro_campos,$registro_datos_formulario,$for
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoTextoLargo
 	Genera el codigo HTML y CSS correspondiente a un campo de texto largo (textarea) vinculado a un campo de datos sobre un formulario
@@ -5342,8 +5650,8 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoAreaResponsive
 	Genera el codigo HTML y CSS correspondiente a un campo de texto con formato responsive usando SummerNote
@@ -5400,8 +5708,8 @@ function PCO_CargarObjetoAreaResponsive($registro_campos,$registro_datos_formula
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoTextoFormato
 	Genera el codigo HTML y CSS correspondiente a un campo de texto largo (textarea alterado por CKEditor) vinculado a un campo de datos sobre un formulario
@@ -5535,8 +5843,8 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoListaSeleccion
 	Genera el codigo HTML y CSS correspondiente a un campo de lista (select - ComboBox) vinculado a un campo de datos sobre un formulario
@@ -5961,8 +6269,8 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoEtiqueta
 	Genera el codigo HTML y CSS correspondiente a un campo de etiqueta sobre un formulario
@@ -5989,8 +6297,8 @@ function PCO_CargarObjetoEtiqueta($registro_campos,$registro_datos_formulario)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoCampoEtiqueta
 	Genera el codigo HTML para imprimir el valor de un campo directamente, sin control de datos.
@@ -6082,8 +6390,8 @@ function PCO_CargarObjetoCampoEtiqueta($registro_campos,$registro_datos_formular
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoIFrame
 	Genera el codigo HTML correspondiente a un campo de IFRAME para empotrar paginas externas sobre un formulario
@@ -6129,8 +6437,8 @@ function PCO_CargarObjetoIFrame($registro_campos,$registro_datos_formulario)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoListaRadio
 	Genera el codigo HTML y CSS correspondiente a los radio-button (Radio) vinculado a un campo de datos sobre un formulario
@@ -6248,8 +6556,8 @@ function PCO_CargarObjetoListaRadio($registro_campos,$registro_datos_formulario,
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoCasillaCheck
 	Genera el codigo HTML y CSS correspondiente a una casilla de verificacion (checkbox) vinculado a un campo de datos sobre un formulario
@@ -6329,8 +6637,8 @@ function PCO_CargarObjetoCasillaCheck($registro_campos,$registro_datos_formulari
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoDeslizador
 	Genera el codigo HTML y CSS correspondiente a un campo tipo range de HTML5 vinculado a un campo de datos sobre un formulario
@@ -6402,8 +6710,8 @@ function PCO_CargarObjetoDeslizador($registro_campos,$registro_datos_formulario)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoArchivoAdjunto
 	Genera el codigo HTML y CSS correspondiente a un campo de archivo (file) vinculado a un campo de datos sobre un formulario
@@ -6484,8 +6792,8 @@ function PCO_CargarObjetoArchivoAdjunto($registro_campos,$registro_datos_formula
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoCanvas
 	Genera el codigo HTML y CSS correspondiente a un campo de canvas vinculado a un campo de datos sobre un formulario
@@ -6689,8 +6997,8 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoCamara
 	Genera el codigo HTML y CSS correspondiente a un campo de canvas usado para la captura de una imagen desde webcam
@@ -6831,8 +7139,8 @@ function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$for
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarObjetoBotonComando
 	Genera el codigo HTML y CSS correspondiente a un boton de comando sobre un formulario
@@ -6909,8 +7217,8 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_AgregarFuncionesEdicionObjeto
 	Genera el codigo HTML y CSS correspondiente los botones y demas elementos para la edicion en caliente de un objeto
@@ -7020,8 +7328,8 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarFormulario
 	Genera el codigo HTML correspondiente a un formulario de la aplicacion y hace los llamados necesarios para la diagramacion por pantalla de los diferentes objetos que lo componen.
@@ -7734,6 +8042,10 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 
         //Carga las funciones JavaScript asociadas al formulario y llama la funcion FrmAutoRun()
         $JavaScriptFormulario=PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["javascript"]);
+
+        //Minimiza el codigo JavaScript del formulario
+        //$JavaScriptFormulario=PCO_Minimizador_OptimizarJS($JavaScriptFormulario);
+
         //Reemplaza la funcion de FrmAutoRun() del formulario por FrmAutoRun_IDFormulario() para garantizar que es unica
         $NumeroIdFormulario=$registro_formulario["id"];
         if ($NumeroIdFormulario<0) $NumeroIdFormulario="LTZ".($NumeroIdFormulario*-1);
@@ -7758,8 +8070,8 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
   }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_GenerarBotonesInforme
 	Genera el codigo HTML correspondiente a los botones definidos para cada registro de un informe indicado por su ID
@@ -7902,8 +8214,8 @@ function PCO_GenerarBotonesInforme($informe,$Ubicacion=0)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_DeterminarCamposOcultos
 	Devuelve la lista de campos establecidos como ocultos para un informe determinado
@@ -7950,8 +8262,8 @@ function PCO_DeterminarCamposOcultos($informe)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ConstruirConsultaInforme
 	Genera el codigo SQL correspondiente a informe especifico por ID, es la consulta cruda de los datos para ser aplicada posteriormente a otra operacion
@@ -8056,8 +8368,8 @@ function PCO_ConstruirConsultaInforme($informe,$evitar_campos_ocultos=0)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_GenerarEtiquetasConsulta
 	Genera una lista separadas por coma con las etiqeutas asociadas a un query SQL
@@ -8131,8 +8443,8 @@ function PCO_GenerarEtiquetasConsulta($ConsultaSQL="",$informe)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CamposRealesInforme
 	Retorna un arreglo con nombres de campos completos, sus nombres reales en base de datos y los nombres de las tablas correspondientes
@@ -8246,8 +8558,8 @@ function PCO_CamposRealesInforme($informe)
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CargarInforme
 	Genera el codigo HTML correspondiente a un informe de la aplicacion y hace los llamados necesarios para la diagramacion por pantalla de los diferentes objetos que lo componen.
