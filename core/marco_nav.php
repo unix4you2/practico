@@ -317,6 +317,20 @@
                             if ($RegistroTableros["id"]!="")
                                 echo '<li><a href="javascript:document.PCO_ExplorarTablerosKanban.submit();"><i class="fa fa-sticky-note fa-fw"></i> '.$MULTILANG_TablerosKanban.'</a></li>';
                         ?>
+
+
+    					<?php
+                            //Determina si el usurio puede o no cambiar el modo dia/noche segun estado en panel de configuracion
+                            if ($PCO_PermitirUsuariosModoNoche=="1")
+                                {
+                                    $IconoModoActivo='<i class="fa fa-toggle-off fa-fw fa-1x"></i>';
+                                    if ($PCO_TransformacionColores=="inverso")
+                                        $IconoModoActivo='<i class="fa fa-toggle-on fa-fw fa-1x"></i>';
+                                    $IconoModoDiaNoche=$IconoModoActivo.' Activar modo oscuro';
+                                    echo '<li><a href="javascript:document.PCO_ExplorarTablerosKanban.submit();">'.$IconoModoDiaNoche.'</a></li>';
+                                }
+                        ?>
+
 						<li class="divider"></li>
 						<li><a href="javascript:cerrar_sesion.submit();"><i class="fa fa-sign-out fa-fw texto-blink"></i> <?php echo $MULTILANG_CerrarSesion; ?></a></li>
 					</ul>

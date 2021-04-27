@@ -25,9 +25,11 @@ core/marco_abajo.php
 core/marco_arriba_bs.php
 core/marco_conf.php
 core/marco_forms.php
+core/marco_nav.php
 core/kanban.php
 core/menus.php
 core/objetos.php
+core/usuarios.php
 
 mod/pmydb/index.php
 inc/ace/src-min-noconflict/*
@@ -60,6 +62,7 @@ LogCambios="
 * Added [CORE]: Todos los scrips JS en formularios y eventos de controles en formularios pueden tomar valores de variables PHP en notacion {$ Variable}.  Tenga en cuenta que la variable PHP _Debe_ que estar definida en el contexto en que se hace llamado a la funcion JS para que ésta la pueda reconocer y agregar a su código, en caso contrario serán reemplazadas por una cadena vacía.
 * Enhan [AUDIT]: Mejorada la maquetacion general del módulo de auditorías y distribución responsive en informes de auditoria para permitir visualizar claramente eventos de auditoría extensos como resultados de queries o similares.
 * Added [CORE]: Nuevas funciones PCO_Minimizador_OptimizarJS y PCO_Minimizador_OptimizarCSS permiten optimizar codigos JavaScript y CSS antes de ser entregados al usuario, aumentando la velocidad de carga y ayudando al ocultamiento (en parte) de la logica de negocio.
+* Added [USUARIOS]: La adición de usuarios ahora se hace mediante un objeto interno, eliminando el còdigo asociado en el archivo con funciones de usuarios.
 
 
 * Added [CORE]: Soporte de modo oscuro, noche o de ahorro de energía por inversion de paletas de colores. Se incluye posibilidad de inversión, escalas de grises y sepias como paletas alternativas.
@@ -143,6 +146,11 @@ ADD `PCO_TransformacionColores` varchar(255) COLLATE 'utf8_general_ci' NULL AFTE
 ALTER TABLE `core_usuario` ADD `transformacion_colores` varchar(15) COLLATE 'utf8_general_ci' NOT NULL DEFAULT '' COMMENT 'vacio|inverso|grises|sepia';
 
 ALTER TABLE `core_chat` ADD INDEX `destinatario` (`destinatario`);
+
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('dicotomico_habilitadodeshabilitado', '1', '{ $ $MULTILANG_Habilitado}', '1');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('dicotomico_habilitadodeshabilitado', '0', '{ $ MULTILANG_Deshabilitado}', '2');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('dicotomico_deshabilitadohabilitado', '0', '{ $ MULTILANG_Deshabilitado}', '1');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('dicotomico_deshabilitadohabilitado', '1', '{ $ $MULTILANG_Habilitado}', '2');
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
