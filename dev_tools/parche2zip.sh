@@ -179,6 +179,7 @@ php objeto2xml.php
 		IFS=$old_IFS
 		echo $LogCambios > ${SCRIPTPATH}${Slash}../tmp/par_cambios.txt
 		echo $ScriptBasedatos > ${SCRIPTPATH}${Slash}../tmp/par_sql.txt
+		echo $ScriptPHPAutorun > ${SCRIPTPATH}${Slash}../xml/autorun_patch.php
 		echo $VersionCompatibleAno$Punto$VersionCompatibleMes > ${SCRIPTPATH}${Slash}../tmp/par_compat.txt
 		echo $LEAME > ${SCRIPTPATH}${Slash}../tmp/leame.txt
 		IFS=$'\n'
@@ -195,6 +196,7 @@ php objeto2xml.php
 		rm ${SCRIPTPATH}${Slash}../tmp/par_sql.txt
 		rm ${SCRIPTPATH}${Slash}../tmp/par_compat.txt
 		rm ${SCRIPTPATH}${Slash}../tmp/leame.txt
+		rm ${SCRIPTPATH}${Slash}../xml/autorun_patch.php
 	fi
 
 # Presenta resultados, restablece variables y termina

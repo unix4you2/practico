@@ -45,8 +45,9 @@
 <form method="POST" name="cerrar_sesion"  class="oculto_impresion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="Terminar_sesion">
 </form>
-<form method="POST" name="actualizar_perfil"  class="oculto_impresion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    <input type="Hidden" name="PCO_Accion" value="PCO_ActualizarPerfilUsuario">
+<form method="POST" name="PCO_CargarActualizarPefil"  class="oculto_impresion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    <input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+    <input type="Hidden" name="PCO_Objeto" value="frm:-22:1:login:<?php echo $PCOSESS_LoginUsuario; ?>">
 </form>
 <form method="POST" name="reseteo_clave"  class="oculto_impresion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="PCO_CambiarContrasena">

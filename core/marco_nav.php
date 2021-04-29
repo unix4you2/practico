@@ -282,7 +282,7 @@
 						<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-user">
-						<li><a href="javascript:document.actualizar_perfil.submit();"><i class="fa fa-user fa-fw"></i> <?php echo $Nombre_usuario;?></a></li>
+						<li><a href="javascript:document.PCO_CargarActualizarPefil.submit();"><i class="fa fa-user fa-fw"></i> <?php echo $Nombre_usuario;?></a></li>
 						<li><a href="javascript:document.reseteo_clave.submit();"><i class="fa fa-key fa-fw"></i> <?php echo $MULTILANG_UsrReset; ?></a></li>
 	                    <?php
 							/*Carga opcion de chat solamente si esta habilitado
@@ -327,7 +327,7 @@
                                     if ($PCO_TransformacionColores=="inverso")
                                         $IconoModoActivo='<i class="fa fa-toggle-on fa-fw fa-1x"></i>';
                                     $IconoModoDiaNoche=$IconoModoActivo.' Activar modo oscuro';
-                                    echo '<li><a href="javascript:document.PCO_ExplorarTablerosKanban.submit();">'.$IconoModoDiaNoche.'</a></li>';
+                                    echo '<li><a href="javascript:document.PCO_CargarActualizarPefil.submit();">'.$IconoModoDiaNoche.'</a></li>';
                                 }
                         ?>
 
