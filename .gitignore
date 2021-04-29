@@ -4,4 +4,8 @@ practico.sqlite3
 core/configuracion.php
 mod/colmedicos_sgsst/*
 mod/couch
+mod/fileman/cargas/practico_usuarios/*.png
+mod/fileman/cargas/practico_usuarios/*.gif
+mod/fileman/cargas/practico_usuarios/*.jpeg
+mod/fileman/cargas/practico_usuarios/*.jpg
 inc/practico_se/*

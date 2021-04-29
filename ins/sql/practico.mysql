@@ -92,6 +92,8 @@ CREATE TABLE core_usuario (
   plantilla_permisos varchar(250) default '',
   descripcion varchar(250) NULL,
   transformacion_colores varchar(10) NULL,
+  idioma varchar(5) NOT NULL DEFAULT '',
+  avatar varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (login)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -630,6 +632,21 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('vistas_informe',	'E',	'{$MULTILANG_Si}, {$MULTILANG_Escritorio}',	2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('vistas_informe',	'B',	'{$MULTILANG_Si}, {$MULTILANG_InfBarraSuperior}',	3);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('vistas_informe',	'A',	'{$MULTILANG_Si}, {$MULTILANG_Ambos}',	4);
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_habilitadodeshabilitado', '1', '{$MULTILANG_Habilitado}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_habilitadodeshabilitado', '0', '{$MULTILANG_Deshabilitado}', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_deshabilitadohabilitado', '0', '{$MULTILANG_Deshabilitado}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_deshabilitadohabilitado', '1', '{$MULTILANG_Habilitado}', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_filtrocolor', '', 'Sin cambios - predeterminado (None - default)', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_filtrocolor', 'inverso', 'Inverso para modos dia y noche - (Inverted)', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_filtrocolor', 'grises', 'Escala de grises (Grayscale)', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_filtrocolor', 'sepia', 'Tonos Sepia (Sepia)', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('idiomas_plataforma', '',   '{$MULTILANG_Predeterminado}', '0');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('idiomas_plataforma', 'es', 'Espanol - Spanish (es.php)', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('idiomas_plataforma', 'en', 'Ingles - English (en.php)', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('idiomas_plataforma', 'hi', 'हिंदी - Hindi (by GoogleTranslato (hi.php)', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('idiomas_plataforma', 'fr', 'Frances - French (by GoogleTranslator) (fr.php)', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('idiomas_plataforma', 'pt', 'Português - Portuguese (by GoogleTranslator) (pt.php)', '5');
+
 
 DROP TABLE IF EXISTS core_bugtracker;
 CREATE TABLE core_bugtracker (

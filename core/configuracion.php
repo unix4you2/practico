@@ -90,7 +90,7 @@
 
 	$ZonaHoraria='America/Bogota';
 	$IdiomaPredeterminado='es';
-	$IdiomaEnLogin=0;
+	$IdiomaEnLogin=1;
 	$Tema_PracticoFramework='bootstrap';
 	$PCO_ArchivoImagenFondo='';
 	$PCO_TransformacionColores='';

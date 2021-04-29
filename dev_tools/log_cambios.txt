@@ -64,6 +64,7 @@ LogCambios="
 * Added [CORE]: Nuevas funciones PCO_Minimizador_OptimizarJS y PCO_Minimizador_OptimizarCSS permiten optimizar codigos JavaScript y CSS antes de ser entregados al usuario, aumentando la velocidad de carga y ayudando al ocultamiento (en parte) de la logica de negocio.
 * Added [USUARIOS]: La adición de usuarios ahora se hace mediante un objeto interno, eliminando el còdigo asociado en el archivo con funciones de usuarios.
 * Added [USUARIOS]: Se permite a los usuarios de plataforma cargar una fotografía para su perfil.  Tener en cuenta que la carpeta mod/fileman/cargas/practico_usuarios será utilizada para alojar los archivos.
+* Added [USUARIOS]: Agregados campos de personalizacion por usuario que permite seleccionar su paleta de color, idioma por defecto y avatar o imagen de perfil.  Cualquier operación que se tenga relacionada con adición de usuarios en el núcleo del framework (core_usuario) debería ser revisada para cumplir con los nuevos campos.
 * Added [CORE]: Soporte de modo oscuro, noche o de ahorro de energía por inversion de paletas de colores. Se incluye posibilidad de inversión, escalas de grises y sepias como paletas alternativas.
 * Enhan [CORE]: Formulario de base para informes y transporte de datos ahora no ocupa espacio en pantalla para mejorar estética de maquetación.
 * Enhan [CORE]: Mejorado rendimiento en tablas de chat para organizaciones con usuarios cuyo uso es frecuente.
@@ -142,22 +143,33 @@ ADD `PCOVAR_Administradores` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT
 ALTER TABLE `core_parametros`
 ADD `PCO_TransformacionColores` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PCO_ArchivoImagenFondo`;
 
+
 ALTER TABLE `core_usuario` ADD `transformacion_colores` varchar(15) COLLATE 'utf8_general_ci' NOT NULL DEFAULT '' COMMENT 'vacio|inverso|grises|sepia';
 
 ALTER TABLE `core_chat` ADD INDEX `destinatario` (`destinatario`);
 
 ALTER TABLE `core_usuario` ADD `id` int(11) NOT NULL AUTO_INCREMENT UNIQUE FIRST;
 
-INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('dicotomico_habilitadodeshabilitado', '1', '{ $ $MULTILANG_Habilitado}', '1');
+ALTER TABLE `core_usuario`
+ADD `idioma` varchar(5) COLLATE 'utf8_general_ci' NOT NULL DEFAULT '',
+ADD `avatar` varchar(255) COLLATE 'utf8_general_ci' NOT NULL DEFAULT '' AFTER `idioma`;
+
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('dicotomico_habilitadodeshabilitado', '1', '{ $ MULTILANG_Habilitado}', '1');
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('dicotomico_habilitadodeshabilitado', '0', '{ $ MULTILANG_Deshabilitado}', '2');
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('dicotomico_deshabilitadohabilitado', '0', '{ $ MULTILANG_Deshabilitado}', '1');
-INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('dicotomico_deshabilitadohabilitado', '1', '{ $ $MULTILANG_Habilitado}', '2');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('dicotomico_deshabilitadohabilitado', '1', '{ $ MULTILANG_Habilitado}', '2');
 
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('tipos_filtrocolor', '', 'Sin cambios - predeterminado (None - default)', '1');
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('tipos_filtrocolor', 'inverso', 'Inverso para modos dia y noche - (Inverted)', '2');
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('tipos_filtrocolor', 'grises', 'Escala de grises (Grayscale)', '3');
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('tipos_filtrocolor', 'sepia', 'Tonos Sepia (Sepia)', '4');
 
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('idiomas_plataforma', '',   '{ $ MULTILANG_Predeterminado}', '0');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('idiomas_plataforma', 'es', 'Espanol - Spanish (es.php)', '1');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('idiomas_plataforma', 'en', 'Ingles - English (en.php)', '2');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('idiomas_plataforma', 'hi', 'हिंदी - Hindi (by GoogleTranslato (hi.php)', '3');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('idiomas_plataforma', 'fr', 'Frances - French (by GoogleTranslator) (fr.php)', '4');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('idiomas_plataforma', 'pt', 'Português - Portuguese (by GoogleTranslator) (pt.php)', '5');
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
