@@ -8255,7 +8255,7 @@ function PCO_DeterminarCamposOcultos($informe)
 						$PCO_ColumnasOcultas[]=$registro_campos["valor_campo"].$posfijo_campo;
 						//Lleva el campo oculto despues del punto
 						$PCO_PartesCampo=explode(".",$registro_campos["valor_campo"].$posfijo_campo);
-						$PCO_ColumnasOcultas[]=$PCO_PartesCampo[1];
+						@$PCO_ColumnasOcultas[]=$PCO_PartesCampo[1];
 						//Lleva el campo oculto si es un alias
 						$PCO_PartesCampo=explode(" as ",$registro_campos["valor_campo"].$posfijo_campo);
 						$PCO_ColumnasOcultas[]=$PCO_PartesCampo[1];
@@ -8542,7 +8542,7 @@ function PCO_CamposRealesInforme($informe)
                                             //Si el informe usa una conexion externa usa su configuracion
                                             if($registro_informe["conexion_origen_datos"]!="")
                                                 {
-                            						if (PCO_ExisteCampoTabla($nombre_campo_simple,$tabla_actual,${$registro_informe["conexion_origen_datos"]},$registro_informe["motorbd"],$registro_informe["basedatos"]))
+                            						if (@PCO_ExisteCampoTabla($nombre_campo_simple,$tabla_actual,${$registro_informe["conexion_origen_datos"]},$registro_informe["motorbd"],$registro_informe["basedatos"]))
                             							$nombre_tabla_simple=$tabla_actual;
                                                 }
                                             else
@@ -8793,7 +8793,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 					    {
 					        $TituloFinalColumna=$EtiquetaColumna;
 					        //Si la columna actual tiene un titulo arbitrario definido entonces lo agrega
-					        if ($ListaCampos_TitutloArbitrario[$ConteoPosicionColumna]!="")
+					        if (@$ListaCampos_TitutloArbitrario[$ConteoPosicionColumna]!="")
                                 $TituloFinalColumna=PCO_ReemplazarVariablesPHPEnCadena($ListaCampos_TitutloArbitrario[$ConteoPosicionColumna]);
 						    $SalidaFinalInforme.= '<th>'.$TituloFinalColumna.'</th>';
 						    $ConteoPosicionColumna++;
@@ -8842,14 +8842,14 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 									if (@!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
 										{
 											$ValorCampoIdentificador=$registro_informe[0]; //Toma por ahora el primer campo (OCULTO O NO)
-											$Nombre_CampoLlave=$CamposReales[0]["ListaCampos_NombreSimple"][0]; //Toma por ahora el primer campo (OCULTO O NO)
-											$Nombre_CampoEditable=$CamposReales[0]["ListaCampos_NombreSimple"][$i];
-											$Nombre_TablaEditable=$CamposReales[0]["ListaTablas_NombreSimple"][$i];
+											$Nombre_CampoLlave=@$CamposReales[0]["ListaCampos_NombreSimple"][0]; //Toma por ahora el primer campo (OCULTO O NO)
+											$Nombre_CampoEditable=@$CamposReales[0]["ListaCampos_NombreSimple"][$i];
+											$Nombre_TablaEditable=@$CamposReales[0]["ListaTablas_NombreSimple"][$i];
 											$IdentificadorDeCampoEditable="$Nombre_TablaEditable:$Nombre_CampoEditable:$Nombre_CampoLlave:$ValorCampoIdentificador";
 
 											//Determina la activacion o no de la cadena de edicion del campo
 											$CadenaActivadora_Edicion="";
-											if ($CamposReales[0]["ListaCampos_PermitirEdicion"][$i]==1)
+											if (@$CamposReales[0]["ListaCampos_PermitirEdicion"][$i]==1)
 												$CadenaActivadora_Edicion=' id="'.$IdentificadorDeCampoEditable.'" contenteditable="true" ';
 
 											$ValorVisibleFinal=$registro_informe[$i];
