@@ -167,8 +167,19 @@
 						
 						//Agrega variable de sesion para el modulo de chat.  Quita puntos, espacios y otros caracteres del usuario que generen errores en JS
 						$NombreUsuarioChat = preg_replace("/[^a-zA-Z0-9]/", "_", $registro["login"] );
+						
+						//Ajusta variables segun preferencias del usuario (si aplica)
+						if ($idioma_login!=$registro["idioma"]) $idioma_login=$registro["idioma"];
+						
+						//Ruta del avatar
+						$ruta_avatar_usuario="";
+						if ($registro["avatar"]!="") 
+						    {
+						        $partes_ruta_avatar=explode("|",$registro["avatar"]);
+						        $ruta_avatar_usuario=$partes_ruta_avatar[0];
+						    }
+						
 						if (!isset($_SESSION["username"])) $_SESSION["username"]=(string)$NombreUsuarioChat;
-
 						if (!isset($_SESSION["PCOSESS_NombreUsuario"])) $_SESSION["PCOSESS_NombreUsuario"]=(string)$resultado_webservice->credencial[0]->nombre;
 						if (!isset($_SESSION["Nombre_usuario"])) $_SESSION["Nombre_usuario"]=(string)$resultado_webservice->credencial[0]->nombre;
 						if (!isset($_SESSION["Descripcion_usuario"])) $_SESSION["Descripcion_usuario"]=(string)$resultado_webservice->credencial[0]->descripcion;
@@ -182,6 +193,8 @@
 						if (!isset($_SESSION["Nombre_Aplicacion"])) $_SESSION["Nombre_Aplicacion"]=$registro_parametros["nombre_aplicacion"];
 						if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
 						if (!isset($_SESSION["PCOSESS_IdiomaUsuario"])) $_SESSION["PCOSESS_IdiomaUsuario"]=$idioma_login;
+						if (!isset($_SESSION["PCOSESS_TransformacionPaleta"])) $_SESSION["PCOSESS_TransformacionPaleta"]=$registro["transformacion_colores"];
+						if (!isset($_SESSION["PCOSESS_RutaAvatar"])) $_SESSION["PCOSESS_RutaAvatar"]=(string)$ruta_avatar_usuario;
 
 						// Lleva a auditoria con query manual por la falta de $Login_Usuario
 						PCO_Auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$uid);

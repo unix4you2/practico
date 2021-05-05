@@ -29,6 +29,7 @@ core/marco_nav.php
 core/kanban.php
 core/menus.php
 core/objetos.php
+core/sesion.php
 core/usuarios.php
 
 mod/pmydb/index.php

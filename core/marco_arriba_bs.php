@@ -145,6 +145,10 @@
     <?php
         //Determina si se tiene algun filtro de color POR DEFECTO en toda la plataforma y lo aplica
         $PCOVAR_CadenaFiltroColores="";
+        
+        //Determina si el usuario tiene o no un perfil de colores seleccionado y lo utiliza
+        if ($PCOSESS_TransformacionPaleta!="") $PCO_TransformacionColores=$PCOSESS_TransformacionPaleta;
+        
         if ($PCO_TransformacionColores!="")
             {
                 switch ($PCO_TransformacionColores) {

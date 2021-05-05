@@ -287,7 +287,7 @@
     				        $ComplementoImagenPerfil="<img src='{$RutaFotoUsuario}' style='width:30px; height:30px; border-radius: 50%; margin-top:0px; margin-bottom:0px;'>";
 				    ?>
 					    
-					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="">
 						<?php echo $ComplementoImagenPerfil; ?> <i class="fa fa-caret-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-user">
