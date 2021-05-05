@@ -906,6 +906,9 @@ function PCO_EliminarFormulario($formulario="")
 */
 function PCO_ImportarDefinicionesXML()
     {
+		//Se desactiva el limite de tiempo para ejecucion del script
+		set_time_limit (0) ;
+		
         $ArregloElementos = array();
         //Obtiene lista de archivos en xml/ para ser ejecutados
         $DirectorioXML = dir("xml/");
