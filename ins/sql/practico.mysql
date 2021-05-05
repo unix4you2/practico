@@ -20,58 +20,108 @@ CREATE TABLE core_parametros (
   federado_encripcion varchar(255) NULL DEFAULT '',
   federado_puerto varchar(255) NULL DEFAULT '',
 
-
-
-
-
-
-
-  NombreRAD	varchar(255) NULL DEFAULT 'Practico',
-  ArchivoCORE	varchar(255) NULL DEFAULT '',	
-  TablasCore	varchar(255) NULL DEFAULT 'core_',	
-  TablasApp	varchar(255) NULL DEFAULT 'app_',	
-**LlaveDePaso	varchar(255) NULL DEFAULT 'INSTALL',
-  ModoDepuracion	varchar(255) NULL DEFAULT '0',
-  PermitirReporteBugs	varchar(255) NULL	 DEFAULT '0',
-  DepuracionSQL	varchar(255) NULL	 DEFAULT '0',
-  BuscarActualizaciones	varchar(255) NULL DEFAULT '0',	
-  ZonaHoraria	varchar(255) NULL	
-  IdiomaPredeterminado	varchar(255) NULL	
-  IdiomaEnLogin	varchar(255) NULL	
-  Tema_PracticoFramework	varchar(255) NULL	
-  PCO_ArchivoImagenFondo	varchar(255) NULL	
-  PCO_TransformacionColores	varchar(255) NULL	
-  TipoCaptchaLogin	varchar(255) NULL	DEFAULT 'visual',	
-  CaracteresCaptcha	varchar(255) NULL DEFAULT '4',	
-  CodigoGoogleAnalytics	varchar(255) NULL	
+#  NombreRAD	varchar(255) NULL DEFAULT 'Practico',
+#  ArchivoCORE	varchar(255) NULL DEFAULT '',	
+#  TablasCore	varchar(255) NULL DEFAULT 'core_',	
+#  TablasApp	varchar(255) NULL DEFAULT 'app_',	
+#**LlaveDePaso	varchar(255) NULL DEFAULT 'INSTALL',
+#  ModoDepuracion	varchar(255) NULL DEFAULT '0',
+#  PermitirReporteBugs	varchar(255) NULL	 DEFAULT '0',
+#  DepuracionSQL	varchar(255) NULL	 DEFAULT '0',
+#  BuscarActualizaciones	varchar(255) NULL DEFAULT '0',	
+#  ZonaHoraria	varchar(255) NULL	
+#  IdiomaPredeterminado	varchar(255) NULL	
+#  IdiomaEnLogin	varchar(255) NULL	
+#  Tema_PracticoFramework	varchar(255) NULL	
+#  PCO_ArchivoImagenFondo	varchar(255) NULL	
+#  PCO_TransformacionColores	varchar(255) NULL	
+#  TipoCaptchaLogin	varchar(255) NULL	DEFAULT 'visual',	
+#  CaracteresCaptcha	varchar(255) NULL DEFAULT '4',	
+#  CodigoGoogleAnalytics	varchar(255) NULL	
   
-  Auth_TipoMotor	varchar(255) NULL DEFAULT 'practico',
-  Auth_ProtoTransporte	varchar(255) NULL	 DEFAULT '',	
-  Auth_PermitirReseteoClaves	varchar(255) NULL	
-  Auth_PermitirAutoRegistro	varchar(255) NULL	
-  Auth_PlantillaAutoRegistro	varchar(255) NULL	
-  Auth_PresentarOauthInicio	varchar(255) NULL	
+#  Auth_TipoMotor	varchar(255) NULL DEFAULT 'practico',
+#  Auth_ProtoTransporte	varchar(255) NULL	 DEFAULT '',	
+#  Auth_PermitirReseteoClaves	varchar(255) NULL	
+#  Auth_PermitirAutoRegistro	varchar(255) NULL	
+#  Auth_PlantillaAutoRegistro	varchar(255) NULL	
+#  Auth_PresentarOauthInicio	varchar(255) NULL	
   
-  Auth_TipoEncripcion	varchar(255) NULL DEFAULT 'plano',	
-  Auth_LDAPServidor	varchar(255) NULL	DEFAULT '',	
-  Auth_LDAPPuerto	varchar(255) NULL	DEFAULT '',	
-  Auth_LDAPDominio	varchar(255) NULL	DEFAULT '',	
-  Auth_LDAPOU	varchar(255) NULL	 DEFAULT '',	
-  Activar_ModuloChat	varchar(255) NULL DEFAULT '0',	
-  PWA_Activa	varchar(255) NULL DEFAULT '0',	
-  PWA_DireccionTexto	varchar(255) NULL	DEFAULT 'ltr',	
-  PWA_Display	varchar(255) NULL		DEFAULT 'fullscreen',	
-  PWA_Orientacion	varchar(255) NULL	DEFAULT 'portrait',	
-  PWA_FCMSenderID	varchar(255) NULL		DEFAULT '103953800507',	
-  PWA_Scope	varchar(255) NULL		DEFAULT '',	
-  PWA_AutorizacionGPS	varchar(255) NULL	DEFAULT '0',	
-  PWA_AutorizacionFCM	varchar(255) NULL	DEFAULT '0',	
-  PWA_AutorizacionCAM	varchar(255) NULL	DEFAULT '0',	
-  PWA_AutorizacionMIC	varchar(255) NULL	DEFAULT '0',	
-  PWA_OcultarBarrasHerramientas	varchar(255) NULL	DEFAULT '0',	
-  _SeparadorCampos_	varchar(255) NULL DEFAULT '||_||',	
-  ModoDesarrolladorPractico	varchar(255) NULL DEFAULT '0',	
-  PCOVAR_Administradores	varchar(255) NULL DEFAULT 'admin',	
+#  Auth_TipoEncripcion	varchar(255) NULL DEFAULT 'plano',	
+#  Auth_LDAPServidor	varchar(255) NULL	DEFAULT '',	
+#  Auth_LDAPPuerto	varchar(255) NULL	DEFAULT '',	
+#  Auth_LDAPDominio	varchar(255) NULL	DEFAULT '',	
+#  Auth_LDAPOU	varchar(255) NULL	 DEFAULT '',	
+#  Activar_ModuloChat	varchar(255) NULL DEFAULT '0',	
+#  PWA_Activa	varchar(255) NULL DEFAULT '0',	
+#  PWA_DireccionTexto	varchar(255) NULL	DEFAULT 'ltr',	
+#  PWA_Display	varchar(255) NULL		DEFAULT 'fullscreen',	
+#  PWA_Orientacion	varchar(255) NULL	DEFAULT 'portrait',	
+#  PWA_FCMSenderID	varchar(255) NULL		DEFAULT '103953800507',	
+#  PWA_Scope	varchar(255) NULL		DEFAULT '',	
+#  PWA_AutorizacionGPS	varchar(255) NULL	DEFAULT '0',	
+#  PWA_AutorizacionFCM	varchar(255) NULL	DEFAULT '0',	
+#  PWA_AutorizacionCAM	varchar(255) NULL	DEFAULT '0',	
+#  PWA_AutorizacionMIC	varchar(255) NULL	DEFAULT '0',	
+#  PWA_OcultarBarrasHerramientas	varchar(255) NULL	DEFAULT '0',	
+#  _SeparadorCampos_	varchar(255) NULL DEFAULT '||_||',	
+#  ModoDesarrolladorPractico	varchar(255) NULL DEFAULT '0',	
+#  PCOVAR_Administradores	varchar(255) NULL DEFAULT 'admin',	
+
+
+
+##SCRIPT DE GENERACION DE CAMPOS ES ARCHIVO DE LOG_CAMBIOS.TXT
+
+#* Enhan [CORE]: Las configuraciones base son movidas desde un archivo a registro en base de datos facilitando el despliegue y actualización de parámetros en GAE
+
+#ALTER TABLE `core_parametros`
+#ADD `NombreRAD` varchar(255) COLLATE 'utf8_general_ci' NULL,
+#ADD `ArchivoCORE` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `NombreRAD`,
+#ADD `TablasCore` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Cuidado al cambiar: Prefijo de Tablas base para uso de Practico' AFTER `ArchivoCORE`,
+#ADD `TablasApp` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Cuidado al cambiar: Prefijo para Tablas de datos definidas por el usuario' AFTER `TablasCore`,
+#ADD `LlaveDePaso` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Valor unico para firmar los usuarios del aplicativo.  No debe ser cambiado despues de puesto en marcha a menos que se haga un update manual el usuario que no coincida con la llave no podra ingresar' AFTER `TablasApp`,
+#ADD `ModoDepuracion` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `LlaveDePaso`,
+#ADD `PermitirReporteBugs` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `ModoDepuracion`,
+#ADD `DepuracionSQL` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PermitirReporteBugs`,
+#ADD `BuscarActualizaciones` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `DepuracionSQL`,
+#ADD `ZonaHoraria` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `BuscarActualizaciones`,
+#ADD `IdiomaPredeterminado` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `ZonaHoraria`,
+#ADD `IdiomaEnLogin` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `IdiomaPredeterminado`,
+#ADD `Tema_PracticoFramework` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `IdiomaEnLogin`,
+#ADD `PCO_ArchivoImagenFondo` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `Tema_PracticoFramework`,
+#ADD `TipoCaptchaLogin` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PCO_ArchivoImagenFondo`,
+#ADD `CaracteresCaptcha` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `TipoCaptchaLogin`,
+#ADD `CodigoGoogleAnalytics` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `CaracteresCaptcha`,
+#ADD `Auth_TipoMotor` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Tipo de motor usado para la autenticacion de usuarios' AFTER `CodigoGoogleAnalytics`,
+#ADD `Auth_ProtoTransporte` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `Auth_TipoMotor`,
+#ADD `Auth_PermitirReseteoClaves` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `Auth_ProtoTransporte`,
+#ADD `Auth_PermitirAutoRegistro` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `Auth_PermitirReseteoClaves`,
+#ADD `Auth_PlantillaAutoRegistro` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `Auth_PermitirAutoRegistro`,
+#ADD `Auth_PresentarOauthInicio` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `Auth_PlantillaAutoRegistro`,
+#ADD `Auth_TipoEncripcion` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Configuracion LDAP - Auth_TipoMotor=ldap' AFTER `Auth_PresentarOauthInicio`,
+#ADD `Auth_LDAPServidor` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `Auth_TipoEncripcion`,
+#ADD `Auth_LDAPPuerto` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `Auth_LDAPServidor`,
+#ADD `Auth_LDAPDominio` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `Auth_LDAPPuerto`,
+#ADD `Auth_LDAPOU` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `Auth_LDAPDominio`,
+#ADD `Activar_ModuloChat` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Especifica si desea activar o no el modulo de chat para usuarios asi: 0=No, 1=Solo usuarios internos, 2=Solo usuarios externos, 3=Todos los usuarios, 4=Exclusivo para admin (podra iniciar conversacion y chat con cualquier otro usuario aun con modulo desactivado)' AFTER `Auth_LDAPOU`,
+#ADD `PWA_Activa` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Especifica si desea activar o no el registro de la aplicacion como una Aplicacion web progresiva PWA y algunos permisos de usuario' AFTER `Activar_ModuloChat`,
+#ADD `PWA_DireccionTexto` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PWA_Activa`,
+#ADD `PWA_Display` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PWA_DireccionTexto`,
+#ADD `PWA_Orientacion` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PWA_Display`,
+#ADD `PWA_FCMSenderID` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PWA_Orientacion`,
+#ADD `PWA_Scope` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PWA_FCMSenderID`,
+#ADD `PWA_AutorizacionGPS` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PWA_Scope`,
+#ADD `PWA_AutorizacionFCM` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PWA_AutorizacionGPS`,
+#ADD `PWA_AutorizacionCAM` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PWA_AutorizacionFCM`,
+#ADD `PWA_AutorizacionMIC` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PWA_AutorizacionCAM`,
+#ADD `PWA_OcultarBarrasHerramientas` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PWA_AutorizacionMIC`,
+#ADD `_SeparadorCampos_` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Define cadena usada para separar campos en operaciones de bases de datos' AFTER `PWA_OcultarBarrasHerramientas`,
+#ADD `ModoDesarrolladorPractico` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Define si la plataforma se encuentra activa para realizar desarrollo interno de PracticoFramework [0=Inactivo|-10000=Activo]' AFTER `_SeparadorCampos_`,
+#ADD `PCOVAR_Administradores` varchar(255) COLLATE 'utf8_general_ci' NULL COMMENT 'Define cadena separada por comas con usuarios administradores de la aplicacion' AFTER `ModoDesarrolladorPractico`;
+
+#ALTER TABLE `core_parametros`
+#ADD `PCO_TransformacionColores` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `PCO_ArchivoImagenFondo`;
+
+
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
