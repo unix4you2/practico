@@ -278,11 +278,20 @@
 		//Presenta el menu de login de usuario
 	?>
 				<li class="dropdown">
+				    <?php
+				        $ComplementoImagenPerfil='<i class="fa fa-user fa-fw"></i>';
+				        //Busca si el usuario tiene imagen de perfil
+				        $PartesFotoUsuario=explode("|",PCO_EjecutarSQL("SELECT avatar FROM {$TablasCore}usuario WHERE login='$PCOSESS_LoginUsuario' ")->fetchColumn());
+				        $RutaFotoUsuario=$PartesFotoUsuario[0];
+				        if ($RutaFotoUsuario!="")
+    				        $ComplementoImagenPerfil="<img src='{$RutaFotoUsuario}' style='width:30px; height:30px; border-radius: 50%; margin-top:0px; margin-bottom:0px;'>";
+				    ?>
+					    
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+						<?php echo $ComplementoImagenPerfil; ?> <i class="fa fa-caret-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-user">
-						<li><a href="javascript:document.PCO_CargarActualizarPefil.submit();"><i class="fa fa-user fa-fw"></i> <?php echo $Nombre_usuario;?></a></li>
+						<li><a href="javascript:document.PCO_CargarActualizarPefil.submit();"><?php echo $ComplementoImagenPerfil; ?> <?php echo $Nombre_usuario;?></a><hr style="margin-top:0px; margin-bottom:0px;"></li>
 						<li><a href="javascript:document.reseteo_clave.submit();"><i class="fa fa-key fa-fw"></i> <?php echo $MULTILANG_UsrReset; ?></a></li>
 	                    <?php
 							/*Carga opcion de chat solamente si esta habilitado
