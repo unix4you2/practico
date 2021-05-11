@@ -2818,6 +2818,16 @@ if ($PCO_Accion=="PCO_EditarFormulario")
         //Elimina saltos de linea del contenido para ser asignado directamente al DIV con JQuery
         $ContenidoBarraFlotante_Herramientas=preg_replace("[\n|\r|\n\r]", '', trim($ContenidoBarraFlotante_Herramientas));
 
+
+        //Define el estilo activo de la ventana
+        if($registro_form["estilo_ventana"]=="panel") $SeleccionEstilo1="SELECTED";
+        if($registro_form["estilo_ventana"]=="panel-default") $SeleccionEstilo2="SELECTED";
+        if($registro_form["estilo_ventana"]=="panel-primary") $SeleccionEstilo3="SELECTED";
+        if($registro_form["estilo_ventana"]=="panel-success") $SeleccionEstilo4="SELECTED";
+        if($registro_form["estilo_ventana"]=="panel-info") $SeleccionEstilo5="SELECTED";
+        if($registro_form["estilo_ventana"]=="panel-warning") $SeleccionEstilo6="SELECTED";
+        if($registro_form["estilo_ventana"]=="panel-danger") $SeleccionEstilo7="SELECTED";
+
         //Formulario de configuracion del formulario
         $ContenidoBarraFlotante_EditForm='
             <div align=center style="color:#FFFFFF;"><hr>
@@ -2833,7 +2843,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 	            //$ContenidoBarraFlotante_EditForm.=''.PCO_CargarFormulario("-15",0,"","",1,0);
 
 
-$ContenidoBarraFlotante_EditForm.='
+            $ContenidoBarraFlotante_EditForm.='
                     <!-- Modal EditorJavascript -->';
                     $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
                     $ContenidoBarraFlotante_EditForm.='
@@ -2844,19 +2854,37 @@ $ContenidoBarraFlotante_EditForm.='
                 			<button type="button" class="btn btn-success" onclick="javascript:document.datosact.submit();">'.$MULTILANG_Actualizar.' JS <i class="fa fa-floppy-o"></i></button>
                             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
                     $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
-        
-        //Define el estilo activo de la ventana
-        if($registro_form["estilo_ventana"]=="panel") $SeleccionEstilo1="SELECTED";
-        if($registro_form["estilo_ventana"]=="panel-default") $SeleccionEstilo2="SELECTED";
-        if($registro_form["estilo_ventana"]=="panel-primary") $SeleccionEstilo3="SELECTED";
-        if($registro_form["estilo_ventana"]=="panel-success") $SeleccionEstilo4="SELECTED";
-        if($registro_form["estilo_ventana"]=="panel-info") $SeleccionEstilo5="SELECTED";
-        if($registro_form["estilo_ventana"]=="panel-warning") $SeleccionEstilo6="SELECTED";
-        if($registro_form["estilo_ventana"]=="panel-danger") $SeleccionEstilo7="SELECTED";
-        
-        $ContenidoBarraFlotante_EditForm.='
+            $ContenidoBarraFlotante_EditForm.='
                     <!-- Fin Modal EditorJavascript -->
 
+
+                    <!-- Modal Editor PRE Script -->';
+                    $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaPRESCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
+                    $ContenidoBarraFlotante_EditForm.='
+                        <div class="well" style="color:#000000;">Script de ejecuci&oacute;n previa al cargue del formulario. Tiene que comenzar con <b>< ? php</b> o vac&iacute;o para no ejecutar nada. 
+                        <textarea name="pre_script" id="pre_script" data-editor="php" class="form-control" style="width: 950px; height: 450px;"></textarea>
+                        </div>';
+                        $barra_herramientas_modal='
+                			<button type="button" class="btn btn-success" onclick="javascript:document.datosact.submit();">'.$MULTILANG_Actualizar.' PHP-Pre <i class="fa fa-floppy-o"></i></button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+                    $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
+        
+        $ContenidoBarraFlotante_EditForm.='
+                    <!-- Fin Modal Editor PRE Script -->
+
+                    <!-- Modal Editor PRE Script -->';
+                    $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaPOSTSCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
+                    $ContenidoBarraFlotante_EditForm.='
+                        <div class="well" style="color:#000000;">Script de ejecuci&oacute;n posterior a las operaciones de tipo automaticas realizadas por el formulario. Tiene que comenzar con <b>< ? php</b> o vac&iacute;o para no ejecutar nada. 
+                        <textarea name="post_script" id="post_script" data-editor="php" class="form-control" style="width: 950px; height: 450px;"></textarea>
+                        </div>';
+                        $barra_herramientas_modal='
+                			<button type="button" class="btn btn-success" onclick="javascript:document.datosact.submit();">'.$MULTILANG_Actualizar.' PHP-Pre <i class="fa fa-floppy-o"></i></button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+                    $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
+        
+        $ContenidoBarraFlotante_EditForm.='
+                    <!-- Fin Modal Editor PRE Script -->
 
 				<table class="table table-condensed table-unbordered" style="color:#FFFFFF; font-size:12px;">
 					<tr>
@@ -3209,7 +3237,7 @@ $ContenidoBarraFlotante_EditForm.='
 
 			if ($mensaje_error=="")
 				{
-					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario SET estilo_ventana=?,titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=?,estilo_pestanas=?,id_html=?,tipo_maquetacion=?,css_columnas=? WHERE id= ? ","$estilo_ventana$_SeparadorCampos_$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$formulario");
+					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario SET estilo_ventana=?,titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=?,estilo_pestanas=?,id_html=?,tipo_maquetacion=?,css_columnas=?,pre_script=?,post_script=? WHERE id= ? ","$estilo_ventana$_SeparadorCampos_$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$formulario");
 					PCO_Auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">

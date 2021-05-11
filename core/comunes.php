@@ -7449,8 +7449,8 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 			}
 		
 		//Carga cualquier script PRE para el formulario
-		if ($registro_formulario["pre_script"]!="")
-		    PCO_EvaluarCodigo($registro_formulario["pre_script"]);
+		//if ($registro_formulario["pre_script"]!="")
+		//    PCO_EvaluarCodigo($registro_formulario["pre_script"]);
 		
 		// Define la barra de herramientas mini superior (en barra de titulo)
 		@$barra_herramientas_mini.='
@@ -7466,6 +7466,14 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
             {
 				$ComplementoTituloFormulario='
 				<div class="pull-right">
+                    <a class="btn btn-primary btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="#myModalActualizaPRESCRIPT">
+                        <div><i class="fa fa-file-code-o"></i> PRE</div>
+                    </a>
+                    <!--
+                    <a class="btn btn-info btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="#myModalActualizaPOSTSCRIPT">
+                        <div><i class="fa fa-file-code-o"></i> POST</div>
+                    </a>
+                    -->
                     <a class="btn btn-warning btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="#myModalActualizaJAVASCRIPT">
                         <div><i class="fa fa-file-code-o"></i> JS</div>
                     </a>
