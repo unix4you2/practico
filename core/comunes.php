@@ -1163,8 +1163,10 @@ function PCO_ImportarXMLFormulario($xml_importado)
 				$tipo_maquetacion=base64_decode($xml_importado->core_formulario[0]->tipo_maquetacion);
 				$css_columnas=base64_decode($xml_importado->core_formulario[0]->css_columnas);
 				$estilo_ventana=base64_decode($xml_importado->core_formulario[0]->estilo_ventana);
+				$pre_script=base64_decode($xml_importado->core_formulario[0]->pre_script);
+				$post_script=base64_decode($xml_importado->core_formulario[0]->post_script);
 				// Inserta el nuevo objeto al form
-				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposParaID.$ListaCamposSinID_formulario.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana");
+				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposParaID.$ListaCamposSinID_formulario.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script");
 
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
@@ -1325,8 +1327,10 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$tipo_maquetacion=$registro["tipo_maquetacion"];
 							$css_columnas=$registro["css_columnas"];
 							$estilo_ventana=$registro["estilo_ventana"];
+							$pre_script=$registro["pre_script"];
+							$post_script=$registro["post_script"];
 							// Inserta el nuevo objeto al form
-							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana");
+							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script");
 							$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
 							// Busca los elementos que componen el formulario para hacerles la copia
@@ -7441,7 +7445,13 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 				$consulta_datos_formulario = $ConexionPDO->prepare("SELECT * FROM ".$registro_formulario["tabla_datos"]." WHERE $PCO_CampoBusquedaBD='$PCO_ValorBusquedaBD'");
 				$consulta_datos_formulario->execute();
 				$registro_datos_formulario = $consulta_datos_formulario->fetch();
+				$PCO_RegistroDatosFormulario=$registro_datos_formulario;
 			}
+		
+		//Carga cualquier script PRE para el formulario
+		if ($registro_formulario["pre_script"]!="")
+		    PCO_EvaluarCodigo($registro_formulario["pre_script"]);
+		
 		// Define la barra de herramientas mini superior (en barra de titulo)
 		@$barra_herramientas_mini.='
 				<a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_VistaImpresion.'" name="">

@@ -21,6 +21,7 @@ core/codigobarras.php
 core/comunes.php
 core/correos.php
 core/doc_intro.php
+core/formularios.php
 core/marco_abajo.php
 core/marco_arriba_bs.php
 core/marco_conf.php
@@ -78,6 +79,8 @@ LogCambios="
 * Added [CORE]: Los usuarios pueden activar/desactivar a través de la edición de su perfil los modos de inversión o modo noche en sus aplicaciones según decisión del administrador de plataforma.
 * Enhan [CORE]: Rutina de importacion de definiciones XML ahora deshabilita el tiempo de ejecucion del Script PHP (set_time_limit) para garantizar que todas las definiciones son importadas cuando se trata de una cantidad grande de archivos y se supera los tiempos de ejecucion del servidor.
 * Fixed [CORE]: Eliminadas advertencias innecesarias del tipo -Notice: Undefined offset- en offsets o posiciones de arreglo inexistentes para la generacion de titulos de informes desde consulta o arbitrarios. 
+* Enhan [FORMS]:  Ahora los formularios cuentan con la posibilidad de definir scripts de precarga.  Dichos scripts son lanzados ANTES de iniciar la carga del formulario y sus controles pero después de haber cargado el registro de datos correspondiente en caso que se trate de formularios de consulta.  La variable PHP que contendrá todos los valores recuperados desde base de datos para el registro es $ PCO_RegistroDatosFormulario. Dichos scripts deben comenzar siempre con el tag < ? php 
+* Enhan [FORMS]:  Aumentado el tamaño máximo de los JavaScript en formularios de 64Kb a 16Mb
 
 "
 
@@ -85,6 +88,10 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+ALTER TABLE `core_formulario` CHANGE `javascript` `javascript` mediumtext COLLATE 'utf8_general_ci' NULL AFTER `columnas`;
+
+ALTER TABLE `core_formulario` ADD `pre_script` mediumtext COLLATE 'utf8_general_ci' NULL, ADD `post_script` mediumtext COLLATE 'utf8_general_ci' NULL AFTER `pre_script`;
+
 ALTER TABLE `core_usuario` ADD `transformacion_colores` varchar(15) COLLATE 'utf8_general_ci' NOT NULL DEFAULT '' COMMENT 'vacio|inverso|grises|sepia';
 
 ALTER TABLE `core_chat` ADD INDEX `destinatario` (`destinatario`);
