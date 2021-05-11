@@ -43,8 +43,8 @@
 
 
 <?php
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EliminarDatosFormulario
 	Elimina los datos asociados sobre las tablas de aplicacion para un registro determinado.  Esta funcion es utilizada por los botones de Eliminar registro definidos como accion en un formulario
@@ -128,8 +128,8 @@
 		}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ActualizarDatosFormulario
 	Actualiza un registro sobre la tabla de aplicacion cuando es llamada la accion de actualizar datos sobre un formulario.
@@ -358,8 +358,8 @@
 		}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_GuardarDatosFormulario
 	Guarda un registro sobre la tabla de aplicacion cuando es llamada la accion de guardar datos sobre un formulario.  Tomando todos los datos del formulario construye un query valido en SQL para hacer la insercion de los datos que debieron recibirse por metodo POST desde el formulario
@@ -671,8 +671,8 @@
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EliminarAccionFormulario
 	Elimina un boton creado para un formulario
@@ -706,8 +706,8 @@
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EliminarCampoFormulario
 	Elimina un campo de datos, etiqueta, marco externo o informe creado para un formulario
@@ -744,8 +744,8 @@
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ActualizarCampoFormulario
 	Actualiza un campo de datos, etiqueta, marco externo o informe en un formulario
@@ -821,8 +821,8 @@
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_GuardarCampoFormulario
 	Agrega un campo de datos, etiqueta, marco externo o informe a un formulario
@@ -899,8 +899,8 @@
 
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_GuardarAccionFormulario
 	Agrega un boton con una accion determinada para un formulario
@@ -951,8 +951,8 @@
 		}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EditarEventoObjeto
 	Edita el evento asociado a un objeto determinado en una ventana independiente que se lanza como popup
@@ -1008,14 +1008,14 @@
 		}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Section: Acciones a ser ejecutadas (si aplica) en cada cargue de la herramienta
 */
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_DesplazarObjetosForm
 	Cambia el peso de todos los elementos de un formulario sumando uno +1 para dejar un espacio donde se pueda insertar un nuevo elemento
@@ -1068,8 +1068,8 @@ if (@$PCO_Accion=="PCO_DesplazarObjetosForm")
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EditarFormulario
 	Despliega las ventanas requeridas para agregar los diferentes elementos al formulario como campos, etiquetas, marcos y acciones
@@ -1085,7 +1085,7 @@ if (@$PCO_Accion=="PCO_DesplazarObjetosForm")
 	Salida:
 		Ventanas con herramientas de edicion y vista previa del formulario en pantalla
 */
-/* ################################################################## */
+########################################################################
 if ($PCO_Accion=="PCO_EditarFormulario")
 	{
 	    if ($formulario=="") $formulario=$PCO_Valor; //Reasignacion de valor para modelo dinamico de practico
@@ -2838,54 +2838,36 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                 <input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
                 <input type="Hidden" name="formulario" value="'.$registro_form["id"].'">';
 
+            //Define los botones que van en cada dialogo Modal (los mismos para todos)
+            $barra_herramientas_modal='
+    			<button type="button" class="btn btn-success" onclick="javascript:document.datosact.submit();">'.$MULTILANG_Actualizar.' Script <i class="fa fa-floppy-o"></i></button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
 
-                //PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno_formulario=0)
-	            //$ContenidoBarraFlotante_EditForm.=''.PCO_CargarFormulario("-15",0,"","",1,0);
-
-
-            $ContenidoBarraFlotante_EditForm.='
-                    <!-- Modal EditorJavascript -->';
+                    //Modal Editor JavaScript
                     $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
                     $ContenidoBarraFlotante_EditForm.='
                         <div class="well" style="color:#000000;">'.$MULTILANG_FrmHlpFunciones.'
                         <textarea name="javascript" id="javascript" data-editor="javascript" class="form-control" style="width: 950px; height: 450px;"></textarea>
                         </div>';
-                        $barra_herramientas_modal='
-                			<button type="button" class="btn btn-success" onclick="javascript:document.datosact.submit();">'.$MULTILANG_Actualizar.' JS <i class="fa fa-floppy-o"></i></button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
                     $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
-            $ContenidoBarraFlotante_EditForm.='
-                    <!-- Fin Modal EditorJavascript -->
 
-
-                    <!-- Modal Editor PRE Script -->';
+                    //Modal Editor PRE Script
                     $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaPRESCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
                     $ContenidoBarraFlotante_EditForm.='
-                        <div class="well" style="color:#000000;">Script de ejecuci&oacute;n previa al cargue del formulario. Tiene que comenzar con <b>< ? php</b> o vac&iacute;o para no ejecutar nada. 
+                        <div class="well" style="color:#000000;">Script de ejecuci&oacute;n previa al cargue del formulario.
                         <textarea name="pre_script" id="pre_script" data-editor="php" class="form-control" style="width: 950px; height: 450px;"></textarea>
                         </div>';
-                        $barra_herramientas_modal='
-                			<button type="button" class="btn btn-success" onclick="javascript:document.datosact.submit();">'.$MULTILANG_Actualizar.' PHP-Pre <i class="fa fa-floppy-o"></i></button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
                     $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
         
-        $ContenidoBarraFlotante_EditForm.='
-                    <!-- Fin Modal Editor PRE Script -->
-
-                    <!-- Modal Editor PRE Script -->';
+                    //Modal Editor POST Script
                     $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaPOSTSCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
                     $ContenidoBarraFlotante_EditForm.='
-                        <div class="well" style="color:#000000;">Script de ejecuci&oacute;n posterior a las operaciones de tipo automaticas realizadas por el formulario. Tiene que comenzar con <b>< ? php</b> o vac&iacute;o para no ejecutar nada. 
+                        <div class="well" style="color:#000000;">Script de ejecuci&oacute;n posterior a las operaciones de tipo autom&aacute;ticas realizadas por el formulario.
                         <textarea name="post_script" id="post_script" data-editor="php" class="form-control" style="width: 950px; height: 450px;"></textarea>
                         </div>';
-                        $barra_herramientas_modal='
-                			<button type="button" class="btn btn-success" onclick="javascript:document.datosact.submit();">'.$MULTILANG_Actualizar.' PHP-Pre <i class="fa fa-floppy-o"></i></button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
                     $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
         
         $ContenidoBarraFlotante_EditForm.='
-                    <!-- Fin Modal Editor PRE Script -->
-
 				<table class="table table-condensed table-unbordered" style="color:#FFFFFF; font-size:12px;">
 					<tr>
 						<td>
@@ -3076,12 +3058,16 @@ if ($PCO_Accion=="PCO_EditarFormulario")
     ?>
 
     <textarea name="ghost_javascript" id="ghost_javascript" style="width: 0px; height: 0px; display:none; visibility:hidden;"><?php echo $registro_form["javascript"]; ?></textarea>
+    <textarea name="ghost_precript" id="ghost_precript" style="width: 0px; height: 0px; display:none; visibility:hidden;"><?php echo $registro_form["pre_script"]; ?></textarea>
+    <textarea name="ghost_postscript" id="ghost_postscript" style="width: 0px; height: 0px; display:none; visibility:hidden;"><?php echo $registro_form["post_script"]; ?></textarea>
 	<script language="JavaScript">
 	    //Asigna contenidos generados a la barra flotante
 		$('#PCODIV_SeccionLateralFlotanteUsoInterno').html('<?php echo htmlspecialchars_decode($ContenidoBarraFlotante_Herramientas); ?>');
 		$('#PCODIV_SeccionLateralFlotanteUsoInterno').append('<?php echo htmlspecialchars_decode($ContenidoBarraFlotante_EditForm); ?>');
 		//Reasigna valor de script desde la variable inicial de carga
 		document.datosact.javascript.value=ghost_javascript.value;
+		document.datosact.pre_script.value=ghost_precript.value;
+		document.datosact.post_script.value=ghost_postscript.value;
 	</script>
 
     <div class="row">
@@ -3144,8 +3130,8 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EliminarFormulario
 	Alias de paso para PCO_EliminarFormulario
@@ -3169,8 +3155,8 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 		}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EliminarEventoObjeto
 	Elimina el script asociado a un evento javascript de un control de formulario
@@ -3189,8 +3175,8 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 		}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ActualizarJavaEvento
 	Actualiza el script asociado a un evento javascript de un control de formulario
@@ -3216,8 +3202,8 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 		}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ActualizarFormulario
 	Actualiza los datos basicos de un formulario
@@ -3259,8 +3245,8 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 		}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_GuardarFormulario
 	Agrega un formulario vacio para la aplicacion
@@ -3310,8 +3296,8 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 		}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_CopiarFormulario
 	Agrega un formulario a partir de otro para la aplicacion
@@ -3343,8 +3329,8 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 		}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_DefinirCopiaFormularios
 	Presenta opciones para generar una copia del formulario seleccionado usando diferentes formatos
@@ -3385,8 +3371,8 @@ if ($PCO_Accion=="PCO_DefinirCopiaFormularios")
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ConfirmarImportacionFormulario
 	Lee el archivo cargado sobre /tmp y regenera el objeto alli existente
@@ -3442,8 +3428,8 @@ if ($PCO_Accion=="PCO_ConfirmarImportacionFormulario")
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_AnalizarImportacionFormulario
 	Revisa el archivo cargado sobre /tmp para validar si se trata de un objeto definido correctamente
@@ -3560,8 +3546,8 @@ if ($PCO_Accion=="PCO_AnalizarImportacionFormulario")
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ImportarFormulario
 	Presenta el paso 1 de importacion de formularios
@@ -3644,8 +3630,8 @@ if ($PCO_Accion=="PCO_ImportarFormulario")
 	}
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_AdministrarFormularios
 	Presenta ventanas con la posibilidad de agregar nuevo formulario a la aplicacion y el listado para administrar o editar los existentes

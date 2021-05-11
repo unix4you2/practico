@@ -403,7 +403,16 @@ function PCO_EvaluarCodigo($CadenaCodigoPHP) {
     $MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
     $RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
     fwrite ( $ArchivoInclusionTemporal, $CadenaCodigoPHP );
-    $ResultadoInclusion = include ($RutaArchivoTemporal);
+
+    try
+        {
+            $ResultadoInclusion = include ($RutaArchivoTemporal);
+        }
+    catch (Exception $e)
+        {
+            echo "Se ha detectado un error durante la inclusion del archivo {$RutaArchivoTemporal}: ",  $e->getMessage();
+        }
+
     fclose ( $ArchivoInclusionTemporal );
     return $ResultadoInclusion;
 }
@@ -7449,8 +7458,15 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 			}
 		
 		//Carga cualquier script PRE para el formulario
-		//if ($registro_formulario["pre_script"]!="")
-		//    PCO_EvaluarCodigo($registro_formulario["pre_script"]);
+		if ($registro_formulario["pre_script"]!="")
+		    {
+		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
+		        $ComplementoInicioScript="";
+		        if (substr(trim($registro_formulario["pre_script"]),0,5)!='<?php')
+		            $ComplementoInicioScript="<?php\n";
+		        PCO_EvaluarCodigo($ComplementoInicioScript.$registro_formulario["pre_script"]);
+		    }
+		    
 		
 		// Define la barra de herramientas mini superior (en barra de titulo)
 		@$barra_herramientas_mini.='
@@ -7469,11 +7485,9 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                     <a class="btn btn-primary btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="#myModalActualizaPRESCRIPT">
                         <div><i class="fa fa-file-code-o"></i> PRE</div>
                     </a>
-                    <!--
                     <a class="btn btn-info btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="#myModalActualizaPOSTSCRIPT">
                         <div><i class="fa fa-file-code-o"></i> POST</div>
                     </a>
-                    -->
                     <a class="btn btn-warning btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="#myModalActualizaJAVASCRIPT">
                         <div><i class="fa fa-file-code-o"></i> JS</div>
                     </a>
