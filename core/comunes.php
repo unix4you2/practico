@@ -398,19 +398,29 @@ function PCO_GenerarNombreAdjunto($nombre_archivo,$campo_tabla,$extension_archiv
 	Salida:
 		Evaluacion y ejecucion del codigo correspondiente mediante la inclusion de un archivo temporal con su contenido
 */
-function PCO_EvaluarCodigo($CadenaCodigoPHP) {
+function PCO_EvaluarCodigo($CadenaCodigoPHP,$ByPassSintaxis=0,$DescComplemento="")
+{
+    global $PCO_ChequeoDinamicoSintaxis;
+
     $ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal
     $MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
     $RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
     fwrite ( $ArchivoInclusionTemporal, $CadenaCodigoPHP );
 
-    try
+    //Busca si se tienen errores o no para saber si incluye el archivo 
+    $ErroresSintaxis=0;
+    if ($PCO_ChequeoDinamicoSintaxis==1 || $ByPassSintaxis==1)
+        $ErroresSintaxis=PCO_BuscarErroresSintaxisPHP($RutaArchivoTemporal,1,$DescComplemento);
+    if ($ErroresSintaxis==0)
         {
-            $ResultadoInclusion = include ($RutaArchivoTemporal);
-        }
-    catch (Exception $e)
-        {
-            echo "Se ha detectado un error durante la inclusion del archivo {$RutaArchivoTemporal}: ",  $e->getMessage();
+            try
+                {
+                    $ResultadoInclusion = include ($RutaArchivoTemporal);
+                }
+            catch (Exception $e)
+                {
+                    echo "Se ha detectado un error durante la inclusion del archivo {$RutaArchivoTemporal}: ",  $e->getMessage();
+                }
         }
 
     fclose ( $ArchivoInclusionTemporal );
@@ -2140,7 +2150,7 @@ function PCO_ManejadorErrores($DetalleExcepcion)
 		0 si no hay errores de sintaxis
 		1 si hay errores ademas de los mensajes en la salida estandar
 */
-function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
+function PCO_BuscarErroresSintaxisPHP($ArchivoFuente,$ByPassSintaxis=0,$DescComplemento="")
     {
 		//Hace el proceso de verificacion solamente en plataformas diferentes a Windows.  Windows no lo permite a menos que se especifique el path completo de PHP
 		if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' || strtoupper(PHP_OS) === 'FREEBSD' || strtoupper(PHP_OS) === 'OPENBSD')
@@ -2165,14 +2175,14 @@ function PCO_BuscarErroresSintaxisPHP($ArchivoFuente)
 			{
 				global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$PCO_ChequeoDinamicoSintaxis;
 				$SalidaFuncion=0;
-				if ($PCO_ChequeoDinamicoSintaxis=="1")
+				if ($PCO_ChequeoDinamicoSintaxis=="1" || $ByPassSintaxis=="1")
 				    {
         				if (@exec('php -l '.escapeshellarg($ArchivoFuente), $Salida, $Codigo)===false)
                             throw new \RuntimeException('Detectado error de sintaxis en'.escapeshellarg($ArchivoFuente));
 
         				if ($Codigo)  //Si se tiene un valor diferente de cero retornado por el comando
         					{
-        						PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion,"<b>".$MULTILANG_Detalles."</b>: Se deberia evitar la inclusion del archivo $ArchivoFuente pues PHP retorna el mensaje: <i>".$Salida[0].$Salida[1].$Salida[2]."<i>.  Se recomienda validar su sintaxis para que pueda ser incluido sin problemas.", '', 'fa fa-exclamation-triangle fa-3x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
+        						PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion,"PHP retorna: <i>".$Salida[0].$Salida[1].$Salida[2]."<i>.  <b>Valide su sintaxis para ser incluido sin problemas</b>.  {$DescComplemento}", '', 'fa fa-exclamation-triangle fa-3x texto-rojo texto-blink', 'alert alert-danger alert-dismissible');
         						$SalidaFuncion=1;
         					}
 				    }
@@ -7464,7 +7474,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		        $ComplementoInicioScript="";
 		        if (substr(trim($registro_formulario["pre_script"]),0,5)!='<?php')
 		            $ComplementoInicioScript="<?php\n";
-		        PCO_EvaluarCodigo($ComplementoInicioScript.$registro_formulario["pre_script"]);
+		        PCO_EvaluarCodigo($ComplementoInicioScript.$registro_formulario["pre_script"],1,"Detalles: PRE-Code Form ID=".$formulario);
 		    }
 		    
 		

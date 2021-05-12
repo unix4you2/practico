@@ -2854,7 +2854,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                     //Modal Editor PRE Script
                     $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaPRESCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
                     $ContenidoBarraFlotante_EditForm.='
-                        <div class="well" style="color:#000000;">Script de ejecuci&oacute;n previa al cargue del formulario.
+                        <div class="well" style="color:#000000;">Script PHP de ejecuci&oacute;n previa al cargue del formulario.  <br>Advertencia: Errores de sintaxis en este script pueden detener totalmente la ejecuci&oacute;n de c&oacute;digo y requerir su ajuste manual a trav&eacute;s de registros para recuperar el sistema, sea cuidadoso.
                         <textarea name="pre_script" id="pre_script" data-editor="php" class="form-control" style="width: 950px; height: 450px;"></textarea>
                         </div>';
                     $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
@@ -2862,7 +2862,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                     //Modal Editor POST Script
                     $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaPOSTSCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
                     $ContenidoBarraFlotante_EditForm.='
-                        <div class="well" style="color:#000000;">Script de ejecuci&oacute;n posterior a las operaciones de tipo autom&aacute;ticas realizadas por el formulario.
+                        <div class="well" style="color:#000000;">Script PHP de ejecuci&oacute;n posterior a las operaciones de tipo autom&aacute;ticas realizadas por el formulario.    <br>Advertencia: Errores de sintaxis en este script pueden detener totalmente la ejecuci&oacute;n de c&oacute;digo y requerir su ajuste manual a trav&eacute;s de registros para recuperar el sistema, sea cuidadoso.
                         <textarea name="post_script" id="post_script" data-editor="php" class="form-control" style="width: 950px; height: 450px;"></textarea>
                         </div>';
                     $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
