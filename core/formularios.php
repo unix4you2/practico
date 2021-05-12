@@ -56,8 +56,8 @@
 		valor - valor a comparar sobre el campo y que es usado para determinar que registro eliminar
 
 	(start code)
-		SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'
-		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND valor_unico=1
+		SELECT * FROM ".$TablasCore."formulario WHERE id='$PCO_FormularioActivo'
+		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$PCO_FormularioActivo' AND visible=1 AND valor_unico=1
 		DELETE FROM ".$tabla." WHERE $campo='$valor'
 	(end)
 
@@ -78,18 +78,18 @@
 			if (@$PCO_ValorCampoTransporte2=="" )  $PCO_ValorCampoTransporte2="PCO_ValorCampoTransporte2";
 			$mensaje_error="";
 			// Busca datos del formulario
-			$consulta_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
+			$consulta_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$PCO_FormularioActivo");
 			$registro_formulario = $consulta_formulario->fetch();
 			$tabla=$registro_formulario["tabla_datos"];
 
-			$consulta_campos_unicos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND valor_unico=1","$formulario");
+			$consulta_campos_unicos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND valor_unico=1","$PCO_FormularioActivo");
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
 					$valor=${$campo};
 
 				    //Busca todos los campos tipo adjunto para eliminar el arachivo correspondiente
-				    $consulta_campos_adjuntos=PCO_EjecutarSQL("SELECT campo FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND tipo='archivo_adjunto' ","$formulario");
+				    $consulta_campos_adjuntos=PCO_EjecutarSQL("SELECT campo FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND tipo='archivo_adjunto' ","$PCO_FormularioActivo");
                     while ($registro_campos_adjuntos=$consulta_campos_adjuntos->fetch())
                         {
                             //Busca nombre del archivo
@@ -109,12 +109,24 @@
 					//POSIBILIDAD DE REEMPLAZAR POR ESTE QUERY SI LA TABLA MANEJA CAMPO ID:  PCO_EjecutarSQLUnaria("DELETE FROM ".$tabla." WHERE id=$id_registro_datos ");
         			PCO_Auditar("Elimina registro donde ".$campo." = ".$valor." en ".$tabla);
 				}
+
+    		//Carga cualquier script POST para el formulario
+    		if ($registro_formulario["post_script"]!="")
+    		    {
+    		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
+    		        $ComplementoInicioScript="";
+    		        if (substr(trim($registro_formulario["post_script"]),0,5)!='<?php')
+    		            $ComplementoInicioScript="<?php\n";
+    		        PCO_EvaluarCodigo($ComplementoInicioScript.$registro_formulario["post_script"],1,"Detalles: POST-Code Form ID=".$PCO_FormularioActivo);
+    		    }
+
 			echo '<form name="PCO_FormContinuarFlujo_EliminarDatos" action="'.$ArchivoCORE.'" method="POST">
 				<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
 				<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
 				<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
 				<input type="Hidden" name="nombre_tabla" value="'.$tabla.'">
-				<input type="Hidden" name="formulario" value="'.$formulario.'">
+				<input type="Hidden" name="formulario" value="'.$PCO_FormularioActivo.'">
+				<input type="Hidden" name="PCO_FormularioActivo" value="'.$PCO_FormularioActivo.'">
 				<input type="Hidden" name="popup_activo" value="FormularioCampos">
                 <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                 <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
@@ -137,7 +149,7 @@
 
 	Variables de entrada:
 
-		formulario - ID unico de formulario sobre el cual se realiza la operacion de actualizacion
+		$PCO_FormularioActivo - ID unico de formulario sobre el cual se realiza la operacion de actualizacion
 		lista de valores - obtenidos dinamicamente dependiendo de la definicion del formulario
 
 	Salida:
@@ -160,13 +172,13 @@
 			$mensaje_error="";
 
 			// Busca datos del formulario
-			$consulta_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
+			$consulta_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$PCO_FormularioActivo");
 			$registro_formulario = $consulta_formulario->fetch();
 
 /*
 			// Busca los campos del form marcados como valor unico y verifica que no existan valores en la tabla
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_unicos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND valor_unico=1");
+			$consulta_campos_unicos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario='$PCO_FormularioActivo' AND visible=1 AND valor_unico=1");
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
@@ -181,7 +193,7 @@
 
 			// Busca los campos del form marcados como obligatorios a los que no se les ingreso valor
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_obligatorios=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND obligatorio=1","$formulario");
+			$consulta_campos_obligatorios=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND obligatorio=1","$PCO_FormularioActivo");
 			while ($registro_campos_obligatorios = $consulta_campos_obligatorios->fetch())
 				{
 					$campo=$registro_campos_obligatorios["campo"];
@@ -202,7 +214,7 @@
                     //Agregar el campo a la lista solamente si es de datos y si es diferente al campo ID que es usado para la actualizacion (objetos de tipo etiqueta o iframes son pasados por alto)
                     $cadena_tipos_excluidos=" AND tipo<>'etiqueta' AND tipo<>'url_iframe' AND tipo<>'informe' AND tipo<>'campo_etiqueta' AND tipo<>'boton_comando' ";
 					
-                    $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND campo<>'id' $cadena_tipos_excluidos ","$formulario");
+                    $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND campo<>'id' $cadena_tipos_excluidos ","$PCO_FormularioActivo");
 					while ($registro_campos = $consulta_campos->fetch())
 						{
 					        if ($registro_campos["tipo"]!="form_consulta")
@@ -309,13 +321,24 @@
 					PCO_Auditar("Actualiza registro $id_registro_datos en ".$registro_formulario["tabla_datos"]);
 					//echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 
+            		//Carga cualquier script POST para el formulario
+            		if ($registro_formulario["post_script"]!="")
+            		    {
+            		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
+            		        $ComplementoInicioScript="";
+            		        if (substr(trim($registro_formulario["post_script"]),0,5)!='<?php')
+            		            $ComplementoInicioScript="<?php\n";
+            		        PCO_EvaluarCodigo($ComplementoInicioScript.$registro_formulario["post_script"],1,"Detalles: POST-Code Form ID=".$PCO_FormularioActivo);
+            		    }
+
 					if ($errores_de_carga=="")
 						echo '<form name="PCO_FormContinuarFlujo_ActualizarDatos" action="'.$ArchivoCORE.'" method="POST">
 						<input type="Hidden" name="PCO_Accion" value="'.$PCO_PostAccion.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="formulario" value="'.$PCO_FormularioActivo.'">
+						<input type="Hidden" name="PCO_FormularioActivo" value="'.$PCO_FormularioActivo.'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
@@ -329,7 +352,8 @@
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte1.'" value="'.$PCO_ValorCampoTransporte1.'">
 						<input type="Hidden" name="'.$PCO_NombreCampoTransporte2.'" value="'.$PCO_ValorCampoTransporte2.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="formulario" value="'.$PCO_FormularioActivo.'">
+						<input type="Hidden" name="PCO_FormularioActivo" value="'.$PCO_FormularioActivo.'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
@@ -347,15 +371,16 @@
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="formulario" value="'.$PCO_FormularioActivo.'">
+						<input type="Hidden" name="PCO_FormularioActivo" value="'.$PCO_FormularioActivo.'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						</form>';
 				}
             //Redirecciona al siguiente flujo de aplicacion a menos que la PostAccion indique paso directamente
             if ($PCO_PostAccionDirecta!="1")
-			    echo '<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_ActualizarDatos.submit();  </script>';
-		}
+			    echo 'OKK<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_ActualizarDatos.submit();  </script>';
+    }
 
 
 ########################################################################
@@ -370,10 +395,10 @@
 		lista de valores - obtenidos dinamicamente dependiendo de la definicion del formulario
 
 	(start code)
-		SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'
-		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1 AND valor_unico=1
+		SELECT * FROM ".$TablasCore."formulario WHERE id='$PCO_FormularioActivo'
+		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$PCO_FormularioActivo' AND visible=1 AND valor_unico=1
 		SELECT id FROM ".$tabla." WHERE $campo='$valor'
-		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND visible=1
+		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$PCO_FormularioActivo' AND visible=1
 		INSERT INTO ".$registro_formulario["tabla_datos"]." (".$lista_campos.") VALUES (".$lista_valores.")"
 	(end)
 
@@ -396,12 +421,12 @@
 			$mensaje_error="";
 
 			// Busca datos del formulario
-			$consulta_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
+			$consulta_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$PCO_FormularioActivo");
 			$registro_formulario = $consulta_formulario->fetch();
 
 			// Busca los campos del form marcados como valor unico y verifica que no existan valores en la tabla
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_unicos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND valor_unico=1","$formulario");
+			$consulta_campos_unicos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND valor_unico=1","$PCO_FormularioActivo");
 			while ($registro_campos_unicos = $consulta_campos_unicos->fetch())
 				{
 					$campo=$registro_campos_unicos["campo"];
@@ -415,7 +440,7 @@
 
 			// Busca los campos del form marcados como obligatorios a los que no se les ingreso valor
 			$tabla=$registro_formulario["tabla_datos"];
-			$consulta_campos_obligatorios=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND obligatorio=1","$formulario");
+			$consulta_campos_obligatorios=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 AND obligatorio=1","$PCO_FormularioActivo");
 			while ($registro_campos_obligatorios = $consulta_campos_obligatorios->fetch())
 				{
 					$campo=$registro_campos_obligatorios["campo"];
@@ -435,7 +460,7 @@
 					$lista_valores_interrogantes="";
 					$lista_valores_concatenados="";
 
-					$consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1","$formulario");
+					$consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1","$PCO_FormularioActivo");
 					while ($registro_campos = $consulta_campos->fetch())
 						{
 							//Hace la operacion con el campo solamente si es de datos (objetos de tipo etiqueta o iframes son pasados por alto)
@@ -623,6 +648,16 @@
         			if (@$PCO_ValorCampoTransporte1=="_OBTENER_ULTIMO_ID_" )  $PCO_ValorCampoTransporte1=$UltimoIDRegistroInsertado;
         			if (@$PCO_ValorCampoTransporte2=="_OBTENER_ULTIMO_ID_" )  $PCO_ValorCampoTransporte2=$UltimoIDRegistroInsertado;
 
+            		//Carga cualquier script POST para el formulario
+            		if ($registro_formulario["post_script"]!="")
+            		    {
+            		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
+            		        $ComplementoInicioScript="";
+            		        if (substr(trim($registro_formulario["post_script"]),0,5)!='<?php')
+            		            $ComplementoInicioScript="<?php\n";
+            		        PCO_EvaluarCodigo($ComplementoInicioScript.$registro_formulario["post_script"],1,"Detalles: POST-Code Form ID=".$PCO_FormularioActivo);
+            		    }
+
 					if ($errores_de_carga=="")
 						//echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 						echo '<form name="PCO_FormContinuarFlujo_GuardarDatos" action="'.$ArchivoCORE.'" method="POST">
@@ -644,7 +679,7 @@
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$errores_de_carga.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="formulario" value="'.$PCO_FormularioActivo.'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						</form>';
@@ -659,7 +694,8 @@
 						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
 						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
 						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
+						<input type="Hidden" name="formulario" value="'.$PCO_FormularioActivo.'">
+						<input type="Hidden" name="PCO_FormularioActivo" value="'.$PCO_FormularioActivo.'">
                         <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
                         <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
 						</form>';
