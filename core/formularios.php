@@ -46,6 +46,37 @@
 ########################################################################
 ########################################################################
 /*
+	Function: PCO_EjecutarPostAccionForm
+	Accion dedicada exclusivamente a la ejecucion de un codigo POST de formulario, sin necesidad de ejecutar alguna de las operaciones automaticas de adiciona, actualizacion o eliminacion
+
+	Variables de entrada:
+
+		PCO_FormularioActivo - ID unico de formulario sobre el cual se realiza la operacion de eliminacion
+
+	Salida:
+		Registro de formulario recuperado y ejecutado su codigo POST (si aplica o existe)
+*/
+	if ($PCO_Accion=="PCO_EjecutarPostAccionForm")
+		{
+			$mensaje_error="";
+			// Busca datos del formulario
+			$registro_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$PCO_FormularioActivo")->fetch();
+
+    		//Carga cualquier script POST para el formulario
+    		if ($registro_formulario["post_script"]!="")
+    		    {
+    		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
+    		        $ComplementoInicioScript="";
+    		        if (substr(trim($registro_formulario["post_script"]),0,5)!='<?php')
+    		            $ComplementoInicioScript="<?php\n";
+    		        PCO_EvaluarCodigo($ComplementoInicioScript.$registro_formulario["post_script"],1,"Detalles: POST-Code Form ID=".$PCO_FormularioActivo);
+    		    }
+		}
+
+
+########################################################################
+########################################################################
+/*
 	Function: PCO_EliminarDatosFormulario
 	Elimina los datos asociados sobre las tablas de aplicacion para un registro determinado.  Esta funcion es utilizada por los botones de Eliminar registro definidos como accion en un formulario
 
