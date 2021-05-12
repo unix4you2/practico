@@ -1822,6 +1822,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                                     </optgroup>
                                     <optgroup label="<?php echo $MULTILANG_FrmAccionT2; ?>">
                                         <option value="externa_formulario"  <?php if (@$registro_campo_editar["tipo_accion"]=="externa_formulario") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmAccionExterna; ?></option>
+                                        <option value="externa_postcode"  <?php if (@$registro_campo_editar["tipo_accion"]=="externa_postcode") echo 'SELECTED'; ?>>Ejecutar s&oacute;lo el c&oacute;digo POST del propio formulario</option>
                                         <option value="externa_javascript"  <?php if (@$registro_campo_editar["tipo_accion"]=="externa_javascript") echo 'SELECTED'; ?>><?php echo $MULTILANG_FrmAccionJS; ?></option>
                                     </optgroup>
                                 </select>
@@ -2425,6 +2426,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                             </optgroup>
                             <optgroup label="<?php echo $MULTILANG_FrmAccionT2; ?>">
                                 <option value="externa_formulario"><?php echo $MULTILANG_FrmAccionExterna; ?></option>
+                                <option value="externa_postcode">Ejecutar s&oacute;lo el c&oacute;digo POST del propio formulario</option>
                                 <option value="externa_javascript"><?php echo $MULTILANG_FrmAccionJS; ?></option>
                             </optgroup>
                         </select>
