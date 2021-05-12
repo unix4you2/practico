@@ -83,6 +83,7 @@ LogCambios="
 * Enhan [FORMS]:  Aumentado el tamaño máximo de los JavaScript en formularios de 64Kb a 16Mb
 * Enhan [DEV]:  Optimizado el set de pruebas y configuración para TravisCI.  Se retiran PostgreSQL y SQLite del banco de pruebas
 * Enhan [CORE]: Funciones de chequeo de sintaxis corren automáticamente para secuencias de scripts PRE y POST en formularios e informes.  Se deja bajo configuración opcional para el resto de scripts y se ejecutan sólo en plataformas linux.
+* Enhan [FORMS]:  Controles de tipo botón de comando (independientes o de barra de estado de formularios) permiten una nueva acción que ejecuta unicamente el código PHP ingresado en la sección POST del propio formulario permitiendo operaciones y controles de flujo más específicos o especializados.
 
 "
 
