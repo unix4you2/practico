@@ -40,24 +40,24 @@ matrix:
       dist: precise
       env:
       - DB1=MySQL
-      - DB2=PostgreSQL
-      - DB3=SQLite3
+#      - DB2=PostgreSQL
+#      - DB3=SQLite3
       sudo: required
       services:
       - mysql
-      - postgresql
-      - postgresql
+#      - postgresql
+#      - postgresql
 
     - php: 5.4
       dist: trusty
       env:
       - DB1=MySQL
-      - DB2=PostgreSQL
-      - DB3=SQLite3
+#      - DB2=PostgreSQL
+#      - DB3=SQLite3
       sudo: required
       services:
       - mysql
-      - postgresql
+#      - postgresql
 
 #    - php: 5.4
 #      dist: trusty
@@ -78,56 +78,56 @@ matrix:
       dist: trusty
       env:
       - DB1=MySQL
-      - DB2=PostgreSQL
-      - DB3=SQLite3
+#      - DB2=PostgreSQL
+#      - DB3=SQLite3
       sudo: required
       services:
       - mysql
-      - postgresql
+#      - postgresql
       
     - php: 5.6
       dist: trusty
       env:
       - DB1=MySQL
-      - DB2=PostgreSQL
-      - DB3=SQLite3
+#      - DB2=PostgreSQL
+#      - DB3=SQLite3
       sudo: required
       services:
       - mysql
-      - postgresql
+#      - postgresql
       
     - php: 7.0
       dist: trusty
       env:
       - DB1=MySQL
-      - DB2=PostgreSQL
-      - DB3=SQLite3
+#      - DB2=PostgreSQL
+#      - DB3=SQLite3
       sudo: required
       services:
       - mysql
-      - postgresql
+#      - postgresql
       
     - php: 7.1
       dist: trusty
       env:
       - DB1=MySQL
-      - DB2=PostgreSQL
-      - DB3=SQLite3
+#      - DB2=PostgreSQL
+#      - DB3=SQLite3
       sudo: required
       services:
       - mysql
-      - postgresql
+#      - postgresql
 
     - php: 7.2
       dist: trusty
       env:
       - DB1=MySQL
-      - DB2=PostgreSQL
-      - DB3=SQLite3
+#      - DB2=PostgreSQL
+#      - DB3=SQLite3
       sudo: required
       services:
       - mysql
-      - postgresql
+#      - postgresql
 
 #    - php: hhvm
 #      dist: trusty
@@ -189,9 +189,9 @@ install:
 before_script:
   #Creamos la base de datos para la instalacion de prueba sobre cada motor
   - mysql -e 'create database practico;'
-  - psql -c 'create database practico;' -U postgres
+#  - psql -c 'create database practico;' -U postgres
   #SQLite3:
-  - touch practico.db
+#  - touch practico.db
 
   #Asegura permisos completos en la carpeta de pruebas
   - chmod -R 777 dev_tools/tests
