@@ -121,7 +121,6 @@
 		{
 			// Actualiza los datos
 			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."kanban SET descripcion='$titulos_columnas',compartido_rw='$compartido_rw'    WHERE categoria='[PRACTICO][ColumnasTablero]' AND id='$ID_TableroKanban'  ");
-			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."kanban SET descripcion='$titulos_categorias'  WHERE categoria='[PRACTICO][CategoriasTareas]' AND tablero='$ID_TableroKanban' ");
 			PCO_Auditar("Actualiza propiedades de tablero Kanban $ID_TableroKanban");
 			PCO_RedireccionATableroKanban($ID_TableroKanban);
 		}
@@ -172,28 +171,6 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: GuardarTareaKanban
-	Almacena la informacion asociada a una tarea sobre el tablero kanban
-
-	Salida:
-		Registro almacenado en la tabla de aplicacion
-
-	Ver tambien:
-		<PCO_ExplorarTablerosKanban>
-*/
-	if ($PCO_Accion=="GuardarTareaKanban")
-		{
-			$mensaje_error="";
-			// Elimina los datos
-			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw,tablero,porcentaje) VALUES ('$PCOSESS_LoginUsuario','$titulo','$descripcion','$asignado_a','$categoria','$columna','$peso','$estilo','$fecha','0','',$ID_TableroKanban,'$porcentaje') ");
-			PCO_Auditar("Agrega tarea Kanban a tablero $ID_TableroKanban");
-			PCO_RedireccionATableroKanban($ID_TableroKanban);
-		}
-
-
-/* ################################################################## */
-/* ################################################################## */
-/*
 	Function: GuardarCreacionKanban
 	Crea un nuevo tablero para el usuario activo
 
@@ -209,7 +186,6 @@
 			// Agrega los datos
 			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw) VALUES ('$PCOSESS_LoginUsuario','$titulo_tablero','$titulos_columnas','','[PRACTICO][ColumnasTablero]','-2','0','','20000101','0','') ");
 			$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
-			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw,tablero) VALUES ('$PCOSESS_LoginUsuario','','$titulos_categorias','','[PRACTICO][CategoriasTareas]','-2','0','','20000101','0','',$idObjetoInsertado) ");
 			PCO_Auditar("Agrega Tablero Kanban $titulo_tablero Id:$idObjetoInsertado");
 			$_SESSION["PCOSESS_TableroKanbanActivo"]=(string)$idObjetoInsertado;
 			PCO_RedireccionATableroKanban($idObjetoInsertado);
@@ -300,6 +276,10 @@
             if ($PCOSESS_LoginUsuario==$ResultadoColumnas["login_admintablero"])
                 $ComplementoEliminar='<a onclick=\'return confirm("'.$MULTILANG_DelKanban.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=EliminarTareaKanban&ID_TableroKanban='.$ID_TableroKanban.'&ID_TableroKanban='.$ID_TableroKanban.'&IdTareaKanban='.$RegistroTareas["id"].'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-trash"></i></a>';
 
+            //Determina si la tarea se puede o no editar
+            $ComplementoEditar="";
+            if ($PCOSESS_LoginUsuario==$ResultadoColumnas["login_admintablero"])
+                $ComplementoEditar='<a onclick=\'PCO_CargarPopUP(0,0,'.$RegistroTareas["id"].');\' class="btn btn-default btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil"></i></a>';
 
             //Pone controles
             $salida='<div id="PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'" style="margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
@@ -309,6 +289,7 @@
                         <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"           data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($RegistroTareas["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=peso&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["peso"]+1).'\'><i class="fa fa-arrow-down"></i></a>
                         <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'"              data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($RegistroTareas["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=peso&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["peso"]-1).'\'><i class="fa fa-arrow-up"></i></a>
                         <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'"             data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=columna&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["columna"]+1).'\'><i class="fa fa-arrow-right"></i></a>
+                        '.$ComplementoEditar.'
                         '.$ComplementoEliminar.'
                         '.$ComplementoArchivar.'
                     </div>
@@ -323,12 +304,22 @@
 //Presenta una tarea especifica tomando la informacion desde un registro de BD
 	function PCO_PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban,$ResultadoColumnas)
 		{
-		    global $PCO_FechaOperacion;
+		    global $PCO_FechaOperacion,$TablasCore;
 		    global $MULTILANG_FechaLimite,$MULTILANG_AsignadoA,$MULTILANG_InfCategoria,$MULTILANG_DelKanban,$MULTILANG_Finalizado;
             
             $EtiquetaIconoTareas=  "<i href='javascript:return false;' class='fa fa-fw fa-thumb-tack' data-toggle='tooltip' data-placement='top' title='".$RegistroTareas["categoria"]."' ></i>";
             $EtiquetaPersonas=  "<i href='javascript:return false;' class='fa fa-fw fa-users' data-toggle='tooltip' data-placement='top' title='".$MULTILANG_AsignadoA.": ".$RegistroTareas["asignado_a"]."' ></i>";
             $EtiquetaCalendario="<i href='javascript:return false;' class='fa fa-fw fa-calendar' data-toggle='tooltip' data-placement='top' title='".$MULTILANG_FechaLimite.": ".$RegistroTareas["fecha"]."' ></i>";
+
+			//Busca avatar del responsable
+	        $ComplementoImagenPerfil='<i class="fa fa-user-circle-o fa-fw fa-2x"></i>';
+	        //Busca si el usuario tiene imagen de perfil
+	        $PartesFotoUsuario=explode("|",PCO_EjecutarSQL("SELECT avatar FROM {$TablasCore}usuario WHERE login='".$RegistroTareas["asignado_a"]."' ")->fetchColumn());
+	        $RutaFotoUsuario=$PartesFotoUsuario[0];
+	        if ($RutaFotoUsuario!="")
+		        $ComplementoImagenPerfil="<img src='{$RutaFotoUsuario}' style='width:25px; height:25px; border-radius: 50%; margin-top:0px; margin-bottom:0px;'>";
+				    
+
 
 		    //Determina el estilo por defecto para el cuadro
 		    $EstiloCuadro=$RegistroTareas["estilo"];
@@ -346,6 +337,7 @@
                     <div class="panel-heading">
                         <div class="row">
                             <div>&nbsp;
+                                '.$ComplementoImagenPerfil.'
                                 '.$EtiquetaIconoTareas.'
                                 '.$EtiquetaCalendario.'
                                 '.$EtiquetaPersonas.'
@@ -402,8 +394,6 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
             //Busca las columnas definidas en el tablero
             $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo FROM ".$TablasCore."kanban WHERE id='$ID_TableroKanban' ")->fetch();
             $ArregloColumnasTablero=explode(",",$ResultadoColumnas["descripcion"]);
-            $ResultadoCategorias=PCO_EjecutarSQL("SELECT descripcion FROM ".$TablasCore."kanban WHERE categoria='[PRACTICO][CategoriasTareas]' AND tablero='$ID_TableroKanban' ")->fetch();
-            $ArregloCategoriasTareas=explode(",",$ResultadoCategorias["descripcion"]);
     ?>
 
         <!-- INICIO MODAL  PERSONALIZACION COLUMNAS Y CATEGORIAS -->
@@ -417,14 +407,6 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                                 <label for="titulos_columnas"><?php echo $MULTILANG_ListaColumnas; ?> (<?php echo $MULTILANG_FrmDesLista2; ?>)</label>
                                 <div class="form-group input-group">
                                     <input type="text" id="titulos_columnas" name="titulos_columnas" class="form-control" value="<?php echo $ResultadoColumnas["descripcion"]; ?>">
-                                    <span class="input-group-addon">
-                                        <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    </span>
-                                </div>
-    
-                                <label for="titulos_categorias"><?php echo $MULTILANG_ListaCategorias; ?> (<?php echo $MULTILANG_FrmDesLista2; ?>)</label>
-                                <div class="form-group input-group">
-                                    <input type="text" id="titulos_categorias" name="titulos_categorias" class="form-control" value="<?php echo $ResultadoCategorias["descripcion"]; ?>">
                                     <span class="input-group-addon">
                                         <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                                     </span>
@@ -448,170 +430,6 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
             ?>
         <!-- FIN MODAL PERSONALIZACION COLUMNAS Y CATEGORIAS -->
 
-            <!-- INICIO MODAL ADICION DE TAREAS -->
-            <?php PCO_AbrirDialogoModal("myModalActividadKanban".$ID_TableroKanban,$MULTILANG_AgregarNuevaTarea,"modal-wide"); ?>
-    			<form name="datosfield<?php echo $ID_TableroKanban; ?>" id="datosfield<?php echo $ID_TableroKanban; ?>" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    				<input type="Hidden" name="PCO_Accion" value="GuardarTareaKanban">
-    
-            		<div class="row">
-            			<div class="col col-md-6">
-            
-                                <div class="form-group input-group">
-                                    <input type="text" name="titulo" class="form-control" placeholder="<?php echo $MULTILANG_FrmTituloBot; ?>">
-                                    <span class="input-group-addon">
-                                        <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    </span>
-                                </div>
-    
-                                <label for="plantilla"><?php echo $MULTILANG_Plantilla; ?></label>
-                                <div class="form-group input-group">
-                                    <select id="plantilla" name="plantilla" class="form-control" onchange="document.datosfield<?php echo $ID_TableroKanban; ?>.descripcion.value=this.value.replace(/BR/g,'\n');">
-            							<option value=""><?php echo $MULTILANG_Ninguno; ?></option>
-                                        <option value="<?php echo $MULTILANG_Historia1Des; ?>"><?php echo $MULTILANG_Historia1; ?></option>
-                                        <option value="<?php echo $MULTILANG_Historia2Des; ?>"><?php echo $MULTILANG_Historia2; ?></option>
-                                        <option value="<?php echo $MULTILANG_Historia3Des; ?>"><?php echo $MULTILANG_Historia3; ?></option>
-                                    </select>
-                                    <span class="input-group-addon">
-                                        <a  href="#" data-toggle="tooltip" data-html="true"  title="Plantillas de texto predisenadas / Text templates"><i class="fa fa-question-circle text-info"></i></a>
-                                    </span>
-                                </div>
-    
-                                <div class="form-group input-group">
-                                    <textarea name="descripcion" id="descripcion" rows="15" class="form-control" placeholder="<?php echo $MULTILANG_InfDescripcion; ?> (Se admite HTML / This allow HTML)"></textarea>
-                                    <span class="input-group-addon">
-                                        <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_DesTarea; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                                    </span>
-                                </div>
-            
-            			</div>
-            			<div class="col col-md-6">
-            
-            					<div class="row">
-            						<div class="col col-md-6">
-            							<label for="fecha"><?php echo $MULTILANG_FechaLimite; ?>:</label>
-                                        <div class="form-group input-group">
-                                            <input type="text" data-date-format="YYYY-MM-DD" name="fecha" value="<?php echo $PCO_FechaOperacionGuiones; ?>" id="fecha" readonly  class="form-control">
-                                            <?php
-                                                @$funciones_activacion_datepickers.="
-                                                    $(function () {
-                                                        $('#fecha').datetimepicker({
-                                                            language: '$IdiomaPredeterminado',
-                                                            pickTime: false
-                                                        });
-                                                    });";
-                                            ?>
-                                            <span class="input-group-addon">
-                                                <i class="glyphicon glyphicon-calendar"></i>
-                                            </span>
-                                        </div>
-            						</div>
-            						<div class="col col-md-6">
-            							<label for="estilo"><?php echo $MULTILANG_FrmEstilo; ?> (color):</label>
-            							<div class="form-group input-group">
-            								<select id="estilo" name="estilo" class="selectpicker">
-            									<option value=""><?php echo $MULTILANG_Ninguno; ?></option>
-            									<option value="default "><?php echo $MULTILANG_BtnEstiloPredeterminado; ?> (gris)</option>
-            									<option value="primary "><?php echo $MULTILANG_BtnEstiloPrimario; ?> (azul oscuro)</option>
-            									<option value="success "><?php echo $MULTILANG_BtnEstiloFinalizado; ?> (verde)</option>
-            									<option value="info "><?php echo $MULTILANG_BtnEstiloInformacion; ?> (azul claro)</option>
-            									<option value="warning "><?php echo $MULTILANG_BtnEstiloAdvertencia; ?> (naranja)</option>
-            									<option value="danger "><?php echo $MULTILANG_BtnEstiloPeligro; ?> (rojo)</option>
-            								</select>
-            							</div>
-            						</div>
-            					</div>
-            
-            					<div class="row">
-            						<div class="col col-md-6">
-                                        <label for="asignado_a"><?php echo $MULTILANG_AsignadoA; ?></label>
-                                        <div class="form-group input-group">
-                                            <select id="asignado_a" name="asignado_a" class="selectpicker" data-live-search=true>
-                                                <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-                                                <?php
-                                                    $ResultadoUsuarios=PCO_EjecutarSQL("SELECT login,nombre FROM ".$TablasCore."usuario ORDER BY login");
-                                                    while($RegistroUsuario=$ResultadoUsuarios->fetch())
-                                                        echo "<option value='".$RegistroUsuario["login"]."'>".$RegistroUsuario["nombre"]." (".$RegistroUsuario["login"].") </option>";
-                                                ?>
-                                            </select>
-                                            <span class="input-group-addon">
-                                                <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_AsignadoADes; ?>"><i class="fa fa-question-circle text-info"></i></a>
-                                            </span>
-                                        </div>
-            						</div>
-            						<div class="col col-md-6">
-                                        <label for="categoria"><?php echo $MULTILANG_InfCategoria; ?></label>
-                                        <div class="form-group input-group">
-                                            <select id="categoria" name="categoria" class="selectpicker">
-                                                <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
-                                                <?php
-                                                    foreach ($ArregloCategoriasTareas as $NombreCategoria)
-                                                        echo "<option value='$NombreCategoria'>$NombreCategoria</option>";
-                                                ?>
-                                            </select>
-                                        </div>
-            						</div>
-            					</div>
-    
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="columna"><?php echo $MULTILANG_Columna; ?></label>
-                                        <div class="form-group input-group">
-                                            <select id="columna" name="columna" class="form-control" data-style="btn-warning">
-                                                <?php
-                                                    $ConteoColumna=1;
-                                                    foreach ($ArregloColumnasTablero as $NombreColumna)
-                                                        {
-                                                            echo "<option value='$ConteoColumna'>$ConteoColumna. $NombreColumna</option>";
-                                                            $ConteoColumna++;
-                                                        }
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="peso"><?php echo $MULTILANG_Peso; ?> (<?php echo $MULTILANG_Prioridad; ?>)</label>
-                                        <div class="form-group input-group">
-                                            <select id="peso" name="peso" class="selectpicker">
-                                                <?php
-                                                    for ($i=1;$i<=100;$i++)
-                                                        echo '<option value="'.$i.'">'.$i.'</option>';
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-    
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label for="porcentaje"><?php echo $MULTILANG_Finalizado; ?> (%)</label>
-                                        <div class="form-group input-group">
-                                            <select id="porcentaje" name="porcentaje" class="form-control" data-style="btn-warning">
-                                                <?php
-                                                    for ($i=0;$i<=100;$i++)
-                                                        echo '<option value="'.$i.'">'.$i.' %</option>';
-                                                ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="ID_TableroKanban">ID Kanban</label>
-                                        <div class="form-group input-group">
-                                            <input type="Text" id="ID_TableroKanban" name="ID_TableroKanban" value="<?php echo $ID_TableroKanban; ?>" readonly  class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-    
-            			</div>
-            		</div>
-                </form>
-        <?php 
-            $barra_herramientas_modal='
-                <input type="Button" class="btn btn-success" value="'.$MULTILANG_AgregarNuevaTarea.'" onClick="document.datosfield'.$ID_TableroKanban.'.submit()">
-                <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
-            PCO_CerrarDialogoModal($barra_herramientas_modal);
-        ?>
-        <!-- FIN MODAL ADICION DE TAREAS -->
-
 
 <?php
         //Si el usuario es el mismo creador o propietario del tablero le da la posibilidad de eliminarlo
@@ -620,7 +438,7 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
             $ComplementoHerramientasEliminacion='<div class="pull-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick=\'return confirm(" '.$MULTILANG_Atencion.'  '.$MULTILANG_Atencion.'  '.$MULTILANG_Atencion.' \\n---------------------------------------------\\n '.$MULTILANG_Eliminar.' '.$MULTILANG_TablerosKanban.'\\n\\n\\n'.$MULTILANG_Confirma.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=EliminarTableroKanban&ID_TableroKanban='.$ID_TableroKanban.'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_ZonaPeligro.'!!!<br><b>'.$MULTILANG_Eliminar.' '.$MULTILANG_TablerosKanban.'</b>"><i class="fa fa-trash"></i></a></div>';
 
         //Cuenta el numero de tareas en el tablero
-        $CantidadTareasTotal=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' AND categoria<>'[PRACTICO][CategoriasTareas]' ")->fetchColumn();
+        $CantidadTareasTotal=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' ")->fetchColumn();
         $CantidadTareasArchivadas=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE archivado=1 AND tablero='$ID_TableroKanban' ")->fetchColumn();
         $PorcentajeTotalAvance=0;
         if ($CantidadTareasTotal!=0)
@@ -672,12 +490,12 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                     <tr>
                         <td valign=top align=center>
                             <b><i class='fa fa-tags fa-fw fa-2x'></i>Actividades por categor&iacute;a / Activities by cathegory</b><br>";
-                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT categoria as '{$MULTILANG_ListaCategorias}', COUNT(*) as '{$MULTILANG_Tareas}'  FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' AND categoria<>'[PRACTICO][CategoriasTareas]' GROUP BY categoria ORDER BY categoria ");
+                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT categoria as '{$MULTILANG_ListaCategorias}', COUNT(*) as '{$MULTILANG_Tareas}'  FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' GROUP BY categoria ORDER BY categoria ");
         echo "          </td>
                         <td>&nbsp;&nbsp;</td>
                         <td valign=top align=center>
                             <b><i class='fa fa-user fa-fw fa-2x'></i>Tareas por usuario / Tasks by user</b><br>";
-                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT asignado_a as '{$MULTILANG_AsignadoA}', COUNT(*) as '{$MULTILANG_Tareas}' FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' AND categoria<>'[PRACTICO][CategoriasTareas]' GROUP BY asignado_a ORDER BY asignado_a ");
+                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT asignado_a as '{$MULTILANG_AsignadoA}', COUNT(*) as '{$MULTILANG_Tareas}' FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' GROUP BY asignado_a ORDER BY asignado_a ");
         echo "          </td>
                     </tr>
                 </table>";
@@ -700,7 +518,8 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
 
                                 echo "<td valign=top width='$AnchoColumnas%' ondrop='Soltar(event,$ConteoColumna)' ondragover='PermitirSoltar(event,$ConteoColumna)' id='MarcoBotonOcultar".$ConteoColumna."'>";
                                 echo "<div data-toggle='tooltip' data-html='true' data-placement='top' title='".$MULTILANG_ArrastrarTarea."' class='btn pull-left' ><i class='fa-1x'><i class='fa fa-stack-overflow'></i> <b>".$NombreColumna."</b> <font color=red>{$PorcentajeTotalAvanceColumna}%</font></i></div>";
-                                echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='$(\"#myModalActividadKanban$ID_TableroKanban\").modal(\"show\"); document.datosfield$ID_TableroKanban.columna.value=$ConteoColumna;'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
+                                //echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='$(\"#myModalActividadKanban$ID_TableroKanban\").modal(\"show\"); document.datosfield$ID_TableroKanban.columna.value=$ConteoColumna;'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
+                                echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='PCO_CargarPopUP($ID_TableroKanban,$ConteoColumna,0);'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
                                 echo "<br>";
                                 
                                 echo "<div id='MarcoTareasColumna$ConteoColumna'>
@@ -758,6 +577,21 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
 
 		<script type="" language="JavaScript">
 		    var TareaArrastrarActiva=0;
+
+            function PCO_CargarPopUP(ID_TableroKanban,ConteoColumna,RegistroTarea)
+                {
+                    //Determina si es creacion o edicion
+                    if (RegistroTarea==0)
+                        URLPopUp='index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-23:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&ID_TableroKanban='+ID_TableroKanban+'&ConteoColumna='+ConteoColumna;
+                    else
+                        URLPopUp='index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-23:0:id:'+RegistroTarea+'&Presentar_FullScreen=1&Precarga_EstilosBS=1';
+                    
+                    //Carga en Popup el formulario de actualizacion
+                    PCOJS_MostrarMensaje("<?php echo $MULTILANG_AgregarNuevaTarea; ?>","Cargando...","modal-wide");
+                    $("#PCO_Modal_MensajeCuerpo").html('<iframe scrolling="yes" style="margin:10px; border:0px;" height=550 width=100% src="'+URLPopUp+'"></iframe>');
+                    $("#PCO_Modal_MensajeBotones").hide();
+                }
+
 		    function CargarCrearTarea(Columna,Tablero)
 		        {
             		// Se muestra el cuadro modal
@@ -873,14 +707,6 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanbanResumido")
                                         <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
                                     </span>
                                 </div>
-
-                                <label for="titulos_categorias"><?php echo $MULTILANG_ListaCategorias; ?> (<?php echo $MULTILANG_FrmDesLista2; ?>)</label>
-                                <div class="form-group input-group">
-                                    <input type="text" id="titulos_categorias" name="titulos_categorias" class="form-control" value="">
-                                    <span class="input-group-addon">
-                                        <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
-                                    </span>
-                                </div>
             			</div>
             		</div>
                 </form>
@@ -897,27 +723,28 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanbanResumido")
         $ResultadoTablerosPropios=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND login_admintablero='$PCOSESS_LoginUsuario' ")->fetchColumn();
         $ResultadoTablerosCompartidos=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%' ")->fetchColumn();
 
+        if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+            echo "      
+                <div class='row'>
+                    <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
+                        <div class='pull-left'><div class='btn btn-success' onclick='CargarCreacionTablero();'><i class='fa fa-plus fa-fw fa-1x'></i> [KANBAN] $MULTILANG_CrearTablero</div></div>
+						&nbsp;&nbsp;&nbsp;&nbsp;<button type='Button' onclick='document.PCO_FormVerMenu.submit()' class='btn btn-warning'><i class='fa fa-home fa-fw'></i> $MULTILANG_IrEscritorio</button>
+                    </div>
+                    <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
+                        <div class='pull-left btn-xs'></div>
+                    </div>
+                </div><br>";
+                
         //Si hay tableros carga el informe, sino presenta mensaje de que no hay tableros
         if ($ResultadoTablerosPropios!=0 || $ResultadoTablerosCompartidos!=0)
             {
-                PCO_CargarInforme(-32,1);
-                
+                PCO_CargarInforme(-32,1,"htm","Informes",1);
             }
         else
             {
                 echo "<center>".$MULTILANG_NoTablero."<br><br><BR></center>";
             }
 
-        if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-            echo "      
-                <div class='row'>
-                    <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
-                        <div class='pull-left'><div class='btn btn-success btn-xs' onclick='CargarCreacionTablero();'><i class='fa fa-plus fa-fw fa-1x'></i> [KANBAN] $MULTILANG_CrearTablero</div></div>
-                    </div>
-                    <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
-                        <div class='pull-left btn-xs'></div>
-                    </div>
-                </div><br>";
     }
 
 ?>

@@ -598,6 +598,17 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('idiomas_plataforma', 'hi', 'हिंदी - Hindi (by GoogleTranslato (hi.php)', '3');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('idiomas_plataforma', 'fr', 'Frances - French (by GoogleTranslator) (fr.php)', '4');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('idiomas_plataforma', 'pt', 'Português - Portuguese (by GoogleTranslator) (pt.php)', '5');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('plantillas_kanban', '', '{$MULTILANG_Ninguno}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('plantillas_kanban', '{$MULTILANG_Historia1Des}', '{$MULTILANG_Historia1}', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('plantillas_kanban', '{$MULTILANG_Historia2Des}', '{$MULTILANG_Historia2}', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('plantillas_kanban', '{$MULTILANG_Historia3Des}', '{$MULTILANG_Historia3}', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_kanban', '', '{$MULTILANG_Ninguno}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_kanban', 'default ', '{$MULTILANG_BtnEstiloPredeterminado} (gris)', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_kanban', 'primary ', '{$MULTILANG_BtnEstiloPrimario} (azul oscuro)', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_kanban', 'success ', '{$MULTILANG_BtnEstiloFinalizado} (verde)', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_kanban', 'info ', '{$MULTILANG_BtnEstiloInformacion} (azul claro)', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_kanban', 'warning ', '{$MULTILANG_BtnEstiloAdvertencia} (naranja)', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_kanban', 'danger ', '{$MULTILANG_BtnEstiloPeligro} (rojo)', '1');
 
 
 DROP TABLE IF EXISTS core_bugtracker;

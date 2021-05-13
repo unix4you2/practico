@@ -86,6 +86,12 @@ LogCambios="
 * Enhan [CORE]: Funciones de chequeo de sintaxis corren automáticamente para secuencias de scripts PRE y POST en formularios e informes.  Se deja bajo configuración opcional para el resto de scripts y se ejecutan sólo en plataformas linux.
 * Enhan [FORMS]:  Controles de tipo botón de comando (independientes o de barra de estado de formularios) permiten una nueva acción que ejecuta unicamente el código PHP ingresado en la sección POST del propio formulario permitiendo operaciones y controles de flujo más específicos o especializados.
 * Added [INFORMES]:  Ahora los informes cuentan con la posibilidad de definir scripts de precarga y postcarga permitiendo así encapsular muchas de las funcionalidades.  Dichos scripts son lanzados ANTES o DESPUES de la carga del informe permitiendo definir comportamientos especiales, realizar controles de seguridad o incluso transformaciones de sus datos o controles.  Recordar que se trata de inclusiones en contexto local, por lo que cualquier manipulación de variables requeriría que se haga una declaración del tipo global $ variable; antes de poder ser utilizada.   Por razones de seguridad no se utilizan evaluaciones directas de código y en su lugar se generan archivos temporales con su contenido que posteriormente son incluidas en contextos locales por lo que aquellos formularios que contengan este tipo de elementos pueden aumentar en algunos milisegundos su carga.  
+* Enhan [PCODER]: El editor {P}Coder deja de tener versión stan-alone y ahora se encuentra directamente incorporado al framewrok, simplificando su código y extendiendo sus funcionalidades a edición de cadenas en bases de datos.
+* Added [KANBAN]: Tableros Kanban presentan el avatar del usuario responsable de cada tarea para facilitar su visualizacion y gestion.
+* Enhan [KANBAN]: Eliminadas las acciones personalizadas para guardar tareas.  Ahora el proceso se hace mediante un formulario interno.
+* Enhan [KANBAN]: Las categorías han sido estandarizadas a procesos de desarrollo. El diálogo usado para configurar las categorías de tableros ahora las suprime.
+* Added [KANBAN]: Se permite edición de tareas para el mismo usuario que las ha creado.
+
 
 "
 
@@ -125,6 +131,21 @@ INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_v
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('idiomas_plataforma', 'hi', 'हिंदी - Hindi (by GoogleTranslato (hi.php)', '3');
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('idiomas_plataforma', 'fr', 'Frances - French (by GoogleTranslator) (fr.php)', '4');
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('idiomas_plataforma', 'pt', 'Português - Portuguese (by GoogleTranslator) (pt.php)', '5');
+
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('plantillas_kanban', '', '{ $ MULTILANG_Ninguno}', '1');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('plantillas_kanban', '{ $ MULTILANG_Historia1Des}', '{ $ MULTILANG_Historia1}', '2');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('plantillas_kanban', '{ $ MULTILANG_Historia2Des}', '{ $ MULTILANG_Historia2}', '3');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('plantillas_kanban', '{ $ MULTILANG_Historia3Des}', '{ $ MULTILANG_Historia3}', '4');
+
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('estilos_kanban', '', '{ $ MULTILANG_Ninguno}', '1');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('estilos_kanban', 'default ', '{ $ MULTILANG_BtnEstiloPredeterminado} (gris)', '1');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('estilos_kanban', 'primary ', '{ $ MULTILANG_BtnEstiloPrimario} (azul oscuro)', '1');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('estilos_kanban', 'success ', '{ $ MULTILANG_BtnEstiloFinalizado} (verde)', '1');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('estilos_kanban', 'info ', '{ $ MULTILANG_BtnEstiloInformacion} (azul claro)', '1');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('estilos_kanban', 'warning ', '{ $ MULTILANG_BtnEstiloAdvertencia} (naranja)', '1');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('estilos_kanban', 'danger ', '{ $ MULTILANG_BtnEstiloPeligro} (rojo)', '1');
+
+DELETE FROM core_kanban WHERE categoria='[PRACTICO][CategoriasTareas]';
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

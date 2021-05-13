@@ -8768,7 +8768,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 					{
 						//Cuando es embebido (=1) no imprime el boton de retorno pues se asume dentro de un formulario
 						if (!$embebido)
-							echo '<div align=center><button type="Button" onclick="document.PCO_FormVerMenu.submit()" class="btn btn-warning"><i class="fa fa-home fa-fw"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
+							echo '<div align=center id="PCOContenedor_BotonEscritorio"><button type="Button" onclick="document.PCO_FormVerMenu.submit()" class="btn btn-warning"><i class="fa fa-home fa-fw"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 
 						$TituloVentanaInforme=PCO_ReemplazarVariablesPHPEnCadena($registro_informe["titulo"]);
 						//Define si requiere o no boton de exportacion en la barra de titulo
