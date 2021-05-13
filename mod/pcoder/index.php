@@ -50,7 +50,23 @@
             error_reporting(E_ERROR | E_WARNING | E_PARSE | E_NOTICE | E_DEPRECATED | E_STRICT | E_USER_DEPRECATED | E_USER_ERROR | E_USER_WARNING); //Otras disponibles | E_PARSE | E_CORE_ERROR | E_CORE_WARNING |
         }
 
-    include_once("inc/configuracion.php");
+	/*	Define si PCoder se ejecuta en modo StandAlone (Independiente)
+		para cualquier proyecto o servidor o como un modulo de Practico
+		Posibles Valores:  1=StandAlone   0=Modulo de Practico        */
+	$PCO_PCODER_StandAlone=0;
+
+	/*	Define el Path inicial sobre el cual el usuario puede navegar
+		por el sistema de archivos del servidor para editarlos. A mayor
+		numero de carpetas a leer sera mas lenta la apertura del editor.
+		Posibles valores:	/							-> Todo su disco!!!
+							.							-> Directorio Actual de PCoder (generalmente sobre mod/pcoder)
+							../							-> Raiz de PCoder (generalmente sobre mod/pcoder/mod)
+							../../						-> Raiz de PCoder (Donde reside LICENSE, AUTHORS, Etc)
+							../../../  					-> Raiz Instalacion PCoder cuando es independiente o Raiz de Practico si esta como modulo
+							Otros						-> Agregue aqui tantos niveles superiores como desee segun su ruta de instalacion
+							$_SERVER['DOCUMENT_ROOT']	-> Raiz de Todo el servidor web  */
+	$PCO_PCODER_RaizExploracionArchivos=$_SERVER['DOCUMENT_ROOT'].DIRECTORY_SEPARATOR;
+
     //Incluye librerias basicas de trabajo
     @require('inc/variables.php');
     @require('inc/comunes.php');
@@ -69,9 +85,6 @@
             include_once("../../inc/practico/idiomas/es.php");
             include_once("../../inc/practico/idiomas/".$IdiomaPredeterminado.".php");
         }
-    //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario
-    include("idiomas/es.php");
-    include("idiomas/".$IdiomaPredeterminado.".php");
 
     // Establece la zona horaria por defecto para la aplicacion
     date_default_timezone_set($ZonaHoraria);
