@@ -338,6 +338,9 @@ CREATE TABLE core_informe (
   encabezado_html text,
   tabla_responsive char(1) DEFAULT 'N',
   permitido_home char(1) DEFAULT 'N',
+  javascript mediumtext,
+  pre_script mediumtext,
+  post_script mediumtext,
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
