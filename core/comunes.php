@@ -8648,6 +8648,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF;
         global $ModoDepuracion,$ModoDesarrolladorPractico;
         global $PCO_InformesGraficosSinDatos,$PCOVAR_ConteoRegistrosUltimoInforme;
+        global $PCO_FuncionesJSInternasFORM;
         
         //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
         $BotonSaltoEdicion='
@@ -8683,6 +8684,12 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         		        if (substr(trim($registro_informe["post_script"]),0,5)!='<?php')
         		            $ComplementoInicioScript="<?php\n";
         		        $CadenaPOSTScriptPHP=$ComplementoInicioScript.$registro_informe["post_script"];
+        		    }
+
+        		//Prepara JavaSCRIPT para el informe (se carga mas abajo pero deja la cadena lista)
+        		if (trim($registro_informe["javascript"])!="")
+        		    {
+                        $JavaScriptInforme=PCO_ReemplazarVariablesPHPEnCadena(trim($registro_informe["javascript"]));
         		    }
             }
 
@@ -9222,4 +9229,12 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 		    {
 		        PCO_EvaluarCodigo($CadenaPOSTScriptPHP,1,"Detalles: POST-Code Rep ID=".$informe);
 		    }
+
+		//Ejecuta script POST para el informe llevandolo a la misma cadena de formularios que se agrega en marco_abajo
+		if ($JavaScriptInforme!="")
+		    {
+        	    $PCO_FuncionesJSInternasFORM .= '<script type="text/javascript">
+        	    '.$JavaScriptInforme.'
+        		</script>';
+        	}
 	}
