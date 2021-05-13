@@ -1183,8 +1183,7 @@ function PCODER_CargarArchivo(path_archivo)
 					    //Verifica que el archivo no se encuentre bloqueado
 					    ResultadoBloqueoArchivo="";
 			            //Intenta hacer el bloqueo de archivo y Actualiza el registro de archivo como abierto
-			            if (PCO_PCODER_StandAlone=="0")
-    				        ResultadoBloqueoArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ActivarBloqueoArchivo&PCODER_archivo="+path_archivo);
+				        ResultadoBloqueoArchivo=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_ActivarBloqueoArchivo&PCODER_archivo="+path_archivo);
 
 					    if (ResultadoBloqueoArchivo.length<10 || ResultadoBloqueoArchivo.includes("[ADV]"))
 					        {
@@ -1326,67 +1325,47 @@ function PCODER_ObtenerLineaMinimap(Minimap,e)
 
 function PCODER_HistorialArchivoActual()
     {
-        if (PCO_PCODER_StandAlone==0)
+        if(ListaArchivos[IndiceArchivoActual].NombreArchivo!="demo.txt")
             {
-                if(ListaArchivos[IndiceArchivoActual].NombreArchivo!="demo.txt")
-                    {
-                		ResultadoOperacion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-23&RutaDocumento="+ListaArchivos[IndiceArchivoActual].RutaDocumento+"&NombreArchivo="+ListaArchivos[IndiceArchivoActual].NombreArchivo);
-                		PCOJS_MostrarMensaje(MULTILANG_PCODER_HistorialVersiones, ResultadoOperacion," modal modal-wide ");                
-                    }
-                else
-                    {
-                		PCOJS_MostrarMensaje(MULTILANG_PCODER_HistorialVersiones, "Cargue primero un archivo para revisar su historial de cambios<br><br>Please load a file to see the version history");
-                    }
+        		ResultadoOperacion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-23&RutaDocumento="+ListaArchivos[IndiceArchivoActual].RutaDocumento+"&NombreArchivo="+ListaArchivos[IndiceArchivoActual].NombreArchivo);
+        		PCOJS_MostrarMensaje(MULTILANG_PCODER_HistorialVersiones, ResultadoOperacion," modal modal-wide ");                
             }
         else
-        	PCOJS_MostrarMensaje("ERROR", MensajeFuncionalidadNoDisponible," modal modal-wide ");
+            {
+        		PCOJS_MostrarMensaje(MULTILANG_PCODER_HistorialVersiones, "Cargue primero un archivo para revisar su historial de cambios<br><br>Please load a file to see the version history");
+            }
     }
 
 
 function PCODER_CargarUsuariosChatEstandar()
     {
-        if (PCO_PCODER_StandAlone==0)
-            {
-        		ResultadoOperacion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-24");
-        		PCOJS_MostrarMensaje("Chat estandar", ResultadoOperacion," modal modal-wide ");
-            }
-        else
-        	PCOJS_MostrarMensaje("ERROR", MensajeFuncionalidadNoDisponible," modal modal-wide ");
+		ResultadoOperacion=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-24");
+		PCOJS_MostrarMensaje("Chat estandar", ResultadoOperacion," modal modal-wide ");
     }
 
 
 function PCODER_CargarMarcoEstadoYBloqueos()
     {
-        if (PCO_PCODER_StandAlone==0)
-            {
-                $("#MarcoEstadoYBloqueos").html("<font color=white><br><br>Espere... <i class='fa fa-refresh fa-spin'></i> Wait...</font>");
-                //Consulta los bloqueos especificos del usuario, sino como admin busca los bloqueos de todos los usuarios
-                if (PCOSESS_LoginUsuario!="admin")
-                    ResultadoConsultaBloqueos=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-25&EnVentana=1");
-                else
-                    ResultadoConsultaBloqueos=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-26&EnVentana=1");
-                //Genera estadisticas rapidas desde historicos de PCoder
-                ResultadoArchivosFrecuentes=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-27&EnVentana=1");
-                ResultadoDesarrolladoresFrecuentes=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-28&EnVentana=1");
-                ResultadoMovimientoMes=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-29&EnVentana=1");
-
-                //Actualiza el marco con la informacion
-                $("#MarcoEstadoYBloqueos").html(ResultadoConsultaBloqueos+"<div class='row'><div class='col col-xs-8 col-sm-8 col-md-8 col-lg-8'>"+ResultadoArchivosFrecuentes+"</div><div class='col col-xs-4 col-sm-4 col-md-4 col-lg-4'>"+ResultadoDesarrolladoresFrecuentes+"</div> <div class='col col-xs-12 col-sm-12 col-md-12 col-lg-12'>"+ResultadoMovimientoMes+"</div> </div>");
-                $('#MarcoEstadoYBloqueos').css({ overflow: 'scroll', overflowX: 'scroll', overflowY: 'scroll' });
-            }
+        $("#MarcoEstadoYBloqueos").html("<font color=white><br><br>Espere... <i class='fa fa-refresh fa-spin'></i> Wait...</font>");
+        //Consulta los bloqueos especificos del usuario, sino como admin busca los bloqueos de todos los usuarios
+        if (PCOSESS_LoginUsuario!="admin")
+            ResultadoConsultaBloqueos=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-25&EnVentana=1");
         else
-        	PCOJS_MostrarMensaje("ERROR", MensajeFuncionalidadNoDisponible," modal modal-wide ");
+            ResultadoConsultaBloqueos=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-26&EnVentana=1");
+        //Genera estadisticas rapidas desde historicos de PCoder
+        ResultadoArchivosFrecuentes=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-27&EnVentana=1");
+        ResultadoDesarrolladoresFrecuentes=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-28&EnVentana=1");
+        ResultadoMovimientoMes=PCO_ObtenerContenidoAjax(0,"index.php","PCO_Accion=PCOMOD_CargarInformexID&IDInforme=-29&EnVentana=1");
+
+        //Actualiza el marco con la informacion
+        $("#MarcoEstadoYBloqueos").html(ResultadoConsultaBloqueos+"<div class='row'><div class='col col-xs-8 col-sm-8 col-md-8 col-lg-8'>"+ResultadoArchivosFrecuentes+"</div><div class='col col-xs-4 col-sm-4 col-md-4 col-lg-4'>"+ResultadoDesarrolladoresFrecuentes+"</div> <div class='col col-xs-12 col-sm-12 col-md-12 col-lg-12'>"+ResultadoMovimientoMes+"</div> </div>");
+        $('#MarcoEstadoYBloqueos').css({ overflow: 'scroll', overflowX: 'scroll', overflowY: 'scroll' });
     }
 
 
 function PCODER_PracticoMeetings()
-    {10
-        if (PCO_PCODER_StandAlone==0)
-            {
-                TogetherJS(this); return false;
-            }
-        else
-        	PCOJS_MostrarMensaje("ERROR", MensajeFuncionalidadNoDisponible," modal modal-wide ");
+    {
+        TogetherJS(this); return false;
     }
 
 

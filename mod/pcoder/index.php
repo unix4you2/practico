@@ -71,46 +71,37 @@
     @require('inc/variables.php');
     @require('inc/comunes.php');
     @require('inc/comunes_bd.php');
-    if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
-        {
-            // Incluye archivo de configuracion de base
-            include_once '../../core/configuracion.php';
-            // Inicia las conexiones con la BD y las deja listas para las operaciones
-            include_once '../../core/conexiones.php';
-            // Incluye definiciones comunes de la base de datos
-            include_once '../../inc/practico/def_basedatos.php';
-            // Incluye archivo con algunas funciones comunes usadas por la herramienta
-            include_once '../../core/comunes.php';
-            //Agrega idiomas de Practico Framework
-            include_once("../../inc/practico/idiomas/es.php");
-            include_once("../../inc/practico/idiomas/".$IdiomaPredeterminado.".php");
-        }
+
+    // Incluye archivo de configuracion de base
+    include_once '../../core/configuracion.php';
+    // Inicia las conexiones con la BD y las deja listas para las operaciones
+    include_once '../../core/conexiones.php';
+    // Incluye definiciones comunes de la base de datos
+    include_once '../../inc/practico/def_basedatos.php';
+    // Incluye archivo con algunas funciones comunes usadas por la herramienta
+    include_once '../../core/comunes.php';
+    //Agrega idiomas de Practico Framework
+    include_once("../../inc/practico/idiomas/es.php");
+    include_once("../../inc/practico/idiomas/".$IdiomaPredeterminado.".php");
 
     // Establece la zona horaria por defecto para la aplicacion
     date_default_timezone_set($ZonaHoraria);
 
-	// Determina si no se trabaja en modo StandAlone y verifica entonces credenciales
-	if ($PCO_PCODER_StandAlone==0)
+	// Valida sesion activa de Practico
+	if (!isset($PCOSESS_SesionAbierta)) 
 		{
-			// Valida sesion activa de Practico
-			if (!isset($PCOSESS_SesionAbierta)) 
-				{
-					echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
-					die();
-				}
+			echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
+			die();
 		}
 
-	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
-		{
-		    // Determina si es un usuario administrador para poder abrir el editor
-		    if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-		        {
-					echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
-					die();
-		        }
-		    else
-		        $EsUnAdmin=1;
-		}
+    // Determina si es un usuario administrador para poder abrir el editor
+    if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+        {
+			echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
+			die();
+        }
+    else
+        $EsUnAdmin=1;
 
 	//Crea variable se sesion usada por la consola de comandos
 	$_SESSION['PCONSOLE_KEY']="23456789abcdefghijkmnpqrstuvwxyz";
@@ -153,7 +144,7 @@
     }
 
 
-if (@$EsUnAdmin==1 || $PCO_PCODER_StandAlone==1)
+if (@$EsUnAdmin==1)
 {
     //Carga el archivo recibido, si no recibe nada carga un demo
     if (@$PCODER_archivo=="")
@@ -208,10 +199,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
     <link href="../../inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
 
-    <?php
-    	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
-    		echo '<link type="text/css" rel="stylesheet" media="all" href="../../inc/chat/css/chat.css" />  <!-- incluye estilos para cajas de chat -->';
-    ?>
+    <link type="text/css" rel="stylesheet" media="all" href="../../inc/chat/css/chat.css" />
 
     <!-- jQuery -->
 	<script type="text/javascript" src="../../inc/jquery/jquery-2.1.0.min.js"></script>
@@ -401,11 +389,7 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 	<!-- ################## FIN DE LA MAQUETACION ################## -->
 
 <!--</div>  FINALIZA MARCO DE CHAT -->
-
-    <?php
-    	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
-    		echo '<script type="text/javascript" src="../../inc/chat/js/chat.js"></script>';  // Agrega scripts de chat
-    ?>
+    <script type="text/javascript" src="../../inc/chat/js/chat.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="../../inc/bootstrap/js/bootstrap.min.js"></script>
@@ -499,53 +483,50 @@ $('#pestana_consola_comandos').trigger('click');
 
 <?php
     //Incluye sistema de chat para desarrolladores
-	if ($PCO_PCODER_StandAlone==0) //███▓▓▓▒▒▒ Si es MODULO DE PRACTICO FRAMEWORK ▒▒▒▓▓▓███
-		{
-		    if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-		        {
-                ?>
-                    <script>
-                        // TogetherJS configuration would go here, but we'll talk about that
-                        // later
-                        TogetherJSConfig_siteName="PRACTICO FRAMEWORK";
-                        TogetherJSConfig_toolName="Practico-Meetings";
-                        //TogetherJSConfig_hubBase=""; //Servidor de conferencia
-                        TogetherJSConfig_dontShowClicks = false; //Deshabilitar la vista de clics de participantes
-                        //TogetherJSConfig_findRoom = "Cuarto_de_Desarrolladores";  //Crea un cuarto especifico y loguea en el a todos los participantes
-                        //TogetherJSConfig_findRoom = {prefix: "Cuarto_de_Desarrolladores", max: 5} //Crea un cuarto y ademas asigna un maximo de participantes
-                        TogetherJSConfig_autoStart = false; //Reinicia la sesion de un usuario
-                        TogetherJSConfig_suppressJoinConfirmation=true; //Evita la confirmacion de ingreso a un cuarto para los invitados
-                        TogetherJSConfig_suppressInvite=true;
-                        TogetherJSConfig_inviteFromRoom=false;
-                        TogetherJSConfig_includeHashInUrl=true; //Util en aplicaciones de una sola pagina para indicar que una misma URL no quiere decir que cada persona ve lo mismo
-                        TogetherJSConfig_disableWebRTC=true; //Deshabilita boton de llamada de audio
-                        TogetherJSConfig_ignoreForms=false; //Define si ignora los formularios
-                        
-                        TogetherJSConfig_getUserName = function () {return '<?php echo "$Nombre_usuario ($PCOSESS_LoginUsuario)"; ?>';};   //Funcion que establece el nombre de usuario, debe retornar null en caso que no lo pueda establecer
-                        //TogetherJSConfig_getUserAvatar = function () {return avatarUrl;}; //Establece la URL utilizada para el avatar del usuario
-                        //TogetherJSConfig_getUserColor = function () {return '#ff00ff';}; Retorna el color que diferencia al usuario
-                    
-                        //Retira opciones innecesarias de PMeetings y hace la traduccion forzada a espanol
-                        function LimpiarInterfaz()
-                            {
-                                $("#togetherjs-menu-help").hide();
-                                $("#togetherjs-menu-feedback").hide();
-                                $("#togetherjs-share-button").hide();
-                                $("#togetherjs-share-button").css("display", "none");
-                                $("#togetherjs-share-button").css("visibility", "hidden");
-                                //Traduce cadenas basicas
-                                $("#togetherjs-menu-update-name").html('<img src="https://togetherjs.com/togetherjs/images/button-pencil.png" alt=""> Actualizar tu nombre');
-                                $("#togetherjs-menu-update-avatar").html('<img src="https://togetherjs.com/togetherjs/images/btn-menu-change-avatar.png" alt=""> Cambiar avatar');
-                                $("#togetherjs-menu-update-color").html('<span class="togetherjs-person-bgcolor-self" style="background-color: rgb(255, 0, 255);"></span> Actualizar tu color');
-                                $("#togetherjs-menu-end").html('<img src="https://togetherjs.com/togetherjs/images/button-end-session.png" alt=""> Cerrar sesion');
-                            }
-                        TogetherJSConfig_on_ready = function () {
-                            LimpiarInterfaz(); };
-                    </script>
-                    <script src="https://togetherjs.com/togetherjs-min.js"></script>
-                <?php
-		        }
-		}
+    if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+        {
+        ?>
+            <script>
+                // TogetherJS configuration would go here, but we'll talk about that
+                // later
+                TogetherJSConfig_siteName="PRACTICO FRAMEWORK";
+                TogetherJSConfig_toolName="Practico-Meetings";
+                //TogetherJSConfig_hubBase=""; //Servidor de conferencia
+                TogetherJSConfig_dontShowClicks = false; //Deshabilitar la vista de clics de participantes
+                //TogetherJSConfig_findRoom = "Cuarto_de_Desarrolladores";  //Crea un cuarto especifico y loguea en el a todos los participantes
+                //TogetherJSConfig_findRoom = {prefix: "Cuarto_de_Desarrolladores", max: 5} //Crea un cuarto y ademas asigna un maximo de participantes
+                TogetherJSConfig_autoStart = false; //Reinicia la sesion de un usuario
+                TogetherJSConfig_suppressJoinConfirmation=true; //Evita la confirmacion de ingreso a un cuarto para los invitados
+                TogetherJSConfig_suppressInvite=true;
+                TogetherJSConfig_inviteFromRoom=false;
+                TogetherJSConfig_includeHashInUrl=true; //Util en aplicaciones de una sola pagina para indicar que una misma URL no quiere decir que cada persona ve lo mismo
+                TogetherJSConfig_disableWebRTC=true; //Deshabilita boton de llamada de audio
+                TogetherJSConfig_ignoreForms=false; //Define si ignora los formularios
+                
+                TogetherJSConfig_getUserName = function () {return '<?php echo "$Nombre_usuario ($PCOSESS_LoginUsuario)"; ?>';};   //Funcion que establece el nombre de usuario, debe retornar null en caso que no lo pueda establecer
+                //TogetherJSConfig_getUserAvatar = function () {return avatarUrl;}; //Establece la URL utilizada para el avatar del usuario
+                //TogetherJSConfig_getUserColor = function () {return '#ff00ff';}; Retorna el color que diferencia al usuario
+            
+                //Retira opciones innecesarias de PMeetings y hace la traduccion forzada a espanol
+                function LimpiarInterfaz()
+                    {
+                        $("#togetherjs-menu-help").hide();
+                        $("#togetherjs-menu-feedback").hide();
+                        $("#togetherjs-share-button").hide();
+                        $("#togetherjs-share-button").css("display", "none");
+                        $("#togetherjs-share-button").css("visibility", "hidden");
+                        //Traduce cadenas basicas
+                        $("#togetherjs-menu-update-name").html('<img src="https://togetherjs.com/togetherjs/images/button-pencil.png" alt=""> Actualizar tu nombre');
+                        $("#togetherjs-menu-update-avatar").html('<img src="https://togetherjs.com/togetherjs/images/btn-menu-change-avatar.png" alt=""> Cambiar avatar');
+                        $("#togetherjs-menu-update-color").html('<span class="togetherjs-person-bgcolor-self" style="background-color: rgb(255, 0, 255);"></span> Actualizar tu color');
+                        $("#togetherjs-menu-end").html('<img src="https://togetherjs.com/togetherjs/images/button-end-session.png" alt=""> Cerrar sesion');
+                    }
+                TogetherJSConfig_on_ready = function () {
+                    LimpiarInterfaz(); };
+            </script>
+            <script src="https://togetherjs.com/togetherjs-min.js"></script>
+        <?php
+        }
 ?>
 
 </body>

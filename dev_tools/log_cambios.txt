@@ -37,7 +37,7 @@ core/usuarios.php
 mod/pmydb/index.php
 inc/ace/src-min-noconflict/*
 
-
+mod/pcoder/*
 
 
 xml/*
