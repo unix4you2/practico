@@ -8664,6 +8664,26 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         		$consulta_informe=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
         		$registro_informe=$consulta_informe->fetch();
         		$Identificador_informe=$registro_informe["id"];
+
+        		//Carga cualquier script PRE para el informe
+        		if ($registro_informe["pre_script"]!="")
+        		    {
+        		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
+        		        $ComplementoInicioScript="";
+        		        if (substr(trim($registro_informe["pre_script"]),0,5)!='<?php')
+        		            $ComplementoInicioScript="<?php\n";
+        		        PCO_EvaluarCodigo($ComplementoInicioScript.$registro_informe["pre_script"],1,"Detalles: PRE-Code Rep ID=".$informe);
+        		    }
+
+        		//Prepara script POST para el informe (se carga mas abajo pero deja la cadena lista)
+        		if ($registro_informe["post_script"]!="")
+        		    {
+        		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
+        		        $ComplementoInicioScript="";
+        		        if (substr(trim($registro_informe["post_script"]),0,5)!='<?php')
+        		            $ComplementoInicioScript="<?php\n";
+        		        $CadenaPOSTScriptPHP=$ComplementoInicioScript.$registro_informe["post_script"];
+        		    }
             }
 
         //Determina si se deben ocultar elementos por banderas o porque el informe asi lo obliga
@@ -9197,4 +9217,9 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $ModoDepuracion)
             PCO_Mensaje($MULTILANG_MonCommSQL, $consulta, '', 'fa fa-fw fa-2x fa-database', 'alert alert-info alert-dismissible ');
 
+		//Ejecuta script POST para el informe
+		if ($CadenaPOSTScriptPHP!="")
+		    {
+		        PCO_EvaluarCodigo($CadenaPOSTScriptPHP,1,"Detalles: POST-Code Rep ID=".$informe);
+		    }
 	}
