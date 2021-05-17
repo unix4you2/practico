@@ -98,7 +98,7 @@
 
 	$TipoCaptchaLogin='visual';
 	$CaracteresCaptcha=4;
-	$CodigoGoogleAnalytics='UA-847800-11';
+	$CodigoGoogleAnalytics='UA-847800-9';
 	
 	// Tipo de motor usado para la autenticacion de usuarios
 	$Auth_TipoMotor='practico';

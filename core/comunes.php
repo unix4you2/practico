@@ -404,7 +404,7 @@ function PCO_AgregarFaroAnalytics()
         // Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie
         // su valor a traves del panel de configuracion de Practico con el entregado como ID de GoogleAnalytics
         $TagsGA[]=base64_decode("VUEtODQ3ODAwLTk=");
-        if ($CodigoGoogleAnalytics!="") $TagsGA[]=$CodigoGoogleAnalytics;
+        if ($CodigoGoogleAnalytics!="" && $CodigoGoogleAnalytics!="UA-847800-9") $TagsGA[]=$CodigoGoogleAnalytics;
         //Global site tag (gtag.js) - Google Analytics
         foreach ($TagsGA as $EtiquetaGA)
             {
