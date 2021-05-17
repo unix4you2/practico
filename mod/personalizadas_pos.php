@@ -54,3 +54,158 @@ if ($PCO_Accion=="Mi_AccionPoscarga_XYZ")
 
 
 	}
+	
+if ($PCO_Accion=="PruebaDT") 
+	{
+?>
+<a href="http://192.168.0.63/practico/index.php?PCO_Accion=PruebaDT">http://192.168.0.63/practico/index.php?PCO_Accion=PruebaDT</a>
+<table id='empTable' class='display dataTable'>
+<thead>
+<tr>
+<th>id</th>
+<th>empresa</th>
+<th>documento</th>
+<th>tipo_identificacion</th>
+<th>digito_verificacion</th>
+<th>nombre</th>
+<th>direccion</th>
+<th>genero</th>
+<th>departamento</th>
+<th>municipio</th>
+<th>tel_residencia</th>
+<th>tel_movil</th>
+<th>tel_trabajo</th>
+<th>fecha_nacimiento</th>
+<th>correo</th>
+<th>correo_empresa</th>
+<th>ubicacion_fisica</th>
+<th>notas</th>
+<th>estado</th>
+<th>salario</th>
+<th>cuenta_numero</th>
+<th>cuenta_entidad</th>
+<th>cuenta_tipo</th>
+<th>cargo</th>
+<th>entidad_eps</th>
+<th>codigo_eps</th>
+<th>entidad_afp</th>
+<th>codigo_afp</th>
+<th>tipo_vinculacion</th>
+<th>fecha_primer_ingreso</th>
+<th>fecha_ultimo_retiro</th>
+<th>extension</th>
+<th>area</th>
+<th>sede</th>
+<th>id_sede</th>
+<th>usuario</th>
+<th>jefe_inmediato</th>
+<th>estrato</th>
+<th>grupo_etnico</th>
+<th>condicion_discapacidad</th>
+<th>escolaridad</th>
+<th>rh</th>
+<th>nro_hijos</th>
+<th>estado_civil</th>
+<th>turno</th>
+<th>perfil_cargo</th>
+<th>cumple_sgsst</th>
+<th>talla_camisa</th>
+<th>talla_pantalon</th>
+<th>talla_zapatos</th>
+<th>es_responsable_sgsst</th>
+</tr>
+</thead>
+</table>
+
+
+<script language="javascript">
+    
+    
+$(document).ready(function(){
+   $('#empTable').DataTable({
+      'processing': true,
+      'serverSide': true,
+      'serverMethod': 'post',
+      'responsive':true,
+
+      'ajax': {
+          'url':'/practico/index.php?PCO_Accion=recordset_json&Presentar_FullScreen=1&Precarga_EstilosBS=0'
+      },
+
+      'columns': [
+            { data: 'id' } ,
+            { data: 'empresa' } ,
+            { data: 'documento' } ,
+            { data: 'tipo_identificacion' } ,
+            { data: 'digito_verificacion' } ,
+            { data: 'nombre' } ,
+            { data: 'direccion' } ,
+            { data: 'genero' } ,
+            { data: 'departamento' } ,
+            { data: 'municipio' } ,
+            { data: 'tel_residencia' } ,
+            { data: 'tel_movil' } ,
+            { data: 'tel_trabajo' } ,
+            { data: 'fecha_nacimiento' } ,
+            { data: 'correo' } ,
+            { data: 'correo_empresa' } ,
+            { data: 'ubicacion_fisica' } ,
+            { data: 'notas' } ,
+            { data: 'estado' } ,
+            { data: 'salario' } ,
+            { data: 'cuenta_numero' } ,
+            { data: 'cuenta_entidad' } ,
+            { data: 'cuenta_tipo' } ,
+            { data: 'cargo' } ,
+            { data: 'entidad_eps' } ,
+            { data: 'codigo_eps' } ,
+            { data: 'entidad_afp' } ,
+            { data: 'codigo_afp' } ,
+            { data: 'tipo_vinculacion' } ,
+            { data: 'fecha_primer_ingreso' } ,
+            { data: 'fecha_ultimo_retiro' } ,
+            { data: 'extension' } ,
+            { data: 'area' } ,
+            { data: 'sede' } ,
+            { data: 'id_sede' } ,
+            { data: 'usuario' } ,
+            { data: 'jefe_inmediato' } ,
+            { data: 'estrato' } ,
+            { data: 'grupo_etnico' } ,
+            { data: 'condicion_discapacidad' } ,
+            { data: 'escolaridad' } ,
+            { data: 'rh' } ,
+            { data: 'nro_hijos' } ,
+            { data: 'estado_civil' } ,
+            { data: 'turno' } ,
+            { data: 'perfil_cargo' } ,
+            { data: 'cumple_sgsst' } ,
+            { data: 'talla_camisa' } ,
+            { data: 'talla_pantalon' } ,
+            { data: 'talla_zapatos' } ,
+            { data: 'es_responsable_sgsst' },
+      ],
+
+   });
+});    
+    
+    
+</script>
+
+
+
+
+
+
+<?php
+	}
+
+if ($PCO_Accion=="PruebaDT2") 
+	{
+	    echo '<a href="http://192.168.0.63/practico/index.php?PCO_Accion=PruebaDT2">http://192.168.0.63/practico/index.php?PCO_Accion=PruebaDT2</a>';
+
+        PCO_CargarInforme("113");  //Select *
+        //PCO_CargarInforme("114");  //Select lista campos
+
+	}
+?>

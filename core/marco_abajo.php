@@ -312,6 +312,86 @@
                                     this.fnAdjustColumnSizing(true);
                                     },';
 
+
+
+
+//Tablas con AJAX
+/*
+    echo "
+      'processing': true,
+      'serverSide': true,
+      'serverMethod': 'post',
+      'responsive':true,
+
+      'ajax': {
+          'url':'/practico/index.php?PCO_Accion=recordset_json&Presentar_FullScreen=1&Precarga_EstilosBS=0'
+      },
+
+      'columns': [
+            { data: 'id' } ,
+            { data: 'empresa' } ,
+            { data: 'documento' } ,
+            { data: 'tipo_identificacion' } ,
+            { data: 'digito_verificacion' } ,
+            { data: 'nombre' } ,
+            { data: 'direccion' } ,
+            { data: 'genero' } ,
+            { data: 'departamento' } ,
+            { data: 'municipio' } ,
+            { data: 'tel_residencia' } ,
+            { data: 'tel_movil' } ,
+            { data: 'tel_trabajo' } ,
+            { data: 'fecha_nacimiento' } ,
+            { data: 'correo' } ,
+            { data: 'correo_empresa' } ,
+            { data: 'ubicacion_fisica' } ,
+            { data: 'notas' } ,
+            { data: 'estado' } ,
+            { data: 'salario' } ,
+            { data: 'cuenta_numero' } ,
+            { data: 'cuenta_entidad' } ,
+            { data: 'cuenta_tipo' } ,
+            { data: 'cargo' } ,
+            { data: 'entidad_eps' } ,
+            { data: 'codigo_eps' } ,
+            { data: 'entidad_afp' } ,
+            { data: 'codigo_afp' } ,
+            { data: 'tipo_vinculacion' } ,
+            { data: 'fecha_primer_ingreso' } ,
+            { data: 'fecha_ultimo_retiro' } ,
+            { data: 'extension' } ,
+            { data: 'area' } ,
+            { data: 'sede' } ,
+            { data: 'id_sede' } ,
+            { data: 'usuario' } ,
+            { data: 'jefe_inmediato' } ,
+            { data: 'estrato' } ,
+            { data: 'grupo_etnico' } ,
+            { data: 'condicion_discapacidad' } ,
+            { data: 'escolaridad' } ,
+            { data: 'rh' } ,
+            { data: 'nro_hijos' } ,
+            { data: 'estado_civil' } ,
+            { data: 'turno' } ,
+            { data: 'perfil_cargo' } ,
+            { data: 'cumple_sgsst' } ,
+            { data: 'talla_camisa' } ,
+            { data: 'talla_pantalon' } ,
+            { data: 'talla_zapatos' } ,
+            { data: 'es_responsable_sgsst' },
+      ],
+
+    
+    ";
+
+*/
+
+
+
+
+
+
+
                         //Agrega al datatable el footer con autosuma cuando aplica
                         if (trim($TablasDataTableTotales[$i])!="" && $CadenaFormateadaTotales!="")
                             echo '
@@ -795,16 +875,8 @@
 	?>
 
     <?php
-        // Estadisticas de uso anonimo con GABeacon
-        $PrefijoGA='<img src="https://rastreador-visitas.appspot.com/';
-        $PosfijoGA='/Practico/'.$_SERVER['SERVER_NAME'].'/ACT/'.$PCO_Accion.'/SCR/'.$_SERVER['PHP_SELF'].'/?pixel" border=0 ALT=""/>';
-        // Este valor indica un ID generico de GA UA-847800-9 No edite esta linea sobre el codigo
-        // Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie
-        // su valor a traves del panel de configuracion de Practico con el entregado como ID de GoogleAnalytics
-        $Infijo=base64_decode("VUEtODQ3ODAwLTk=");
-        echo $PrefijoGA.$Infijo.$PosfijoGA;
-        if(@$CodigoGoogleAnalytics!="")
-            echo $PrefijoGA.$CodigoGoogleAnalytics.$PosfijoGA;	
+        // Estadisticas de uso anonimo con GABeacon(Deprecated) Directo por Google Analytics
+        PCO_AgregarFaroAnalytics();
     ?>
 
     <script language="JavaScript">

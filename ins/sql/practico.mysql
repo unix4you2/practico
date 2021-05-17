@@ -341,6 +341,7 @@ CREATE TABLE core_informe (
   javascript mediumtext,
   pre_script mediumtext,
   post_script mediumtext,
+  usar_ajax int(1) DEFAULT '0',
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

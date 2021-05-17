@@ -388,6 +388,46 @@ function PCO_GenerarNombreAdjunto($nombre_archivo,$campo_tabla,$extension_archiv
 ########################################################################
 ########################################################################
 /*
+    Function: PCO_AgregarFaroAnalytics
+    Agrega el codigo HTML y JS necesario para activar los faros de Google Analytics cuando asi se desea
+    
+	Salida:
+		Funciones requeridas para la adcion del faro al final de la pagina
+*/
+function PCO_AgregarFaroAnalytics()
+    {
+        global $PCO_Accion,$TablasCore,$CodigoGoogleAnalytics;
+        $PosfijoGA=$_SERVER['SERVER_NAME'].'/ACT/'.$PCO_Accion.'/SCR'.$_SERVER['PHP_SELF'];
+        $RegistroParam=PCO_EjecutarSQL("SELECT nombre_empresa_corto,nombre_aplicacion FROM {$TablasCore}parametros LIMIT 0,1")->fetch();
+        $InfoAppGA=$RegistroParam["nombre_empresa_corto"]." - ".$RegistroParam["nombre_aplicacion"];
+        // Este valor indica un ID generico de GA UA-847800-9 No edite esta linea sobre el codigo
+        // Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie
+        // su valor a traves del panel de configuracion de Practico con el entregado como ID de GoogleAnalytics
+        $TagsGA[]=base64_decode("VUEtODQ3ODAwLTk=");
+        if ($CodigoGoogleAnalytics!="") $TagsGA[]=$CodigoGoogleAnalytics;
+        //Global site tag (gtag.js) - Google Analytics
+        foreach ($TagsGA as $EtiquetaGA)
+            {
+                echo "<script async src='https://www.googletagmanager.com/gtag/js?id={$EtiquetaGA}'></script>
+                    <script>
+                      window.dataLayer = window.dataLayer || [];
+                      function gtag(){dataLayer.push(arguments);}
+                      gtag('js', new Date());
+                      gtag('config', '{$EtiquetaGA}',
+                            {
+                                'transport_type': 'beacon',
+                                'page_title': '{$InfoAppGA}',
+                                'page_path': '{$PosfijoGA}',
+                            }
+                      );
+                    </script>";                
+            }
+    }
+
+
+########################################################################
+########################################################################
+/*
 	Function: PCO_EvaluarCodigo
 	Ejecuta codigo PHP recibido dentro de una cadena.  Reemplazo para la funcion eval que pasa a ser obsoleta por seguridad
 
@@ -1657,9 +1697,10 @@ function PCO_ImportarXMLInforme($xml_importado)
 				$javascript=base64_decode($xml_importado->core_informe[0]->javascript);
 				$pre_script=base64_decode($xml_importado->core_informe[0]->pre_script);
 				$post_script=base64_decode($xml_importado->core_informe[0]->post_script);
+				$usar_ajax=base64_decode($xml_importado->core_informe[0]->usar_ajax);
 
 				// Inserta el nuevo informe
-				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$permitido_home$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script");
+				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$permitido_home$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$usar_ajax");
 
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
@@ -1845,9 +1886,10 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							$javascript=$registro["javascript"];
 							$pre_script=$registro["pre_script"];
 							$post_script=$registro["post_script"];
+							$usar_ajax=$registro["usar_ajax"];
 
 							// Inserta el nuevo informe
-							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$permitido_home$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script");
+							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$permitido_home$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$usar_ajax");
 
 							$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
@@ -8898,6 +8940,11 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                     //Asigna el total dde registros a variable global para posible uso fuera de la funcion
                     $PCOVAR_ConteoRegistrosUltimoInforme=$consulta_ejecucion->rowCount();
 
+
+
+if ($registro_informe["usar_ajax"]==0)
+    {
+
 					//Procesa resultados solo si es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch(), rowCount() y demas metodos
 					while($consulta_ejecucion!="1" && $registro_informe=$consulta_ejecucion->fetch())
 						{
@@ -8950,7 +8997,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 							$SalidaFinalInforme.= '</tr>';
 							$numero_filas++;
 						}
-
+    }
 					$SalidaFinalInforme.= '</tbody>';
 					
 					//Si se desea tabla responsive oculta el pie de pagina (libreria datatables no soporta responsive con tfooter)
