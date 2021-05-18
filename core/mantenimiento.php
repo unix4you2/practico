@@ -55,31 +55,56 @@ if ($PCO_Accion=="PCO_ReportarBugs")
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: PCO_LimpiarCacheSQL
+	Limpia los registros asociados a la tabla de cache de informes SQL que se encuentran en una fecha anterior a la actual.
+*/
+if ($PCO_Accion=="PCO_LimpiarCacheSQL")
+	{
+        if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
+            {
+                $CantidadRegistros=PCO_EjecutarSQL("SELECT COUNT(*) as Conteo FROM core_informe_cache WHERE DATE(momento)<DATE(NOW())")->fetchColumn();
+
+        		//Elimina los registros
+                PCO_EjecutarSQLUnaria("DELETE FROM core_informe_cache WHERE DATE(momento)<DATE(NOW())");
+
+        		PCO_AbrirBarraEstado();
+        		echo '<div align=center><h3>'.$MULTILANG_EspacioLiberado.': <b>'.$CantidadRegistros.' Registros/Records</b></h3></div>
+        		<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
+        		PCO_CerrarBarraEstado();   
+            }
+	}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: limpiar_backups
 	Limpia los archivos de backups contenidos en la carpeta /bkp y que normalmente son realizados despues de cada proceso de parcheo o actualizacion
 */
 if ($PCO_Accion=="limpiar_backups")
 	{
-
-		//Presenta el listado de archivos
-		echo PCO_ListadoExploracionArchivosVisual("bkp/","",$MULTILANG_ArchivosLimpiados,0);
-		
-		//Elimina los archivos presentados, menos el index
-		$ListadoArchivosEliminar=PCO_ListadoExploracionArchivos("bkp/","");
-		$TotalAhorro=0;
-		foreach ($ListadoArchivosEliminar as $Archivo)
-			{
-				if ($Archivo["Nombre"]!="index.html")
-					{
-						@unlink($Archivo["Enlace"]);
-						$TotalAhorro+=$Archivo["Tamano"];
-					}
-			}
-
-		PCO_AbrirBarraEstado();
-		echo '<div align=center><h3>'.$MULTILANG_EspacioLiberado.': <b>'.$TotalAhorro.' Kb</b></h3></div>
-		<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
-		PCO_CerrarBarraEstado();
+        if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
+            {
+        		//Presenta el listado de archivos
+        		echo PCO_ListadoExploracionArchivosVisual("bkp/","",$MULTILANG_ArchivosLimpiados,0);
+        		
+        		//Elimina los archivos presentados, menos el index
+        		$ListadoArchivosEliminar=PCO_ListadoExploracionArchivos("bkp/","");
+        		$TotalAhorro=0;
+        		foreach ($ListadoArchivosEliminar as $Archivo)
+        			{
+        				if ($Archivo["Nombre"]!="index.html")
+        					{
+        						@unlink($Archivo["Enlace"]);
+        						$TotalAhorro+=$Archivo["Tamano"];
+        					}
+        			}
+        
+        		PCO_AbrirBarraEstado();
+        		echo '<div align=center><h3>'.$MULTILANG_EspacioLiberado.': <b>'.$TotalAhorro.' Kb</b></h3></div>
+        		<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
+        		PCO_CerrarBarraEstado();
+            }
 	}
 
 
@@ -91,26 +116,28 @@ if ($PCO_Accion=="limpiar_backups")
 */
 if ($PCO_Accion=="limpiar_temporales")
 	{
-
-		//Presenta el listado de archivos
-		echo PCO_ListadoExploracionArchivosVisual("tmp/","",$MULTILANG_ArchivosLimpiados,0);
-		
-		//Elimina los archivos presentados, menos el index
-		$ListadoArchivosEliminar=PCO_ListadoExploracionArchivos("tmp/","");
-		$TotalAhorro=0;
-		foreach ($ListadoArchivosEliminar as $Archivo)
-			{
-				if ($Archivo["Nombre"]!="index.html")
-					{
-						@unlink($Archivo["Enlace"]);
-						$TotalAhorro+=$Archivo["Tamano"];
-					}
-			}
-
-		PCO_AbrirBarraEstado();
-		echo '<div align=center><h3>'.$MULTILANG_EspacioLiberado.': <b>'.$TotalAhorro.' Kb</b></h3></div>
-		<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
-		PCO_CerrarBarraEstado();
+        if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
+            {
+        		//Presenta el listado de archivos
+        		echo PCO_ListadoExploracionArchivosVisual("tmp/","",$MULTILANG_ArchivosLimpiados,0);
+        		
+        		//Elimina los archivos presentados, menos el index
+        		$ListadoArchivosEliminar=PCO_ListadoExploracionArchivos("tmp/","");
+        		$TotalAhorro=0;
+        		foreach ($ListadoArchivosEliminar as $Archivo)
+        			{
+        				if ($Archivo["Nombre"]!="index.html")
+        					{
+        						@unlink($Archivo["Enlace"]);
+        						$TotalAhorro+=$Archivo["Tamano"];
+        					}
+        			}
+        
+        		PCO_AbrirBarraEstado();
+        		echo '<div align=center><h3>'.$MULTILANG_EspacioLiberado.': <b>'.$TotalAhorro.' Kb</b></h3></div>
+        		<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
+        		PCO_CerrarBarraEstado();
+            }
 	}
 
 
@@ -129,59 +156,61 @@ if ($PCO_Accion=="limpiar_temporales")
 */
 if ($PCO_Accion=="mantenimiento_tablas")
 	{
-		
-		//Inicia la tabla de resultados
-		echo '
-			<table class="table table-responsive table-unbordered table-hover table-condensed btn-xs">
-				<thead>
-					<tr>
-						<th>'.$MULTILANG_Tablas.'</th>
-						<th>'.$MULTILANG_Accion.'</th>
-						<th>'.$MULTILANG_Detalles.'</th>
-						<th>'.$MULTILANG_Resultados.'</th>
-					</tr>
-				</thead>
-				<tbody>';
-
-		//Si la operacion es de mantenimientos
-		if ($PCO_TipoOperacion=="ANALYZE" || $PCO_TipoOperacion=="OPTIMIZE" || $PCO_TipoOperacion=="REPAIR")
-			{
-				//Busca las tablas son el prefijo especificado
-				$resultado_conteos_tablas=PCO_ConsultarTablas($PCO_PrefijoTablas);
-				//Recorre las tablas y presenta resultados de la operacion con cada una
-				while ($registro_conteos_tablas = $resultado_conteos_tablas->fetch())
-					{
-						$nombre_tabla=@$registro_conteos_tablas[0];
-						//Si la tabla es de aplicacion hace la operacion
-						if (@strpos($nombre_tabla,$PCO_PrefijoTablas)!==FALSE)
-							{
-								$registro_conteos_tablas=PCO_EjecutarSQL("$PCO_TipoOperacion TABLE $nombre_tabla")->fetch();
-								echo '
-									<tr>
-										<td>'.$registro_conteos_tablas[0].'</td>
-										<td>'.$registro_conteos_tablas[1].'</td>
-										<td>'.$registro_conteos_tablas[2].'</td>
-										<td>'.$registro_conteos_tablas[3].'</td>
-									</tr>';
-							}
-					}
-			}
-
-		if ($PCO_TipoOperacion=="TRUNCATE")
-			$resultado_consulta=PCO_EjecutarSQL("TRUNCATE TABLE $PCO_PrefijoTablas");
-
-		if ($PCO_TipoOperacion=="DELETE")
-			$resultado_consulta=PCO_EjecutarSQL("DELETE FROM $PCO_PrefijoTablas");
-
-		echo '
-			<tr>
-				<td colspan=4><h4><b>'.$PCO_TipoOperacion.'</b> '.$PCO_PrefijoTablas.': <b>'.$MULTILANG_Finalizado.' <i class="fa fa-thumbs-o-up fa-fw"></i></b></h4></td>
-			</tr>';
-				
-        //Finaliza tabla de resultados
-		echo '</tbody>
-			</table>';
-		PCO_AbrirBarraEstado();
-		echo '<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
-		PCO_CerrarBarraEstado();
+        if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']))
+            {
+        		//Inicia la tabla de resultados
+        		echo '
+        			<table class="table table-responsive table-unbordered table-hover table-condensed btn-xs">
+        				<thead>
+        					<tr>
+        						<th>'.$MULTILANG_Tablas.'</th>
+        						<th>'.$MULTILANG_Accion.'</th>
+        						<th>'.$MULTILANG_Detalles.'</th>
+        						<th>'.$MULTILANG_Resultados.'</th>
+        					</tr>
+        				</thead>
+        				<tbody>';
+        
+        		//Si la operacion es de mantenimientos
+        		if ($PCO_TipoOperacion=="ANALYZE" || $PCO_TipoOperacion=="OPTIMIZE" || $PCO_TipoOperacion=="REPAIR")
+        			{
+        				//Busca las tablas son el prefijo especificado
+        				$resultado_conteos_tablas=PCO_ConsultarTablas($PCO_PrefijoTablas);
+        				//Recorre las tablas y presenta resultados de la operacion con cada una
+        				while ($registro_conteos_tablas = $resultado_conteos_tablas->fetch())
+        					{
+        						$nombre_tabla=@$registro_conteos_tablas[0];
+        						//Si la tabla es de aplicacion hace la operacion
+        						if (@strpos($nombre_tabla,$PCO_PrefijoTablas)!==FALSE)
+        							{
+        								$registro_conteos_tablas=PCO_EjecutarSQL("$PCO_TipoOperacion TABLE $nombre_tabla")->fetch();
+        								echo '
+        									<tr>
+        										<td>'.$registro_conteos_tablas[0].'</td>
+        										<td>'.$registro_conteos_tablas[1].'</td>
+        										<td>'.$registro_conteos_tablas[2].'</td>
+        										<td>'.$registro_conteos_tablas[3].'</td>
+        									</tr>';
+        							}
+        					}
+        			}
+        
+        		if ($PCO_TipoOperacion=="TRUNCATE")
+        			$resultado_consulta=PCO_EjecutarSQL("TRUNCATE TABLE $PCO_PrefijoTablas");
+        
+        		if ($PCO_TipoOperacion=="DELETE")
+        			$resultado_consulta=PCO_EjecutarSQL("DELETE FROM $PCO_PrefijoTablas");
+        
+        		echo '
+        			<tr>
+        				<td colspan=4><h4><b>'.$PCO_TipoOperacion.'</b> '.$PCO_PrefijoTablas.': <b>'.$MULTILANG_Finalizado.' <i class="fa fa-thumbs-o-up fa-fw"></i></b></h4></td>
+        			</tr>';
+        				
+                //Finaliza tabla de resultados
+        		echo '</tbody>
+        			</table>';
+        		PCO_AbrirBarraEstado();
+        		echo '<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
+        		PCO_CerrarBarraEstado();
+            }
 	}

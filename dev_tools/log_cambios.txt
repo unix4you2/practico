@@ -23,9 +23,11 @@ core/correos.php
 core/doc_intro.php
 core/formularios.php
 core/informes.php
+core/mantenimiento.php
 core/marco_abajo.php
 core/marco_arriba_bs.php
 core/marco_conf.php
+core/marco_dev.php
 core/marco_forms.php
 core/marco_nav.php
 core/kanban.php
@@ -94,8 +96,10 @@ LogCambios="
 * Enhan [USUARIOS]: Durante la creación de usuarios se valida que al crear usuarios plantilla éstos queden por defecto deshabilitados y que por ningún motivo tengan a su vez otra plantilla seleccionada.
 * Enhan [CORE]: La analytica realizada por Google para las aplicaciones se hace ahora de manera asincrónica, aumentando la velocidad de carga.  Se recuerda a los desarrolladores que solo agregando su codigo Analytics en el panel de configuracion obtendran valiosa informacion sobre el uso, seguimiento y analisis de rendimiento y velocidad de sus aplicaciones en tiempo real o por los rangos de fechas deseados. 
 * Enhan [CORE]: Faro de analytics incluye ahora el nombre de organizacion y de aplicación para aquellos desarrolladores que desean realizar seguimiento y análisis de rendimiento a múltiples aplicaciones bajo un mismo ID de Analytics.  Dicha información será transmitida bajo la propiedad de título de página en la sección de contenido de su panel.
-
-
+* Added [INFORMES]: Se agrega tabla de cache de informes que permite almacenar las consultas (ya convertidas y con reemplazos) lanzadas por los usuarios cada que usan el sistema de informes interno.  Esto no sólo ayuda para efectos de depuración para los desarrolladores, sino también para lanzar la recuperación de datos de informes con métodos AJAX.
+* Fixed [CORE]:  La funcion PCO_ObtenerUltimoIDInsertado reconoce ahora por defecto al motor interno y refina su funcionamiento a otros DBLib, MS SQL Server, Oracle y PostgreSQL.  Se recomienda revisar quienes hagan uso de esta funcion interna no tener alteraciones en su comportamiento.
+* Added [CORE]: Agregada opción en la sección de mantenimiento de aplicación para la limpieza de caché de consultas anteriores a la fecha actual.
+* Enhan [CORE]: Se aseguran algunas tareas de mantenimiento del sistema para que solo puedan ser ejecutadas por usuarios administradores/desarrolladores.
 
 "
 
@@ -110,6 +114,17 @@ ALTER TABLE `core_formulario` ADD `pre_script` mediumtext COLLATE 'utf8_general_
 ALTER TABLE `core_informe` ADD `javascript` mediumtext COLLATE 'utf8_general_ci' NULL, ADD `pre_script` mediumtext COLLATE 'utf8_general_ci' NULL AFTER `javascript`, ADD `post_script` mediumtext COLLATE 'utf8_general_ci' NULL AFTER `pre_script`;
 
 ALTER TABLE `core_informe` ADD `usar_ajax` int(1) NULL DEFAULT '0';
+
+DROP TABLE IF EXISTS core_informe_cache;
+CREATE TABLE core_informe_cache (
+  id int(10) AUTO_INCREMENT,
+  informe int(10),
+  usuario varchar(250),
+  momento timestamp NOT NULL DEFAULT NOW(),
+  conexion varchar(250) NOT NULL DEFAULT '',
+  script_sql mediumtext,
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 ALTER TABLE `core_usuario` ADD `transformacion_colores` varchar(15) COLLATE 'utf8_general_ci' NOT NULL DEFAULT '' COMMENT 'vacio|inverso|grises|sepia';
 
@@ -198,6 +213,18 @@ ScriptPHPAutorun="
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
 Usar el hash sumando todos los permisos de un usuario para ver si el crc32 da diferente de lo que tiene a la plantilla entonces lo asigne o regenere.
+
+
+
+
+
+informe -20 (o cualquier negativo) genera un ID para Jquery como Informe_-20 ...  revisar si se convierte para evitar problemsa de sintaxis.  Estaba habilitado
+
+
+
+
+
+
 
 ANOTACIONES DE TABLA DE PARAMETROS:
 #  NombreRAD	varchar(255) NULL DEFAULT 'Practico',

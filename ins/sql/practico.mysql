@@ -397,6 +397,17 @@ CREATE TABLE core_informe_boton (
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+DROP TABLE IF EXISTS core_informe_cache;
+CREATE TABLE core_informe_cache (
+  id int(10) AUTO_INCREMENT,
+  informe int(10),
+  usuario varchar(250),
+  momento timestamp NOT NULL DEFAULT NOW(),
+  conexion varchar(250) NOT NULL DEFAULT '',
+  script_sql mediumtext,
+  PRIMARY KEY  (id)
+) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
 DROP TABLE IF EXISTS core_usuario_informe;
 CREATE TABLE core_usuario_informe (
   id int(10) NOT NULL AUTO_INCREMENT,

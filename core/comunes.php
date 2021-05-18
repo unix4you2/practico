@@ -3159,6 +3159,11 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
         if ($PCO_Accion=="GuardarPersonalizacionKanban")        $retorno = 1;
         if ($PCO_Accion=="PCO_ExplorarTablerosKanbanResumido")  $retorno = 1;
 
+        if (PCO_EsAdministrador($PCOSESS_LoginUsuario))
+            {
+                if ($PCO_Accion=="PCO_LimpiarCacheSQL")  $retorno = 1;
+            }
+
         //VALIDA OTRAS ACCOIONES ESPECIALES
 
         //Verifica cambios de estado en tableros kanban de usuarios razo
@@ -3641,10 +3646,14 @@ function PCO_CompletarParametros($Cadena,$data)
 */
 function PCO_ObtenerUltimoIDInsertado($ConexionBD="")
 	{
-		global $MotorBD;
-
+		global $MotorBD,$ConexionPDO;
+        if ($ConexionBD=="")  $ConexionBD=$ConexionPDO;
         $id_ultimo_registro_insertado="";
-		$id_ultimo_registro_insertado=$ConexionBD->lastInsertId();
+
+		if ($MotorBD=="mysql")
+			{
+		        $id_ultimo_registro_insertado=$ConexionBD->lastInsertId();
+		    }
 		//Si el motor no soporta adecuadamente el lastInsertId() hace funcion manual
 		if ($MotorBD=="dblib_mssql")
 			{
@@ -8693,7 +8702,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 		global $ListaCamposSinID_replicasbd,$ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 		global $MULTILANG_Editar,$MULTILANG_Informes,$MULTILANG_Exportar,$MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
 		global $IdiomaPredeterminado;
-        global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF;
+        global $PCO_InformesRecuperacionAJAX,$PCO_InformesIdCache,$PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF;
         global $ModoDepuracion,$ModoDesarrolladorPractico;
         global $PCO_InformesGraficosSinDatos,$PCOVAR_ConteoRegistrosUltimoInforme;
         global $PCO_FuncionesJSInternasFORM;
@@ -8755,6 +8764,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                     {
         		        $registro_conexiones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE nombre='".$registro_informe["conexion_origen_datos"]."' ")->fetch();
                     	global ${$registro_conexiones["nombre"]};
+                    	$NombreConexionExtra=${$registro_conexiones["nombre"]};
                     }
         		//Si no encuentra informe presenta error
         		if ($registro_informe["id"]=="") PCO_Mensaje($MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste." ".$MULTILANG_ContacteAdmin."<br>(".$MULTILANG_Informes." $informe)", '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
@@ -8940,10 +8950,25 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                     //Asigna el total dde registros a variable global para posible uso fuera de la funcion
                     $PCOVAR_ConteoRegistrosUltimoInforme=$consulta_ejecucion->rowCount();
 
-
+                    //Lleva informe a la cache siempre y cuando no sea un informe interno del framework
+                    if ($informe>0)
+                        {
+                            PCO_EjecutarSQLUnaria("INSERT INTO {$TablasCore}informe_cache (informe,usuario,conexion,script_sql) VALUES('{$informe}','{$PCOSESS_LoginUsuario}','{$NombreConexionExtra}',?) ","{$consulta}");
+                            $IdCacheInformes=PCO_ObtenerUltimoIDInsertado();
+                            if ($registro_informe["soporte_datatable"]=="S")
+                    	        @$PCO_InformesIdCache.=$IdCacheInformes."|";
+                        }
+                    else
+                        {
+                            if ($registro_informe["soporte_datatable"]=="S")
+                    	        @$PCO_InformesIdCache.="0"."|";
+                        }
 
 if ($registro_informe["usar_ajax"]==0)
     {
+        //Define banderas para determinar si el informe se recupera por AJAX o no posteriormente en marco_abajo
+	    if ($registro_informe["soporte_datatable"]=="S")
+	        $PCO_InformesRecuperacionAJAX.="0"."|";
 
 					//Procesa resultados solo si es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch(), rowCount() y demas metodos
 					while($consulta_ejecucion!="1" && $registro_informe=$consulta_ejecucion->fetch())
@@ -8998,6 +9023,16 @@ if ($registro_informe["usar_ajax"]==0)
 							$numero_filas++;
 						}
     }
+else
+    {
+        //Define banderas para determinar si el informe se recupera por AJAX o no posteriormente en marco_abajo
+	    if ($registro_informe["soporte_datatable"]=="S")
+	        $PCO_InformesRecuperacionAJAX.="1"."|";
+    }
+
+
+
+
 					$SalidaFinalInforme.= '</tbody>';
 					
 					//Si se desea tabla responsive oculta el pie de pagina (libreria datatables no soporta responsive con tfooter)

@@ -269,6 +269,11 @@
                 $TablasDataTableExportaCSV=@explode("|",$PCO_InformesDataTableExrpotaCSV);
                 $TablasDataTableExportaXLS=@explode("|",$PCO_InformesDataTableExrpotaXLS);
                 $TablasDataTableExportaPDF=@explode("|",$PCO_InformesDataTableExrpotaPDF);
+                $TablasDataTableIdCache=@explode("|",$PCO_InformesIdCache);
+                $TablasDataTableRecuperacionAJAX=@explode("|",$PCO_InformesRecuperacionAJAX);
+                
+                echo "//$PCO_InformesDataTable - $PCO_InformesIdCache  -  $PCO_InformesRecuperacionAJAX";
+                
                 for ($i=0; $i<count($TablasDataTable);$i++)
                     {
                         $Paginacion=trim($TablasDataTablePaginaciones[$i]);
@@ -286,7 +291,7 @@
 
                         if ($Paginacion=="" || $Paginacion==0) $Paginacion=10;  //Si no hay paginacion personalizada pone 10 por defecto
                         echo '
-                            //alert(" '.$TablasDataTable[$i].' Paginacion:'.$Paginacion.'  ColumnaTotales:'.$ColumnaTotales.'  CadenaFormateadaTotales:'.$CadenaFormateadaTotales.'  "); //Depuracion solamente
+                            //alert(" '.$TablasDataTable[$i].' RecAJAX:'.$TablasDataTableRecuperacionAJAX[$i].'  Paginacion:'.$Paginacion.'  ColumnaTotales:'.$ColumnaTotales.'  CadenaFormateadaTotales:'.$CadenaFormateadaTotales.'  "); //Depuracion solamente
                             var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
                                 {
                                     destroy: true,   //Habilita autodestruccion de objeto si se necesita reinicializar
@@ -316,7 +321,8 @@
 
 
 //Tablas con AJAX
-/*
+if($TablasDataTableRecuperacionAJAX[$i]=="1")
+{
     echo "
       'processing': true,
       'serverSide': true,
@@ -383,8 +389,7 @@
 
     
     ";
-
-*/
+}
 
 
 

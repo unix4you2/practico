@@ -299,7 +299,7 @@
         { include "core/monitoreo.php";  @include "inc/practico_se/core/monitoreo.php"; }
     if ($PCO_Accion=="recordset_json" || $PCO_Accion=="cambiar_estado_campo" || $PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box" || $PCO_Accion=="PCO_ObtenerOpcionesAjaxSelect")
         { include "core/ajax.php";  @include "inc/practico_se/core/ajax.php"; }
-    if ($PCO_Accion=="PCO_ReportarBugs" || $PCO_Accion=="mantenimiento_tablas" || $PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
+    if ($PCO_Accion=="PCO_LimpiarCacheSQL" || $PCO_Accion=="PCO_ReportarBugs" || $PCO_Accion=="mantenimiento_tablas" || $PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
         { include "core/mantenimiento.php";  @include "inc/practico_se/core/mantenimiento.php"; }
     if ($PCO_Accion=="PCO_ExplorarTablerosKanbanResumido" || $PCO_Accion=="EliminarTableroKanban" || $PCO_Accion=="GuardarCreacionKanban" || $PCO_Accion=="VerTareasArchivadas" || $PCO_Accion=="ArchivarTareaKanban" || $PCO_Accion=="PCO_ExplorarTablerosKanban" || $PCO_Accion=="EliminarTareaKanban" || $PCO_Accion=="GuardarPersonalizacionKanban")
         { include "core/kanban.php";  @include "inc/practico_se/core/kanban.php"; }
