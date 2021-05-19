@@ -102,7 +102,7 @@ LogCambios="
 * Enhan [CORE]: Se aseguran algunas tareas de mantenimiento del sistema para que solo puedan ser ejecutadas por usuarios administradores/desarrolladores.
 * Fixed [INFORMES]:  Se evita la generación de código JS para la activación de elementos de tipo DataTable que no cuenten con un ID HTML válido.
 * Enhan [INFORMES]: Se verifica compatibilidad con HTML5 para los IDs de elementos y el uso de caracteres como _,- y . (https://developer.mozilla.org/es/docs/Web/HTML/Global_attributes/id).  Tenga presente que esta característica no es compatible con HTML4.
-
+* Added [INFORMES]: Se permite la recuperación dinámica de registros en informes, esto es realmente útil cuando se generan informes con cientos de miles o millones de resultados.  dicha característica y sus condiciones de funcionamiento pueden ser encontradas en la ficha de configuración de parámetros del informe.
 
 
 "

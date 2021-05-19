@@ -84,7 +84,9 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
         //Verifica no solo por ID de cache sino tambien que perteneca al usuario logueado para evitar robo de datos o informes entre usuarios
         $RegistroCacheSQL=PCO_EjecutarSQL("SELECT * FROM core_informe_cache WHERE id='{$IdRegistro_CacheSQL}' AND usuario='".$_SESSION["PCOSESS_LoginUsuario"]."' ")->fetch();
         $ConsultaCacheada=trim($RegistroCacheSQL["script_sql"]);
-        
+        $ListaColumnasCache=trim($RegistroCacheSQL["columnas"]);
+        $ListaCamposDT=explode(",",$ListaColumnasCache);
+
         //BLOQUE1: Ajusta consultas y variables necesarias.  Sigue adelante solo si hay consulta valida
         if ($ConsultaCacheada!="")
             {
@@ -108,60 +110,12 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
                 $PCO_CondicionesFiltrado=" ";
                 if(trim($PCO_ValorFiltro) != '')
                     {
-
-
-                        
-                        //FORMA OPCIONAL: Recuperar la lista de columnas directo desde la cache (menos rapido): $ListaCamposDT=explode(",",PCO_EjecutarSQL("SELECT columnas FROM {$TablasCore}informe_cache WHERE id='".$TablasDataTableIdCache[$i]."' ")->fetchColumn());
-
-
-
-                        
-                        //RUTA: 1) agregar las etiquetas del informe (titulos de columnas) tanto en marco_abajo como ajax.  Revisar si se usa cache directa (creo que es mejor)
-                        //      2) agregar los likes para las busquedas
-                        
-                        
-                        
-                        
-                        
-                        /*
-                        //OBTENER LOS CAMPOS DEL Informe
-                        //POR CADA CAMPO AGREGAR LA CONDICION OR LIKE DEL CAMPO Y EL FILTRO (SOLO SI EL FILTRO ES DIFERENTE DE VACIO)
-                       $PCO_CondicionesFiltrado = " AND (emp_name LIKE :emp_name or 
-                            email LIKE :email OR 
-                            city LIKE :city ) ";
-                       $CondicionesFiltradoARREGLOOOO = array( 
-                            'emp_name'=>"%$PCO_ValorFiltro%", 
-                            'email'=>"%$PCO_ValorFiltro%",
-                            'city'=>"%$PCO_ValorFiltro%"
-                       );
-                       */
-
-
-/*
-
-					$EtiquetasConsulta=PCO_GenerarEtiquetasConsulta("",108); //Enviar el informe para que se determinen tambien sus columnas ocultas
-
-					//Genera HTML con las columnas
-                    //Busca los campos definidos en el informe como visibles y luego determina si el campo tiene o no titulo arbitrario
-        			$ListaCampos_TitutloArbitrario=array();
-        			$consulta_titulosarbitrarios=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? AND visible=1 ORDER BY peso,id","$informe");
-        			while ($registro_titulosarbitrarios = $consulta_titulosarbitrarios->fetch())
-        					$ListaCampos_TitutloArbitrario[]=$registro_titulosarbitrarios["titulo_arbitrario"];
-				    $ConteoPosicionColumna=0;   //Utilizado para conocer la columna actual y luego buscar si tiene titulo arbitrario
-					foreach($EtiquetasConsulta[0]["ColumnasVisibles"] as $EtiquetaColumna)
-					    {
-					        $TituloFinalColumna=$EtiquetaColumna;
-					        //Si la columna actual tiene un titulo arbitrario definido entonces lo agrega
-					        if ($ListaCampos_TitutloArbitrario[$ConteoPosicionColumna]!="")
-                                $TituloFinalColumna=PCO_ReemplazarVariablesPHPEnCadena($ListaCampos_TitutloArbitrario[$ConteoPosicionColumna]);
-						    $SalidaFinalInforme.= '<th>'.$TituloFinalColumna.'</th>';
-						    $ConteoPosicionColumna++;
-					    }
-
-*/
-
+                        //Agrega los likes para todos los campos en el complemento de condicion cuando el usuario digita algo en el cuadro de filtro
+                        $PCO_CondicionesFiltrado=" AND ( ";
+                        foreach ($ListaCamposDT as $CampoDT)
+                            $PCO_CondicionesFiltrado.=" {$CampoDT} LIKE '%{$PCO_ValorFiltro}%' OR ";
+                        $PCO_CondicionesFiltrado.=" 1=2 ) "; //Agrega una condicion que nunca se cumple para los OR y Cierra el AND del SQL
                     }
-
 
                 //PROCESA LA CONSULTA DE BASE separando en partes y generando las subconsultas para conteo de registros y agregando ademas las condiciones
                 //1. Construye consulta para gran TOTAL de registros en la consulta
@@ -177,16 +131,16 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
                         $CadenaOrderBy=" ORDER BY $PCO_ColumnaOrdenamiento $PCO_DireccionOrdenamiento ";
                     $ConsultaCacheadaRegistros="{$ConsultaCacheada} {$PCO_CondicionesFiltrado} {$CadenaOrderBy} LIMIT {$PCO_FilaInicial},{$PCO_CantidadFilas} ";
 
-                if(1==10) //Solo para efectos de depuracion mediante F12 - Network, cambiar a condicion invalida en produccion
+                if(1==2) //Solo para efectos de depuracion mediante F12 - Network, cambiar a condicion invalida en produccion
                     {
                         echo "
                             <br>ConsultaOriginal=$ConsultaCacheada
                             <br>ConsultaTotalRegistros=$ConsultaTotalRegistros
                             <br>ConsultaTotalRegistrosFiltrados=$ConsultaTotalRegistrosFiltrados
                             <br>ConsultaRegistros=$ConsultaCacheadaRegistros
+                            <br>PCO_ValorFiltro=$PCO_ValorFiltro
                         ";
                         die();
-                        //SELECT * FROM app_empleado_vistarecortada WHERE 1=1 AND 2=2 GROUP BY id  
                     }
             }
 
@@ -206,13 +160,11 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
                 $PCO_ArregloDatosRegistros = array();
                     foreach($RegistrosRecuperados as $row)
                         {
-                            //Agrega el registro al arreglo de retorno
-                            $PCO_ArregloDatosRegistros[] = array(
-                                "id"=>$row['id'],
-                                "documento"=>$row['documento'],
-                                "nombre"=>$row['nombre'],   
-                                "direccion"=>$row['direccion'],
-                                );
+                            $ArregloAsociativoCampos=array();
+                            //Recorre todos los campos definidos para agregarlos como llaves al arreglo de registro
+                            foreach ($ListaCamposDT as $CampoDT)
+                                $ArregloAsociativoCampos += [$CampoDT => $row[$CampoDT] ];  //Arregla el par Key-Value al arreglo de registro
+                            $PCO_ArregloDatosRegistros[]=$ArregloAsociativoCampos;          //Agrega el arreglo de registro al arreglo de resultado general
                         }
         
                 //Define la respuesta con los datos obtenidos
@@ -223,9 +175,10 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
                    "aaData" => $PCO_ArregloDatosRegistros
                 );
                 
+                //Entrega resultados en JSON formateados para DT
                 echo json_encode($RespuestaFormatoJSON);
-        
-                //Finaliza ejecucion
+
+                //Finaliza ejecucion para evitar datos basura
                 die();
             }
     }
