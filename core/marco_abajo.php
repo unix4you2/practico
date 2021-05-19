@@ -271,51 +271,70 @@
                 $TablasDataTableExportaPDF=@explode("|",$PCO_InformesDataTableExrpotaPDF);
                 $TablasDataTableIdCache=@explode("|",$PCO_InformesIdCache);
                 $TablasDataTableRecuperacionAJAX=@explode("|",$PCO_InformesRecuperacionAJAX);
+                $TablasDataTableColumnas=@explode("|",$PCO_InformesListaColumnas);
                 
-                echo "//$PCO_InformesDataTable - $PCO_InformesIdCache  -  $PCO_InformesRecuperacionAJAX";
+                if (1==1)  //Solo para efectos de depuracion
+                echo "
+                    /*
+                        Activacion de elementos tipo DATATABLE:
+                        PCO_InformesDataTable=$PCO_InformesDataTable
+                        PCO_InformesDataTablePaginaciones=$PCO_InformesDataTablePaginaciones
+                        PCO_InformesDataTableTotales=$PCO_InformesDataTableTotales
+                        PCO_InformesDataTableFormatoTotales=$PCO_InformesDataTableFormatoTotales
+                        PCO_InformesDataTableExrpotaCLP=$PCO_InformesDataTableExrpotaCLP
+                        PCO_InformesDataTableExrpotaCSV=$PCO_InformesDataTableExrpotaCSV
+                        PCO_InformesDataTableExrpotaXLS=$PCO_InformesDataTableExrpotaXLS
+                        PCO_InformesDataTableExrpotaPDF=$PCO_InformesDataTableExrpotaPDF
+                        PCO_InformesIdCache=$PCO_InformesIdCache
+                        PCO_InformesRecuperacionAJAX=$PCO_InformesRecuperacionAJAX
+                        PCO_InformesListaColumnas=$PCO_InformesListaColumnas
+                    */";
                 
                 for ($i=0; $i<count($TablasDataTable);$i++)
                     {
-                        $Paginacion=trim($TablasDataTablePaginaciones[$i]);
-                        $ColumnaTotales=trim($TablasDataTableTotales[$i])-1;
-                        $ColumnaTotalesVisual=trim($TablasDataTableTotales[$i]);
-                        $CadenaFormateadaTotales=trim($TablasDataTableFormatosTotales[$i]);
-                        $CadenaExportaCLP=trim($TablasDataTableExportaCLP[$i]); if ($CadenaExportaCLP=="S") $CadenaExportaCLP='{ extend: "copy",    className: "InformeBotonCopiar" },'; else $CadenaExportaCLP='';
-                        $CadenaExportaCSV=trim($TablasDataTableExportaCSV[$i]); if ($CadenaExportaCSV=="S") $CadenaExportaCSV='{ extend: "csv",     className: "InformeBotonCsv" },   '; else $CadenaExportaCSV='';
-                        $CadenaExportaXLS=trim($TablasDataTableExportaXLS[$i]); if ($CadenaExportaXLS=="S") $CadenaExportaXLS='{ extend: "excel",   className: "InformeBotonExcel" ,  title: "" }, '; else $CadenaExportaXLS='';
-                        $CadenaExportaPDF=trim($TablasDataTableExportaPDF[$i]); if ($CadenaExportaPDF=="S") $CadenaExportaPDF='{ extend: "pdf",     className: "InformeBotonPdf" },   '; else $CadenaExportaPDF='';
-                        //Realiza operaciones de reemplazo de patrones sobre la cadena de formato de Totales si aplica
-                        $CadenaFormateadaTotales=str_replace("_TOTAL_PAGINA_","'+pageTotal +'",$CadenaFormateadaTotales);
-                        $CadenaFormateadaTotales=str_replace("_TOTAL_INFORME_","'+total +'",$CadenaFormateadaTotales);
-                        $CadenaFormateadaTotales=str_replace("_COLUMNA_","$ColumnaTotalesVisual",$CadenaFormateadaTotales);
-
-                        if ($Paginacion=="" || $Paginacion==0) $Paginacion=10;  //Si no hay paginacion personalizada pone 10 por defecto
-                        echo '
-                            //alert(" '.$TablasDataTable[$i].' RecAJAX:'.$TablasDataTableRecuperacionAJAX[$i].'  Paginacion:'.$Paginacion.'  ColumnaTotales:'.$ColumnaTotales.'  CadenaFormateadaTotales:'.$CadenaFormateadaTotales.'  "); //Depuracion solamente
-                            var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
-                                {
-                                    destroy: true,   //Habilita autodestruccion de objeto si se necesita reinicializar
-                                    dom: "Blfrtip",  //Ej:  Blfrtip  Da formato a la tabla: Ver https://datatables.net/reference/option/dom
-                                    buttons: [
-                                        '.$CadenaExportaCLP.'
-                                        '.$CadenaExportaCSV.'
-                                        '.$CadenaExportaXLS.'
-                                        '.$CadenaExportaPDF.'
-                                        //{ extend: "print", className: "InformeBotonPrint" }
-                                    ],
-
-                                    "pageLength": '.$Paginacion.',
-                                    //"responsive": true, //Opcional, no necesario activarlo si la tabla ya tiene la clase nowrap y responsive (y ya esto se hace en la generacion del informe)
-                                    "scrollX": true,
-                                    "bAutoWidth": true,
-                                    //"bSort": false,
-                                    //"autoWidth": true,
-                                    //aoColumns: [ { sWidth: "45%" }, { sWidth: "45%" }, { sWidth: "10%", bSearchable: false, bSortable: false } ],
-                                    //"aaSorting": [],  //Un alias a versiones viejas de order:
-                                    "order": [],
-                                    "fnInitComplete": function() {
-                                    this.fnAdjustColumnSizing(true);
-                                    },';
+                        //Agrega codigo para activacion de DataTable solamente cuando se tenga un ID de tabla valido
+                        if ($TablasDataTable[$i]!="")
+                            {
+                                $Paginacion=trim($TablasDataTablePaginaciones[$i]);
+                                $ColumnaTotales=trim($TablasDataTableTotales[$i])-1;
+                                $ColumnaTotalesVisual=trim($TablasDataTableTotales[$i]);
+                                $CadenaFormateadaTotales=trim($TablasDataTableFormatosTotales[$i]);
+                                $CadenaExportaCLP=trim($TablasDataTableExportaCLP[$i]); if ($CadenaExportaCLP=="S") $CadenaExportaCLP='{ extend: "copy",    className: "InformeBotonCopiar" },'; else $CadenaExportaCLP='';
+                                $CadenaExportaCSV=trim($TablasDataTableExportaCSV[$i]); if ($CadenaExportaCSV=="S") $CadenaExportaCSV='{ extend: "csv",     className: "InformeBotonCsv" },   '; else $CadenaExportaCSV='';
+                                $CadenaExportaXLS=trim($TablasDataTableExportaXLS[$i]); if ($CadenaExportaXLS=="S") $CadenaExportaXLS='{ extend: "excel",   className: "InformeBotonExcel" ,  title: "" }, '; else $CadenaExportaXLS='';
+                                $CadenaExportaPDF=trim($TablasDataTableExportaPDF[$i]); if ($CadenaExportaPDF=="S") $CadenaExportaPDF='{ extend: "pdf",     className: "InformeBotonPdf" },   '; else $CadenaExportaPDF='';
+                                //Realiza operaciones de reemplazo de patrones sobre la cadena de formato de Totales si aplica
+                                $CadenaFormateadaTotales=str_replace("_TOTAL_PAGINA_","'+pageTotal +'",$CadenaFormateadaTotales);
+                                $CadenaFormateadaTotales=str_replace("_TOTAL_INFORME_","'+total +'",$CadenaFormateadaTotales);
+                                $CadenaFormateadaTotales=str_replace("_COLUMNA_","$ColumnaTotalesVisual",$CadenaFormateadaTotales);
+        
+                                if ($Paginacion=="" || $Paginacion==0) $Paginacion=10;  //Si no hay paginacion personalizada pone 10 por defecto
+                                echo '
+                                    //alert(" '.$TablasDataTable[$i].' RecAJAX:'.$TablasDataTableRecuperacionAJAX[$i].'  Paginacion:'.$Paginacion.'  ColumnaTotales:'.$ColumnaTotales.'  CadenaFormateadaTotales:'.$CadenaFormateadaTotales.'  "); //Depuracion solamente
+                                    var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
+                                        {
+                                            destroy: true,   //Habilita autodestruccion de objeto si se necesita reinicializar
+                                            dom: "Blfrtip",  //Ej:  Blfrtip  Da formato a la tabla: Ver https://datatables.net/reference/option/dom
+                                            buttons: [
+                                                '.$CadenaExportaCLP.'
+                                                '.$CadenaExportaCSV.'
+                                                '.$CadenaExportaXLS.'
+                                                '.$CadenaExportaPDF.'
+                                                //{ extend: "print", className: "InformeBotonPrint" }
+                                            ],
+        
+                                            "pageLength": '.$Paginacion.',
+                                            //"responsive": true, //Opcional, no necesario activarlo si la tabla ya tiene la clase nowrap y responsive (y ya esto se hace en la generacion del informe)
+                                            "scrollX": true,
+                                            "bAutoWidth": true,
+                                            //"bSort": false,
+                                            //"autoWidth": true,
+                                            //aoColumns: [ { sWidth: "45%" }, { sWidth: "45%" }, { sWidth: "10%", bSearchable: false, bSortable: false } ],
+                                            //"aaSorting": [],  //Un alias a versiones viejas de order:
+                                            "order": [],
+                                            "fnInitComplete": function() {
+                                            this.fnAdjustColumnSizing(true);
+                                            },';
 
 
 
@@ -330,61 +349,14 @@ if($TablasDataTableRecuperacionAJAX[$i]=="1")
       'responsive':true,
 
       'ajax': {
-          'url':'/practico/index.php?PCO_Accion=recordset_json&Presentar_FullScreen=1&Precarga_EstilosBS=0'
+          'url':'/practico/core/ajax.php?PCO_Accion=PCO_RecuperarRecordsetJSON_DataTable&IdRegistro_CacheSQL=".$TablasDataTableIdCache[$i]."&NroFilasBase={$Paginacion}'
       },
 
       'columns': [
             { data: 'id' } ,
-            { data: 'empresa' } ,
             { data: 'documento' } ,
-            { data: 'tipo_identificacion' } ,
-            { data: 'digito_verificacion' } ,
             { data: 'nombre' } ,
             { data: 'direccion' } ,
-            { data: 'genero' } ,
-            { data: 'departamento' } ,
-            { data: 'municipio' } ,
-            { data: 'tel_residencia' } ,
-            { data: 'tel_movil' } ,
-            { data: 'tel_trabajo' } ,
-            { data: 'fecha_nacimiento' } ,
-            { data: 'correo' } ,
-            { data: 'correo_empresa' } ,
-            { data: 'ubicacion_fisica' } ,
-            { data: 'notas' } ,
-            { data: 'estado' } ,
-            { data: 'salario' } ,
-            { data: 'cuenta_numero' } ,
-            { data: 'cuenta_entidad' } ,
-            { data: 'cuenta_tipo' } ,
-            { data: 'cargo' } ,
-            { data: 'entidad_eps' } ,
-            { data: 'codigo_eps' } ,
-            { data: 'entidad_afp' } ,
-            { data: 'codigo_afp' } ,
-            { data: 'tipo_vinculacion' } ,
-            { data: 'fecha_primer_ingreso' } ,
-            { data: 'fecha_ultimo_retiro' } ,
-            { data: 'extension' } ,
-            { data: 'area' } ,
-            { data: 'sede' } ,
-            { data: 'id_sede' } ,
-            { data: 'usuario' } ,
-            { data: 'jefe_inmediato' } ,
-            { data: 'estrato' } ,
-            { data: 'grupo_etnico' } ,
-            { data: 'condicion_discapacidad' } ,
-            { data: 'escolaridad' } ,
-            { data: 'rh' } ,
-            { data: 'nro_hijos' } ,
-            { data: 'estado_civil' } ,
-            { data: 'turno' } ,
-            { data: 'perfil_cargo' } ,
-            { data: 'cumple_sgsst' } ,
-            { data: 'talla_camisa' } ,
-            { data: 'talla_pantalon' } ,
-            { data: 'talla_zapatos' } ,
-            { data: 'es_responsable_sgsst' },
       ],
 
     
@@ -395,57 +367,61 @@ if($TablasDataTableRecuperacionAJAX[$i]=="1")
 
 
 
-
-
-                        //Agrega al datatable el footer con autosuma cuando aplica
-                        if (trim($TablasDataTableTotales[$i])!="" && $CadenaFormateadaTotales!="")
-                            echo '
-                                    "footerCallback": function ( row, data, start, end, display ) {
-                                        var api = this.api(), data;
-                                        // Remueve el formato de la celda para obtener solamente el numero entero para la suma
-                                            var intVal = function ( i ) {
-                                                return typeof i === \'string\' ?
-                                                    i.replace(/[\$,]/g, \'\')*1 :
-                                                    typeof i === \'number\' ?
-                                                        i : 0;
-                                            };
-                                        // Total de todas las paginas
-                                            total = api
-                                                .column( '.$ColumnaTotales.' )
-                                                .data()
-                                                .reduce( function (a, b) {
-                                                    return intVal(a) + intVal(b);
-                                                }, 0 );
-                                        // Total de la pagina actual
-                                            pageTotal = api
-                                                .column( '.$ColumnaTotales.', { page: \'current\'} )
-                                                .data()
-                                                .reduce( function (a, b) {
-                                                    return intVal(a) + intVal(b);
-                                                }, 0 );
-                                        // Actualiza el pie de pagina del datatable siempre en la columna 0
-                                        $( api.column( 0 ).footer() ).html(
-                                            \''.$CadenaFormateadaTotales.'\'
-                                        );
-                                    },';
-                        echo '
-                                    "language": {
-                                            "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
-                                            "zeroRecords": "Nothing found - sorry",
-                                            "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
-                                            "infoEmpty": "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
-                                            "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
-                                            oPaginate: { sFirst:"'.$MULTILANG_Primero.'",sLast:"'.$MULTILANG_Ultimo.'",sNext:"'.$MULTILANG_Siguiente.'",sPrevious:"'.$MULTILANG_Previo.'" },
-                                            sEmptyTable:"'.$MULTILANG_InfDataTableNoDatos.'",
-                                            sSearch:"'.$MULTILANG_Buscar.':",
-                                            sLoadingRecords:"'.$MULTILANG_Cargando.'...",
-                                            sProcessing:"'.$MULTILANG_Procesando.'...",
-                                            sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'"
+        
+        
+                                //Agrega al datatable el footer con autosuma cuando aplica
+                                if (trim($TablasDataTableTotales[$i])!="" && $CadenaFormateadaTotales!="")
+                                    echo '
+                                            "footerCallback": function ( row, data, start, end, display ) {
+                                                var api = this.api(), data;
+                                                // Remueve el formato de la celda para obtener solamente el numero entero para la suma
+                                                    var intVal = function ( i ) {
+                                                        return typeof i === \'string\' ?
+                                                            i.replace(/[\$,]/g, \'\')*1 :
+                                                            typeof i === \'number\' ?
+                                                                i : 0;
+                                                    };
+                                                // Total de todas las paginas
+                                                    total = api
+                                                        .column( '.$ColumnaTotales.' )
+                                                        .data()
+                                                        .reduce( function (a, b) {
+                                                            return intVal(a) + intVal(b);
+                                                        }, 0 );
+                                                // Total de la pagina actual
+                                                    pageTotal = api
+                                                        .column( '.$ColumnaTotales.', { page: \'current\'} )
+                                                        .data()
+                                                        .reduce( function (a, b) {
+                                                            return intVal(a) + intVal(b);
+                                                        }, 0 );
+                                                // Actualiza el pie de pagina del datatable siempre en la columna 0
+                                                $( api.column( 0 ).footer() ).html(
+                                                    \''.$CadenaFormateadaTotales.'\'
+                                                );
+                                            },';
+                                echo '
+                                            "language": {
+                                                    "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
+                                                    "zeroRecords": "Nothing found - sorry",
+                                                    "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
+                                                    "infoEmpty": "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
+                                                    "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
+                                                    oPaginate: { sFirst:"'.$MULTILANG_Primero.'",sLast:"'.$MULTILANG_Ultimo.'",sNext:"'.$MULTILANG_Siguiente.'",sPrevious:"'.$MULTILANG_Previo.'" },
+                                                    sEmptyTable:"'.$MULTILANG_InfDataTableNoDatos.'",
+                                                    sSearch:"'.$MULTILANG_Buscar.':",
+                                                    sLoadingRecords:"'.$MULTILANG_Cargando.'...",
+                                                    sProcessing:"'.$MULTILANG_Procesando.'...",
+                                                    sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'"
+                                                }
                                         }
-                                }
-                            );
-                        ';
-                    }
+                                    );
+                                ';
+
+
+
+                            } //Fin si hay un ID valido de DataTable
+                    } //Fin activacion de todas las DT
             ?>
             
             //Ejecucion de algunas funciones para correcion de estilos y responsive sobre datatables

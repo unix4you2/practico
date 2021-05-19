@@ -8702,7 +8702,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 		global $ListaCamposSinID_replicasbd,$ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 		global $MULTILANG_Editar,$MULTILANG_Informes,$MULTILANG_Exportar,$MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
 		global $IdiomaPredeterminado;
-        global $PCO_InformesRecuperacionAJAX,$PCO_InformesIdCache,$PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF;
+        global $PCO_InformesListaColumnasDT,$PCO_InformesRecuperacionAJAX,$PCO_InformesIdCache,$PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF;
         global $ModoDepuracion,$ModoDesarrolladorPractico;
         global $PCO_InformesGraficosSinDatos,$PCOVAR_ConteoRegistrosUltimoInforme;
         global $PCO_FuncionesJSInternasFORM;
@@ -8918,6 +8918,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         			while ($registro_titulosarbitrarios = $consulta_titulosarbitrarios->fetch())
         					$ListaCampos_TitutloArbitrario[]=$registro_titulosarbitrarios["titulo_arbitrario"];
 				    $ConteoPosicionColumna=0;   //Utilizado para conocer la columna actual y luego buscar si tiene titulo arbitrario
+					$ListaColumnasInforme="";   //Acumula las columnas para ser usadas luego en los DataTables (si aplica)
 					foreach($EtiquetasConsulta[0]["ColumnasVisibles"] as $EtiquetaColumna)
 					    {
 					        $TituloFinalColumna=$EtiquetaColumna;
@@ -8925,9 +8926,10 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 					        if (@$ListaCampos_TitutloArbitrario[$ConteoPosicionColumna]!="")
                                 $TituloFinalColumna=PCO_ReemplazarVariablesPHPEnCadena($ListaCampos_TitutloArbitrario[$ConteoPosicionColumna]);
 						    $SalidaFinalInforme.= '<th>'.$TituloFinalColumna.'</th>';
+						    $ListaColumnasInforme.=$TituloFinalColumna.',';
 						    $ConteoPosicionColumna++;
 					    }
-
+					$ListaColumnasInforme=substr($ListaColumnasInforme, 0, -1);//Elimina la coma sobrante del informe
 					//Si el informe tiene botones al final entonces agrega columna adicional
 					if ($cadena_generica_botones!="")
 						{
@@ -8953,90 +8955,93 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                     //Lleva informe a la cache siempre y cuando no sea un informe interno del framework
                     if ($informe>0)
                         {
-                            PCO_EjecutarSQLUnaria("INSERT INTO {$TablasCore}informe_cache (informe,usuario,conexion,script_sql) VALUES('{$informe}','{$PCOSESS_LoginUsuario}','{$NombreConexionExtra}',?) ","{$consulta}");
+                            PCO_EjecutarSQLUnaria("INSERT INTO {$TablasCore}informe_cache (informe,usuario,conexion,script_sql,columnas) VALUES('{$informe}','{$PCOSESS_LoginUsuario}','{$NombreConexionExtra}',?,'{$ListaColumnasInforme}') ","{$consulta}");
                             $IdCacheInformes=PCO_ObtenerUltimoIDInsertado();
                             if ($registro_informe["soporte_datatable"]=="S")
-                    	        @$PCO_InformesIdCache.=$IdCacheInformes."|";
+                                {
+                    	            @$PCO_InformesIdCache.=$IdCacheInformes."|";
+                    	            @$PCO_InformesListaColumnasDT.=$ListaColumnasInforme."|";
+                                }
                         }
                     else
                         {
                             if ($registro_informe["soporte_datatable"]=="S")
-                    	        @$PCO_InformesIdCache.="0"."|";
+                                {
+                    	            @$PCO_InformesIdCache.="0"."|";
+                    	            @$PCO_InformesListaColumnasDT.=$ListaColumnasInforme."|";
+                                }
                         }
 
-if ($registro_informe["usar_ajax"]==0)
-    {
-        //Define banderas para determinar si el informe se recupera por AJAX o no posteriormente en marco_abajo
-	    if ($registro_informe["soporte_datatable"]=="S")
-	        $PCO_InformesRecuperacionAJAX.="0"."|";
-
-					//Procesa resultados solo si es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch(), rowCount() y demas metodos
-					while($consulta_ejecucion!="1" && $registro_informe=$consulta_ejecucion->fetch())
-						{
-							$SalidaFinalInforme.= '<tr>';
-
-							//Si el informe tiene botones al comienzo los agrega
-							if ($cadena_generica_botones_principio!="")
-								{
-									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo (OCULTO O NO)
-									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones_principio);
-									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
-									//Muestra los botones preparados para el registro
-									$SalidaFinalInforme.= '<td>'.$cadena_botones_registro.'</td>';
-								}
-
-							for ($i=0;$i<$EtiquetasConsulta[0]["NumeroColumnas"];$i++)
-								{
-									//Muestra la columna solo si no se trata de una de las ocultas
-									if (@!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
-										{
-											$ValorCampoIdentificador=$registro_informe[0]; //Toma por ahora el primer campo (OCULTO O NO)
-											$Nombre_CampoLlave=@$CamposReales[0]["ListaCampos_NombreSimple"][0]; //Toma por ahora el primer campo (OCULTO O NO)
-											$Nombre_CampoEditable=@$CamposReales[0]["ListaCampos_NombreSimple"][$i];
-											$Nombre_TablaEditable=@$CamposReales[0]["ListaTablas_NombreSimple"][$i];
-											$IdentificadorDeCampoEditable="$Nombre_TablaEditable:$Nombre_CampoEditable:$Nombre_CampoLlave:$ValorCampoIdentificador";
-
-											//Determina la activacion o no de la cadena de edicion del campo
-											$CadenaActivadora_Edicion="";
-											if (@$CamposReales[0]["ListaCampos_PermitirEdicion"][$i]==1)
-												$CadenaActivadora_Edicion=' id="'.$IdentificadorDeCampoEditable.'" contenteditable="true" ';
-
-											$ValorVisibleFinal=$registro_informe[$i];
-											if ($ModoDesarrolladorPractico==1) $ValorVisibleFinal=PCO_ReemplazarVariablesPHPEnCadena($ValorVisibleFinal);
-
-											$SalidaFinalInforme.= '
-												<td '.$CadenaActivadora_Edicion.'>'.$ValorVisibleFinal.'</td>';
-										}
-								}
-
-							//Si el informe tiene botones al final los agrega
-							if ($cadena_generica_botones!="")
-								{
-									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo (OCULTO O NO)
-									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones);
-									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
-									//Muestra los botones preparados para el registro
-									$SalidaFinalInforme.= '<td>'.$cadena_botones_registro.'</td>';
-								}
-
-							$SalidaFinalInforme.= '</tr>';
-							$numero_filas++;
-						}
-    }
-else
-    {
-        //Define banderas para determinar si el informe se recupera por AJAX o no posteriormente en marco_abajo
-	    if ($registro_informe["soporte_datatable"]=="S")
-	        $PCO_InformesRecuperacionAJAX.="1"."|";
-    }
-
-
-
+                    if ($registro_informe["usar_ajax"]==0)
+                        {
+                            //Define banderas para determinar si el informe se recupera por AJAX o no posteriormente en marco_abajo
+                    	    if ($registro_informe["soporte_datatable"]=="S")
+                    	        $PCO_InformesRecuperacionAJAX.="0"."|";
+        
+        					//Procesa resultados solo si es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch(), rowCount() y demas metodos
+        					while($consulta_ejecucion!="1" && $registro_informe=$consulta_ejecucion->fetch())
+        						{
+        							$SalidaFinalInforme.= '<tr>';
+        
+        							//Si el informe tiene botones al comienzo los agrega
+        							if ($cadena_generica_botones_principio!="")
+        								{
+        									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo (OCULTO O NO)
+        									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones_principio);
+        									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
+        									//Muestra los botones preparados para el registro
+        									$SalidaFinalInforme.= '<td>'.$cadena_botones_registro.'</td>';
+        								}
+        
+        							for ($i=0;$i<$EtiquetasConsulta[0]["NumeroColumnas"];$i++)
+        								{
+        									//Muestra la columna solo si no se trata de una de las ocultas
+        									if (@!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
+        										{
+        											$ValorCampoIdentificador=$registro_informe[0]; //Toma por ahora el primer campo (OCULTO O NO)
+        											$Nombre_CampoLlave=@$CamposReales[0]["ListaCampos_NombreSimple"][0]; //Toma por ahora el primer campo (OCULTO O NO)
+        											$Nombre_CampoEditable=@$CamposReales[0]["ListaCampos_NombreSimple"][$i];
+        											$Nombre_TablaEditable=@$CamposReales[0]["ListaTablas_NombreSimple"][$i];
+        											$IdentificadorDeCampoEditable="$Nombre_TablaEditable:$Nombre_CampoEditable:$Nombre_CampoLlave:$ValorCampoIdentificador";
+        
+        											//Determina la activacion o no de la cadena de edicion del campo
+        											$CadenaActivadora_Edicion="";
+        											if (@$CamposReales[0]["ListaCampos_PermitirEdicion"][$i]==1)
+        												$CadenaActivadora_Edicion=' id="'.$IdentificadorDeCampoEditable.'" contenteditable="true" ';
+        
+        											$ValorVisibleFinal=$registro_informe[$i];
+        											if ($ModoDesarrolladorPractico==1) $ValorVisibleFinal=PCO_ReemplazarVariablesPHPEnCadena($ValorVisibleFinal);
+        
+        											$SalidaFinalInforme.= '
+        												<td '.$CadenaActivadora_Edicion.'>'.$ValorVisibleFinal.'</td>';
+        										}
+        								}
+        
+        							//Si el informe tiene botones al final los agrega
+        							if ($cadena_generica_botones!="")
+        								{
+        									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo (OCULTO O NO)
+        									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones);
+        									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
+        									//Muestra los botones preparados para el registro
+        									$SalidaFinalInforme.= '<td>'.$cadena_botones_registro.'</td>';
+        								}
+        
+        							$SalidaFinalInforme.= '</tr>';
+        							$numero_filas++;
+        						}
+                        }
+                    else
+                        {
+                            //Define banderas para determinar si el informe se recupera por AJAX o no posteriormente en marco_abajo
+                    	    if ($registro_informe["soporte_datatable"]=="S")
+                    	        $PCO_InformesRecuperacionAJAX.="1"."|";
+                        }
 
 					$SalidaFinalInforme.= '</tbody>';
 					
-					//Si se desea tabla responsive oculta el pie de pagina (libreria datatables no soporta responsive con tfooter)
-			        if ( $registro_informe["tabla_responsive"] == 'N' )
+					//Si se desea tabla responsive oculta el pie de pagina (libreria datatables no soporta responsive con tfooter ni recupareacion ajax con tfooter)
+			        if ( $registro_informe["tabla_responsive"] == 'N' && $registro_informe["usar_ajax"]==0)
 			            {
         					$SalidaFinalInforme.= '<tfoot id="PCO_PiePaginaInforme_'.$registro_informe["id"].'" '.$ComplementoAnulacionPiePagina.'>';
         					//Cuando es embebido (=1) no agrega los totales de registro

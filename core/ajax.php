@@ -57,26 +57,79 @@
 
 	Salida:
 		Lista de elementos < option > usados en el combo
-
 */
-if ($PCO_Accion=="recordset_json" ) 
-    {           
+if (!isset($PCO_Accion)) $PCO_Accion=$_REQUEST["PCO_Accion"];
+if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" ) 
+    {   
+        //Se asegura de tener las variables requeridas por filtros y recibidas desde la peticion
+        if (!isset($IdRegistro_CacheSQL)) $IdRegistro_CacheSQL=$_REQUEST["IdRegistro_CacheSQL"];
+        if (!isset($NroFilasBase)) $NroFilasBase=$_REQUEST["NroFilasBase"];
 
-
-        ##Obtiene algunos de los valores recibidos en la solicitud desde el DataTable
-        $PCO_IteracionLlamadosDataTable = $_POST['draw'];                                       //Uso interno de DT
-        $PCO_FilaInicial = $_POST['start'];                                                     //Registro inicial 
-        $PCO_CantidadFilas = $_POST['length'];                                                  //Cantidad deseada de registros usado en LIMIT
-        $ColumnaOrdenamientoRecibidaDT = $_POST['order'][0]['column'];                          //Obtiene la columna de indexado / ordenamiento
-        $PCO_ColumnaOrdenamiento = $_POST['columns'][$ColumnaOrdenamientoRecibidaDT]['data'];   //Columna usada en el ORDER BY
-        $PCO_DireccionOrdenamiento = $_POST['order'][0]['dir'];                                 //Direccion usada en el ordenamiento: asc or desc
-        $PCO_ValorFiltro = $_POST['search']['value'];                                           //Valor ingresado en la caja de filtro por el usuario
-
-        $PCOVAR_VariablesFiltroQueryDT="";
+        // Valida sesion activa de Practico
+        @session_start();
+        if(!isset($_SESSION['PCOSESS_SesionAbierta'])) {
+        	echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
+        	die();
+        }
         
+        include_once '../core/configuracion.php';
+        // Inicia las conexiones con la BD y las deja listas para las operaciones
+        include_once '../core/conexiones.php';
+        // Incluye definiciones comunes de la base de datos
+        include_once '../inc/practico/def_basedatos.php';
+        // Incluye archivo con algunas funciones comunes usadas por la herramienta
+        include_once '../core/comunes.php';
         
-        //OBTENER LOS CAMPOS DEL Informe
-        //POR CADA CAMPO AGREGAR LA CONDICION OR LIKE DEL CAMPO Y EL FILTRO (SOLO SI EL FILTRO ES DIFERENTE DE VACIO)
+        //Busca la consulta asociada al datatable desde la cache de SQL en la primera generacion del reporte.
+        //Verifica no solo por ID de cache sino tambien que perteneca al usuario logueado para evitar robo de datos o informes entre usuarios
+        $RegistroCacheSQL=PCO_EjecutarSQL("SELECT * FROM core_informe_cache WHERE id='{$IdRegistro_CacheSQL}' AND usuario='".$_SESSION["PCOSESS_LoginUsuario"]."' ")->fetch();
+        $ConsultaCacheada=trim($RegistroCacheSQL["script_sql"]);
+        
+        //BLOQUE1: Ajusta consultas y variables necesarias.  Sigue adelante solo si hay consulta valida
+        if ($ConsultaCacheada!="")
+            {
+                ##Obtiene algunos de los valores recibidos en la solicitud desde el DataTable
+                @$PCO_IteracionLlamadosDataTable = $_POST['draw'];                                       //Uso interno de DT
+                @$PCO_FilaInicial = $_POST['start'];                                                     //Registro inicial 
+                @$PCO_CantidadFilas = $_POST['length'];                                                  //Cantidad deseada de registros usado en LIMIT
+                @$ColumnaOrdenamientoRecibidaDT = $_POST['order'][0]['column'];                          //Obtiene la columna de indexado / ordenamiento
+                @$PCO_ColumnaOrdenamiento = $_POST['columns'][$ColumnaOrdenamientoRecibidaDT]['data'];   //Columna usada en el ORDER BY
+                @$PCO_DireccionOrdenamiento = $_POST['order'][0]['dir'];                                 //Direccion usada en el ordenamiento: asc or desc
+                @$PCO_ValorFiltro = $_POST['search']['value'];                                           //Valor ingresado en la caja de filtro por el usuario
+
+                //Corrige valores para un limit basico cuando no se reciben de entrada
+                if ($PCO_CantidadFilas=="")
+                    {
+                        $PCO_FilaInicial=0;
+                        $PCO_CantidadFilas=$NroFilasBase;
+                    }
+
+                //Busca y/o establece posibles condiciones de filtro adicional recibidas desde el DT en su campo de busqueda
+                $PCO_CondicionesFiltrado=" ";
+                if(trim($PCO_ValorFiltro) != '')
+                    {
+                        
+                        
+                        
+                        //RUTA: 1) agregar las etiquetas del informe (titulos de columnas) tanto en marco_abajo como ajax.  Revisar si se usa cache directa (creo que es mejor)
+                        //      2) agregar los likes para las busquedas
+                        
+                        
+                        
+                        
+                        
+                        /*
+                        //OBTENER LOS CAMPOS DEL Informe
+                        //POR CADA CAMPO AGREGAR LA CONDICION OR LIKE DEL CAMPO Y EL FILTRO (SOLO SI EL FILTRO ES DIFERENTE DE VACIO)
+                       $PCO_CondicionesFiltrado = " AND (emp_name LIKE :emp_name or 
+                            email LIKE :email OR 
+                            city LIKE :city ) ";
+                       $CondicionesFiltradoARREGLOOOO = array( 
+                            'emp_name'=>"%$PCO_ValorFiltro%", 
+                            'email'=>"%$PCO_ValorFiltro%",
+                            'city'=>"%$PCO_ValorFiltro%"
+                       );
+                       */
 
 
 /*
@@ -102,130 +155,74 @@ if ($PCO_Accion=="recordset_json" )
 
 */
 
+                    }
 
-        //die();
+
+                //PROCESA LA CONSULTA DE BASE separando en partes y generando las subconsultas para conteo de registros y agregando ademas las condiciones
+                //1. Construye consulta para gran TOTAL de registros en la consulta
+                $SubCadena=strstr($ConsultaCacheada, "FROM", FALSE); //SIN retorno de cadena previa al needle
+                $ConsultaTotalRegistros = "SELECT COUNT(*) AS allcount  {$SubCadena}";
+
+                //2. Construye consulta para TOTAL de registros en la consulta al aplicar filtros
+                $ConsultaTotalRegistrosFiltrados = "{$ConsultaTotalRegistros} {$PCO_CondicionesFiltrado}";
+
+                //3. Construye consulta para obtener los registros
+                    $CadenaOrderBy=" ";
+                    if ($PCO_ColumnaOrdenamiento!="")
+                        $CadenaOrderBy=" ORDER BY $PCO_ColumnaOrdenamiento $PCO_DireccionOrdenamiento ";
+                    $ConsultaCacheadaRegistros="{$ConsultaCacheada} {$PCO_CondicionesFiltrado} {$CadenaOrderBy} LIMIT {$PCO_FilaInicial},{$PCO_CantidadFilas} ";
+
+                if(1==10) //Solo para efectos de depuracion mediante F12 - Network, cambiar a condicion invalida en produccion
+                    {
+                        echo "
+                            <br>ConsultaOriginal=$ConsultaCacheada
+                            <br>ConsultaTotalRegistros=$ConsultaTotalRegistros
+                            <br>ConsultaTotalRegistrosFiltrados=$ConsultaTotalRegistrosFiltrados
+                            <br>ConsultaRegistros=$ConsultaCacheadaRegistros
+                        ";
+                        die();
+                        //SELECT * FROM app_empleado_vistarecortada WHERE 1=1 AND 2=2 GROUP BY id  
+                    }
+            }
+
+        //BLOQUE2: Genera conteos y datos requeridos.  Sigue adelante solo si hay consulta valida
+        if ($ConsultaCacheada!="")
+            {
+                //Obitene el Total de registros en la consulta de base SIN filtros
+                $PCO_TotalRegistrosConsulta = PCO_EjecutarSQL($ConsultaTotalRegistros)->fetchColumn();
         
+                //Obtiene el total de registros en la consulta CON filtros aplicados
+                $PCO_TotalRegistrosConsultaCONFiltro = PCO_EjecutarSQL($ConsultaTotalRegistrosFiltrados)->fetchColumn();
         
-/*        
-$searchArray = array();
-## Recorre todos los campos del datatable y construye adicion al query para filtrar por el valor digitado por el usuario 
-$searchQuery = " ";
-if($PCO_ValorFiltro != ''){
-   $searchQuery = " AND (emp_name LIKE :emp_name or 
-        email LIKE :email OR 
-        city LIKE :city ) ";
-   $searchArray = array( 
-        'emp_name'=>"%$PCO_ValorFiltro%", 
-        'email'=>"%$PCO_ValorFiltro%",
-        'city'=>"%$PCO_ValorFiltro%"
-   );
-}
-*/
-
-
-//RUTA:  En informes identificar si son del tipo AJAX para solo crear la tabla de encabezados.
-// en informes mirar si se agrega la inicializacion de la tabla con la consulta 
-// en informes mirar si se lleva a cache la consulta realizada para luego enviar como parametro al ajax el ID de la consulta en cache.
-// Revisar si se evita la inicializacion automatica de los datatables porque puede que este para todos al tiempo y estos requieren otro tipo de inicializacion o al menos indicando la parte de campos y demas
-
-
-
-
-
-        $PCO_ConsultaRegistros="SELECT id,empresa,documento,tipo_identificacion,digito_verificacion,nombre,direccion,genero,departamento,municipio,tel_residencia,tel_movil,tel_trabajo,fecha_nacimiento,correo,correo_empresa,ubicacion_fisica,notas,estado,salario,cuenta_numero,cuenta_entidad,cuenta_tipo,cargo,entidad_eps,codigo_eps,entidad_afp,codigo_afp,tipo_vinculacion,fecha_primer_ingreso,fecha_ultimo_retiro,extension,area,sede,id_sede,usuario,jefe_inmediato,estrato,grupo_etnico,condicion_discapacidad,escolaridad,rh,nro_hijos,estado_civil,turno,perfil_cargo,cumple_sgsst,talla_camisa,talla_pantalon,talla_zapatos,es_responsable_sgsst FROM app_empleado 
+                //Hace la consulta desde la cache de SQL
+                $RegistrosRecuperados = PCO_EjecutarSQL($ConsultaCacheadaRegistros)->fetchAll();
         
+                //Define el arreglo con los datos y lo llena desde cada fila del registro
+                $PCO_ArregloDatosRegistros = array();
+                    foreach($RegistrosRecuperados as $row)
+                        {
+                            //Agrega el registro al arreglo de retorno
+                            $PCO_ArregloDatosRegistros[] = array(
+                                "id"=>$row['id'],
+                                "documento"=>$row['documento'],
+                                "nombre"=>$row['nombre'],   
+                                "direccion"=>$row['direccion'],
+                                );
+                        }
         
-        LIMIT $PCO_FilaInicial,$PCO_CantidadFilas
-        ";
-
-
-
-        //Obitene el Total de registros en la consulta de base SIN filtros
-        $PCO_TotalRegistrosConsulta = PCO_EjecutarSQL("SELECT COUNT(*) AS allcount FROM app_empleado ")->fetchColumn();
-
-        //TODO TODO TODO:  Agregar la condicion de filtrado
-        //Obtiene el total de registros en la consulta CON filtros aplicados
-        $PCO_TotalRegistrosConsultaCONFiltro = PCO_EjecutarSQL("SELECT COUNT(*) AS allcount FROM app_empleado WHERE 1 $PCOVAR_VariablesFiltroQueryDT                   ".$searchQuery)->fetchColumn();
-
-
-        //echo("SELECT * FROM app_empleado WHERE 1 $PCOVAR_VariablesFiltroQueryDT                    ORDER BY $PCO_ColumnaOrdenamiento $PCO_DireccionOrdenamiento LIMIT $PCO_FilaInicial,$PCO_CantidadFilas");
-
-
-        //TODO TODO TODO:  Agregar la condicion de filtrado
-        $RegistrosRecuperados = PCO_EjecutarSQL("SELECT * FROM app_empleado WHERE 1 $PCOVAR_VariablesFiltroQueryDT                    ORDER BY $PCO_ColumnaOrdenamiento $PCO_DireccionOrdenamiento LIMIT $PCO_FilaInicial,$PCO_CantidadFilas")->fetchAll();
-
-
-        //Define el arreglo con los datos y lo llena desde cada fila del registro
-        $PCO_ArregloDatosRegistros = array();
-            foreach($RegistrosRecuperados as $row)
-                {
-                    //Agrega el registro al arreglo de retorno
-                    $PCO_ArregloDatosRegistros[] = array(
-                        "id"=>$row['id'],
-                        "empresa"=>$row['empresa'],
-                        "documento"=>$row['documento'],
-                        "tipo_identificacion"=>$row['tipo_identificacion'],
-                        "digito_verificacion"=>$row['digito_verificacion'],
-                        "nombre"=>$row['nombre'],
-                        "direccion"=>$row['direccion'],
-                        "genero"=>$row['genero'],
-                        "departamento"=>$row['departamento'],
-                        "municipio"=>$row['municipio'],
-                        "tel_residencia"=>$row['tel_residencia'],
-                        "tel_movil"=>$row['tel_movil'],
-                        "tel_trabajo"=>$row['tel_trabajo'],
-                        "fecha_nacimiento"=>$row['fecha_nacimiento'],
-                        "correo"=>$row['correo'],
-                        "correo_empresa"=>$row['correo_empresa'],
-                        "ubicacion_fisica"=>$row['ubicacion_fisica'],
-                        "notas"=>$row['notas'],
-                        "estado"=>$row['estado'],
-                        "salario"=>$row['salario'],
-                        "cuenta_numero"=>$row['cuenta_numero'],
-                        "cuenta_entidad"=>$row['cuenta_entidad'],
-                        "cuenta_tipo"=>$row['cuenta_tipo'],
-                        "cargo"=>$row['cargo'],
-                        "entidad_eps"=>$row['entidad_eps'],
-                        "codigo_eps"=>$row['codigo_eps'],
-                        "entidad_afp"=>$row['entidad_afp'],
-                        "codigo_afp"=>$row['codigo_afp'],
-                        "tipo_vinculacion"=>$row['tipo_vinculacion'],
-                        "fecha_primer_ingreso"=>$row['fecha_primer_ingreso'],
-                        "fecha_ultimo_retiro"=>$row['fecha_ultimo_retiro'],
-                        "extension"=>$row['extension'],
-                        "area"=>$row['area'],
-                        "sede"=>$row['sede'],
-                        "id_sede"=>$row['id_sede'],
-                        "usuario"=>$row['usuario'],
-                        "jefe_inmediato"=>$row['jefe_inmediato'],
-                        "estrato"=>$row['estrato'],
-                        "grupo_etnico"=>$row['grupo_etnico'],
-                        "condicion_discapacidad"=>$row['condicion_discapacidad'],
-                        "escolaridad"=>$row['escolaridad'],
-                        "rh"=>$row['rh'],
-                        "nro_hijos"=>$row['nro_hijos'],
-                        "estado_civil"=>$row['estado_civil'],
-                        "turno"=>$row['turno'],
-                        "perfil_cargo"=>$row['perfil_cargo'],
-                        "cumple_sgsst"=>$row['cumple_sgsst'],
-                        "talla_camisa"=>$row['talla_camisa'],
-                        "talla_pantalon"=>$row['talla_pantalon'],
-                        "talla_zapatos"=>$row['talla_zapatos'],
-                        "es_responsable_sgsst"=>$row['es_responsable_sgsst'],   );
-                }
-
-        //Define la respuesta con los datos obtenidos
-        $RespuestaFormatoJSON = array(
-           "draw" => intval($PCO_IteracionLlamadosDataTable),
-           "iTotalRecords" => $PCO_TotalRegistrosConsulta,
-           "iTotalDisplayRecords" => $PCO_TotalRegistrosConsultaCONFiltro,
-           "aaData" => $PCO_ArregloDatosRegistros
-        );
+                //Define la respuesta con los datos obtenidos
+                $RespuestaFormatoJSON = array(
+                   "draw" => intval($PCO_IteracionLlamadosDataTable),
+                   "iTotalRecords" => $PCO_TotalRegistrosConsulta,
+                   "iTotalDisplayRecords" => $PCO_TotalRegistrosConsultaCONFiltro,
+                   "aaData" => $PCO_ArregloDatosRegistros
+                );
+                
+                echo json_encode($RespuestaFormatoJSON);
         
-        echo json_encode($RespuestaFormatoJSON);
-
-        //Finaliza ejecucion
-        die();
+                //Finaliza ejecucion
+                die();
+            }
     }
 
 

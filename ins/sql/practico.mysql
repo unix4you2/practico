@@ -405,6 +405,7 @@ CREATE TABLE core_informe_cache (
   momento timestamp NOT NULL DEFAULT NOW(),
   conexion varchar(250) NOT NULL DEFAULT '',
   script_sql mediumtext,
+  columnas text,
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

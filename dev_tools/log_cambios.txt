@@ -100,6 +100,10 @@ LogCambios="
 * Fixed [CORE]:  La funcion PCO_ObtenerUltimoIDInsertado reconoce ahora por defecto al motor interno y refina su funcionamiento a otros DBLib, MS SQL Server, Oracle y PostgreSQL.  Se recomienda revisar quienes hagan uso de esta funcion interna no tener alteraciones en su comportamiento.
 * Added [CORE]: Agregada opción en la sección de mantenimiento de aplicación para la limpieza de caché de consultas anteriores a la fecha actual.
 * Enhan [CORE]: Se aseguran algunas tareas de mantenimiento del sistema para que solo puedan ser ejecutadas por usuarios administradores/desarrolladores.
+* Fixed [INFORMES]:  Se evita la generación de código JS para la activación de elementos de tipo DataTable que no cuenten con un ID HTML válido.
+* Enhan [INFORMES]: Se verifica compatibilidad con HTML5 para los IDs de elementos y el uso de caracteres como _,- y . (https://developer.mozilla.org/es/docs/Web/HTML/Global_attributes/id).  Tenga presente que esta característica no es compatible con HTML4.
+
+
 
 "
 
@@ -123,6 +127,7 @@ CREATE TABLE core_informe_cache (
   momento timestamp NOT NULL DEFAULT NOW(),
   conexion varchar(250) NOT NULL DEFAULT '',
   script_sql mediumtext,
+  columnas text,
   PRIMARY KEY  (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
