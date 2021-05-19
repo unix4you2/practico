@@ -8962,7 +8962,6 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                     	    @$PCO_InformesListaColumnasDT.=$ListaColumnasInforme."|";
 					    }
 
-
                     if ($registro_informe["usar_ajax"]==0)
                         {
                             //Define banderas para determinar si el informe se recupera por AJAX o no posteriormente en marco_abajo

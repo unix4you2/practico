@@ -339,7 +339,8 @@
                                 if($TablasDataTableRecuperacionAJAX[$i]=="1")
                                     {
                                         //Genera la definicion requerida por DT con la lista de columnas 
-                                        $ListaCamposDT=explode(",",$TablasDataTableColumnas); //Genera arreglo para los campos
+                                        $ListaCamposDT=explode(",",$TablasDataTableColumnas[$i]); //Genera arreglo para los campos
+                                        //FORMA OPCIONAL: Recuperar la lista de columnas directo desde la cache (menos rapido): $ListaCamposDT=explode(",",PCO_EjecutarSQL("SELECT columnas FROM {$TablasCore}informe_cache WHERE id='".$TablasDataTableIdCache[$i]."' ")->fetchColumn());
                                         $CadenaCamposDT="";
                                         foreach ($ListaCamposDT as $CampoDT)
                                             $CadenaCamposDT.="{ data: '{$CampoDT}' } ,";
@@ -354,10 +355,6 @@
                                             
                                             'columns': [
                                                 {$CadenaCamposDT}
-                                                { data: 'id' } ,
-                                                { data: 'documento' } ,
-                                                { data: 'nombre' } ,
-                                                { data: 'direccion' } ,
                                             ],
                                         ";
                                     }

@@ -108,8 +108,13 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
                 $PCO_CondicionesFiltrado=" ";
                 if(trim($PCO_ValorFiltro) != '')
                     {
+
+
                         
-                        
+                        //FORMA OPCIONAL: Recuperar la lista de columnas directo desde la cache (menos rapido): $ListaCamposDT=explode(",",PCO_EjecutarSQL("SELECT columnas FROM {$TablasCore}informe_cache WHERE id='".$TablasDataTableIdCache[$i]."' ")->fetchColumn());
+
+
+
                         
                         //RUTA: 1) agregar las etiquetas del informe (titulos de columnas) tanto en marco_abajo como ajax.  Revisar si se usa cache directa (creo que es mejor)
                         //      2) agregar los likes para las busquedas
