@@ -271,12 +271,12 @@
                 $TablasDataTableExportaPDF=@explode("|",$PCO_InformesDataTableExrpotaPDF);
                 $TablasDataTableIdCache=@explode("|",$PCO_InformesIdCache);
                 $TablasDataTableRecuperacionAJAX=@explode("|",$PCO_InformesRecuperacionAJAX);
-                $TablasDataTableColumnas=@explode("|",$PCO_InformesListaColumnas);
+                $TablasDataTableColumnas=@explode("|",$PCO_InformesListaColumnasDT);
                 
-                if (1==1)  //Solo para efectos de depuracion
+                if (1==1)  //Solo para efectos de depuracion, cambiar a condicion invalida en produccion
                 echo "
                     /*
-                        Activacion de elementos tipo DATATABLE:
+                        Activacion de elementos tipo DATATABLE (depuracion):
                         PCO_InformesDataTable=$PCO_InformesDataTable
                         PCO_InformesDataTablePaginaciones=$PCO_InformesDataTablePaginaciones
                         PCO_InformesDataTableTotales=$PCO_InformesDataTableTotales
@@ -287,7 +287,7 @@
                         PCO_InformesDataTableExrpotaPDF=$PCO_InformesDataTableExrpotaPDF
                         PCO_InformesIdCache=$PCO_InformesIdCache
                         PCO_InformesRecuperacionAJAX=$PCO_InformesRecuperacionAJAX
-                        PCO_InformesListaColumnas=$PCO_InformesListaColumnas
+                        PCO_InformesListaColumnasDT=$PCO_InformesListaColumnasDT
                     */";
                 
                 for ($i=0; $i<count($TablasDataTable);$i++)
@@ -310,7 +310,6 @@
         
                                 if ($Paginacion=="" || $Paginacion==0) $Paginacion=10;  //Si no hay paginacion personalizada pone 10 por defecto
                                 echo '
-                                    //alert(" '.$TablasDataTable[$i].' RecAJAX:'.$TablasDataTableRecuperacionAJAX[$i].'  Paginacion:'.$Paginacion.'  ColumnaTotales:'.$ColumnaTotales.'  CadenaFormateadaTotales:'.$CadenaFormateadaTotales.'  "); //Depuracion solamente
                                     var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
                                         {
                                             destroy: true,   //Habilita autodestruccion de objeto si se necesita reinicializar
@@ -336,38 +335,32 @@
                                             this.fnAdjustColumnSizing(true);
                                             },';
 
-
-
-
-//Tablas con AJAX
-if($TablasDataTableRecuperacionAJAX[$i]=="1")
-{
-    echo "
-      'processing': true,
-      'serverSide': true,
-      'serverMethod': 'post',
-      'responsive':true,
-
-      'ajax': {
-          'url':'/practico/core/ajax.php?PCO_Accion=PCO_RecuperarRecordsetJSON_DataTable&IdRegistro_CacheSQL=".$TablasDataTableIdCache[$i]."&NroFilasBase={$Paginacion}'
-      },
-
-      'columns': [
-            { data: 'id' } ,
-            { data: 'documento' } ,
-            { data: 'nombre' } ,
-            { data: 'direccion' } ,
-      ],
-
-    
-    ";
-}
-
-
-
-
-
-        
+                                //Agrega configuraciones especificas para tablas con recuperacion por AJAX
+                                if($TablasDataTableRecuperacionAJAX[$i]=="1")
+                                    {
+                                        //Genera la definicion requerida por DT con la lista de columnas 
+                                        $ListaCamposDT=explode(",",$TablasDataTableColumnas); //Genera arreglo para los campos
+                                        $CadenaCamposDT="";
+                                        foreach ($ListaCamposDT as $CampoDT)
+                                            $CadenaCamposDT.="{ data: '{$CampoDT}' } ,";
+                                        echo "
+                                            'processing': true,
+                                            'serverSide': true,
+                                            'serverMethod': 'post',
+                                            
+                                            'ajax': {
+                                                'url':'core/ajax.php?PCO_Accion=PCO_RecuperarRecordsetJSON_DataTable&IdRegistro_CacheSQL=".$TablasDataTableIdCache[$i]."&NroFilasBase={$Paginacion}'
+                                            },
+                                            
+                                            'columns': [
+                                                {$CadenaCamposDT}
+                                                { data: 'id' } ,
+                                                { data: 'documento' } ,
+                                                { data: 'nombre' } ,
+                                                { data: 'direccion' } ,
+                                            ],
+                                        ";
+                                    }
         
                                 //Agrega al datatable el footer con autosuma cuando aplica
                                 if (trim($TablasDataTableTotales[$i])!="" && $CadenaFormateadaTotales!="")
@@ -417,9 +410,6 @@ if($TablasDataTableRecuperacionAJAX[$i]=="1")
                                         }
                                     );
                                 ';
-
-
-
                             } //Fin si hay un ID valido de DataTable
                     } //Fin activacion de todas las DT
             ?>

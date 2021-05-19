@@ -7455,7 +7455,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton,$ListaCamposSinID_menu;
 		global $MULTILANG_Formularios,$MULTILANG_Editar,$MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
-        global $PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF;
+        global $PCO_InformesListaColumnasDT,$PCO_InformesRecuperacionAJAX,$PCO_InformesIdCache,$PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF;
         global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
 
 		// Busca datos del formulario
@@ -8852,19 +8852,6 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
 					//DEPRECATED echo '	<html>		<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Arial, Verdana, Tahoma;">';
 
-					//Si el informe va a soportar datatable entonces lo agrega a las tablas que deben ser convertidas en el pageonload
-					if ($registro_informe["soporte_datatable"]=="S")
-					    {
-						    @$PCO_InformesDataTable.="TablaInforme_".$registro_informe["id"]."|";
-						    @$PCO_InformesDataTablePaginaciones.=$registro_informe["tamano_paginacion"]."|"; //Agrega tamano predefinido para la tabla
-						    @$PCO_InformesDataTableTotales.=$registro_informe["subtotales_columna"]."|";
-						    @$PCO_InformesDataTableFormatoTotales.=$registro_informe["subtotales_formato"]."|";
-						    @$PCO_InformesDataTableExrpotaCLP.=$registro_informe["exportar_dtclp"]."|";
-						    @$PCO_InformesDataTableExrpotaCSV.=$registro_informe["exportar_dtcsv"]."|";
-						    @$PCO_InformesDataTableExrpotaXLS.=$registro_informe["exportar_dtxls"]."|";
-						    @$PCO_InformesDataTableExrpotaPDF.=$registro_informe["exportar_dtpdf"]."|";
-					    }
-
                     //Agrega titulo o encabezado si esta definido
                     if ( $registro_informe["encabezado_html"] != '' )
                         $SalidaFinalInforme.= '<div id="titulo-informe-ID'.$registro_informe["id"].'">'.$registro_informe["encabezado_html"].'</div>';
@@ -8953,24 +8940,28 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                     $PCOVAR_ConteoRegistrosUltimoInforme=$consulta_ejecucion->rowCount();
 
                     //Lleva informe a la cache siempre y cuando no sea un informe interno del framework
+                    $IdCacheInformes=0;
                     if ($informe>0)
                         {
                             PCO_EjecutarSQLUnaria("INSERT INTO {$TablasCore}informe_cache (informe,usuario,conexion,script_sql,columnas) VALUES('{$informe}','{$PCOSESS_LoginUsuario}','{$NombreConexionExtra}',?,'{$ListaColumnasInforme}') ","{$consulta}");
                             $IdCacheInformes=PCO_ObtenerUltimoIDInsertado();
-                            if ($registro_informe["soporte_datatable"]=="S")
-                                {
-                    	            @$PCO_InformesIdCache.=$IdCacheInformes."|";
-                    	            @$PCO_InformesListaColumnasDT.=$ListaColumnasInforme."|";
-                                }
                         }
-                    else
-                        {
-                            if ($registro_informe["soporte_datatable"]=="S")
-                                {
-                    	            @$PCO_InformesIdCache.="0"."|";
-                    	            @$PCO_InformesListaColumnasDT.=$ListaColumnasInforme."|";
-                                }
-                        }
+
+					//Si el informe va a soportar datatable entonces lo agrega a las tablas que deben ser convertidas en el pageonload
+					if ($registro_informe["soporte_datatable"]=="S")
+					    {
+						    @$PCO_InformesDataTable.="TablaInforme_".$registro_informe["id"]."|";
+						    @$PCO_InformesDataTablePaginaciones.=$registro_informe["tamano_paginacion"]."|"; //Agrega tamano predefinido para la tabla
+						    @$PCO_InformesDataTableTotales.=$registro_informe["subtotales_columna"]."|";
+						    @$PCO_InformesDataTableFormatoTotales.=$registro_informe["subtotales_formato"]."|";
+						    @$PCO_InformesDataTableExrpotaCLP.=$registro_informe["exportar_dtclp"]."|";
+						    @$PCO_InformesDataTableExrpotaCSV.=$registro_informe["exportar_dtcsv"]."|";
+						    @$PCO_InformesDataTableExrpotaXLS.=$registro_informe["exportar_dtxls"]."|";
+						    @$PCO_InformesDataTableExrpotaPDF.=$registro_informe["exportar_dtpdf"]."|";
+            	            @$PCO_InformesIdCache.=$IdCacheInformes."|";
+                    	    @$PCO_InformesListaColumnasDT.=$ListaColumnasInforme."|";
+					    }
+
 
                     if ($registro_informe["usar_ajax"]==0)
                         {
