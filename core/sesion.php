@@ -65,51 +65,6 @@
 */
 	if ($PCO_Accion=="Iniciar_login") 
 		{
-
-
-
-/*
-
-			//Verifica autorizacion para direccion IP de origen
-			if (trim($registro["redes_permitidas"])!="" && $MensajeErrorLogin=="")
-				{
-				    //Descompone la red de acceso en partes para ser comparada con cada red, equipo o subred permitida
-				    $PartesIPOrigen=explode(".",$IP);
-				    $RedesPermitidas=explode(";",$registro["redes_permitidas"]);
-				    $DetectadaRedPermitida=0;
-				    $RedAnalizada=0;
-				    while($RedAnalizada < count($RedesPermitidas) && $DetectadaRedPermitida==0)
-				        {
-				            $PartesIPPermitida=explode(".",$RedesPermitidas[$RedAnalizada]);
-				            
-				            $Octeto0_OK=1;
-				            $Octeto1_OK=1;
-				            $Octeto2_OK=1;
-				            $Octeto3_OK=1;
-				            //Analiza cada octeto de la red
-				            if($PartesIPPermitida[0]!="*" && $PartesIPPermitida[0]!=$PartesIPOrigen[0] ) $Octeto0_OK=0;
-				            if($PartesIPPermitida[1]!="*" && $PartesIPPermitida[1]!=$PartesIPOrigen[1] ) $Octeto1_OK=0;
-				            if($PartesIPPermitida[2]!="*" && $PartesIPPermitida[2]!=$PartesIPOrigen[2] ) $Octeto2_OK=0;
-				            if($PartesIPPermitida[3]!="*" && $PartesIPPermitida[3]!=$PartesIPOrigen[3] ) $Octeto3_OK=0;
-
-                            //Valida si los octetos pasaron la prueba
-                            if ($Octeto0_OK==1 && $Octeto1_OK==1 && $Octeto2_OK==1 && $Octeto3_OK==1)
-                                {
-                                    $DetectadaRedPermitida=1;
-        				            $MensajeErrorLogin="";
-                                }
-                            else
-        				        $MensajeErrorLogin="Usted no se encuentra autorizado para ingresar desde la red donde se encuentra";
-				            $RedAnalizada++;
-				        }
-                    if($DetectadaRedPermitida==0 && $registro["uid"]!="")
-                        auditar("Elimina sesiones activas al intentar acceso con RED no autorizada desde $IP a UO: $UnidadOrganizacional Cola:$ColaActivaSesion","",$uid);
-				}
-
-*/
-
-
-
 			//Filtra cadenas recibidas para evitar sql injection
 			$uid_orig=$uid;
 			$clave_orig=$clave;
@@ -129,6 +84,8 @@
 				}
 
 			$ok_login=0;
+			$DetectadaRedPermitida=0;
+			$ComplementoMensajeRedNoPermitida="";
 			// Inicia la autenticacion frente a tablas de sistema
 			if ($Auth_MotorWS!=1)
     		    {
@@ -138,22 +95,64 @@
     				if ($RegistroUsuario["login"]!="")
     				    {
     				        $ok_login=1;
-                    		// Inicia el XML de salida basico solamente con el estado de aceptacion
-                    		$salida_xml .= "<?xml version=\"1.0\" encoding=\"utf-8\" ?>
-                            <credenciales>
-                            	<credencial>
-                            		<aceptacion>1</aceptacion>
-                            		<login>".$RegistroUsuario["login"]."</login>
-                            		<nombre>".$RegistroUsuario["nombre"]."</nombre>
-                            		<descripcion>".$RegistroUsuario["descripcion"]."</descripcion>
-                            		<nivel>".$RegistroUsuario["nivel"]."</nivel>
-                            		<correo>".$RegistroUsuario["correo"]."</correo>
-                            		<ultimo_acceso>".$RegistroUsuario["ultimo_acceso"]."</ultimo_acceso>";
-                            		// Finaliza el archivo XML
-                            		$salida_xml .= "
-                            	</credencial>
-                            </credenciales>";
-                            $resultado_webservice = @simplexml_load_string($salida_xml);
+    				        $RedesPermitidas=trim($RegistroUsuario["redes_permitidas"]);
+    				        //Si el login esta bien valida ademas que las redes de acceso sean las permitidas.  Siempre y cuando tenga alguna definida y ademas no sea admin o desarrollador
+    				        if ($RedesPermitidas=="" || PCO_EsAdministrador($uid))
+    				            $DetectadaRedPermitida=1;
+    				        else
+    				            {
+            				        $IP_Usuario=$_SERVER['REMOTE_ADDR'];
+                				    //Descompone la red de acceso en partes para ser comparada con cada red, equipo o subred permitida
+                				    $PartesIPOrigen=explode(".",$IP_Usuario);
+                				    $RedesPermitidas=explode(";",$RedesPermitidas);
+                				    $RedAnalizada=0;
+                				    while($RedAnalizada < count($RedesPermitidas) && $DetectadaRedPermitida==0)
+                				        {
+                				            $PartesIPPermitida=explode(".",$RedesPermitidas[$RedAnalizada]);
+                				            $Octeto0_OK=1;
+                				            $Octeto1_OK=1;
+                				            $Octeto2_OK=1;
+                				            $Octeto3_OK=1;
+                				            //Analiza cada octeto de la red
+                				            if($PartesIPPermitida[0]!="*" && $PartesIPPermitida[0]!=$PartesIPOrigen[0] ) $Octeto0_OK=0;
+                				            if($PartesIPPermitida[1]!="*" && $PartesIPPermitida[1]!=$PartesIPOrigen[1] ) $Octeto1_OK=0;
+                				            if($PartesIPPermitida[2]!="*" && $PartesIPPermitida[2]!=$PartesIPOrigen[2] ) $Octeto2_OK=0;
+                				            if($PartesIPPermitida[3]!="*" && $PartesIPPermitida[3]!=$PartesIPOrigen[3] ) $Octeto3_OK=0;
+                
+                                            //Valida si los octetos pasaron la prueba
+                                            if ($Octeto0_OK==1 && $Octeto1_OK==1 && $Octeto2_OK==1 && $Octeto3_OK==1)
+                                                $DetectadaRedPermitida=1;
+                                            else
+                        				        $MensajeErrorLogin="Usted no se encuentra autorizado para ingresar desde la red donde se encuentra";
+                				            $RedAnalizada++;
+                				        }    				                
+    				            }
+    				        
+                            if($DetectadaRedPermitida==0)
+                                {
+                                    PCO_Auditar("Elimina sesiones activas al intentar acceso con RED no autorizada desde $IP_Usuario","$uid");
+                                    $ComplementoMensajeRedNoPermitida="<br>Red o lugar de origen donde se encuentra el usuario NO autorizado";
+                                }
+                            
+                            if ($DetectadaRedPermitida==1)
+                                {
+                            		// Inicia el XML de salida basico solamente con el estado de aceptacion
+                            		$salida_xml .= "<?xml version=\"1.0\" encoding=\"utf-8\" ?>
+                                    <credenciales>
+                                    	<credencial>
+                                    		<aceptacion>1</aceptacion>
+                                    		<login>".$RegistroUsuario["login"]."</login>
+                                    		<nombre>".$RegistroUsuario["nombre"]."</nombre>
+                                    		<descripcion>".$RegistroUsuario["descripcion"]."</descripcion>
+                                    		<nivel>".$RegistroUsuario["nivel"]."</nivel>
+                                    		<correo>".$RegistroUsuario["correo"]."</correo>
+                                    		<ultimo_acceso>".$RegistroUsuario["ultimo_acceso"]."</ultimo_acceso>";
+                                    		// Finaliza el archivo XML
+                                    		$salida_xml .= "
+                                    	</credencial>
+                                    </credenciales>";
+                                    $resultado_webservice = @simplexml_load_string($salida_xml);   
+                                }
     				    }
     		    }
 
@@ -190,7 +189,7 @@
     		    }
 
 			$clave_correcta=0;
-			if ($clave!="" && $ok_login==1 && $ok_captcha==1)
+			if ($clave!="" && $ok_login==1 && $ok_captcha==1 && $DetectadaRedPermitida==1)
 				  {
 
 						// Busca datos del usuario Practico, sin importar metodo de autenticacion para tener configuraciones de permisos y parametros propios de la herramienta
@@ -259,7 +258,7 @@
 			// Si la clave es incorrecta muestra de nuevo la ventana de ingreso
 			if (!$clave_correcta)
 				{
-					PCO_Mensaje($MULTILANG_ErrorTitAuth,$MULTILANG_ErrorDesAuth,'','fa fa-ban fa-4x text-danger','alert alert-danger');
+					PCO_Mensaje($MULTILANG_ErrorTitAuth,$MULTILANG_ErrorDesAuth.$ComplementoMensajeRedNoPermitida,'','fa fa-ban fa-4x text-danger','alert alert-danger');
 					PCO_VentanaLogin();
 				}
 			else
