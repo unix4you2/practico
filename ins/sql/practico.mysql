@@ -41,6 +41,7 @@ CREATE TABLE core_usuario (
   transformacion_colores varchar(10) NULL,
   idioma varchar(5) NOT NULL DEFAULT '',
   avatar varchar(255) NOT NULL DEFAULT '',
+  redes_permitidas text,
   PRIMARY KEY  (login)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

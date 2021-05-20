@@ -410,7 +410,7 @@
 				}
             //Redirecciona al siguiente flujo de aplicacion a menos que la PostAccion indique paso directamente
             if ($PCO_PostAccionDirecta!="1")
-			    echo 'OKK<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_ActualizarDatos.submit();  </script>';
+			    echo '<script type="" language="JavaScript"> document.PCO_FormContinuarFlujo_ActualizarDatos.submit();  </script>';
     }
 
 

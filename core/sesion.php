@@ -65,6 +65,51 @@
 */
 	if ($PCO_Accion=="Iniciar_login") 
 		{
+
+
+
+/*
+
+			//Verifica autorizacion para direccion IP de origen
+			if (trim($registro["redes_permitidas"])!="" && $MensajeErrorLogin=="")
+				{
+				    //Descompone la red de acceso en partes para ser comparada con cada red, equipo o subred permitida
+				    $PartesIPOrigen=explode(".",$IP);
+				    $RedesPermitidas=explode(";",$registro["redes_permitidas"]);
+				    $DetectadaRedPermitida=0;
+				    $RedAnalizada=0;
+				    while($RedAnalizada < count($RedesPermitidas) && $DetectadaRedPermitida==0)
+				        {
+				            $PartesIPPermitida=explode(".",$RedesPermitidas[$RedAnalizada]);
+				            
+				            $Octeto0_OK=1;
+				            $Octeto1_OK=1;
+				            $Octeto2_OK=1;
+				            $Octeto3_OK=1;
+				            //Analiza cada octeto de la red
+				            if($PartesIPPermitida[0]!="*" && $PartesIPPermitida[0]!=$PartesIPOrigen[0] ) $Octeto0_OK=0;
+				            if($PartesIPPermitida[1]!="*" && $PartesIPPermitida[1]!=$PartesIPOrigen[1] ) $Octeto1_OK=0;
+				            if($PartesIPPermitida[2]!="*" && $PartesIPPermitida[2]!=$PartesIPOrigen[2] ) $Octeto2_OK=0;
+				            if($PartesIPPermitida[3]!="*" && $PartesIPPermitida[3]!=$PartesIPOrigen[3] ) $Octeto3_OK=0;
+
+                            //Valida si los octetos pasaron la prueba
+                            if ($Octeto0_OK==1 && $Octeto1_OK==1 && $Octeto2_OK==1 && $Octeto3_OK==1)
+                                {
+                                    $DetectadaRedPermitida=1;
+        				            $MensajeErrorLogin="";
+                                }
+                            else
+        				        $MensajeErrorLogin="Usted no se encuentra autorizado para ingresar desde la red donde se encuentra";
+				            $RedAnalizada++;
+				        }
+                    if($DetectadaRedPermitida==0 && $registro["uid"]!="")
+                        auditar("Elimina sesiones activas al intentar acceso con RED no autorizada desde $IP a UO: $UnidadOrganizacional Cola:$ColaActivaSesion","",$uid);
+				}
+
+*/
+
+
+
 			//Filtra cadenas recibidas para evitar sql injection
 			$uid_orig=$uid;
 			$clave_orig=$clave;

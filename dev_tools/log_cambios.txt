@@ -103,7 +103,8 @@ LogCambios="
 * Fixed [INFORMES]:  Se evita la generación de código JS para la activación de elementos de tipo DataTable que no cuenten con un ID HTML válido.
 * Enhan [INFORMES]: Se verifica compatibilidad con HTML5 para los IDs de elementos y el uso de caracteres como _,- y . (https://developer.mozilla.org/es/docs/Web/HTML/Global_attributes/id).  Tenga presente que esta característica no es compatible con HTML4.
 * Added [INFORMES]: Se permite la recuperación dinámica de registros en informes, esto es realmente útil cuando se generan informes con cientos de miles o millones de resultados.  dicha característica y sus condiciones de funcionamiento pueden ser encontradas en la ficha de configuración de parámetros del informe.
-
+* Added [USUARIOS]: Se permite especificar para cada usuario las redes desde las cuales tiene acceso a la plataforma.  Esto es particularmente útil por controles y/o auditorías de seguridad así como usuarios que deben tener acceso desde sitios específicos o conexiones remotas por VPN o teletrabajo.
+* Added [USUARIOS]: Usuarios administradores pueden editar la ficha de usuarios y sus datos básicos desde el listado de usuarios del framework.
 
 "
 
@@ -140,6 +141,8 @@ ALTER TABLE `core_usuario` ADD `id` int(11) NOT NULL AUTO_INCREMENT UNIQUE FIRST
 ALTER TABLE `core_usuario`
 ADD `idioma` varchar(5) COLLATE 'utf8_general_ci' NOT NULL DEFAULT '',
 ADD `avatar` varchar(255) COLLATE 'utf8_general_ci' NOT NULL DEFAULT '' AFTER `idioma`;
+
+ALTER TABLE `core_usuario` ADD `redes_permitidas` text;
 
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('dicotomico_habilitadodeshabilitado', '1', '{ $ MULTILANG_Habilitado}', '1');
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('dicotomico_habilitadodeshabilitado', '0', '{ $ MULTILANG_Deshabilitado}', '2');
