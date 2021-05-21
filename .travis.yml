@@ -119,7 +119,7 @@ matrix:
       - mysql
 
     - php: 8.0
-      dist: trusty
+      dist: xenial
       env:
       - DB1=MySQL
       sudo: required
