@@ -4556,7 +4556,7 @@ function PCO_BuscarActualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
 						fclose($archivo);
 					}
 				if ($version_actualizada>$version_practico)
-					PCO_Mensaje($MULTILANG_Atencion,$MULTILANG_ActAlertaVersion,'','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
+					PCO_Mensaje($MULTILANG_Atencion,$MULTILANG_ActAlertaVersion.'<br><a href="https://www.practico.org/descargas" target="_blank" class="btn btn-default btn-xs" style="margin-left:90px;"><i class="fa fa-download fa-fw"></i> Descargar / Donwload </a><br><br>','','fa fa-exclamation-triangle fa-5x','TextosEscritorio');
 			}
 	}
 

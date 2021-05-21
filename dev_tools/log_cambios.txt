@@ -109,7 +109,7 @@ LogCambios="
 * Added [INFORMES]: Los informes con scripts PRE y POST presentan advertencias en la parte superior de su diseño para avisar al desarrollador cuando se tenga algún error de sintaxis en ellos.
 * Added [FORMS]: Los formularios con scripts PRE y POST presentan advertencias en la parte superior de su diseño para avisar al desarrollador cuando se tenga algún error de sintaxis en ellos.
 * Added [INFORMES]: Nueva opción en el diseño de informes permite seleccionar entre las opciones de importación nativas una para CSV crudo.  Siendo mucho más rápida y eficiente que la opción personalizable pero sin selección de formatos.  El desarrollador puede seleccionar cualquier combinación de opciones de exportación disponibles para el usuario final.  Se debe tener en cuenta que en informes que generen objetos especiales como un dato dentro del registro éstos también serán tenidos en cuenta.
-
+* Enhan [CORE]: La funcion de búsqueda de nuevas versiones o actualizaciones del framework agrega ahora un botón con acceso directo al sitio de descargas.
 
 "
 
@@ -233,18 +233,6 @@ ScriptPHPAutorun="
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
 Usar el hash sumando todos los permisos de un usuario para ver si el crc32 da diferente de lo que tiene a la plantilla entonces lo asigne o regenere.
-
-
-
-
-
-informe -20 (o cualquier negativo) genera un ID para Jquery como Informe_-20 ...  revisar si se convierte para evitar problemsa de sintaxis.  Estaba habilitado
-
-
-
-
-
-
 
 ANOTACIONES DE TABLA DE PARAMETROS:
 #  NombreRAD	varchar(255) NULL DEFAULT 'Practico',
