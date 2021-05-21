@@ -623,7 +623,10 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_kanban', 'info ', '{$MULTILANG_BtnEstiloInformacion} (azul claro)', '1');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_kanban', 'warning ', '{$MULTILANG_BtnEstiloAdvertencia} (naranja)', '1');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_kanban', 'danger ', '{$MULTILANG_BtnEstiloPeligro} (rojo)', '1');
-
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('exportaciones_informe', 'N', '{$MULTILANG_No}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('exportaciones_informe', 'S', '{$MULTILANG_Si}, Nativo personalizable', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('exportaciones_informe', 'C', '{$MULTILANG_Si}, Crudo CSV', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('exportaciones_informe', 'A', '{$MULTILANG_Si}, Ambos: Nativo y CSV', '4');
 
 DROP TABLE IF EXISTS core_bugtracker;
 CREATE TABLE core_bugtracker (

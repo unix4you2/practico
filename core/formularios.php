@@ -3189,8 +3189,28 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                 if ($MensajeCamposdeTablaHuerfanos!='')
                     PCO_Mensaje($MULTILANG_FrmCampoHuerfano,"$MensajeCamposdeTablaHuerfanos","","fa fa-fw fa-2x fa-info-circle","alert alert-dismissible alert-info btn-xs");
 
-            	//function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno=0)
+		        //Revisa la sintaxis de los SCRIPT PRE y POST para presentar advertencias si es del caso
+	            $RegistroScriptsFormulario=PCO_EjecutarSQL("SELECT pre_script,post_script FROM ".$TablasCore."formulario WHERE id=? ","$formulario")->fetch();
+        		if ($RegistroScriptsFormulario["pre_script"]!="")
+        		    {
+        		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
+        		        $ComplementoInicioScript="";
+        		        if (substr(trim($RegistroScriptsFormulario["pre_script"]),0,5)!='<?php')
+        		            $ComplementoInicioScript="<?php\n";
+        		        PCO_EvaluarCodigo($ComplementoInicioScript.$RegistroScriptsFormulario["pre_script"],1,"Detalles: PRE-Code Form ID=".$formulario,1);
+        		    }
+        		//Revisa la sintaxis de los SCRIPT PRE y POST para presentar advertencias si es del caso
+        		if ($RegistroScriptsFormulario["post_script"]!="")
+        		    {
+        		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
+        		        $ComplementoInicioScript="";
+        		        if (substr(trim($RegistroScriptsFormulario["post_script"]),0,5)!='<?php')
+        		            $ComplementoInicioScript="<?php\n";
+        		        PCO_EvaluarCodigo($ComplementoInicioScript.$RegistroScriptsFormulario["post_script"],1,"Detalles: POST-Code Form ID=".$formulario,1);
+        		    }
+		    
                 PCO_CargarFormulario($formulario,1,"","",0,1); //Cargar el form en modo de diseno
+
             ?>
         </div>
     </div>

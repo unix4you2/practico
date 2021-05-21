@@ -105,6 +105,11 @@ LogCambios="
 * Added [INFORMES]: Se permite la recuperación dinámica de registros en informes, esto es realmente útil cuando se generan informes con cientos de miles o millones de resultados.  dicha característica y sus condiciones de funcionamiento pueden ser encontradas en la ficha de configuración de parámetros del informe.
 * Added [USUARIOS]: Se permite especificar para cada usuario las redes desde las cuales tiene acceso a la plataforma.  Esto es particularmente útil por controles y/o auditorías de seguridad así como usuarios que deben tener acceso desde sitios específicos o conexiones remotas por VPN o teletrabajo.
 * Added [USUARIOS]: Usuarios administradores pueden editar la ficha de usuarios y sus datos básicos desde el listado de usuarios del framework.
+* Added [CORE]: La rutina de evaluacion de sintaxis de código interno (disponible sólo en servidores Linux con la función exec activada permiten sólo evaluar el código en búsqueda de errores sin necesidad de ejecutarlo.
+* Added [INFORMES]: Los informes con scripts PRE y POST presentan advertencias en la parte superior de su diseño para avisar al desarrollador cuando se tenga algún error de sintaxis en ellos.
+* Added [FORMS]: Los formularios con scripts PRE y POST presentan advertencias en la parte superior de su diseño para avisar al desarrollador cuando se tenga algún error de sintaxis en ellos.
+* Added [INFORMES]: Nueva opción en el diseño de informes permite seleccionar entre las opciones de importación nativas una para CSV crudo.  Siendo mucho más rápida y eficiente que la opción personalizable pero sin selección de formatos.  El desarrollador puede seleccionar cualquier combinación de opciones de exportación disponibles para el usuario final.  Se debe tener en cuenta que en informes que generen objetos especiales como un dato dentro del registro éstos también serán tenidos en cuenta.
+
 
 "
 
@@ -173,6 +178,13 @@ INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_v
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('estilos_kanban', 'info ', '{ $ MULTILANG_BtnEstiloInformacion} (azul claro)', '1');
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('estilos_kanban', 'warning ', '{ $ MULTILANG_BtnEstiloAdvertencia} (naranja)', '1');
 INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('estilos_kanban', 'danger ', '{ $ MULTILANG_BtnEstiloPeligro} (rojo)', '1');
+
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('exportaciones_informe', 'N', '{ $ MULTILANG_No}', '1');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('exportaciones_informe', 'S', '{ $ MULTILANG_Si}, Nativo personalizable', '2');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('exportaciones_informe', 'C', '{ $ MULTILANG_Si}, Crudo CSV', '3');
+INSERT INTO `core_opcionlista` (`identificador_lista`, `valor_interno`, `valor_visual`, `ordenamiento`) VALUES ('exportaciones_informe', 'A', '{ $ MULTILANG_Si}, Ambos: Nativo y CSV', '4');
+
+
 
 DELETE FROM core_kanban WHERE categoria='[PRACTICO][CategoriasTareas]';
 

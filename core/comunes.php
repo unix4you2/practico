@@ -438,7 +438,7 @@ function PCO_AgregarFaroAnalytics()
 	Salida:
 		Evaluacion y ejecucion del codigo correspondiente mediante la inclusion de un archivo temporal con su contenido
 */
-function PCO_EvaluarCodigo($CadenaCodigoPHP,$ByPassSintaxis=0,$DescComplemento="")
+function PCO_EvaluarCodigo($CadenaCodigoPHP,$ByPassSintaxis=0,$DescComplemento="",$EvitarInclusionSoloRevisar=0)
 {
     global $PCO_ChequeoDinamicoSintaxis;
 
@@ -451,7 +451,7 @@ function PCO_EvaluarCodigo($CadenaCodigoPHP,$ByPassSintaxis=0,$DescComplemento="
     $ErroresSintaxis=0;
     if ($PCO_ChequeoDinamicoSintaxis==1 || $ByPassSintaxis==1)
         $ErroresSintaxis=PCO_BuscarErroresSintaxisPHP($RutaArchivoTemporal,1,$DescComplemento);
-    if ($ErroresSintaxis==0)
+    if ($ErroresSintaxis==0 && $EvitarInclusionSoloRevisar==0)
         {
             try
                 {
@@ -7526,7 +7526,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 			}
 		
 		//Carga cualquier script PRE para el formulario
-		if ($registro_formulario["pre_script"]!="")
+		if ($registro_formulario["pre_script"]!="" && $modo_diseno_formulario==0)
 		    {
 		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
 		        $ComplementoInicioScript="";
@@ -8824,12 +8824,21 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
 						$TituloVentanaInforme=PCO_ReemplazarVariablesPHPEnCadena($registro_informe["titulo"]);
 						//Define si requiere o no boton de exportacion en la barra de titulo
-						if ($registro_informe["genera_pdf"]=='S' && $embebido!=1)
+						if ($registro_informe["genera_pdf"]!='N' && $embebido!=1)
 							{
-								$TituloVentanaInforme='
-								<a class="btn btn-primary btn-xs pull-right" data-toggle="modal" href="#myModalEXPORTACION">
-									<div><i class="fa fa-floppy-o fa-fw"></i> '.$MULTILANG_Exportar.'</div>
-								</a>'.$TituloVentanaInforme;
+							    //Formato nativo
+    				            if ($registro_informe["genera_pdf"]=='S' || $registro_informe["genera_pdf"]=='A')
+                                    {
+        								$TituloVentanaInforme='
+        								<a class="btn btn-primary btn-xs pull-right" data-toggle="modal" href="#myModalEXPORTACION">
+        									<div><i class="fa fa-floppy-o fa-fw"></i> '.$MULTILANG_Exportar.'</div>
+        								</a>'.$TituloVentanaInforme;
+                                    }
+							    //Formato CSV por AJAX - Solo genera el marco, el boton se agrega luego cuando se conozca el ID de la cache de informe (mas abajo)
+    				            if ($registro_informe["genera_pdf"]=='C' || $registro_informe["genera_pdf"]=='A')
+                                    {
+        								$TituloVentanaInforme='<div id="PCO_MarcoBotonCSVInforme'.$informe.'" class="pull-right" style="margin-left:5px;"></div>'.$TituloVentanaInforme;
+                                    }
 							}
 
 						//Carga la ventana con el informe
@@ -8847,7 +8856,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 					echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].' !important; HEIGHT: '.$registro_informe["alto"].' !important">';
 
 				//Genera enlaces a las opciones de descarga
-				if ($registro_informe["genera_pdf"]=='S'  && $embebido!=1)
+				if (($registro_informe["genera_pdf"]=='S' || $registro_informe["genera_pdf"]=='A')  && $embebido!=1)
 					include_once("core/marco_export.php");
 
 					//DEPRECATED echo '	<html>		<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Arial, Verdana, Tahoma;">';
@@ -8945,6 +8954,14 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                         {
                             PCO_EjecutarSQLUnaria("INSERT INTO {$TablasCore}informe_cache (informe,usuario,conexion,script_sql,columnas) VALUES('{$informe}','{$PCOSESS_LoginUsuario}','{$NombreConexionExtra}',?,'{$ListaColumnasInforme}') ","{$consulta}");
                             $IdCacheInformes=PCO_ObtenerUltimoIDInsertado();
+
+                            //Ahora que se tiene una cache, determina si se requiere boton de exportacion CSV por AJAX y lo agrega
+				            if ($registro_informe["genera_pdf"]=='C' || $registro_informe["genera_pdf"]=='A')
+                                {
+                                    echo "<script language='JavaScript'>
+                                        $('#PCO_MarcoBotonCSVInforme{$informe}').html('<a class=\"btn btn-success btn-xs pull-right\" href=\"core/ajax.php?PCO_Accion=PCO_ExportacionQueryCacheCSV&amp;IdRegistro_CacheSQL={$IdCacheInformes}\"> <i class=\"fa fa-file-excel-o fa-fw\"></i> {$MULTILANG_Exportar} CSV </a>');
+                                    </script>";
+                                }
                         }
 
 					//Si el informe va a soportar datatable entonces lo agrega a las tablas que deben ser convertidas en el pageonload

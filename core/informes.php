@@ -2004,7 +2004,26 @@ if ($PCO_Accion=="PCO_EditarInforme")
 	            if ($RegistroCamposEditables["id"]!="")
                     PCO_Mensaje("Advertencia", "Se han detectado campos editables en informes con DataTables activado.  Esto puede generar conflictos con DataTables que relacionen registros sobre paginacion.  La edicion en caliente puede no ser efectiva.", '', 'fa fa-fw fa-2x fa-warning', 'alert alert-dismissible alert-warning');
 	        }
-	    
+
+        //Revisa la sintaxis de los SCRIPT PRE y POST para presentar advertencias si es del caso
+    	if ($registro_informe["pre_script"]!="")
+		    {
+		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
+		        $ComplementoInicioScript="";
+		        if (substr(trim($registro_informe["pre_script"]),0,5)!='<?php')
+		            $ComplementoInicioScript="<?php\n";
+		        PCO_EvaluarCodigo($ComplementoInicioScript.$registro_informe["pre_script"],1,"Detalles: PRE-Code Rep ID=".$informe,1);
+		    }
+        //Revisa la sintaxis de los SCRIPT PRE y POST para presentar advertencias si es del caso
+    	if ($registro_informe["post_script"]!="")
+		    {
+		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
+		        $ComplementoInicioScript="";
+		        if (substr(trim($registro_informe["post_script"]),0,5)!='<?php')
+		            $ComplementoInicioScript="<?php\n";
+		        PCO_EvaluarCodigo($ComplementoInicioScript.$registro_informe["post_script"],1,"Detalles: POST-Code Rep ID=".$informe,1);
+		    }
+
 	    PCO_CargarFormulario("-14",1,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,0,0);
 	?>
 

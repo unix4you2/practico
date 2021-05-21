@@ -36,17 +36,84 @@
 	Funciones asociadas a generacion de controles de datos basados en los parametros recibidos
 */
 
+//Recupera al menos la accion cuando se trata de llamados sin contexto del index del framework
+if (!isset($PCO_Accion)) $PCO_Accion=$_REQUEST["PCO_Accion"];
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
-	Function: recordset_json
+	Function: PCO_ExportacionQueryCacheCSV
+	Este archivo exporta cualquier QueryRecibido a formato CSV en la salida estandar del navegador para ser descargado
+
+	Variables de entrada:
+
+        IdRegistro_CacheSQL - ID unico del Informe asociado a la consulta que se encuentra cacheado
+        NombreArchivo - Opcional para generar un nombre de archivo personalizado para el informe
+
+	Salida:
+		* Datos a traves del navegador
+*/
+if ($PCO_Accion=="PCO_ExportacionQueryCacheCSV" ) 
+    {   
+        //Se asegura de tener las variables requeridas por filtros y recibidas desde la peticion
+        if (!isset($IdRegistro_CacheSQL)) $IdRegistro_CacheSQL=$_REQUEST["IdRegistro_CacheSQL"];
+        
+        $NombreArchivo=$_REQUEST['NombreArchivo'];
+        if ($NombreArchivo=="") $NombreArchivo="DatosExportadosCSV_Inf{$IdRegistro_CacheSQL}.csv";
+
+        // Valida sesion activa de Practico
+        @session_start();
+        if(!isset($_SESSION['PCOSESS_SesionAbierta'])) {
+        	echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
+        	die();
+        }
+
+        include_once '../core/configuracion.php';
+        // Inicia las conexiones con la BD y las deja listas para las operaciones
+        include_once '../core/conexiones.php';
+        // Incluye definiciones comunes de la base de datos
+        include_once '../inc/practico/def_basedatos.php';
+        // Incluye archivo con algunas funciones comunes usadas por la herramienta
+        include_once '../core/comunes.php';
+        
+        $RegistroCacheSQL=PCO_EjecutarSQL("SELECT * FROM core_informe_cache WHERE id='{$IdRegistro_CacheSQL}' AND usuario='".$_SESSION["PCOSESS_LoginUsuario"]."' ")->fetch();
+        $ConsultaCacheada=trim($RegistroCacheSQL["script_sql"]);
+        $ListaColumnasCache=trim($RegistroCacheSQL["columnas"]);
+
+        //Continua adelante solo si realmente encontro el informe cacheado y coincidente entre id y usuario
+        if ($ConsultaCacheada!="")
+            {
+                //Construye las columnas
+                $PCO_ColumnasVisibles=explode(",",$ListaColumnasCache);
+        
+                //Inicia la entrega de contenidos
+                ob_clean();
+                $ArchivoDestino = fopen("php://output", 'w');
+                header("Content-disposition: attachment; filename=".$NombreArchivo);
+                header("Content-Type: text/csv; charset=UTF-8;");
+                //Agrega las columnas como encabezados
+                fputcsv($ArchivoDestino, $PCO_ColumnasVisibles);
+                //Agrega los datos de cada registro
+                $ResultadoConsulta=PCO_EjecutarSQL($ConsultaCacheada);
+                
+                while ($Registro = $ResultadoConsulta->fetch(PDO::FETCH_ASSOC))
+                    fputcsv($ArchivoDestino, $Registro);
+                //Cierra la salida
+                fclose($ArchivoDestino);
+            }
+    }
+
+
+########################################################################
+########################################################################
+/*
+	Function: PCO_RecuperarRecordsetJSON_DataTable
 	Hace una consulta a la base de datos determinada por un identificador de informe y retorna los registros formateados en JSON.  Util en DataTables con AJAX
 
 	Variables de entrada:
 
-        IDInforme - ID unico del Informe asociado a la consulta
+        IdRegistro_CacheSQL - ID unico del Informe asociado a la consulta que se encuentra cacheado
         
         start - Enviado automaticamente por DataTables 
         length - Enviado automaticamente por DataTables 
@@ -58,7 +125,6 @@
 	Salida:
 		Lista de elementos < option > usados en el combo
 */
-if (!isset($PCO_Accion)) $PCO_Accion=$_REQUEST["PCO_Accion"];
 if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" ) 
     {   
         //Se asegura de tener las variables requeridas por filtros y recibidas desde la peticion
@@ -184,8 +250,8 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: opciones_combo_box
 	Hace una consulta a la base de datos y retorna las opciones a desplegar en una lista de seleccion o combobox
@@ -241,8 +307,8 @@ if ($PCO_Accion=="opciones_combo_box")
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: valor_campo_tabla
 	Hace una consulta a la base de datos sobre un campo y tabla especificos y retorna su valor.  Acepta condiciones de filtrado
@@ -273,14 +339,14 @@ if ($PCO_Accion=="valor_campo_tabla")
     }
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Section: Acciones a ser ejecutadas (si aplica) en cada cargue de la herramienta
 */
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: cambiar_estado_campo
 	Abre los espacios de trabajo dinamicos sobre el contenedor principal donde se despliega informacion
@@ -346,8 +412,8 @@ if (@$PCO_Accion=="cambiar_estado_campo")
 	
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_ObtenerOpcionesAjaxSelect
 	Consulta de manera dinamica los elementos requeridos para una lista de seleccion

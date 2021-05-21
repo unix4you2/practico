@@ -122,8 +122,6 @@
                                             //Valida si los octetos pasaron la prueba
                                             if ($Octeto0_OK==1 && $Octeto1_OK==1 && $Octeto2_OK==1 && $Octeto3_OK==1)
                                                 $DetectadaRedPermitida=1;
-                                            else
-                        				        $MensajeErrorLogin="Usted no se encuentra autorizado para ingresar desde la red donde se encuentra";
                 				            $RedAnalizada++;
                 				        }    				                
     				            }
@@ -131,7 +129,7 @@
                             if($DetectadaRedPermitida==0)
                                 {
                                     PCO_Auditar("Elimina sesiones activas al intentar acceso con RED no autorizada desde $IP_Usuario","$uid");
-                                    $ComplementoMensajeRedNoPermitida="<br>Red o lugar de origen donde se encuentra el usuario NO autorizado";
+                                    $ComplementoMensajeRedNoPermitida="<li><b>Red o lugar de origen donde se encuentra el usuario NO autorizado</b>";
                                 }
                             
                             if ($DetectadaRedPermitida==1)
