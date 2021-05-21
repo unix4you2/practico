@@ -89,45 +89,43 @@ matrix:
       dist: trusty
       env:
       - DB1=MySQL
-#      - DB2=PostgreSQL
-#      - DB3=SQLite3
       sudo: required
       services:
       - mysql
-#      - postgresql
-      
+
     - php: 7.0
       dist: trusty
       env:
       - DB1=MySQL
-#      - DB2=PostgreSQL
-#      - DB3=SQLite3
       sudo: required
       services:
       - mysql
-#      - postgresql
-      
+
     - php: 7.1
       dist: trusty
       env:
       - DB1=MySQL
-#      - DB2=PostgreSQL
-#      - DB3=SQLite3
       sudo: required
       services:
       - mysql
-#      - postgresql
 
     - php: 7.2
       dist: trusty
       env:
       - DB1=MySQL
-#      - DB2=PostgreSQL
-#      - DB3=SQLite3
+
       sudo: required
       services:
       - mysql
-#      - postgresql
+
+    - php: 8.0
+      dist: trusty
+      env:
+      - DB1=MySQL
+      sudo: required
+      services:
+      - mysql
+
 
 #    - php: hhvm
 #      dist: trusty

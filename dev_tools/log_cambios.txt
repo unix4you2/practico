@@ -111,6 +111,7 @@ LogCambios="
 * Added [INFORMES]: Nueva opción en el diseño de informes permite seleccionar entre las opciones de importación nativas una para CSV crudo.  Siendo mucho más rápida y eficiente que la opción personalizable pero sin selección de formatos.  El desarrollador puede seleccionar cualquier combinación de opciones de exportación disponibles para el usuario final.  Se debe tener en cuenta que en informes que generen objetos especiales como un dato dentro del registro éstos también serán tenidos en cuenta.
 * Enhan [CORE]: La funcion de búsqueda de nuevas versiones o actualizaciones del framework agrega ahora un botón con acceso directo al sitio de descargas.
 * Added [KANBAN]: Los desarrolladores o administradores cuentan con dos informes en el explorador de tableros que les permite visualizar un total de tareas pendientes por todos los tableros y de tareas archivadas.  Util para evitar el ingreso independiente a cada tablero y revisar cumplimiento de actividades.
+* Enhan [INFORMES]: Opción de exportación nativa en CSV para informes está disponible incluso cuando éstos se encuentren embebidos en otros controles o formularios siempre y cuando el objeto sea diagramado en ventana propia, permitiendo múltiples botones de exportación en una misma pantalla cuando se combinen informes.
 
 "
 

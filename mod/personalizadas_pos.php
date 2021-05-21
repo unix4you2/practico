@@ -47,6 +47,9 @@
 
             Por favor considere la construccion de un nuevo modulo antes que implementar rutinas sobre este archivo
             Please consider to build a new module before to deploy rutines in this file
+            
+            IMPORTANTE: Muchas de estas acciones podrían ser realizadas directamente sobre los scripts POST de formularios e informes
+                        ofreciendo un mayor encapsulamiento y portabilidad de las funcionalidades cuando se hagan despliegues a produccion.
             */
 
 if ($PCO_Accion=="Mi_AccionPoscarga_XYZ") 
@@ -55,13 +58,4 @@ if ($PCO_Accion=="Mi_AccionPoscarga_XYZ")
 
 	}
 
-
-if ($PCO_Accion=="PruebaDT2") 
-	{
-	    echo '<a href="http://192.168.0.63/practico/index.php?PCO_Accion=PruebaDT2">http://192.168.0.63/practico/index.php?PCO_Accion=PruebaDT2</a>';
-
-        PCO_CargarInforme("113",1);  //Select *
-        //PCO_CargarInforme("114");  //Select lista campos
-
-	}
 ?>

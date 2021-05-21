@@ -8834,12 +8834,14 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         									<div><i class="fa fa-floppy-o fa-fw"></i> '.$MULTILANG_Exportar.'</div>
         								</a>'.$TituloVentanaInforme;
                                     }
-							    //Formato CSV por AJAX - Solo genera el marco, el boton se agrega luego cuando se conozca el ID de la cache de informe (mas abajo)
-    				            if ($registro_informe["genera_pdf"]=='C' || $registro_informe["genera_pdf"]=='A')
-                                    {
-        								$TituloVentanaInforme='<div id="PCO_MarcoBotonCSVInforme'.$informe.'" class="pull-right" style="margin-left:5px;"></div>'.$TituloVentanaInforme;
-                                    }
 							}
+
+						//Define si requiere o no boton de exportacion en la barra de titulo
+					    //Formato CSV por AJAX - Solo genera el marco, el boton se agrega luego cuando se conozca el ID de la cache de informe (mas abajo)
+			            if ($registro_informe["genera_pdf"]=='C' || $registro_informe["genera_pdf"]=='A')
+                            {
+								$TituloVentanaInforme='<div id="PCO_MarcoBotonCSVInforme'.$informe.'" class="pull-right" style="margin-left:5px;"></div>'.$TituloVentanaInforme;
+                            }
 
 						//Carga la ventana con el informe
 						PCO_AbrirVentana($TituloVentanaInforme.$ComplementoIdObjetoEnTitulo,'panel panel-info',$registro_informe["ancho"]);
