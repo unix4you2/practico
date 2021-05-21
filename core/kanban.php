@@ -724,16 +724,27 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanbanResumido")
         $ResultadoTablerosCompartidos=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%' ")->fetchColumn();
 
         if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-            echo "      
-                <div class='row'>
-                    <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
-                        <div class='pull-left'><div class='btn btn-success' onclick='CargarCreacionTablero();'><i class='fa fa-plus fa-fw fa-1x'></i> [KANBAN] $MULTILANG_CrearTablero</div></div>
-						&nbsp;&nbsp;&nbsp;&nbsp;<button type='Button' onclick='document.PCO_FormVerMenu.submit()' class='btn btn-warning'><i class='fa fa-home fa-fw'></i> $MULTILANG_IrEscritorio</button>
-                    </div>
-                    <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
-                        <div class='pull-left btn-xs'></div>
-                    </div>
-                </div><br>";
+            {
+                //Verifica si tiene tableros compartidos y agrega el/los botones para explorar globalmente tareas de cada tablero
+                $CadenaExploracionTareas="";
+                if ($ResultadoTablerosPropios!=0 || $ResultadoTablerosCompartidos!=0)
+                    $CadenaExploracionTareas= "
+                        &nbsp;&nbsp;&nbsp;&nbsp; <div class='pull-left'><a class='btn btn-info' href='index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=inf:-33:1'><i class='fa fa-eye fa-fw fa-1x'></i> Ver todas las tareas pendientes</a></div>
+                        &nbsp;&nbsp;&nbsp;&nbsp; <div class='pull-left'><a class='btn btn-default' href='index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=inf:-34:1'><i class='fa fa-eye fa-fw fa-1x'></i> Ver todas las tareas archivadas</a></div>
+                        ";
+                //Presenta botones de crear tablero y volver al menu                
+                echo "      
+                    <div class='row'>
+                        <div class='col col-md-12 col-sm-12 col-lg-12 col-xs-12'>
+                            <div class='pull-left'><div class='btn btn-success' onclick='CargarCreacionTablero();'><i class='fa fa-plus fa-fw fa-1x'></i> [KANBAN] $MULTILANG_CrearTablero</div></div>
+                            {$CadenaExploracionTareas}
+    						&nbsp;&nbsp;&nbsp;&nbsp;<button type='Button' onclick='document.PCO_FormVerMenu.submit()' class='btn btn-warning'><i class='fa fa-home fa-fw'></i> $MULTILANG_IrEscritorio</button>
+                        </div>
+                        <div class='col col-md-6 col-sm-6 col-lg-6 col-xs-6'>
+                            <div class='pull-left btn-xs'></div>
+                        </div>
+                    </div><br>";
+            }
                 
         //Si hay tableros carga el informe, sino presenta mensaje de que no hay tableros
         if ($ResultadoTablerosPropios!=0 || $ResultadoTablerosCompartidos!=0)
