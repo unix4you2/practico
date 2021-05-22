@@ -20,7 +20,7 @@ CREATE TABLE core_parametros (
   federado_encripcion varchar(255) NULL DEFAULT '',
   federado_puerto varchar(255) NULL DEFAULT '',
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO core_parametros (nombre_empresa_largo,nombre_empresa_corto,nombre_aplicacion,version,fecha_lanzamiento,licencia,creditos) VALUES ('Nombre completo de su empresa','PAR_NombreCortoEmpresa','PAR_NombreAplicacion','PAR_VersionApp','20150101','Texto de su licencia','Texto asociado a los creditos de su aplicacion');
 
@@ -45,7 +45,7 @@ CREATE TABLE core_usuario (
   redes_permitidas text,
   PRIMARY KEY  (login),
   UNIQUE (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO core_usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno) VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','Super usuario',1,'sucorreo@dominio.com',DATE(NOW()),'d41d8cd98f00b204e9800998ecf8427e',1);
 
@@ -59,7 +59,7 @@ CREATE TABLE core_auditoria (
   fecha date NOT NULL,
   hora time NOT NULL,
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_menu;
 CREATE TABLE core_menu (
@@ -84,7 +84,7 @@ CREATE TABLE core_menu (
   clase_contenedor varchar(250) default '',
   hash_unico varchar(15) default '',
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_usuario_menu;
 CREATE TABLE core_usuario_menu (
@@ -92,7 +92,7 @@ CREATE TABLE core_usuario_menu (
   usuario varchar(250) NOT NULL default '',
   menu varchar(15) NOT NULL default '0',
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_formulario;
 CREATE TABLE core_formulario (
@@ -112,7 +112,7 @@ CREATE TABLE core_formulario (
   pre_script mediumtext,
   post_script mediumtext,
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_formulario_objeto;
 CREATE TABLE core_formulario_objeto (
@@ -173,7 +173,7 @@ CREATE TABLE core_formulario_objeto (
   ajax_busqueda_dinamica int(1) default '0',
   etiqueta_colapsable varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 ALTER TABLE core_formulario_objeto ADD INDEX formulario (formulario);
 
@@ -184,7 +184,7 @@ CREATE TABLE core_evento_objeto (
   evento varchar(250) default '',
   javascript text,
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_evento_inventario;
 CREATE TABLE core_evento_inventario (
@@ -193,7 +193,7 @@ CREATE TABLE core_evento_inventario (
   categoria varchar(250) default '',
   descripcion varchar(250) default '',
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('onclick',                    '01. Raton (Mouse)',        '$MULTILANG_EventoClick');
 INSERT INTO core_evento_inventario (evento,categoria,descripcion) VALUES ('ondblclick',                 '01. Raton (Mouse)',        '$MULTILANG_EventoDobleClick');
@@ -307,7 +307,7 @@ CREATE TABLE core_formulario_boton (
   retorno_estilo VARCHAR(50) NULL DEFAULT '',
   id_html varchar(250) default '',
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe;
 CREATE TABLE core_informe (
@@ -346,7 +346,7 @@ CREATE TABLE core_informe (
   post_script mediumtext,
   usar_ajax int(1) DEFAULT '0',
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_campos;
 CREATE TABLE core_informe_campos (
@@ -359,7 +359,7 @@ CREATE TABLE core_informe_campos (
   editable int(1) DEFAULT 0,
   titulo_arbitrario varchar(255) DEFAULT '',
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_tablas;
 CREATE TABLE core_informe_tablas (
@@ -368,7 +368,7 @@ CREATE TABLE core_informe_tablas (
   valor_tabla varchar(250),
   valor_alias varchar(250),
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_condiciones;
 CREATE TABLE core_informe_condiciones (
@@ -379,7 +379,7 @@ CREATE TABLE core_informe_condiciones (
   valor_der varchar(250),
   peso int(3) default '0',
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_boton;
 CREATE TABLE core_informe_boton (
@@ -398,7 +398,7 @@ CREATE TABLE core_informe_boton (
   imagen varchar(250) DEFAULT '',
   ubicar_principio int(1) default '0',
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_informe_cache;
 CREATE TABLE core_informe_cache (
@@ -410,7 +410,7 @@ CREATE TABLE core_informe_cache (
   script_sql mediumtext,
   columnas text,
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_usuario_informe;
 CREATE TABLE core_usuario_informe (
@@ -418,7 +418,7 @@ CREATE TABLE core_usuario_informe (
   usuario varchar(250) NOT NULL,
   informe int(10) NOT NULL,
   PRIMARY KEY  (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_llaves_api;
 CREATE TABLE core_llaves_api (
@@ -431,7 +431,7 @@ CREATE TABLE core_llaves_api (
   ip_autorizada varchar(255) NOT NULL,
   funciones_autorizadas text,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_chat;
 CREATE TABLE core_chat (
@@ -442,7 +442,7 @@ CREATE TABLE core_chat (
   sent DATETIME,
   recd INTEGER UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 ALTER TABLE core_chat ADD INDEX destinatario (destinatario);
 
 DROP TABLE IF EXISTS core_monitoreo;
@@ -472,7 +472,7 @@ CREATE TABLE core_monitoreo (
   conexion_origen_datos varchar(255) DEFAULT '',
   modo_compacto int(10) DEFAULT '0',
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_replicasbd;
 CREATE TABLE core_replicasbd (
@@ -486,7 +486,7 @@ CREATE TABLE core_replicasbd (
   puertobd VARCHAR(255) NOT NULL DEFAULT '',
   tipo_replica INTEGER(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_kanban;
 CREATE TABLE core_kanban (
@@ -505,7 +505,7 @@ CREATE TABLE core_kanban (
   tablero int(11),
   porcentaje int(11) default '0',
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 ALTER TABLE core_kanban ADD INDEX columna(columna);
 ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
 
@@ -517,7 +517,7 @@ CREATE TABLE core_opcionlista (
   valor_visual varchar(255),
   ordenamiento int(11),
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_grafico','T','{$MULTILANG_TablaDatos}',1);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_grafico','G','{$MULTILANG_Grafico}',2);
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_sino','S','{$MULTILANG_Si}',1);
@@ -652,13 +652,13 @@ CREATE TABLE core_bugtracker (
   adjunto longblob,
   historial_gestion text,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_tabla_comodin;
 CREATE TABLE core_tabla_comodin (
   id int(10) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_tareascron;
 CREATE TABLE core_tareascron (
@@ -670,7 +670,7 @@ CREATE TABLE core_tareascron (
   habilitado int(1),
   historial_ejecucion text,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_pcoder_historial;
 CREATE TABLE core_pcoder_historial (
@@ -683,7 +683,7 @@ CREATE TABLE core_pcoder_historial (
   contenido mediumtext,
   tipo_origen char(1) NULL DEFAULT 'A',
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_pcoder_bloqueos;
 CREATE TABLE core_pcoder_bloqueos (
@@ -695,7 +695,7 @@ CREATE TABLE core_pcoder_bloqueos (
   direccion_origen varchar(255),
   agente varchar(255),
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_pcoder_chat;
 CREATE TABLE core_pcoder_chat (
@@ -706,7 +706,7 @@ CREATE TABLE core_pcoder_chat (
   sent DATETIME,
   recd int(11) UNSIGNED NOT NULL DEFAULT 0,
   PRIMARY KEY (id)
-) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 DROP TABLE IF EXISTS core_acortadorurls;
 CREATE TABLE core_acortadorurls (
@@ -719,4 +719,4 @@ CREATE TABLE core_acortadorurls (
   contador_uso int(11) NOT NULL DEFAULT '0',
   tipo_redireccion char(3) NOT NULL DEFAULT '301',
   PRIMARY KEY (id)
-);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
