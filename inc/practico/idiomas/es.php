@@ -1170,7 +1170,7 @@
 	$MULTILANG_ErrorScripts='Error ejecutando la consulta sobre la base de datos';
 	$MULTILANG_IrInstalacion='Ir a su instalaci&oacute;n de Pr&aacute;ctico';
 	$MULTILANG_Totalejecutado='Total consultas ejecutadas';
-	$MULTILANG_MsjFinal1='Si esta es una instalaci&oacute;n nueva puede ingresar al sistema mediante las credenciales<b> admin/admin</b> y cambiarlas luego por las que usted desee.';
+	$MULTILANG_MsjFinal1='Si esta es una instalaci&oacute;n nueva puede ingresar al sistema mediante las credenciales<b> admin/admin</b> y cambiarlas luego por las que usted desee.<hr><b><font color=red>LA PRIMERA VEZ QUE INGRESE TARDARA MAS DE LO NORMAL MIENTRAS SE EJECUTAN LOS SCRIPTS DE POST-INSTALACION</font></b><hr>';
 	$MULTILANG_MsjFinal2='Recuerde eliminar por completo el directorio de instalaci&oacute;n (carpeta /ins)</b></u> para evitar que otra persona ejecute nuevamente estos scripts sobre un sistema en producci&oacute;n pudiendo ocasionar alg&uacute;n tipo de da&ntilde;o.';
 	$MULTILANG_MsjFinal2='Resumen de operaciones ejecutadas';
 	$MULTILANG_AuthLDAPTitulo='Autenticacion basada en LDAP';

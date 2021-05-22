@@ -1171,7 +1171,7 @@
 	$MULTILANG_ErrorScripts='Error executing the query on the database';
 	$MULTILANG_IrInstalacion='Go to your Practico installation';
 	$MULTILANG_Totalejecutado='Total queries executed';
-	$MULTILANG_MsjFinal1='If this is a new installation can enter the system through <b> credentials admin / admin </ b> and change then as you desire.';
+	$MULTILANG_MsjFinal1='If this is a new installation can enter the system through <b> credentials admin / admin </ b> and change then as you desire.<hr><b><font color=red>FIRST TIME YOU LOGIN WILL BE A LONG TIME WHILE POST-INSTALLATION SCRIPTS ARE EXECUTED</font></b><hr>';
 	$MULTILANG_MsjFinal2='Remember to completely remove the installation directory (folder / ins) </b> </u> to prevent other person run these scripts again on a production system can cause any damage.';
 	$MULTILANG_MsjFinal2='Summary of operations executed';
 	$MULTILANG_AuthLDAPTitulo='LDAP based login';

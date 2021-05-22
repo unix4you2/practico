@@ -26,6 +26,7 @@ INSERT INTO core_parametros (nombre_empresa_largo,nombre_empresa_corto,nombre_ap
 
 DROP TABLE IF EXISTS core_usuario;
 CREATE TABLE core_usuario (
+  id int(11) NOT NULL AUTO_INCREMENT,
   login varchar(250) NOT NULL,
   clave varchar(50) NOT NULL default 'd41d8cd98fd41d8cd98fd41d8cd98fd41d8cd98f',
   nombre varchar(250) NOT NULL default '',
@@ -42,7 +43,8 @@ CREATE TABLE core_usuario (
   idioma varchar(5) NOT NULL DEFAULT '',
   avatar varchar(255) NOT NULL DEFAULT '',
   redes_permitidas text,
-  PRIMARY KEY  (login)
+  PRIMARY KEY  (login),
+  UNIQUE (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO core_usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno) VALUES ('admin','21232f297a57a5a743894a0e4a801fc3','Super usuario',1,'sucorreo@dominio.com',DATE(NOW()),'d41d8cd98f00b204e9800998ecf8427e',1);
@@ -706,6 +708,7 @@ CREATE TABLE core_pcoder_chat (
   PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+DROP TABLE IF EXISTS core_acortadorurls;
 CREATE TABLE core_acortadorurls (
   id int(11) unsigned NOT NULL AUTO_INCREMENT,
   url_larga varchar(1024) NOT NULL,
