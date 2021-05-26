@@ -42,6 +42,7 @@ LogCambios="
 * Enhan [CORE]: Actualizacion de librería PDFMake desde 0.1.53 a 0.1.71
 * Enhan [CORE]: Se evita presentacion de mensajes de depuracion de scroll detectado/no detectado
 * Fixed [CORE]: Sentencias de arreglos asociativos anidados para la generación de campos en datatables dináicos se reescribe para ser compatible tanto con versiones nuevas como viejas (5.3+) de PHP, en las cuales generaba error por versión obsoleta del lenguaje.
+* Enhan [INFORMES]: Agregadas aclaraciones acerca del formato de consultas y sentencias SQL con recuperación dinámica para poder ser comprendidos por el framework durante la recuperación de registros.
 
 
 TODO TODO TODO
