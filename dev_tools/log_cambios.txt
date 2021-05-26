@@ -43,6 +43,7 @@ LogCambios="
 * Enhan [CORE]: Se evita presentacion de mensajes de depuracion de scroll detectado/no detectado
 * Fixed [CORE]: Sentencias de arreglos asociativos anidados para la generación de campos en datatables dináicos se reescribe para ser compatible tanto con versiones nuevas como viejas (5.3+) de PHP, en las cuales generaba error por versión obsoleta del lenguaje.
 * Enhan [INFORMES]: Agregadas aclaraciones acerca del formato de consultas y sentencias SQL con recuperación dinámica para poder ser comprendidos por el framework durante la recuperación de registros.
+* Added [DEV]: Cuando el framework detecta que se encuentra en modo de desarrollador interno activado (valor -10000) presenta automáticamente una opción en el menú de usuario para lanzar el banco de pruebas interno del framework.
 
 
 TODO TODO TODO

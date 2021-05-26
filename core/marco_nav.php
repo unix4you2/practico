@@ -327,7 +327,6 @@
                                 echo '<li><a href="javascript:document.PCO_ExplorarTablerosKanban.submit();"><i class="fa fa-sticky-note fa-fw"></i> '.$MULTILANG_TablerosKanban.'</a></li>';
                         ?>
 
-
     					<?php
                             //Determina si el usurio puede o no cambiar el modo dia/noche segun estado en panel de configuracion
                             if ($PCO_PermitirUsuariosModoNoche=="1")
@@ -338,6 +337,12 @@
                                     $IconoModoDiaNoche=$IconoModoActivo.' Activar modo oscuro';
                                     echo '<li><a href="javascript:document.PCO_CargarActualizarPefil.submit();">'.$IconoModoDiaNoche.'</a></li>';
                                 }
+                        ?>
+
+    					<?php
+                            //Determina si esta en modo desarrollador del framework y agrega opcion para saltar al banco de pruebas interno
+                            if ($ModoDesarrolladorPractico==-10000)
+                                echo '<li><a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-25:1"><i class="fa fa-steam fa-fw"></i> <b>Banco de pruebas interno</b></a></li>';
                         ?>
 
 						<li class="divider"></li>
