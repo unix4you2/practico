@@ -17,9 +17,10 @@ ListaArchivos="
 index.php
 core/ajax.php
 core/marco_abajo.php
+core/marco_nav.php
+
 inc/reactjs/*
 inc/jquery/plugins/pdfmake-0.1.71/*
-
 
 xml/*
 inc/practico/idiomas/*
