@@ -229,7 +229,10 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
                             $ArregloAsociativoCampos=array();
                             //Recorre todos los campos definidos para agregarlos como llaves al arreglo de registro
                             foreach ($ListaCamposDT as $CampoDT)
-                                $ArregloAsociativoCampos += [$CampoDT => $row[$CampoDT] ];  //Arregla el par Key-Value al arreglo de registro
+                                {
+                                    //Agrega el par Key-Value con el campo correspondiente al arreglo de registro
+                                    $ArregloAsociativoCampos += array( $CampoDT => $row[$CampoDT] ); 
+                                }
                             $PCO_ArregloDatosRegistros[]=$ArregloAsociativoCampos;          //Agrega el arreglo de registro al arreglo de resultado general
                         }
         

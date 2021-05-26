@@ -271,7 +271,8 @@
     <script type="text/javascript" src="inc/bootstrap/js/plugins/toggle/bootstrap-toggle.min.js"></script>
 
     <script src="inc/jquery/plugins/jszip.min.js"></script>
-    <script src="inc/jquery/plugins/pdfmake.min.js"></script>
+    <!--<script src="inc/jquery/plugins/pdfmake.min.js"></script>-->
+    <script src="inc/jquery/plugins/pdfmake-0.1.71/pdfmake.min.js"></script>
     <script src="inc/jquery/plugins/vfs_fonts.js"></script>
 
     <!-- Morris Charts JavaScript -->

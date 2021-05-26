@@ -185,8 +185,17 @@
     <!-- JavaScript Personalizado del tema -->
     <script src="inc/bootstrap/js/sb-admin-2.js"></script>
     <script src="inc/bootstrap/js/practico.min.js?<?php echo filemtime('inc/bootstrap/js/practico.min.js'); ?>"></script>
-    <!-- Chat -->
-    <script type="text/javascript" src="inc/chat/js/chat.js"></script>
+    <?php
+    	//Carga marco de chat solamente si esta habilitado
+    	if (isset($Activar_ModuloChat) && $Activar_ModuloChat>0 && @$_SESSION['username']!="")
+        	{
+	?>
+                <!-- Chat -->
+                <script type="text/javascript" src="inc/chat/js/chat.js"></script>
+    <?php
+    	    }
+    ?>
+
 
     <?php
         //Si el usuario es admin por defecto presenta la barra lateral activa
@@ -232,12 +241,12 @@
             if( PCOJSVAR_HayScroll )
                 {
                     //$("#page-wrapper").css({ 'height': "100% !important" }); //SI Hay scroll  
-                    console.log("Scroll detectado");
+                    //console.log("Scroll detectado");
                 }
             else
                 {
                     $("#page-wrapper").css({ 'height': "100%" }); // NO Hay scroll  
-                    console.log("Scroll NO detectado");
+                    //console.log("Scroll NO detectado");
                 }
         });
     </script>
