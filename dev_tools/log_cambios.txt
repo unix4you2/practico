@@ -16,11 +16,13 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/ajax.php
+core/comunes.php
 core/marco_abajo.php
 core/marco_nav.php
 
 inc/reactjs/*
 inc/jquery/plugins/pdfmake-0.1.71/*
+inc/php-saml/*
 
 xml/*
 inc/practico/idiomas/*
@@ -45,12 +47,18 @@ LogCambios="
 * Fixed [CORE]: Sentencias de arreglos asociativos anidados para la generación de campos en datatables dináicos se reescribe para ser compatible tanto con versiones nuevas como viejas (5.3+) de PHP, en las cuales generaba error por versión obsoleta del lenguaje.
 * Enhan [INFORMES]: Agregadas aclaraciones acerca del formato de consultas y sentencias SQL con recuperación dinámica para poder ser comprendidos por el framework durante la recuperación de registros.
 * Added [DEV]: Cuando el framework detecta que se encuentra en modo de desarrollador interno activado (valor -10000) presenta automáticamente una opción en el menú de usuario para lanzar el banco de pruebas interno del framework.
+* Fixed [INFORMES]: Botón de Consulta SQL (Avanzado) lleva a la pestaña correcta del forma a su lado derecho (Consulta SQL)
+* Enhan [INFORMES]: Se agregan a la cache de consulta los informes internos del framework (Id negativo).  Para efectos de depuracion sobre su aplicacion los desarrolladores podrian tener en cuenta solo los Id de informe positivos.
+* Fixed [INFORMES]: Se permite el uso de Alias en los informes con recuperación por AJAX evitando error de SQL a generar filtros de búsqueda dinámicos.
+* Enhan [INFORMES]: Agrega aclaración sobre el uso de alias en las consultas para aquellos informes con recuperación por AJAX.
+* Enhan [DEV]: Agregado al banco de pruebas de ReactJS, Acciones Pre,Post y procesamiento de variables internas así como informes con y sin recuperación por AJAX junto con pruebas de Alias y concatenaciones.
+* Fixed [INFORMES]: Ajustada característica de subtotales para datatables.  Se advierte que su uso está condicionado a que la recuperación por ajax y la distribución responsive se encuentres DESHABILITADAS ya que generan incompatibilidad.  Se recomienda revisar que no tenga ningún informe con estas características o sino debe ser ajustado antes de aplicar este parche.  Query de ayuda para buscar este tipo de informes: SELECT * FROM core_informe WHERE subtotales_columna<>'' AND (tabla_responsive='S' OR usar_ajax=1)
+* Fixed [INFORMES]: Se han recuperado los pie de pagina en informes con total de registros encontrados o subtotales calculados.  Es posible que si no los viera antes era por no ser considerados, si es así y desea ocultarlos simplemente en la configuración de su informe seleccione la opción de SI ocultar pie de pagina.
+* Added [CORE]: Implementación del modelo de SP (Service provider) en la aplicación para proveer Soporte SSO para autenticacion de usuarios mediante un IdP SAML2
 
 
 TODO TODO TODO
 * Added [CORE]: Ahora la rutina de VerificarConectividad utilizada por el framework para presentar al usuario su estado de red (cuando se cae o regresa) es configurable desde el panel de la aplicación indicando si estará deshabilitada por defecto o cada cuánto se desea realizar el chequeo de conectividad del usuario.
-
-
 
 "
 
@@ -68,26 +76,43 @@ UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$')
 ScriptPHPAutorun=""
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ########################################################################
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
+
+https://github.com/onelogin/php-saml
+https://developers.onelogin.com/saml/php
+https://stackoverflow.com/questions/43910939/steps-to-implement-sso-for-php-application
+https://developers.onelogin.com/
+
+Task1 OK - Descargar demo
+Task2 OK - Registrarse y crear App connector
+Task3 OK - Desde opcion SSO Pegar datos hacia settings.php
+            Issuer URL ➞	entityId
+            SAML 2.0 Endpoint (HTTP) ➞	singleSignOnService
+            SLO Endpoint (HTTP)➞	singleLogoutService
+            X.509 Certificate > View Details➞	x509cert
+Task4 OK - Definir datos del service provider (la aplicacion propia)
+            spBaseUrl  (setear la URL base del sistema)
+            entityId
+            assertionConsumerService
+            singleLogoutService
+            NameIDFormat  cambiado  unspecified  a  emailAddress   (revisar si sin especificar aplica a todos)
+
+            Se pegan datos desde settings.php hacia el panel de configuracion de saml así:
+            assertionConsumerService➞	ACS (Consumer) URL   (en el validator estaba  .*  y se agregó  /.*
+                                        y Recipient
+            singleLogoutService ➞	 Single Logout URL
+            entityId ➞	Audience
+                        
+            Diligenciar otros campos segun OneLogin
+Task5 OK - Creacion de un usuario en la app
+
+URL de llamado:  https://dev.practico.org/practico/inc/saml2/php-saml-master/demo1
+SAML Tracer extension firefox:  https://addons.mozilla.org/es/firefox/addon/saml-tracer/
+https://www.samltool.com/
+
+
 Usar el hash sumando todos los permisos de un usuario para ver si el crc32 da diferente de lo que tiene a la plantilla entonces lo asigne o regenere.
 
 ANOTACIONES DE TABLA DE PARAMETROS:

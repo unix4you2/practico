@@ -7466,7 +7466,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                     <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=PCO_EditarFormulario&popup_activo=&formulario='.$formulario.'">
                         <div><i class="fa fa-pencil-square"></i> '.$MULTILANG_Editar.' '.$MULTILANG_Formularios.' <i>[ID='.$formulario.']</i></div>
                     </a>';
-		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && $formulario>=0)
+		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && ($formulario>=0 || $ModoDesarrolladorPractico=-10000) )
 		    $ComplementoIdObjetoEnTitulo="  $BotonSaltoEdicion";
 
 		echo '
@@ -8952,7 +8952,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
                     //Lleva informe a la cache siempre y cuando no sea un informe interno del framework
                     $IdCacheInformes=0;
-                    if ($informe>0)
+                    //if ($informe>0 || $ModoDesarrolladorPractico==-10000)
                         {
                             PCO_EjecutarSQLUnaria("INSERT INTO {$TablasCore}informe_cache (informe,usuario,conexion,script_sql,columnas) VALUES('{$informe}','{$PCOSESS_LoginUsuario}','{$NombreConexionExtra}',?,'{$ListaColumnasInforme}') ","{$consulta}");
                             $IdCacheInformes=PCO_ObtenerUltimoIDInsertado();
@@ -8988,7 +8988,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                     	        $PCO_InformesRecuperacionAJAX.="0"."|";
         
         					//Procesa resultados solo si es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch(), rowCount() y demas metodos
-        					while($consulta_ejecucion!="1" && $registro_informe=$consulta_ejecucion->fetch())
+        					while($consulta_ejecucion!="1" && $registro_datos_informe=$consulta_ejecucion->fetch())
         						{
         							$SalidaFinalInforme.= '<tr>';
         
@@ -8996,8 +8996,8 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         							if ($cadena_generica_botones_principio!="")
         								{
         									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo (OCULTO O NO)
-        									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones_principio);
-        									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
+        									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_datos_informe[0],$cadena_generica_botones_principio);
+        									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_datos_informe[0],$cadena_botones_registro);
         									//Muestra los botones preparados para el registro
         									$SalidaFinalInforme.= '<td>'.$cadena_botones_registro.'</td>';
         								}
@@ -9007,7 +9007,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         									//Muestra la columna solo si no se trata de una de las ocultas
         									if (@!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
         										{
-        											$ValorCampoIdentificador=$registro_informe[0]; //Toma por ahora el primer campo (OCULTO O NO)
+        											$ValorCampoIdentificador=$registro_datos_informe[0]; //Toma por ahora el primer campo (OCULTO O NO)
         											$Nombre_CampoLlave=@$CamposReales[0]["ListaCampos_NombreSimple"][0]; //Toma por ahora el primer campo (OCULTO O NO)
         											$Nombre_CampoEditable=@$CamposReales[0]["ListaCampos_NombreSimple"][$i];
         											$Nombre_TablaEditable=@$CamposReales[0]["ListaTablas_NombreSimple"][$i];
@@ -9018,7 +9018,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         											if (@$CamposReales[0]["ListaCampos_PermitirEdicion"][$i]==1)
         												$CadenaActivadora_Edicion=' id="'.$IdentificadorDeCampoEditable.'" contenteditable="true" ';
         
-        											$ValorVisibleFinal=$registro_informe[$i];
+        											$ValorVisibleFinal=$registro_datos_informe[$i];
         											if ($ModoDesarrolladorPractico==1) $ValorVisibleFinal=PCO_ReemplazarVariablesPHPEnCadena($ValorVisibleFinal);
         
         											$SalidaFinalInforme.= '
@@ -9030,8 +9030,8 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         							if ($cadena_generica_botones!="")
         								{
         									//Transforma la cadena generica con los datos especificos del registro, toma por ahora el primer campo (OCULTO O NO)
-        									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_informe[0],$cadena_generica_botones);
-        									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_informe[0],$cadena_botones_registro);
+        									$cadena_botones_registro=str_replace("DELFRMVALVALOR",$registro_datos_informe[0],$cadena_generica_botones);
+        									$cadena_botones_registro=str_replace("DETFRMVALBASE",$registro_datos_informe[0],$cadena_botones_registro);
         									//Muestra los botones preparados para el registro
         									$SalidaFinalInforme.= '<td>'.$cadena_botones_registro.'</td>';
         								}
@@ -9048,18 +9048,20 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                         }
 
 					$SalidaFinalInforme.= '</tbody>';
-					
+
 					//Si se desea tabla responsive oculta el pie de pagina (libreria datatables no soporta responsive con tfooter ni recupareacion ajax con tfooter)
-			        if ( $registro_informe["tabla_responsive"] == 'N' && $registro_informe["usar_ajax"]==0)
+			        if ($registro_informe["tabla_responsive"] == 'N' &&  $registro_informe["usar_ajax"]=="0")
 			            {
         					$SalidaFinalInforme.= '<tfoot id="PCO_PiePaginaInforme_'.$registro_informe["id"].'" '.$ComplementoAnulacionPiePagina.'>';
         					//Cuando es embebido (=1) no agrega los totales de registro
         					//if (!$embebido)
+        					$CantidadColumnasSpan=$ConteoPosicionColumna-1;
         					@$SalidaFinalInforme.= '
-        						<tr><td colspan='.$numero_columnas.'>
-        							<b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
-        						</td></tr>';
-
+        						<tr>
+        						    <th colspan='.$CantidadColumnasSpan.'>
+        							    <b>'.$MULTILANG_TotalRegistros.': </b>'.$numero_filas.'
+        						    </th>
+        						</tr>';
         					//Cierra pie de pagina, tabla y marco responsive para la tabla
         					$SalidaFinalInforme.= '</tfoot>';
 			            }

@@ -1,0 +1,230 @@
+<?php
+/**
+ *  SAML Handler
+ */
+
+session_start();
+
+require_once dirname(__DIR__).'/_toolkit_loader.php';
+
+require_once 'settings.php';
+
+function ImprimirDepuracion($SeccionCodigo="SinDefinir")
+    {
+        return;
+        global $auth;
+        print_r("<hr><b>SECCION DE CODIGO=".$SeccionCodigo."</b>");
+        print_r('<hr>VARS=');       @print_r(get_defined_vars());
+        print_r('<hr>CLASSES=');    @print_r(get_declared_classes());
+        print_r('<hr>$_GET=');      @print_r($_GET);
+        print_r('<hr>$_SESSION=');  @print_r($_SESSION);
+
+        echo "VARIABLE requestID=".$requestID;
+        echo "VARIABLE sessionJohn=".$_SESSION['PracticoSAML'];
+        echo "<hr>";
+        var_dump($auth);
+    }
+
+$auth = new OneLogin_Saml2_Auth($settingsInfo);
+
+
+########################################################################
+########################################################################
+if (isset($_GET['sso']))
+    {
+        ImprimirDepuracion("SSO");
+        $auth->login();
+        # If AuthNRequest ID need to be saved in order to later validate it, do instead
+        // $ssoBuiltUrl = $auth->login(null, array(), false, false, true);
+        // $_SESSION['AuthNRequestID'] = $auth->getLastRequestID();
+        // $_SESSION['PracticoSAML'] = (string)"SSO_On";
+        // header('Pragma: no-cache');
+        // header('Cache-Control: no-cache, must-revalidate');
+        // header('Location: ' . $ssoBuiltUrl);
+        // exit();
+    }
+
+
+
+
+########################################################################
+########################################################################
+if (isset($_GET['sso2']))
+    {
+        $returnTo = $spBaseUrl.'/demo1/attrs.php';
+        $auth->login($returnTo);
+    }
+
+
+
+
+########################################################################
+########################################################################
+if (isset($_GET['slo']))
+    {
+        $returnTo = null;
+        $parameters = array();
+        $nameId = null;
+        $sessionIndex = null;
+        $nameIdFormat = null;
+        $samlNameIdNameQualifier = null;
+        $samlNameIdSPNameQualifier = null;
+    
+        if (isset($_SESSION['samlNameId']))
+            {
+                $nameId = $_SESSION['samlNameId'];
+            }
+            
+        if (isset($_SESSION['samlNameIdFormat'])) 
+            {
+                $nameIdFormat = $_SESSION['samlNameIdFormat'];
+            }
+            
+        if (isset($_SESSION['samlNameIdNameQualifier'])) 
+            {
+                $samlNameIdNameQualifier = $_SESSION['samlNameIdNameQualifier'];
+            }
+            
+        if (isset($_SESSION['samlNameIdSPNameQualifier'])) 
+            {
+                $samlNameIdSPNameQualifier = $_SESSION['samlNameIdSPNameQualifier'];
+            }
+            
+        if (isset($_SESSION['samlSessionIndex']))
+            {
+                $sessionIndex = $_SESSION['samlSessionIndex'];
+            }
+    
+        $auth->logout($returnTo, $parameters, $nameId, $sessionIndex, false, $nameIdFormat, $samlNameIdNameQualifier, $samlNameIdSPNameQualifier);
+    
+        # If LogoutRequest ID need to be saved in order to later validate it, do instead
+        # $sloBuiltUrl = $auth->logout(null, $paramters, $nameId, $sessionIndex, true);
+        # $_SESSION['LogoutRequestID'] = $auth->getLastRequestID();
+        # header('Pragma: no-cache');
+        # header('Cache-Control: no-cache, must-revalidate');
+        # header('Location: ' . $sloBuiltUrl);
+        # exit();
+    }
+
+
+
+
+########################################################################
+########################################################################
+if (isset($_GET['acs']))
+    {
+        if (isset($_SESSION) && isset($_SESSION['AuthNRequestID'])) 
+            {
+                $requestID = $_SESSION['AuthNRequestID'];
+            } 
+        else
+            {
+                $requestID = null;
+            }
+            
+        ImprimirDepuracion("ACS");
+
+        $auth->processResponse($requestID);
+    
+        $errors = $auth->getErrors();
+    
+        if (!empty($errors))
+            {
+                echo '<p>',implode(', ', $errors),'</p>';
+                if ($auth->getSettings()->isDebugActive())
+                    {
+                        echo '<p>'.$auth->getLastErrorReason().'</p>';
+                    }
+            }
+    
+        if (!$auth->isAuthenticated())
+            {
+                echo "<p>Not authenticated</p>";
+                echo '<p>'.$auth->getLastErrorReason().'</p>';
+                exit();
+            }
+    
+        $_SESSION['samlUserdata'] = $auth->getAttributes();
+        $_SESSION['samlNameId'] = $auth->getNameId();
+        $_SESSION['samlNameIdFormat'] = $auth->getNameIdFormat();
+        $_SESSION['samlNameIdNameQualifier'] = $auth->getNameIdNameQualifier();
+        $_SESSION['samlNameIdSPNameQualifier'] = $auth->getNameIdSPNameQualifier();
+        $_SESSION['samlSessionIndex'] = $auth->getSessionIndex();
+        unset($_SESSION['AuthNRequestID']);
+        if (isset($_POST['RelayState']) && OneLogin_Saml2_Utils::getSelfURL() != $_POST['RelayState'])
+            {
+                $auth->redirectTo($_POST['RelayState']);
+            }
+    }
+
+
+
+
+########################################################################
+########################################################################
+if (isset($_GET['sls']))
+    {
+        if (isset($_SESSION) && isset($_SESSION['LogoutRequestID'])) 
+            {
+                $requestID = $_SESSION['LogoutRequestID'];
+            } 
+        else 
+            {
+                $requestID = null;
+            }
+    
+        $auth->processSLO(false, $requestID);
+        $errors = $auth->getErrors();
+        if (empty($errors)) 
+            {
+                echo '<p>Sucessfully logged out</p>';
+            }
+        else
+            {
+                echo '<p>', implode(', ', $errors), '</p>';
+                if ($auth->getSettings()->isDebugActive()) 
+                    {
+                        echo '<p>'.$auth->getLastErrorReason().'</p>';
+                    }
+            }
+    }
+
+
+
+
+########################################################################
+########################################################################
+if (isset($_SESSION['samlUserdata']))
+    {
+        ImprimirDepuracion(1);
+        if (!empty($_SESSION['samlUserdata'])) 
+            {
+                $attributes = $_SESSION['samlUserdata'];
+                echo 'You have the following attributes:<br>';
+                echo '<table><thead><th>Name</th><th>Values</th></thead><tbody>';
+                foreach ($attributes as $attributeName => $attributeValues)
+                    {
+                        echo '<tr><td>' . htmlentities($attributeName) . '</td><td><ul>';
+                        foreach ($attributeValues as $attributeValue)
+                            {
+                                echo '<li>' . htmlentities($attributeValue) . '</li>';
+                            }
+                        echo '</ul></td></tr>';
+                    }
+                echo '</tbody></table>';
+            }
+        else
+            {
+                echo "<p>You don't have any attribute</p>";
+            }
+    
+        echo '<p><a href="?slo" >Logout</a></p>';
+    }
+else
+    {
+        ImprimirDepuracion(2);
+        echo '<p><a href="?sso" >Login</a></p>';
+        echo '<p><a href="?sso2" >Login and access to attrs.php page</a></p>';
+        
+        //Cookie: PHPSESSID=1bsg2kc1tkd0dciav75o22n7r1
+    }

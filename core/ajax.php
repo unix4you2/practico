@@ -178,8 +178,53 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
                     {
                         //Agrega los likes para todos los campos en el complemento de condicion cuando el usuario digita algo en el cuadro de filtro
                         $PCO_CondicionesFiltrado=" AND ( ";
-                        foreach ($ListaCamposDT as $CampoDT)
-                            $PCO_CondicionesFiltrado.=" {$CampoDT} LIKE '%{$PCO_ValorFiltro}%' OR ";
+
+                        //Verifica si los campos tienen aliases o no
+                        $ExistenAliasEnCampos=0;
+                        $ConsultaBusquedaAlias=strstr($ConsultaCacheada, "FROM", TRUE); //Con retorno de cadena previa al needle
+                        $ConsultaBusquedaAlias=str_replace("SELECT", "", $ConsultaBusquedaAlias);
+                        //Cambia cualquier combinacion de la sentencia para alias para uniformarla a mausculas 
+                        $ConsultaBusquedaAlias=str_replace ( " as ", " AS " , $ConsultaBusquedaAlias);
+                        $ConsultaBusquedaAlias=str_replace ( " As ", " AS " , $ConsultaBusquedaAlias);
+                        $ConsultaBusquedaAlias=str_replace ( " aS ", " AS " , $ConsultaBusquedaAlias);
+                        
+                        //CASO 1: La lista de campos contiene la sentenia de Alias.  Busca la palabra As
+                            if ( strpos($ConsultaBusquedaAlias," AS ")>0 )
+                                {
+                                    $ExistenAliasEnCampos=1;
+                                    $TrozosCamposAlias=explode(" AS ",$ConsultaBusquedaAlias);
+                                    $ListaCamposDTAlias=array();
+                                    $TotalTrozos=count($TrozosCamposAlias);
+                                    $TrozoAnalizado=1;
+                                    //Recorre todos los trozos, normalmente de la forma:   Campo1    Alias1,Campo2    Alias2,Campo3    Alias3...
+                                    foreach ($TrozosCamposAlias as $TrozoCampo)
+                                        {
+                                            $CampoDTAlias="";
+                                            //El primer trozo ya llega listo entonces lo agrega directamente, sino lo procesa
+                                            if ($TrozoAnalizado==1)
+                                                $CampoDTAlias=$TrozoCampo;
+                                            else
+                                                {
+                                                    //Verifica que no sea el ultimo trozo (el cual se descarta)
+                                                    if ($TrozoAnalizado!=$TotalTrozos)
+                                                        {
+                                                            $CampoDTAlias=strstr($TrozoCampo, ",", FALSE); //Con retorno de cadena posterior al needle
+                                                            $CampoDTAlias=substr($CampoDTAlias, 1); //Elimina coma inicial sobrante 
+                                                        }
+                                                }
+                                            if ($CampoDTAlias!="")
+                                                $PCO_CondicionesFiltrado.=" {$CampoDTAlias} LIKE '%{$PCO_ValorFiltro}%' OR ";
+                                            $TrozoAnalizado++;
+                                        }
+                                }
+
+                        //CASO 2: El mas simple, Cuando no se tienen Aliases en los campos (AS)
+                            if ($ExistenAliasEnCampos==0)
+                                {
+                                    foreach ($ListaCamposDT as $CampoDT)
+                                        $PCO_CondicionesFiltrado.=" {$CampoDT} LIKE '%{$PCO_ValorFiltro}%' OR ";
+                                }
+
                         $PCO_CondicionesFiltrado.=" 1=2 ) "; //Agrega una condicion que nunca se cumple para los OR y Cierra el AND del SQL
                     }
 
