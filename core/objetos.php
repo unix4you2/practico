@@ -102,20 +102,6 @@
                                     PCO_SelectorObjetosMenu();
                                 }
 
-                            //Si se trata del formulario de configuraciones OAuth genera variable de URI para redirecciones
-                            if ($partes_objeto[1]=="-5")
-                                {
-                    				// Determina si la conexion actual de Practico esta encriptada
-                    				if(empty($_SERVER["HTTPS"]))
-                    					$protocolo_webservice="http://";
-                    				else
-                    					$protocolo_webservice="https://";
-                    				// Construye la URI de retorno
-                    				$prefijo_webservice=$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];
-                    				// Construye la URI de redireccion base para concatenar el servicio especifico
-                    				$URI = $protocolo_webservice.$prefijo_webservice."?PCO_WSOn=1&PCO_WSId=PCO_AutenticacionOauth&OAuthSrv=";
-                                }
-
 							PCO_CargarFormulario($partes_objeto[1],@$en_ventana,@$PCO_CampoBusquedaBD,@$PCO_ValorBusquedaBD);
 						}
 					//Si es un informe lo llama con sus parámetros

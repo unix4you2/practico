@@ -17,6 +17,7 @@ ListaArchivos="
 index.php
 core/ajax.php
 core/comunes.php
+core/objetos.php
 core/marco_abajo.php
 core/marco_nav.php
 
@@ -56,6 +57,8 @@ LogCambios="
 * Fixed [INFORMES]: Se han recuperado los pie de pagina en informes con total de registros encontrados o subtotales calculados.  Es posible que si no los viera antes era por no ser considerados, si es así y desea ocultarlos simplemente en la configuración de su informe seleccione la opción de SI ocultar pie de pagina.
 * Added [CORE]: Implementación del modelo de SP (Service provider) en la aplicación para proveer Soporte SSO para autenticacion de usuarios mediante un IdP SAML2
 * Added [CORE]: Módulo de auditoría cuenta con usuario especial SEClog:event que graba todos los errores de seguridad o intentos de acceso a funcionalidades restringidas presentados.
+* Enhan [CORE]: Se optimiza codigo en el llamado de OAuth que ha sido pasado directamente al Form -5
+
 
 
 
