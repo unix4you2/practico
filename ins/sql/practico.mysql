@@ -720,3 +720,28 @@ CREATE TABLE core_acortadorurls (
   tipo_redireccion char(3) NOT NULL DEFAULT '301',
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_samlconector;
+CREATE TABLE core_samlconector (
+  id int(11) unsigned NOT NULL AUTO_INCREMENT,
+  sp_baseurl varchar(255) NOT NULL,
+  sp_entity_id varchar(255) NOT NULL,
+  sp_assertion_consumer_service varchar(255) NOT NULL,
+  sp_single_logout_service varchar(255) NOT NULL,
+  sp_nameid_format varchar(255) NOT NULL,
+  idp_entityid varchar(255) NOT NULL,
+  idp_single_signon_service varchar(255) NOT NULL,
+  idp_single_logout_service varchar(255) NOT NULL,
+  idp_x509cert text,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+
+
+
+
+
+
+
+
+
