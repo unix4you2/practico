@@ -724,11 +724,15 @@ CREATE TABLE core_acortadorurls (
 DROP TABLE IF EXISTS core_samlconector;
 CREATE TABLE core_samlconector (
   id int(11) unsigned NOT NULL AUTO_INCREMENT,
+  activado char(1) DEFAULT 'S',
+  nombre_conector varchar(255) NOT NULL,
+  ruta_logo varchar(255) NOT NULL,
   sp_baseurl varchar(255) NOT NULL,
   sp_entity_id varchar(255) NOT NULL,
   sp_assertion_consumer_service varchar(255) NOT NULL,
   sp_single_logout_service varchar(255) NOT NULL,
   sp_nameid_format varchar(255) NOT NULL,
+  sp_nameid_format_full varchar(255) NOT NULL,
   idp_entityid varchar(255) NOT NULL,
   idp_single_signon_service varchar(255) NOT NULL,
   idp_single_logout_service varchar(255) NOT NULL,

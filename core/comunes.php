@@ -4728,6 +4728,14 @@ function PCO_ContarProveedoresOAuthConfigurados()
     }
 
 
+function PCO_ContarProveedoresSAML2Configurados()
+    {
+        $Conteo=0;
+        $Conteo=PCO_EjecutarSQL("SELECT COUNT(*) FROM core_samlconector ")->fetchColumn();
+        return $Conteo;
+    }
+
+
 function PCO_GenerarOpcionesProveedoresOAuth()
     {
         global $APIGoogle_ClientId,$APIGoogle_ClientSecret,$APIFacebook_ClientId,$APIFacebook_ClientSecret,$APILinkedIn_ClientId,$APILinkedIn_ClientSecret,$APIInstagram_ClientId,$APIInstagram_ClientSecret,$APIDropbox_ClientId,$APIDropbox_ClientSecret,$APIMicrosoft_ClientId,$APIMicrosoft_ClientSecret,$APIFlickr_ClientId,$APIFlickr_ClientSecret,$APITwitter_ClientId,$APITwitter_ClientSecret,$APIFoursquare_ClientId,$APIFoursquare_ClientSecret,$APIXING_ClientId,$APIXING_ClientSecret,$APISalesforce_ClientId,$APISalesforce_ClientSecret,$APIBitbucket_ClientId,$APIBitbucket_ClientSecret,$APIYahoo_ClientId,$APIYahoo_ClientSecret,$APIBox_ClientId,$APIBox_ClientSecret,$APIDisqus_ClientId,$APIDisqus_ClientSecret,$APIEventful_ClientId,$APIEventful_ClientSecret,$APISurveyMonkey_ClientId,$APISurveyMonkey_ClientSecret,$APIRightSignature_ClientId,$APIRightSignature_ClientSecret,$APIFitbit_ClientId,$APIFitbit_ClientSecret,$APIScoopIt_ClientId,$APIScoopIt_ClientSecret,$APITumblr_ClientId,$APITumblr_ClientSecret,$APIStockTwits_ClientId,$APIStockTwits_ClientSecret,$APIVK_ClientId,$APIVK_ClientSecret,$APIWithings_ClientId,$APIWithings_ClientSecret;

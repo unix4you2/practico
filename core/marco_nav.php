@@ -183,6 +183,14 @@
 							</a>
 						</li>
 						<li>
+							<a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-26:1">
+								<div>
+									<i class="fa fa-exchange fa-fw"></i> Autenticaci&oacute;n SSO por SAML
+									<span class="pull-right badge"><?php echo PCO_ContarProveedoresSAML2Configurados(); ?></span>
+								</div>
+							</a>
+						</li>
+						<li>
 							<a data-toggle="modal" href="javascript:document.PCO_VerReplicaciones.submit();">
 								<div>
 									<i class="fa fa-cubes fa-fw"></i> <?php echo $MULTILANG_ReplicaTitulo; ?>
