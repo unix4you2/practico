@@ -9,22 +9,6 @@ require_once dirname(__DIR__).'/_toolkit_loader.php';
 
 require_once 'settings.php';
 
-function ImprimirDepuracion($SeccionCodigo="SinDefinir")
-    {
-        return;
-        global $auth;
-        print_r("<hr><b>SECCION DE CODIGO=".$SeccionCodigo."</b>");
-        print_r('<hr>VARS=');       @print_r(get_defined_vars());
-        print_r('<hr>CLASSES=');    @print_r(get_declared_classes());
-        print_r('<hr>$_GET=');      @print_r($_GET);
-        print_r('<hr>$_SESSION=');  @print_r($_SESSION);
-
-        echo "VARIABLE requestID=".$requestID;
-        echo "VARIABLE sessionJohn=".$_SESSION['PracticoSAML'];
-        echo "<hr>";
-        var_dump($auth);
-    }
-
 $auth = new OneLogin_Saml2_Auth($settingsInfo);
 
 
@@ -32,7 +16,6 @@ $auth = new OneLogin_Saml2_Auth($settingsInfo);
 ########################################################################
 if (isset($_GET['sso']))
     {
-        ImprimirDepuracion("SSO");
         $auth->login();
         # If AuthNRequest ID need to be saved in order to later validate it, do instead
         // $ssoBuiltUrl = $auth->login(null, array(), false, false, true);
@@ -122,8 +105,6 @@ if (isset($_GET['acs']))
                 $requestID = null;
             }
             
-        ImprimirDepuracion("ACS");
-
         $auth->processResponse($requestID);
     
         $errors = $auth->getErrors();
@@ -196,7 +177,6 @@ if (isset($_GET['sls']))
 ########################################################################
 if (isset($_SESSION['samlUserdata']))
     {
-        ImprimirDepuracion(1);
         if (!empty($_SESSION['samlUserdata'])) 
             {
                 $attributes = $_SESSION['samlUserdata'];
@@ -222,7 +202,6 @@ if (isset($_SESSION['samlUserdata']))
     }
 else
     {
-        ImprimirDepuracion(2);
         echo '<p><a href="?sso" >Login</a></p>';
         echo '<p><a href="?sso2" >Login and access to attrs.php page</a></p>';
         
