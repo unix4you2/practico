@@ -91,7 +91,7 @@ if ($PCO_Accion=="PCO_ExportacionQueryCacheCSV" )
                 ob_clean();
                 $ArchivoDestino = fopen("php://output", 'w');
 
- 		header("Content-Encoding: utf-8"); 
+ 		        header("Content-Encoding: utf-8"); 
                 header("Content-disposition: attachment; filename=".$NombreArchivo);
                 header("Content-Type: text/csv; charset=UTF-8;");
                 echo "\xEF\xBB\xBF"; // UTF-8 BOM	
