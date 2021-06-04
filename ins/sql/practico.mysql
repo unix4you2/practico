@@ -737,15 +737,6 @@ CREATE TABLE core_samlconector (
   idp_single_signon_service varchar(255) NOT NULL,
   idp_single_logout_service varchar(255) NOT NULL,
   idp_x509cert text,
+  usuario_plantilla varchar(255) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-
-
-
-
-
-
-
-
-
