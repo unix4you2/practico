@@ -14,6 +14,36 @@ $auth = new OneLogin_Saml2_Auth($settingsInfo);
 
 ########################################################################
 ########################################################################
+//Presenta mensajes con un formato basico cuando no se tienen contextos
+//completos del framework, maquetaciones, etc.
+function PCO_SAML_MensajeBasico($Titulo,$Mensaje,$ColorBarra="darkred",$ColorFondo="lightgray",$IncluirHeaders=0,$LimpiarBuffer=1)
+    {
+        if ($LimpiarBuffer==1)
+            ob_clean();
+        //Agrega encabezados completos cuando asi lo requiere la pagina
+        if ($IncluirHeaders==1)
+            echo "<!DOCTYPE html><body style='margin:0; padding:0; background-color:{$ColorFondo};'>";
+        //Imprime mensaje
+        echo "
+            <center><br>
+                <div align=center id='PCOContenedor_MsjSAML' style='font-family: monospace,serif,terminal; font-size:11px; margin:0px; padding:3px; background-color:lightgray; width:98%; box-shadow: 3px 3px 3px gray; border-radius:5px;'>
+                    <div align=center id='PCOContenedor_TituloSAML' style='border-radius:3px; margin:3px; padding:5px; color:white; background-color:{$ColorBarra}; box-shadow: 2px 2px 2px {$ColorBarra};'>
+                        <b>{$Titulo}</b>
+                    </div>
+                    <div id='PCOContenedor_MensajeSAML' style='margin:5px;'>
+                        {$Mensaje}
+                    </div>
+                </div>
+            </center>";
+        //Agrega encabezados completos cuando asi lo requiere la pagina
+        if ($IncluirHeaders==1)
+            echo '</body></html>';
+    }
+
+
+
+########################################################################
+########################################################################
 if (isset($_GET['sso']))
     {
         $auth->login();
@@ -26,18 +56,6 @@ if (isset($_GET['sso']))
         // header('Location: ' . $ssoBuiltUrl);
         // exit();
     }
-
-
-
-
-########################################################################
-########################################################################
-if (isset($_GET['sso2']))
-    {
-        $returnTo = $spBaseUrl.'/demo1/attrs.php';
-        $auth->login($returnTo);
-    }
-
 
 
 
@@ -91,7 +109,6 @@ if (isset($_GET['slo']))
 
 
 
-
 ########################################################################
 ########################################################################
 if (isset($_GET['acs']))
@@ -117,11 +134,10 @@ if (isset($_GET['acs']))
                         echo '<p>'.$auth->getLastErrorReason().'</p>';
                     }
             }
-    
+
         if (!$auth->isAuthenticated())
             {
-                echo "<p>Not authenticated</p>";
-                echo '<p>'.$auth->getLastErrorReason().'</p>';
+                PCO_SAML_MensajeBasico("&#9940; No autenticado / Not authenticated &#9940;",$auth->getLastErrorReason(),"darkred","darkgray",1,1); //Tit,Msj,Color,Fondo,Head,ClsBuff
                 exit();
             }
     
@@ -131,13 +147,19 @@ if (isset($_GET['acs']))
         $_SESSION['samlNameIdNameQualifier'] = $auth->getNameIdNameQualifier();
         $_SESSION['samlNameIdSPNameQualifier'] = $auth->getNameIdSPNameQualifier();
         $_SESSION['samlSessionIndex'] = $auth->getSessionIndex();
+        
+        
+        //samlNameId
+        //samlSessionIndex
+        //RelayState
+
+        
         unset($_SESSION['AuthNRequestID']);
         if (isset($_POST['RelayState']) && OneLogin_Saml2_Utils::getSelfURL() != $_POST['RelayState'])
             {
                 $auth->redirectTo($_POST['RelayState']);
             }
     }
-
 
 
 
@@ -172,7 +194,6 @@ if (isset($_GET['sls']))
 
 
 
-
 ########################################################################
 ########################################################################
 if (isset($_SESSION['samlUserdata']))
@@ -199,11 +220,26 @@ if (isset($_SESSION['samlUserdata']))
             }
     
         echo '<p><a href="?slo" >Logout</a></p>';
+        
+        var_dump($_SESSION['samlUserdata']);
     }
 else
     {
-        echo '<p><a href="?sso" >Login</a></p>';
-        echo '<p><a href="?sso2" >Login and access to attrs.php page</a></p>';
+        $MensajeLogin="<br><i>Conectores disponibles / Connectors available</i><br>
+        <p><a href='?sso' >Login</a></p>";
+        PCO_SAML_MensajeBasico("&#9911; Acceso SSO &#9911; </b>&nbsp;Conectores SAML disponibles<b>",$MensajeLogin,"navy","darkgray",1,1); //Tit,Msj,Color,Fondo,Head,ClsBuff
+
         
-        //Cookie: PHPSESSID=1bsg2kc1tkd0dciav75o22n7r1
+        //echo '<p><a href="?sso2" >Login and access to attrs.php page</a></p>';
+        //Redireccion a la accion sso2 (mas abajo)
+    }
+
+
+
+########################################################################
+########################################################################
+if (isset($_GET['sso2']))
+    {
+        $returnTo = $spBaseUrl.'/practico/inc/php-saml/practico/attrs.php';
+        $auth->login($returnTo);
     }
