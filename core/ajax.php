@@ -90,8 +90,12 @@ if ($PCO_Accion=="PCO_ExportacionQueryCacheCSV" )
                 //Inicia la entrega de contenidos
                 ob_clean();
                 $ArchivoDestino = fopen("php://output", 'w');
+
+ 		header("Content-Encoding: utf-8"); 
                 header("Content-disposition: attachment; filename=".$NombreArchivo);
                 header("Content-Type: text/csv; charset=UTF-8;");
+                echo "\xEF\xBB\xBF"; // UTF-8 BOM	
+		
                 //Agrega las columnas como encabezados
                 fputcsv($ArchivoDestino, $PCO_ColumnasVisibles);
                 //Agrega los datos de cada registro
