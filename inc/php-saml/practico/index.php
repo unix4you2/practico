@@ -271,40 +271,45 @@ if (isset($_SESSION['samlUserdata']))
 ## PRESENTADO A QUIENES LLEGAN A LA OPCION SIN LOGIN O SESION ACTIVA  ##
 if (!isset($_SESSION['samlUserdata']))
     {
-        //Recorre todos los conectares SAML para agregar la opcion
-        include_once '../../../core/configuracion.php';
-        // Inicia las conexiones con la BD y las deja listas para las operaciones
-        include_once '../../../core/conexiones.php';
-        // Incluye definiciones comunes de la base de datos
-        include_once '../../../inc/practico/def_basedatos.php';
-        // Incluye archivo con algunas funciones comunes usadas por la herramienta
-        include_once '../../../core/comunes.php';
+        ob_clean();
+        header('Location: ../../../index.php');
+        exit;
+
+        //CODIGO MANTENIDO POR COMPATIBILIDAD, REALMENTE LAS OPCIONES SSO SON PRESENTADAS POR EL LOGIN DE PRACTICO
+        // //Recorre todos los conectares SAML para agregar la opcion
+        // include_once '../../../core/configuracion.php';
+        // // Inicia las conexiones con la BD y las deja listas para las operaciones
+        // include_once '../../../core/conexiones.php';
+        // // Incluye definiciones comunes de la base de datos
+        // include_once '../../../inc/practico/def_basedatos.php';
+        // // Incluye archivo con algunas funciones comunes usadas por la herramienta
+        // include_once '../../../core/comunes.php';
         
-        //Toma el primer conector SAML definido
-        $ResultadoConectorSAML=PCO_EjecutarSQL("SELECT * FROM core_samlconector WHERE activado='S' ORDER BY nombre_conector LIMIT 0,1 ");
-        //Aunque solo es uno el proceso se hace en un while para descartar si no hubo ninguno o si en futuro hay varios
-        $ListaOpcionesConector="";
-        while ($RegistroConectorSAML=$ResultadoConectorSAML->fetch())
-            {
-                $NombreConectorSSO=$RegistroConectorSAML["nombre_conector"];
-                $ImagenConectorSSO="";
-                if ($RegistroConectorSAML["ruta_logo"]!="")
-                    {
-                        $ImagenConectorSSO=explode("|",$RegistroConectorSAML["ruta_logo"]);
-                        $ImagenConectorSSO=$ImagenConectorSSO[0];
-                        $ImagenConectorSSO="<img style='border-radius: 5%;' width='50' height='50' src='../../../{$ImagenConectorSSO}'>";
-                    }
-                $EnlaceSSO="?sso";
-                $ListaOpcionesConector.="
-                    <br><a href='{$EnlaceSSO}' style='text-decoration:none;'>
-                        <div>
-                            {$ImagenConectorSSO}
-                        </div>
-                        <div>
-                            {$NombreConectorSSO}
-                        </div>
-                    </a>";
-            }
-        $MensajeLogin="{$ListaOpcionesConector}<br>";
-        PCO_SAML_MensajeBasico("&#9940; Acceso SSO &#9940; </b>&nbsp;Conectores SAML disponibles<b>",$MensajeLogin,"#e81974","darkgray",1,1); //Tit,Msj,Color,Fondo,Head,ClsBuff
+        // //Toma el primer conector SAML definido
+        // $ResultadoConectorSAML=PCO_EjecutarSQL("SELECT * FROM core_samlconector WHERE activado='S' ORDER BY nombre_conector LIMIT 0,1 ");
+        // //Aunque solo es uno el proceso se hace en un while para descartar si no hubo ninguno o si en futuro hay varios
+        // $ListaOpcionesConector="";
+        // while ($RegistroConectorSAML=$ResultadoConectorSAML->fetch())
+        //     {
+        //         $NombreConectorSSO=$RegistroConectorSAML["nombre_conector"];
+        //         $ImagenConectorSSO="";
+        //         if ($RegistroConectorSAML["ruta_logo"]!="")
+        //             {
+        //                 $ImagenConectorSSO=explode("|",$RegistroConectorSAML["ruta_logo"]);
+        //                 $ImagenConectorSSO=$ImagenConectorSSO[0];
+        //                 $ImagenConectorSSO="<img style='border-radius: 5%;' width='50' height='50' src='../../../{$ImagenConectorSSO}'>";
+        //             }
+        //         $EnlaceSSO="?sso";
+        //         $ListaOpcionesConector.="
+        //             <br><a href='{$EnlaceSSO}' style='text-decoration:none;'>
+        //                 <div>
+        //                     {$ImagenConectorSSO}
+        //                 </div>
+        //                 <div>
+        //                     {$NombreConectorSSO}
+        //                 </div>
+        //             </a>";
+        //     }
+        // $MensajeLogin="{$ListaOpcionesConector}<br>";
+        // PCO_SAML_MensajeBasico("&#9940; Acceso SSO &#9940; </b>&nbsp;Conectores SAML disponibles<b>",$MensajeLogin,"#e81974","darkgray",1,1); //Tit,Msj,Color,Fondo,Head,ClsBuff
     }

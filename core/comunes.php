@@ -4917,7 +4917,7 @@ function PCO_VentanaLogin()
 
 		  //Variables para el sistema de captcha
 		  global $MULTILANG_TipoCaptchaPrefijo,$MULTILANG_TipoCaptchaPosfijo;
-          global $MULTILANG_SimboloCaptchaCarro,    $MULTILANG_SimboloCaptchaTijeras,    $MULTILANG_SimboloCaptchaCalculadora,    $MULTILANG_SimboloCaptchaBomba,    $MULTILANG_SimboloCaptchaLibro,    $MULTILANG_SimboloCaptchaPastel,    $MULTILANG_SimboloCaptchaCafe,    $MULTILANG_SimboloCaptchaNube,    $MULTILANG_SimboloCaptchaDiamante,    $MULTILANG_SimboloCaptchaMujer,    $MULTILANG_SimboloCaptchaHombre,    $MULTILANG_SimboloCaptchaBalon,    $MULTILANG_SimboloCaptchaControl,    $MULTILANG_SimboloCaptchaCasa,    $MULTILANG_SimboloCaptchaCelular,    $MULTILANG_SimboloCaptchaArbol,    $MULTILANG_SimboloCaptchaTrofeo,    $MULTILANG_SimboloCaptchaSombrilla,    $MULTILANG_SimboloCaptchaUniversidad,    $MULTILANG_SimboloCaptchaCamara,    $MULTILANG_SimboloCaptchaAmbulancia,    $MULTILANG_SimboloCaptchaAvion,    $MULTILANG_SimboloCaptchaTren,    $MULTILANG_SimboloCaptchaBicicleta,    $MULTILANG_SimboloCaptchaCamion,    $MULTILANG_SimboloCaptchaCorazon;
+          global $MULTILANG_Aplicacion,$MULTILANG_SimboloCaptchaCarro,    $MULTILANG_SimboloCaptchaTijeras,    $MULTILANG_SimboloCaptchaCalculadora,    $MULTILANG_SimboloCaptchaBomba,    $MULTILANG_SimboloCaptchaLibro,    $MULTILANG_SimboloCaptchaPastel,    $MULTILANG_SimboloCaptchaCafe,    $MULTILANG_SimboloCaptchaNube,    $MULTILANG_SimboloCaptchaDiamante,    $MULTILANG_SimboloCaptchaMujer,    $MULTILANG_SimboloCaptchaHombre,    $MULTILANG_SimboloCaptchaBalon,    $MULTILANG_SimboloCaptchaControl,    $MULTILANG_SimboloCaptchaCasa,    $MULTILANG_SimboloCaptchaCelular,    $MULTILANG_SimboloCaptchaArbol,    $MULTILANG_SimboloCaptchaTrofeo,    $MULTILANG_SimboloCaptchaSombrilla,    $MULTILANG_SimboloCaptchaUniversidad,    $MULTILANG_SimboloCaptchaCamara,    $MULTILANG_SimboloCaptchaAmbulancia,    $MULTILANG_SimboloCaptchaAvion,    $MULTILANG_SimboloCaptchaTren,    $MULTILANG_SimboloCaptchaBicicleta,    $MULTILANG_SimboloCaptchaCamion,    $MULTILANG_SimboloCaptchaCorazon;
 
             //Variables posiblemente recibidas desde un autoregistro
             global $AUTO_uid,$AUTO_clave;
@@ -4984,6 +4984,39 @@ function PCO_VentanaLogin()
 			global $APIYammer_ClientId,$APIYammer_ClientSecret;
 			global $APIYandex_ClientId,$APIYandex_ClientSecret;
 
+            //Determina si se tiene un login SAML activado
+            $RegistroSAML=PCO_EjecutarSQL("SELECT * FROM core_samlconector WHERE activado='S' ORDER BY nombre_conector LIMIT 0,1 ")->fetch();
+            $CadenaOcultamiento_LoginEstandarPRE="";
+            $CadenaOcultamiento_LoginEstandarPOS="";
+            if ($RegistroSAML["nombre_conector"]!="")
+                {
+                    //Presenta boton para ir al login estandar de aplicacion
+                    $CadenaOcultamiento_LoginEstandarPRE="<details><summary><div id='PCO_BotonLoginEstandar' onclic='$(\"#PCO_BotonLoginEstandar\").hide();' class='btn btn-info'><b>{$MULTILANG_LoginClasico}</b> ($MULTILANG_Aplicacion)</div></summary>";
+                    $CadenaOcultamiento_LoginEstandarPOS="</details>";
+                    $CadenaOpcionesSAML="";
+                    $NombreConectorSSO=$RegistroSAML["nombre_conector"];
+                    $ImagenConectorSSO="";
+                    if ($RegistroSAML["ruta_logo"]!="")
+                        {
+                            $ImagenConectorSSO=explode("|",$RegistroSAML["ruta_logo"]);
+                            $ImagenConectorSSO=$ImagenConectorSSO[0];
+                            $ImagenConectorSSO="<img style='border-radius: 5%;' width='50' height='50' src='{$ImagenConectorSSO}'>";
+                        }
+                    $EnlaceSSO="inc/php-saml/practico/?sso";
+                    $CadenaOpcionesSAML.="
+                        <br><a href='{$EnlaceSSO}' style='text-decoration:none;'>
+                            <div>
+                                {$ImagenConectorSSO}
+                            </div>
+                            <div>
+                                {$NombreConectorSSO}
+                            </div>
+                        </a>";
+                    $CadenaOpcionesSAML="{$CadenaOpcionesSAML}<br>";
+                }
+            
+
+
             $CadenaProveedoresOAuthDisponibles=PCO_GenerarOpcionesProveedoresOAuth();
 			//Si se desea ubicar las opciones oAuth a traves de un boton genera el marco flotante correspondiente
 			if ($UbicacionProveedoresOAuth=='0')
@@ -5029,6 +5062,7 @@ function PCO_VentanaLogin()
                                 <h3 class="panel-title"><?php echo $MULTILANG_TituloLogin; ?></h3>
                             </div>
                             <div align=center class="panel-body btn-xs">
+                    <?php echo $CadenaOcultamiento_LoginEstandarPRE; ?>
 
                                     <form role="form" name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
                                     <input type="Hidden" name="PCO_Accion" value="Iniciar_login">
@@ -5201,6 +5235,10 @@ function PCO_VentanaLogin()
 
 
                             <script language="JavaScript"> login_usuario.uid.focus(); </script>
+
+                    <?php echo $CadenaOcultamiento_LoginEstandarPOS; ?>
+                    <?php echo $CadenaOpcionesSAML; ?>
+
                             </div> <!-- /panel-body -->
                         </div>
                     </div>  <!--FIN Class EnfasisLoginZoom -->
