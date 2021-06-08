@@ -223,10 +223,15 @@ if (isset($_SESSION['samlUserdata']))
         
         var_dump($_SESSION['samlUserdata']);
     }
-else
+
+
+
+########################################################################
+########################################################################
+## PRESENTADO A QUIENES LLEGAN A LA OPCION SIN LOGIN O SESION ACTIVA  ##
+if (!isset($_SESSION['samlUserdata']))
     {
         //Recorre todos los conectares SAML para agregar la opcion
-        
         include_once '../../../core/configuracion.php';
         // Inicia las conexiones con la BD y las deja listas para las operaciones
         include_once '../../../core/conexiones.php';
@@ -258,20 +263,8 @@ else
                         <div>
                             {$Nombre}
                         </div>
-                    </a>
-                ";
+                    </a>";
             }
-        
         $MensajeLogin="{$ListaOpcionesConector}<br>";
         PCO_SAML_MensajeBasico("&#9911; Acceso SSO &#9911; </b>&nbsp;Conectores SAML disponibles<b>",$MensajeLogin,"#e81974","darkgray",1,1); //Tit,Msj,Color,Fondo,Head,ClsBuff
-    }
-
-
-
-########################################################################
-########################################################################
-if (isset($_GET['sso2']))
-    {
-        $returnTo = $spBaseUrl.'/practico/inc/php-saml/practico/attrs.php';
-        $auth->login($returnTo);
     }
