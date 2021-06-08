@@ -280,7 +280,12 @@
 	{
 		PCO_Auditar("Cierra sesion desde $PCO_DireccionAuditoria");
 		session_destroy();
-		echo '<form name="Redireccion" method="POST"><input type="Hidden" name="PCO_Accion" value="Mensaje_cierre_sesion"></form><script type="" language="JavaScript">	document.Redireccion.submit();  </script>';
+		
+		//Si se trata de una sesion SAML finaliza tambien a esta
+		if ($PCO_FinalizarSAML=="1")
+	        echo "<script> window.location.replace('inc/php-saml/practico/?slo'); </script>";
+	    else
+    		echo '<form name="Redireccion" method="POST"><input type="Hidden" name="PCO_Accion" value="Mensaje_cierre_sesion"></form><script type="" language="JavaScript">	document.Redireccion.submit();  </script>';
 	}
 
 

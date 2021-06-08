@@ -45,6 +45,10 @@
 <form method="POST" name="cerrar_sesion"  class="oculto_impresion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="Terminar_sesion">
 </form>
+<form method="POST" name="PCOForm_CerrarSesionSAML"  class="oculto_impresion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    <input type="Hidden" name="PCO_Accion" value="Terminar_sesion">
+    <input type="Hidden" name="PCO_FinalizarSAML" value="1">
+</form>
 <form method="POST" name="PCO_CargarActualizarPefil"  class="oculto_impresion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
     <input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
     <input type="Hidden" name="PCO_Objeto" value="frm:-22:1:login:<?php echo $PCOSESS_LoginUsuario; ?>">

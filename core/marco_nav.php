@@ -354,7 +354,17 @@
                         ?>
 
 						<li class="divider"></li>
-						<li><a href="javascript:cerrar_sesion.submit();"><i class="fa fa-sign-out fa-fw texto-blink"></i> <?php echo $MULTILANG_CerrarSesion; ?></a></li>
+						<li><a href="javascript:cerrar_sesion.submit();"><i class="fa fa-sign-out fa-fw texto-blink"></i> <?php echo $MULTILANG_CerrarSesion; ?> (<?php echo $MULTILANG_Aplicacion; ?>)</a></li>
+						
+						<?php
+						    //Verifica si existe una sesion SAML activada y presenta la opcion para hacer cierre de sesion general
+						    if ($_SESSION['samlSessionIndex']!="" && $_SESSION['samlNameId']!="")
+						        {
+						?>
+    						<li><a href="javascript:PCOForm_CerrarSesionSAML.submit();"><i class="fa fa-sign-out fa-fw texto-blink"></i> <?php echo $MULTILANG_CerrarSesion; ?> (Todo el SSO)</a></li>
+						<?php
+		                        } //Fin si es sesion SAML
+						?>
 					</ul>
 					<!-- /.dropdown-user -->
 				</li>

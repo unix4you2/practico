@@ -1,15 +1,43 @@
 <?php
-/**
- *  SAML Handler
- */
+/*
+	 _
+	|_) _ _  _ _|_. _ _					  	Copyright (C) 2020
+	|  | (_|(_  | |(_(_) 				  	John F. Arroyave Gutiérrez
+	  www.practico.org					  	unix4you2@gmail.com
+                                            All rights reserved.
+    
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are met:
+    
+    1. Redistributions of source code must retain the above copyright notice, this
+       list of conditions and the following disclaimer.
+    
+    2. Redistributions in binary form must reproduce the above copyright notice,
+       this list of conditions and the following disclaimer in the documentation
+       and/or other materials provided with the distribution.
+    
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+    AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+    IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+    FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+    DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+    SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+    CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+    OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+/*
+	Title: Modulo SSO-SAML
+	Establece funciones y captura envios y estados para conectores SAML
+*/
 
 session_start();
-
 require_once dirname(__DIR__).'/_toolkit_loader.php';
-
 require_once 'settings.php';
 
 $auth = new OneLogin_Saml2_Auth($settingsInfo);
+
 
 
 ########################################################################
@@ -63,7 +91,7 @@ if (isset($_GET['sso']))
 ########################################################################
 if (isset($_GET['slo']))
     {
-        $returnTo = null;
+        $returnTo = "../../../index.php";
         $parameters = array();
         $nameId = null;
         $sessionIndex = null;
@@ -95,7 +123,7 @@ if (isset($_GET['slo']))
             {
                 $sessionIndex = $_SESSION['samlSessionIndex'];
             }
-    
+
         $auth->logout($returnTo, $parameters, $nameId, $sessionIndex, false, $nameIdFormat, $samlNameIdNameQualifier, $samlNameIdSPNameQualifier);
     
         # If LogoutRequest ID need to be saved in order to later validate it, do instead
@@ -142,23 +170,18 @@ if (isset($_GET['acs']))
             }
     
         $_SESSION['samlUserdata'] = $auth->getAttributes();
-        $_SESSION['samlNameId'] = $auth->getNameId();
+        $_SESSION['samlNameId'] = $auth->getNameId();                                   //Variable de interes: Nombre del usuario
         $_SESSION['samlNameIdFormat'] = $auth->getNameIdFormat();
         $_SESSION['samlNameIdNameQualifier'] = $auth->getNameIdNameQualifier();
         $_SESSION['samlNameIdSPNameQualifier'] = $auth->getNameIdSPNameQualifier();
-        $_SESSION['samlSessionIndex'] = $auth->getSessionIndex();
-        
-        
-        //samlNameId
-        //samlSessionIndex
-        //RelayState
+        $_SESSION['samlSessionIndex'] = $auth->getSessionIndex();                       //Variable de interes: Identificador de sesion
 
-        
-        unset($_SESSION['AuthNRequestID']);
-        if (isset($_POST['RelayState']) && OneLogin_Saml2_Utils::getSelfURL() != $_POST['RelayState'])
-            {
-                $auth->redirectTo($_POST['RelayState']);
-            }
+        //SE EVITA POR AHORA LA REDIRECCION.  La redireccion del framework es estatica hacia el Menu
+        // unset($_SESSION['AuthNRequestID']);
+        // if (isset($_POST['RelayState']) && OneLogin_Saml2_Utils::getSelfURL() != $_POST['RelayState'])
+        //     {
+        //         $auth->redirectTo($_POST['RelayState']);
+        //     }
     }
 
 
@@ -170,7 +193,7 @@ if (isset($_GET['sls']))
         if (isset($_SESSION) && isset($_SESSION['LogoutRequestID'])) 
             {
                 $requestID = $_SESSION['LogoutRequestID'];
-            } 
+            }
         else 
             {
                 $requestID = null;

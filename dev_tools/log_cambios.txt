@@ -19,8 +19,10 @@ core/ajax.php
 core/comunes.php
 core/objetos.php
 core/marco_abajo.php
+core/marco_forms.php
 core/marco_nav.php
 core/marco_navizq.php
+core/sesion.php
 
 inc/reactjs/*
 inc/jquery/plugins/pdfmake-0.1.71/*
