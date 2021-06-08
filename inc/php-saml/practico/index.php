@@ -247,13 +247,14 @@ if (isset($_SESSION['samlUserdata']))
 
         if (trim($_SESSION['samlNameId'])!="")
             {
-                $MensajeLogin="<br>Usted ha ingresado como <b>".$_SESSION['samlNameId']."</b><br>
-                    <br>
-                    <a href='?slo' style='text-decoration:none; background-color:gray; border-radius:3px; color:white; padding:5px;'>&#9194; Salir</a>&nbsp;&nbsp;&nbsp;
-                    <a href='?slo' style='text-decoration:none; background-color:gray; border-radius:3px; color:white; padding:5px;'>Ir a la aplicaci&oacute;n &#9193;</a>
+                //CODIGO MANTENIDO POR COMPATIBILIDAD, REALMENTE NO SE NECESITA MOSTRAR MENSAJE PUES PASA DIRECTO A HACER EL LOGIN
+                // $MensajeLogin="<br>Usted ha ingresado como <b>".$_SESSION['samlNameId']."</b><br>
+                //     <br>
+                //     <a href='?slo' style='text-decoration:none; background-color:gray; border-radius:3px; color:white; padding:5px;'>&#9194; Salir</a>&nbsp;&nbsp;&nbsp;
+                //     <a href='?slo' style='text-decoration:none; background-color:gray; border-radius:3px; color:white; padding:5px;'>Ir a la aplicaci&oacute;n &#9193;</a>
         
-                <br><br>";
-                PCO_SAML_MensajeBasico("&#9989; Acceso SSO Concedido &#9989;",$MensajeLogin,"darkgreen","lightgray",1,1); //Tit,Msj,Color,Fondo,Head,ClsBuff
+                // <br><br>";
+                // PCO_SAML_MensajeBasico("&#9989; Acceso SSO Concedido &#9989;",$MensajeLogin,"darkgreen","lightgray",1,1); //Tit,Msj,Color,Fondo,Head,ClsBuff
                 
                 //Intenta el login con el usuario recibido
                 PCO_SAML_EjecutarLogin(trim($_SESSION['samlNameId']));
