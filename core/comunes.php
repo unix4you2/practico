@@ -345,6 +345,105 @@ function PCO_Minimizador_OptimizarJS($CodigoJS)
     }
 
 
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCO_SAML_CrearUsuario
+	Agrega usuarios de manera automatica cuando son autenticados por SAML
+*/
+	function PCO_SAML_CrearUsuario($login_chk='',$nombre_chk='',$correo_chk='',$interno_chk=0,$plantilla_permisos_chk='')
+		{
+			global $TablasCore,$LlaveDePaso,$PCO_FechaOperacion,$ListaCamposSinID_usuario;
+			// Inserta datos del usuario
+			$clavemd5=MD5(PCO_TextoAleatorio(20));
+			$pasomd5=MD5($LlaveDePaso);
+			$descripcion="Auth:SAML";
+			//Agrega el registro de usuario si aun no existe
+			if (!PCO_ExisteValor($TablasCore."usuario","login",$login_chk))
+				{
+					@PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno,plantilla_permisos,descripcion) VALUES ('$login_chk','$clavemd5','$nombre_chk',1,'$correo_chk','$PCO_FechaOperacion','$pasomd5','$interno_chk','$plantilla_permisos_chk','$descripcion')");
+					PCO_Auditar("OAuth:Agregado usuario $login_chk para SAML");
+				}
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
+	Function: PCO_SAML_EjecutarLogin
+	Recibe los parametros necesarios para hacer el registro de un usuario en la plataforma durante su ingreso cuando se usa oauth
+	
+	Variables de entrada:
+
+		accion - Accion a ser ejectudada, de la que se desea buscar permiso heredado por otra
+
+	Salida:
+		Variables de sesion registradas
+		Redireccion del usuario al menu
+*/
+	function PCO_SAML_EjecutarLogin($login_chk)
+		{
+			global $TablasCore,$uid,$ListaCamposSinID_usuario,$ListaCamposSinID_parametros,$ListaCamposSinID_parametros,$ListaCamposSinID_auditoria,$PCO_DireccionAuditoria,$PCO_HoraOperacion,$PCO_FechaOperacion,$ArchivoCORE;
+			$nombre_chk=$login_chk;
+			$correo_chk="";
+            $plantilla_origen_permisos=PCO_EjecutarSQL("SELECT usuario_plantilla FROM core_samlconector WHERE activado='S' ORDER BY nombre_conector LIMIT 0,1 ")->fetchColumn();
+
+			// Busca datos del usuario Practico, segun tipo de servicio OAuth para tener configuraciones de permisos y parametros propios de la herramienta
+			$consulta_busqueda_usuario_oauth="SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$login_chk' AND descripcion LIKE '%Auth:$OAuth_servicio%' ";
+			$registro=PCO_EjecutarSQL($consulta_busqueda_usuario_oauth)->fetch();
+
+			// Agrega el usuario cuando es primer login desde el servicio
+			if ($registro["login"]=="")
+				{
+					PCO_SAML_CrearUsuario($login_chk,$nombre_chk,$correo_chk,1,$plantilla_origen_permisos);
+					// Actualiza el registro desde nueva consulta
+					$registro=PCO_EjecutarSQL($consulta_busqueda_usuario_oauth)->fetch();
+				}
+
+			//Copia permisos de la plantilla si aplica
+			if ($registro["plantilla_permisos"]!="")
+				{
+					PCO_Auditar("Carga permisos a su perfil desde plantilla $plantilla_origen_permisos",$login_chk);
+					PCO_CopiarPermisos($plantilla_origen_permisos,$login_chk);
+					PCO_CopiarInformes($plantilla_origen_permisos,$login_chk);
+				}
+
+			// Se buscan datos de la aplicacion
+			$consulta_parametros=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_parametros." FROM ".$TablasCore."parametros");
+			$registro_parametros = $consulta_parametros->fetch();
+
+			// Actualiza las variables de sesion con el registro
+			$PCOSESS_SesionAbierta=1;
+			// Actualiza booleana de ingreso
+			$clave_correcta=1;
+			// Registro de variables en la sesion
+			@session_start();
+			if (!isset($_SESSION["PCOSESS_LoginUsuario"])) $_SESSION["PCOSESS_LoginUsuario"]=(string)$registro["login"];
+			if (!isset($_SESSION["username"])) $_SESSION["username"]=(string)$registro["login"]; //Usada para el modulo de chat
+			if (!isset($_SESSION["Nombre_usuario"])) $_SESSION["Nombre_usuario"]=(string)$registro["nombre"];
+			if (!isset($_SESSION["Descripcion_usuario"])) $_SESSION["Descripcion_usuario"]=(string)$registro["descripcion"];
+			if (!isset($_SESSION["Nivel_usuario"])) $_SESSION["Nivel_usuario"]=(string)$registro["nivel"];
+			if (!isset($_SESSION["Correo_usuario"])) $_SESSION["Correo_usuario"]=(string)$registro["correo"];
+			if (!isset($_SESSION["Clave_usuario"])) $_SESSION["Clave_usuario"]=$registro["clave"];
+			if (!isset($_SESSION["LlaveDePasoUsuario"])) $_SESSION["LlaveDePasoUsuario"]=$registro["llave_paso"];
+			if (!isset($_SESSION["PCOSESS_SesionAbierta"])) $_SESSION["PCOSESS_SesionAbierta"]=$PCOSESS_SesionAbierta;
+			if (!isset($_SESSION["clave_correcta"])) $_SESSION["clave_correcta"]=$clave_correcta;
+			if (!isset($_SESSION["Nombre_Empresa_Corto"])) $_SESSION["Nombre_Empresa_Corto"]=$registro_parametros["nombre_empresa_corto"];
+			if (!isset($_SESSION["Nombre_Aplicacion"])) $_SESSION["Nombre_Aplicacion"]=$registro_parametros["nombre_aplicacion"];
+			if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
+
+			// Lleva a auditoria con query manual por la falta de $PCOSESS_LoginUsuario
+			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('".$registro["login"]."','Ingresa al sistema desde $PCO_DireccionAuditoria','$PCO_FechaOperacion','$PCO_HoraOperacion')");
+			PCO_Auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$_SESSION["PCOSESS_LoginUsuario"]);
+			// Actualiza fecha del ultimo ingreso para el usuario
+			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login='".$registro["login"]."'","$PCO_FechaOperacion");
+
+			// Redirecciona al menu
+			header("Location: ../../../index.php");
+			exit();
+		}
+
+
 ########################################################################
 ########################################################################
 /*

@@ -31,7 +31,6 @@
 	Title: Modulo SSO-SAML
 	Establece configuraciones para conectores SAML
 */
-
 include_once '../../../core/configuracion.php';
 // Inicia las conexiones con la BD y las deja listas para las operaciones
 include_once '../../../core/conexiones.php';

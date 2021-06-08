@@ -198,6 +198,8 @@ if (isset($_GET['sls']))
 ########################################################################
 if (isset($_SESSION['samlUserdata']))
     {
+        //Presenta los posibles atributos recibidos para el usuario desde el IdP (Por ahora retirados, no necesarios)
+        /*
         if (!empty($_SESSION['samlUserdata'])) 
             {
                 $attributes = $_SESSION['samlUserdata'];
@@ -218,10 +220,25 @@ if (isset($_SESSION['samlUserdata']))
             {
                 echo "<p>You don't have any attribute</p>";
             }
-    
-        echo '<p><a href="?slo" >Logout</a></p>';
+        */
+
+        if (trim($_SESSION['samlNameId'])!="")
+            {
+                $MensajeLogin="<br>Usted ha ingresado como <b>".$_SESSION['samlNameId']."</b><br>
+                    <br>
+                    <a href='?slo' style='text-decoration:none; background-color:gray; border-radius:3px; color:white; padding:5px;'>&#9194; Salir</a>&nbsp;&nbsp;&nbsp;
+                    <a href='?slo' style='text-decoration:none; background-color:gray; border-radius:3px; color:white; padding:5px;'>Ir a la aplicaci&oacute;n &#9193;</a>
         
-        var_dump($_SESSION['samlUserdata']);
+                <br><br>";
+                PCO_SAML_MensajeBasico("&#9989; Acceso SSO Concedido &#9989;",$MensajeLogin,"darkgreen","lightgray",1,1); //Tit,Msj,Color,Fondo,Head,ClsBuff
+                
+                //Intenta el login con el usuario recibido
+                PCO_SAML_EjecutarLogin(trim($_SESSION['samlNameId']));
+            }
+        else
+            {
+                PCO_SAML_MensajeBasico("Acceso SSO","ERROR: No se cuenta con un Id de usuario valido desde el IdP","darkred","lightgray",1,1); //Tit,Msj,Color,Fondo,Head,ClsBuff
+            }
     }
 
 
@@ -246,25 +263,25 @@ if (!isset($_SESSION['samlUserdata']))
         $ListaOpcionesConector="";
         while ($RegistroConectorSAML=$ResultadoConectorSAML->fetch())
             {
-                $Nombre=$RegistroConectorSAML["nombre_conector"];
-                $ImagenConector="";
+                $NombreConectorSSO=$RegistroConectorSAML["nombre_conector"];
+                $ImagenConectorSSO="";
                 if ($RegistroConectorSAML["ruta_logo"]!="")
                     {
-                        $ImagenConector=explode("|",$RegistroConectorSAML["ruta_logo"]);
-                        $ImagenConector=$ImagenConector[0];
-                        $ImagenConector="<img style='border-radius: 5%;' width='50' height='50' src='../../../{$ImagenConector}'>";
+                        $ImagenConectorSSO=explode("|",$RegistroConectorSAML["ruta_logo"]);
+                        $ImagenConectorSSO=$ImagenConectorSSO[0];
+                        $ImagenConectorSSO="<img style='border-radius: 5%;' width='50' height='50' src='../../../{$ImagenConectorSSO}'>";
                     }
-                $Enlace="?sso";
+                $EnlaceSSO="?sso";
                 $ListaOpcionesConector.="
-                    <br><a href='{$Enlace}' style='text-decoration:none;'>
+                    <br><a href='{$EnlaceSSO}' style='text-decoration:none;'>
                         <div>
-                            {$ImagenConector}
+                            {$ImagenConectorSSO}
                         </div>
                         <div>
-                            {$Nombre}
+                            {$NombreConectorSSO}
                         </div>
                     </a>";
             }
         $MensajeLogin="{$ListaOpcionesConector}<br>";
-        PCO_SAML_MensajeBasico("&#9911; Acceso SSO &#9911; </b>&nbsp;Conectores SAML disponibles<b>",$MensajeLogin,"#e81974","darkgray",1,1); //Tit,Msj,Color,Fondo,Head,ClsBuff
+        PCO_SAML_MensajeBasico("&#9940; Acceso SSO &#9940; </b>&nbsp;Conectores SAML disponibles<b>",$MensajeLogin,"#e81974","darkgray",1,1); //Tit,Msj,Color,Fondo,Head,ClsBuff
     }
