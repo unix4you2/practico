@@ -349,7 +349,7 @@
 
     					<?php
                             //Determina si esta en modo desarrollador del framework y agrega opcion para saltar al banco de pruebas interno
-                            if ($ModoDesarrolladorPractico==-10000)
+                            if ($ModoDesarrolladorPractico==-10000 && PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
                                 echo '<li><a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-25:1"><i class="fa fa-steam fa-fw"></i> <b>Banco de pruebas interno</b></a></li>';
                         ?>
 
