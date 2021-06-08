@@ -58,9 +58,12 @@ LogCambios="
 * Enhan [DEV]: Agregado al banco de pruebas de ReactJS, Acciones Pre,Post y procesamiento de variables internas así como informes con y sin recuperación por AJAX junto con pruebas de Alias y concatenaciones.
 * Fixed [INFORMES]: Ajustada característica de subtotales para datatables.  Se advierte que su uso está condicionado a que la recuperación por ajax y la distribución responsive se encuentres DESHABILITADAS ya que generan incompatibilidad.  Se recomienda revisar que no tenga ningún informe con estas características o sino debe ser ajustado antes de aplicar este parche.  Query de ayuda para buscar este tipo de informes: SELECT * FROM core_informe WHERE subtotales_columna<>'' AND (tabla_responsive='S' OR usar_ajax=1)
 * Fixed [INFORMES]: Se han recuperado los pie de pagina en informes con total de registros encontrados o subtotales calculados.  Es posible que si no los viera antes era por no ser considerados, si es así y desea ocultarlos simplemente en la configuración de su informe seleccione la opción de SI ocultar pie de pagina.
-* Added [CORE]: Implementación del modelo de SP (Service provider) en la aplicación para proveer Soporte SSO para autenticacion de usuarios mediante un IdP SAML2
+* Added [CORE]: Implementación del modelo de SP (Service provider) en la aplicación para proveer Soporte SSO para autenticacion de usuarios mediante un IdP SAML2.  Cuando se detecte al menos un proveedor de servicios registrado el sistema de login cambiará ara presentar a éste por defecto y dejar el login estándar oculto en un botón.  Si se desea gestionar permisos a los usuarios éstos deberán hacer login al menus una vez o ser creados con anticipacion para poder realizar la asociación de permisos o hacer uso de la plantilla en caso deseado.
 * Added [CORE]: Módulo de auditoría cuenta con usuario especial SEClog:event que graba todos los errores de seguridad o intentos de acceso a funcionalidades restringidas presentados.
 * Enhan [CORE]: Se optimiza codigo en el llamado de OAuth que ha sido pasado directamente al Form -5
+* Enhan [CORE]: Informe con detalles de auditoría permite recuperación por AJAX ofreciendo mayor velocidad en la exploración de rangos de fecha amplios permitiendo además la exportación de todos los eventos.
+
+
 
 
 

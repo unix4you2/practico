@@ -4986,13 +4986,15 @@ function PCO_VentanaLogin()
 
             //Determina si se tiene un login SAML activado
             $RegistroSAML=PCO_EjecutarSQL("SELECT * FROM core_samlconector WHERE activado='S' ORDER BY nombre_conector LIMIT 0,1 ")->fetch();
+            $CadenaMargen_LoginSAML="";
             $CadenaOcultamiento_LoginEstandarPRE="";
             $CadenaOcultamiento_LoginEstandarPOS="";
             if ($RegistroSAML["nombre_conector"]!="")
                 {
                     //Presenta boton para ir al login estandar de aplicacion
-                    $CadenaOcultamiento_LoginEstandarPRE="<details><summary><div id='PCO_BotonLoginEstandar' onclic='$(\"#PCO_BotonLoginEstandar\").hide();' class='btn btn-info'><b>{$MULTILANG_LoginClasico}</b> ($MULTILANG_Aplicacion)</div></summary>";
+                    $CadenaOcultamiento_LoginEstandarPRE="<details><summary><div id='PCO_BotonLoginEstandar' onclick='$(\"#PCO_BotonLoginEstandar\").hide(); $(\"#PCO_MarcoLoginSAML\").hide();' class='btn btn-info'><b>{$MULTILANG_LoginClasico}</b> ($MULTILANG_Aplicacion)</div></summary>";
                     $CadenaOcultamiento_LoginEstandarPOS="</details>";
+                    $CadenaMargen_LoginSAML="<br><br>";
                     $CadenaOpcionesSAML="";
                     $NombreConectorSSO=$RegistroSAML["nombre_conector"];
                     $ImagenConectorSSO="";
@@ -5055,6 +5057,7 @@ function PCO_VentanaLogin()
 
                 <!--Login Estandar-->
                 <div class="row">
+                    <?php echo $CadenaMargen_LoginSAML; ?>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xs-offset-0 col-sm-offset-4 col-md-offset-4 col-lg-offset-4" >
                     <div id="EnfasisLoginZoom" class="EnfasisLoginZoom" style="box-shadow: 3px 3px 3px gray;">
                         <div class="panel panel-default">
@@ -5237,7 +5240,10 @@ function PCO_VentanaLogin()
                             <script language="JavaScript"> login_usuario.uid.focus(); </script>
 
                     <?php echo $CadenaOcultamiento_LoginEstandarPOS; ?>
-                    <?php echo $CadenaOpcionesSAML; ?>
+                    <div id="PCO_MarcoLoginSAML">
+                        <?php echo $CadenaOpcionesSAML; ?>    
+                    </div>
+                    
 
                             </div> <!-- /panel-body -->
                         </div>
