@@ -53,7 +53,7 @@
 	$UsuarioBD='root';
 	$PasswordBD='mypass';
 	$MotorBD='mysql';		// Puede variar segun el driver PDO: mysql|pgsql|sqlite|sqlsrv|mssql|ibm|dblib|odbc|oracle|ifmx|fbd
-	$PuertoBD='';	// Vacio para predeterminado
+	$PuertoBD='';	// Vacio para predeterminado 
 
 	/*
 		Section: Variables para aplicacion
@@ -139,4 +139,4 @@
 	$ModoDesarrolladorPractico=-10000; // [0=Inactivo|-10000=Activo]
 
 	// Define cadena separada por comas con usuarios administradores de la aplicacion
-	$PCOVAR_Administradores='admin,john.arroyave';
+	$PCOVAR_Administradores='admin';
