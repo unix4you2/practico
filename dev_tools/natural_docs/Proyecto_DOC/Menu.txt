@@ -126,6 +126,7 @@ Group: Index  {
    Variable Index: Variables
    Cookie Index: Cookies
    Event Index: Events
+   Type Index: Types
    }  # Group: Index
 
 Text: Copyright (c) 2013
@@ -380,3 +381,7 @@ Group: Inc  {
    File: PCOJS_MostrarMensaje  (inc/bootstrap/js/practico.js)
    }  # Group: Inc
 
+File: "StructElem",  (inc/jquery/plugins/pdfmake-0.1.71/pdfmake.js)
+File: Modulo SSO-SAML  (inc/php-saml/practico/index.php)
+File: Modulo SSO-SAML  (inc/php-saml/practico/metadata.php)
+File: Modulo SSO-SAML  (inc/php-saml/practico/settings.php)
