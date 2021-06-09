@@ -6,6 +6,30 @@
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
 ```
+## Versión 21.7 (2021-06-10)
+* Fixed [KANBAN]: Creación de tareas kanban evita valores null en el campo de archivado.  Por defecto inicializa en cero para ser presentada como pendiente sobre el tablero.
+* Enhan [CHAT]: Al desactivar el módulo de chat desde el panel de configuración se desactivan las rutinas que buscan mensajes periódicamente para evitar tráfico innecesario.
+* Enhan [CORE]: Actualizacion de librería PDFMake desde 0.1.53 a 0.1.71
+* Enhan [CORE]: Se evita presentacion de mensajes de depuracion de scroll detectado/no detectado
+* Fixed [CORE]: Sentencias de arreglos asociativos anidados para la generación de campos en datatables dináicos se reescribe para ser compatible tanto con versiones nuevas como viejas (5.3+) de PHP, en las cuales generaba error por versión obsoleta del lenguaje.
+* Enhan [INFORMES]: Agregadas aclaraciones acerca del formato de consultas y sentencias SQL con recuperación dinámica para poder ser comprendidos por el framework durante la recuperación de registros.
+* Added [DEV]: Cuando el framework detecta que se encuentra en modo de desarrollador interno activado (valor -10000) presenta automáticamente una opción en el menú de usuario para lanzar el banco de pruebas interno del framework.
+* Fixed [INFORMES]: Botón de Consulta SQL (Avanzado) lleva a la pestaña correcta del forma a su lado derecho (Consulta SQL)
+* Enhan [INFORMES]: Se agregan a la cache de consulta los informes internos del framework (Id negativo).  Para efectos de depuracion sobre su aplicacion los desarrolladores podrian tener en cuenta solo los Id de informe positivos.
+* Fixed [INFORMES]: Se permite el uso de Alias en los informes con recuperación por AJAX evitando error de SQL a generar filtros de búsqueda dinámicos.
+* Enhan [INFORMES]: Agrega aclaración sobre el uso de alias en las consultas para aquellos informes con recuperación por AJAX.
+* Enhan [DEV]: Agregado al banco de pruebas de ReactJS, Acciones Pre,Post y procesamiento de variables internas así como informes con y sin recuperación por AJAX junto con pruebas de Alias y concatenaciones.
+* Fixed [INFORMES]: Ajustada característica de subtotales para datatables.  Se advierte que su uso está condicionado a que la recuperación por ajax y la distribución responsive se encuentres DESHABILITADAS ya que generan incompatibilidad.  Se recomienda revisar que no tenga ningún informe con estas características o sino debe ser ajustado antes de aplicar este parche.  Query de ayuda para buscar este tipo de informes: SELECT * FROM core_informe WHERE subtotales_columna<>'' AND (tabla_responsive='S' OR usar_ajax=1)
+* Fixed [INFORMES]: Se han recuperado los pie de pagina en informes con total de registros encontrados o subtotales calculados.  Es posible que si no los viera antes era por no ser considerados, si es así y desea ocultarlos simplemente en la configuración de su informe seleccione la opción de SI ocultar pie de pagina.
+* Added [CORE]: Implementación del modelo de SP (Service provider) en la aplicación para proveer Soporte SSO para autenticacion de usuarios mediante un IdP SAML2.  Cuando se detecte al menos un proveedor de servicios registrado el sistema de login cambiará ara presentar a éste por defecto y dejar el login estándar oculto en un botón.  Si se desea gestionar permisos a los usuarios éstos deberán hacer login al menus una vez o ser creados con anticipacion para poder realizar la asociación de permisos o hacer uso de la plantilla en caso deseado.
+* Added [CORE]: Módulo de auditoría cuenta con usuario especial SEClog:event que graba todos los errores de seguridad o intentos de acceso a funcionalidades restringidas presentados.
+* Enhan [CORE]: Se optimiza codigo en el llamado de OAuth que ha sido pasado directamente al Form -5
+* Enhan [CORE]: Informe con detalles de auditoría permite recuperación por AJAX ofreciendo mayor velocidad en la exploración de rangos de fecha amplios permitiendo además la exportación de todos los eventos.
+* Enhan [CORE]: Mejorada la exportación nativa de informes en CSV evitando problemas de caracteres al especificar la codificación de archivo final.
+* Added [INFORMES]: Los informes permiten ahora definir si los usuarios pueden personalizar las columnas visibles al generar el informe.
+* Enhan [INFORMES]: El boton de cargar vista previa de informes presenta ahora los resultados en una ventana separada.
+
+
 ## Versión 21.5 (2021-05-21)
 
 * Added [CORE]: La consola de navegador presenta una advertencia cuando el usuario intenta abrirla para ejecutar alguna depuracion o comando.
