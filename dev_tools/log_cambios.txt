@@ -67,6 +67,10 @@ LogCambios="
 * Enhan [CORE]: Informe con detalles de auditoría permite recuperación por AJAX ofreciendo mayor velocidad en la exploración de rangos de fecha amplios permitiendo además la exportación de todos los eventos.
 * Enhan [CORE]: Mejorada la exportación nativa de informes en CSV evitando problemas de caracteres al especificar la codificación de archivo final.
 * Added [INFORMES]: Los informes permiten ahora definir si los usuarios pueden personalizar las columnas visibles al generar el informe.
+* Enhan [INFORMES]: El boton de cargar vista previa de informes presenta ahora los resultados en una ventana separada.
+
+
+
 
 
 

@@ -2028,7 +2028,7 @@ if ($PCO_Accion=="PCO_EditarInforme")
 	?>
 
 			<?php PCO_AbrirVentana($MULTILANG_InfVistaPrev, 'panel-primary'); ?>
-    			<form action="<?php echo $ArchivoCORE; ?>" method="post" name="datosprevios" id="datosprevios" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    			<form action="<?php echo $ArchivoCORE; ?>" method="post" name="datosprevios" id="datosprevios" target="_blank" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
         			<input type="hidden" name="PCO_Accion" value="PCO_CargarObjeto">
         			<input type="hidden" name="PCO_Objeto" value="inf:<?php echo $registro_informe['id']; ?>:1:htm:Informes:0">
     			</form>
