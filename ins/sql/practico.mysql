@@ -345,6 +345,7 @@ CREATE TABLE core_informe (
   pre_script mediumtext,
   post_script mediumtext,
   usar_ajax int(1) DEFAULT '0',
+  definir_cols char(1) NULL DEFAULT 'N',
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

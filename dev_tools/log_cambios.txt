@@ -17,6 +17,7 @@ ListaArchivos="
 index.php
 core/ajax.php
 core/comunes.php
+core/informes.php
 core/objetos.php
 core/marco_abajo.php
 core/marco_forms.php
@@ -27,6 +28,8 @@ core/sesion.php
 inc/reactjs/*
 inc/jquery/plugins/pdfmake-0.1.71/*
 inc/php-saml/*
+inc/bootstrap/js/plugins/dataTables/*
+
 
 xml/*
 inc/practico/idiomas/*
@@ -44,7 +47,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 
-* Fixed [CHAT]: Creación de tareas kanban evita valores null en el campo de archivado.  Por defecto inicializa en cero para ser presentada como pendiente sobre el tablero.
+* Fixed [KANBAN]: Creación de tareas kanban evita valores null en el campo de archivado.  Por defecto inicializa en cero para ser presentada como pendiente sobre el tablero.
 * Enhan [CHAT]: Al desactivar el módulo de chat desde el panel de configuración se desactivan las rutinas que buscan mensajes periódicamente para evitar tráfico innecesario.
 * Enhan [CORE]: Actualizacion de librería PDFMake desde 0.1.53 a 0.1.71
 * Enhan [CORE]: Se evita presentacion de mensajes de depuracion de scroll detectado/no detectado
@@ -62,6 +65,8 @@ LogCambios="
 * Added [CORE]: Módulo de auditoría cuenta con usuario especial SEClog:event que graba todos los errores de seguridad o intentos de acceso a funcionalidades restringidas presentados.
 * Enhan [CORE]: Se optimiza codigo en el llamado de OAuth que ha sido pasado directamente al Form -5
 * Enhan [CORE]: Informe con detalles de auditoría permite recuperación por AJAX ofreciendo mayor velocidad en la exploración de rangos de fecha amplios permitiendo además la exportación de todos los eventos.
+* Enhan [CORE]: Mejorada la exportación nativa de informes en CSV evitando problemas de caracteres al especificar la codificación de archivo final.
+* Added [INFORMES]: Los informes permiten ahora definir si los usuarios pueden personalizar las columnas visibles al generar el informe.
 
 
 
@@ -97,6 +102,9 @@ CREATE TABLE core_samlconector (
   usuario_plantilla varchar(255) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+ALTER TABLE core_informe ADD definir_cols char(1) NULL DEFAULT 'N';
+
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

@@ -168,6 +168,7 @@
     <script src="inc/bootstrap/js/plugins/dataTables/jquery.dataTables.min.js"></script>
     <script src="inc/bootstrap/js/plugins/dataTables/dataTables.buttons.min.js"></script><!--N-->
     <script src="inc/bootstrap/js/plugins/dataTables/buttons.html5.min.js"></script><!--N-->
+    <script src="inc/bootstrap/js/plugins/dataTables/buttons.colVis.min.js"></script><!--N-->
 
     <script src="inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.min.js"></script>
 
@@ -278,6 +279,7 @@
                 $TablasDataTableExportaCSV=@explode("|",$PCO_InformesDataTableExrpotaCSV);
                 $TablasDataTableExportaXLS=@explode("|",$PCO_InformesDataTableExrpotaXLS);
                 $TablasDataTableExportaPDF=@explode("|",$PCO_InformesDataTableExrpotaPDF);
+                $TablasDataTableDefineCOLS=@explode("|",$PCO_InformesDataTableDefineCOLS);
                 $TablasDataTableIdCache=@explode("|",$PCO_InformesIdCache);
                 $TablasDataTableRecuperacionAJAX=@explode("|",$PCO_InformesRecuperacionAJAX);
                 $TablasDataTableColumnas=@explode("|",$PCO_InformesListaColumnasDT);
@@ -294,6 +296,7 @@
                         PCO_InformesDataTableExrpotaCSV=$PCO_InformesDataTableExrpotaCSV
                         PCO_InformesDataTableExrpotaXLS=$PCO_InformesDataTableExrpotaXLS
                         PCO_InformesDataTableExrpotaPDF=$PCO_InformesDataTableExrpotaPDF
+                        PCO_InformesTablasDataTableDefineCOLS=$PCO_InformesDataTableDefineCOLS
                         PCO_InformesIdCache=$PCO_InformesIdCache
                         PCO_InformesRecuperacionAJAX=$PCO_InformesRecuperacionAJAX
                         PCO_InformesListaColumnasDT=$PCO_InformesListaColumnasDT
@@ -312,6 +315,7 @@
                                 $CadenaExportaCSV=trim($TablasDataTableExportaCSV[$i]); if ($CadenaExportaCSV=="S") $CadenaExportaCSV='{ extend: "csv",     className: "InformeBotonCsv" },   '; else $CadenaExportaCSV='';
                                 $CadenaExportaXLS=trim($TablasDataTableExportaXLS[$i]); if ($CadenaExportaXLS=="S") $CadenaExportaXLS='{ extend: "excel",   className: "InformeBotonExcel" ,  title: "" }, '; else $CadenaExportaXLS='';
                                 $CadenaExportaPDF=trim($TablasDataTableExportaPDF[$i]); if ($CadenaExportaPDF=="S") $CadenaExportaPDF='{ extend: "pdf",     className: "InformeBotonPdf" },   '; else $CadenaExportaPDF='';
+                                $CadenaPersonalizarColumnas=trim($TablasDataTableDefineCOLS[$i]); if ($CadenaPersonalizarColumnas=="S") $CadenaPersonalizarColumnas='{ extend: "colvis",  text:"'.$MULTILANG_Columna.'(s)",  className: "InformeBotonCopiar" }, '; else $CadenaPersonalizarColumnas='';
                                 //Realiza operaciones de reemplazo de patrones sobre la cadena de formato de Totales si aplica
                                 $CadenaFormateadaTotales=str_replace("_TOTAL_PAGINA_","'+pageTotal +'",$CadenaFormateadaTotales);
                                 $CadenaFormateadaTotales=str_replace("_TOTAL_INFORME_","'+total +'",$CadenaFormateadaTotales);
@@ -324,6 +328,7 @@
                                             destroy: true,   //Habilita autodestruccion de objeto si se necesita reinicializar
                                             dom: "Blfrtip",  //Ej:  Blfrtip  Da formato a la tabla: Ver https://datatables.net/reference/option/dom
                                             buttons: [
+                                                '.$CadenaPersonalizarColumnas.'
                                                 '.$CadenaExportaCLP.'
                                                 '.$CadenaExportaCSV.'
                                                 '.$CadenaExportaXLS.'
