@@ -1,12 +1,12 @@
 #[VersionCompatible]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para tmp/par_compat.txt
-VersionCompatibleAno="21"
-VersionCompatibleMes="5"
+VersionCompatibleAno=""
+VersionCompatibleMes=""
 
 #[VersionFinal]
 #Utilice vacios para crear parches compatibles con cualquier version: Usado para inc/version_actual.txt
-VersionFinalAno="21"
-VersionFinalMes="7"
+VersionFinalAno=""
+VersionFinalMes=""
 
 #[Archivo de version]
 #Predeterminado: " inc/version_actual.txt "  DEJAR EN BLANCO para parches compatibles con cualquier version. Pero hay error de no reconocimiento.  Validar en actualizacion.php
@@ -15,21 +15,7 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
-core/ajax.php
 core/comunes.php
-core/informes.php
-core/objetos.php
-core/marco_abajo.php
-core/marco_forms.php
-core/marco_nav.php
-core/marco_navizq.php
-core/sesion.php
-
-inc/reactjs/*
-inc/jquery/plugins/pdfmake-0.1.71/*
-inc/php-saml/*
-inc/bootstrap/js/plugins/dataTables/*
-
 
 xml/*
 inc/practico/idiomas/*
@@ -47,33 +33,6 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 
-* Fixed [KANBAN]: Creación de tareas kanban evita valores null en el campo de archivado.  Por defecto inicializa en cero para ser presentada como pendiente sobre el tablero.
-* Enhan [CHAT]: Al desactivar el módulo de chat desde el panel de configuración se desactivan las rutinas que buscan mensajes periódicamente para evitar tráfico innecesario.
-* Enhan [CORE]: Actualizacion de librería PDFMake desde 0.1.53 a 0.1.71
-* Enhan [CORE]: Se evita presentacion de mensajes de depuracion de scroll detectado/no detectado
-* Fixed [CORE]: Sentencias de arreglos asociativos anidados para la generación de campos en datatables dináicos se reescribe para ser compatible tanto con versiones nuevas como viejas (5.3+) de PHP, en las cuales generaba error por versión obsoleta del lenguaje.
-* Enhan [INFORMES]: Agregadas aclaraciones acerca del formato de consultas y sentencias SQL con recuperación dinámica para poder ser comprendidos por el framework durante la recuperación de registros.
-* Added [DEV]: Cuando el framework detecta que se encuentra en modo de desarrollador interno activado (valor -10000) presenta automáticamente una opción en el menú de usuario para lanzar el banco de pruebas interno del framework.
-* Fixed [INFORMES]: Botón de Consulta SQL (Avanzado) lleva a la pestaña correcta del forma a su lado derecho (Consulta SQL)
-* Enhan [INFORMES]: Se agregan a la cache de consulta los informes internos del framework (Id negativo).  Para efectos de depuracion sobre su aplicacion los desarrolladores podrian tener en cuenta solo los Id de informe positivos.
-* Fixed [INFORMES]: Se permite el uso de Alias en los informes con recuperación por AJAX evitando error de SQL a generar filtros de búsqueda dinámicos.
-* Enhan [INFORMES]: Agrega aclaración sobre el uso de alias en las consultas para aquellos informes con recuperación por AJAX.
-* Enhan [DEV]: Agregado al banco de pruebas de ReactJS, Acciones Pre,Post y procesamiento de variables internas así como informes con y sin recuperación por AJAX junto con pruebas de Alias y concatenaciones.
-* Fixed [INFORMES]: Ajustada característica de subtotales para datatables.  Se advierte que su uso está condicionado a que la recuperación por ajax y la distribución responsive se encuentres DESHABILITADAS ya que generan incompatibilidad.  Se recomienda revisar que no tenga ningún informe con estas características o sino debe ser ajustado antes de aplicar este parche.  Query de ayuda para buscar este tipo de informes: SELECT * FROM core_informe WHERE subtotales_columna<>'' AND (tabla_responsive='S' OR usar_ajax=1)
-* Fixed [INFORMES]: Se han recuperado los pie de pagina en informes con total de registros encontrados o subtotales calculados.  Es posible que si no los viera antes era por no ser considerados, si es así y desea ocultarlos simplemente en la configuración de su informe seleccione la opción de SI ocultar pie de pagina.
-* Added [CORE]: Implementación del modelo de SP (Service provider) en la aplicación para proveer Soporte SSO para autenticacion de usuarios mediante un IdP SAML2.  Cuando se detecte al menos un proveedor de servicios registrado el sistema de login cambiará ara presentar a éste por defecto y dejar el login estándar oculto en un botón.  Si se desea gestionar permisos a los usuarios éstos deberán hacer login al menus una vez o ser creados con anticipacion para poder realizar la asociación de permisos o hacer uso de la plantilla en caso deseado.
-* Added [CORE]: Módulo de auditoría cuenta con usuario especial SEClog:event que graba todos los errores de seguridad o intentos de acceso a funcionalidades restringidas presentados.
-* Enhan [CORE]: Se optimiza codigo en el llamado de OAuth que ha sido pasado directamente al Form -5
-* Enhan [CORE]: Informe con detalles de auditoría permite recuperación por AJAX ofreciendo mayor velocidad en la exploración de rangos de fecha amplios permitiendo además la exportación de todos los eventos.
-* Enhan [CORE]: Mejorada la exportación nativa de informes en CSV evitando problemas de caracteres al especificar la codificación de archivo final.
-* Added [INFORMES]: Los informes permiten ahora definir si los usuarios pueden personalizar las columnas visibles al generar el informe.
-* Enhan [INFORMES]: El boton de cargar vista previa de informes presenta ahora los resultados en una ventana separada.
-
-
-
-
-
-
 
 
 
@@ -86,28 +45,6 @@ TODO TODO TODO
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
-
-DROP TABLE IF EXISTS core_samlconector;
-CREATE TABLE core_samlconector (
-  id int(11) unsigned NOT NULL AUTO_INCREMENT,
-  activado char(1) DEFAULT 'S',
-  nombre_conector varchar(255) NOT NULL,
-  ruta_logo varchar(255) NOT NULL,
-  sp_baseurl varchar(255) NOT NULL,
-  sp_entity_id varchar(255) NOT NULL,
-  sp_assertion_consumer_service varchar(255) NOT NULL,
-  sp_single_logout_service varchar(255) NOT NULL,
-  sp_nameid_format varchar(255) NOT NULL,
-  sp_nameid_format_full varchar(255) NOT NULL,
-  idp_entityid varchar(255) NOT NULL,
-  idp_single_signon_service varchar(255) NOT NULL,
-  idp_single_logout_service varchar(255) NOT NULL,
-  idp_x509cert text,
-  usuario_plantilla varchar(255) NOT NULL,
-  PRIMARY KEY (id)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
-ALTER TABLE core_informe ADD definir_cols char(1) NULL DEFAULT 'N';
 
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
@@ -122,31 +59,6 @@ ScriptPHPAutorun=""
 ########################################################################
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
-
-
-Task1 OK - Descargar demo
-Task2 OK - Registrarse y crear App connector
-Task3 OK - Desde opcion SSO Pegar datos hacia settings.php
-            Issuer URL ➞	entityId
-            SAML 2.0 Endpoint (HTTP) ➞	singleSignOnService
-            SLO Endpoint (HTTP)➞	singleLogoutService
-            X.509 Certificate > View Details➞	x509cert
-Task4 OK - Definir datos del service provider (la aplicacion propia)
-            spBaseUrl  (setear la URL base del sistema)
-            entityId
-            assertionConsumerService
-            singleLogoutService
-            NameIDFormat  cambiado  unspecified  a  emailAddress   (revisar si sin especificar aplica a todos)
-
-            Se pegan datos desde settings.php hacia el panel de configuracion de saml así:
-            assertionConsumerService➞	ACS (Consumer) URL   (en el validator estaba  .*  y se agregó  /.*
-                                        y Recipient
-            singleLogoutService ➞	 Single Logout URL
-            entityId ➞	Audience
-                        
-            Diligenciar otros campos segun OneLogin
-Task5 OK - Creacion de un usuario en la app
-
 
 
 Usar el hash sumando todos los permisos de un usuario para ver si el crc32 da diferente de lo que tiene a la plantilla entonces lo asigne o regenere.
