@@ -199,6 +199,13 @@ php objeto2xml.php
 		rm ${SCRIPTPATH}${Slash}../xml/autorun_patch.php
 	fi
 
+#Limpia los XML generados para el instalador de manera que no sean contemplados o re-ejecutados nuevamente en la recarga de desarrollo
+	cd $SCRIPTPATH
+	cd ..
+	cd xml
+	rm *.xml
+	rm *.php
+
 # Presenta resultados, restablece variables y termina
 	IFS=$old_IFS  # restablece el separador de campo predeterminado
 	echo "-----------------------------------------------------------------"

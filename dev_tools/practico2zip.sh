@@ -118,11 +118,18 @@ ListaExcluidos=" inc/practico_se\* skin/nomo_editada\* mod/sopa\* mod/ldap\* mod
     cp -r Salida_DOC/* ../../../unix4you2.github.io/dev_docs/
     cd ..
 
+#Limpia los XML generados para el instalador de manera que no sean contemplados o re-ejecutados nuevamente en la recarga de desarrollo
+	cd $SCRIPTPATH
+	cd ..
+	cd xml
+	rm *.xml
+	rm *.php
 
 # Presenta resultados, restablece variables y termina
 	IFS=$old_IFS  # restablece el separador de campo predeterminado
 	echo "-----------------------------------------------------------------"
 	echo "Presione [Enter] para finalizar. "
+
 #	read -p "" vble
 	exit 0  # Finalizo ejecucion normal del script
 
