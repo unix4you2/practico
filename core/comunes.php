@@ -7619,7 +7619,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                     <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=PCO_EditarFormulario&popup_activo=&formulario='.$formulario.'">
                         <div><i class="fa fa-pencil-square"></i> '.$MULTILANG_Editar.' '.$MULTILANG_Formularios.' <i>[ID='.$formulario.']</i></div>
                     </a>';
-		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && ($formulario>=0 || $ModoDesarrolladorPractico=-10000) )
+		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && ($formulario>=0 || $ModoDesarrolladorPractico==-10000) )
 		    $ComplementoIdObjetoEnTitulo="  $BotonSaltoEdicion";
 
 		echo '
@@ -9105,18 +9105,15 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
                     //Lleva informe a la cache siempre y cuando no sea un informe interno del framework
                     $IdCacheInformes=0;
-                    //if ($informe>0 || $ModoDesarrolladorPractico==-10000)
-                        {
-                            PCO_EjecutarSQLUnaria("INSERT INTO {$TablasCore}informe_cache (informe,usuario,conexion,script_sql,columnas) VALUES('{$informe}','{$PCOSESS_LoginUsuario}','{$NombreConexionExtra}',?,'{$ListaColumnasInforme}') ","{$consulta}");
-                            $IdCacheInformes=PCO_ObtenerUltimoIDInsertado();
+                    PCO_EjecutarSQLUnaria("INSERT INTO {$TablasCore}informe_cache (informe,usuario,conexion,script_sql,columnas) VALUES('{$informe}','{$PCOSESS_LoginUsuario}','{$NombreConexionExtra}',?,'{$ListaColumnasInforme}') ","{$consulta}");
+                    $IdCacheInformes=PCO_ObtenerUltimoIDInsertado();
 
-                            //Ahora que se tiene una cache, determina si se requiere boton de exportacion CSV por AJAX y lo agrega
-				            if ($registro_informe["genera_pdf"]=='C' || $registro_informe["genera_pdf"]=='A')
-                                {
-                                    echo "<script language='JavaScript'>
-                                        $('#PCO_MarcoBotonCSVInforme{$informe}').html('<a class=\"btn btn-success btn-xs pull-right\" href=\"core/ajax.php?PCO_Accion=PCO_ExportacionQueryCacheCSV&amp;IdRegistro_CacheSQL={$IdCacheInformes}\"> <i class=\"fa fa-file-excel-o fa-fw\"></i> {$MULTILANG_Exportar} CSV </a>');
-                                    </script>";
-                                }
+                    //Ahora que se tiene una cache, determina si se requiere boton de exportacion CSV por AJAX y lo agrega
+		            if ($registro_informe["genera_pdf"]=='C' || $registro_informe["genera_pdf"]=='A')
+                        {
+                            echo "<script language='JavaScript'>
+                                $('#PCO_MarcoBotonCSVInforme{$informe}').html('<a class=\"btn btn-success btn-xs pull-right\" href=\"core/ajax.php?PCO_Accion=PCO_ExportacionQueryCacheCSV&amp;IdRegistro_CacheSQL={$IdCacheInformes}\"> <i class=\"fa fa-file-excel-o fa-fw\"></i> {$MULTILANG_Exportar} CSV </a>');
+                            </script>";
                         }
 
 					//Si el informe va a soportar datatable entonces lo agrega a las tablas que deben ser convertidas en el pageonload

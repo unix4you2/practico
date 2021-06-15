@@ -32,12 +32,9 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Fixed [CORE]: Asignacion incorrecta durante comparación de modo programador de framework permite la edición de formularios internos.
 
 
-
-
-TODO TODO TODO
-* Added [CORE]: Ahora la rutina de VerificarConectividad utilizada por el framework para presentar al usuario su estado de red (cuando se cae o regresa) es configurable desde el panel de la aplicación indicando si estará deshabilitada por defecto o cada cuánto se desea realizar el chequeo de conectividad del usuario.
 
 "
 
@@ -59,6 +56,29 @@ ScriptPHPAutorun=""
 ########################################################################
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
+
+WAF:
+https://github.com/Alemalakra/xWAF          PHP 5.3
+https://github.com/terrylinooo/shieldon
+https://github.com/orangemiaw/SimpleWAF
+https://github.com/isjing/seihen            PHP 5.6
+https://github.com/riverside/php-waf        PHP 7+
+https://github.com/stefan2200/firewall
+https://github.com/abdal-security-group/Abdal-Php-Waf
+https://github.com/thevops/simple-waf
+
+https://github.com/echo-devim/litewaf
+https://github.com/NumanABi/webcop-firewall/tree/master/en
+https://github.com/marcocesarato/PHP-AIO-Security
+
+Para apache:
+https://github.com/asklinux/rimau-waf
+
+
+TODO TODO TODO
+* Added [CORE]: Ahora la rutina de VerificarConectividad utilizada por el framework para presentar al usuario su estado de red (cuando se cae o regresa) es configurable desde el panel de la aplicación indicando si estará deshabilitada por defecto o cada cuánto se desea realizar el chequeo de conectividad del usuario.
+
+
 
 
 Usar el hash sumando todos los permisos de un usuario para ver si el crc32 da diferente de lo que tiene a la plantilla entonces lo asigne o regenere.
