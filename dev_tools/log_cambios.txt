@@ -33,6 +33,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 * Fixed [CORE]: Asignacion incorrecta durante comparación de modo programador de framework permite la edición de formularios internos.
+* Fixed [USUARIOS]: Ficha de usuarios no almacena si el usuario es usado como plantilla o no.
 
 
 
