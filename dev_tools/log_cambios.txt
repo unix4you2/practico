@@ -33,6 +33,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 * Fixed [CORE]: Asignacion incorrecta durante comparación de modo programador de framework permite la edición de formularios internos.
+* Fixed [CORE]: Rutinas de limpieza de cadenas para evitar inyecciones SQL incluyen espacios despuès de palabras clave para evitar coincidencias con valores de parámetros.
 * Fixed [USUARIOS]: Ficha de usuarios no almacena si el usuario es usado como plantilla o no.
 
 
@@ -59,6 +60,7 @@ ScriptPHPAutorun=""
 TODOList="
 
 WAF:
+-----------------------------------------------------
 https://github.com/Alemalakra/xWAF          PHP 5.3
 https://github.com/terrylinooo/shieldon
 https://github.com/orangemiaw/SimpleWAF
@@ -74,6 +76,41 @@ https://github.com/marcocesarato/PHP-AIO-Security
 
 Para apache:
 https://github.com/asklinux/rimau-waf
+
+
+https://www.netsparker.com/blog/web-security/sql-injection-cheat-sheet/
+https://www.imperva.com/learn/application-security/sql-injection-sqli/
+https://owasp.org/www-community/attacks/SQL_Injection
+https://www.w3schools.com/sql/sql_injection.asp
+
+
+
+
+Face Recognition:
+-----------------------------------------------------
+https://justadudewhohacks.github.io/face-api.js/docs/index.html
+https://justadudewhohacks.github.io/face-api.js/face_and_landmark_detection/
+https://github.com/justadudewhohacks/
+
+https://rapidapi.com/blog/php-face-detection-fpeg/
+https://stackoverflow.com/questions/22941904/facial-recognition-using-php/26414063
+https://stackoverflow.com/questions/4159924/face-detection-in-php
+
+
+https://github.com/MacgyverCode/faceRecognition-PHP
+https://www.phpclasses.org/blog/post/831-Notable-PHP-package-PHP-Face-Detection-Library.html
+https://hackthestuff.com/article/how-to-face-detection-using-webcam-in-php
+https://heartbeat.fritz.ai/facial-recognition-system-with-javascript-f9659c381434
+https://bensonruan.com/face-detection-with-face-api-js/
+https://betterprogramming.pub/how-to-set-up-face-verification-the-easy-way-using-html5-javascript-5301235e495f
+
+https://github.com/shango44/facesoft-html5-javascript-face-match
+
+
+Otros:
+-----------------------------------------------------
+https://github.com/animate-css/animate.css/network/members
+
 
 
 TODO TODO TODO

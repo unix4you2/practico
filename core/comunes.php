@@ -3656,6 +3656,11 @@ function PCO_CodigoQR($contenido,$recuperacion_errores="L",$ancho_pixeles=3,$mar
 		1' and ''='
 		' OR 'A'='A
 		$username = 1' or '1' = '1
+
+
+
+
+
 */
 function PCO_FiltrarCadenaSQL($cadena)
 	{
@@ -3665,13 +3670,13 @@ function PCO_FiltrarCadenaSQL($cadena)
 			{
 				$cadena = str_ireplace("''","'",$cadena);
 				$cadena = str_ireplace("\\","",$cadena);
-				$cadena = str_ireplace("COPY","",$cadena);
-				$cadena = str_ireplace("DELETE","",$cadena);
-				$cadena = str_ireplace("DROP","",$cadena);
-				$cadena = str_ireplace("DUMP","",$cadena);
+				$cadena = str_ireplace("COPY ","",$cadena);
+				$cadena = str_ireplace("DELETE ","",$cadena);
+				$cadena = str_ireplace("DROP ","",$cadena);
+				$cadena = str_ireplace("DUMP ","",$cadena);
 				$cadena = str_ireplace(" OR ","",$cadena);
 				$cadena = str_ireplace("%","",$cadena);
-				$cadena = str_ireplace("LIKE","",$cadena);
+				$cadena = str_ireplace(" LIKE ","",$cadena);
 				$cadena = str_ireplace("--","",$cadena);
 				$cadena = str_ireplace("^","",$cadena);
 				$cadena = str_ireplace("[","",$cadena);
