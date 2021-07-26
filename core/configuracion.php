@@ -53,7 +53,7 @@
 	$UsuarioBD='root';
 	$PasswordBD='mypass';
 	$MotorBD='mysql';		// Puede variar segun el driver PDO: mysql|pgsql|sqlite|sqlsrv|mssql|ibm|dblib|odbc|oracle|ifmx|fbd
-	$PuertoBD='';	// Vacio para predeterminado 
+	$PuertoBD='';	// Vacio para predeterminado
 
 	/*
 		Section: Variables para aplicacion
@@ -93,7 +93,7 @@
 	$IdiomaEnLogin=1;
 	$Tema_PracticoFramework='bootstrap';
 	$PCO_ArchivoImagenFondo='';
-	$PCO_TransformacionColores='inverso';
+	$PCO_TransformacionColores='';
     $PCO_PermitirUsuariosModoNoche='1';
 
 	$TipoCaptchaLogin='visual';

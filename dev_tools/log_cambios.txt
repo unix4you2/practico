@@ -112,6 +112,10 @@ Otros:
 https://github.com/animate-css/animate.css/network/members
 
 
+EDITOR:
+https://www.diagrams.net/blog/embedding-walkthrough   usando modo embedded de draw.io (diagrmas.net)
+https://stackoverflow.com/search?q=[draw.io]
+https://digirent.nl/examples/mxgraph/docs/js-api/files/editor/mxEditor-js.html
 
 TODO TODO TODO
 * Added [CORE]: Ahora la rutina de VerificarConectividad utilizada por el framework para presentar al usuario su estado de red (cuando se cae o regresa) es configurable desde el panel de la aplicación indicando si estará deshabilitada por defecto o cada cuánto se desea realizar el chequeo de conectividad del usuario.
