@@ -98,7 +98,6 @@
 			$PCOVAR_UrlImagenFondo = $protocolo_sitioweb.$prefijo_sitioweb."/".$PCO_ArchivoImagenFondo."?".filemtime($PCO_ArchivoImagenFondo);
 			$PCOVAR_CadenaImagenFondo="background-image: url('$PCOVAR_UrlImagenFondo'); background-repeat: no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;";
 	    }
-
 ?>
 
 <body oncontextmenu="return false;"  style="background-color: <?php echo $PCO_ColorFondoGeneral; ?>;">

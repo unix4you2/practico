@@ -5066,6 +5066,7 @@ function PCO_VentanaLogin()
                 <div class="row">
                     <?php echo $CadenaMargen_LoginSAML; ?>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xs-offset-0 col-sm-offset-4 col-md-offset-4 col-lg-offset-4" >
+                    <br>
                     <div id="EnfasisLoginZoom" class="EnfasisLoginZoom" style="box-shadow: 3px 3px 3px gray;">
                         <div class="panel panel-default">
                             <div class="panel-heading">

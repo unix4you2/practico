@@ -93,7 +93,7 @@
 	$IdiomaEnLogin=1;
 	$Tema_PracticoFramework='bootstrap';
 	$PCO_ArchivoImagenFondo='';
-	$PCO_TransformacionColores='';
+	$PCO_TransformacionColores='inverso';
     $PCO_PermitirUsuariosModoNoche='1';
 
 	$TipoCaptchaLogin='visual';

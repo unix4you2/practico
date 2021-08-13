@@ -38,6 +38,67 @@ LogCambios="
 
 
 
+
+
+
+
+
+* Enhan [KANBAN]: Se permite agregar un estado general del requerimiento entre Aceptado,EnProgreso,Finalizado,Rechazado,Devuelto
+* Enhan [KANBAN]: Cuando se cambia el porcentaje de finalización de actividad al 100% automáticamente se actualiza el estado de tarea a Finalizado
+* Enhan [KANBAN]: Cuando se actualiza el estado de una actividad a Finalizado se cambia el porcentaje de avance automáticamente a 100%
+* Enhan [KANBAN]: Se agrega posibilidad de agregar pruebas funcionales y no funcionales a cada actividad así como el responsable de cada una.  Se deja sólo un campo de responsable para el control o aceptación de la prueba.
+* Enhan [KANBAN]: Se agrega fecha de inicio de actividad. Por defecto contemplado que pasa a una columna de elicitación como la fecha de creación, modificable.
+* Added [KANBAN]: Actividades con pruebas funcionales y/o no funcionales sin recibir aceptación no podrán ser archivadas
+* Added [KANBAN]: Informe de banco de pruebas permite visualizar todas las actividades pendientes por tablero que están a la espera de aceptar pruebas sin importar su columna o estado actual.
+* Added [KANBAN]: Las tareas kanban cuentan con la posibilidad de reportar Bugs (Reportes de errores) específicos por cada actividad que alimentan el módulo de reporte y seguimiento de errores.
+* Added [KANBAN]: Mensaje en la barra superior le indica a un usuario si tiene pruebas pendientes por aprobación.
+* Added [KANBAN]: Menú de tableros Kanban incluye un informe con todo el banco de pruebas establecido en el sistema
+* Added [KANBAN]: Se permite compartir tareas en modo de edición a usuarios específicos
+* Added [KANBAN]: Para tableros compartidos en edición con otras personas se almacena versiones de cada cambio dentro de un campo historial.
+* Added [KANBAN]: Agregado campo adicional para indicar cantidad de horas/hombre estimadas por actividad
+* Added [KANBAN]: Agregado campo para presupuesto por actividad
+* Enhan [KANBAN]: Se permite adjuntar un archivo con detalles del requerimiento cuando así sea necesario por el usuario final.
+
+
+Permitir identificar desviaciones de un requerimiento durante las pruebas
+
+PLAN DE PRUEBAS
+
+Funcionales:
+Pruebas unitarias
+Pruebas de componentes
+Pruebas de integración
+Pruebas de sistema
+Pruebas de humo
+Pruebas alpha
+Pruebas beta
+Pruebas de aceptación
+Pruebas de regresión
+
+
+No Funcionales:
+Pruebas de compatibilidad
+Pruebas de seguridad
+Pruebas de Estrés
+Pruebas de usabilidad
+Pruebas de rendimiento
+Pruebas de internacionalización y localización
+Pruebas de escalabilidad
+Pruebas de mantenibilidad
+Pruebas de instalabilidad
+Pruebas de portabilidad
+
+
+Parte del cliente/usuario:
+Pruebas de aceptación
+
+
+
+Enfoques de pruebas:
+Pruebas de Caja blanca
+Pruebas de Caja negra
+
+
 "
 
 
@@ -45,6 +106,27 @@ LogCambios="
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
 
+
+
+
+
+ALTER TABLE `core_kanban`
+CHANGE `fecha` `fecha` date NULL COMMENT 'Fecha de entrega/estimada' AFTER `estilo`,
+ADD `usuarios_edicion` varchar(255) NULL COMMENT 'Usuarios que pueden editar la tarea',
+ADD `estado_general` varchar(30) NULL AFTER `usuarios_edicion`,
+ADD `pruebas_funcionales` varchar(500) NULL AFTER `estado_general`,
+ADD `pruebas_nofuncionales` varchar(500) NULL AFTER `pruebas_funcionales`,
+ADD `fecha_inicio` date NULL AFTER `pruebas_nofuncionales`,
+ADD `aceptacion_pf` char(2) NULL DEFAULT 'No' COMMENT 'Aceptacion de pruebas funcionales' AFTER `fecha_inicio`,
+ADD `aceptacion_pnf` char(2) NULL DEFAULT 'No' COMMENT 'Aceptacion de pruebas no funcionales' AFTER `aceptacion_pf`,
+ADD `historial` text NULL AFTER `aceptacion_pnf`,
+ADD `horas_estimadas` int(11) NULL DEFAULT '0' AFTER `historial`,
+ADD `presupuesto` int(11) NULL DEFAULT '0' AFTER `horas_estimadas`,
+ADD `adjunto_elicitacion` varchar(255) NULL AFTER `presupuesto`;
+
+ALTER TABLE `core_kanban`
+ADD `usuario_aceptacion_pf` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `aceptacion_pnf`,
+ADD `usuario_aceptacion_pnf` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `usuario_aceptacion_pf`;
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

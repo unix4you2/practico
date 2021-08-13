@@ -505,9 +505,23 @@ CREATE TABLE core_kanban (
   compartido_rw TEXT,
   tablero int(11),
   porcentaje int(11) default '0',
+  usuarios_edicion varchar(255) NULL,
+  estado_general varchar(30) NULL,
+  pruebas_funcionales varchar(500) NULL,
+  pruebas_nofuncionales varchar(500) NULL,
+  fecha_inicio date NULL AFTER,
+  aceptacion_pf char(2) NULL DEFAULT 'No',
+  aceptacion_pnf char(2) NULL DEFAULT 'No',
+  usuario_aceptacion_pf varchar(250) NULL DEFAULT '',
+  usuario_aceptacion_pnf varchar(250) NULL DEFAULT '',
+  historial text NULL,
+  horas_estimadas int(11) NULL DEFAULT '0',
+  presupuesto int(11) NULL DEFAULT '0',
+  adjunto_elicitacion varchar(255) NULL,
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 ALTER TABLE core_kanban ADD INDEX columna(columna);
+ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
 ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
 
 DROP TABLE IF EXISTS core_opcionlista;
