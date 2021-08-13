@@ -509,7 +509,7 @@ CREATE TABLE core_kanban (
   estado_general varchar(30) NULL,
   pruebas_funcionales varchar(500) NULL,
   pruebas_nofuncionales varchar(500) NULL,
-  fecha_inicio date NULL AFTER,
+  fecha_inicio date NULL,
   aceptacion_pf char(2) NULL DEFAULT 'No',
   aceptacion_pnf char(2) NULL DEFAULT 'No',
   usuario_aceptacion_pf varchar(250) NULL DEFAULT '',
@@ -522,7 +522,8 @@ CREATE TABLE core_kanban (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 ALTER TABLE core_kanban ADD INDEX columna(columna);
 ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
-ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
+ALTER TABLE core_kanban ADD INDEX usuario_aceptacion_pf(usuario_aceptacion_pf);
+ALTER TABLE core_kanban ADD INDEX usuario_aceptacion_pnf(usuario_aceptacion_pnf);
 
 DROP TABLE IF EXISTS core_opcionlista;
 CREATE TABLE core_opcionlista (

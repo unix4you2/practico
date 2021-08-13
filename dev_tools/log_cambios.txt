@@ -128,6 +128,9 @@ ALTER TABLE `core_kanban`
 ADD `usuario_aceptacion_pf` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `aceptacion_pnf`,
 ADD `usuario_aceptacion_pnf` varchar(255) COLLATE 'utf8_general_ci' NULL AFTER `usuario_aceptacion_pf`;
 
+ALTER TABLE core_kanban ADD INDEX usuario_aceptacion_pf(usuario_aceptacion_pf);
+ALTER TABLE core_kanban ADD INDEX usuario_aceptacion_pnf(usuario_aceptacion_pnf);
+
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
 "
