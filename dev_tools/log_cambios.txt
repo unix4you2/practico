@@ -32,6 +32,8 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #TOMAR CONTENIDO DESDE EL README
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
+* Enhan [CORE]: Eliminada dependencia obsoleta e insegura de jquery-1.11.1.min.js, aquellas proyectos que por algún motivo hicieran uso manual de dicha librería deberán actualizar sus inclusiones a las disponibles sobre /inc/jquery
+* Enhan [CORE]: Actualizada dependencia insegura de moments.js version 2.8.4 a version 2.29.1 sobre /inc/bootstrap/js/plugins/moment
 * Fixed [CORE]: Asignacion incorrecta durante comparación de modo programador de framework permite la edición de formularios internos.
 * Fixed [CORE]: Rutinas de limpieza de cadenas para evitar inyecciones SQL incluyen espacios despuès de palabras clave para evitar coincidencias con valores de parámetros.
 * Fixed [USUARIOS]: Ficha de usuarios no almacena si el usuario es usado como plantilla o no.
@@ -58,6 +60,30 @@ LogCambios="
 * Added [KANBAN]: Agregado campo adicional para indicar cantidad de horas/hombre estimadas por actividad
 * Added [KANBAN]: Agregado campo para presupuesto por actividad
 * Enhan [KANBAN]: Se permite adjuntar un archivo con detalles del requerimiento cuando así sea necesario por el usuario final.
+
+
+
+
+
+
+
+
+
+
+
+
+
+moment-with-locales.min.js
+Requerido en marco abajo:
+    <!-- Plugins JavaScript requeridos por DateTimePicker -->
+    <script src="inc/bootstrap/js/plugins/moment/moment-with-locales.min.js"></script>
+
+inc/bootstrap/js/plugins/moment/LICENSE
+
+
+
+
+
 
 
 Permitir identificar desviaciones de un requerimiento durante las pruebas
