@@ -129,6 +129,47 @@
 /* ################################################################## */
 /* ################################################################## */
 /*
+	Function: AceptarPruebasTareaKanban
+	Actualiza el estado de aceptacion de las pruebas asociadas a una tarea del tablero
+
+	Salida:
+		Registro de tarea actualizado, tablero visualizado con la tarea actualizada
+
+	Ver tambien:
+		<PCO_ExplorarTablerosKanban>
+*/
+	if ($PCO_Accion=="AceptarPruebasTareaKanban")
+		{
+			//Define el campo a actualizar segun el tipo de prueba recibido
+			if ($TipoPrueba=="PF") $Campo="aceptacion_pf";
+			if ($TipoPrueba=="PNF") $Campo="aceptacion_pnf";
+			
+			// Actualiza los datos
+			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."kanban SET $Campo='Si' WHERE id=?","$IdTareaKanban");
+			PCO_Auditar("Acepta pruebas $TipoPrueba tarea Kanban $IdTareaKanban");
+			if ($Retorno=="")
+			    PCO_RedireccionATableroKanban($ID_TableroKanban);
+            if ($Retorno=="BancoPruebas")
+                {
+        			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+        				<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+                        <input type="Hidden" name="Presentar_FullScreen" value="'.@$Presentar_FullScreen.'">
+                        <input type="Hidden" name="Precarga_EstilosBS" value="'.@$Precarga_EstilosBS.'">
+        				<input type="Hidden" name="PCO_ErrorIcono" value="'.@$PCO_ErrorIcono.'">
+        				<input type="Hidden" name="PCO_ErrorEstilo" value="'.@$PCO_ErrorEstilo.'">
+        				<input type="Hidden" name="PCO_ErrorTitulo" value="'.@$PCO_ErrorTitulo.'">
+        				<input type="Hidden" name="PCO_Objeto" value="inf:-40:1">
+        				<input type="Hidden" name="PCO_ErrorDescripcion" value="'.@$PCO_ErrorDescripcion.'">
+        				</form>
+        			<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+                    exit;
+                }
+		}
+
+
+/* ################################################################## */
+/* ################################################################## */
+/*
 	Function: EliminarTareaKanban
 	Elimina la informacion asociada a una tarea sobre el tablero kanban
 
@@ -256,7 +297,7 @@
 */
 	function PCO_AgregarFuncionesEdicionTarea($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban,$ResultadoColumnas)
 		{
-		    global $PCOSESS_LoginUsuario,$MULTILANG_ArchivarTareaAdv,$MULTILANG_ArchivarTarea,$MULTILANG_DelKanban,$MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
+		    global $PCOSESS_LoginUsuario,$MULTILANG_ArchivarTareaAdv,$MULTILANG_Error,$MULTILANG_ArchivarTarea,$MULTILANG_DelKanban,$MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
 			$salida='';
             //Determina estados de activacion o no para controles segun valores actuales del registro
             $EstadoDeshabilitadoMoverIzquierda="";
@@ -269,7 +310,25 @@
             //Determina si la tarea esta en la ultima columna (candidata a ser archivada)
             $ComplementoArchivar="";
             if ($RegistroTareas["columna"]==$ColumnasDisponibles && $PCOSESS_LoginUsuario==$ResultadoColumnas["login_admintablero"])
-                $ComplementoArchivar='&nbsp;&nbsp;<a onclick=\'return confirm("'.$MULTILANG_ArchivarTareaAdv.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=ArchivarTareaKanban&ID_TableroKanban='.$ID_TableroKanban.'&IdTareaKanban='.$RegistroTareas["id"].'\' class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_ArchivarTarea.'"><i class="fa fa-archive"></i></a>';
+                {
+                    //Deja archivar la tarea solo si no esta pendiente por alguna prueba
+                    if (($RegistroTareas["aceptacion_pf"]!="No" || trim($RegistroTareas["pruebas_funcionales"])=="") && ($RegistroTareas["aceptacion_pnf"]!="No" || trim($RegistroTareas["pruebas_nofuncionales"])==""))
+                        $ComplementoArchivar='&nbsp;<a onclick=\'return confirm("'.$MULTILANG_ArchivarTareaAdv.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=ArchivarTareaKanban&ID_TableroKanban='.$ID_TableroKanban.'&IdTareaKanban='.$RegistroTareas["id"].'\' class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_ArchivarTarea.'"><i class="fa fa-archive"></i></a>';                    
+                    else
+                        $ComplementoArchivar='&nbsp;<a onclick=\'return PCOJS_MostrarMensaje("'.$MULTILANG_Error.'","No se pueden archivar tareas que esten <b>pendientes por aceptacion de pruebas funcionales o no funcionales</b>.<br>Por favor acepte la realizacion de pruebas de manera explicita antes de poder continuar.<hr><u>Pruebas funcionales requeridas</u>: '.$RegistroTareas["pruebas_funcionales"].'<br><u>Usuario responsable</u>: '.$RegistroTareas["usuario_aceptacion_pf"].'<hr><u>Pruebas no funcionales requeridas</u>: '.$RegistroTareas["pruebas_nofuncionales"].'<br><u>Usuario responsable</u>: '.$RegistroTareas["usuario_aceptacion_pnf"].'");\' href=\'#\' class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_ArchivarTarea.'"><i class="fa fa-archive"></i></a>';
+                }
+
+            //Agrega botones de aceptacion de pruebas funcionales si aplica
+            $ComplementoAceptacionPruebas="";
+            if ($RegistroTareas["usuario_aceptacion_pf"]==$PCOSESS_LoginUsuario  || $RegistroTareas["usuario_aceptacion_pnf"]==$PCOSESS_LoginUsuario)
+                {
+                    //Agrega boton para aceptacion de pruebas funcionales
+                    if ($RegistroTareas["aceptacion_pf"]!="Si" && trim($RegistroTareas["usuario_aceptacion_pf"])==$PCOSESS_LoginUsuario)
+                        $ComplementoAceptacionPruebas.='<a onclick=\'return confirm("Se dispone a aceptar las pruebas funcionales. \\n\\n SEGURO QUE DESEA CONTINUAR?");\' href=\''.$ArchivoCORE.'?PCO_Accion=AceptarPruebasTareaKanban&TipoPrueba=PF&ID_TableroKanban='.$ID_TableroKanban.'&IdTareaKanban='.$RegistroTareas["id"].'\' class="btn btn-success btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="Aceptar pruebas funcionales"> <i class="fa fa-check-circle fa-1x"></i> OK P.F.</a>';
+                    //Agrega boton para aceptacion de pruebas no funcionales
+                    if ($RegistroTareas["aceptacion_pnf"]!="Si" && trim($RegistroTareas["usuario_aceptacion_pnf"])==$PCOSESS_LoginUsuario)
+                        $ComplementoAceptacionPruebas.='&nbsp;<a onclick=\'return confirm("Se dispone a aceptar las pruebas NO funcionales. \\n\\n SEGURO QUE DESEA CONTINUAR?");\' href=\''.$ArchivoCORE.'?PCO_Accion=AceptarPruebasTareaKanban&TipoPrueba=PNF&ID_TableroKanban='.$ID_TableroKanban.'&IdTareaKanban='.$RegistroTareas["id"].'\' class="btn btn-success btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="Aceptar pruebas NO funcionales"> <i class="fa fa-check-circle fa-1x"></i> OK P.N.F.</a>';
+                }
 
             //Determina si la tarea se puede o no eliminar
             $ComplementoEliminar="";
@@ -278,20 +337,31 @@
 
             //Determina si la tarea se puede o no editar
             $ComplementoEditar="";
-            if ($PCOSESS_LoginUsuario==$ResultadoColumnas["login_admintablero"])
+            if ($PCOSESS_LoginUsuario==$ResultadoColumnas["login_admintablero"] || stripos($RegistroTareas["usuarios_edicion"],$PCOSESS_LoginUsuario)!==false )   
                 $ComplementoEditar='<a onclick=\'PCO_CargarPopUP(0,0,'.$RegistroTareas["id"].');\' class="btn btn-default btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil"></i></a>';
 
+            //Determina si la tarea permite reportar bugs o no
+            $TituloBUG=urlencode("[Kanban] ".$ResultadoColumnas["titulo"]." [Tarea] ".$RegistroTareas["titulo"]);
+            $ComplementoReporteBugs='&nbsp;<a href=\'index.php?PCO_Accion=PCO_ReportarBugs&PCO_TituloRecibidoBUG='.$TituloBUG.'&PCO_CapturaTrazas=KanbanID:'.$RegistroTareas["id"].'\' class="btn btn-success btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="Reportar Bug o Error asociado a esta tarea"> <i class="fa fa-bug fa-1x"></i></a>';
+
             //Pone controles
-            $salida='<div id="PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'" style="margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
-                    <div align="center" style="display: inline-block">
-                        <!--<a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true" data-placement="top" title="'.$MULTILANG_Editar.'" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&campo='.$RegistroTareas["id"].'&formulario='.$RegistroTareas["formulario"].'&popup_activo=FormularioCampos&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-pencil"></i></a>-->
-                        <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'"           data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=columna&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["columna"]-1).'\'><i class="fa fa-arrow-left"></i></a>
-                        <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"           data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($RegistroTareas["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=peso&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["peso"]+1).'\'><i class="fa fa-arrow-down"></i></a>
-                        <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'"              data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($RegistroTareas["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=peso&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["peso"]-1).'\'><i class="fa fa-arrow-up"></i></a>
-                        <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'"             data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=columna&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["columna"]+1).'\'><i class="fa fa-arrow-right"></i></a>
-                        '.$ComplementoEditar.'
-                        '.$ComplementoEliminar.'
-                        '.$ComplementoArchivar.'
+            $salida='<div class="well well-sm" id="PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'" style=" margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
+                    <div align="left" style="display: inline-block">
+                        <div style="margin-top:3px;">
+                            <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'"           data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=columna&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["columna"]-1).'\'><i class="fa fa-arrow-left"></i></a>
+                            <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"           data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($RegistroTareas["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=peso&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["peso"]+1).'\'><i class="fa fa-arrow-down"></i></a>
+                            <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'"              data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($RegistroTareas["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=peso&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["peso"]-1).'\'><i class="fa fa-arrow-up"></i></a>
+                            <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'"             data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$RegistroTareas["id"].'&tabla=kanban&campo=columna&accion_retorno=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'&valor='.($RegistroTareas["columna"]+1).'\'><i class="fa fa-arrow-right"></i></a>
+                            '.$ComplementoEditar.'
+                        </div>
+                        <div style="margin-top:3px;">
+                            '.$ComplementoAceptacionPruebas.'
+                        </div>
+                        <div style="margin-top:3px;">
+                            '.$ComplementoEliminar.'
+                            '.$ComplementoArchivar.'
+                            '.$ComplementoReporteBugs.'
+                        </div>
                     </div>
                 </div>';
 
@@ -364,7 +434,7 @@
                                 </div>
                             </div>
                             <div class="text-center">
-                                '.$AccionesTarea.'<br>
+                                '.$AccionesTarea.'
                             </div>
                         </div>
                     </div>
@@ -728,10 +798,12 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanbanResumido")
                 //Verifica si tiene tableros compartidos y agrega el/los botones para explorar globalmente tareas de cada tablero
                 $CadenaExploracionTareas="";
                 if ($ResultadoTablerosPropios!=0 || $ResultadoTablerosCompartidos!=0)
-                    $CadenaExploracionTareas= "
+                    $CadenaExploracionTareas.= "
                         &nbsp;&nbsp;&nbsp;&nbsp; <div class='pull-left'><a class='btn btn-info' href='index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=inf:-33:1'><i class='fa fa-eye fa-fw fa-1x'></i> Ver todas las tareas pendientes</a></div>
                         &nbsp;&nbsp;&nbsp;&nbsp; <div class='pull-left'><a class='btn btn-default' href='index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=inf:-34:1'><i class='fa fa-eye fa-fw fa-1x'></i> Ver todas las tareas archivadas</a></div>
+                        &nbsp;&nbsp;&nbsp;&nbsp; <div class='pull-left'><a class='btn btn-success' href='index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=inf:-40:1'><i class='fa fa-check fa-fw fa-1x'></i> Banco de pruebas</a></div>
                         ";
+
                 //Presenta botones de crear tablero y volver al menu                
                 echo "      
                     <div class='row'>

@@ -403,9 +403,9 @@ function PCO_Minimizador_OptimizarJS($CodigoJS)
 			//Copia permisos de la plantilla si aplica
 			if ($registro["plantilla_permisos"]!="")
 				{
-					PCO_Auditar("Carga permisos a su perfil desde plantilla $plantilla_origen_permisos",$login_chk);
-					PCO_CopiarPermisos($plantilla_origen_permisos,$login_chk);
-					PCO_CopiarInformes($plantilla_origen_permisos,$login_chk);
+					PCO_Auditar("Carga permisos a su perfil desde plantilla ".$registro["plantilla_permisos"],$login_chk);
+					PCO_CopiarPermisos($registro["plantilla_permisos"],$login_chk);
+					PCO_CopiarInformes($registro["plantilla_permisos"],$login_chk);
 				}
 
 			// Se buscan datos de la aplicacion
@@ -433,10 +433,9 @@ function PCO_Minimizador_OptimizarJS($CodigoJS)
 			if (!isset($_SESSION["Version_Aplicacion"])) $_SESSION["Version_Aplicacion"]=$registro_parametros["version"];
 
 			// Lleva a auditoria con query manual por la falta de $PCOSESS_LoginUsuario
-			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES ('".$registro["login"]."','Ingresa al sistema desde $PCO_DireccionAuditoria','$PCO_FechaOperacion','$PCO_HoraOperacion')");
 			PCO_Auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$_SESSION["PCOSESS_LoginUsuario"]);
 			// Actualiza fecha del ultimo ingreso para el usuario
-			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login='".$registro["login"]."'","$PCO_FechaOperacion");
+			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso='$PCO_FechaOperacion' WHERE login='".$registro["login"]."'");
 
 			// Redirecciona al menu
 			header("Location: ../../../index.php");
@@ -7617,6 +7616,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		global $MULTILANG_Formularios,$MULTILANG_Editar,$MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
         global $PCO_InformesListaColumnasDT,$PCO_InformesRecuperacionAJAX,$PCO_InformesIdCache,$PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF,$PCO_InformesDataTableDefineCOLS;
         global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
+		global $PCO_BarraHerramientasFormulario; 
 
 		// Busca datos del formulario
 		$registro_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario")->fetch();
@@ -7697,7 +7697,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		    
 		
 		// Define la barra de herramientas mini superior (en barra de titulo)
-		@$barra_herramientas_mini.='
+		@$PCO_BarraHerramientasFormulario.='
 				<a  href="#" data-toggle="tooltip" data-html="true"  title="'.$MULTILANG_VistaImpresion.'" name="">
 					<i class="fa fa-print" OnClick="ImprimirMarco(\'MARCO_IMPRESION\');"></i>
 				</a>';
@@ -7727,7 +7727,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
             }
 
 		// Crea ventana si aplica para el form
-		if ($en_ventana) PCO_AbrirVentana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario.$ComplementoIdObjetoEnTitulo,$registro_formulario["estilo_ventana"],'',$barra_herramientas_mini);
+		if ($en_ventana) PCO_AbrirVentana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario.$ComplementoIdObjetoEnTitulo,$registro_formulario["estilo_ventana"],'',$PCO_BarraHerramientasFormulario);
 
         //Busca las posibles opciones de menu agregadas al formulario
         $RegistroCantidadMenues=PCO_EjecutarSQL("SELECT COUNT(*) as CantidadMenues FROM ".$TablasCore."menu WHERE formulario_vinculado='$formulario' AND padre=0")->fetch();
@@ -9034,16 +9034,6 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
 					$SalidaFinalInforme.= '<!--<div class="table-responsive">-->
 											<table width="100%" class="btn-xs table table-condensed table-hover order-column table-striped table-unbordered  '.$ComplementoResponsiveTabla.'  '.$estilo.'" id="TablaInforme_'.$registro_informe["id"].'"><thead id="PCO_EncabezadosInforme_'.$registro_informe["id"].'" '.$ComplementoAnulacionEncabezado.'>';
-
-                    //if ($registro_informe["personalizacion_encabezados"]!="")
-					$SalidaFinalInforme.= '
-                            <!-- PERSONALIZACION DE ENCABEZADOS, GENERA CONFLICTO CON DATATABLES AL HACER REFERENCIA A INDICES MALOS
-                            <tr>
-            					<th colspan=1 rowspan="2">Columna1</th>
-                                <th colspan="2">Columna2</th>
-                            </tr>
-                            -->
-                        <tr>';
 
 					//Busca si tiene acciones (botones) para cada registro y los genera
 					if (!$anular_acciones)
