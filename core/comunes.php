@@ -1797,9 +1797,18 @@ function PCO_ImportarXMLInforme($xml_importado)
 				$post_script=base64_decode($xml_importado->core_informe[0]->post_script);
 				$usar_ajax=base64_decode($xml_importado->core_informe[0]->usar_ajax);
 				$definir_cols=base64_decode($xml_importado->core_informe[0]->definir_cols);
+				$pane_activado=base64_decode($xml_importado->core_informe[0]->pane_activado);
+				$pane_cascada=base64_decode($xml_importado->core_informe[0]->pane_cascada);
+				$pane_colapsado=base64_decode($xml_importado->core_informe[0]->pane_colapsado);
+				$pane_columnas=base64_decode($xml_importado->core_informe[0]->pane_columnas);
+				$pane_subtotalesrelativos=base64_decode($xml_importado->core_informe[0]->pane_subtotalesrelativos);
+				$pane_conteos=base64_decode($xml_importado->core_informe[0]->pane_conteos);
+				$pane_controles=base64_decode($xml_importado->core_informe[0]->pane_controles);
+				$pane_control_colapsar=base64_decode($xml_importado->core_informe[0]->pane_control_colapsar);
+				$pane_control_ordenar=base64_decode($xml_importado->core_informe[0]->pane_control_ordenar);
 
 				// Inserta el nuevo informe
-				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$permitido_home$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$usar_ajax$_SeparadorCampos_$definir_cols");
+				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$permitido_home$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$usar_ajax$_SeparadorCampos_$definir_cols$_SeparadorCampos_$pane_activado$_SeparadorCampos_$pane_cascada$_SeparadorCampos_$pane_colapsado$_SeparadorCampos_$pane_columnas$_SeparadorCampos_$pane_subtotalesrelativos$_SeparadorCampos_$pane_conteos$_SeparadorCampos_$pane_controles$_SeparadorCampos_$pane_control_colapsar$_SeparadorCampos_$pane_control_ordenar");
 
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
@@ -1987,9 +1996,18 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							$post_script=$registro["post_script"];
 							$usar_ajax=$registro["usar_ajax"];
 							$definir_cols=$registro["definir_cols"];
+							$pane_activado=$registro["pane_activado"];
+							$pane_cascada=$registro["pane_cascada"];
+							$pane_colapsado=$registro["pane_colapsado"];
+							$pane_columnas=$registro["pane_columnas"];
+							$pane_subtotalesrelativos=$registro["pane_subtotalesrelativos"];
+							$pane_conteos=$registro["pane_conteos"];
+							$pane_controles=$registro["pane_controles"];
+							$pane_control_colapsar=$registro["pane_control_colapsar"];
+							$pane_control_ordenar=$registro["pane_control_ordenar"];
 
 							// Inserta el nuevo informe
-							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$permitido_home$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$usar_ajax$_SeparadorCampos_$definir_cols");
+							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$permitido_home$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$usar_ajax$_SeparadorCampos_$definir_cols$_SeparadorCampos_$pane_activado$_SeparadorCampos_$pane_cascada$_SeparadorCampos_$pane_colapsado$_SeparadorCampos_$pane_columnas$_SeparadorCampos_$pane_subtotalesrelativos$_SeparadorCampos_$pane_conteos$_SeparadorCampos_$pane_controles$_SeparadorCampos_$pane_control_colapsar$_SeparadorCampos_$pane_control_ordenar");
 
 							$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
