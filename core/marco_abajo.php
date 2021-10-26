@@ -327,32 +327,6 @@
                                 if ($Paginacion=="" || $Paginacion==0) $Paginacion=10;  //Si no hay paginacion personalizada pone 10 por defecto
 
 
-
-
-
-
-
-
-/*
-para definir pane en columnas especificas
-https://datatables.net/extensions/searchpanes/examples/initialisation/forceShow.html
-        columnDefs: [
-            {
-                searchPanes: {
-                    show: true
-                },
-                targets: [0]
-            },
-            {
-                searchPanes: {
-                    show: false
-                },
-                targets: [2]
-            }
-        ]
-*/
-
-
                                 echo '
                                     var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
                                         {
