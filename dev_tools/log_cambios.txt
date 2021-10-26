@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/informes.php
 core/kanban.php
 core/marco_arriba_bs.php
 core/marco_abajo.php
@@ -45,6 +46,7 @@ LogCambios="
 * Fixed [CORE]: Inclusión de librerías de reconocimiento facial sobre inc/face-detect basadas en face api y modelos de tensor flow.
 * Enhan [CORE]: Los procesos de autenticacion por SAML y su uso de plantillas permiten: Sin plantilla en la configuración, Con plantilla en su configuración para primer acceso (y siguientes si no se cambia), Con plantilla en su configuración y cambio de plantilla para los usuarios prefiriendo así cualquier otra plantilla asignada al usuario durante sus inicios de sesión posteriores.
 * Enhan [CORE]: Agregados índices de auditoría para aumentar velocidad de recuparación de información y conteos del módulo.
+* Enhan [CORE]: Eliminada funcion manual interna (codigo y excepciones) de actualizacion de informes.  Ahora se hace por función interna automática.
 * Fixed [USUARIOS]: Ficha de usuarios no almacena si el usuario es usado como plantilla o no.
 * Fixed [INFORMES]:  Eliminado texto en comentario HTML innecesario sobre personalización de encabezados y conflictos con DataTables.
 * Enhan [INFORMES]:  Banco de pruebas interno incluye escenario DataTables+Ajax+Botones generados con cadenas complejas y caracteres de escape
@@ -107,12 +109,14 @@ ALTER TABLE core_informe_cache ADD INDEX informe (informe), ADD INDEX usuario (u
 ALTER TABLE core_auditoria ADD INDEX usuario_login (usuario_login), ADD INDEX fecha (fecha);
 
 ALTER TABLE core_informe ADD pane_activado char(2) DEFAULT 'N';
-
-
-
-
-
-
+ALTER TABLE core_informe ADD pane_cascada char(2) DEFAULT 'N';
+ALTER TABLE core_informe ADD pane_colapsado char(2) DEFAULT 'N';
+ALTER TABLE core_informe ADD pane_columnas varchar(15) DEFAULT '';
+ALTER TABLE core_informe ADD pane_subtotalesrelativos char(2) DEFAULT 'N';
+ALTER TABLE core_informe ADD pane_conteos char(2) DEFAULT 'N';
+ALTER TABLE core_informe ADD pane_controles char(2) DEFAULT 'N';
+ALTER TABLE core_informe ADD pane_control_colapsar char(2) DEFAULT 'N';
+ALTER TABLE core_informe ADD pane_control_ordenar char(2) DEFAULT 'N';
 
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'N', '{ $ MULTILANG_No}', '1');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'SC', '{ $ MULTILANG_Si}, Arriba y colapsado', '2');

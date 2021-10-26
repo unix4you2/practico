@@ -3149,7 +3149,6 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "PCO_ClonarDisenoInforme")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
 		if ($PCO_Accion== "PCO_DefinirCopiaInformes")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
 		if ($PCO_Accion== "PCO_EliminarInforme")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
-		if ($PCO_Accion== "PCO_ActualizarInforme")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
 		if ($PCO_Accion== "PCO_EliminarInformeTabla")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
 		if ($PCO_Accion== "PCO_GuardarInformeTabla")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");
 		if ($PCO_Accion== "PCO_EliminarInformeCampo")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarInformes");

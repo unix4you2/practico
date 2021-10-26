@@ -347,9 +347,15 @@ CREATE TABLE core_informe (
   post_script mediumtext,
   usar_ajax int(1) DEFAULT '0',
   definir_cols char(1) NULL DEFAULT 'N',
-
   pane_activado char(2) DEFAULT 'N',
-
+  pane_cascada char(2) DEFAULT 'N',
+  pane_colapsado char(2) DEFAULT 'N',
+  pane_columnas varchar(15) DEFAULT '',
+  pane_subtotalesrelativos char(2) DEFAULT 'N',
+  pane_conteos char(2) DEFAULT 'N',
+  pane_controles char(2) DEFAULT 'N',
+  pane_control_colapsar char(2) DEFAULT 'N',
+  pane_control_ordenar char(2) DEFAULT 'N',
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

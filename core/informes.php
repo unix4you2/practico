@@ -563,56 +563,6 @@ if ($PCO_Accion=="PCO_ActualizarGraficoInforme")
 /* ################################################################## */
 /* ################################################################## */
 /*
-	Function: PCO_ActualizarInforme
-	Cambia el registro asociado a un informe de la aplicacion
-
-	Variables de entrada:
-
-		id - ID del informe que se desea cambiarse
-		variables - Nuevos valores de variable para formato_final, alto,ancho,titulo,descripcion,categoria
-
-		(start code)
-			UPDATE ".$TablasCore."informe SET formato_final='$formato_final', alto='$alto',ancho='$ancho',titulo='$titulo',descripcion='$descripcion',categoria='$categoria' WHERE id=$id
-		(end)
-
-	Salida:
-		Registro de informe actualizado
-
-	Ver tambien:
-
-		<PCO_EditarInforme> | <PCO_ActualizarGraficoInforme> | <PCO_ActualizarAgrupamientoInforme>
-*/
-if ($PCO_Accion=="PCO_ActualizarInforme")
-	{
-		$mensaje_error="";
-		if ($titulo=="") $mensaje_error.=$MULTILANG_InfErr2.'<br>';
-		if ($categoria=="") $mensaje_error.=$MULTILANG_InfErr3.'<br>';
-		if ($mensaje_error=="")
-			{
-				// Actualiza los datos 
-				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."informe SET definir_cols=?,usar_ajax=?,javascript=?,pre_script=?,post_script=?,permitido_home=?,tabla_responsive=?,encabezado_html=?,ocultar_encabezado=?,ocultar_piepagina=?,anular_acciones=?,exportar_dtclp=?,exportar_dtcsv=?,exportar_dtxls=?,exportar_dtpdf=?,tooltip_titulo=?, consulta_sql=?, conexion_origen_datos=?,subtotales_columna=?,subtotales_formato=?,tamano_paginacion=?, formulario_filtrado=?, soporte_datatable=?, variables_filtro=?, genera_pdf=?, formato_final=?, alto=?,ancho=?,titulo=?,descripcion=?,categoria=? WHERE id=? ","$definir_cols$_SeparadorCampos_$usar_ajax$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$permitido_home$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$formato_final$_SeparadorCampos_$alto$_SeparadorCampos_$ancho$_SeparadorCampos_$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$id");
-				PCO_Auditar("Actualiza informe $id");
-				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
-					<input type="Hidden" name="informe" value="'.$id.'">
-					</form>
-					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-			}
-		else
-			{
-				echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					<input type="Hidden" name="PCO_Accion" value="PCO_EditarInforme">
-					<input type="Hidden" name="informe" value="'.$id.'">
-					<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
-					<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
-					</form>
-					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-			}
-	}
-
-/* ################################################################## */
-/* ################################################################## */
-/*
 	Function: PCO_EliminarInformeCondicion
 	Elimina una condicion de filtrado para un informe de la aplicacion
 
