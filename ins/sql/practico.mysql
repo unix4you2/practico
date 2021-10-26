@@ -347,6 +347,9 @@ CREATE TABLE core_informe (
   post_script mediumtext,
   usar_ajax int(1) DEFAULT '0',
   definir_cols char(1) NULL DEFAULT 'N',
+
+  pane_activado char(2) DEFAULT 'N',
+
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -652,6 +655,11 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('exportaciones_informe', 'S', '{$MULTILANG_Si}, Nativo personalizable', '2');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('exportaciones_informe', 'C', '{$MULTILANG_Si}, Crudo CSV', '3');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('exportaciones_informe', 'A', '{$MULTILANG_Si}, Ambos: Nativo y CSV', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'N', '{$MULTILANG_No}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'SC', '{$MULTILANG_Si}, Arriba y colapsado', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'SE', '{$MULTILANG_Si}, Arriba y expandido', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'IC', '{$MULTILANG_Si}, Abajo y colapsado', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'IE', '{$MULTILANG_Si}, Abajo y expandido', '5');
 
 DROP TABLE IF EXISTS core_bugtracker;
 CREATE TABLE core_bugtracker (

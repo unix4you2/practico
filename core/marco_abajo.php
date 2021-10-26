@@ -171,6 +171,9 @@
     <script src="inc/bootstrap/js/plugins/dataTables/buttons.colVis.min.js"></script><!--N-->
 
     <script src="inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.min.js"></script>
+    
+    <script src="inc/bootstrap/js/plugins/dataTables/dataTables.select.min.js"></script>
+    <script src="inc/bootstrap/js/plugins/dataTables/dataTables.searchPanes.min.js"></script>
 
     <!-- DataTables Responsive -->
     <script src="inc/bootstrap/js/plugins/dataTables/dataTables.responsive.min.js"></script><!--N-->
@@ -322,11 +325,39 @@
                                 $CadenaFormateadaTotales=str_replace("_COLUMNA_","$ColumnaTotalesVisual",$CadenaFormateadaTotales);
         
                                 if ($Paginacion=="" || $Paginacion==0) $Paginacion=10;  //Si no hay paginacion personalizada pone 10 por defecto
+
+
+
+
+
+
+
+
+/*
+para definir pane en columnas especificas
+https://datatables.net/extensions/searchpanes/examples/initialisation/forceShow.html
+        columnDefs: [
+            {
+                searchPanes: {
+                    show: true
+                },
+                targets: [0]
+            },
+            {
+                searchPanes: {
+                    show: false
+                },
+                targets: [2]
+            }
+        ]
+*/
+
+
                                 echo '
                                     var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
                                         {
                                             destroy: true,   //Habilita autodestruccion de objeto si se necesita reinicializar
-                                            dom: "Blfrtip",  //Ej:  Blfrtip  Da formato a la tabla: Ver https://datatables.net/reference/option/dom
+                                            dom: "PBlfrtip",  //Ej:  Blfrtip  Da formato a la tabla: Ver https://datatables.net/reference/option/dom
                                             buttons: [
                                                 '.$CadenaPersonalizarColumnas.'
                                                 '.$CadenaExportaCLP.'
@@ -335,7 +366,29 @@
                                                 '.$CadenaExportaPDF.'
                                                 //{ extend: "print", className: "InformeBotonPrint" }
                                             ],
-        
+
+                                            searchPanes: {
+                                                cascadePanes: true, //Activa los paneles de busqueda dependiente tipo BI con conteos actualizables
+                                                initCollapsed: false,
+                                                layout: "columns-6",//Define tamano de columnas para el ancho de cada pane
+                                                viewTotal: false,  //Permite ver totales y subtotales relativos a los conteos de los filtros activos
+                                                
+                                                controls: true,//oculta/muestra todos los controles
+                                                            collapse: false, //oculta o muestra botones de colapsado
+            viewCount: false, //Conteo al lado derecho de cada elemento en los filtros 
+            orderable: false, //boton de ordenamiento sobre el pane
+                                            },
+                                            //Ver ejemplo de traduccion en language
+
+
+
+
+
+
+
+
+
+
                                             "pageLength": '.$Paginacion.',
                                             //"responsive": true, //Opcional, no necesario activarlo si la tabla ya tiene la clase nowrap y responsive (y ya esto se hace en la generacion del informe)
                                             "scrollX": true,
@@ -416,7 +469,25 @@
                                                     sSearch:"'.$MULTILANG_Buscar.':",
                                                     sLoadingRecords:"'.$MULTILANG_Cargando.'...",
                                                     sProcessing:"'.$MULTILANG_Procesando.'...",
-                                                    sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'"
+                                                    sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'",
+
+                                                    searchPanes: {
+                                                            title: {
+                                                                _: "Filtros aplicados: %d",
+                                                                0: "Sin filtros aplicados",
+                                                                1: "Un filtro aplicado",
+                                                            },
+                                                            collapse: {
+                                                                0: "Opciones de filtro",
+                                                                1: "Filtro (uno aplicado)",
+                                                                _: "Opciones de filtro (%d)"
+                                                            },
+                                                            collapseMessage: "Colapsar todo",
+                                                            showMessage: "Mostrar todo",
+                                                            clearMessage: "Quitar filtros",
+                                                            count: "{total}",
+                                                            countFiltered: "{shown} / ({total})"
+                                                        }
                                                 }
                                         }
                                     );

@@ -17,6 +17,8 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/kanban.php
+core/marco_arriba_bs.php
+core/marco_abajo.php
 inc/face-detect/*
 
 xml/*
@@ -62,6 +64,10 @@ LogCambios="
 * Added [KANBAN]: Las tareas kanban cuentan con la posibilidad de reportar Bugs (Reportes de errores) específicos por cada actividad que alimentan el módulo de reporte y seguimiento de errores.
 * Enhan [KANBAN]: Ampliada la barra de herramientas flotante presentada para las operaciones con tareas del tablero.
 
+
+
+
+
 "
 
 
@@ -99,6 +105,20 @@ ADD INDEX archivado (archivado);
 ALTER TABLE core_informe_cache ADD INDEX informe (informe), ADD INDEX usuario (usuario);
 
 ALTER TABLE core_auditoria ADD INDEX usuario_login (usuario_login), ADD INDEX fecha (fecha);
+
+ALTER TABLE core_informe ADD pane_activado char(2) DEFAULT 'N';
+
+
+
+
+
+
+
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'N', '{ $ MULTILANG_No}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'SC', '{ $ MULTILANG_Si}, Arriba y colapsado', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'SE', '{ $ MULTILANG_Si}, Arriba y expandido', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'IC', '{ $ MULTILANG_Si}, Abajo y colapsado', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'IE', '{ $ MULTILANG_Si}, Abajo y expandido', '5');
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

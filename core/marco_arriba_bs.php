@@ -106,6 +106,8 @@
     <!-- CSS Plugins DataTables -->
     <link href="inc/bootstrap/css/plugins/responsive.dataTables.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/buttons.dataTables.min.css" rel="stylesheet">
+    <link href="inc/bootstrap/css/plugins/dataTables/searchPanes.dataTables.min.css" rel="stylesheet">
+    <link href="inc/bootstrap/css/plugins/dataTables/select.dataTables.min.css" rel="stylesheet">
 
     <!-- Estilos especificos para botones de exportacion de informes y paginador -->
     <style>
