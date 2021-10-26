@@ -662,10 +662,8 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('exportaciones_informe', 'C', '{$MULTILANG_Si}, Crudo CSV', '3');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('exportaciones_informe', 'A', '{$MULTILANG_Si}, Ambos: Nativo y CSV', '4');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'N', '{$MULTILANG_No}', '1');
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'SC', '{$MULTILANG_Si}, Arriba y colapsado', '2');
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'SE', '{$MULTILANG_Si}, Arriba y expandido', '3');
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'IC', '{$MULTILANG_Si}, Abajo y colapsado', '4');
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'IE', '{$MULTILANG_Si}, Abajo y expandido', '5');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'S', '{$MULTILANG_Si}, Arriba de la tabla', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'I', '{$MULTILANG_Si}, Debajo de la tabla', '4');
 
 DROP TABLE IF EXISTS core_bugtracker;
 CREATE TABLE core_bugtracker (

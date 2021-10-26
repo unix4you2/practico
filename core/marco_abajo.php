@@ -286,6 +286,15 @@
                 $TablasDataTableIdCache=@explode("|",$PCO_InformesIdCache);
                 $TablasDataTableRecuperacionAJAX=@explode("|",$PCO_InformesRecuperacionAJAX);
                 $TablasDataTableColumnas=@explode("|",$PCO_InformesListaColumnasDT);
+                $TablasDataTable_pane_activado=@explode("|",$PCO_InformesDataTable_pane_activado);
+                $TablasDataTable_pane_cascada=@explode("|",$PCO_InformesDataTable_pane_cascada);
+                $TablasDataTable_pane_colapsado=@explode("|",$PCO_InformesDataTable_pane_colapsado);
+                $TablasDataTable_pane_columnas=@explode("|",$PCO_InformesDataTable_pane_columnas);
+                $TablasDataTable_pane_subtotalesrelativos=@explode("|",$PCO_InformesDataTable_pane_subtotalesrelativos);
+                $TablasDataTable_pane_conteos=@explode("|",$PCO_InformesDataTable_pane_conteos);
+                $TablasDataTable_pane_controles=@explode("|",$PCO_InformesDataTable_pane_controles);
+                $TablasDataTable_pane_control_colapsar=@explode("|",$PCO_InformesDataTable_pane_control_colapsar);
+                $TablasDataTable_pane_control_ordenar=@explode("|",$PCO_InformesDataTable_pane_control_ordenar);
                 
                 if (1==1)  //Solo para efectos de depuracion, cambiar a condicion invalida en produccion
                 echo "
@@ -319,6 +328,42 @@
                                 $CadenaExportaXLS=trim($TablasDataTableExportaXLS[$i]); if ($CadenaExportaXLS=="S") $CadenaExportaXLS='{ extend: "excel",   className: "InformeBotonExcel" ,  title: "" }, '; else $CadenaExportaXLS='';
                                 $CadenaExportaPDF=trim($TablasDataTableExportaPDF[$i]); if ($CadenaExportaPDF=="S") $CadenaExportaPDF='{ extend: "pdf",     className: "InformeBotonPdf" },   '; else $CadenaExportaPDF='';
                                 $CadenaPersonalizarColumnas=trim($TablasDataTableDefineCOLS[$i]); if ($CadenaPersonalizarColumnas=="S") $CadenaPersonalizarColumnas='{ extend: "colvis",  text:"'.$MULTILANG_Columna.'(s)",  className: "InformeBotonCopiar" }, '; else $CadenaPersonalizarColumnas='';
+
+                                //DEFINE CADENAS EN PANELES DE FILTRADO
+                                $CadenaPosicionPanelesArriba="";
+                                $CadenaPosicionPanelesAbajo="";
+                                $Cadena_pane_cascada="";
+                                $Cadena_pane_colapsado="";
+                                $Cadena_pane_columnas="";
+                                $Cadena_pane_subtotalesrelativos="";
+                                $Cadena_pane_conteos="";
+                                $Cadena_pane_controles="";
+                                $Cadena_pane_control_colapsar="";
+                                $Cadena_pane_control_ordenar="";
+                                if ($TablasDataTable_pane_activado[$i]=="S") $CadenaPosicionPanelesArriba="P";
+                                if ($TablasDataTable_pane_activado[$i]=="I") $CadenaPosicionPanelesAbajo="P";
+                                if ($TablasDataTable_pane_cascada[$i]=="S") $Cadena_pane_cascada=" cascadePanes: true, ";
+                                if ($TablasDataTable_pane_colapsado[$i]=="S") $Cadena_pane_colapsado=" initCollapsed: true, ";
+                                if ($TablasDataTable_pane_columnas[$i]!="") $Cadena_pane_columnas=' layout: "columns-'.$TablasDataTable_pane_columnas[$i].'", ';
+                                if ($TablasDataTable_pane_subtotalesrelativos[$i]=="S") $Cadena_pane_subtotalesrelativos=" viewTotal: false, ";
+                                if ($TablasDataTable_pane_conteos[$i]!="S") $Cadena_pane_conteos=" viewCount: false, ";
+                                if ($TablasDataTable_pane_controles[$i]!="S") $Cadena_pane_controles=" controls: false, ";
+                                if ($TablasDataTable_pane_control_colapsar[$i]!="S") $Cadena_pane_control_colapsar=" collapse: false, ";
+                                if ($TablasDataTable_pane_control_ordenar[$i]!="S") $Cadena_pane_control_ordenar=" orderable: false, ";
+                                $CadenaPanelesFiltrado='
+                                            searchPanes:
+                                                {
+                                                    '.$Cadena_pane_cascada.'
+                                                    '.$Cadena_pane_colapsado.'
+                                                    '.$Cadena_pane_columnas.'
+                                                    '.$Cadena_pane_subtotalesrelativos.'
+                                                    '.$Cadena_pane_conteos.'
+                                                    '.$Cadena_pane_controles.'
+                                                    '.$Cadena_pane_control_colapsar.'
+                                                    '.$Cadena_pane_control_ordenar.'
+                                                },
+                                        ';
+
                                 //Realiza operaciones de reemplazo de patrones sobre la cadena de formato de Totales si aplica
                                 $CadenaFormateadaTotales=str_replace("_TOTAL_PAGINA_","'+pageTotal +'",$CadenaFormateadaTotales);
                                 $CadenaFormateadaTotales=str_replace("_TOTAL_INFORME_","'+total +'",$CadenaFormateadaTotales);
@@ -326,12 +371,11 @@
         
                                 if ($Paginacion=="" || $Paginacion==0) $Paginacion=10;  //Si no hay paginacion personalizada pone 10 por defecto
 
-
                                 echo '
                                     var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
                                         {
                                             destroy: true,   //Habilita autodestruccion de objeto si se necesita reinicializar
-                                            dom: "PBlfrtip",  //Ej:  Blfrtip  Da formato a la tabla: Ver https://datatables.net/reference/option/dom
+                                            dom: "'.$CadenaPosicionPanelesArriba.'Blfrtip'.$CadenaPosicionPanelesAbajo.'",  //Ej:  Blfrtip  Da formato a la tabla: Ver https://datatables.net/reference/option/dom
                                             buttons: [
                                                 '.$CadenaPersonalizarColumnas.'
                                                 '.$CadenaExportaCLP.'
@@ -340,29 +384,7 @@
                                                 '.$CadenaExportaPDF.'
                                                 //{ extend: "print", className: "InformeBotonPrint" }
                                             ],
-
-                                            searchPanes: {
-                                                cascadePanes: true, //Activa los paneles de busqueda dependiente tipo BI con conteos actualizables
-                                                initCollapsed: false,
-                                                layout: "columns-6",//Define tamano de columnas para el ancho de cada pane
-                                                viewTotal: false,  //Permite ver totales y subtotales relativos a los conteos de los filtros activos
-                                                
-                                                controls: true,//oculta/muestra todos los controles
-                                                            collapse: false, //oculta o muestra botones de colapsado
-            viewCount: false, //Conteo al lado derecho de cada elemento en los filtros 
-            orderable: false, //boton de ordenamiento sobre el pane
-                                            },
-                                            //Ver ejemplo de traduccion en language
-
-
-
-
-
-
-
-
-
-
+                                            '.$CadenaPanelesFiltrado.'
                                             "pageLength": '.$Paginacion.',
                                             //"responsive": true, //Opcional, no necesario activarlo si la tabla ya tiene la clase nowrap y responsive (y ya esto se hace en la generacion del informe)
                                             "scrollX": true,

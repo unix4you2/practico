@@ -119,10 +119,8 @@ ALTER TABLE core_informe ADD pane_control_colapsar char(2) DEFAULT 'N';
 ALTER TABLE core_informe ADD pane_control_ordenar char(2) DEFAULT 'N';
 
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'N', '{ $ MULTILANG_No}', '1');
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'SC', '{ $ MULTILANG_Si}, Arriba y colapsado', '2');
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'SE', '{ $ MULTILANG_Si}, Arriba y expandido', '3');
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'IC', '{ $ MULTILANG_Si}, Abajo y colapsado', '4');
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'IE', '{ $ MULTILANG_Si}, Abajo y expandido', '5');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'S', '{ $ MULTILANG_Si}, Arriba de la tabla', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'I', '{ $ MULTILANG_Si}, Debajo de la tabla', '4');
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
