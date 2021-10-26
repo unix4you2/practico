@@ -47,6 +47,7 @@ LogCambios="
 * Enhan [CORE]: Los procesos de autenticacion por SAML y su uso de plantillas permiten: Sin plantilla en la configuración, Con plantilla en su configuración para primer acceso (y siguientes si no se cambia), Con plantilla en su configuración y cambio de plantilla para los usuarios prefiriendo así cualquier otra plantilla asignada al usuario durante sus inicios de sesión posteriores.
 * Enhan [CORE]: Agregados índices de auditoría para aumentar velocidad de recuparación de información y conteos del módulo.
 * Enhan [CORE]: Eliminada funcion manual interna (codigo y excepciones) de actualizacion de informes.  Ahora se hace por función interna automática.
+* Enhan [CORE]: Agregado al banco de pruebas en Informes Tablas las pruebas funcionales necesarias para paneles de filtrado automático.
 * Fixed [USUARIOS]: Ficha de usuarios no almacena si el usuario es usado como plantilla o no.
 * Fixed [INFORMES]:  Eliminado texto en comentario HTML innecesario sobre personalización de encabezados y conflictos con DataTables.
 * Enhan [INFORMES]:  Banco de pruebas interno incluye escenario DataTables+Ajax+Botones generados con cadenas complejas y caracteres de escape
