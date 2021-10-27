@@ -6,6 +6,38 @@
 |_____\___/ \__, |  \__,_|\___|  \___\__,_|_| |_| |_|_.__/|_|\___/|___/
             |___/ 
 ```
+## Versión 22.1 (2021-11-01)
+* Enhan [CORE]: Eliminada dependencia obsoleta e insegura de jquery-1.11.1.min.js, aquellas proyectos que por algún motivo hicieran uso manual de dicha librería deberán actualizar sus inclusiones a las disponibles sobre /inc/jquery
+* Fixed [CORE]: CVE-2015-9251,CVE-2015-9251,CVE-2012-6708,CVE-2015-9251,CVE-2019-11358
+* Enhan [CORE]: Actualizada dependencia insegura de moments.js version 2.8.4 a version 2.29.1 sobre /inc/bootstrap/js/plugins/moment
+* Fixed [CORE]: CVE-2017-18214,CVE-2016-4055
+* Fixed [CORE]: Asignacion incorrecta durante comparación de modo programador de framework permite la edición de formularios internos.
+* Fixed [CORE]: Rutinas de limpieza de cadenas para evitar inyecciones SQL incluyen espacios despuès de palabras clave para evitar coincidencias con valores de parámetros.
+* Fixed [CORE]: Inclusión de librerías de reconocimiento facial sobre inc/face-detect basadas en face api y modelos de tensor flow.
+* Enhan [CORE]: Los procesos de autenticacion por SAML y su uso de plantillas permiten: Sin plantilla en la configuración, Con plantilla en su configuración para primer acceso (y siguientes si no se cambia), Con plantilla en su configuración y cambio de plantilla para los usuarios prefiriendo así cualquier otra plantilla asignada al usuario durante sus inicios de sesión posteriores.
+* Enhan [CORE]: Agregados índices de auditoría para aumentar velocidad de recuparación de información y conteos del módulo.
+* Enhan [CORE]: Eliminada funcion manual interna (codigo y excepciones) de actualizacion de informes.  Ahora se hace por función interna automática.
+* Enhan [CORE]: Agregado al banco de pruebas en Informes Tablas las pruebas funcionales necesarias para paneles de filtrado automático.
+* Fixed [USUARIOS]: Ficha de usuarios no almacena si el usuario es usado como plantilla o no.
+* Fixed [INFORMES]:  Eliminado texto en comentario HTML innecesario sobre personalización de encabezados y conflictos con DataTables.
+* Enhan [INFORMES]:  Banco de pruebas interno incluye escenario DataTables+Ajax+Botones generados con cadenas complejas y caracteres de escape
+* Enhan [INFORMES]:  Agregados índices a las tablas de caché de informes para mejorar los tiempos de recuperación de caché por parte de usuarios finales.
+* Added [FORMS]: El scope de la variable $ PCO_BarraHerramientasFormulario ha sido ampliado a global para permitir la personalización de barras de herramientas de formulario desde funciones Pre.
+* Enhan [KANBAN]: Se permite agregar un estado general del requerimiento entre Aceptado,EnProgreso,Finalizado,Rechazado,Devuelto
+* Enhan [KANBAN]: Cuando se cambia el porcentaje de finalización de actividad al 100% automáticamente se actualiza el estado de tarea a Finalizado
+* Enhan [KANBAN]: Cuando se actualiza el estado de una actividad a Finalizado se cambia el porcentaje de avance automáticamente a 100%
+* Enhan [KANBAN]: Se agrega posibilidad de agregar pruebas funcionales y no funcionales a cada actividad así como el responsable de cada una.  Se deja sólo un campo de responsable para el control o aceptación de la prueba.
+* Enhan [KANBAN]: Se agrega fecha de inicio de actividad. Por defecto contemplado que pasa a una columna de elicitación como la fecha de creación, modificable.
+* Added [KANBAN]: Menú de tableros Kanban incluye un informe con todo el banco de pruebas establecido en el sistema
+* Added [KANBAN]: Actividades con pruebas funcionales y/o no funcionales sin recibir aceptación no podrán ser archivadas
+* Added [KANBAN]: Informe de banco de pruebas permite visualizar todas las actividades pendientes por tablero que están a la espera de aceptar pruebas sin importar su columna o estado actual.  Solo auqellas sin archivar (pendientes por salir de tablero)
+* Added [KANBAN]: Agregado campo adicional para indicar cantidad de horas/hombre estimadas por actividad
+* Added [KANBAN]: Agregado campo para presupuesto por actividad
+* Added [KANBAN]: Se permite compartir tareas en modo de edición a usuarios específicos
+* Added [KANBAN]: Las tareas kanban cuentan con la posibilidad de reportar Bugs (Reportes de errores) específicos por cada actividad que alimentan el módulo de reporte y seguimiento de errores.
+* Enhan [KANBAN]: Ampliada la barra de herramientas flotante presentada para las operaciones con tareas del tablero.
+
+
 ## Versión 21.7 (2021-06-10)
 * Fixed [KANBAN]: Creación de tareas kanban evita valores null en el campo de archivado.  Por defecto inicializa en cero para ser presentada como pendiente sobre el tablero.
 * Enhan [CHAT]: Al desactivar el módulo de chat desde el panel de configuración se desactivan las rutinas que buscan mensajes periódicamente para evitar tráfico innecesario.
