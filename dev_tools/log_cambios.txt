@@ -33,6 +33,10 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 
+* Enhan [CORE]: Eliminado soporte discriminado para versiones SE.  Sus funcionalidades serán incluidas poco a poco en las versiones libres.
+* Fixed [CORE]: Eliminada advertencia de índice no definido para la variable e utilizada en el sistema de URLs cortas
+
+
 
 "
 
