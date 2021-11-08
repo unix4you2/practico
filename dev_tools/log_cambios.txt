@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/usuarios.php
 
 xml/*
 inc/practico/idiomas/*
@@ -35,6 +36,8 @@ LogCambios="
 
 * Enhan [CORE]: Eliminado soporte discriminado para versiones SE.  Sus funcionalidades serán incluidas poco a poco en las versiones libres.
 * Fixed [CORE]: Eliminada advertencia de índice no definido para la variable e utilizada en el sistema de URLs cortas
+* Enhan [CORE]: El despacho de correos del sistema toma por defecto como remitente al correo del administrador del sistema, de manera que se puedan hacer registros ante sistemas de despacho de correo sin problemas.
+
 
 
 

@@ -300,7 +300,7 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="enviar_correo_lla
                 $EnlaceRecuperacion.="?PCO_Accion=PCO_RecuperarContrasena&PCO_SubAccion=ingresar_clave_nueva&usuario=$usuario&llave=".$LlaveRecuperacion;
                 //Datos para el correo
                 $cuenta_destinatario="___".substr($registro["correo"],3,strlen($registro["correo"])-6)."_____";
-                $remitente=$registro["correo"];
+                $remitente=PCO_EjecutarSQL("SELECT correo FROM ".$TablasCore."usuario WHERE login=?","admin")->fetchColumn();
                 $destinatario=$registro["correo"];
                 $asunto="[".$NombreRAD."] ".$MULTILANG_UsrAsuntoReset;
                 $cuerpo_mensaje="<br><br>".$MULTILANG_UsrResetLink.":<br><b><a href=$EnlaceRecuperacion>$EnlaceRecuperacion</a></b>";
@@ -335,7 +335,7 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="enviar_correo_con
                 //Busca los datos del usuario y los envia al correo registrado
                 $registro=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE correo=?","$correo")->fetch();
 				
-                $remitente=$registro["correo"];
+                $remitente=PCO_EjecutarSQL("SELECT correo FROM ".$TablasCore."usuario WHERE login=?","admin")->fetchColumn();
                 $destinatario=$registro["correo"];
                 $asunto="[".$NombreRAD."] ".$MULTILANG_UsrAsuntoReset;
                 $cuerpo_mensaje="<br><br>".$MULTILANG_Usuario." ".$NombreRAD.": <b>".$registro["login"]."</b>";
@@ -1079,7 +1079,8 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 
 					//Envia correo informativo
 					$cuerpo_mensaje="<br>".$MULTILANG_Bienvenido." ".$nombre.",<br><hr>Login: <b>".$login."</b><br>Password: <b>".$clave."</b><br><br><b><a href=".$URLAcceso.">[".$MULTILANG_TituloLogin."]</a></b><br><br>";
-					PCO_EnviarCorreo("noreply@".$_SERVER["SERVER_NAME"],$correo,$MULTILANG_Bienvenido." [$NombreRAD]",$cuerpo_mensaje);
+	                $remitente=PCO_EjecutarSQL("SELECT correo FROM ".$TablasCore."usuario WHERE login=?","admin")->fetchColumn();
+					PCO_EnviarCorreo($remitente,$correo,$MULTILANG_Bienvenido." [$NombreRAD]",$cuerpo_mensaje);
                     //Presenta mensaje final
 					echo "<br>";
 					PCO_Mensaje($MULTILANG_Atencion, $MULTILANG_UsrFinRegistro, '', 'fa fa-fw fa-2x fa-info-circle', 'alert alert-success');
