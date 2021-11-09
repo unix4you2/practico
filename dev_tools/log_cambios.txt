@@ -17,6 +17,8 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/usuarios.php
+inc/bootstrap/js/plugins/dataTables/*
+inc/bootstrap/css/plugins/dataTables/*
 
 xml/*
 inc/practico/idiomas/*
@@ -34,9 +36,11 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 
+* Enhan [CORE]: Eliminada bandera NO_AUTO_CREATE_USER durante la generacion de conexiones SQL para compatibilidad con motores nuevos
 * Enhan [CORE]: Eliminado soporte discriminado para versiones SE.  Sus funcionalidades serán incluidas poco a poco en las versiones libres.
 * Fixed [CORE]: Eliminada advertencia de índice no definido para la variable e utilizada en el sistema de URLs cortas
 * Enhan [CORE]: El despacho de correos del sistema toma por defecto como remitente al correo del administrador del sistema, de manera que se puedan hacer registros ante sistemas de despacho de correo sin problemas.
+* Fixed [INFORMES]: Agregadas librerias faltantes para los search pane en dataTables
 
 
 
