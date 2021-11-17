@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/conexiones.php
 core/usuarios.php
 inc/bootstrap/js/plugins/dataTables/*
 inc/bootstrap/css/plugins/dataTables/*
