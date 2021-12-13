@@ -5620,7 +5620,7 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 	{
 		global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
         global $funciones_activacion_datepickers;
-		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_Contrasena;
 
         //Busca datos del formulario
         $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
@@ -5756,6 +5756,27 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
                     $salida.= '<input type="Hidden" name="PCO_ValorBusquedaBD" '.$cadena_valor.'>';
                 $salida.= '</span>';
 			}
+
+
+		// Si el campo es de clave agrega icono para mostrarla (cambiando el tipo de control dinamicamente)
+		if ($registro_campos["tipo"]=="texto_clave")
+			{
+			    $IdCampoClave=$registro_campos["id_html"];
+                $salida.= '<script languaje="JavaScript">
+                                //Cambia un tipo de control de formulario para poder presentar un boton de cambio a texto o password
+                                function CambiarTipoControl_'.$IdCampoClave.'(Control)
+                                    {
+                                        if (document.getElementById(Control).type == "text")
+                                            document.getElementById(Control).type = "password";
+                                        else
+                                            document.getElementById(Control).type = "text";
+                                    }
+                            </script>
+                        <span class="input-group-addon">';
+                    $salida.= '<a title="'.$MULTILANG_Contrasena.'" onclick="CambiarTipoControl_'.$IdCampoClave.'(\''.$IdCampoClave.'\');"><i class="fa fa-eye-slash fa-fw"></i></a>';
+                $salida.= '</span>';
+			}
+
 
         //Agrega el icono de calendario a campos con validaciones tipo datepicker al detectar una cadena de ID para algun datepicker
 		if ($cadena_ID_datepicker!="")
