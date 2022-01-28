@@ -1243,26 +1243,3 @@ if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
 				}
 		}
 
-
-/* ################################################################## */
-/* ################################################################## */
-if ($PCO_Accion=="PCO_PanelAuditoriaMovimientos")
-	{
-        /*
-        	Function: PCO_PanelAuditoriaMovimientos
-        	Presenta un panel con informacion general acerca de las ultimas acciones del sistema las ultimas 30 acciones del sistema, permitiendo su actualizacion automatica cada 5 segundos
-        
-        	Proceso simplificado:
-        		(start code)
-        			SELECT core_auditoria.id as ID,core_auditoria.usuario_login,core_auditoria.accion,core_auditoria.fecha,core_auditoria.hora FROM ".$TablasCore."auditoria WHERE core_auditoria.fecha >= "" AND core_auditoria.fecha <= "" AND core_auditoria.accion LIKE "%%" AND core_auditoria.usuario_login LIKE "%%" ORDER BY fecha DESC, hora DESC LIMIT 0,30
-        		(end)
-        
-        	Salida de la funcion:
-        		* Listado de operaciones realizadas actualizado automaticamente segun los parametros dados
-        
-        */
-			if ($FechaInicioAuditoria=="") $FechaInicioAuditoria=$PCO_FechaOperacionGuiones;
-			if ($FechaFinAuditoria=="") $FechaFinAuditoria=$PCO_FechaOperacionGuiones;
-			PCO_Auditar("Carga modulo de auditoria");
-			PCO_CargarFormulario("-7",1);
-	}

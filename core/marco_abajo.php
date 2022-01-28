@@ -53,7 +53,7 @@
 		<Seccion superior> | <Articulador>
 	*/
 ?>
-
+ 
 
 
 
@@ -378,10 +378,10 @@ $(document).ready( function() {
     ],
     columnDefs: [{
         searchPanes: {
-            show: true
+            show: true,
         },
         targets: [0, 1, 2, 3]
-    }]
+    }],
   });
 } );
 */
@@ -441,6 +441,12 @@ $(document).ready( function() {
                                             'columns': [
                                                 {$CadenaCamposDT}
                                             ],
+    columnDefs: [{
+        searchPanes: {
+            show: true,
+        },
+        //targets: [7]
+    }],
                                         ";
                                     }
         

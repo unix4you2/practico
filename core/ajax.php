@@ -35,7 +35,7 @@
 	Section: Controles de datos
 	Funciones asociadas a generacion de controles de datos basados en los parametros recibidos
 */
-
+ 
 //Recupera al menos la accion cuando se trata de llamados sin contexto del index del framework
 if (!isset($PCO_Accion)) $PCO_Accion=$_REQUEST["PCO_Accion"];
 
@@ -105,6 +105,222 @@ if ($PCO_Accion=="PCO_ExportacionQueryCacheCSV" )
                     fputcsv($ArchivoDestino, $Registro);
                 //Cierra la salida
                 fclose($ArchivoDestino);
+            }
+    }
+
+
+########################################################################
+########################################################################
+/*
+	Function: PCO_RecuperarRecordsetJSON_DataTable
+	Hace una consulta a la base de datos determinada por un identificador de informe y retorna los registros formateados en JSON.  Util en DataTables con AJAX
+
+	Variables de entrada:
+
+        IdRegistro_CacheSQL - ID unico del Informe asociado a la consulta que se encuentra cacheado
+        
+        start - Enviado automaticamente por DataTables 
+        length - Enviado automaticamente por DataTables 
+        search[value] - Enviado automaticamente por DataTables 
+
+    Ver tambien:
+        Para efectos de depuracion F12 pestana Network presentara en Headers todo lo enviado por datatables en la solicitud Ajax
+
+	Salida:
+		Lista de elementos < option > usados en el combo
+*/
+if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTablePANES" ) 
+    {   
+        //Se asegura de tener las variables requeridas por filtros y recibidas desde la peticion
+        if (!isset($IdRegistro_CacheSQL)) $IdRegistro_CacheSQL=$_REQUEST["IdRegistro_CacheSQL"];
+        if (!isset($NroFilasBase)) $NroFilasBase=$_REQUEST["NroFilasBase"];
+
+        // Valida sesion activa de Practico
+        @session_start();
+        if(!isset($_SESSION['PCOSESS_SesionAbierta'])) {
+        	echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
+        	die();
+        }
+        
+        include_once '../core/configuracion.php';
+        // Inicia las conexiones con la BD y las deja listas para las operaciones
+        include_once '../core/conexiones.php';
+        // Incluye definiciones comunes de la base de datos
+        include_once '../inc/practico/def_basedatos.php';
+        // Incluye archivo con algunas funciones comunes usadas por la herramienta
+        include_once '../core/comunes.php';
+        
+        //Busca la consulta asociada al datatable desde la cache de SQL en la primera generacion del reporte.
+        //Verifica no solo por ID de cache sino tambien que perteneca al usuario logueado para evitar robo de datos o informes entre usuarios
+        $RegistroCacheSQL=PCO_EjecutarSQL("SELECT * FROM core_informe_cache WHERE id='{$IdRegistro_CacheSQL}' AND usuario='".$_SESSION["PCOSESS_LoginUsuario"]."' ")->fetch();
+        $ConsultaCacheada=trim($RegistroCacheSQL["script_sql"]);
+        $ListaColumnasCache=trim($RegistroCacheSQL["columnas"]);
+        $ListaCamposDT=explode(",",$ListaColumnasCache);
+
+        //BLOQUE1: Ajusta consultas y variables necesarias.  Sigue adelante solo si hay consulta valida
+        if ($ConsultaCacheada!="")
+            {
+                ##Obtiene algunos de los valores recibidos en la solicitud desde el DataTable
+                @$PCO_IteracionLlamadosDataTable = $_POST['draw'];                                       //Uso interno de DT
+                @$PCO_FilaInicial = $_POST['start'];                                                     //Registro inicial 
+                @$PCO_CantidadFilas = $_POST['length'];                                                  //Cantidad deseada de registros usado en LIMIT
+                @$ColumnaOrdenamientoRecibidaDT = $_POST['order'][0]['column'];                          //Obtiene la columna de indexado / ordenamiento
+                @$PCO_ColumnaOrdenamiento = $_POST['columns'][$ColumnaOrdenamientoRecibidaDT]['data'];   //Columna usada en el ORDER BY
+                @$PCO_DireccionOrdenamiento = $_POST['order'][0]['dir'];                                 //Direccion usada en el ordenamiento: asc or desc
+                @$PCO_ValorFiltro = $_POST['search']['value'];                                           //Valor ingresado en la caja de filtro por el usuario
+
+                //Corrige valores para un limit basico cuando no se reciben de entrada
+                if ($PCO_CantidadFilas=="")
+                    {
+                        $PCO_FilaInicial=0;
+                        $PCO_CantidadFilas=$NroFilasBase;
+                    }
+
+                //Busca y/o establece posibles condiciones de filtro adicional recibidas desde el DT en su campo de busqueda
+                $PCO_CondicionesFiltrado=" ";
+                if(trim($PCO_ValorFiltro) != '')
+                    {
+                        //Agrega los likes para todos los campos en el complemento de condicion cuando el usuario digita algo en el cuadro de filtro
+                        $PCO_CondicionesFiltrado=" AND ( ";
+
+                        //Verifica si los campos tienen aliases o no
+                        $ExistenAliasEnCampos=0;
+                        $ConsultaBusquedaAlias=strstr($ConsultaCacheada, "FROM", TRUE); //Con retorno de cadena previa al needle
+                        $ConsultaBusquedaAlias=str_replace("SELECT", "", $ConsultaBusquedaAlias);
+                        //Cambia cualquier combinacion de la sentencia para alias para uniformarla a mausculas 
+                        $ConsultaBusquedaAlias=str_replace ( " as ", " AS " , $ConsultaBusquedaAlias);
+                        $ConsultaBusquedaAlias=str_replace ( " As ", " AS " , $ConsultaBusquedaAlias);
+                        $ConsultaBusquedaAlias=str_replace ( " aS ", " AS " , $ConsultaBusquedaAlias);
+                        
+                        //CASO 1: La lista de campos contiene la sentenia de Alias.  Busca la palabra As
+                            if ( strpos($ConsultaBusquedaAlias," AS ")>0 )
+                                {
+                                    $ExistenAliasEnCampos=1;
+                                    $TrozosCamposAlias=explode(" AS ",$ConsultaBusquedaAlias);
+                                    $ListaCamposDTAlias=array();
+                                    $TotalTrozos=count($TrozosCamposAlias);
+                                    $TrozoAnalizado=1;
+                                    //Recorre todos los trozos, normalmente de la forma:   Campo1    Alias1,Campo2    Alias2,Campo3    Alias3...
+                                    foreach ($TrozosCamposAlias as $TrozoCampo)
+                                        {
+                                            $CampoDTAlias="";
+                                            //El primer trozo ya llega listo entonces lo agrega directamente, sino lo procesa
+                                            if ($TrozoAnalizado==1)
+                                                $CampoDTAlias=$TrozoCampo;
+                                            else
+                                                {
+                                                    //Verifica que no sea el ultimo trozo (el cual se descarta)
+                                                    if ($TrozoAnalizado!=$TotalTrozos)
+                                                        {
+                                                            $CampoDTAlias=strstr($TrozoCampo, ",", FALSE); //Con retorno de cadena posterior al needle
+                                                            $CampoDTAlias=substr($CampoDTAlias, 1); //Elimina coma inicial sobrante 
+                                                        }
+                                                }
+                                            if ($CampoDTAlias!="")
+                                                $PCO_CondicionesFiltrado.=" {$CampoDTAlias} LIKE '%{$PCO_ValorFiltro}%' OR ";
+                                            $TrozoAnalizado++;
+                                        }
+                                }
+
+                        //CASO 2: El mas simple, Cuando no se tienen Aliases en los campos (AS)
+                            if ($ExistenAliasEnCampos==0)
+                                {
+                                    foreach ($ListaCamposDT as $CampoDT)
+                                        $PCO_CondicionesFiltrado.=" {$CampoDT} LIKE '%{$PCO_ValorFiltro}%' OR ";
+                                }
+
+                        $PCO_CondicionesFiltrado.=" 1=2 ) "; //Agrega una condicion que nunca se cumple para los OR y Cierra el AND del SQL
+                    }
+
+                //PROCESA LA CONSULTA DE BASE separando en partes y generando las subconsultas para conteo de registros y agregando ademas las condiciones
+                //1. Construye consulta para gran TOTAL de registros en la consulta
+                $SubCadena=strstr($ConsultaCacheada, "FROM", FALSE); //SIN retorno de cadena previa al needle
+                $ConsultaTotalRegistros = "SELECT COUNT(*) AS allcount  {$SubCadena}";
+
+                //2. Construye consulta para TOTAL de registros en la consulta al aplicar filtros
+                $ConsultaTotalRegistrosFiltrados = "{$ConsultaTotalRegistros} {$PCO_CondicionesFiltrado}";
+
+                //3. Construye consulta para obtener los registros
+                    $CadenaOrderBy=" ";
+                    if ($PCO_ColumnaOrdenamiento!="")
+                        $CadenaOrderBy=" ORDER BY $PCO_ColumnaOrdenamiento $PCO_DireccionOrdenamiento ";
+                    $ConsultaCacheadaRegistros="{$ConsultaCacheada} {$PCO_CondicionesFiltrado} {$CadenaOrderBy} LIMIT {$PCO_FilaInicial},{$PCO_CantidadFilas} ";
+
+                if(1==2) //Solo para efectos de depuracion mediante F12 - Network, cambiar a condicion invalida en produccion
+                    {
+                        echo "
+                            <br>ConsultaOriginal=$ConsultaCacheada
+                            <br>ConsultaTotalRegistros=$ConsultaTotalRegistros
+                            <br>ConsultaTotalRegistrosFiltrados=$ConsultaTotalRegistrosFiltrados
+                            <br>ConsultaRegistros=$ConsultaCacheadaRegistros
+                            <br>PCO_ValorFiltro=$PCO_ValorFiltro
+                        ";
+                        die();
+                    }
+            }
+
+        //BLOQUE2: Genera conteos y datos requeridos.  Sigue adelante solo si hay consulta valida
+        if ($ConsultaCacheada!="")
+            {
+                //Obitene el Total de registros en la consulta de base SIN filtros
+                $PCO_TotalRegistrosConsulta = PCO_EjecutarSQL($ConsultaTotalRegistros)->fetchColumn();
+        
+                //Obtiene el total de registros en la consulta CON filtros aplicados
+                $PCO_TotalRegistrosConsultaCONFiltro = PCO_EjecutarSQL($ConsultaTotalRegistrosFiltrados)->fetchColumn();
+        
+                //Hace la consulta desde la cache de SQL
+                $RegistrosRecuperados = PCO_EjecutarSQL($ConsultaCacheadaRegistros)->fetchAll();
+        
+                //Define el arreglo con los datos y lo llena desde cada fila del registro
+                $PCO_ArregloDatosRegistros = array();
+                    foreach($RegistrosRecuperados as $row)
+                        {
+                            $ArregloAsociativoCampos=array();
+                            //Recorre todos los campos definidos para agregarlos como llaves al arreglo de registro
+                            foreach ($ListaCamposDT as $CampoDT)
+                                {
+                                    //Agrega el par Key-Value con el campo correspondiente al arreglo de registro
+                                    $ArregloAsociativoCampos += array( $CampoDT => $row[$CampoDT] ); 
+                                }
+                            $PCO_ArregloDatosRegistros[]=$ArregloAsociativoCampos;          //Agrega el arreglo de registro al arreglo de resultado general
+                        }
+        
+                //Define la respuesta con los datos obtenidos
+                //Antes el elemento data era aaData
+
+$PCO_ArregloPanes='
+
+
+"SearchPanes": {
+  "options": { 
+    "Identificador": [ 
+      { "label": "6", "total": "100", "value": "6", "count": "100" } 
+      ]
+       } }
+
+';
+
+//$PCO_ArregloPanes=json_encode($PCO_ArregloPanes);
+
+                $RespuestaFormatoJSON = array(
+                   "draw" => intval($PCO_IteracionLlamadosDataTable),
+                   "iTotalRecords" => $PCO_TotalRegistrosConsulta,
+                   "iTotalDisplayRecords" => $PCO_TotalRegistrosConsultaCONFiltro,
+                   "data" => $PCO_ArregloDatosRegistros,
+                   $PCO_ArregloPanes
+                );
+
+
+
+$RespuestaFormatoJSON='{"draw":0,"iTotalRecords":"4329","iTotalDisplayRecords":"4329","data":[{"Identificador":"1","Fecha":"2021-05-21","Dia":"21","Mes":"5","Ano":"2021","Hora":"20:28:39","Usuario":"admin","Accion":"Elimina informe -29"},{"Identificador":"2","Fecha":"2021-05-21","Dia":"21","Mes":"5","Ano":"2021","Hora":"20:28:39","Usuario":"admin","Accion":"Elimina formulario -6"},{"Identificador":"3","Fecha":"2021-05-21","Dia":"21","Mes":"5","Ano":"2021","Hora":"20:28:39","Usuario":"admin","Accion":"Elimina formulario -21"},{"Identificador":"4","Fecha":"2021-05-21","Dia":"21","Mes":"5","Ano":"2021","Hora":"20:28:39","Usuario":"admin","Accion":"Elimina informe -28"},{"Identificador":"5","Fecha":"2021-05-21","Dia":"21","Mes":"5","Ano":"2021","Hora":"20:28:39","Usuario":"admin","Accion":"Elimina formulario -11"},{"Identificador":"6","Fecha":"2021-05-21","Dia":"21","Mes":"5","Ano":"2021","Hora":"20:28:39","Usuario":"admin","Accion":"Elimina informe -19"},{"Identificador":"7","Fecha":"2021-05-21","Dia":"21","Mes":"5","Ano":"2021","Hora":"20:28:39","Usuario":"admin","Accion":"Elimina informe -15"},{"Identificador":"8","Fecha":"2021-05-21","Dia":"21","Mes":"5","Ano":"2021","Hora":"20:28:39","Usuario":"admin","Accion":"Elimina informe -22"},{"Identificador":"9","Fecha":"2021-05-21","Dia":"21","Mes":"5","Ano":"2021","Hora":"20:28:39","Usuario":"admin","Accion":"Elimina informe -10"},{"Identificador":"10","Fecha":"2021-05-21","Dia":"21","Mes":"5","Ano":"2021","Hora":"20:28:39","Usuario":"admin","Accion":"Elimina formulario -15"}],"SearchPanes":{"options":{"Identificador":[{"label":"6","total":"100","value":"6","count":"100"}]}}}';
+
+echo $RespuestaFormatoJSON;
+                
+                //Entrega resultados en JSON formateados para DT
+                //echo json_encode($RespuestaFormatoJSON);
+
+                //Finaliza ejecucion para evitar datos basura
+                die();
             }
     }
 
@@ -286,16 +502,16 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
                         }
         
                 //Define la respuesta con los datos obtenidos
+                //Antes el elemento data era aaData
                 $RespuestaFormatoJSON = array(
                    "draw" => intval($PCO_IteracionLlamadosDataTable),
                    "iTotalRecords" => $PCO_TotalRegistrosConsulta,
                    "iTotalDisplayRecords" => $PCO_TotalRegistrosConsultaCONFiltro,
-                   "aaData" => $PCO_ArregloDatosRegistros
+                   "data" => $PCO_ArregloDatosRegistros
                 );
-                
+
                 //Entrega resultados en JSON formateados para DT
                 echo json_encode($RespuestaFormatoJSON);
-
                 //Finaliza ejecucion para evitar datos basura
                 die();
             }

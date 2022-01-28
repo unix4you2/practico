@@ -17,6 +17,8 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/conexiones.php
+core/marco_admin.php
+core/marco_forms.php
 core/usuarios.php
 inc/bootstrap/js/plugins/dataTables/*
 inc/bootstrap/css/plugins/dataTables/*
@@ -43,7 +45,7 @@ LogCambios="
 * Enhan [CORE]: El despacho de correos del sistema toma por defecto como remitente al correo del administrador del sistema, de manera que se puedan hacer registros ante sistemas de despacho de correo sin problemas.
 * Fixed [INFORMES]: Agregadas librerias faltantes para los search pane en dataTables
 * Added [FORMS]: Controles de formulario de tipo contraseña incluyen un botón al lado derecho que permite visualizar / ocultar los valores ingresads por el usuario
-
+* Enhan [CORE]: Seccion de auditoria de usuarios elimina código innecesario al cambiar código por elementos internos
 
 
 
