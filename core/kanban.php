@@ -427,7 +427,7 @@
                                 <b>'.$RegistroTareas["titulo"].'</b>
                                 </div>
                             </div>
-                            <div class="text-left">
+                            <div class="text-left" style="overflow: auto;">
                                 <div class="btn-xs">
                                 <hr style="border-top: 1px dotted; margin:0; padding:0;">
                                 '.nl2br($RegistroTareas["descripcion"]).'
@@ -571,40 +571,74 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                 </table>";
 
         echo "<!-- Tareas definidas en el tablero -->
-            <div class='panel panel-default well'>
-                <table border=1 width='100%' class='table table-responsive table-condensed btn-xs' style='border: 1px solid lightgray;'><tr>";
+            <div class='panel panel-default well'>";
 
+        echo "  <div class='row' style='border: 1px solid lightgray;'>";
                             //Recorre las columnas del tablero
                             $ConteoColumna=1;
                             $ColumnasDisponibles=count($ArregloColumnasTablero);
-                            $AnchoColumnas=round(100/$ColumnasDisponibles);
+                            
+                            //Intenta obtener el ancho de las columnas como una clase bootstrap en lugar de pixeles
+                            //$AnchoColumnas=round(100/$ColumnasDisponibles);
+                            $AnchoColumnas=floor(12/$ColumnasDisponibles);
+
+                            $AnchoColumnasXS=12;
+                            $AnchoColumnasSM=6;
+                            $AnchoColumnasMD=4;
+                            $AnchoColumnasLG=$AnchoColumnas;
+                            $CadenaColumnas=" col col-xs-{$AnchoColumnasXS} col-sm-{$AnchoColumnasSM} col-md-{$AnchoColumnasMD} col-lg-{$AnchoColumnasLG} ";
+
+                            //Si el ancho de columnas no es suficiente para las 12 unidades reutiliza el espacio en la ulima que es la que mas controles y botones tiene en cada tarea
+                            if ($AnchoColumnas*$ColumnasDisponibles!=12)
+                                {
+                                    $AnchoUltimaColumna=$AnchoColumnas+(12-($AnchoColumnas*$ColumnasDisponibles));
+                                    $CadenaColumnasUltimaColumna=" col col-xs-{$AnchoColumnasXS} col-sm-{$AnchoColumnasSM} col-md-{$AnchoUltimaColumna} col-lg-{$AnchoUltimaColumna} ";
+                                }
+
                             foreach ($ArregloColumnasTablero as $NombreColumna) {
                                 //Cuenta el numero de tareas en esta columna VS la cantidad de tareas activas en el tablero para obtener el porcentaje de representacion en el tablero
                                 $CantidadTareasColumna=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE columna=$ConteoColumna AND archivado=0 AND tablero='$ID_TableroKanban' ")->fetchColumn();
                                 $PorcentajeTotalAvanceColumna=0;
                                 if ($CantidadTareasTotal-$CantidadTareasArchivadas!=0)
                                     $PorcentajeTotalAvanceColumna=round($CantidadTareasColumna*100/($CantidadTareasTotal-$CantidadTareasArchivadas));
-                                
 
-                                echo "<td valign=top width='$AnchoColumnas%' ondrop='Soltar(event,$ConteoColumna)' ondragover='PermitirSoltar(event,$ConteoColumna)' id='MarcoBotonOcultar".$ConteoColumna."'>";
-                                echo "<div data-toggle='tooltip' data-html='true' data-placement='top' title='".$MULTILANG_ArrastrarTarea."' class='btn pull-left' ><i class='fa-1x'><i class='fa fa-stack-overflow'></i> <b>".$NombreColumna."</b> <font color=red>{$PorcentajeTotalAvanceColumna}%</font></i></div>";
-                                //echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='$(\"#myModalActividadKanban$ID_TableroKanban\").modal(\"show\"); document.datosfield$ID_TableroKanban.columna.value=$ConteoColumna;'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
-                                echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='PCO_CargarPopUP($ID_TableroKanban,$ConteoColumna,0);'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
-                                echo "<br>";
-                                
-                                echo "<div id='MarcoTareasColumna$ConteoColumna'>
-                                <br><br><div id='ColumnaKanbanMarcoArrastre".$ConteoColumna."'></div>";
-                                //Busca las tarjetas de la columna siempre y cuando no esten ya archivadas
-                                $ResultadoTareas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND columna=$ConteoColumna AND tablero='$ID_TableroKanban' ORDER BY peso ASC ");
-                                while ($RegistroTareas=$ResultadoTareas->fetch())
-                                    echo PCO_PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban,$ResultadoColumnas);
-                                echo "</div></td>";
+                                echo "<div class='{$CadenaColumnas}' ondrop='Soltar(event,$ConteoColumna)' ondragover='PermitirSoltar(event,$ConteoColumna)' id='MarcoBotonOcultar".$ConteoColumna."' style='border-left:1px solid; border-color:lightgray;' >";
+                                    echo "<div data-toggle='tooltip' data-html='true' data-placement='top' title='".$MULTILANG_ArrastrarTarea."' class='btn pull-left' ><i class='fa-1x'><i class='fa fa-stack-overflow'></i> <b>".$NombreColumna."</b> <font color=red>{$PorcentajeTotalAvanceColumna}%</font></i></div>";
+                                            //echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='$(\"#myModalActividadKanban$ID_TableroKanban\").modal(\"show\"); document.datosfield$ID_TableroKanban.columna.value=$ConteoColumna;'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
+                                            echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='PCO_CargarPopUP($ID_TableroKanban,$ConteoColumna,0);'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
+                                            echo "<br>";
+                                            
+                                            echo "<div id='MarcoTareasColumna$ConteoColumna'>
+                                            <br><br><div id='ColumnaKanbanMarcoArrastre".$ConteoColumna."'></div>";
+                                            //Busca las tarjetas de la columna siempre y cuando no esten ya archivadas
+                                            $ResultadoTareas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND columna=$ConteoColumna AND tablero='$ID_TableroKanban' ORDER BY peso ASC ");
+                                            while ($RegistroTareas=$ResultadoTareas->fetch())
+                                                echo PCO_PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban,$ResultadoColumnas);
+                                    echo "</div>";
+                                echo "</div>";
                                 $ConteoColumna++;
+                                //Verifica si ha quedado en la ultima columna y reaprovecha el espacio (si aplica)
+                                if ($ConteoColumna==$ColumnasDisponibles && $CadenaColumnasUltimaColumna!="")
+                                    $CadenaColumnas=$CadenaColumnasUltimaColumna;
                             }
+        echo "  </row>";
 
-        echo "  <tr></table>";
         echo "</div>";
 
+        //Genera script de actualizacion para los altos de columna (forzados psara permitir arrastrar y soltar)
+        echo '
+            <script language="JavaScript">
+                $( document ).ready(function() {
+                    var MaximoAlto=0; ';        
+                    for ($i=1;$i<=$ColumnasDisponibles;$i++)
+                        echo " if (document.getElementById('MarcoBotonOcultar".$i."').clientHeight > MaximoAlto) MaximoAlto=document.getElementById('MarcoBotonOcultar".$i."').clientHeight;";
+            
+                    for ($i=1;$i<=$ColumnasDisponibles;$i++)
+                        echo '$("#MarcoBotonOcultar'.$i.'").css("height",MaximoAlto+"px");';
+                    
+                    echo '$("#MarcoBotonOcultar1").css("border-left","0px solid");';
+        echo '  });
+            </script>';
 		}
 
 

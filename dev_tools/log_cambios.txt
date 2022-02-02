@@ -18,6 +18,7 @@ index.php
 core/comunes.php
 core/conexiones.php
 core/marco_admin.php
+core/kanban.php
 core/marco_forms.php
 core/usuarios.php
 inc/bootstrap/js/plugins/dataTables/*
@@ -46,6 +47,9 @@ LogCambios="
 * Fixed [INFORMES]: Agregadas librerias faltantes para los search pane en dataTables
 * Added [FORMS]: Controles de formulario de tipo contraseña incluyen un botón al lado derecho que permite visualizar / ocultar los valores ingresads por el usuario
 * Enhan [CORE]: Seccion de auditoria de usuarios elimina código innecesario al cambiar código por elementos internos
+* Enhan [KANBAN]: Tableros Kanban son ahora 100% responsive en sus columnas.
+* Enhan [KANBAN]: Actividades con descripciones demasiado extensas o con textos que no permitan la propiedad wrap presentan automáticamente barras de desplazamiento para visualizar los detalles de la tarea.
+
 
 
 
