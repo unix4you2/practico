@@ -293,7 +293,7 @@
         { include "core/ajax.php"; }
     if ($PCO_Accion=="PCO_LimpiarCacheSQL" || $PCO_Accion=="PCO_ReportarBugs" || $PCO_Accion=="mantenimiento_tablas" || $PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
         { include "core/mantenimiento.php"; }
-    if ($PCO_Accion=="PCO_ExplorarTablerosKanbanResumido" || $PCO_Accion=="AceptarPruebasTareaKanban" || $PCO_Accion=="EliminarTableroKanban" || $PCO_Accion=="GuardarCreacionKanban" || $PCO_Accion=="VerTareasArchivadas" || $PCO_Accion=="ArchivarTareaKanban" || $PCO_Accion=="PCO_ExplorarTablerosKanban" || $PCO_Accion=="EliminarTareaKanban" || $PCO_Accion=="GuardarPersonalizacionKanban")
+    if ($PCO_Accion=="PCO_ExplorarTablerosGantt" || $PCO_Accion=="PCO_ExplorarTablerosKanbanResumido" || $PCO_Accion=="AceptarPruebasTareaKanban" || $PCO_Accion=="EliminarTableroKanban" || $PCO_Accion=="GuardarCreacionKanban" || $PCO_Accion=="VerTareasArchivadas" || $PCO_Accion=="ArchivarTareaKanban" || $PCO_Accion=="PCO_ExplorarTablerosKanban" || $PCO_Accion=="EliminarTareaKanban" || $PCO_Accion=="GuardarPersonalizacionKanban")
         { include "core/kanban.php"; }
 
 

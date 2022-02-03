@@ -628,18 +628,64 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
         //Genera script de actualizacion para los altos de columna (forzados psara permitir arrastrar y soltar)
         echo '
             <script language="JavaScript">
+                var ResolucionCompletaPantalla=window.screen.width;
+                var AnchoDocumentoKanban=$(document).width();
+
                 $( document ).ready(function() {
-                    var MaximoAlto=0; ';        
-                    for ($i=1;$i<=$ColumnasDisponibles;$i++)
-                        echo " if (document.getElementById('MarcoBotonOcultar".$i."').clientHeight > MaximoAlto) MaximoAlto=document.getElementById('MarcoBotonOcultar".$i."').clientHeight;";
-            
-                    for ($i=1;$i<=$ColumnasDisponibles;$i++)
-                        echo '$("#MarcoBotonOcultar'.$i.'").css("height",MaximoAlto+"px");';
-                    
-                    echo '$("#MarcoBotonOcultar1").css("border-left","0px solid");';
+                        //Determina si la resolucion de pantalla es suficiente para hacer transformacion en altos de columna
+                        if (AnchoDocumentoKanban>=992)
+                            {
+                                var MaximoAlto=0; ';        
+                                for ($i=1;$i<=$ColumnasDisponibles;$i++)
+                                    echo " if (document.getElementById('MarcoBotonOcultar".$i."').clientHeight > MaximoAlto) MaximoAlto=document.getElementById('MarcoBotonOcultar".$i."').clientHeight;";
+                                for ($i=1;$i<=$ColumnasDisponibles;$i++)
+                                    echo '$("#MarcoBotonOcultar'.$i.'").css("height",MaximoAlto+"px");';
+                    echo '  }
+                    $("#MarcoBotonOcultar1").css("border-left","0px solid");';
         echo '  });
             </script>';
 		}
+
+
+//#################################################################################
+//#################################################################################
+/*
+	Function: PCO_ExplorarTablerosGantt
+	PResenta la lista de tareas de un proyecto en formato Gantt
+	
+	Salida:
+		Diagama Gantt em pantalla
+*/
+if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
+    {
+        //Si recibe un ID de tablero desde el informe de resumen entonces lo usa para ser visualizado
+        if ($PCO_Valor!="" || $PCOSESS_TableroKanbanActivo!="")
+            {
+                if ($PCO_Valor!="") { $CadenaTablerosAVisualizar=$PCO_Valor; $_SESSION["PCOSESS_TableroKanbanActivo"]=(string)$PCO_Valor; }
+                if ($PCOSESS_TableroKanbanActivo!="" && $PCO_Valor=="") $CadenaTablerosAVisualizar=$PCOSESS_TableroKanbanActivo;
+                //Establece una variable de sesion para saber en que tablero esta trabajando en el momento
+            }
+
+        echo "Gantt ".$PCOSESS_TableroKanbanActivo;
+
+
+/*
+VER:  https://twproject.com/
+
+https://taitems.github.io/jQuery.Gantt/
+
+
+
+REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
+*/
+
+
+
+
+    }
+
+
+
 
 
 //#################################################################################
