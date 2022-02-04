@@ -49,7 +49,7 @@
 
 .fn-gantt .leftPanel {
     float: left;
-    width: 225px;
+    width: 400px;
     overflow: hidden;
     border-right: 1px solid #DDD;
     position: relative;
@@ -60,7 +60,7 @@
     display: inline-block;
     margin: 0 0 0 5px;
     color: #484A4D;
-    width: 110px;
+    /*width: 110px;*/
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -69,11 +69,20 @@
 .fn-gantt .leftPanel .row {
     border-bottom: 1px solid #DDD;
 }
-.fn-gantt .leftPanel .name, .fn-gantt .leftPanel .desc {
+
+.fn-gantt .leftPanel .name {
     float: left;
     height: 24px;
-    width: 50%;
+    width: 35%;
     background-color: #f6f6f6;
+}
+
+.fn-gantt .leftPanel .desc {
+    float: left;
+    height: 24px;
+    width: 65%;
+    background-color: #f6f6f6;
+    font-size: 11px;
 }
 
 .fn-gantt .leftPanel .name {
@@ -88,8 +97,6 @@
     background-color: #f6f6f6;
     width: 100%;
 }
-
-
 
 
 /* === RIGHT PANEL === */
@@ -183,18 +190,10 @@
 }
 
 .fn-gantt .bar {
-    background-color: #D0E4FD;
     height: 18px;
     margin: 0 3px 3px 0;
     position: absolute;
     z-index: 10;
-    text-align: center;
--webkit-box-shadow: 0 0 1px rgba(0,0,0,0.25) inset;
-   -moz-box-shadow: 0 0 1px rgba(0,0,0,0.25) inset;
-        box-shadow: 0 0 1px rgba(0,0,0,0.25) inset;
--webkit-border-radius: 3px;
-   -moz-border-radius: 3px;
-        border-radius: 3px;
 }
 
 .fn-gantt .bar .fn-label {
@@ -204,10 +203,9 @@
     width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
-    /*text-shadow: 0 1px 0 rgba(255,255,255,0.4);*/
     text-shadow: -1px -1px 5px white;
     color: black !important;
-    text-align: left; /*center*/
+    text-align: left;
     font-size: 10px;
 }
 

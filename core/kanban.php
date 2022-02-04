@@ -716,7 +716,6 @@ REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
                                 $ArregloColumnas=explode(",",$ColumnasTablero);
                                 $NombreColumnaTarea="".trim($ArregloColumnas[$RegistroTarea["columna"]*1-1]);
 
-
                                 //Si la columna no ha sido agregada al grafico la primnera vez la agrega
                                 $NombreColumnaTarea=(string)$NombreColumnaTarea;
                                 if (in_array($NombreColumnaTarea, $ArregloColumnas)==true)
@@ -727,7 +726,6 @@ REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
                                 else
                                     {
                                         $UltimaColumna="";
-
                                     }
                                     
                                 // echo "console.log('Variable UltimaColumna = {$UltimaColumna}');";
@@ -798,9 +796,11 @@ REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
 
                                 $PCO_SalidaFuenteDatos.= '
                                     {
-                                        
+                                        id:  "'.$RegistroTarea["id"].'",
                                         name: "<i class=\'fa fa-stack-overflow fa-fw\'></i>'.$UltimaColumna.'",
                                         desc: "'.$RegistroTarea["titulo"].'",
+                                        data:  "holi",
+
                                         values: [{
                                             from: "'.$Actividad_FechaInicio.'",
                                             to: "'.$Actividad_FechaFin.'",
@@ -831,22 +831,25 @@ REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
             //Inicializa el tablero sobre el DIV que tenga la clase gantt asociada
             $(".gantt").gantt({
                 source: PCO_FuenteDatosGantt,
-                navigate: "scroll",
-                scale: "weeks",
-                maxScale: "months",
-                minScale: "hours",
+                navigate: "scroll",         //"buttons", "scroll"
+                scale: "days",             //"months", "weeks", "days", "hours"
+                maxScale: "months",         //"months", "weeks", "days", "hours"
+                minScale: "hours",          //"months", "weeks", "days", "hours"
                 itemsPerPage: 25,
-                scrollToToday: false,
-                useCookie: true,
-                onItemClick: function(data) {
-                    alert("Item clicked - show some details");
+                scrollToToday: true,        //true,false
+                useCookie: false,           //false,true    Determina si se debe guardar o no la ubicacion, vista, posicion, etc. entre cargas de pagina
+                months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+                dow: ["D", "L", "M", "M", "J", "V", "S"],
+                waitText: "Por favor espere...",
+                onItemClick: function(data,rowId) {
+                    alert("Detalles de WBS:"+rowId);
                 },
                 onAddClick: function(dt, rowId) {
-                    alert("Empty space clicked - add an item!");
+                    alert("Empty space clicked - add an item! FILA="+rowId+" Fecha unix="+dt);
                 },
                 onRender: function() {
                     if (window.console && typeof console.log === "function") {
-                        console.log("chart rendered");
+                        //console.log("Se ha generado el GANTT");
                     }
                 }
             });

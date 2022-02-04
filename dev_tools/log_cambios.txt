@@ -58,7 +58,9 @@ LogCambios="
 * Enhan [KANBAN]: Tableros Kanban son ahora 100% responsive en sus columnas.
 * Enhan [KANBAN]: Actividades con descripciones demasiado extensas o con textos que no permitan la propiedad wrap presentan automáticamente barras de desplazamiento para visualizar los detalles de la tarea.
 * Enhan [KANBAN]: Ajustadas fechas de inicio no definidas en tableros kanban como 2000-01-01
-* Enhan [KANBAN]: Ajustadas fechas de inicio no definidas en tableros kanban como 2000-01-01
+* Enhan [KANBAN]: Fechas de inicio no indicadas en versiones previas son actualizada a su fecha de cierre por compatibilidad hacia versiones nuevas y tableros Gantt.
+* Enhan [KANBAN]: Tableros Kanban cuentan ahora con compatibilidad de vista en diagramas tipo Gantt para facilitar la gestión de actividades en una vista temporal.
+
 
 
 
