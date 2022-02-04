@@ -163,6 +163,9 @@
         // Incluye archivo con las consultas y datos para ser diagramados por Morris
             include_once("core/marco_admin_morris.php");
     ?>
+    
+    <!-- Gantt -->
+    <script src="inc/jquery/plugins/gantt-master/js/jquery.fn.gantt.js"></script>
 
     <!-- DataTables JavaScript -->
     <script src="inc/bootstrap/js/plugins/dataTables/jquery.dataTables.min.js"></script>

@@ -666,7 +666,6 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                 //Establece una variable de sesion para saber en que tablero esta trabajando en el momento
             }
 
-        echo "Gantt ".$PCOSESS_TableroKanbanActivo;
 
 
 /*
@@ -678,14 +677,252 @@ https://taitems.github.io/jQuery.Gantt/
 
 REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
 */
+?>
 
 
 
 
+
+
+
+        <div class="container" style="font-family: Helvetica, Arial, sans-serif; font-size: 13px; padding: 0 0 50px 0;">
+            <div class="gantt"></div>
+        </div>
+
+
+
+    <script>
+        $(function() {
+            "use strict";
+
+            var PCO_FuenteDatosGantt = [
+            
+            {
+                name: "Sprint 0",
+                desc: "Analysis",
+                values: [{
+                    from: 1320192000000,
+                    to: 1322401600000,
+                    label: "Requirement Gathering",
+                    customClass: "ganttRed"
+                }]
+            },
+            
+            {
+                desc: "Scoping",
+                values: [{
+                    from: 1322611200000,
+                    to: 1323302400000,
+                    label: "Scoping",
+                    customClass: "ganttRed"
+                }]
+            },
+            
+            {
+                name: "Sprint 1",
+                desc: "Development",
+                values: [{
+                    from: 1323802400000,
+                    to: 1325685200000,
+                    label: "Development",
+                    customClass: "ganttGreen"
+                }]
+            },{
+                name: " ",
+                desc: "Showcasing",
+                values: [{
+                    from: 1325685200000,
+                    to: 1325695200000,
+                    label: "Showcasing",
+                    customClass: "ganttBlue"
+                }]
+            },{
+                name: "Sprint 2",
+                desc: "Development",
+                values: [{
+                    from: 1325695200000,
+                    to: 1328785200000,
+                    label: "Development",
+                    customClass: "ganttGreen"
+                }]
+            },{
+                desc: "Showcasing",
+                values: [{
+                    from: 1328785200000,
+                    to: 1328905200000,
+                    label: "Showcasing",
+                    customClass: "ganttBlue"
+                }]
+            },{
+                name: "Release Stage",
+                desc: "Training",
+                values: [{
+                    from: 1330011200000,
+                    to: 1336611200000,
+                    label: "Training",
+                    customClass: "ganttOrange"
+                }]
+            },{
+                desc: "Deployment",
+                values: [{
+                    from: 1336611200000,
+                    to: 1338711200000,
+                    label: "Deployment",
+                    customClass: "ganttOrange"
+                }]
+            },
+            {
+                desc: "Warranty Period",
+                values: [{
+                    from: 1336611200000,
+                    to: 1349711200000,
+                    label: "Warranty Period",
+                    customClass: "ganttOrange"
+                }]
+            }
+            
+            ];
+
+
+
+            //Genera la variable de arreglo con las actividades
+
+
+            <?php
+                    
+                $PCO_SalidaFuenteDatos="
+                    var PCO_FuenteDatosGantt = 
+                        [ ";
+                        //Genera los datos para el diagrama.  SOLO TAREAS SIN ARCHIVAR.
+                        $TareasTablero=PCO_EjecutarSQL("
+                            SELECT * FROM {$TablasCore}kanban WHERE  archivado = 0  AND    tablero = '{$PCO_Valor}'  AND    columna >= 0 
+                            ORDER BY columna ASC, fecha ASC
+                        
+                        ");
+                        $UltimaColumna="";
+                        $ArregloColumnas=array();
+                        while ($RegistroTarea=$TareasTablero->fetch())
+                            {
+                                //Busca el nombre de la columna para la actividad
+                                $TableroActivo=$RegistroTarea["tablero"];
+                                $ColumnasTablero=PCO_EjecutarSQL("SELECT descripcion FROM core_kanban WHERE  id = '{$TableroActivo}' ")->fetchColumn();
+                                $ArregloColumnas=explode(",",$ColumnasTablero);
+                                $NombreColumnaTarea="".trim($ArregloColumnas[$RegistroTarea["columna"]*1-1]);
+
+
+                                //Si la columna no ha sido agregada al grafico la primnera vez la agrega
+                                $NombreColumnaTarea=(string)$NombreColumnaTarea;
+                                if (in_array($NombreColumnaTarea, $ArregloColumnas)==true)
+                                    {
+                                        $ArregloColumnas[]=(string)$NombreColumnaTarea;
+                                        $UltimaColumna=(string)$NombreColumnaTarea;
+                                    }
+                                else
+                                    {
+                                        $UltimaColumna="";
+
+                                    }
+                                    
+                                echo "console.log('Variable UltimaColumna = {$UltimaColumna}');";
+                                echo "console.log('Variable Descrip = ".$RegistroTarea["titulo"]."');";
+                                
+                                $DescripcionDeActividad=" ".$RegistroTarea["titulo"]." (WBS: ".$RegistroTarea["id"].")";
+
+
+// id	int(10) Incremento automático	
+// login_admintablero	varchar(250) NULL	
+// titulo	varchar(255) NULL	
+// descripcion	text NULL	
+// asignado_a	varchar(250) NULL	
+// categoria	varchar(255) NULL	
+// columna	int(11) NULL	
+// peso	int(11) NULL	
+// estilo	varchar(15) NULL	
+// fecha	date NULL	Fecha de entrega/estimada
+// archivado	int(11) NULL	
+// compartido_rw	text NULL	
+// tablero	int(11) NULL	
+// porcentaje	int(11) NULL [0]	
+// usuarios_edicion	varchar(255) NULL	Usuarios que pueden editar la tarea
+// estado_general	varchar(30) NULL	
+// pruebas_funcionales	varchar(500) NULL	
+// pruebas_nofuncionales	varchar(500) NULL	
+// fecha_inicio	date NULL	
+// aceptacion_pf	char(2) NULL [No]	Aceptacion de pruebas funcionales
+// aceptacion_pnf	char(2) NULL [No]	Aceptacion de pruebas no funcionales
+// usuario_aceptacion_pf	varchar(255) NULL	
+// usuario_aceptacion_pnf	varchar(255) NULL	
+// historial	text NULL	
+// horas_estimadas	int(11) NULL [0]	
+// presupuesto	int(11) NULL [0]	
+// adjunto_elicitacion	varchar(255) NULL
+
+
+
+                                $PCO_SalidaFuenteDatos.= '
+                                    {
+                                        
+                                        name: "<i class=\'fa fa-stack-overflow fa-fw\'></i>'.$UltimaColumna.'",
+                                        desc: "'.$RegistroTarea["titulo"].'",
+                                        values: [{
+                                            from: 1336611200000,
+                                            to: 1349711200000,
+                                            label: "'.$DescripcionDeActividad.'",
+                                            customClass: "ganttOrange"
+                                        }]
+                                    },
+                                ';
+                            }
+
+                //Cierra el JSON
+                $PCO_SalidaFuenteDatos.="  ]; ";
+                //Imprime el JS con los datos directamente en la pagina
+                echo $PCO_SalidaFuenteDatos;
+            ?>
+                
+
+
+
+            
+            //Inicializa el tablero sobre el DIV que tenga la clase gantt asociada
+            $(".gantt").gantt({
+                source: PCO_FuenteDatosGantt,
+                navigate: "scroll",
+                scale: "weeks",
+                maxScale: "months",
+                minScale: "hours",
+                itemsPerPage: 25,
+                scrollToToday: false,
+                useCookie: true,
+                onItemClick: function(data) {
+                    alert("Item clicked - show some details");
+                },
+                onAddClick: function(dt, rowId) {
+                    alert("Empty space clicked - add an item!");
+                },
+                onRender: function() {
+                    if (window.console && typeof console.log === "function") {
+                        console.log("chart rendered");
+                    }
+                }
+            });
+
+            $(".gantt").popover({
+                selector: ".bar",
+                title: function _getItemText() {
+                    return this.textContent;
+                },
+                container: '.gantt',
+                content: "Here's some useful information.",
+                trigger: "hover",
+                placement: "auto right"
+            });
+
+        });
+    </script>
+
+<?php
     }
-
-
-
 
 
 //#################################################################################

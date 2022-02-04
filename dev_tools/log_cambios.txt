@@ -17,12 +17,20 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/conexiones.php
+core/marco_abajo.php
 core/marco_admin.php
-core/kanban.php
+core/marco_arriba_bs.php
 core/marco_forms.php
+core/kanban.php
 core/usuarios.php
 inc/bootstrap/js/plugins/dataTables/*
 inc/bootstrap/css/plugins/dataTables/*
+inc/jquery/plugins/gantt-master/*
+inc/bootstrap/js/plugins/moment/*
+inc/jquery/plugins/vfs_fonts.js
+
+
+
 
 xml/*
 inc/practico/idiomas/*

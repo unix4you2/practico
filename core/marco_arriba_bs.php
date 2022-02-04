@@ -143,6 +143,8 @@
             }
     </style>
 
+    <!-- CSS Plugin Gantt -->
+    <link href="inc/jquery/plugins/gantt-master/css/style.css" type="text/css" rel="stylesheet">
 
     <?php
         //Determina si se tiene algun filtro de color POR DEFECTO en toda la plataforma y lo aplica
