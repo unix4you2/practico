@@ -57,6 +57,8 @@ LogCambios="
 * Enhan [CORE]: Seccion de auditoria de usuarios elimina código innecesario al cambiar código por elementos internos
 * Enhan [KANBAN]: Tableros Kanban son ahora 100% responsive en sus columnas.
 * Enhan [KANBAN]: Actividades con descripciones demasiado extensas o con textos que no permitan la propiedad wrap presentan automáticamente barras de desplazamiento para visualizar los detalles de la tarea.
+* Enhan [KANBAN]: Ajustadas fechas de inicio no definidas en tableros kanban como 2000-01-01
+* Enhan [KANBAN]: Ajustadas fechas de inicio no definidas en tableros kanban como 2000-01-01
 
 
 
@@ -67,6 +69,9 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+
+UPDATE core_kanban SET fecha_inicio='2000-01-01' WHERE fecha_inicio IS NULL;
+UPDATE core_kanban SET fecha_inicio=fecha WHERE fecha_inicio='2000-01-01' AND (fecha IS NOT NULL);
 
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');

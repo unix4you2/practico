@@ -204,36 +204,15 @@
     width: 100%;
     text-overflow: ellipsis;
     overflow: hidden;
-    text-shadow: 0 1px 0 rgba(255,255,255,0.4);
-    color: #414B57 !important;
-    text-align: center;
-    font-size: 11px;
-}
-
-.fn-gantt .ganttRed {
-    background-color: #F9C4E1;
-}
-.fn-gantt .ganttRed .fn-label {
-    color: #78436D !important;
-}
-
-.fn-gantt .ganttGreen {
-    background-color: #D8EDA3;
-}
-.fn-gantt .ganttGreen .fn-label {
-    color: #778461 !important;
-}
-
-.fn-gantt .ganttOrange {
-    background-color: #FCD29A;
-}
-.fn-gantt .ganttOrange .fn-label {
-    color: #714715 !important;
+    /*text-shadow: 0 1px 0 rgba(255,255,255,0.4);*/
+    text-shadow: -1px -1px 5px white;
+    color: black !important;
+    text-align: left; /*center*/
+    font-size: 10px;
 }
 
 
 /* === BOTTOM NAVIGATION === */
-
 .fn-gantt .bottom {
     clear: both;
     background-color: #f6f6f6;
@@ -428,4 +407,3 @@
 .row:after {
     clear: both;
 }
-

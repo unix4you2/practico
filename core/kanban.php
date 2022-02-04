@@ -611,7 +611,7 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                                             echo "<div id='MarcoTareasColumna$ConteoColumna'>
                                             <br><br><div id='ColumnaKanbanMarcoArrastre".$ConteoColumna."'></div>";
                                             //Busca las tarjetas de la columna siempre y cuando no esten ya archivadas
-                                            $ResultadoTareas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND columna=$ConteoColumna AND tablero='$ID_TableroKanban' ORDER BY peso ASC ");
+                                            $ResultadoTareas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND columna=$ConteoColumna AND tablero='$ID_TableroKanban' ORDER BY peso ASC, id ASC ");
                                             while ($RegistroTareas=$ResultadoTareas->fetch())
                                                 echo PCO_PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban,$ResultadoColumnas);
                                     echo "</div>";
@@ -694,100 +694,7 @@ REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
     <script>
         $(function() {
             "use strict";
-
-            var PCO_FuenteDatosGantt = [
-            
-            {
-                name: "Sprint 0",
-                desc: "Analysis",
-                values: [{
-                    from: 1320192000000,
-                    to: 1322401600000,
-                    label: "Requirement Gathering",
-                    customClass: "ganttRed"
-                }]
-            },
-            
-            {
-                desc: "Scoping",
-                values: [{
-                    from: 1322611200000,
-                    to: 1323302400000,
-                    label: "Scoping",
-                    customClass: "ganttRed"
-                }]
-            },
-            
-            {
-                name: "Sprint 1",
-                desc: "Development",
-                values: [{
-                    from: 1323802400000,
-                    to: 1325685200000,
-                    label: "Development",
-                    customClass: "ganttGreen"
-                }]
-            },{
-                name: " ",
-                desc: "Showcasing",
-                values: [{
-                    from: 1325685200000,
-                    to: 1325695200000,
-                    label: "Showcasing",
-                    customClass: "ganttBlue"
-                }]
-            },{
-                name: "Sprint 2",
-                desc: "Development",
-                values: [{
-                    from: 1325695200000,
-                    to: 1328785200000,
-                    label: "Development",
-                    customClass: "ganttGreen"
-                }]
-            },{
-                desc: "Showcasing",
-                values: [{
-                    from: 1328785200000,
-                    to: 1328905200000,
-                    label: "Showcasing",
-                    customClass: "ganttBlue"
-                }]
-            },{
-                name: "Release Stage",
-                desc: "Training",
-                values: [{
-                    from: 1330011200000,
-                    to: 1336611200000,
-                    label: "Training",
-                    customClass: "ganttOrange"
-                }]
-            },{
-                desc: "Deployment",
-                values: [{
-                    from: 1336611200000,
-                    to: 1338711200000,
-                    label: "Deployment",
-                    customClass: "ganttOrange"
-                }]
-            },
-            {
-                desc: "Warranty Period",
-                values: [{
-                    from: 1336611200000,
-                    to: 1349711200000,
-                    label: "Warranty Period",
-                    customClass: "ganttOrange"
-                }]
-            }
-            
-            ];
-
-
-
             //Genera la variable de arreglo con las actividades
-
-
             <?php
                     
                 $PCO_SalidaFuenteDatos="
@@ -796,7 +703,7 @@ REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
                         //Genera los datos para el diagrama.  SOLO TAREAS SIN ARCHIVAR.
                         $TareasTablero=PCO_EjecutarSQL("
                             SELECT * FROM {$TablasCore}kanban WHERE  archivado = 0  AND    tablero = '{$PCO_Valor}'  AND    columna >= 0 
-                            ORDER BY columna ASC, fecha ASC
+                            ORDER BY columna ASC, peso, id 
                         
                         ");
                         $UltimaColumna="";
@@ -823,10 +730,40 @@ REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
 
                                     }
                                     
-                                echo "console.log('Variable UltimaColumna = {$UltimaColumna}');";
-                                echo "console.log('Variable Descrip = ".$RegistroTarea["titulo"]."');";
-                                
-                                $DescripcionDeActividad=" ".$RegistroTarea["titulo"]." (WBS: ".$RegistroTarea["id"].")";
+                                // echo "console.log('Variable UltimaColumna = {$UltimaColumna}');";
+                                // echo "console.log('Variable Descrip = ".$RegistroTarea["titulo"]."');";
+                                //echo "console.log('Variable color ".$RegistroTarea["id"]." = |".$RegistroTarea["estilo"]."|');";
+
+                                //Define los valores a presentar en el grafico                                
+                                $Actividad_Descripcion=" ".$RegistroTarea["titulo"]." (WBS: ".$RegistroTarea["id"].")";
+                                $Actividad_FechaInicio=str_replace("-","/",$RegistroTarea["fecha_inicio"]); //Cambia a formato aceptado por plugin AAAA/MM/DD
+                                $Actividad_FechaFin=str_replace("-","/",$RegistroTarea["fecha"]);           //Cambia a formato aceptado por plugin AAAA/MM/DD
+                                switch (trim($RegistroTarea["estilo"])) {
+                                    case '':
+                                        $Actividad_Estilo="btn btn-default btn-xs";
+                                        break;
+                                    case 'default':
+                                        $Actividad_Estilo="btn btn-default btn-xs";
+                                        break;
+                                    case 'primary':
+                                        $Actividad_Estilo="btn btn-primary btn-xs";
+                                        break;
+                                    case 'success':
+                                        $Actividad_Estilo="btn btn-success btn-xs";
+                                        break;
+                                    case 'info':
+                                        $Actividad_Estilo="btn btn-info btn-xs";
+                                        break;
+                                    case 'warning':
+                                        $Actividad_Estilo="btn btn-warning btn-xs";
+                                        break;
+                                    case 'danger':
+                                        $Actividad_Estilo="btn btn-danger btn-xs";
+                                        break;
+                                    default:
+                                        $Actividad_Estilo="btn btn-default btn-xs";
+                                        break;
+                                }
 
 
 // id	int(10) Incremento automático	
@@ -865,10 +802,10 @@ REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
                                         name: "<i class=\'fa fa-stack-overflow fa-fw\'></i>'.$UltimaColumna.'",
                                         desc: "'.$RegistroTarea["titulo"].'",
                                         values: [{
-                                            from: 1336611200000,
-                                            to: 1349711200000,
-                                            label: "'.$DescripcionDeActividad.'",
-                                            customClass: "ganttOrange"
+                                            from: "'.$Actividad_FechaInicio.'",
+                                            to: "'.$Actividad_FechaFin.'",
+                                            label: "'.$Actividad_Descripcion.'",
+                                            customClass: "'.$Actividad_Estilo.'"
                                         }]
                                     },
                                 ';
@@ -882,7 +819,14 @@ REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
                 
 
 
-
+            // // shifts dates closer to Date.now()
+            // var offset = new Date().setHours(0, 0, 0, 0) -
+            //     new Date(PCO_FuenteDatosGantt[0].values[0].from).setDate(35);
+            // for (var i = 0, len = PCO_FuenteDatosGantt.length, value; i < len; i++) {
+            //     value = PCO_FuenteDatosGantt[i].values[0];
+            //     value.from += offset;
+            //     value.to += offset;
+            // }
             
             //Inicializa el tablero sobre el DIV que tenga la clase gantt asociada
             $(".gantt").gantt({
