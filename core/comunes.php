@@ -3267,6 +3267,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 
 		// Funciones en core/kanban.php
         if ($PCO_Accion=="PCO_ExplorarTablerosKanban")          $retorno = 1;
+        if ($PCO_Accion=="PCO_ExplorarTablerosGantt")           $retorno = 1;
         if ($PCO_Accion=="EliminarTableroKanban")               $retorno = 1; //PCO_PermisoAgregadoAccion("PCO_ExplorarTablerosKanban")
         if ($PCO_Accion=="GuardarCreacionKanban")               $retorno = 1;
         if ($PCO_Accion=="VerTareasArchivadas")                 $retorno = 1;

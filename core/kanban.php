@@ -464,6 +464,10 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
             //Busca las columnas definidas en el tablero
             $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo FROM ".$TablasCore."kanban WHERE id='$ID_TableroKanban' ")->fetch();
             $ArregloColumnasTablero=explode(",",$ResultadoColumnas["descripcion"]);
+
+
+
+
     ?>
 
         <!-- INICIO MODAL  PERSONALIZACION COLUMNAS Y CATEGORIAS -->
@@ -499,9 +503,8 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                 PCO_CerrarDialogoModal($barra_herramientas_modal);
             ?>
         <!-- FIN MODAL PERSONALIZACION COLUMNAS Y CATEGORIAS -->
-
-
 <?php
+
         //Si el usuario es el mismo creador o propietario del tablero le da la posibilidad de eliminarlo
         $ComplementoHerramientasEliminacion="";
         if ($PCOSESS_LoginUsuario==$ResultadoColumnas["login_admintablero"])
@@ -553,6 +556,7 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                     </div>
                 </div>
             </div>";
+
 
         //Estadisticas basicas del tablero 
         echo "
@@ -665,168 +669,160 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                 if ($PCOSESS_TableroKanbanActivo!="" && $PCO_Valor=="") $CadenaTablerosAVisualizar=$PCOSESS_TableroKanbanActivo;
                 //Establece una variable de sesion para saber en que tablero esta trabajando en el momento
             }
+        //Agrega boton de regreso al escritorio
+        echo '<div align=center>
+                <a href="index.php" class="btn btn-warning"><i class="fa fa-fw fa-chevron-circle-left"></i>'.$MULTILANG_FrmAccionRegresar.'</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="javascript:document.PCO_ExplorarTablerosKanban.submit();" class="btn btn-success"><i class="fa fa-fw fa-eye"></i>'.$MULTILANG_TodosLosTableros.'</a>
+                <br><br>
+            </div>';
 
 
+        echo "<form name='recarga_tablero_kanban' action='$ArchivoCORE' method='POST' style='display: inline!important;'>
+            <input type='Hidden' name='PCO_Accion' value='PCO_ExplorarTablerosGantt'>
+            <input type='Hidden' name='PCO_Valor' value='{$PCO_Valor}'>
+            <input type='Hidden' name='CadenaTablerosAVisualizar' value=''>
+            </form>";
+
+            //Busca las columnas definidas en el tablero
+            $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo FROM ".$TablasCore."kanban WHERE id='$PCO_Valor' ")->fetch();
+            $ArregloColumnasTablero=explode(",",$ResultadoColumnas["descripcion"]);
+
+
+        //Cuenta el numero de tareas en el tablero
+        $CantidadTareasTotal=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE tablero='$PCO_Valor' AND categoria<>'[PRACTICO][ColumnasTablero]' ")->fetchColumn();
+        $CantidadTareasArchivadas=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE archivado=1 AND tablero='$PCO_Valor' ")->fetchColumn();
+        $PorcentajeTotalAvance=0;
+        if ($CantidadTareasTotal!=0)
+            $PorcentajeTotalAvance=round($CantidadTareasArchivadas*100/$CantidadTareasTotal);
+
+        $ComplementoHerramientasArchivadas="";
+        if ($PCO_Valor!="")
+            $ComplementoHerramientasArchivadas="<div class='pull-left'>
+                                                    <a class='btn btn-default btn-xs' href='".$ArchivoCORE."?PCO_Accion=VerTareasArchivadas&ID_TableroKanban=$PCO_Valor'>
+                                                        <i class='fa fa-archive fa-fw fa-1x'></i> $MULTILANG_TareasArchivadas <b>($CantidadTareasArchivadas $MULTILANG_InfDataTableRegTotal)</b>
+                                                    </a>
+                                                </div>";
+
+        echo "
+            <!-- Barra de herramientas del tablero -->
+            <div class='well well-sm'>
+                <div class='row'>
+                    <div align=center style='font-size:18px;' class='col col-md-12 col-sm-12 col-lg-12 col-xs-12'>
+                        <i class='fa fa-sticky-note text-orange' style='color:orange'></i> Kanban <b>".$ResultadoColumnas["titulo"]." </b><i>(ID: $PCO_Valor $MULTILANG_Tareas: $CantidadTareasTotal)</i>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col col-md-5 col-sm-5 col-lg-5 col-xs-5'>
+                        <div class='pull-left btn-xs'> <a class='btn btn-primary btn-xs' onclick='document.recarga_tablero_kanban.CadenaTablerosAVisualizar.value=$PCO_Valor; document.recarga_tablero_kanban.submit();'><i class='fa fa-refresh'></i> $MULTILANG_Actualizar</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        $ComplementoHerramientasArchivadas
+                    </div>
+                    <div class='col col-md-2 col-sm-2 col-lg-2 col-xs-2'>
+                        <div class='progress'>
+                            <div class='progress-bar progress-bar-info progress-bar-striped active' role='progressbar' aria-valuenow='{$PorcentajeTotalAvance}' aria-valuemin='0' aria-valuemax='100' style='width: 100%'>
+                                <b>{$PorcentajeTotalAvance}%</b> {$MULTILANG_Finalizado}
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col col-md-5 col-sm-5 col-lg-5 col-xs-5'>
+                    </div>
+                </div>
+            </div>";
 
 /*
 VER:  https://twproject.com/
 
 https://taitems.github.io/jQuery.Gantt/
 
-
-
 REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
 */
 ?>
-
-
-
-
-
-
 
         <div class="container" style="font-family: Helvetica, Arial, sans-serif; font-size: 13px; padding: 0 0 50px 0;">
             <div class="gantt"></div>
         </div>
 
+		<script type="" language="JavaScript">
+		    var TareaArrastrarActiva=0;
+            function PCO_CargarPopUP(ID_TableroKanban,ConteoColumna,RegistroTarea)
+                {
+                    //Determina si es creacion o edicion
+                    if (RegistroTarea==0)
+                        URLPopUp='index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-23:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&ID_TableroKanban='+ID_TableroKanban+'&ConteoColumna='+ConteoColumna;
+                    else
+                        URLPopUp='index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-23:0:id:'+RegistroTarea+'&Presentar_FullScreen=1&Precarga_EstilosBS=1';
+                                        //Carga en Popup el formulario de actualizacion
+                    PCOJS_MostrarMensaje("<?php echo $MULTILANG_AgregarNuevaTarea; ?>","Cargando...","modal-wide");
+                    $("#PCO_Modal_MensajeCuerpo").html('<iframe scrolling="yes" style="margin:10px; border:0px;" height=550 width=100% src="'+URLPopUp+'"></iframe>');
+                    $("#PCO_Modal_MensajeBotones").hide();
+                }
 
+		    function CargarCrearTarea(Columna,Tablero)
+		        {
+            		// Se muestra el cuadro modal
+            		$('#myModalActividadKanban').modal('show');
+            		//Asigna el valor predeterminado segun lo que llegue en columna
+            		document.datosfield.columna.value=Columna;
+            		document.datosfield.ID_TableroKanban.value=Tablero;
+		        }
+		</script>
 
     <script>
         $(function() {
             "use strict";
             //Genera la variable de arreglo con las actividades
             <?php
-                    
+                $ListaColumnasTablero=PCO_EjecutarSQL("SELECT descripcion FROM core_kanban WHERE  id = '{$PCO_Valor}' AND columna='-2' AND categoria='[PRACTICO][ColumnasTablero]' ")->fetchColumn();
+                $ListaColumnas=explode(",",$ListaColumnasTablero);
+                $PosicionColumna=0;
+
+                //Genera los datos para el diagrama.  SOLO TAREAS SIN ARCHIVAR.
                 $PCO_SalidaFuenteDatos="
                     var PCO_FuenteDatosGantt = 
                         [ ";
-                        //Genera los datos para el diagrama.  SOLO TAREAS SIN ARCHIVAR.
-                        $TareasTablero=PCO_EjecutarSQL("
-                            SELECT * FROM {$TablasCore}kanban WHERE  archivado = 0  AND    tablero = '{$PCO_Valor}'  AND    columna >= 0 
-                            ORDER BY columna ASC, peso, id 
-                        
-                        ");
-                        $UltimaColumna="";
-                        $ArregloColumnas=array();
+
+                foreach ($ListaColumnas as $Columna)
+                    {
+                        //Define titulo de columna actual
+                        $Columna="<div class='btn btn-xs btn-success' onclick='PCO_CargarPopUP({$PCO_Valor},{$PosicionColumna},0);'><i class='fa fa-plus fa-fw' ></i></div> ".$Columna;
+
+                        $TareasTablero=PCO_EjecutarSQL("SELECT * FROM {$TablasCore}kanban WHERE archivado = 0 AND tablero = '{$PCO_Valor}' AND columna='{$PosicionColumna}' ORDER BY peso, id  ");
                         while ($RegistroTarea=$TareasTablero->fetch())
                             {
-                                //Busca el nombre de la columna para la actividad
-                                $TableroActivo=$RegistroTarea["tablero"];
-                                $ColumnasTablero=PCO_EjecutarSQL("SELECT descripcion FROM core_kanban WHERE  id = '{$TableroActivo}' ")->fetchColumn();
-                                $ArregloColumnas=explode(",",$ColumnasTablero);
-                                $NombreColumnaTarea="".trim($ArregloColumnas[$RegistroTarea["columna"]*1-1]);
-
-                                //Si la columna no ha sido agregada al grafico la primnera vez la agrega
-                                $NombreColumnaTarea=(string)$NombreColumnaTarea;
-                                if (in_array($NombreColumnaTarea, $ArregloColumnas)==true)
-                                    {
-                                        $ArregloColumnas[]=(string)$NombreColumnaTarea;
-                                        $UltimaColumna=(string)$NombreColumnaTarea;
-                                    }
-                                else
-                                    {
-                                        $UltimaColumna="";
-                                    }
-                                    
-                                // echo "console.log('Variable UltimaColumna = {$UltimaColumna}');";
-                                // echo "console.log('Variable Descrip = ".$RegistroTarea["titulo"]."');";
-                                //echo "console.log('Variable color ".$RegistroTarea["id"]." = |".$RegistroTarea["estilo"]."|');";
-
                                 //Define los valores a presentar en el grafico                                
-                                $Actividad_Descripcion=" ".$RegistroTarea["titulo"]." (WBS: ".$RegistroTarea["id"].")";
-                                $Actividad_FechaInicio=str_replace("-","/",$RegistroTarea["fecha_inicio"]); //Cambia a formato aceptado por plugin AAAA/MM/DD
-                                $Actividad_FechaFin=str_replace("-","/",$RegistroTarea["fecha"]);           //Cambia a formato aceptado por plugin AAAA/MM/DD
-                                switch (trim($RegistroTarea["estilo"])) {
-                                    case '':
-                                        $Actividad_Estilo="btn btn-default btn-xs";
-                                        break;
-                                    case 'default':
-                                        $Actividad_Estilo="btn btn-default btn-xs";
-                                        break;
-                                    case 'primary':
-                                        $Actividad_Estilo="btn btn-primary btn-xs";
-                                        break;
-                                    case 'success':
-                                        $Actividad_Estilo="btn btn-success btn-xs";
-                                        break;
-                                    case 'info':
-                                        $Actividad_Estilo="btn btn-info btn-xs";
-                                        break;
-                                    case 'warning':
-                                        $Actividad_Estilo="btn btn-warning btn-xs";
-                                        break;
-                                    case 'danger':
-                                        $Actividad_Estilo="btn btn-danger btn-xs";
-                                        break;
-                                    default:
-                                        $Actividad_Estilo="btn btn-default btn-xs";
-                                        break;
-                                }
-
-
-// id	int(10) Incremento automático	
-// login_admintablero	varchar(250) NULL	
-// titulo	varchar(255) NULL	
-// descripcion	text NULL	
-// asignado_a	varchar(250) NULL	
-// categoria	varchar(255) NULL	
-// columna	int(11) NULL	
-// peso	int(11) NULL	
-// estilo	varchar(15) NULL	
-// fecha	date NULL	Fecha de entrega/estimada
-// archivado	int(11) NULL	
-// compartido_rw	text NULL	
-// tablero	int(11) NULL	
-// porcentaje	int(11) NULL [0]	
-// usuarios_edicion	varchar(255) NULL	Usuarios que pueden editar la tarea
-// estado_general	varchar(30) NULL	
-// pruebas_funcionales	varchar(500) NULL	
-// pruebas_nofuncionales	varchar(500) NULL	
-// fecha_inicio	date NULL	
-// aceptacion_pf	char(2) NULL [No]	Aceptacion de pruebas funcionales
-// aceptacion_pnf	char(2) NULL [No]	Aceptacion de pruebas no funcionales
-// usuario_aceptacion_pf	varchar(255) NULL	
-// usuario_aceptacion_pnf	varchar(255) NULL	
-// historial	text NULL	
-// horas_estimadas	int(11) NULL [0]	
-// presupuesto	int(11) NULL [0]	
-// adjunto_elicitacion	varchar(255) NULL
-
-
+                                $Actividad_Estilo="btn btn-default btn-xs";
+                                if (trim($RegistroTarea["estilo"])== 'default') $Actividad_Estilo="btn btn-default btn-xs";
+                                if (trim($RegistroTarea["estilo"])== 'primary') $Actividad_Estilo="btn btn-primary btn-xs";
+                                if (trim($RegistroTarea["estilo"])== 'success') $Actividad_Estilo="btn btn-success btn-xs";
+                                if (trim($RegistroTarea["estilo"])== 'info') $Actividad_Estilo="btn btn-info btn-xs";
+                                if (trim($RegistroTarea["estilo"])== 'warning') $Actividad_Estilo="btn btn-warning btn-xs";
+                                if (trim($RegistroTarea["estilo"])== 'danger') $Actividad_Estilo="btn btn-danger btn-xs";
 
                                 $PCO_SalidaFuenteDatos.= '
                                     {
                                         id:  "'.$RegistroTarea["id"].'",
-                                        name: "<i class=\'fa fa-stack-overflow fa-fw\'></i>'.$UltimaColumna.'",
+                                        name: "'.$Columna.'",
                                         desc: "'.$RegistroTarea["titulo"].'",
-                                        data:  "holi",
-
                                         values: [{
-                                            from: "'.$Actividad_FechaInicio.'",
-                                            to: "'.$Actividad_FechaFin.'",
-                                            label: "'.$Actividad_Descripcion.'",
-                                            customClass: "'.$Actividad_Estilo.'"
+                                            from: "'.str_replace("-","/",$RegistroTarea["fecha_inicio"]).'",
+                                            to: "'.str_replace("-","/",$RegistroTarea["fecha"]).'",
+                                            label: "'.$RegistroTarea["titulo"]." (WBS: ".$RegistroTarea["id"].")".'",
+                                            customClass: "'.$Actividad_Estilo.'",
+                                            dataObj:  "'.$RegistroTarea["id"].'",
                                         }]
                                     },
                                 ';
+                                //Limpia el valor de la columna pues ya se imprimio la primera vez.
+                                $Columna="";
                             }
-
+                        //Se mueve al siguiente indice de columa para ser usada en query
+                        $PosicionColumna++;
+                    }
                 //Cierra el JSON
                 $PCO_SalidaFuenteDatos.="  ]; ";
                 //Imprime el JS con los datos directamente en la pagina
                 echo $PCO_SalidaFuenteDatos;
             ?>
-                
-
-
-            // // shifts dates closer to Date.now()
-            // var offset = new Date().setHours(0, 0, 0, 0) -
-            //     new Date(PCO_FuenteDatosGantt[0].values[0].from).setDate(35);
-            // for (var i = 0, len = PCO_FuenteDatosGantt.length, value; i < len; i++) {
-            //     value = PCO_FuenteDatosGantt[i].values[0];
-            //     value.from += offset;
-            //     value.to += offset;
-            // }
             
             //Inicializa el tablero sobre el DIV que tenga la clase gantt asociada
             $(".gantt").gantt({
@@ -835,17 +831,19 @@ REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
                 scale: "days",             //"months", "weeks", "days", "hours"
                 maxScale: "months",         //"months", "weeks", "days", "hours"
                 minScale: "hours",          //"months", "weeks", "days", "hours"
-                itemsPerPage: 25,
-                scrollToToday: true,        //true,false
+                itemsPerPage: 15,
+                //holidays: ["2022/02/07"],
+                scrollToToday: false,        //true,false
                 useCookie: false,           //false,true    Determina si se debe guardar o no la ubicacion, vista, posicion, etc. entre cargas de pagina
                 months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
                 dow: ["D", "L", "M", "M", "J", "V", "S"],
                 waitText: "Por favor espere...",
                 onItemClick: function(data,rowId) {
-                    alert("Detalles de WBS:"+rowId);
+                    //alert("Detalles de WBS:"+data);
+                    PCO_CargarPopUP(<?php echo $PCO_Valor; ?>,0,data);
                 },
                 onAddClick: function(dt, rowId) {
-                    alert("Empty space clicked - add an item! FILA="+rowId+" Fecha unix="+dt);
+                    //alert("Agregando item - FILA="+rowId+" Fecha unix="+dt);
                 },
                 onRender: function() {
                     if (window.console && typeof console.log === "function") {
@@ -860,18 +858,18 @@ REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
                     return this.textContent;
                 },
                 container: '.gantt',
-                content: "Here's some useful information.",
+                content: "Clic para detalles",
                 trigger: "hover",
                 placement: "auto right"
             });
 
         });
     </script>
-
 <?php
     }
-
-
+    
+    
+    
 //#################################################################################
 //#################################################################################
 /*
