@@ -1543,7 +1543,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 						<div id='campo20' style="display:none;">
                             <label for="origen_lista_valores"><?php echo $MULTILANG_FrmOrigenVal; ?>:</label>
                             <div class="form-group input-group">
-                                <select id="origen_lista_valores" name="origen_lista_valores" class="form-control input-sm" onchange="document.datosform.origen_lista_valores_manual.value=document.datosform.origen_lista_valores_manual.value;">
+                                <select id="origen_lista_valores" name="origen_lista_valores" class="form-control input-sm" onchange="document.datosform.origen_lista_valores_manual.value=document.datosform.origen_lista_valores.value;">
                                     <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                                     <?php
                                         $resultado=PCO_ConsultarTablas();

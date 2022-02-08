@@ -17,6 +17,7 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/conexiones.php
+core/formularios.php
 core/marco_abajo.php
 core/marco_admin.php
 core/marco_arriba_bs.php
@@ -60,6 +61,7 @@ LogCambios="
 * Enhan [KANBAN]: Ajustadas fechas de inicio no definidas en tableros kanban como 2000-01-01
 * Enhan [KANBAN]: Fechas de inicio no indicadas en versiones previas son actualizada a su fecha de cierre por compatibilidad hacia versiones nuevas y tableros Gantt.
 * Enhan [KANBAN]: Tableros Kanban cuentan ahora con compatibilidad de vista en diagramas tipo Gantt para facilitar la gestión de actividades en una vista temporal.
+* Fixed [FORMS]: Asignacion de campo de valor manual para listas de seleccion en diseño de formularios.
 
 
 
