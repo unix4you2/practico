@@ -697,7 +697,6 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                                                     </a>
                                                 </div>";
 
-
         if ($PCO_CantidadFilasGantt=="") $PCO_CantidadFilasGantt=15;
         if ($PCO_TipoScrollGantt=="") $PCO_TipoScrollGantt="scroll";
         if ($PCO_EscalaGantt=="") $PCO_EscalaGantt="days";
@@ -776,13 +775,7 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                     </div>
                 </div>
             </div>";
-
-/*
-VER:  https://twproject.com/
-*/
 ?>
-
-
 
         <div class="container" style="font-family: Helvetica, Arial, sans-serif; font-size: 13px; padding: 0 0 50px 0;">
             <div class="gantt"></div>
@@ -1036,8 +1029,6 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
             echo "<center>".$MULTILANG_NoTablero."<br><br><BR></center>";
 
     }
-
-
 
 
 //#################################################################################
