@@ -677,13 +677,6 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                 <br><br>
             </div>';
 
-
-        echo "<form name='recarga_tablero_kanban' action='$ArchivoCORE' method='POST' style='display: inline!important;'>
-            <input type='Hidden' name='PCO_Accion' value='PCO_ExplorarTablerosGantt'>
-            <input type='Hidden' name='PCO_Valor' value='{$PCO_Valor}'>
-            <input type='Hidden' name='CadenaTablerosAVisualizar' value=''>
-            </form>";
-
             //Busca las columnas definidas en el tablero
             $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo FROM ".$TablasCore."kanban WHERE id='$PCO_Valor' ")->fetch();
             $ArregloColumnasTablero=explode(",",$ResultadoColumnas["descripcion"]);
@@ -704,6 +697,15 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                                                     </a>
                                                 </div>";
 
+
+        if ($PCO_CantidadFilasGantt=="") $PCO_CantidadFilasGantt=15;
+        if ($PCO_TipoScrollGantt=="") $PCO_TipoScrollGantt="scroll";
+        if ($PCO_EscalaGantt=="") $PCO_EscalaGantt="days";
+        if ($PCO_EscalaMinimaGantt=="") $PCO_EscalaMinimaGantt="hours";
+        if ($PCO_EscalaMaximaGantt=="") $PCO_EscalaMaximaGantt="months";
+        if ($PCO_IrHoyGantt=="") $PCO_IrHoyGantt="false";
+        if ($PCO_GuardarCookieGantt=="") $PCO_GuardarCookieGantt="false";
+        
         echo "
             <!-- Barra de herramientas del tablero -->
             <div class='well well-sm'>
@@ -727,16 +729,60 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                     <div class='col col-md-5 col-sm-5 col-lg-5 col-xs-5'>
                     </div>
                 </div>
+                <div class='row'>
+                    <div style='font-size:18px;' class='col col-md-12 col-sm-12 col-lg-12 col-xs-12'>
+                        <form name='recarga_tablero_kanban' action='$ArchivoCORE' method='POST' style='font-size:13px; display: inline!important;'>
+                            <input type='Hidden' name='PCO_Accion' value='PCO_ExplorarTablerosGantt'>
+                            <input type='Hidden' name='PCO_Valor' value='{$PCO_Valor}'>
+                            <input type='Hidden' name='CadenaTablerosAVisualizar' value=''>
+                            <input placeholder='Filas Gantt' type='number' step='1' min='5' class='btn btn-sm' size='5' name='PCO_CantidadFilasGantt' id='PCO_CantidadFilasGantt' value='{$PCO_CantidadFilasGantt}' style='display:inline !important; width:100px;'>
+
+                            Navegaci&oacute;n:<select name='PCO_TipoScrollGantt' class='btn btn-sm'>
+                                <option value='scroll'>Scroll</option>
+                                <option value='buttons'>Botones</option>
+                            </select>&nbsp;&nbsp;
+
+                            Escala:<select name='PCO_EscalaGantt' class='btn btn-sm'>
+                                <option value='hours'>Horas</option>
+                                <option value='days' selected>Dias</option>
+                                <option value='weeks'>Semanas</option>
+                                <option value='months'>Meses</option>
+                            </select>&nbsp;&nbsp;
+
+                            Minima:<select name='PCO_EscalaMinimaGantt' class='btn btn-sm'>
+                                <option value='hours' selected>Horas</option>
+                                <option value='days' >Dias</option>
+                                <option value='weeks'>Semanas</option>
+                                <option value='months'>Meses</option>
+                            </select>&nbsp;&nbsp;
+
+                            Maxima:<select name='PCO_EscalaMaximaGantt' class='btn btn-sm'>
+                                <option value='hours'>Horas</option>
+                                <option value='days' >Dias</option>
+                                <option value='weeks'>Semanas</option>
+                                <option value='months' selected>Meses</option>
+                            </select>&nbsp;&nbsp;
+
+                            IrAHoy?:<select name='PCO_IrHoyGantt' class='btn btn-sm'>
+                                <option value='false'>No</option>
+                                <option value='true' >Si</option>
+                            </select>&nbsp;&nbsp;
+
+                            GuardarCookie?:<select name='PCO_GuardarCookieGantt' class='btn btn-sm'>
+                                <option value='false'>No</option>
+                                <option value='true' >Si</option>
+                            </select>&nbsp;&nbsp;
+                        </form>
+                    </div>
+                </div>
             </div>";
 
 /*
 VER:  https://twproject.com/
-
-https://taitems.github.io/jQuery.Gantt/
-
-REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
 */
 ?>
+
+
 
         <div class="container" style="font-family: Helvetica, Arial, sans-serif; font-size: 13px; padding: 0 0 50px 0;">
             <div class="gantt"></div>
@@ -827,14 +873,14 @@ REVISAR LOS PERMISOS DE LA ACCION EN LA ACL
             //Inicializa el tablero sobre el DIV que tenga la clase gantt asociada
             $(".gantt").gantt({
                 source: PCO_FuenteDatosGantt,
-                navigate: "scroll",         //"buttons", "scroll"
-                scale: "days",             //"months", "weeks", "days", "hours"
-                maxScale: "months",         //"months", "weeks", "days", "hours"
-                minScale: "hours",          //"months", "weeks", "days", "hours"
-                itemsPerPage: 15,
+                navigate: "<?php echo $PCO_TipoScrollGantt; ?>",         //"buttons", "scroll"
+                scale: "<?php echo $PCO_EscalaGantt; ?>",             //"months", "weeks", "days", "hours"
+                maxScale: "<?php echo $PCO_EscalaMaximaGantt; ?>",         //"months", "weeks", "days", "hours"
+                minScale: "<?php echo $PCO_EscalaMinimaGantt; ?>",          //"months", "weeks", "days", "hours"
+                itemsPerPage: <?php echo $PCO_CantidadFilasGantt; ?>,
                 //holidays: ["2022/02/07"],
-                scrollToToday: false,        //true,false
-                useCookie: false,           //false,true    Determina si se debe guardar o no la ubicacion, vista, posicion, etc. entre cargas de pagina
+                scrollToToday: <?php echo $PCO_IrHoyGantt; ?>,        //true,false
+                useCookie: <?php echo $PCO_GuardarCookieGantt; ?>,           //false,true    Determina si se debe guardar o no la ubicacion, vista, posicion, etc. entre cargas de pagina
                 months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
                 dow: ["D", "L", "M", "M", "J", "V", "S"],
                 waitText: "Por favor espere...",

@@ -3207,7 +3207,8 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
         if ($PCO_Accion== "PCO_GuardarUsuarioAutoregistro")		$retorno = 1;
 
 		// Funciones en core/menus.php
-		if ($PCO_Accion== "PCO_VerMenu")							$retorno = 1;
+		if ($PCO_Accion== "PCO_VerMenu")						$retorno = 1;
+		if ($PCO_Accion== "PCO_ReportarBugs")					$retorno = 1;
 		if ($PCO_Accion== "PCO_BuscarPermisosPractico")			$retorno = 1;
 		if ($PCO_Accion== "PCO_EliminarMenu")					$retorno = PCO_PermisoAgregadoAccion("PCOFUNC_AdministrarMenu");
 		// Funciones en core/tablas.php
@@ -3230,6 +3231,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "PCO_GuardarDatosFormulario")			$retorno = 1;
 		if ($PCO_Accion== "PCO_EliminarDatosFormulario")		$retorno = 1;
 		if ($PCO_Accion== "PCO_ActualizarDatosFormulario")		$retorno = 1;
+		if ($PCO_Accion== "PCO_EjecutarPostAccionForm")		    $retorno = 1;
 		if ($PCO_Accion== "PCO_ActualizarJavaEvento")		    $retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_EditarEventoObjeto")		        $retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_EliminarEventoObjeto")		    $retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");

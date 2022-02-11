@@ -110,10 +110,10 @@
 
 	// Configuracion LDAP - Auth_TipoMotor=ldap
 	$Auth_TipoEncripcion='plano';
-	$Auth_LDAPServidor='';
-	$Auth_LDAPPuerto='';
-	$Auth_LDAPDominio='';
-	$Auth_LDAPOU='';
+	$Auth_LDAPServidor='172.29.196.181';
+	$Auth_LDAPPuerto='3269';
+	$Auth_LDAPDominio='practico.org';
+	$Auth_LDAPOU='GrupoGenerico';
 
 	// Especifica si desea activar o no el modulo de chat para usuarios asi:
 	// 0=No, 1=Solo usuarios internos, 2=Solo usuarios externos, 3=Todos los usuarios, 4=Exclusivo para admin (podra iniciar conversacion y chat con cualquier otro usuario aun con modulo desactivado)

@@ -62,7 +62,17 @@ LogCambios="
 * Enhan [KANBAN]: Fechas de inicio no indicadas en versiones previas son actualizada a su fecha de cierre por compatibilidad hacia versiones nuevas y tableros Gantt.
 * Enhan [KANBAN]: Tableros Kanban cuentan ahora con compatibilidad de vista en diagramas tipo Gantt para facilitar la gestión de actividades en una vista temporal.
 * Fixed [FORMS]: Asignacion de campo de valor manual para listas de seleccion en diseño de formularios.
+* Enhan [KANBAN]: Se asegura form de creación/edición de tareas por usuarios que no son admin y que no tienen ningún tablero compartido.
+* Enhan [CORE]: Acciones internas de PCO_ReportarBugs,PCO_EjecutarPostAccionForm no requieren ser preautorizadas en los parámetros de aplicación.  En adelante sus permisos serán preautorizados según perfil de usuario y su capacidad para abrir el formulario correspondiente.
 
+
+
+
+
+verificar permisos de edicion sobre la tarea misma en el PRE.
+Que cualquier pueda abrirla pero boton no aparecer
+Vista de calendario
+Libreria de festivos
 
 
 
