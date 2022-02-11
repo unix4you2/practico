@@ -1,4 +1,4 @@
-                ____                 _   _           
+____                 _   _           
                |  _ \ _ __ __ _  ___| |_(_) ___ ___  
                | |_) | '__/ _` |/ __| __| |/ __/ _ \ 
                |  __/| | | (_| | (__| |_| | (_| (_) |
@@ -33,7 +33,7 @@ Alteraciones generales:
 	elfinder.html renombrado a index.php
 	
 	index.php (anteriormente elfinder.html):
-	LINEA: 20 y 27 cambio a idioma espanol predeterminado
+	LINEA: 20 y 27 cambio a idioma espanol predeterminado.  Agregar   lang : 'es'  al arreglo defaultOpts
 	LINEA: 8 inclusion del CSS desde uno descargado a carpeta jquery para evitar ir a la web cada vez
 	LINEA: 9 y 10 inclusion de los JS desde jquery igual que punto anterior
 

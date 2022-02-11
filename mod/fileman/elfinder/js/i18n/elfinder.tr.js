@@ -3,7 +3,9 @@
  * @author I.Taskinoglu & A.Kaya <alikaya@armsyazilim.com>
  * @author Abdullah ELEN <abdullahelen@msn.com>
  * @author Osman KAYAN <osmnkayan@gmail.com>
- * @version 2018-04-13
+ * @author alikayan95@gmail.com
+ * @author Cengiz AKCAN cengiz@vobo.company
+ * @version 2021-02-20
  */
 (function(root, factory) {
 	if (typeof define === 'function' && define.amd) {
@@ -15,12 +17,12 @@
 	}
 }(this, function(elFinder) {
 	elFinder.prototype.i18.tr = {
-		translator : 'I.Taskinoglu & A.Kaya &lt;alikaya@armsyazilim.com&gt;, Abdullah ELEN &lt;abdullahelen@msn.com&gt;, Osman KAYAN &lt;osmnkayan@gmail.com&gt;',
+		translator : 'I.Taskinoglu & A.Kaya &lt;alikaya@armsyazilim.com&gt;, Abdullah ELEN &lt;abdullahelen@msn.com&gt;, Osman KAYAN &lt;osmnkayan@gmail.com&gt;, alikayan95@gmail.com, Cengiz AKCAN cengiz@vobo.company',
 		language   : 'Türkçe',
 		direction  : 'ltr',
-		dateFormat : 'd.m.Y H:i', // Mar 13, 2012 05:27 PM
-		fancyDateFormat : '$1 H:i', // will produce smth like: Today 12:25 PM
-		nonameDateFormat : 'ymd-His', // to apply if upload file is noname: 120513172700
+		dateFormat : 'd.m.Y H:i', // will show like: 20.02.2021 19:30
+		fancyDateFormat : '$1 H:i', // will show like: Bugün 19:30
+		nonameDateFormat : 'ymd-His', // noname upload will show like: 210220-193050
 		messages   : {
 
 			/********************************** errors **********************************/
@@ -116,6 +118,7 @@
 			'errEditorNotFound'    : 'Editör bu dosya türünü bulamıyor.', // from v2.1.25 added 23.5.2017
 			'errServerError'       : 'Sunucu tarafında beklenilmeyen bir hata oluştu.', // from v2.1.25 added 16.6.2017
 			'errEmpty'             : '"$1" klasörü boşaltılamıyor.', // from v2.1.25 added 22.6.2017
+			'moreErrors'           : '"$1" veya daha fazla hata', // from v2.1.44 added 9.12.2018
 
 			/******************************* commands names ********************************/
 			'cmdarchive'   : 'Arşiv oluştur',
@@ -133,7 +136,7 @@
 			'cmdinfo'      : 'Bilgi göster',
 			'cmdmkdir'     : 'Yeni klasör',
 			'cmdmkdirin'   : 'Yeni Klasör / aç', // from v2.1.7 added 19.2.2016
-			'cmdmkfile'    : 'Yeni metin dosyası',
+			'cmdmkfile'    : 'Yeni dosya',
 			'cmdopen'      : 'Aç',
 			'cmdpaste'     : 'Yapıştır',
 			'cmdquicklook' : 'Ön izleme',
@@ -164,6 +167,7 @@
 			'cmdselectnone': 'Seçimi temizle', // from v2.1.28 added 15.08.2017
 			'cmdselectinvert': 'Diğerlerini seç', // from v2.1.28 added 15.08.2017
 			'cmdopennew'   : 'Yeni Sekmede aç', // from v2.1.38 added 3.4.2018
+			'cmdhide'      : 'Ögeyi Gizle', // from v2.1.41 added 24.7.2018
 
 			/*********************************** buttons ***********************************/
 			'btnClose'  : 'Kapat',
@@ -225,6 +229,7 @@
 			'ntfchkdir'   : 'Hedef klasör kontrol ediliyor', // from v2.1.24 added 3.5.2017
 			'ntfundo'     : 'Önceki işlemi geri alma', // from v2.1.27 added 31.07.2017
 			'ntfredo'     : 'Önceki geri almayı tekrarlama', // from v2.1.27 added 31.07.2017
+			'ntfchkcontent' : 'İçeriği kontrol ediniz', // from v2.1.41 added 3.8.2018
 
 			/*********************************** volumes *********************************/
 			'volume_Trash' : 'Çöp', //from v2.1.24 added 29.4.2017
@@ -288,6 +293,9 @@
 			'untitled file.txt' : 'YeniDosya.txt', // added 10.11.2015
 			'untitled folder'   : 'YeniKlasor',   // added 10.11.2015
 			'Archive'           : 'YeniArsiv',  // from v2.1 added 10.11.2015
+			'untitled file'     : 'YeniDosya.$1',  // from v2.1.41 added 6.8.2018
+			'extentionfile'     : '$1: Dosya',    // from v2.1.41 added 6.8.2018
+			'extentiontype'     : '$1: $2',      // from v2.1.43 added 17.10.2018
 
 			/********************************** messages **********************************/
 			'confirmReq'      : 'Onay gerekli',
@@ -298,6 +306,7 @@
 			'confirmNonUTF8'  : 'Bu dosyanın karakter kodlaması tespit edilemedi. Düzenleme için geçici olarak UTF-8\'e dönüştürülmesi gerekir.<br/>Lütfen bu dosyanın karakter kodlamasını seçin.', // from v2.1.19 added 28.11.2016
 			'confirmNotSave'  : 'Düzenlenmiş içerik.<br/>Değişiklikleri kaydetmek istemiyorsanız son yapılanlar kaybolacak.', // from v2.1 added 15.7.2015
 			'confirmTrash'    : 'Öğeleri çöp kutusuna taşımak istediğinizden emin misiniz?', //from v2.1.24 added 29.4.2017
+			'confirmMove'     : '"$1" değiştirmek istediğinizden emin misiniz?', //from v2.1.50 added 27.7.2019
 			'apllyAll'        : 'Tümüne uygula',
 			'name'            : 'İsim',
 			'size'            : 'Boyut',
@@ -315,6 +324,10 @@
 			'selectlfile'     : 'Son dosyayı seç',
 			'viewlist'        : 'Liste görünümü',
 			'viewicons'       : 'Simge görünümü',
+			'viewSmall'       : 'Small iconlar', // from v2.1.39 added 22.5.2018
+			'viewMedium'      : 'Medium iconlar', // from v2.1.39 added 22.5.2018
+			'viewLarge'       : 'Large iconlar', // from v2.1.39 added 22.5.2018
+			'viewExtraLarge'  : 'Extra large iconlar', // from v2.1.39 added 22.5.2018
 			'places'          : 'Yerler',
 			'calc'            : 'Hesapla',
 			'path'            : 'Yol',
@@ -433,6 +446,7 @@
 			'clearBrowserData': 'Bu tarayıcıda kayıtlı ayarları başlat', // from v2.1.26 added 28.6.2017
 			'toolbarPref'     : 'Araç çubuğu ayarları', // from v2.1.27 added 2.8.2017
 			'charsLeft'       : '... $1 karakter kaldı',  // from v2.1.29 added 30.8.2017
+			'linesLeft'       : '... $1 satır kaldı.',  // from v2.1.52 added 16.1.2020
 			'sum'             : 'Toplam', // from v2.1.29 added 28.9.2017
 			'roughFileSize'   : 'Kaba dosya boyutu', // from v2.1.30 added 2.11.2017
 			'autoFocusDialog' : 'Fare ile üzerine gelince diyalog öğesi odaklansın',  // from v2.1.30 added 2.11.2017
@@ -458,6 +472,29 @@
 			'workspace'       : 'Çalışma alanı', // from v2.1.38 added 4.4.2018
 			'dialog'          : 'Diyalog', // from v2.1.38 added 4.4.2018
 			'all'             : 'Tümü', // from v2.1.38 added 4.4.2018
+			'iconSize'        : 'İcon Boyutu (İcon Görünümü İçin)', // from v2.1.39 added 7.5.2018
+			'editorMaximized' : 'Maksimum düzenleyici penceresini aç', // from v2.1.40 added 30.6.2018
+			'editorConvNoApi' : 'API ile dönüşüm şu anda mevcut olmadığından, lütfen web sitesinde dönüştürün.', //from v2.1.40 added 8.7.2018
+			'editorConvNeedUpload' : 'Dönüştürmeden sonra, dönüştürülen dosyayı kaydetmek için öğe URL\'si veya indirilen bir dosya ile karşıya yüklemeniz gerekir.', //from v2.1.40 added 8.7.2018
+			'convertOn'       : ' $1 site çevrildi', // from v2.1.40 added 10.7.2018
+			'integrations'    : 'Entegrasyonlar', // from v2.1.40 added 11.7.2018
+			'integrationWith' : 'Bu elFinder aşağıdaki harici hizmetlere entegre edilmiştir. Lütfen kullanmadan önce kullanım koşullarını, gizlilik politikasını vb. Kontrol edin.', // from v2.1.40 added 11.7.2018
+			'showHidden'      : 'Gizli ögeleri aç.', // from v2.1.41 added 24.7.2018
+			'hideHidden'      : 'Gizli ögeleri kapat.', // from v2.1.41 added 24.7.2018
+			'toggleHidden'    : 'Gizli ögeleri aç/kapat', // from v2.1.41 added 24.7.2018
+			'makefileTypes'   : '"Yeni dosya" ile etkinleştirilecek dosya türleri', // from v2.1.41 added 7.8.2018
+			'typeOfTextfile'  : 'Text dosyası tipi.', // from v2.1.41 added 7.8.2018
+			'add'             : 'Ekle', // from v2.1.41 added 7.8.2018
+			'theme'           : 'Tema', // from v2.1.43 added 19.10.2018
+			'default'         : 'Varsayılan', // from v2.1.43 added 19.10.2018
+			'description'     : 'Açıklama', // from v2.1.43 added 19.10.2018
+			'website'         : 'Websayfası', // from v2.1.43 added 19.10.2018
+			'author'          : 'Yazar', // from v2.1.43 added 19.10.2018
+			'email'           : 'E-mail', // from v2.1.43 added 19.10.2018
+			'license'         : 'Lisans', // from v2.1.43 added 19.10.2018
+			'exportToSave'    : 'Bu öğe kaydedilemez. Düzenlemeleri kaybetmemek için PC\'nize aktarmanız gerekir.', // from v2.1.44 added 1.12.2018
+			'dblclickToSelect': 'Dosyayı seçmek için çift tıklayın.', // from v2.1.47 added 22.1.2019
+			'useFullscreen'   : 'Tam ekran modunu kullan', // from v2.1.47 added 19.2.2019
 
 			/********************************** mimetypes **********************************/
 			'kindUnknown'     : 'Bilinmiyor',

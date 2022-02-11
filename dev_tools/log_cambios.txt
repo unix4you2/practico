@@ -30,6 +30,9 @@ inc/jquery/plugins/gantt-master/*
 inc/bootstrap/js/plugins/moment/*
 inc/jquery/plugins/vfs_fonts.js
 inc/ace/src-min-noconflict/*
+inc/mxgraph/*
+mod/pcoder/index.php
+mod/fileman/elfinder/*
 
 
 
@@ -67,7 +70,8 @@ LogCambios="
 * Enhan [CORE]: Acciones internas de PCO_ReportarBugs,PCO_EjecutarPostAccionForm no requieren ser preautorizadas en los parámetros de aplicación.  En adelante sus permisos serán preautorizados según perfil de usuario y su capacidad para abrir el formulario correspondiente.
 * Enhan [CORE]: Actualizada version de AceEditor de {P}Coder desde 1.4.12 a 1.4.14
 * Enhan [CORE]: Actualizada version de GraphEditor desde 4.0.4 a 4.2.2
-
+* Enhan [CORE]: Actualizada version de ElFinder desde 2.1.39 a 2.1.59
+    
 
 
 
