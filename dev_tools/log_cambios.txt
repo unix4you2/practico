@@ -36,6 +36,7 @@ mod/pcoder/index.php
 mod/pcoder/mod/consola/index.php
 mod/pcoder/mod/explorador/index.php
 mod/pmobile/index.php
+mod/pbrowser/*
 mod/fileman/elfinder/*
 inc/jquery/jquery*
 

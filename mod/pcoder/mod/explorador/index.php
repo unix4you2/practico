@@ -38,11 +38,11 @@
 	header('Content-type: text/html; charset=utf-8');
 
     //Incluye archivo inicial de configuracion
-	include_once("../../inc/configuracion.php");
+	include_once("../../../../core/configuracion.php");
 
     //Incluye idioma espanol, o sobreescribe vbles por configuracion de usuario
-    include("../../idiomas/es.php");
-    include("../../idiomas/".$IdiomaPredeterminado.".php");
+    include("../../../../inc/practico/idiomas/es.php");
+    include("../../../../inc/practico/idiomas/".$IdiomaPredeterminado.".php");
     // FIN BLOQUE BASICO DE INCLUSION ##################################
 
     // Establece la zona horaria por defecto para la aplicacion
