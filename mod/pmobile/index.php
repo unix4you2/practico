@@ -109,7 +109,7 @@ if ($PCO_Accion=="PCOMOD_SimularMovil")
     <link href="../../inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- jQuery -->
-	<script type="text/javascript" src="../../inc/jquery/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="../../inc/jquery/jquery-2.2.4.min.js"></script>
 	<script>
         var currFFZoom = 1;
         var currIEZoom = 100;

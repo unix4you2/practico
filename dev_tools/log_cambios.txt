@@ -33,6 +33,9 @@ inc/jquery/plugins/vfs_fonts.js
 inc/ace/src-min-noconflict/*
 inc/mxgraph/*
 mod/pcoder/index.php
+mod/pcoder/mod/consola/index.php
+mod/pcoder/mod/explorador/index.php
+mod/pmobile/index.php
 mod/fileman/elfinder/*
 inc/jquery/jquery*
 
