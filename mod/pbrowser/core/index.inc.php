@@ -286,7 +286,7 @@ echo '<?xml version="1.0" encoding="utf-8"?>';
 <!-- /#wrapper inicial -->
 
     <!-- jQuery -->
-	<script type="text/javascript" src="../../../inc/jquery/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="../../../inc/jquery/jquery-2.2.4.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script type="text/javascript" src="../../../inc/bootstrap/js/bootstrap.min.js"></script>
