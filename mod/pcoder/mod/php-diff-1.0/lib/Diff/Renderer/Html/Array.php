@@ -179,6 +179,7 @@ class Diff_Renderer_Html_Array extends Diff_Renderer_Abstract
 		$lines = array_map(array($this, 'HtmlSafe'), $lines);
 		foreach($lines as &$line) {
 			$line = preg_replace('# ( +)|^ #e', "\$this->FixSpaces('\\1')", $line);
+
 		}
 		return $lines;
 	}

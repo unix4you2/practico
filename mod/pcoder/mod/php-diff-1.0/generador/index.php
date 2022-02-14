@@ -39,15 +39,15 @@
 
 	//Determina estilo CSS
 	$EstiloCSS="oscuro";
-	if ($_GET["EstiloCSS"]!="") $EstiloCSS=$_GET["EstiloCSS"];
+	if (@$_GET["EstiloCSS"]!="") $EstiloCSS=$_GET["EstiloCSS"];
 	
 	//Determina tipo de entrada a procesar 
 	$TipoEntrada="archivos";
-	if ($_GET["TipoEntrada"]!="") $TipoEntrada=$_GET["TipoEntrada"];
+	if (@$_GET["TipoEntrada"]!="") $TipoEntrada=$_GET["TipoEntrada"];
 
 	//Determina modo de visualizacion
 	$ModoVisual="ladoalado";
-	if ($_GET["ModoVisual"]!="") $ModoVisual=$_GET["ModoVisual"];
+	if (@$_GET["ModoVisual"]!="") $ModoVisual=$_GET["ModoVisual"];
 
 	//Segun el tipo de entrada procesa archivos o cadenas
 	if ($TipoEntrada=="archivos")
@@ -55,13 +55,13 @@
 			//Carga los archivos a procesar
 			$ArchivoViejo=file_get_contents(dirname(__FILE__).'/demo_limpio.txt');
 			//$ArchivoViejo=file_get_contents(dirname(__FILE__).'/demo_viejo.txt');
-			if ($_GET["ArchivoViejo"]!="") $ArchivoViejo=file_get_contents($_GET["ArchivoViejo"]);
+			if (@$_GET["ArchivoViejo"]!="") $ArchivoViejo=file_get_contents($_GET["ArchivoViejo"]);
 			
-			if ($_GET["Archivo2DesdeHistorial"]!="1")
+			if (@$_GET["Archivo2DesdeHistorial"]!="1")
 			    {
         			$ArchivoNuevo=file_get_contents(dirname(__FILE__).'/demo_limpio.txt');
         			//$ArchivoNuevo=file_get_contents(dirname(__FILE__).'/demo_nuevo.txt');
-        			if ($_GET["ArchivoNuevo"]!="") $ArchivoNuevo=file_get_contents($_GET["ArchivoNuevo"]);			        
+        			if (@$_GET["ArchivoNuevo"]!="") $ArchivoNuevo=file_get_contents($_GET["ArchivoNuevo"]);			        
 			    }
 		    else
 		        {
