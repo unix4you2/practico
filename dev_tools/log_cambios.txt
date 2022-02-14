@@ -18,6 +18,7 @@ index.php
 core/comunes.php
 core/conexiones.php
 core/formularios.php
+core/monitoreo.php
 core/marco_abajo.php
 core/marco_admin.php
 core/marco_arriba_bs.php
@@ -108,6 +109,8 @@ TODOList="
 
 Vista de calendario
 Libreria de festivos
+
+ajax.php: PCO_RecuperarRecordsetJSON_DataTablePANES para recuperacion de datos en panes
 
 WAF:
 -----------------------------------------------------

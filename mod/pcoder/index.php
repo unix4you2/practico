@@ -193,6 +193,9 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
 	<!-- Estilos especificos PCoder -->
     <link href="css/pcoder.min.css?<?php echo filemtime('css/pcoder.min.css'); ?>" rel="stylesheet" type="text/css">
+
+    <!-- jQuery -->
+	<script type="text/javascript" src="../../inc/jquery/jquery-2.2.4.min.js"></script>
     
     <!-- Estilos selector de color -->
     <link rel="stylesheet" href="../../inc/jquery/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
@@ -201,8 +204,6 @@ if ($PCO_Accion=="PCOMOD_CargarPcoder")
 
     <link type="text/css" rel="stylesheet" media="all" href="../../inc/chat/css/chat.css" />
 
-    <!-- jQuery -->
-	<script type="text/javascript" src="../../inc/jquery/jquery-2.1.0.min.js"></script>
 	<!-- Plugins adicionales JQuery -->
 	<script type="text/javascript" src="../../inc/jquery/plugins/jquery.fileTree-1.01/jquery.easing.js"></script>
 	<script type="text/javascript" src="../../inc/jquery/plugins/jquery.fileTree-1.01/jqueryFileTree.js"></script>

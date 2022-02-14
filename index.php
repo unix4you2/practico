@@ -241,7 +241,6 @@
 								<br>';
 		}
 
-
     // Prueba que todas las extensiones requeridas se encuentren habilitadas
     PCO_VerificarExtensionesPHP();
 

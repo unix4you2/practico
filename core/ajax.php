@@ -112,7 +112,7 @@ if ($PCO_Accion=="PCO_ExportacionQueryCacheCSV" )
 ########################################################################
 ########################################################################
 /*
-	Function: PCO_RecuperarRecordsetJSON_DataTable
+	Function: PCO_RecuperarRecordsetJSON_DataTablePANES
 	Hace una consulta a la base de datos determinada por un identificador de informe y retorna los registros formateados en JSON.  Util en DataTables con AJAX
 
 	Variables de entrada:

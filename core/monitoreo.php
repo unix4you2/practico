@@ -790,7 +790,7 @@ if ($PCO_Accion=="PCO_VerMonitoreo")
 
     <!-- CSS Core de Bootstrap -->
     <link href="inc/bootstrap/css/tema_bootstrap.min.css" rel="stylesheet"  media="screen">
-    <link href="inc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">
+    <!--<link href="inc/bootstrap/css/bootstrap-theme.css" rel="stylesheet"  media="screen">-->
 
 	<!-- Estilos especificos Monitoreo -->
     <link href="inc/bootstrap/css/monitoreo.min.css" rel="stylesheet"  media="screen">
@@ -802,7 +802,7 @@ if ($PCO_Accion=="PCO_VerMonitoreo")
     <link href="inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
 
     <!-- jQuery -->
-	<script type="text/javascript" src="inc/jquery/jquery-2.1.0.min.js"></script>
+	<script type="text/javascript" src="inc/jquery/jquery-2.2.4.min.js"></script>
 </head>
 
 		<body oncontextmenu="return false;" style="font-family: Verdana, Tahoma, Arial; font-size: 11px;">
