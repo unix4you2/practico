@@ -819,9 +819,9 @@ $(document).ready( function() {
                     for (var ComboMultiple of PCOJS_ListaCombosMultiplesJoin) 
                         {
                             ComboMultiple=ComboMultiple.trim();             //Elimina posibles espacios en el id del elemento
-                            ValorComboMultiple=$("#"+ComboMultiple).val();
                             if (ComboMultiple!="")
                                 {
+                                    ValorComboMultiple=$("#"+ComboMultiple).val();
                                     if (ValorComboMultiple!=null)
                                         {
                                             ValorSanitizadoComboMultiple=$("#"+ComboMultiple).val().join(",");

@@ -33,6 +33,7 @@ inc/ace/src-min-noconflict/*
 inc/mxgraph/*
 mod/pcoder/index.php
 mod/fileman/elfinder/*
+inc/jquery/jquery-3.6.0.min.js
 
 
 
@@ -71,6 +72,13 @@ LogCambios="
 * Enhan [CORE]: Actualizada version de AceEditor de {P}Coder desde 1.4.12 a 1.4.14
 * Enhan [CORE]: Actualizada version de GraphEditor desde 4.0.4 a 4.2.2
 * Enhan [CORE]: Actualizada version de ElFinder desde 2.1.39 a 2.1.59
+* Enhan [CORE]: Actualizada version de ReactJS desde 16.13.1 a 17.0.2
+* Fixed [CORE]: Funcion de PCOJS_SanitizarValoresListaMultiple() opera solamente cuando se tenga una lista, evitando error de JS a procesar elemento # inexistente.
+
+
+
+* Enhan [CORE]: Actualizada version de JQuery a 3.6.0.  Se recomienda a quienes hagan llamados directos a la librería previa 2.1 buscarlos y actualizarlos previo a su futura eliminación en siguientes versiones.
+
     
 
 
