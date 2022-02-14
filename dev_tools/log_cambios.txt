@@ -74,6 +74,7 @@ LogCambios="
 * Enhan [CORE]: Actualizada version de ElFinder desde 2.1.39 a 2.1.59
 * Enhan [CORE]: Actualizada version de ReactJS desde 16.13.1 a 17.0.2
 * Fixed [CORE]: Funcion de PCOJS_SanitizarValoresListaMultiple() opera solamente cuando se tenga una lista, evitando error de JS a procesar elemento # inexistente.
+* Enhan [CORE]: Eliminado soporte a JQuery 1.7.2. Aquellos proyectos que por algún motivo hicieran uso manual de dicha librería deberán actualizar sus inclusiones a las disponibles sobre /inc/jquery
 
 
 
