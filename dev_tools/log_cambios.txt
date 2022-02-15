@@ -41,6 +41,7 @@ mod/pmobile/index.php
 mod/pbrowser/*
 mod/fileman/elfinder/*
 inc/jquery/jquery*
+inc/jquery/plugins/jquery-migrate*
 
 
 
@@ -83,7 +84,7 @@ LogCambios="
 * Fixed [CORE]: Funcion de PCOJS_SanitizarValoresListaMultiple() opera solamente cuando se tenga una lista, evitando error de JS a procesar elemento # inexistente.
 * Enhan [CORE]: Eliminado soporte a JQuery 1.7.2. Aquellos proyectos que por algún motivo hicieran uso manual de dicha librería deberán actualizar sus inclusiones a las disponibles sobre /inc/jquery
 * Enhan [CORE]: Actualizada version de JQuery desde 2.1.0 a 2.2.4.  Se recomienda a quienes hagan llamados directos a la librería previa buscarlos y actualizarlos previo a su futura eliminación en siguientes versiones.
-* Enhan [CORE]: Agregado paquete transicional de JQuery 3.6.0.  Aunque se contará con la implementación del Migrate Plugin se recomienda ajustar scripts que puedan estar obsoletos y realizar pruebas funcionales con cambio sobre marco_arriba_bs.  Lanzamiento final proyectado para 22.9
+* Enhan [CORE]: Agregado paquete transicional de JQuery 3.6.0.  Aunque se contará con la implementación del Migrate Plugin se recomienda ajustar scripts que puedan estar obsoletos y realizar pruebas funcionales con cambio sobre core/marco_arriba_bs.php activando el modo de desarrollo del plugin.  Se recomienda depurar a traves de consola cualquier mensaje referente a JQMIGRATE y asociado a los scripts propios de su aplicación. Lanzamiento final proyectado para 22.9
 
     
 
