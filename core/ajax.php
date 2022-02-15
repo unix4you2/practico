@@ -56,18 +56,18 @@ if (!isset($PCO_Accion)) $PCO_Accion=$_REQUEST["PCO_Accion"];
 */
 if ($PCO_Accion=="PCO_ExportacionQueryCacheCSV" ) 
     {   
-        //Se asegura de tener las variables requeridas por filtros y recibidas desde la peticion
-        if (!isset($IdRegistro_CacheSQL)) $IdRegistro_CacheSQL=$_REQUEST["IdRegistro_CacheSQL"];
-        
-        $NombreArchivo=$_REQUEST['NombreArchivo'];
-        if ($NombreArchivo=="") $NombreArchivo="DatosExportadosCSV_Inf{$IdRegistro_CacheSQL}.csv";
-
         // Valida sesion activa de Practico
         @session_start();
         if(!isset($_SESSION['PCOSESS_SesionAbierta'])) {
         	echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
         	die();
         }
+
+        //Se asegura de tener las variables requeridas por filtros y recibidas desde la peticion
+        if (!isset($IdRegistro_CacheSQL)) $IdRegistro_CacheSQL=$_REQUEST["IdRegistro_CacheSQL"];
+        
+        $NombreArchivo=$_REQUEST['NombreArchivo'];
+        if ($NombreArchivo=="") $NombreArchivo="DatosExportadosCSV_Inf{$IdRegistro_CacheSQL}.csv";
 
         include_once '../core/configuracion.php';
         // Inicia las conexiones con la BD y las deja listas para las operaciones
@@ -131,10 +131,6 @@ if ($PCO_Accion=="PCO_ExportacionQueryCacheCSV" )
 */
 if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTablePANES" ) 
     {   
-        //Se asegura de tener las variables requeridas por filtros y recibidas desde la peticion
-        if (!isset($IdRegistro_CacheSQL)) $IdRegistro_CacheSQL=$_REQUEST["IdRegistro_CacheSQL"];
-        if (!isset($NroFilasBase)) $NroFilasBase=$_REQUEST["NroFilasBase"];
-
         // Valida sesion activa de Practico
         @session_start();
         if(!isset($_SESSION['PCOSESS_SesionAbierta'])) {
@@ -142,6 +138,10 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTablePANES" )
         	die();
         }
         
+        //Se asegura de tener las variables requeridas por filtros y recibidas desde la peticion
+        if (!isset($IdRegistro_CacheSQL)) $IdRegistro_CacheSQL=$_REQUEST["IdRegistro_CacheSQL"];
+        if (!isset($NroFilasBase)) $NroFilasBase=$_REQUEST["NroFilasBase"];
+
         include_once '../core/configuracion.php';
         // Inicia las conexiones con la BD y las deja listas para las operaciones
         include_once '../core/conexiones.php';
@@ -347,10 +347,6 @@ echo $RespuestaFormatoJSON;
 */
 if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" ) 
     {   
-        //Se asegura de tener las variables requeridas por filtros y recibidas desde la peticion
-        if (!isset($IdRegistro_CacheSQL)) $IdRegistro_CacheSQL=$_REQUEST["IdRegistro_CacheSQL"];
-        if (!isset($NroFilasBase)) $NroFilasBase=$_REQUEST["NroFilasBase"];
-
         // Valida sesion activa de Practico
         @session_start();
         if(!isset($_SESSION['PCOSESS_SesionAbierta'])) {
@@ -358,6 +354,10 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
         	die();
         }
         
+        //Se asegura de tener las variables requeridas por filtros y recibidas desde la peticion
+        if (!isset($IdRegistro_CacheSQL)) $IdRegistro_CacheSQL=$_REQUEST["IdRegistro_CacheSQL"];
+        if (!isset($NroFilasBase)) $NroFilasBase=$_REQUEST["NroFilasBase"];
+
         include_once '../core/configuracion.php';
         // Inicia las conexiones con la BD y las deja listas para las operaciones
         include_once '../core/conexiones.php';
