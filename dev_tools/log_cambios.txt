@@ -15,6 +15,7 @@ ArchivoVersion=" inc/version_actual.txt "
 #[ListaArchivos] Separados por espacio o salto de linea, se puede usar notacion core/* para incluir por ejemplo subcarpetas
 ListaArchivos="
 index.php
+core/ajax.php
 core/comunes.php
 core/conexiones.php
 core/formularios.php
@@ -85,6 +86,7 @@ LogCambios="
 * Enhan [CORE]: Eliminado soporte a JQuery 1.7.2. Aquellos proyectos que por algún motivo hicieran uso manual de dicha librería deberán actualizar sus inclusiones a las disponibles sobre /inc/jquery
 * Enhan [CORE]: Actualizada version de JQuery desde 2.1.0 a 2.2.4.  Se recomienda a quienes hagan llamados directos a la librería previa buscarlos y actualizarlos previo a su futura eliminación en siguientes versiones.
 * Enhan [CORE]: Agregado paquete transicional de JQuery 3.6.0.  Aunque se contará con la implementación del Migrate Plugin se recomienda ajustar scripts que puedan estar obsoletos y realizar pruebas funcionales con cambio sobre core/marco_arriba_bs.php activando el modo de desarrollo del plugin.  Se recomienda depurar a traves de consola cualquier mensaje referente a JQMIGRATE y asociado a los scripts propios de su aplicación. Lanzamiento final proyectado para 22.9
+* Added [INFORMES]: Informes obtenidos mediante conexiones remotas soportan ahora la recuperación de registros mediante AJAX
 
     
 
