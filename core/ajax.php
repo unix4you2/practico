@@ -478,15 +478,27 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
         //BLOQUE2: Genera conteos y datos requeridos.  Sigue adelante solo si hay consulta valida
         if ($ConsultaCacheada!="")
             {
+                //Determina la conexion utilizada por el informe
+                $ConexionAUtilizar="";
+                $IdInformeCacheado=$RegistroCacheSQL["informe"];
+                //$ConexionBDInforme=PCO_EjecutarSQL("SELECT conexion_origen_datos FROM core_informe WHERE id='{$IdInformeCacheado}' ")->fetchColumn();
+                $ConexionBDInforme=PCO_EjecutarSQL("SELECT conexion_origen_datos FROM core_informe,core_replicasbd WHERE core_replicasbd.nombre=core_informe.conexion_origen_datos AND core_informe.id='{$IdInformeCacheado}' ")->fetchColumn();
+                if($ConexionBDInforme!=""  )
+                    {
+                        // Genera conexiones individuales o conexiones para replicacion de transacciones
+                        include_once '../core/conexiones_extra.php';
+                        $ConexionAUtilizar=${$ConexionBDInforme};
+                    }
+
                 //Obitene el Total de registros en la consulta de base SIN filtros
-                $PCO_TotalRegistrosConsulta = PCO_EjecutarSQL($ConsultaTotalRegistros)->fetchColumn();
+                $PCO_TotalRegistrosConsulta = PCO_EjecutarSQL($ConsultaTotalRegistros,"",$ConexionAUtilizar)->fetchColumn();
         
                 //Obtiene el total de registros en la consulta CON filtros aplicados
-                $PCO_TotalRegistrosConsultaCONFiltro = PCO_EjecutarSQL($ConsultaTotalRegistrosFiltrados)->fetchColumn();
+                $PCO_TotalRegistrosConsultaCONFiltro = PCO_EjecutarSQL($ConsultaTotalRegistrosFiltrados,"",$ConexionAUtilizar)->fetchColumn();
         
                 //Hace la consulta desde la cache de SQL
-                $RegistrosRecuperados = PCO_EjecutarSQL($ConsultaCacheadaRegistros)->fetchAll();
-        
+                $RegistrosRecuperados = PCO_EjecutarSQL($ConsultaCacheadaRegistros,"",$ConexionAUtilizar)->fetchAll();
+
                 //Define el arreglo con los datos y lo llena desde cada fila del registro
                 $PCO_ArregloDatosRegistros = array();
                     foreach($RegistrosRecuperados as $row)
