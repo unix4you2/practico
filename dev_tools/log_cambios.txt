@@ -26,25 +26,28 @@ core/marco_arriba_bs.php
 core/marco_forms.php
 core/kanban.php
 core/usuarios.php
-inc/bootstrap/js/plugins/dataTables/*
-inc/bootstrap/css/plugins/dataTables/*
-inc/jquery/plugins/gantt-master/*
-inc/bootstrap/js/plugins/moment/*
-inc/jquery/plugins/vfs_fonts.js
+
 inc/ace/src-min-noconflict/*
+inc/bootstrap/css/plugins/buttons*
+inc/bootstrap/css/plugins/dataTables*
+inc/bootstrap/css/plugins/jquery*
+inc/bootstrap/css/plugins/responsive*
+inc/bootstrap/css/plugins/dataTables/*
+inc/bootstrap/js/plugins/dataTables/*
+inc/bootstrap/js/plugins/moment/*
+inc/jquery/jquery*
+inc/jquery/plugins/gantt-master/*
+inc/jquery/plugins/vfs_fonts.js
+inc/jquery/plugins/jquery-migrate*
 inc/mxgraph/*
+mod/fileman/elfinder/*
 mod/pcoder/index.php
 mod/pcoder/mod/consola/index.php
 mod/pcoder/mod/explorador/index.php
 mod/pcoder/mod/php-diff-1.0/generador/index.php
 mod/pcoder/mod/php-diff-1.0/lib/Diff/Renderer/Html/Array.php
-mod/pmobile/index.php
 mod/pbrowser/*
-mod/fileman/elfinder/*
-inc/jquery/jquery*
-inc/jquery/plugins/jquery-migrate*
-
-
+mod/pmobile/index.php
 
 
 xml/*
@@ -87,6 +90,12 @@ LogCambios="
 * Enhan [CORE]: Actualizada version de JQuery desde 2.1.0 a 2.2.4.  Se recomienda a quienes hagan llamados directos a la librería previa buscarlos y actualizarlos previo a su futura eliminación en siguientes versiones.
 * Enhan [CORE]: Agregado paquete transicional de JQuery 3.6.0.  Aunque se contará con la implementación del Migrate Plugin se recomienda ajustar scripts que puedan estar obsoletos y realizar pruebas funcionales con cambio sobre core/marco_arriba_bs.php activando el modo de desarrollo del plugin.  Se recomienda depurar a traves de consola cualquier mensaje referente a JQMIGRATE y asociado a los scripts propios de su aplicación. Lanzamiento final proyectado para 22.9
 * Added [INFORMES]: Informes obtenidos mediante conexiones remotas soportan ahora la recuperación de registros mediante AJAX
+* Enhan [CORE]: Banco de pruebas interno mejora en reporte -DataTables + Responsive (LIMIT 0,30)- para incluir campos largos y mejorar pruebas funcionales.
+* Enhan [CORE]: Banco de pruebas interno cuenta con informe para pruebas funcionales que obtiene sus datos desde una conexión remota, de replicación o alterna y además le aplica DataTables+Recuperación AJAX.
+* Enhan [CORE]: Actualizado DataTables desde 1.10.18 a 1.11.4 compatible Jquery 3.6.0
+* Enhan [CORE]: Actualizada version de DataTables Buttons desde 1.5.6 a 2.2.2
+* Enhan [CORE]: Actualizada version de DataTables Responsive desde 2.2.3 a 2.2.9
+* Enhan [CORE]: Actualizada version de DataTables Select desde 1.3.3 a 1.3.4
 
     
 
