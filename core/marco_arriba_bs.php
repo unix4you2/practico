@@ -272,7 +272,16 @@
     <!-- jQuery -->
 	<script type="text/javascript" src="inc/jquery/jquery-3.6.0.min.js"></script>
 	<script type="text/javascript" src="inc/jquery/plugins/jquery-migrate-3.3.2.js"></script> <!-- sin min para desarrollo -->
+
+    <!-- Bootstrap Core JavaScript -->
+    <script type="text/javascript" src="inc/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Boostrap-Select -->
     <script type="text/javascript" src="inc/bootstrap/js/plugins/select/bootstrap-select.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/select/bootstrap-select.min.js'); ?>"></script>
+
+    <!-- AJAX para Boostrap-Select -->
+    <script src="inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js'); ?>"></script>
+
     <script type="text/javascript" src="inc/bootstrap/js/plugins/toggle/bootstrap-toggle.min.js"></script>
 
     <script src="inc/jquery/plugins/jszip.min.js"></script>
@@ -287,7 +296,6 @@
 
     <!-- AJAX para Boostrap-Select -->
     <link  rel="stylesheet" href="inc/bootstrap/css/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.css" rel="stylesheet">
-    <script src="inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js?<?php echo filemtime('inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js'); ?>"></script>
 
     <!-- ReactJS -->
     <script src="inc/reactjs/react.production.min.js" crossorigin></script>  <!-- react.production.min.js | react.development.js -->

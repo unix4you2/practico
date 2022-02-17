@@ -1,5 +1,5 @@
 /*!
- * Bootstrap-select v1.13.14 (https://developer.snapappointments.com/bootstrap-select)
+ * Bootstrap-select v1.13.18 (https://developer.snapappointments.com/bootstrap-select)
  *
  * Copyright 2012-2020 SnapAppointments, LLC
  * Licensed under MIT (https://github.com/snapappointments/bootstrap-select/blob/master/LICENSE)
@@ -677,6 +677,7 @@
   }
 
   var elementTemplates = {
+    div: document.createElement('div'),
     span: document.createElement('span'),
     i: document.createElement('i'),
     subtext: document.createElement('small'),
@@ -686,8 +687,11 @@
     fragment: document.createDocumentFragment()
   }
 
+  elementTemplates.noResults = elementTemplates.li.cloneNode(false);
+  elementTemplates.noResults.className = 'no-results';
+
   elementTemplates.a.setAttribute('role', 'option');
-  if (version.major === '4') elementTemplates.a.className = 'dropdown-item';
+  elementTemplates.a.className = 'dropdown-item';
 
   elementTemplates.subtext.className = 'text-muted';
 
@@ -728,7 +732,7 @@
         }
       }
 
-      if (typeof classes !== 'undefined' && classes !== '') a.classList.add.apply(a.classList, classes.split(' '));
+      if (typeof classes !== 'undefined' && classes !== '') a.classList.add.apply(a.classList, classes.split(/\s+/));
       if (inline) a.setAttribute('style', inline);
 
       return a;
@@ -803,6 +807,13 @@
     }
   }
 
+  function showNoResults (searchMatch, searchValue) {
+    if (!searchMatch.length) {
+      elementTemplates.noResults.innerHTML = this.options.noneResultsText.replace('{0}', '"' + htmlEscape(searchValue) + '"');
+      this.$menuInner[0].firstChild.appendChild(elementTemplates.noResults);
+    }
+  }
+
   var Selectpicker = function (element, options) {
     var that = this;
 
@@ -864,7 +875,7 @@
     this.init();
   };
 
-  Selectpicker.VERSION = '1.13.14';
+  Selectpicker.VERSION = '1.13.18';
 
   // part of this is duplicated in i18n/defaults-en_US.js. Make sure to update both.
   Selectpicker.DEFAULTS = {
@@ -926,17 +937,19 @@
 
     init: function () {
       var that = this,
-          id = this.$element.attr('id');
+          id = this.$element.attr('id'),
+          element = this.$element[0],
+          form = element.form;
 
       selectId++;
       this.selectId = 'bs-select-' + selectId;
 
-      this.$element[0].classList.add('bs-select-hidden');
+      element.classList.add('bs-select-hidden');
 
       this.multiple = this.$element.prop('multiple');
       this.autofocus = this.$element.prop('autofocus');
 
-      if (this.$element[0].classList.contains('show-tick')) {
+      if (element.classList.contains('show-tick')) {
         this.options.showTick = true;
       }
 
@@ -946,12 +959,18 @@
         .after(this.$newElement)
         .prependTo(this.$newElement);
 
+      // ensure select is associated with form element if it got unlinked after moving it inside newElement
+      if (form && element.form === null) {
+        if (!form.id) form.id = 'form-' + this.selectId;
+        element.setAttribute('form', form.id);
+      }
+
       this.$button = this.$newElement.children('button');
       this.$menu = this.$newElement.children(Selector.MENU);
       this.$menuInner = this.$menu.children('.inner');
       this.$searchbox = this.$menu.find('input');
 
-      this.$element[0].classList.remove('bs-select-hidden');
+      element.classList.remove('bs-select-hidden');
 
       if (this.options.dropdownAlignRight === true) this.$menu[0].classList.add(classNames.MENURIGHT);
 
@@ -1006,7 +1025,7 @@
         }
       });
 
-      if (that.$element[0].hasAttribute('required')) {
+      if (element.hasAttribute('required')) {
         this.$element.on('invalid' + EVENT_KEY, function () {
           that.$button[0].classList.add('bs-invalid');
 
@@ -1102,7 +1121,7 @@
 
       drop =
         '<div class="dropdown bootstrap-select' + showTick + inputGroup + '">' +
-          '<button type="button" class="' + this.options.styleBase + ' dropdown-toggle" ' + (this.options.display === 'static' ? 'data-display="static"' : '') + 'data-toggle="dropdown"' + autofocus + ' role="combobox" aria-owns="' + this.selectId + '" aria-haspopup="listbox" aria-expanded="false">' +
+          '<button type="button" tabindex="-1" class="' + this.options.styleBase + ' dropdown-toggle" ' + (this.options.display === 'static' ? 'data-display="static"' : '') + 'data-toggle="dropdown"' + autofocus + ' role="combobox" aria-owns="' + this.selectId + '" aria-haspopup="listbox" aria-expanded="false">' +
             '<div class="filter-option">' +
               '<div class="filter-option-inner">' +
                 '<div class="filter-option-inner-inner"></div>' +
@@ -1134,6 +1153,7 @@
     setPositionData: function () {
       this.selectpicker.view.canHighlight = [];
       this.selectpicker.view.size = 0;
+      this.selectpicker.view.firstHighlightIndex = false;
 
       for (var i = 0; i < this.selectpicker.current.data.length; i++) {
         var li = this.selectpicker.current.data[i],
@@ -1156,6 +1176,7 @@
         if (canHighlight) {
           this.selectpicker.view.size++;
           li.posinset = this.selectpicker.view.size;
+          if (this.selectpicker.view.firstHighlightIndex === false) this.selectpicker.view.firstHighlightIndex = i;
         }
 
         li.position = (i === 0 ? 0 : this.selectpicker.current.data[i - 1].position) + li.height;
@@ -1424,7 +1445,8 @@
     },
 
     setPlaceholder: function () {
-      var updateIndex = false;
+      var that = this,
+          updateIndex = false;
 
       if (this.options.title && !this.multiple) {
         if (!this.selectpicker.view.titleOption) this.selectpicker.view.titleOption = document.createElement('option');
@@ -1434,8 +1456,13 @@
         updateIndex = true;
 
         var element = this.$element[0],
-            isSelected = false,
-            titleNotAppended = !this.selectpicker.view.titleOption.parentNode;
+            selectTitleOption = false,
+            titleNotAppended = !this.selectpicker.view.titleOption.parentNode,
+            selectedIndex = element.selectedIndex,
+            selectedOption = element.options[selectedIndex],
+            navigation = window.performance && window.performance.getEntriesByType('navigation'),
+            // Safari doesn't support getEntriesByType('navigation') - fall back to performance.navigation
+            isNotBackForward = (navigation && navigation.length) ? navigation[0].type !== 'back_forward' : window.performance.navigation.type !== 2;
 
         if (titleNotAppended) {
           // Use native JS to prepend option (faster)
@@ -1445,8 +1472,7 @@
           // Check if selected or data-selected attribute is already set on an option. If not, select the titleOption option.
           // the selected item may have been changed by user or programmatically before the bootstrap select plugin runs,
           // if so, the select will have the data-selected attribute
-          var $opt = $(element.options[element.selectedIndex]);
-          isSelected = $opt.attr('selected') === undefined && this.$element.data('selected') === undefined;
+          selectTitleOption = !selectedOption || (selectedIndex === 0 && selectedOption.defaultSelected === false && this.$element.data('selected') === undefined);
         }
 
         if (titleNotAppended || this.selectpicker.view.titleOption.index !== 0) {
@@ -1456,7 +1482,15 @@
         // Set selected *after* appending to select,
         // otherwise the option doesn't get selected in IE
         // set using selectedIndex, as setting the selected attr to true here doesn't work in IE11
-        if (isSelected) element.selectedIndex = 0;
+        if (selectTitleOption && isNotBackForward) {
+          element.selectedIndex = 0;
+        } else if (document.readyState !== 'complete') {
+          // if navigation type is back_forward, there's a chance the select will have its value set by BFCache
+          // wait for that value to be set, then run render again
+          window.addEventListener('pageshow', function () {
+            if (that.selectpicker.view.displayedValue !== element.value) that.render();
+          });
+        }
       }
 
       return updateIndex;
@@ -1531,7 +1565,8 @@
 
       function addOptgroup (index, selectOptions) {
         var optgroup = selectOptions[index],
-            previous = selectOptions[index - 1],
+            // skip placeholder option
+            previous = index - 1 < startIndex ? false : selectOptions[index - 1],
             next = selectOptions[index + 1],
             options = optgroup.querySelectorAll('option' + optionSelector);
 
@@ -1579,13 +1614,13 @@
         }
       }
 
-      for (var len = selectOptions.length; startIndex < len; startIndex++) {
-        var item = selectOptions[startIndex];
+      for (var len = selectOptions.length, i = startIndex; i < len; i++) {
+        var item = selectOptions[i];
 
         if (item.tagName !== 'OPTGROUP') {
           addOption(item, {});
         } else {
-          addOptgroup(startIndex, selectOptions);
+          addOptgroup(i, selectOptions);
         }
       }
 
@@ -1644,6 +1679,7 @@
             break;
         }
 
+        item.element = liElement;
         mainElements.push(liElement);
 
         // count the number of characters in the option - not perfect, but should work in most cases
@@ -1692,7 +1728,9 @@
 
       button.classList.toggle('bs-placeholder', that.multiple ? !selectedCount : !getSelectValues(element, selectedOptions));
 
-      this.tabIndex();
+      if (!that.multiple && selectedOptions.length === 1) {
+        that.selectpicker.view.displayedValue = getSelectValues(element, selectedOptions);
+      }
 
       if (this.options.selectedTextFormat === 'static') {
         titleFragment = generateOption.text.call(this, { text: this.options.title }, true);
@@ -1813,7 +1851,7 @@
       if (version.major < 4) {
         newElement.classList.add('bs3');
 
-        if (newElement.parentNode.classList.contains('input-group') &&
+        if (newElement.parentNode.classList && newElement.parentNode.classList.contains('input-group') &&
             (newElement.previousElementSibling || newElement.nextElementSibling) &&
             (newElement.previousElementSibling || newElement.nextElementSibling).classList.contains('input-group-addon')
         ) {
@@ -1840,17 +1878,17 @@
     liHeight: function (refresh) {
       if (!refresh && (this.options.size === false || Object.keys(this.sizeInfo).length)) return;
 
-      var newElement = document.createElement('div'),
-          menu = document.createElement('div'),
-          menuInner = document.createElement('div'),
+      var newElement = elementTemplates.div.cloneNode(false),
+          menu = elementTemplates.div.cloneNode(false),
+          menuInner = elementTemplates.div.cloneNode(false),
           menuInnerInner = document.createElement('ul'),
-          divider = document.createElement('li'),
-          dropdownHeader = document.createElement('li'),
-          li = document.createElement('li'),
-          a = document.createElement('a'),
-          text = document.createElement('span'),
+          divider = elementTemplates.li.cloneNode(false),
+          dropdownHeader = elementTemplates.li.cloneNode(false),
+          li,
+          a = elementTemplates.a.cloneNode(false),
+          text = elementTemplates.span.cloneNode(false),
           header = this.options.header && this.$menu.find('.' + classNames.POPOVERHEADER).length > 0 ? this.$menu.find('.' + classNames.POPOVERHEADER)[0].cloneNode(true) : null,
-          search = this.options.liveSearch ? document.createElement('div') : null,
+          search = this.options.liveSearch ? elementTemplates.div.cloneNode(false) : null,
           actions = this.options.actionsBox && this.multiple && this.$menu.find('.bs-actionsbox').length > 0 ? this.$menu.find('.bs-actionsbox')[0].cloneNode(true) : null,
           doneButton = this.options.doneButton && this.multiple && this.$menu.find('.bs-donebutton').length > 0 ? this.$menu.find('.bs-donebutton')[0].cloneNode(true) : null,
           firstOption = this.$element.find('option')[0];
@@ -1869,8 +1907,21 @@
       dropdownHeader.className = 'dropdown-header';
 
       text.appendChild(document.createTextNode('\u200b'));
-      a.appendChild(text);
-      li.appendChild(a);
+
+      if (this.selectpicker.current.data.length) {
+        for (var i = 0; i < this.selectpicker.current.data.length; i++) {
+          var data = this.selectpicker.current.data[i];
+          if (data.type === 'option') {
+            li = data.element;
+            break;
+          }
+        }
+      } else {
+        li = elementTemplates.li.cloneNode(false);
+        a.appendChild(text);
+        li.appendChild(a);
+      }
+
       dropdownHeader.appendChild(text.cloneNode(true));
 
       if (this.selectpicker.view.widestOption) {
@@ -2327,27 +2378,13 @@
     checkDisabled: function () {
       if (this.isDisabled()) {
         this.$newElement[0].classList.add(classNames.DISABLED);
-        this.$button.addClass(classNames.DISABLED).attr('tabindex', -1).attr('aria-disabled', true);
+        this.$button.addClass(classNames.DISABLED).attr('aria-disabled', true);
       } else {
         if (this.$button[0].classList.contains(classNames.DISABLED)) {
           this.$newElement[0].classList.remove(classNames.DISABLED);
           this.$button.removeClass(classNames.DISABLED).attr('aria-disabled', false);
         }
-
-        if (this.$button.attr('tabindex') == -1 && !this.$element.data('tabindex')) {
-          this.$button.removeAttr('tabindex');
-        }
       }
-    },
-
-    tabIndex: function () {
-      if (this.$element.data('tabindex') !== this.$element.attr('tabindex') &&
-        (this.$element.attr('tabindex') !== -98 && this.$element.attr('tabindex') !== '-98')) {
-        this.$element.data('tabindex', this.$element.attr('tabindex'));
-        this.$button.attr('tabindex', this.$element.data('tabindex'));
-      }
-
-      this.$element.attr('tabindex', -98);
     },
 
     clickListener: function () {
@@ -2457,7 +2494,7 @@
             option.selected = !state;
 
             that.setSelected(clickedIndex, !state);
-            $this.trigger('blur');
+            that.focusedParent.focus();
 
             if (maxOptions !== false || maxOptionsGrp !== false) {
               var maxReached = maxOptions < getSelectedOptions(element).length,
@@ -2585,6 +2622,28 @@
         }
       });
 
+      this.$button
+        .on('focus' + EVENT_KEY, function (e) {
+          var tabindex = that.$element[0].getAttribute('tabindex');
+
+          // only change when button is actually focused
+          if (tabindex !== undefined && e.originalEvent && e.originalEvent.isTrusted) {
+            // apply select element's tabindex to ensure correct order is followed when tabbing to the next element
+            this.setAttribute('tabindex', tabindex);
+            // set element's tabindex to -1 to allow for reverse tabbing
+            that.$element[0].setAttribute('tabindex', -1);
+            that.selectpicker.view.tabindex = tabindex;
+          }
+        })
+        .on('blur' + EVENT_KEY, function (e) {
+          // revert everything to original tabindex
+          if (that.selectpicker.view.tabindex !== undefined && e.originalEvent && e.originalEvent.isTrusted) {
+            that.$element[0].setAttribute('tabindex', that.selectpicker.view.tabindex);
+            this.setAttribute('tabindex', -1);
+            that.selectpicker.view.tabindex = undefined;
+          }
+        });
+
       this.$element
         .on('change' + EVENT_KEY, function () {
           that.render();
@@ -2592,17 +2651,17 @@
           changedArguments = null;
         })
         .on('focus' + EVENT_KEY, function () {
-          if (!that.options.mobile) that.$button.trigger('focus');
+          if (!that.options.mobile) that.$button[0].focus();
         });
     },
 
     liveSearchListener: function () {
-      var that = this,
-          noResults = document.createElement('li');
+      var that = this;
 
       this.$button.on('click.bs.dropdown.data-api', function () {
         if (!!that.$searchbox.val()) {
           that.$searchbox.val('');
+          that.selectpicker.search.previousValue = undefined;
         }
       });
 
@@ -2611,7 +2670,7 @@
       });
 
       this.$searchbox.on('input propertychange', function () {
-        var searchValue = that.$searchbox.val();
+        var searchValue = that.$searchbox[0].value;
 
         that.selectpicker.search.elements = [];
         that.selectpicker.search.data = [];
@@ -2666,16 +2725,13 @@
           that.$menuInner.scrollTop(0);
           that.selectpicker.search.elements = searchMatch;
           that.createView(true);
-
-          if (!searchMatch.length) {
-            noResults.className = 'no-results';
-            noResults.innerHTML = that.options.noneResultsText.replace('{0}', '"' + htmlEscape(searchValue) + '"');
-            that.$menuInner[0].firstChild.appendChild(noResults);
-          }
-        } else {
+          showNoResults.call(that, searchMatch, searchValue);
+        } else if (that.selectpicker.search.previousValue) { // for IE11 (#2402)
           that.$menuInner.scrollTop(0);
           that.createView(false);
         }
+
+        that.selectpicker.search.previousValue =  searchValue;
       });
     },
 
@@ -2833,7 +2889,7 @@
           }
         } else if (e.which === keyCodes.ARROW_DOWN || downOnTab) { // down
           index++;
-          if (index + position0 >= that.selectpicker.view.canHighlight.length) index = 0;
+          if (index + position0 >= that.selectpicker.view.canHighlight.length) index = that.selectpicker.view.firstHighlightIndex;
 
           if (!that.selectpicker.view.canHighlight[index + position0]) {
             index = index + 1 + that.selectpicker.view.canHighlight.slice(index + position0 + 1).indexOf(true);
@@ -2858,10 +2914,10 @@
           }
         } else if (e.which === keyCodes.ARROW_DOWN || downOnTab) { // down
           // scroll to top and highlight first option
-          if (index === 0) {
+          if (index === that.selectpicker.view.firstHighlightIndex) {
             that.$menuInner[0].scrollTop = 0;
 
-            liActiveIndex = 0;
+            liActiveIndex = that.selectpicker.view.firstHighlightIndex;
           } else {
             activeLi = that.selectpicker.current.data[liActiveIndex];
             offset = activeLi.position - that.sizeInfo.menuInnerHeight;
@@ -2988,6 +3044,8 @@
     },
 
     mobile: function () {
+      // ensure mobile is set to true if mobile function is called after init
+      this.options.mobile = true;
       this.$element[0].classList.add('mobile-device');
     },
 
@@ -2997,9 +3055,9 @@
       this.options = config;
 
       this.checkDisabled();
+      this.buildData();
       this.setStyle();
       this.render();
-      this.buildData();
       this.buildList();
       this.setWidth();
 
@@ -3028,6 +3086,10 @@
         this.$bsContainer.remove();
       } else {
         this.$menu.remove();
+      }
+
+      if (this.selectpicker.view.titleOption && this.selectpicker.view.titleOption.parentNode) {
+        this.selectpicker.view.titleOption.parentNode.removeChild(this.selectpicker.view.titleOption);
       }
 
       this.$element
@@ -3108,7 +3170,7 @@
           var dataAttributes = $this.data();
 
           for (var dataAttr in dataAttributes) {
-            if (dataAttributes.hasOwnProperty(dataAttr) && $.inArray(dataAttr, DISALLOWED_ATTRIBUTES) !== -1) {
+            if (Object.prototype.hasOwnProperty.call(dataAttributes, dataAttr) && $.inArray(dataAttr, DISALLOWED_ATTRIBUTES) !== -1) {
               delete dataAttributes[dataAttr];
             }
           }
@@ -3118,7 +3180,7 @@
           $this.data('selectpicker', (data = new Selectpicker(this, config)));
         } else if (options) {
           for (var i in options) {
-            if (options.hasOwnProperty(i)) {
+            if (Object.prototype.hasOwnProperty.call(options, i)) {
               data.options[i] = options[i];
             }
           }
@@ -3154,12 +3216,18 @@
   };
 
   // get Bootstrap's keydown event handler for either Bootstrap 4 or Bootstrap 3
-  var bootstrapKeydown = $.fn.dropdown.Constructor._dataApiKeydownHandler || $.fn.dropdown.Constructor.prototype.keydown;
+  function keydownHandler () {
+    if ($.fn.dropdown) {
+      // wait to define until function is called in case Bootstrap isn't loaded yet
+      var bootstrapKeydown = $.fn.dropdown.Constructor._dataApiKeydownHandler || $.fn.dropdown.Constructor.prototype.keydown;
+      return bootstrapKeydown.apply(this, arguments);
+    }
+  }
 
   $(document)
     .off('keydown.bs.dropdown.data-api')
-    .on('keydown.bs.dropdown.data-api', ':not(.bootstrap-select) > [data-toggle="dropdown"]', bootstrapKeydown)
-    .on('keydown.bs.dropdown.data-api', ':not(.bootstrap-select) > .dropdown-menu', bootstrapKeydown)
+    .on('keydown.bs.dropdown.data-api', ':not(.bootstrap-select) > [data-toggle="dropdown"]', keydownHandler)
+    .on('keydown.bs.dropdown.data-api', ':not(.bootstrap-select) > .dropdown-menu', keydownHandler)
     .on('keydown' + EVENT_KEY, '.bootstrap-select [data-toggle="dropdown"], .bootstrap-select [role="listbox"], .bootstrap-select .bs-searchbox input', Selectpicker.prototype.keydown)
     .on('focusin.modal', '.bootstrap-select [data-toggle="dropdown"], .bootstrap-select [role="listbox"], .bootstrap-select .bs-searchbox input', function (e) {
       e.stopPropagation();

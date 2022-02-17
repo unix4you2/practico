@@ -131,8 +131,7 @@
 
 <!--</div>--> <!-- FINALIZA MARCO DE CHAT -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script type="text/javascript" src="inc/bootstrap/js/bootstrap.min.js"></script>
+
 
     <!-- Plugins JavaScript requeridos por DateTimePicker -->
     <script src="inc/bootstrap/js/plugins/moment/moment-with-locales.min.js"></script>
