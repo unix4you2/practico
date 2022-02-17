@@ -103,6 +103,7 @@ LogCambios="
 * Enhan [CORE]: Actualizada version de Bootstrap Select desde 1.6.5 a 1.13.18.  Cambiado de repositorio de SilvioMoreto a SnapAppointments
 * Enhan [CORE]: Actualizada version de Ajax-Bootstrap-Select desde 1.4.3 a 1.4.5
 * Enhan [CORE]: Reubicación al llamado de JS de Bootstrap para evitar errores en llamado posterior de librerías.
+* Added [CORE]: Retorno de licencia BSD 2 - GPL 3
 
 
     
