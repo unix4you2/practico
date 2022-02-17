@@ -557,7 +557,8 @@ $(document).ready( function() {
 
 		//Si hay tablas con propiedad de editables espera por eventos sobre sus campos
 		$(function(){
-			$("td[contenteditable=true]").blur(function(){
+			$("td[contenteditable=true]").on("blur", function(){
+			//$("td[contenteditable=true]").blur( function(){
 				var nuevo_valor_campo = $(this).text();
 				var datos_campo_peticion = $(this).attr("id");
 				var partes_campo_peticion = datos_campo_peticion.split(":");

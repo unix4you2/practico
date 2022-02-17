@@ -35,6 +35,7 @@ inc/bootstrap/css/plugins/jquery*
 inc/bootstrap/css/plugins/responsive*
 inc/bootstrap/css/plugins/select/*
 inc/bootstrap/css/plugins/dataTables/*
+inc/bootstrap/js/sb-admin-2.js
 inc/bootstrap/js/plugins/ajax-bootstrap-select/*
 inc/bootstrap/js/plugins/dataTables/*
 inc/bootstrap/js/plugins/moment/*
@@ -108,6 +109,8 @@ LogCambios="
 * Enhan [CORE]: Banco de pruebas interno cuenta pruebas para los diferentes tipos de lista desplegable y sus operaciones comunes por JS
 * Enhan [CORE]: Actualizacion en mensajes de error y sesiones inválidas.
 * Enhan [CHAT]: Eliminadas acciones innecesarias de chat incompatibles con nuevas versiones JQuery. Simplificadas funciones de inicializacion, titulos y otras.
+* Enhan [INFORMES]: Ajustada la definicion de eventos generados sobre tablas de informes con columnas editables.  Se cambia a trigger en lugar del eventos directo por compatibilidad JQuery 3.6.0
+* Enhan [CORE]: Ajustado evento de resize y cargue de maquetacion para nuevo JQuery
 
 
 
