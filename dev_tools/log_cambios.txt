@@ -108,9 +108,6 @@ LogCambios="
 * Enhan [CORE]: Actualizacion en mensajes de error y sesiones inválidas.
 
 
-
-
-
 "
 
 
