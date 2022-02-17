@@ -104,9 +104,10 @@ LogCambios="
 * Enhan [CORE]: Actualizada version de Ajax-Bootstrap-Select desde 1.4.3 a 1.4.5
 * Enhan [CORE]: Reubicación al llamado de JS de Bootstrap para evitar errores en llamado posterior de librerías.
 * Added [CORE]: Retorno de licencia BSD 2 - GPL 3
+* Enhan [CORE]: Banco de pruebas interno cuenta pruebas para los diferentes tipos de lista desplegable y sus operaciones comunes por JS
+* Enhan [CORE]: Actualizacion en mensajes de error y sesiones inválidas.
 
 
-    
 
 
 
