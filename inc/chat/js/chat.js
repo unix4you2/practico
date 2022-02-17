@@ -17,30 +17,18 @@ OTHER DEALINGS IN THE SOFTWARE.
 
 */
 
-var windowFocus = true;
 var username;
 var chatHeartbeatCount = 0;
 var minChatHeartbeat = 2000;
 var maxChatHeartbeat = 33000;
 var chatHeartbeatTime = minChatHeartbeat;
-var originalTitle;
-var blinkOrder = 0;
 
 var chatboxFocus = new Array();
 var newMessages = new Array();
-var newMessagesWin = new Array();
 var chatBoxes = new Array();
 
 $(document).ready(function(){
-	originalTitle = document.title;
 	startChatSession();
-
-	$([window, document]).blur(function(){
-		windowFocus = false;
-	}).focus(function(){
-		windowFocus = true;
-		document.title = originalTitle;
-	});
 });
 
 function restructureChatBoxes() {
@@ -71,7 +59,6 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 			$("#chatbox_"+chatboxtitle).css('display','block');
 			restructureChatBoxes();
 		}
-		$("#chatbox_"+chatboxtitle+" .chatboxtextarea").focus();
 		return;
 	}
 
@@ -152,34 +139,6 @@ function createChatBox(chatboxtitle,minimizeChatBox) {
 function chatHeartbeat(){
 
 	var itemsfound = 0;
-	
-	if (windowFocus == false) {
- 
-		var blinkNumber = 0;
-		var titleChanged = 0;
-		for (x in newMessagesWin) {
-			if (newMessagesWin[x] == true) {
-				++blinkNumber;
-				if (blinkNumber >= blinkOrder) {
-					document.title = x+' chat...';
-					titleChanged = 1;
-					break;	
-				}
-			}
-		}
-		
-		if (titleChanged == 0) {
-			document.title = originalTitle;
-			blinkOrder = 0;
-		} else {
-			++blinkOrder;
-		}
-
-	} else {
-		for (x in newMessagesWin) {
-			newMessagesWin[x] = false;
-		}
-	}
 
 	for (x in newMessages) {
 		if (newMessages[x] == true) {
@@ -217,7 +176,6 @@ function chatHeartbeat(){
 					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxinfo">'+item.m+'</span></div>');
 				} else {
 					newMessages[chatboxtitle] = true;
-					newMessagesWin[chatboxtitle] = true;
 					$("#chatbox_"+chatboxtitle+" .chatboxcontent").append('<div class="chatboxmessage"><span class="chatboxmessagefrom">'+item.f+':&nbsp;&nbsp;</span><span class="chatboxmessagecontent">'+item.m+'</span></div>');
 				}
 

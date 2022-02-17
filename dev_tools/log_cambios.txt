@@ -44,6 +44,7 @@ inc/jquery/plugins/gantt-master/*
 inc/jquery/plugins/vfs_fonts.js
 inc/jquery/plugins/jquery-migrate*
 inc/mxgraph/*
+inc/chat/js/chat.js
 mod/fileman/elfinder/*
 mod/pcoder/index.php
 mod/pcoder/mod/consola/index.php
@@ -106,6 +107,9 @@ LogCambios="
 * Added [CORE]: Retorno de licencia BSD 2 - GPL 3
 * Enhan [CORE]: Banco de pruebas interno cuenta pruebas para los diferentes tipos de lista desplegable y sus operaciones comunes por JS
 * Enhan [CORE]: Actualizacion en mensajes de error y sesiones inválidas.
+* Enhan [CHAT]: Eliminadas acciones innecesarias de chat incompatibles con nuevas versiones JQuery. Simplificadas funciones de inicializacion, titulos y otras.
+
+
 
 
 "
@@ -134,6 +138,7 @@ TODOList="
 
 Vista de calendario
 Libreria de festivos
+* Enhan [CORE]: Actualizada version de DateTime picker 3.1.3 a TempusDominus 4.17.49 - Falta inicializar correctamente el idioma  ej: $.datetimepicker.setLocale('es'); en lugar de la propiedad language: '$IdiomaPredeterminado',
 
 ajax.php: PCO_RecuperarRecordsetJSON_DataTablePANES para recuperacion de datos en panes
 

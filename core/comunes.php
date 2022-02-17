@@ -5742,6 +5742,7 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
                 @$funciones_activacion_datepickers.="
                     $(function () {
                         $('#DatePicker_".$registro_campos["campo"]."').datetimepicker({
+                            //locale: 'es',
                             language: '$IdiomaPredeterminado',
                             ".$cadena_ID_datepickerEspecifica."
                         });
