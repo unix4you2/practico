@@ -1,10 +1,6 @@
 ![PRACTICO](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/LogoHorizontal.png)
 ![PHP7](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/php7.png)
-[![Build Status](https://travis-ci.org/unix4you2/practico.svg?branch=master)](https://travis-ci.org/unix4you2/practico)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Estadisticas del proyecto](https://www.openhub.net/p/practicoframework/widgets/project_thin_badge.gif)](https://www.openhub.net/p/practicoframework)
-[![Da las gracias!](https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg)](https://www.practico.org/agradecimientos)
-[![Desplegar](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/heroku.png)](https://heroku.com/deploy?template=https://github.com/unix4you2/practico/tree/master)
 
 Practico es una herramienta de codigo abierto para el diseño automatico de aplicaciones web de manera agil y sin digitar codigo
 
@@ -57,7 +53,3 @@ Si encuentra útil este proyecto y desea contribuir al desarrollo del mismo pued
 
 [![Donaciones](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/paypal.png)](https://www.paypal.com/cgi-bin/webscr?item_name=Donacion+para+desarrollo+de+funcionalidades+de+Pr%E1ctico&cmd=_donations&business=unix4you2%40gmail.com)
 
-
-
-
-[![Analytics](https://rastreador-visitas.appspot.com/UA-847800-9/ArbolFuentes/README?pixel)](https://github.com/practico/rastreador-visitas)
