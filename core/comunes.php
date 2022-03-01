@@ -4685,7 +4685,7 @@ function PCO_BuscarActualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
 		$buscar=rand(0,7);
 		if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $PCO_Accion=="PCO_VerMenu" && $buscar==1)
 			{
-				$path_ultima_version="https://raw.githubusercontent.com/unix4you2/practico/master/dev_tools/version_publicada.txt";
+				$path_ultima_version="http://dev.practico.org:3000/unix4you2/practico/raw/branch/master/dev/version_publicada.txt";
 				$version_actualizada = @PCO_CargarURL($path_ultima_version);
 				$archivo_origen="inc/version_actual.txt";
 				$archivo = fopen($archivo_origen, "r");
