@@ -50,7 +50,6 @@ Group: Modulos Principales  {
    Group: Core  {
 
       File: Conexiones PDO  (core/conexiones.php)
-      File: dev_tools/tests/z_consola.php  (dev_tools/tests/z_consola.php)
 
       Group: Inc  {
 
@@ -127,6 +126,7 @@ Group: Index  {
    Cookie Index: Cookies
    Event Index: Events
    Type Index: Types
+   Build Target Index: Build Targets
    }  # Group: Index
 
 Text: Copyright (c) 2013
@@ -153,206 +153,6 @@ Group: Mod  {
          }  # Group: Inc
 
       Group: Mod  {
-
-         Group: Mxgraph  {
-
-            File: mxClient  (mod/pcoder/mod/mxgraph/javascript/mxClient.js)
-            File: scripts/.../js/Graph.js  (mod/pcoder/mod/mxgraph/javascript/scripts/grapheditor/www/js/Graph.js)
-
-            Group: Src  {
-
-               File: API Specification  (mod/pcoder/mod/mxgraph/javascript/src/js/index.txt)
-
-               Group: Editor  {
-
-                  File: mxDefaultKeyHandler  (mod/pcoder/mod/mxgraph/javascript/src/js/editor/mxDefaultKeyHandler.js)
-                  File: mxDefaultPopupMenu  (mod/pcoder/mod/mxgraph/javascript/src/js/editor/mxDefaultPopupMenu.js)
-                  File: mxDefaultToolbar  (mod/pcoder/mod/mxgraph/javascript/src/js/editor/mxDefaultToolbar.js)
-                  File: mxEditor  (mod/pcoder/mod/mxgraph/javascript/src/js/editor/mxEditor.js)
-                  }  # Group: Editor
-
-               Group: Handler  {
-
-                  File: mxCellHighlight  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxCellHighlight.js)
-                  File: mxCellMarker  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxCellMarker.js)
-                  File: mxCellTracker  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxCellTracker.js)
-                  File: mxConnectionHandler  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxConnectionHandler.js)
-                  File: mxConstraintHandler  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxConstraintHandler.js)
-                  File: mxEdgeHandler  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxEdgeHandler.js)
-                  File: mxEdgeSegmentHandler.js  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxEdgeSegmentHandler.js)
-                  File: mxElbowEdgeHandler  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxElbowEdgeHandler.js)
-                  File: mxGraphHandler  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxGraphHandler.js)
-                  File: mxHandle  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxHandle.js)
-                  File: mxKeyHandler  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxKeyHandler.js)
-                  File: mxPanningHandler  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxPanningHandler.js)
-                  File: mxPopupMenuHandler  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxPopupMenuHandler.js)
-                  File: mxRubberband  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxRubberband.js)
-                  File: mxSelectionCellsHandler  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxSelectionCellsHandler.js)
-                  File: mxTooltipHandler  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxTooltipHandler.js)
-                  File: mxVertexHandler  (mod/pcoder/mod/mxgraph/javascript/src/js/handler/mxVertexHandler.js)
-                  }  # Group: Handler
-
-               Group: Io  {
-
-                  File: mxCellCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxCellCodec.js)
-                  File: mxChildChangeCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxChildChangeCodec.js)
-                  File: mxCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxCodec.js)
-                  File: mxCodecRegistry  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxCodecRegistry.js)
-                  File: mxDefaultKeyHandlerCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxDefaultKeyHandlerCodec.js)
-                  File: mxDefaultPopupMenuCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxDefaultPopupMenuCodec.js)
-                  File: mxDefaultToolbarCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxDefaultToolbarCodec.js)
-                  File: mxEditorCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxEditorCodec.js)
-                  File: mxGenericChangeCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxGenericChangeCodec.js)
-                  File: mxGraphCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxGraphCodec.js)
-                  File: mxGraphViewCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxGraphViewCodec.js)
-                  File: mxModelCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxModelCodec.js)
-                  File: mxObjectCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxObjectCodec.js)
-                  File: mxRootChangeCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxRootChangeCodec.js)
-                  File: mxStylesheetCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxStylesheetCodec.js)
-                  File: mxTerminalChangeCodec  (mod/pcoder/mod/mxgraph/javascript/src/js/io/mxTerminalChangeCodec.js)
-                  }  # Group: Io
-
-               Group: Layout  {
-
-                  Group: Hierarchical  {
-
-                     Group: Model  {
-
-                        File: mxGraphAbstractHierarchyCell  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/hierarchical/model/mxGraphAbstractHierarchyCell.js)
-                        File: mxGraphHierarchyEdge  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/hierarchical/model/mxGraphHierarchyEdge.js)
-                        File: mxGraphHierarchyModel  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/hierarchical/model/mxGraphHierarchyModel.js)
-                        File: mxGraphHierarchyNode  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/hierarchical/model/mxGraphHierarchyNode.js)
-                        File: mxSwimlaneModel  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/hierarchical/model/mxSwimlaneModel.js)
-                        }  # Group: Model
-
-                     File: mxHierarchicalLayout  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/hierarchical/mxHierarchicalLayout.js)
-                     File: mxSwimlaneLayout  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/hierarchical/mxSwimlaneLayout.js)
-
-                     Group: Stage  {
-
-                        File: mxCoordinateAssignment  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/hierarchical/stage/mxCoordinateAssignment.js)
-                        File: mxHierarchicalLayoutStage  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/hierarchical/stage/mxHierarchicalLayoutStage.js)
-                        File: mxMedianHybridCrossingReduction  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/hierarchical/stage/mxMedianHybridCrossingReduction.js)
-                        File: mxMinimumCycleRemover  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/hierarchical/stage/mxMinimumCycleRemover.js)
-                        File: mxSwimlaneOrdering  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/hierarchical/stage/mxSwimlaneOrdering.js)
-                        }  # Group: Stage
-
-                     }  # Group: Hierarchical
-
-                  File: mxCircleLayout  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/mxCircleLayout.js)
-                  File: mxCompactTreeLayout  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/mxCompactTreeLayout.js)
-                  File: mxCompositeLayout  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/mxCompositeLayout.js)
-                  File: mxEdgeLabelLayout  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/mxEdgeLabelLayout.js)
-                  File: mxFastOrganicLayout  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/mxFastOrganicLayout.js)
-                  File: mxGraphLayout  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/mxGraphLayout.js)
-                  File: mxParallelEdgeLayout  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/mxParallelEdgeLayout.js)
-                  File: mxPartitionLayout  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/mxPartitionLayout.js)
-                  File: mxRadialTreeLayout  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/mxRadialTreeLayout.js)
-                  File: mxStackLayout  (mod/pcoder/mod/mxgraph/javascript/src/js/layout/mxStackLayout.js)
-                  }  # Group: Layout
-
-               Group: Model  {
-
-                  File: mxCell  (mod/pcoder/mod/mxgraph/javascript/src/js/model/mxCell.js)
-                  File: mxCellPath  (mod/pcoder/mod/mxgraph/javascript/src/js/model/mxCellPath.js)
-                  File: mxGeometry  (mod/pcoder/mod/mxgraph/javascript/src/js/model/mxGeometry.js)
-                  File: mxGraphModel  (mod/pcoder/mod/mxgraph/javascript/src/js/model/mxGraphModel.js)
-                  }  # Group: Model
-
-               File: mxClient  (mod/pcoder/mod/mxgraph/javascript/src/js/mxClient.js)
-
-               Group: Shape  {
-
-                  File: mxActor  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxActor.js)
-                  File: mxArrow  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxArrow.js)
-                  File: mxArrowConnector  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxArrowConnector.js)
-                  File: mxCloud  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxCloud.js)
-                  File: mxConnector  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxConnector.js)
-                  File: mxCylinder  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxCylinder.js)
-                  File: mxDoubleEllipse  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxDoubleEllipse.js)
-                  File: mxEllipse  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxEllipse.js)
-                  File: mxHexagon  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxHexagon.js)
-                  File: mxImageShape  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxImageShape.js)
-                  File: mxLabel  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxLabel.js)
-                  File: mxLine  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxLine.js)
-                  File: mxMarker  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxMarker.js)
-                  File: mxPolyline  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxPolyline.js)
-                  File: mxRectangleShape  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxRectangleShape.js)
-                  File: mxRhombus  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxRhombus.js)
-                  File: mxShape  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxShape.js)
-                  File: mxStencil  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxStencil.js)
-                  File: mxStencilRegistry  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxStencilRegistry.js)
-                  File: mxSwimlane  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxSwimlane.js)
-                  File: mxText  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxText.js)
-                  File: mxTriangle  (mod/pcoder/mod/mxgraph/javascript/src/js/shape/mxTriangle.js)
-                  }  # Group: Shape
-
-               Group: Util  {
-
-                  File: mxAbstractCanvas2D  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxAbstractCanvas2D.js)
-                  File: mxAnimation  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxAnimation.js)
-                  File: mxAutoSaveManager  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxAutoSaveManager.js)
-                  File: mxClipboard  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxClipboard.js)
-                  File: mxConstants  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxConstants.js)
-                  File: mxDictionary  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxDictionary.js)
-                  File: mxDivResizer  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxDivResizer.js)
-                  File: mxDragSource  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxDragSource.js)
-                  File: mxEffects  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxEffects.js)
-                  File: mxEvent  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxEvent.js)
-                  File: mxEventObject  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxEventObject.js)
-                  File: mxEventSource  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxEventSource.js)
-                  File: mxForm  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxForm.js)
-                  File: mxGuide  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxGuide.js)
-                  File: mxImage  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxImage.js)
-                  File: mxImageBundle  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxImageBundle.js)
-                  File: mxImageExport  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxImageExport.js)
-                  File: mxLog  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxLog.js)
-                  File: mxMorphing  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxMorphing.js)
-                  File: mxMouseEvent  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxMouseEvent.js)
-                  File: mxObjectIdentity  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxObjectIdentity.js)
-                  File: mxPanningManager  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxPanningManager.js)
-                  File: mxPoint  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxPoint.js)
-                  File: mxPopupMenu  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxPopupMenu.js)
-                  File: mxRectangle  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxRectangle.js)
-                  File: mxResources  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxResources.js)
-                  File: mxSvgCanvas2D  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxSvgCanvas2D.js)
-                  File: mxToolbar  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxToolbar.js)
-                  File: mxUndoableEdit  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxUndoableEdit.js)
-                  File: mxUndoManager  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxUndoManager.js)
-                  File: mxUrlConverter  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxUrlConverter.js)
-                  File: mxUtils  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxUtils.js)
-                  File: mxVmlCanvas2D  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxVmlCanvas2D.js)
-                  File: mxWindow  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxWindow.js)
-                  File: mxXmlCanvas2D  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxXmlCanvas2D.js)
-                  File: mxXmlRequest  (mod/pcoder/mod/mxgraph/javascript/src/js/util/mxXmlRequest.js)
-                  }  # Group: Util
-
-               Group: View  {
-
-                  File: mxCellEditor  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxCellEditor.js)
-                  File: mxCellOverlay  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxCellOverlay.js)
-                  File: mxCellRenderer  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxCellRenderer.js)
-                  File: mxCellState  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxCellState.js)
-                  File: mxCellStatePreview  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxCellStatePreview.js)
-                  File: mxConnectionConstraint  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxConnectionConstraint.js)
-                  File: mxEdgeStyle  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxEdgeStyle.js)
-                  File: mxGraph  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxGraph.js)
-                  File: mxGraphSelectionModel  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxGraphSelectionModel.js)
-                  File: mxGraphView  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxGraphView.js)
-                  File: mxLayoutManager  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxLayoutManager.js)
-                  File: mxMultiplicity  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxMultiplicity.js)
-                  File: mxOutline  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxOutline.js)
-                  File: mxPerimeter  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxPerimeter.js)
-                  File: mxPrintPreview  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxPrintPreview.js)
-                  File: mxStyleRegistry  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxStyleRegistry.js)
-                  File: mxStylesheet  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxStylesheet.js)
-                  File: mxSwimlaneManager  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxSwimlaneManager.js)
-                  File: mxTemporaryCellStates  (mod/pcoder/mod/mxgraph/javascript/src/js/view/mxTemporaryCellStates.js)
-                  }  # Group: View
-
-               }  # Group: Src
-
-            }  # Group: Mxgraph
 
          File: pboard/dist/bundle.js  (mod/pcoder/mod/pboard/dist/bundle.js)
          File: PCONSOLE_Cargar  (mod/pcoder/mod/consola/index.php)
@@ -381,7 +181,218 @@ Group: Inc  {
    File: PCOJS_MostrarMensaje  (inc/bootstrap/js/practico.js)
    }  # Group: Inc
 
-File: "StructElem",  (inc/jquery/plugins/pdfmake-0.1.71/pdfmake.js)
-File: Modulo SSO-SAML  (inc/php-saml/practico/index.php)
-File: Modulo SSO-SAML  (inc/php-saml/practico/metadata.php)
-File: Modulo SSO-SAML  (inc/php-saml/practico/settings.php)
+Group: Inc  {
+
+   File: "StructElem",  (inc/jquery/plugins/pdfmake-0.1.71/pdfmake.js)
+
+   Group: Mxgraph  {
+
+      File: ChangeGridColor  (inc/mxgraph/javascript/scripts/grapheditor/www/js/EditorUi.js)
+      File: mxClient  (inc/mxgraph/javascript/mxClient.js)
+      File: scripts/.../js/Graph.js  (inc/mxgraph/javascript/scripts/grapheditor/www/js/Graph.js)
+
+      Group: Src  {
+
+         File: API Specification  (inc/mxgraph/javascript/src/js/index.txt)
+
+         Group: Editor  {
+
+            File: mxDefaultKeyHandler  (inc/mxgraph/javascript/src/js/editor/mxDefaultKeyHandler.js)
+            File: mxDefaultPopupMenu  (inc/mxgraph/javascript/src/js/editor/mxDefaultPopupMenu.js)
+            File: mxDefaultToolbar  (inc/mxgraph/javascript/src/js/editor/mxDefaultToolbar.js)
+            File: mxEditor  (inc/mxgraph/javascript/src/js/editor/mxEditor.js)
+            }  # Group: Editor
+
+         Group: Handler  {
+
+            File: mxCellHighlight  (inc/mxgraph/javascript/src/js/handler/mxCellHighlight.js)
+            File: mxCellMarker  (inc/mxgraph/javascript/src/js/handler/mxCellMarker.js)
+            File: mxCellTracker  (inc/mxgraph/javascript/src/js/handler/mxCellTracker.js)
+            File: mxConnectionHandler  (inc/mxgraph/javascript/src/js/handler/mxConnectionHandler.js)
+            File: mxConstraintHandler  (inc/mxgraph/javascript/src/js/handler/mxConstraintHandler.js)
+            File: mxEdgeHandler  (inc/mxgraph/javascript/src/js/handler/mxEdgeHandler.js)
+            File: mxEdgeSegmentHandler.js  (inc/mxgraph/javascript/src/js/handler/mxEdgeSegmentHandler.js)
+            File: mxElbowEdgeHandler  (inc/mxgraph/javascript/src/js/handler/mxElbowEdgeHandler.js)
+            File: mxGraphHandler  (inc/mxgraph/javascript/src/js/handler/mxGraphHandler.js)
+            File: mxHandle  (inc/mxgraph/javascript/src/js/handler/mxHandle.js)
+            File: mxKeyHandler  (inc/mxgraph/javascript/src/js/handler/mxKeyHandler.js)
+            File: mxPanningHandler  (inc/mxgraph/javascript/src/js/handler/mxPanningHandler.js)
+            File: mxPopupMenuHandler  (inc/mxgraph/javascript/src/js/handler/mxPopupMenuHandler.js)
+            File: mxRubberband  (inc/mxgraph/javascript/src/js/handler/mxRubberband.js)
+            File: mxSelectionCellsHandler  (inc/mxgraph/javascript/src/js/handler/mxSelectionCellsHandler.js)
+            File: mxTooltipHandler  (inc/mxgraph/javascript/src/js/handler/mxTooltipHandler.js)
+            File: mxVertexHandler  (inc/mxgraph/javascript/src/js/handler/mxVertexHandler.js)
+            }  # Group: Handler
+
+         Group: Io  {
+
+            File: mxCellCodec  (inc/mxgraph/javascript/src/js/io/mxCellCodec.js)
+            File: mxChildChangeCodec  (inc/mxgraph/javascript/src/js/io/mxChildChangeCodec.js)
+            File: mxCodec  (inc/mxgraph/javascript/src/js/io/mxCodec.js)
+            File: mxCodecRegistry  (inc/mxgraph/javascript/src/js/io/mxCodecRegistry.js)
+            File: mxDefaultKeyHandlerCodec  (inc/mxgraph/javascript/src/js/io/mxDefaultKeyHandlerCodec.js)
+            File: mxDefaultPopupMenuCodec  (inc/mxgraph/javascript/src/js/io/mxDefaultPopupMenuCodec.js)
+            File: mxDefaultToolbarCodec  (inc/mxgraph/javascript/src/js/io/mxDefaultToolbarCodec.js)
+            File: mxEditorCodec  (inc/mxgraph/javascript/src/js/io/mxEditorCodec.js)
+            File: mxGenericChangeCodec  (inc/mxgraph/javascript/src/js/io/mxGenericChangeCodec.js)
+            File: mxGraphCodec  (inc/mxgraph/javascript/src/js/io/mxGraphCodec.js)
+            File: mxGraphViewCodec  (inc/mxgraph/javascript/src/js/io/mxGraphViewCodec.js)
+            File: mxModelCodec  (inc/mxgraph/javascript/src/js/io/mxModelCodec.js)
+            File: mxObjectCodec  (inc/mxgraph/javascript/src/js/io/mxObjectCodec.js)
+            File: mxRootChangeCodec  (inc/mxgraph/javascript/src/js/io/mxRootChangeCodec.js)
+            File: mxStylesheetCodec  (inc/mxgraph/javascript/src/js/io/mxStylesheetCodec.js)
+            File: mxTerminalChangeCodec  (inc/mxgraph/javascript/src/js/io/mxTerminalChangeCodec.js)
+            }  # Group: Io
+
+         Group: Layout  {
+
+            Group: Hierarchical  {
+
+               Group: Model  {
+
+                  File: mxGraphAbstractHierarchyCell  (inc/mxgraph/javascript/src/js/layout/hierarchical/model/mxGraphAbstractHierarchyCell.js)
+                  File: mxGraphHierarchyEdge  (inc/mxgraph/javascript/src/js/layout/hierarchical/model/mxGraphHierarchyEdge.js)
+                  File: mxGraphHierarchyModel  (inc/mxgraph/javascript/src/js/layout/hierarchical/model/mxGraphHierarchyModel.js)
+                  File: mxGraphHierarchyNode  (inc/mxgraph/javascript/src/js/layout/hierarchical/model/mxGraphHierarchyNode.js)
+                  File: mxSwimlaneModel  (inc/mxgraph/javascript/src/js/layout/hierarchical/model/mxSwimlaneModel.js)
+                  }  # Group: Model
+
+               File: mxHierarchicalLayout  (inc/mxgraph/javascript/src/js/layout/hierarchical/mxHierarchicalLayout.js)
+               File: mxSwimlaneLayout  (inc/mxgraph/javascript/src/js/layout/hierarchical/mxSwimlaneLayout.js)
+
+               Group: Stage  {
+
+                  File: mxCoordinateAssignment  (inc/mxgraph/javascript/src/js/layout/hierarchical/stage/mxCoordinateAssignment.js)
+                  File: mxHierarchicalLayoutStage  (inc/mxgraph/javascript/src/js/layout/hierarchical/stage/mxHierarchicalLayoutStage.js)
+                  File: mxMedianHybridCrossingReduction  (inc/mxgraph/javascript/src/js/layout/hierarchical/stage/mxMedianHybridCrossingReduction.js)
+                  File: mxMinimumCycleRemover  (inc/mxgraph/javascript/src/js/layout/hierarchical/stage/mxMinimumCycleRemover.js)
+                  File: mxSwimlaneOrdering  (inc/mxgraph/javascript/src/js/layout/hierarchical/stage/mxSwimlaneOrdering.js)
+                  }  # Group: Stage
+
+               }  # Group: Hierarchical
+
+            File: mxCircleLayout  (inc/mxgraph/javascript/src/js/layout/mxCircleLayout.js)
+            File: mxCompactTreeLayout  (inc/mxgraph/javascript/src/js/layout/mxCompactTreeLayout.js)
+            File: mxCompositeLayout  (inc/mxgraph/javascript/src/js/layout/mxCompositeLayout.js)
+            File: mxEdgeLabelLayout  (inc/mxgraph/javascript/src/js/layout/mxEdgeLabelLayout.js)
+            File: mxFastOrganicLayout  (inc/mxgraph/javascript/src/js/layout/mxFastOrganicLayout.js)
+            File: mxGraphLayout  (inc/mxgraph/javascript/src/js/layout/mxGraphLayout.js)
+            File: mxParallelEdgeLayout  (inc/mxgraph/javascript/src/js/layout/mxParallelEdgeLayout.js)
+            File: mxPartitionLayout  (inc/mxgraph/javascript/src/js/layout/mxPartitionLayout.js)
+            File: mxRadialTreeLayout  (inc/mxgraph/javascript/src/js/layout/mxRadialTreeLayout.js)
+            File: mxStackLayout  (inc/mxgraph/javascript/src/js/layout/mxStackLayout.js)
+            }  # Group: Layout
+
+         Group: Model  {
+
+            File: mxCell  (inc/mxgraph/javascript/src/js/model/mxCell.js)
+            File: mxCellPath  (inc/mxgraph/javascript/src/js/model/mxCellPath.js)
+            File: mxGeometry  (inc/mxgraph/javascript/src/js/model/mxGeometry.js)
+            File: mxGraphModel  (inc/mxgraph/javascript/src/js/model/mxGraphModel.js)
+            }  # Group: Model
+
+         File: mxClient  (inc/mxgraph/javascript/src/js/mxClient.js)
+
+         Group: Shape  {
+
+            File: mxActor  (inc/mxgraph/javascript/src/js/shape/mxActor.js)
+            File: mxArrow  (inc/mxgraph/javascript/src/js/shape/mxArrow.js)
+            File: mxArrowConnector  (inc/mxgraph/javascript/src/js/shape/mxArrowConnector.js)
+            File: mxCloud  (inc/mxgraph/javascript/src/js/shape/mxCloud.js)
+            File: mxConnector  (inc/mxgraph/javascript/src/js/shape/mxConnector.js)
+            File: mxCylinder  (inc/mxgraph/javascript/src/js/shape/mxCylinder.js)
+            File: mxDoubleEllipse  (inc/mxgraph/javascript/src/js/shape/mxDoubleEllipse.js)
+            File: mxEllipse  (inc/mxgraph/javascript/src/js/shape/mxEllipse.js)
+            File: mxHexagon  (inc/mxgraph/javascript/src/js/shape/mxHexagon.js)
+            File: mxImageShape  (inc/mxgraph/javascript/src/js/shape/mxImageShape.js)
+            File: mxLabel  (inc/mxgraph/javascript/src/js/shape/mxLabel.js)
+            File: mxLine  (inc/mxgraph/javascript/src/js/shape/mxLine.js)
+            File: mxMarker  (inc/mxgraph/javascript/src/js/shape/mxMarker.js)
+            File: mxPolyline  (inc/mxgraph/javascript/src/js/shape/mxPolyline.js)
+            File: mxRectangleShape  (inc/mxgraph/javascript/src/js/shape/mxRectangleShape.js)
+            File: mxRhombus  (inc/mxgraph/javascript/src/js/shape/mxRhombus.js)
+            File: mxShape  (inc/mxgraph/javascript/src/js/shape/mxShape.js)
+            File: mxStencil  (inc/mxgraph/javascript/src/js/shape/mxStencil.js)
+            File: mxStencilRegistry  (inc/mxgraph/javascript/src/js/shape/mxStencilRegistry.js)
+            File: mxSwimlane  (inc/mxgraph/javascript/src/js/shape/mxSwimlane.js)
+            File: mxText  (inc/mxgraph/javascript/src/js/shape/mxText.js)
+            File: mxTriangle  (inc/mxgraph/javascript/src/js/shape/mxTriangle.js)
+            }  # Group: Shape
+
+         Group: Util  {
+
+            File: mxAbstractCanvas2D  (inc/mxgraph/javascript/src/js/util/mxAbstractCanvas2D.js)
+            File: mxAnimation  (inc/mxgraph/javascript/src/js/util/mxAnimation.js)
+            File: mxAutoSaveManager  (inc/mxgraph/javascript/src/js/util/mxAutoSaveManager.js)
+            File: mxClipboard  (inc/mxgraph/javascript/src/js/util/mxClipboard.js)
+            File: mxConstants  (inc/mxgraph/javascript/src/js/util/mxConstants.js)
+            File: mxDictionary  (inc/mxgraph/javascript/src/js/util/mxDictionary.js)
+            File: mxDivResizer  (inc/mxgraph/javascript/src/js/util/mxDivResizer.js)
+            File: mxDragSource  (inc/mxgraph/javascript/src/js/util/mxDragSource.js)
+            File: mxEffects  (inc/mxgraph/javascript/src/js/util/mxEffects.js)
+            File: mxEvent  (inc/mxgraph/javascript/src/js/util/mxEvent.js)
+            File: mxEventObject  (inc/mxgraph/javascript/src/js/util/mxEventObject.js)
+            File: mxEventSource  (inc/mxgraph/javascript/src/js/util/mxEventSource.js)
+            File: mxForm  (inc/mxgraph/javascript/src/js/util/mxForm.js)
+            File: mxGuide  (inc/mxgraph/javascript/src/js/util/mxGuide.js)
+            File: mxImage  (inc/mxgraph/javascript/src/js/util/mxImage.js)
+            File: mxImageBundle  (inc/mxgraph/javascript/src/js/util/mxImageBundle.js)
+            File: mxImageExport  (inc/mxgraph/javascript/src/js/util/mxImageExport.js)
+            File: mxLog  (inc/mxgraph/javascript/src/js/util/mxLog.js)
+            File: mxMorphing  (inc/mxgraph/javascript/src/js/util/mxMorphing.js)
+            File: mxMouseEvent  (inc/mxgraph/javascript/src/js/util/mxMouseEvent.js)
+            File: mxObjectIdentity  (inc/mxgraph/javascript/src/js/util/mxObjectIdentity.js)
+            File: mxPanningManager  (inc/mxgraph/javascript/src/js/util/mxPanningManager.js)
+            File: mxPoint  (inc/mxgraph/javascript/src/js/util/mxPoint.js)
+            File: mxPopupMenu  (inc/mxgraph/javascript/src/js/util/mxPopupMenu.js)
+            File: mxRectangle  (inc/mxgraph/javascript/src/js/util/mxRectangle.js)
+            File: mxResources  (inc/mxgraph/javascript/src/js/util/mxResources.js)
+            File: mxSvgCanvas2D  (inc/mxgraph/javascript/src/js/util/mxSvgCanvas2D.js)
+            File: mxToolbar  (inc/mxgraph/javascript/src/js/util/mxToolbar.js)
+            File: mxUndoableEdit  (inc/mxgraph/javascript/src/js/util/mxUndoableEdit.js)
+            File: mxUndoManager  (inc/mxgraph/javascript/src/js/util/mxUndoManager.js)
+            File: mxUrlConverter  (inc/mxgraph/javascript/src/js/util/mxUrlConverter.js)
+            File: mxUtils  (inc/mxgraph/javascript/src/js/util/mxUtils.js)
+            File: mxVmlCanvas2D  (inc/mxgraph/javascript/src/js/util/mxVmlCanvas2D.js)
+            File: mxWindow  (inc/mxgraph/javascript/src/js/util/mxWindow.js)
+            File: mxXmlCanvas2D  (inc/mxgraph/javascript/src/js/util/mxXmlCanvas2D.js)
+            File: mxXmlRequest  (inc/mxgraph/javascript/src/js/util/mxXmlRequest.js)
+            }  # Group: Util
+
+         Group: View  {
+
+            File: mxCellEditor  (inc/mxgraph/javascript/src/js/view/mxCellEditor.js)
+            File: mxCellOverlay  (inc/mxgraph/javascript/src/js/view/mxCellOverlay.js)
+            File: mxCellRenderer  (inc/mxgraph/javascript/src/js/view/mxCellRenderer.js)
+            File: mxCellState  (inc/mxgraph/javascript/src/js/view/mxCellState.js)
+            File: mxCellStatePreview  (inc/mxgraph/javascript/src/js/view/mxCellStatePreview.js)
+            File: mxConnectionConstraint  (inc/mxgraph/javascript/src/js/view/mxConnectionConstraint.js)
+            File: mxEdgeStyle  (inc/mxgraph/javascript/src/js/view/mxEdgeStyle.js)
+            File: mxGraph  (inc/mxgraph/javascript/src/js/view/mxGraph.js)
+            File: mxGraphSelectionModel  (inc/mxgraph/javascript/src/js/view/mxGraphSelectionModel.js)
+            File: mxGraphView  (inc/mxgraph/javascript/src/js/view/mxGraphView.js)
+            File: mxLayoutManager  (inc/mxgraph/javascript/src/js/view/mxLayoutManager.js)
+            File: mxMultiplicity  (inc/mxgraph/javascript/src/js/view/mxMultiplicity.js)
+            File: mxOutline  (inc/mxgraph/javascript/src/js/view/mxOutline.js)
+            File: mxPerimeter  (inc/mxgraph/javascript/src/js/view/mxPerimeter.js)
+            File: mxPrintPreview  (inc/mxgraph/javascript/src/js/view/mxPrintPreview.js)
+            File: mxStyleRegistry  (inc/mxgraph/javascript/src/js/view/mxStyleRegistry.js)
+            File: mxStylesheet  (inc/mxgraph/javascript/src/js/view/mxStylesheet.js)
+            File: mxSwimlaneManager  (inc/mxgraph/javascript/src/js/view/mxSwimlaneManager.js)
+            File: mxTemporaryCellStates  (inc/mxgraph/javascript/src/js/view/mxTemporaryCellStates.js)
+            }  # Group: View
+
+         }  # Group: Src
+
+      }  # Group: Mxgraph
+
+   Group: Php-saml  {
+
+      File: Modulo SSO-SAML  (inc/php-saml/practico/index.php)
+      File: Modulo SSO-SAML  (inc/php-saml/practico/metadata.php)
+      File: Modulo SSO-SAML  (inc/php-saml/practico/settings.php)
+      }  # Group: Php-saml
+
+   }  # Group: Inc
+
+File: z_consola.php  (dev/tests/z_consola.php)
