@@ -81,13 +81,13 @@
 	for i in $ListaArchivosJS
 	do
 		echo "Optimizando $i$ExtensionArchivosJS"
-		java -jar dev_tools/yuicompressor/yuicompressor-2.4.8.jar $SaltosDeLinea $SetCaracteres $NoOfuscarCodigo $MantenerComilla $NoOptimizar --type js -o "$i$PrefijoArchivo$ExtensionArchivosJS" "$i$ExtensionArchivosJS"
+		java -jar dev/yuicompressor/yuicompressor-2.4.8.jar $SaltosDeLinea $SetCaracteres $NoOfuscarCodigo $MantenerComilla $NoOptimizar --type js -o "$i$PrefijoArchivo$ExtensionArchivosJS" "$i$ExtensionArchivosJS"
 	done
 
 	for i in $ListaArchivosCSS
 	do
 		echo "Optimizando $i$ExtensionArchivosCSS"
-		java -jar dev_tools/yuicompressor/yuicompressor-2.4.8.jar $SaltosDeLinea $SetCaracteres $NoOfuscarCodigo $MantenerComilla $NoOptimizar --type css -o "$i$PrefijoArchivo$ExtensionArchivosCSS" "$i$ExtensionArchivosCSS"
+		java -jar dev/yuicompressor/yuicompressor-2.4.8.jar $SaltosDeLinea $SetCaracteres $NoOfuscarCodigo $MantenerComilla $NoOptimizar --type css -o "$i$PrefijoArchivo$ExtensionArchivosCSS" "$i$ExtensionArchivosCSS"
 	done
 
 # Bash de supervivencia

@@ -42,12 +42,12 @@
      GNU junto con este programa. Si no, vea <http://www.gnu.org/licenses/>
     
 		Title: t_obsoletas
-		Ubicacion *[dev_tools/tests/t_obsoletas.php]*.  Pruebas para evaluacion de funciones obsoletas en las diferentes versiones de PHP
+		Ubicacion *[dev/tests/t_obsoletas.php]*.  Pruebas para evaluacion de funciones obsoletas en las diferentes versiones de PHP
 	*/
 
 	// Definicion de variables para almacenar resultado
 	$estado_final="0";
-	include_once("dev_tools/tests/z_consola.php");
+	include_once("dev/tests/z_consola.php");
     //Presenta estado sobre TravisCI
     PCOCLI_MensajeSimple(" EJECUTANDO PRUEBAS DE FUNCIONES OBSOLETAS ");
 	

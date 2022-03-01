@@ -499,12 +499,12 @@ function PCO_ParsearBloquesDocumentacion($ArregloComentarios)
     }
 
 if ($HabilitarDepuracion)
-    $CodigoEntrada=file_get_contents( "../dev_tools/tests/t_documentador.php" );
+    $CodigoEntrada=file_get_contents( "../dev/tests/t_documentador.php" );
 
 //Limpia cualquier documentacion previa antes de regenerar
 $Resultado=PCO_EjecutarSQLUnaria("DELETE FROM core_devdoc WHERE 1=1");
 
-$ArregloComentariosIdentificados=PCO_ObtenerBloquesDocumentacion($CodigoEntrada,"Arch","../dev_tools/tests/t_documentador.php");
+$ArregloComentariosIdentificados=PCO_ObtenerBloquesDocumentacion($CodigoEntrada,"Arch","../dev/tests/t_documentador.php");
 $ComentariosParseados=PCO_ParsearBloquesDocumentacion($ArregloComentariosIdentificados);
 
 

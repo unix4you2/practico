@@ -65,10 +65,10 @@ php objeto2xml.php
 	cd ..
 
 #Incluye el archivo que ajusta todos los permisos previa generacion del zip
-	source dev_tools/chmod2zip.sh
+	source dev/chmod2zip.sh
 
 #Incluye la compresion de archivos CSS y JS
-	source dev_tools/cssjs2min.sh
+	source dev/cssjs2min.sh
 
 # PARAMETROS BASICOS DEL EMPAQUETADO
 	#Lista de archivos y carpetas a empaquetar (relativos a la raiz y separados por espacio)
@@ -96,7 +96,7 @@ php objeto2xml.php
 	Guion="-" # Usado en concatenaciones
 
 #Incluye los datos/parametros para generacion del parche
-#source dev_tools/log_cambios.txt
+#source dev/log_cambios.txt
 
 #[ArchivosExcluidos] Separados por espacio. Residen en alguna carpeta a comprimir pero deben evitarse
 ListaExcluidos=" inc/practico_se\* skin/nomo_editada\* mod/sopa\* mod/ldap\* mod/pam\* mod/pdf\* core/configuracion.php core/doc_configuracion.php core/doc_intro.php practico.sqlite3 "

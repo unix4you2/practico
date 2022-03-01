@@ -131,10 +131,10 @@ php objeto2xml.php
 	cd ..
 
 #Incluye el archivo que ajusta todos los permisos previa generacion del zip
-	source dev_tools/chmod2zip.sh
+	source dev/chmod2zip.sh
 
 #Incluye la compresion de archivos CSS y JS
-	source dev_tools/cssjs2min.sh
+	source dev/cssjs2min.sh
 
 # Variables de trabajo adicionales
 	oldIFS=$IFS  # conserva el separador de campo
@@ -147,7 +147,7 @@ php objeto2xml.php
 	To="_to_" # Usado en concatenaciones
 
 #Incluye los datos/parametros para generacion del parche
-	source dev_tools/log_cambios.txt
+	source dev/log_cambios.txt
 
 # PARAMETROS BASICOS DEL EMPAQUETADO
 	#Nombre del archivo resultante

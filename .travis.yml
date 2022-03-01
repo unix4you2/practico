@@ -185,7 +185,7 @@ before_script:
 #  - touch practico.db
 
   #Asegura permisos completos en la carpeta de pruebas
-  - chmod -R 777 dev_tools/tests
+  - chmod -R 777 dev/tests
 
   #  - if [[ "$DB" == "pgsql" ]]; then psql -c "DROP DATABASE IF EXISTS hello_world_test;" -U postgres; fi
   #  - if [[ "$DB" == "pgsql" ]]; then psql -c "create database hello_world_test;" -U postgres; fi
@@ -193,14 +193,14 @@ before_script:
 
 # Comandos para construir.  Todos deben retornar cero, cualquier otra salida se considera una falla
 script:
-  - sh  dev_tools/tests/t_sintaxis.sh
-  - php dev_tools/tests/t_obsoletas.php
-  - php dev_tools/tests/t_archivos.php
-  - php dev_tools/tests/t_basedatos.php
+  - sh  dev/tests/t_sintaxis.sh
+  - php dev/tests/t_obsoletas.php
+  - php dev/tests/t_archivos.php
+  - php dev/tests/t_basedatos.php
 
 #Para chequeos de sintaxis JS y CSS revisar repo https://github.com/elementary/website
-#  - dev_tools/parche2zip.sh                 # Script para generacion de parches entre versiones
-#  - dev_tools/practico2zip.sh              # Script para empaquetado y distribución de nuevas versiones
+#  - dev/parche2zip.sh                 # Script para generacion de parches entre versiones
+#  - dev/practico2zip.sh              # Script para empaquetado y distribución de nuevas versiones
 
 # Comandos a ejecutar cuando se finaliza la consutrccion sin problemas
 #after_success

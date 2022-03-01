@@ -42,7 +42,7 @@
      GNU junto con este programa. Si no, vea <http://www.gnu.org/licenses/>
 
 		Title: z_consola
-		Ubicacion *[dev_tools/tests/z_consola.php]*.  Funciones basicas para mensajes de consola
+		Ubicacion *[dev/tests/z_consola.php]*.  Funciones basicas para mensajes de consola
 	*/
 
 

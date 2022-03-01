@@ -42,12 +42,12 @@
      GNU junto con este programa. Si no, vea <http://www.gnu.org/licenses/>
     
 		Title: t_basedatos
-		Ubicacion *[dev_tools/tests/t_basedatos.php]*.  Pruebas para evaluacion de bases de datos al momento de instalacion
+		Ubicacion *[dev/tests/t_basedatos.php]*.  Pruebas para evaluacion de bases de datos al momento de instalacion
 	*/
 
 	// Definicion de variables para almacenar resultado
 	$estado_final="0";
-	include_once("dev_tools/tests/z_consola.php");
+	include_once("dev/tests/z_consola.php");
 	include_once("core/comunes.php");
 	$accion="";
 	$hay_error=0;

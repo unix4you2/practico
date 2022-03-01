@@ -1348,7 +1348,7 @@ para la liberación de la versión 13.912 realizadas en www.indiegogo.com/projec
   * Adición de objetos para los campos de selección de tipo radio-button
   * Botón de acceso directo a la vista previa de informes
   * Adición de acciones para informes
-  * Utilidad de empaquetamiento en dev_tools (bajo Git)
+  * Utilidad de empaquetamiento en /dev (bajo Git)
 
 ## Versión 13.1 (2013-01-15)
   * Primer lanzamiento oficial

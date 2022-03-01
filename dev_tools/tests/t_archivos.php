@@ -42,12 +42,12 @@
      GNU junto con este programa. Si no, vea <http://www.gnu.org/licenses/>
     
 		Title: t_basedatos
-		Ubicacion *[dev_tools/tests/t_archivos.php]*.  Pruebas para evaluacion de rutas y archivos basicos necesarios
+		Ubicacion *[dev/tests/t_archivos.php]*.  Pruebas para evaluacion de rutas y archivos basicos necesarios
 	*/
 
 	// Definicion de variables para almacenar resultado
 	$estado_final="0";
-	include_once("dev_tools/tests/z_consola.php");
+	include_once("dev/tests/z_consola.php");
     //Presenta estado sobre TravisCI
     PCOCLI_MensajeSimple(" EJECUTANDO PRUEBAS DE ARCHIVOS ESPECIFICOS ");
 

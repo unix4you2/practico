@@ -42,7 +42,7 @@
      GNU junto con este programa. Si no, vea <http://www.gnu.org/licenses/>
 
     Title: Documentacion para desarrolladores
-    Ubicacion *[/dev_tools/docs/variables.php]*.  Archivo con documentacion general de variables
+    Ubicacion *[/dev/docs/variables.php]*.  Archivo con documentacion general de variables
 
 
     Section: Variables de sesion
