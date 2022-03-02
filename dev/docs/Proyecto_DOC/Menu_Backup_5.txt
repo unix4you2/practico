@@ -1,0 +1,93 @@
+Format: 1.5
+
+
+Title: Practico
+SubTitle: Generador de aplicaciones WEB libre
+
+Footer: Copyright (c) 2013 - John F. Arroyave Gutierrez |
+
+# You can add a timestamp to your documentation like one of these:
+# Timestamp: Generated on month day, year
+# Timestamp: Updated mm/dd/yyyy
+# Timestamp: Last updated mon day
+#
+#   m     - One or two digit month.  January is "1"
+#   mm    - Always two digit month.  January is "01"
+#   mon   - Short month word.  January is "Jan"
+#   month - Long month word.  January is "January"
+#   d     - One or two digit day.  1 is "1"
+#   dd    - Always two digit day.  1 is "01"
+#   day   - Day with letter extension.  1 is "1st"
+#   yy    - Two digit year.  2006 is "06"
+#   yyyy  - Four digit year.  2006 is "2006"
+#   year  - Four digit year.  2006 is "2006"
+
+
+# --------------------------------------------------------------------------
+# 
+# Cut and paste the lines below to change the order in which your files
+# appear on the menu.  Don't worry about adding or removing files, Natural
+# Docs will take care of that.
+# 
+# You can further organize the menu by grouping the entries.  Add a
+# "Group: [name] {" line to start a group, and add a "}" to end it.
+# 
+# You can add text and web links to the menu by adding "Text: [text]" and
+# "Link: [name] ([URL])" lines, respectively.
+# 
+# The formatting and comments are auto-generated, so don't worry about
+# neatness when editing the file.  Natural Docs will clean it up the next
+# time it is run.  When working with groups, just deal with the braces and
+# forget about the indentation and comments.
+# 
+# --------------------------------------------------------------------------
+
+
+File: Conexiones PDO  (conexiones_extra.php)
+File: Conexiones PDO  (conexiones.php)
+File: documentador.php  (documentador.php)
+
+Group: Index  {
+
+   Index: Everything
+   File Index: Files
+   Function Index: Functions
+   Build Target Index: Build Targets
+   }  # Group: Index
+
+Text: Copyright (c) 2013
+Link: [John F. Arroyave Gutierrez]  (mailto:unix4you2@gmail.com)
+File: Introduccion  (doc_intro.php)
+File: Libreria base  (comunes.php)
+File: Modulo actualizar  (actualizacion.php)
+File: Modulo ajax  (ajax.php)
+File: Modulo correos  (correos.php)
+File: Modulo formularios  (formularios.php)
+File: Modulo informes  (informes.php)
+File: Modulo kanban  (kanban.php)
+File: Modulo mantenimientos  (mantenimiento.php)
+File: Modulo menues  (menus.php)
+File: Modulo monitoreo  (monitoreo.php)
+File: Modulo objetos  (objetos.php)
+File: Modulo sesion  (sesion.php)
+File: Modulo tablas  (tablas.php)
+File: Modulo tareas programadas  (cron.php)
+File: Modulo usuarios  (usuarios.php)
+File: Nucleo de WebServices  (ws_nucleo.php)
+File: Seccion con formularios comunes  (marco_forms.php)
+File: Seccion con los contactos de Chat disponibles  (marco_chat.php)
+File: Seccion Configuracion WebServices  (marco_wscfg.php)
+File: Seccion Escritorio Administrativo  (marco_admin.php)
+File: Seccion Escritorio Administrativo  (marco_admin_morris.php)
+File: Seccion inferior  (marco_abajo.php)
+File: Seccion marco de configuracion  (marco_conf.php)
+File: Seccion marco de desarrollo  (marco_dev.php)
+File: Seccion marco de exportaciones  (marco_export.php)
+File: Seccion Proveedores OAuth  (marco_param.php)
+File: Seccion superior  (marco_navizq.php)
+File: Seccion superior  (marco_arriba_bs.php)
+File: Seccion superior  (marco_arriba.php)
+File: Seccion superior  (marco_nav.php)
+File: TextoAleatorioCaptcha  (captcha.php)
+File: Variables para aplicacion  (configuracion.php)
+File: WS_API  (ws_funciones.php)

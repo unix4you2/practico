@@ -40,363 +40,70 @@ Footer: Copyright (c) 2013 - John F. Arroyave Gutierrez |
 # time it is run.  When working with groups, just deal with the braces and
 # forget about the indentation and comments.
 # 
+# You can use this file on other computers even if they use different
+# directories.  As long as the command line points to the same source files,
+# Natural Docs will be able to correct the locations automatically.
+# 
 # --------------------------------------------------------------------------
 
-
-Group: Modulos Principales  {
-
-   File: Introduccion  (core/doc_intro.php)
-
-   Group: Core  {
-
-      File: Conexiones PDO  (core/conexiones.php)
-
-      Group: Inc  {
-
-         File: Check for symmetry, then construct the eigenvalue decomposition  (inc/phpexcel/Classes/PHPExcel/Shared/JAMA/EigenvalueDecomposition.php)
-         File: Reader/Excel5.php  (inc/phpexcel/Classes/PHPExcel/Reader/Excel5.php)
-         File: Reader/Excel5/Escher.php  (inc/phpexcel/Classes/PHPExcel/Reader/Excel5/Escher.php)
-         }  # Group: Inc
-
-      File: Libreria base  (core/comunes.php)
-      }  # Group: Core
-
-   Group: Modulos  {
-
-      File: Formularios  (no auto-title, core/formularios.php)
-      File: Informes  (no auto-title, core/informes.php)
-      File: Menues  (no auto-title, core/menus.php)
-      File: Objetos  (no auto-title, core/objetos.php)
-      File: Actualizacion  (no auto-title, core/actualizacion.php)
-      File: Sesion  (no auto-title, core/sesion.php)
-      File: Tablas  (no auto-title, core/tablas.php)
-      File: Usuarios  (no auto-title, core/usuarios.php)
-      File: Seccion inferior  (core/marco_abajo.php)
-      File: Seccion superior  (core/marco_arriba.php)
-      File: TextoAleatorioCaptcha  (core/captcha.php)
-      File: Nucleo de WebServices  (core/ws_nucleo.php)
-      File: Seccion Configuracion WebServices  (core/marco_wscfg.php)
-      File: Seccion marco de configuracion  (core/marco_conf.php)
-      File: Seccion marco de desarrollo  (core/marco_dev.php)
-      File: Variables para aplicacion  (core/configuracion.php)
-      File: WS_API  (core/ws_funciones.php)
-      File: Modulo monitoreo  (core/monitoreo.php)
-      File: Seccion con los contactos de Chat disponibles  (core/marco_chat.php)
-      File: Seccion Proveedores OAuth  (core/marco_param.php)
-      File: Seccion Escritorio Administrativo  (core/marco_admin.php)
-      File: Seccion Escritorio Administrativo  (core/marco_admin_morris.php)
-      File: Modulo ajax  (core/ajax.php)
-      File: Seccion superior  (core/marco_arriba_bs.php)
-      File: Seccion marco de exportaciones  (core/marco_export.php)
-      File: Seccion superior  (core/marco_navizq.php)
-      File: Seccion superior  (core/marco_nav.php)
-      File: Modulo mantenimientos  (core/mantenimiento.php)
-      File: Conexiones PDO  (core/conexiones_extra.php)
-      File: Seccion con formularios comunes  (core/marco_forms.php)
-      File: Modulo kanban  (core/kanban.php)
-      File: Modulo tareas programadas  (core/cron.php)
-      File: documentador.php  (core/documentador.php)
-      }  # Group: Modulos
-
-   Group: Inc  {
-
-      File: Idioma espanol  (inc/practico/idiomas/es.php)
-      File: Idioma hindi  (inc/practico/idiomas/hi.php)
-      File: Idioma ingles  (inc/practico/idiomas/en.php)
-      File: Idioma ingles  (inc/practico/idiomas/fr.php)
-      File: Idioma portugues  (inc/practico/idiomas/pt.php)
-      File: Libreria Definicion de base de datos  (inc/practico/def_basedatos.php)
-      }  # Group: Inc
-
-   File: Variables para aplicacion  (ins/paso_3.php)
-   }  # Group: Modulos Principales
-
-Group: Modulos (en desarrollo)  {
-
-   File: Modulo correos  (core/correos.php)
-   }  # Group: Modulos (en desarrollo)
-
-Group: Index  {
-
-   Index: Everything
-   Class Index: Classes
-   File Index: Files
-   Function Index: Functions
-   Variable Index: Variables
-   Cookie Index: Cookies
-   Event Index: Events
-   Type Index: Types
-   Build Target Index: Build Targets
-   }  # Group: Index
 
 Text: Copyright (c) 2013
 Link: [John F. Arroyave Gutierrez]  (mailto:unix4you2@gmail.com)
 
-Group: Mod  {
+Group: Core  {
 
-   File: /js/elFinder.js  (mod/fileman/elfinder/js/elfinder.full.js)
-   File: convertidor_pdf_funcion_predeterminada  (mod/pdf/index.php)
-   File: fileman_admin_embebido  (mod/fileman/index.php)
-   File: Funciones personalizadas  (mod/personalizadas_pos.php)
-   File: Funciones personalizadas en precarga  (mod/personalizadas_pre.php)
-   File: Funciones personalizadas para WebServices  (mod/personalizadas_ws.php)
-   File: ldap/.../lib/schema_functions.php  (mod/ldap/phpldapadmin-1.2.3/lib/schema_functions.php)
-   File: ldap_admin_embebido  (mod/ldap/index.php)
+   File: Conexiones PDO  (/var/www/html/practico/core/conexiones_extra.php)
+   File: Conexiones PDO  (/var/www/html/practico/core/conexiones.php)
+   File: documentador.php  (/var/www/html/practico/core/documentador.php)
+   File: Introduccion  (/var/www/html/practico/core/doc_intro.php)
+   File: Libreria base  (/var/www/html/practico/core/comunes.php)
+   File: Modulo actualizar  (/var/www/html/practico/core/actualizacion.php)
+   File: Modulo ajax  (/var/www/html/practico/core/ajax.php)
+   File: Modulo correos  (/var/www/html/practico/core/correos.php)
+   File: Modulo formularios  (/var/www/html/practico/core/formularios.php)
+   File: Modulo informes  (/var/www/html/practico/core/informes.php)
+   File: Modulo kanban  (/var/www/html/practico/core/kanban.php)
+   File: Modulo mantenimientos  (/var/www/html/practico/core/mantenimiento.php)
+   File: Modulo menues  (/var/www/html/practico/core/menus.php)
+   File: Modulo monitoreo  (/var/www/html/practico/core/monitoreo.php)
+   File: Modulo objetos  (/var/www/html/practico/core/objetos.php)
+   File: Modulo sesion  (/var/www/html/practico/core/sesion.php)
+   File: Modulo tablas  (/var/www/html/practico/core/tablas.php)
+   File: Modulo tareas programadas  (/var/www/html/practico/core/cron.php)
+   File: Modulo usuarios  (/var/www/html/practico/core/usuarios.php)
+   File: Nucleo de WebServices  (/var/www/html/practico/core/ws_nucleo.php)
+   File: Seccion con formularios comunes  (/var/www/html/practico/core/marco_forms.php)
+   File: Seccion con los contactos de Chat disponibles  (/var/www/html/practico/core/marco_chat.php)
+   File: Seccion Configuracion WebServices  (/var/www/html/practico/core/marco_wscfg.php)
+   File: Seccion Escritorio Administrativo  (/var/www/html/practico/core/marco_admin.php)
+   File: Seccion Escritorio Administrativo  (/var/www/html/practico/core/marco_admin_morris.php)
+   File: Seccion inferior  (/var/www/html/practico/core/marco_abajo.php)
+   File: Seccion marco de configuracion  (/var/www/html/practico/core/marco_conf.php)
+   File: Seccion marco de desarrollo  (/var/www/html/practico/core/marco_dev.php)
+   File: Seccion marco de exportaciones  (/var/www/html/practico/core/marco_export.php)
+   File: Seccion Proveedores OAuth  (/var/www/html/practico/core/marco_param.php)
+   File: Seccion superior  (/var/www/html/practico/core/marco_nav.php)
+   File: Seccion superior  (/var/www/html/practico/core/marco_arriba.php)
+   File: Seccion superior  (/var/www/html/practico/core/marco_navizq.php)
+   File: Seccion superior  (/var/www/html/practico/core/marco_arriba_bs.php)
+   File: TextoAleatorioCaptcha  (/var/www/html/practico/core/captcha.php)
+   File: Variables para aplicacion  (/var/www/html/practico/core/configuracion.php)
+   File: WS_API  (/var/www/html/practico/core/ws_funciones.php)
+   }  # Group: Core
 
-   Group: Pcoder  {
+File: PCOJS_MostrarMensaje  (/var/www/html/practico/inc/bootstrap/js/practico.js)
 
-      Group: Inc  {
+Group: Index  {
 
-         File: lib_pcoder.php  (mod/pcoder/inc/lib_pcoder.php)
-         File: Libreria base  (mod/pcoder/inc/comunes_bd.php)
-         File: Presentar_KeyBindings  (mod/pcoder/inc/comunes.php)
-         }  # Group: Inc
+   Build Target Index: Build Targets
+   Index: Everything
+   File Index: Files
+   Function Index: Functions
+   }  # Group: Index
 
-      Group: Mod  {
 
-         File: pboard/dist/bundle.js  (mod/pcoder/mod/pboard/dist/bundle.js)
-         File: PCONSOLE_Cargar  (mod/pcoder/mod/consola/index.php)
-         }  # Group: Mod
 
-      File: PCOJS_MostrarMensaje  (mod/pcoder/js/pcoder.js)
-      File: PCOJS_MostrarMensaje  (mod/pcoder/js/pcoder.min.js)
-      File: PCOMOD_CargarPcoder  (mod/pcoder/index.php)
-      }  # Group: Pcoder
-
-   File: PCOMOD_SimularMovil  (mod/pmobile/index.php)
-   File: probar_ejemplo_mvc  (mod/mvc/index.php)
-
-   Group: Sopa  {
-
-      File: controlador/controlador.php  (mod/sopa/controlador/controlador.php)
-      File: DemoVista_SOPA_Facebook  (mod/sopa/vista/vista.php)
-      File: ObtenerEntradas_FacebookFanPage  (mod/sopa/modelo/modelo.php)
-      }  # Group: Sopa
-
-   }  # Group: Mod
-
-Group: Inc  {
-
-   File: Buffer  (inc/html2canvas/0.5/html2canvas.svg.js)
-   File: PCOJS_MostrarMensaje  (inc/bootstrap/js/practico.js)
-   }  # Group: Inc
-
-Group: Inc  {
-
-   File: "StructElem",  (inc/jquery/plugins/pdfmake-0.1.71/pdfmake.js)
-
-   Group: Mxgraph  {
-
-      File: ChangeGridColor  (inc/mxgraph/javascript/scripts/grapheditor/www/js/EditorUi.js)
-      File: mxClient  (inc/mxgraph/javascript/mxClient.js)
-      File: scripts/.../js/Graph.js  (inc/mxgraph/javascript/scripts/grapheditor/www/js/Graph.js)
-
-      Group: Src  {
-
-         File: API Specification  (inc/mxgraph/javascript/src/js/index.txt)
-
-         Group: Editor  {
-
-            File: mxDefaultKeyHandler  (inc/mxgraph/javascript/src/js/editor/mxDefaultKeyHandler.js)
-            File: mxDefaultPopupMenu  (inc/mxgraph/javascript/src/js/editor/mxDefaultPopupMenu.js)
-            File: mxDefaultToolbar  (inc/mxgraph/javascript/src/js/editor/mxDefaultToolbar.js)
-            File: mxEditor  (inc/mxgraph/javascript/src/js/editor/mxEditor.js)
-            }  # Group: Editor
-
-         Group: Handler  {
-
-            File: mxCellHighlight  (inc/mxgraph/javascript/src/js/handler/mxCellHighlight.js)
-            File: mxCellMarker  (inc/mxgraph/javascript/src/js/handler/mxCellMarker.js)
-            File: mxCellTracker  (inc/mxgraph/javascript/src/js/handler/mxCellTracker.js)
-            File: mxConnectionHandler  (inc/mxgraph/javascript/src/js/handler/mxConnectionHandler.js)
-            File: mxConstraintHandler  (inc/mxgraph/javascript/src/js/handler/mxConstraintHandler.js)
-            File: mxEdgeHandler  (inc/mxgraph/javascript/src/js/handler/mxEdgeHandler.js)
-            File: mxEdgeSegmentHandler.js  (inc/mxgraph/javascript/src/js/handler/mxEdgeSegmentHandler.js)
-            File: mxElbowEdgeHandler  (inc/mxgraph/javascript/src/js/handler/mxElbowEdgeHandler.js)
-            File: mxGraphHandler  (inc/mxgraph/javascript/src/js/handler/mxGraphHandler.js)
-            File: mxHandle  (inc/mxgraph/javascript/src/js/handler/mxHandle.js)
-            File: mxKeyHandler  (inc/mxgraph/javascript/src/js/handler/mxKeyHandler.js)
-            File: mxPanningHandler  (inc/mxgraph/javascript/src/js/handler/mxPanningHandler.js)
-            File: mxPopupMenuHandler  (inc/mxgraph/javascript/src/js/handler/mxPopupMenuHandler.js)
-            File: mxRubberband  (inc/mxgraph/javascript/src/js/handler/mxRubberband.js)
-            File: mxSelectionCellsHandler  (inc/mxgraph/javascript/src/js/handler/mxSelectionCellsHandler.js)
-            File: mxTooltipHandler  (inc/mxgraph/javascript/src/js/handler/mxTooltipHandler.js)
-            File: mxVertexHandler  (inc/mxgraph/javascript/src/js/handler/mxVertexHandler.js)
-            }  # Group: Handler
-
-         Group: Io  {
-
-            File: mxCellCodec  (inc/mxgraph/javascript/src/js/io/mxCellCodec.js)
-            File: mxChildChangeCodec  (inc/mxgraph/javascript/src/js/io/mxChildChangeCodec.js)
-            File: mxCodec  (inc/mxgraph/javascript/src/js/io/mxCodec.js)
-            File: mxCodecRegistry  (inc/mxgraph/javascript/src/js/io/mxCodecRegistry.js)
-            File: mxDefaultKeyHandlerCodec  (inc/mxgraph/javascript/src/js/io/mxDefaultKeyHandlerCodec.js)
-            File: mxDefaultPopupMenuCodec  (inc/mxgraph/javascript/src/js/io/mxDefaultPopupMenuCodec.js)
-            File: mxDefaultToolbarCodec  (inc/mxgraph/javascript/src/js/io/mxDefaultToolbarCodec.js)
-            File: mxEditorCodec  (inc/mxgraph/javascript/src/js/io/mxEditorCodec.js)
-            File: mxGenericChangeCodec  (inc/mxgraph/javascript/src/js/io/mxGenericChangeCodec.js)
-            File: mxGraphCodec  (inc/mxgraph/javascript/src/js/io/mxGraphCodec.js)
-            File: mxGraphViewCodec  (inc/mxgraph/javascript/src/js/io/mxGraphViewCodec.js)
-            File: mxModelCodec  (inc/mxgraph/javascript/src/js/io/mxModelCodec.js)
-            File: mxObjectCodec  (inc/mxgraph/javascript/src/js/io/mxObjectCodec.js)
-            File: mxRootChangeCodec  (inc/mxgraph/javascript/src/js/io/mxRootChangeCodec.js)
-            File: mxStylesheetCodec  (inc/mxgraph/javascript/src/js/io/mxStylesheetCodec.js)
-            File: mxTerminalChangeCodec  (inc/mxgraph/javascript/src/js/io/mxTerminalChangeCodec.js)
-            }  # Group: Io
-
-         Group: Layout  {
-
-            Group: Hierarchical  {
-
-               Group: Model  {
-
-                  File: mxGraphAbstractHierarchyCell  (inc/mxgraph/javascript/src/js/layout/hierarchical/model/mxGraphAbstractHierarchyCell.js)
-                  File: mxGraphHierarchyEdge  (inc/mxgraph/javascript/src/js/layout/hierarchical/model/mxGraphHierarchyEdge.js)
-                  File: mxGraphHierarchyModel  (inc/mxgraph/javascript/src/js/layout/hierarchical/model/mxGraphHierarchyModel.js)
-                  File: mxGraphHierarchyNode  (inc/mxgraph/javascript/src/js/layout/hierarchical/model/mxGraphHierarchyNode.js)
-                  File: mxSwimlaneModel  (inc/mxgraph/javascript/src/js/layout/hierarchical/model/mxSwimlaneModel.js)
-                  }  # Group: Model
-
-               File: mxHierarchicalLayout  (inc/mxgraph/javascript/src/js/layout/hierarchical/mxHierarchicalLayout.js)
-               File: mxSwimlaneLayout  (inc/mxgraph/javascript/src/js/layout/hierarchical/mxSwimlaneLayout.js)
-
-               Group: Stage  {
-
-                  File: mxCoordinateAssignment  (inc/mxgraph/javascript/src/js/layout/hierarchical/stage/mxCoordinateAssignment.js)
-                  File: mxHierarchicalLayoutStage  (inc/mxgraph/javascript/src/js/layout/hierarchical/stage/mxHierarchicalLayoutStage.js)
-                  File: mxMedianHybridCrossingReduction  (inc/mxgraph/javascript/src/js/layout/hierarchical/stage/mxMedianHybridCrossingReduction.js)
-                  File: mxMinimumCycleRemover  (inc/mxgraph/javascript/src/js/layout/hierarchical/stage/mxMinimumCycleRemover.js)
-                  File: mxSwimlaneOrdering  (inc/mxgraph/javascript/src/js/layout/hierarchical/stage/mxSwimlaneOrdering.js)
-                  }  # Group: Stage
-
-               }  # Group: Hierarchical
-
-            File: mxCircleLayout  (inc/mxgraph/javascript/src/js/layout/mxCircleLayout.js)
-            File: mxCompactTreeLayout  (inc/mxgraph/javascript/src/js/layout/mxCompactTreeLayout.js)
-            File: mxCompositeLayout  (inc/mxgraph/javascript/src/js/layout/mxCompositeLayout.js)
-            File: mxEdgeLabelLayout  (inc/mxgraph/javascript/src/js/layout/mxEdgeLabelLayout.js)
-            File: mxFastOrganicLayout  (inc/mxgraph/javascript/src/js/layout/mxFastOrganicLayout.js)
-            File: mxGraphLayout  (inc/mxgraph/javascript/src/js/layout/mxGraphLayout.js)
-            File: mxParallelEdgeLayout  (inc/mxgraph/javascript/src/js/layout/mxParallelEdgeLayout.js)
-            File: mxPartitionLayout  (inc/mxgraph/javascript/src/js/layout/mxPartitionLayout.js)
-            File: mxRadialTreeLayout  (inc/mxgraph/javascript/src/js/layout/mxRadialTreeLayout.js)
-            File: mxStackLayout  (inc/mxgraph/javascript/src/js/layout/mxStackLayout.js)
-            }  # Group: Layout
-
-         Group: Model  {
-
-            File: mxCell  (inc/mxgraph/javascript/src/js/model/mxCell.js)
-            File: mxCellPath  (inc/mxgraph/javascript/src/js/model/mxCellPath.js)
-            File: mxGeometry  (inc/mxgraph/javascript/src/js/model/mxGeometry.js)
-            File: mxGraphModel  (inc/mxgraph/javascript/src/js/model/mxGraphModel.js)
-            }  # Group: Model
-
-         File: mxClient  (inc/mxgraph/javascript/src/js/mxClient.js)
-
-         Group: Shape  {
-
-            File: mxActor  (inc/mxgraph/javascript/src/js/shape/mxActor.js)
-            File: mxArrow  (inc/mxgraph/javascript/src/js/shape/mxArrow.js)
-            File: mxArrowConnector  (inc/mxgraph/javascript/src/js/shape/mxArrowConnector.js)
-            File: mxCloud  (inc/mxgraph/javascript/src/js/shape/mxCloud.js)
-            File: mxConnector  (inc/mxgraph/javascript/src/js/shape/mxConnector.js)
-            File: mxCylinder  (inc/mxgraph/javascript/src/js/shape/mxCylinder.js)
-            File: mxDoubleEllipse  (inc/mxgraph/javascript/src/js/shape/mxDoubleEllipse.js)
-            File: mxEllipse  (inc/mxgraph/javascript/src/js/shape/mxEllipse.js)
-            File: mxHexagon  (inc/mxgraph/javascript/src/js/shape/mxHexagon.js)
-            File: mxImageShape  (inc/mxgraph/javascript/src/js/shape/mxImageShape.js)
-            File: mxLabel  (inc/mxgraph/javascript/src/js/shape/mxLabel.js)
-            File: mxLine  (inc/mxgraph/javascript/src/js/shape/mxLine.js)
-            File: mxMarker  (inc/mxgraph/javascript/src/js/shape/mxMarker.js)
-            File: mxPolyline  (inc/mxgraph/javascript/src/js/shape/mxPolyline.js)
-            File: mxRectangleShape  (inc/mxgraph/javascript/src/js/shape/mxRectangleShape.js)
-            File: mxRhombus  (inc/mxgraph/javascript/src/js/shape/mxRhombus.js)
-            File: mxShape  (inc/mxgraph/javascript/src/js/shape/mxShape.js)
-            File: mxStencil  (inc/mxgraph/javascript/src/js/shape/mxStencil.js)
-            File: mxStencilRegistry  (inc/mxgraph/javascript/src/js/shape/mxStencilRegistry.js)
-            File: mxSwimlane  (inc/mxgraph/javascript/src/js/shape/mxSwimlane.js)
-            File: mxText  (inc/mxgraph/javascript/src/js/shape/mxText.js)
-            File: mxTriangle  (inc/mxgraph/javascript/src/js/shape/mxTriangle.js)
-            }  # Group: Shape
-
-         Group: Util  {
-
-            File: mxAbstractCanvas2D  (inc/mxgraph/javascript/src/js/util/mxAbstractCanvas2D.js)
-            File: mxAnimation  (inc/mxgraph/javascript/src/js/util/mxAnimation.js)
-            File: mxAutoSaveManager  (inc/mxgraph/javascript/src/js/util/mxAutoSaveManager.js)
-            File: mxClipboard  (inc/mxgraph/javascript/src/js/util/mxClipboard.js)
-            File: mxConstants  (inc/mxgraph/javascript/src/js/util/mxConstants.js)
-            File: mxDictionary  (inc/mxgraph/javascript/src/js/util/mxDictionary.js)
-            File: mxDivResizer  (inc/mxgraph/javascript/src/js/util/mxDivResizer.js)
-            File: mxDragSource  (inc/mxgraph/javascript/src/js/util/mxDragSource.js)
-            File: mxEffects  (inc/mxgraph/javascript/src/js/util/mxEffects.js)
-            File: mxEvent  (inc/mxgraph/javascript/src/js/util/mxEvent.js)
-            File: mxEventObject  (inc/mxgraph/javascript/src/js/util/mxEventObject.js)
-            File: mxEventSource  (inc/mxgraph/javascript/src/js/util/mxEventSource.js)
-            File: mxForm  (inc/mxgraph/javascript/src/js/util/mxForm.js)
-            File: mxGuide  (inc/mxgraph/javascript/src/js/util/mxGuide.js)
-            File: mxImage  (inc/mxgraph/javascript/src/js/util/mxImage.js)
-            File: mxImageBundle  (inc/mxgraph/javascript/src/js/util/mxImageBundle.js)
-            File: mxImageExport  (inc/mxgraph/javascript/src/js/util/mxImageExport.js)
-            File: mxLog  (inc/mxgraph/javascript/src/js/util/mxLog.js)
-            File: mxMorphing  (inc/mxgraph/javascript/src/js/util/mxMorphing.js)
-            File: mxMouseEvent  (inc/mxgraph/javascript/src/js/util/mxMouseEvent.js)
-            File: mxObjectIdentity  (inc/mxgraph/javascript/src/js/util/mxObjectIdentity.js)
-            File: mxPanningManager  (inc/mxgraph/javascript/src/js/util/mxPanningManager.js)
-            File: mxPoint  (inc/mxgraph/javascript/src/js/util/mxPoint.js)
-            File: mxPopupMenu  (inc/mxgraph/javascript/src/js/util/mxPopupMenu.js)
-            File: mxRectangle  (inc/mxgraph/javascript/src/js/util/mxRectangle.js)
-            File: mxResources  (inc/mxgraph/javascript/src/js/util/mxResources.js)
-            File: mxSvgCanvas2D  (inc/mxgraph/javascript/src/js/util/mxSvgCanvas2D.js)
-            File: mxToolbar  (inc/mxgraph/javascript/src/js/util/mxToolbar.js)
-            File: mxUndoableEdit  (inc/mxgraph/javascript/src/js/util/mxUndoableEdit.js)
-            File: mxUndoManager  (inc/mxgraph/javascript/src/js/util/mxUndoManager.js)
-            File: mxUrlConverter  (inc/mxgraph/javascript/src/js/util/mxUrlConverter.js)
-            File: mxUtils  (inc/mxgraph/javascript/src/js/util/mxUtils.js)
-            File: mxVmlCanvas2D  (inc/mxgraph/javascript/src/js/util/mxVmlCanvas2D.js)
-            File: mxWindow  (inc/mxgraph/javascript/src/js/util/mxWindow.js)
-            File: mxXmlCanvas2D  (inc/mxgraph/javascript/src/js/util/mxXmlCanvas2D.js)
-            File: mxXmlRequest  (inc/mxgraph/javascript/src/js/util/mxXmlRequest.js)
-            }  # Group: Util
-
-         Group: View  {
-
-            File: mxCellEditor  (inc/mxgraph/javascript/src/js/view/mxCellEditor.js)
-            File: mxCellOverlay  (inc/mxgraph/javascript/src/js/view/mxCellOverlay.js)
-            File: mxCellRenderer  (inc/mxgraph/javascript/src/js/view/mxCellRenderer.js)
-            File: mxCellState  (inc/mxgraph/javascript/src/js/view/mxCellState.js)
-            File: mxCellStatePreview  (inc/mxgraph/javascript/src/js/view/mxCellStatePreview.js)
-            File: mxConnectionConstraint  (inc/mxgraph/javascript/src/js/view/mxConnectionConstraint.js)
-            File: mxEdgeStyle  (inc/mxgraph/javascript/src/js/view/mxEdgeStyle.js)
-            File: mxGraph  (inc/mxgraph/javascript/src/js/view/mxGraph.js)
-            File: mxGraphSelectionModel  (inc/mxgraph/javascript/src/js/view/mxGraphSelectionModel.js)
-            File: mxGraphView  (inc/mxgraph/javascript/src/js/view/mxGraphView.js)
-            File: mxLayoutManager  (inc/mxgraph/javascript/src/js/view/mxLayoutManager.js)
-            File: mxMultiplicity  (inc/mxgraph/javascript/src/js/view/mxMultiplicity.js)
-            File: mxOutline  (inc/mxgraph/javascript/src/js/view/mxOutline.js)
-            File: mxPerimeter  (inc/mxgraph/javascript/src/js/view/mxPerimeter.js)
-            File: mxPrintPreview  (inc/mxgraph/javascript/src/js/view/mxPrintPreview.js)
-            File: mxStyleRegistry  (inc/mxgraph/javascript/src/js/view/mxStyleRegistry.js)
-            File: mxStylesheet  (inc/mxgraph/javascript/src/js/view/mxStylesheet.js)
-            File: mxSwimlaneManager  (inc/mxgraph/javascript/src/js/view/mxSwimlaneManager.js)
-            File: mxTemporaryCellStates  (inc/mxgraph/javascript/src/js/view/mxTemporaryCellStates.js)
-            }  # Group: View
-
-         }  # Group: Src
-
-      }  # Group: Mxgraph
-
-   Group: Php-saml  {
-
-      File: Modulo SSO-SAML  (inc/php-saml/practico/index.php)
-      File: Modulo SSO-SAML  (inc/php-saml/practico/metadata.php)
-      File: Modulo SSO-SAML  (inc/php-saml/practico/settings.php)
-      }  # Group: Php-saml
-
-   }  # Group: Inc
-
-File: comp/.../include/z_consola.php  (dev/comp/atb/include/z_consola.php)
-File: comp/.../include/z_motores.php  (dev/comp/atb/include/z_motores.php)
-File: comp/pfe/index.php  (dev/comp/pfe/index.php)
-File: test/z_consola.php  (dev/test/z_consola.php)
-File: TruncarArreglo  (dev/comp/atb/include/z_utiles.php)
+##### Do not change or remove these lines. #####
+Data: 1(D3333/pH37773RtEo3IHp9t89u39uHG)
+Data: 1(T3333/pH37773RtEo3IHp9t89u38\93Yuut6tHpI3l6)
+Data: 1(h3333/pH37773RtEo3IHp9t89u38E`)
