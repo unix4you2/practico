@@ -44,4 +44,8 @@ perl ./NaturalDocs/NaturalDocs -ro \
     -i ../../../practico/core \
     -i ../../../practico/inc/bootstrap/js \
     -i ../../../practico/img \
-    -xi ../docs -o HTML ../docs/Salida_DOC -p ../docs/Proyecto_DOC
+    -xi ../docs \
+    -o HTML ../../doc \
+    -p ../docs/Proyecto_DOC
+
+chmod -R 777 ../../doc/*
