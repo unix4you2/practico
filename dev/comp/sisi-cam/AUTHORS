@@ -1,0 +1,23 @@
+======================================================================
+                                SISI-CAM
+            Sistema Simple de Grabación de Camaras por Shell
+            Simple System to Record Webcams using only Shell
+======================================================================
+
+Copyright (c) 2013 John F. Arroyave Gutiérrez unix4you2@gmail.com
+                                              www.practico.org
+
+Distribuido bajo licencia GPLv3.  Vea el archivo LICENSE para detalles
+Licensed under GPLv3 terms. See the LICENSE file for details
+
+----------------------------------------------------------------------
+Importante: Todos los archivos y codigos fuente contenidos en este
+            proyecto deben estar bajo codificacion UTF-8 Sin BOM.
+----------------------------------------------------------------------
+
+SiSi-Cam utiliza otras herramientas de software libre para capturar y
+transformar las imagenes obtenidas desde camaras web USB, camaras IP y
+demas origenes configurados.
+
+Cada herramienta, aunque libre, puede manejar diferentes licencias
+compatibles con la GPLv3.
