@@ -40,4 +40,4 @@
 #     Usted ha debido de recibir una copia de la Licencia General Pública de
 #     GNU junto con este programa. Si no, vea <http://www.gnu.org/licenses/>
 
-perl ./NaturalDocs/NaturalDocs -ro -i ../../../practico -xi ../natural -o HTML ../natural/Salida_DOC -p ../natural/Proyecto_DOC
+perl ./NaturalDocs/NaturalDocs -ro -i ../../../practico -xi ../docs -o HTML ../docs/Salida_DOC -p ../docs/Proyecto_DOC

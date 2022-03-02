@@ -125,7 +125,7 @@ ListaExcluidos=" inc/practico_se\* skin/nomo_editada\* mod/sopa\* mod/ldap\* mod
 	echo "-----------------------------------------------------------------"
 	# Me ubico en la ruta del script y entro a la de documentacion
 	cd $SCRIPTPATH
-	cd natural
+	cd docs
     ./GenerarDocumentacion.sh
     # Pasa archivos generados al repositorio web
     # cp -r Salida_DOC/* ../../../unix4you2.github.io/dev_docs/  --OBSOLETO AL ABANDONAR GITHUB--
