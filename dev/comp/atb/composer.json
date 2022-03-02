@@ -1,0 +1,5 @@
+{
+    "require": {
+        "hitbtc-com/hitbtc-php-sdk": "~1.0"
+    }
+}

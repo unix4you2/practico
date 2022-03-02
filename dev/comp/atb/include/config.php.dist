@@ -1,0 +1,4 @@
+<?php
+$API_Trader="hitbtc";						//Portal de trader utilizado:  hitbtc|poloniex|kraken|yobit
+$APIKEY_Trader="HERE_YOUR_APIKEY";			//Llaves de API suministradas por el portal
+$APISECRET_Trader="HERE_YOUR_APISECRET";	//Llaves de API suministradas por el portal
