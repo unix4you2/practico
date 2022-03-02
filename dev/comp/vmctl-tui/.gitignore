@@ -1,0 +1,7 @@
+conf/API_*
+conf/VM_*
+data/disks/*.hd
+data/guests/*.sh
+data/isos/*.iso
+logs/*.log
+temp/*
