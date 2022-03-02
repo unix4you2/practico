@@ -8319,41 +8319,41 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		{
 		    //Limpia el metodo, asume no conocerlo
 
-        switch ($registro_eventos_definidos["evento"]) {
-          //1-Raton
-          case 'onclick': $MetodoJQuery="click"; break;
-          case 'ondblclick': $MetodoJQuery="dblclick"; break;
-          case 'onmousedown': $MetodoJQuery="mousedown"; break;
-          case 'onmouseenter': $MetodoJQuery="mouseenter"; break;
-          case 'onmouseleave': $MetodoJQuery="mouseleave"; break;
-          case 'onmousemove': $MetodoJQuery="mousemove"; break;
-          case 'onmouseover': $MetodoJQuery="mouseover"; break;
-          case 'onmouseout': $MetodoJQuery="mouseout"; break;
-          case 'onmouseup': $MetodoJQuery="mouseup"; break;
-          case 'contextmenu': $MetodoJQuery="contextmenu"; break;
-          //2-Teclado
-          case 'onkeydown': $MetodoJQuery="keydown"; break;
-          case 'onkeypress': $MetodoJQuery="keypress"; break;
-          case 'onkeyup': $MetodoJQuery="keyup"; break;
-          //3-Formularios
-          case 'onfocus': $MetodoJQuery="focus"; break;
-          case 'onblur': $MetodoJQuery="blur"; break;
-          case 'onchange': $MetodoJQuery="change"; break;
-          case 'onselect': $MetodoJQuery="select"; break;
-          case 'onsubmit': $MetodoJQuery="submit"; break;
-          case 'oncut': $MetodoJQuery="reset"; break;
-          case 'oncopy': $MetodoJQuery="click"; break;
-          case 'onpaste': $MetodoJQuery="click"; break;
-          default:
-            $MetodoJQuery="";
-        }
+            switch ($registro_eventos_definidos["evento"]) {
+              //1-Raton
+              case 'onclick': $MetodoJQuery="click"; break;
+              case 'ondblclick': $MetodoJQuery="dblclick"; break;
+              case 'onmousedown': $MetodoJQuery="mousedown"; break;
+              case 'onmouseenter': $MetodoJQuery="mouseenter"; break;
+              case 'onmouseleave': $MetodoJQuery="mouseleave"; break;
+              case 'onmousemove': $MetodoJQuery="mousemove"; break;
+              case 'onmouseover': $MetodoJQuery="mouseover"; break;
+              case 'onmouseout': $MetodoJQuery="mouseout"; break;
+              case 'onmouseup': $MetodoJQuery="mouseup"; break;
+              case 'contextmenu': $MetodoJQuery="contextmenu"; break;
+              //2-Teclado
+              case 'onkeydown': $MetodoJQuery="keydown"; break;
+              case 'onkeypress': $MetodoJQuery="keypress"; break;
+              case 'onkeyup': $MetodoJQuery="keyup"; break;
+              //3-Formularios
+              case 'onfocus': $MetodoJQuery="focus"; break;
+              case 'onblur': $MetodoJQuery="blur"; break;
+              case 'onchange': $MetodoJQuery="change"; break;
+              case 'onselect': $MetodoJQuery="select"; break;
+              case 'onsubmit': $MetodoJQuery="submit"; break;
+              case 'oncut': $MetodoJQuery="reset"; break;
+              case 'oncopy': $MetodoJQuery="click"; break;
+              case 'onpaste': $MetodoJQuery="click"; break;
+              default:
+                $MetodoJQuery="";
+            }
 
 			//Imprime el script asociado al evento siempre y cuando la funcion sea reconocida
 			if ($MetodoJQuery!="")
 			    {
 					$PCO_FuncionesJSInternasFORM .= '
 					    <script language=\'JavaScript\'>
-                            $( "#'.$registro_eventos_definidos["id_html"].'" ).'.$MetodoJQuery.'(function(PCOJS_Evento) {
+                            $( "#'.$registro_eventos_definidos["id_html"].'" ).on("'.$MetodoJQuery.'",function(PCOJS_Evento) {
                               '.PCO_ReemplazarVariablesPHPEnCadena($registro_eventos_definidos["javascript"]).'
                             });
 					    </script>';
