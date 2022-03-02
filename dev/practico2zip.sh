@@ -68,7 +68,7 @@ php objeto2xml.php
 	source dev/chmod2zip.sh
 
 #Incluye la compresion de archivos CSS y JS
-	source dev/cssjs2min.sh
+	source dev/yuic/cssjs2min.sh
 
 # PARAMETROS BASICOS DEL EMPAQUETADO
 	#Lista de archivos y carpetas a empaquetar (relativos a la raiz y separados por espacio)

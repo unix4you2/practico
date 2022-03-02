@@ -395,4 +395,8 @@ Group: Inc  {
 
    }  # Group: Inc
 
-File: z_consola.php  (dev/tests/z_consola.php)
+File: comp/.../include/z_consola.php  (dev/comp/atb/include/z_consola.php)
+File: comp/.../include/z_motores.php  (dev/comp/atb/include/z_motores.php)
+File: comp/pfe/index.php  (dev/comp/pfe/index.php)
+File: test/z_consola.php  (dev/test/z_consola.php)
+File: TruncarArreglo  (dev/comp/atb/include/z_utiles.php)
