@@ -24,6 +24,7 @@ core/marco_abajo.php
 core/marco_admin.php
 core/marco_arriba_bs.php
 core/marco_forms.php
+core/marco_nav.php
 core/kanban.php
 core/usuarios.php
 
@@ -118,6 +119,8 @@ LogCambios="
 * Fixed [GANTT]: Actualizado eventos mouseup,mouseenter,mouseleave,mousemove,mousedown,click en shorthand por nueva sintaxis
 * Fixed [GANTT]: Actualizada sintaxis obsoleta de isFunction por comparaciones mediante typeof
 * Enhan [CORE]: El empaquetador de versiones incluye por defecto la carpeta de documentación de funciones del framework, de manera que los desarrolladores no tengan que buscar en orígenes externos o en el árbol de desarrollo la documentación de funciones y variables comunes.
+* Enhan [CORE]: Agregada opcion en barra de navegacion superior que enlaza a la documentacion del Framework
+
 
 
 

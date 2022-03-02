@@ -278,6 +278,13 @@
 							</a>
 						</li>
 						<li>
+							<a data-toggle="modal" href="doc/index.html" target="_blank">
+								<div>
+									<i class="fa fa-book fa-fw"></i> Documentaci&oacute;n del Framework
+								</div>
+							</a>
+						</li>
+						<li>
 							<a data-toggle="modal" href="https://gitter.im/unix4you2/practico/" target="_blank">
 								<div>
 									<i class="fa fa-comment-o fa-fw"></i> <?php echo $MULTILANG_ChatDevel; ?>
