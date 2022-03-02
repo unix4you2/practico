@@ -121,15 +121,14 @@ ListaExcluidos=" inc/practico_se\* skin/nomo_editada\* mod/sopa\* mod/ldap\* mod
 	echo "| \ _  _    _ _  _  _ _|_ _  _. _  _ "
 	echo "|_/(_)(_|_|| | |(/_| | | (_|(_|(_)| |"
 	echo "-----------------------------------------------------------------"
-	echo "Actualizando documentación NaturalDocs para el proyecto para ser "
-	echo "publicada sobre http://unix4you2.github.io/docs mediante commit  "
+	echo "Actualizando documentación NaturalDocs para el proyecto "
 	echo "-----------------------------------------------------------------"
 	# Me ubico en la ruta del script y entro a la de documentacion
 	cd $SCRIPTPATH
-	cd natural_docs
+	cd natural
     ./GenerarDocumentacion.sh
     # Pasa archivos generados al repositorio web
-    cp -r Salida_DOC/* ../../../unix4you2.github.io/dev_docs/
+    # cp -r Salida_DOC/* ../../../unix4you2.github.io/dev_docs/  --OBSOLETO AL ABANDONAR GITHUB--
     cd ..
 
 #Limpia los XML generados para el instalador de manera que no sean contemplados o re-ejecutados nuevamente en la recarga de desarrollo
