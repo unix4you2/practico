@@ -24,7 +24,8 @@
         ed.setHours(0, 0, 0, 0);
         return cd.getTime() === ed.getTime();
     }
-    $.expr.pseudos.findday = $.expr.createPseudo ?
+
+    jQuery.expr.pseudos['findday'] = $.expr.createPseudo ?
         $.expr.createPseudo(function(text) {
             return function(elt) {
                 return findDay(elt, text);
@@ -51,7 +52,8 @@
         var ed = id.substring(si, id.length);
         return cd === ed;
     }
-    $.expr.pseudos.findweek = $.expr.createPseudo ?
+
+    jQuery.expr.pseudos['findweek'] = $.expr.createPseudo ?
         $.expr.createPseudo(function(text) {
             return function(elt) {
                 return findWeek(elt, text);
@@ -70,7 +72,8 @@
         var ed = id.substring(si, id.length);
         return cd === ed;
     }
-    $.expr[':'].findmonth = $.expr.createPseudo ?
+    
+    jQuery.expr.pseudos['findmonth'] = $.expr.createPseudo ?
         $.expr.createPseudo(function(text) {
             return function(elt) {
                 return findMonth(elt, text);
