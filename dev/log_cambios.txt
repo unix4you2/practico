@@ -111,7 +111,11 @@ LogCambios="
 * Enhan [CHAT]: Eliminadas acciones innecesarias de chat incompatibles con nuevas versiones JQuery. Simplificadas funciones de inicializacion, titulos y otras.
 * Enhan [INFORMES]: Ajustada la definicion de eventos generados sobre tablas de informes con columnas editables.  Se cambia a trigger en lugar del eventos directo por compatibilidad JQuery 3.6.0
 * Enhan [CORE]: Ajustado evento de resize y cargue de maquetacion para nuevo JQuery
-* Fixed [GANTT]: Actualizada sintaxis para los selectores JQuery a los nuevos Pseudo, Ej: jQuery.expr[':'].findmonth a jQuery.expr.pseudos["findmonth"]  por compatibilidad con JQuery 3.6.0
+* Fixed [GANTT]: Actualizada sintaxis para los selectores JQuery a los nuevos Pseudo, Ej: jQuery.expr[':'].findmonth a jQuery.expr.pseudos["findmonth"]  por compatibilidad con JQuery 3.6.0.  Cualquier selector que pueda requerir mantenimiento se puede visualizar en consola mediante console.log($.expr.pseudos)
+* Fixed [GANTT]: Actualizada sintaxis obsoleta de isNumeric, Ej: jQuery.isNumeric(string) se reemplaza a isNan(parseFloat(string))
+* Fixed [GANTT]: Actualizada sintaxis obsoleta de trim, Ej: jQuery.trim( text ) por String.prototype.trim.call( text == null ? "" : text )
+* Fixed [GANTT]: Actualizado eventos mouseup,mouseenter,mouseleave,mousemove,mousedown,click en shorthand por nueva sintaxis
+* Fixed [GANTT]: Actualizada sintaxis obsoleta de isFunction por comparaciones mediante typeof
 
 
 

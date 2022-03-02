@@ -188,7 +188,7 @@
         $.extend(settings, options);
 
         // can't use cookie if don't have `$.cookie`
-        settings.useCookie = settings.useCookie && $.isFunction($.cookie);
+        settings.useCookie = settings.useCookie && typeof $.cookie === "function";
 
         // Grid management
         // ===============
@@ -354,7 +354,7 @@
                 $(element).on(wheel, function (e) { core.wheelScroll(element, e); });
 
                 // Handle click events and dispatch to registered `onAddClick` function
-                dataPanel.click(function (e) {
+                dataPanel.on("click",function (e) {
 
                     e.stopPropagation();
                     var corrX/* <- never used? */, corrY;
@@ -785,7 +785,7 @@
                             .append($('<div class="nav-slider-left" />')
                                 .append($('<button type="button" class="nav-link nav-page-back"/>')
                                     .html('&uarr;')
-                                    .click(function () {
+                                    .on("click",function () {
                                         core.navigatePage(element, -1);
                                     }))
                                 .append($('<div class="page-number"/>')
@@ -793,17 +793,17 @@
                                             .html(element.pageNum + 1 + ' / ' + element.pageCount)))
                                 .append($('<button type="button" class="nav-link nav-page-next"/>')
                                     .html('&darr;')
-                                    .click(function () {
+                                    .on("click",function () {
                                         core.navigatePage(element, 1);
                                     }))
                                 .append($('<button type="button" class="nav-link nav-now"/>')
                                     .html('&#9679;')
-                                    .click(function () {
+                                    .on("click",function () {
                                         core.navigateTo(element, 'now');
                                     }))
                                 .append($('<button type="button" class="nav-link nav-prev-week"/>')
                                     .html('&lt;&lt;')
-                                    .click(function () {
+                                    .on("click",function () {
                                         if (settings.scale === 'hours') {
                                             core.navigateTo(element, tools.getCellSize() * 8);
                                         } else if (settings.scale === 'days') {
@@ -816,7 +816,7 @@
                                     }))
                                 .append($('<button type="button" class="nav-link nav-prev-day"/>')
                                     .html('&lt;')
-                                    .click(function () {
+                                    .on("click",function () {
                                         if (settings.scale === 'hours') {
                                             core.navigateTo(element, tools.getCellSize() * 4);
                                         } else if (settings.scale === 'days') {
@@ -831,12 +831,12 @@
                                     .append($('<div class="nav-slider-bar" />')
                                             .append($('<a class="nav-slider-button" />')
                                                 )
-                                                .mousedown(function (e) {
+                                                .on("mousedown",function (e) {
                                                     e.preventDefault();
                                                     element.scrollNavigation.scrollerMouseDown = true;
                                                     core.sliderScroll(element, e);
                                                 })
-                                                .mousemove(function (e) {
+                                                .on("mousemove",function (e) {
                                                     if (element.scrollNavigation.scrollerMouseDown) {
                                                         core.sliderScroll(element, e);
                                                     }
@@ -846,7 +846,7 @@
                             .append($('<div class="nav-slider-right" />')
                                 .append($('<button type="button" class="nav-link nav-next-day"/>')
                                     .html('&gt;')
-                                    .click(function () {
+                                    .on("click",function () {
                                         if (settings.scale === 'hours') {
                                             core.navigateTo(element, tools.getCellSize() * -4);
                                         } else if (settings.scale === 'days') {
@@ -859,7 +859,7 @@
                                     }))
                             .append($('<button type="button" class="nav-link nav-next-week"/>')
                                     .html('&gt;&gt;')
-                                    .click(function () {
+                                    .on("click",function () {
                                         if (settings.scale === 'hours') {
                                             core.navigateTo(element, tools.getCellSize() * -8);
                                         } else if (settings.scale === 'days') {
@@ -872,17 +872,17 @@
                                     }))
                                 .append($('<button type="button" class="nav-link nav-zoomIn"/>')
                                     .html('&#43;')
-                                    .click(function () {
+                                    .on("click",function () {
                                         core.zoomInOut(element, -1);
                                     }))
                                 .append($('<button type="button" class="nav-link nav-zoomOut"/>')
                                     .html('&#45;')
-                                    .click(function () {
+                                    .on("click",function () {
                                         core.zoomInOut(element, 1);
                                     }))
                                     )
                                 );
-                    $(document).mouseup(function () {
+                    $(document).on("mouseup",function () {
                         element.scrollNavigation.scrollerMouseDown = false;
                     });
                 // Button navigation is provided by setting `settings.navigation='buttons'`
@@ -890,7 +890,7 @@
                     ganttNavigate = $('<div class="navigate" />')
                         .append($('<button type="button" class="nav-link nav-page-back"/>')
                             .html('&uarr;')
-                            .click(function () {
+                            .on("click",function () {
                                 core.navigatePage(element, -1);
                             }))
                         .append($('<div class="page-number"/>')
@@ -898,52 +898,52 @@
                                     .html(element.pageNum + 1 + ' / ' + element.pageCount)))
                         .append($('<button type="button" class="nav-link nav-page-next"/>')
                             .html('&darr;')
-                            .click(function () {
+                            .on("click",function () {
                                 core.navigatePage(element, 1);
                             }))
                         .append($('<button type="button" class="nav-link nav-begin"/>')
                             .html('&#124;&lt;')
-                            .click(function () {
+                            .on("click",function () {
                                 core.navigateTo(element, 'begin');
                             }))
                         .append($('<button type="button" class="nav-link nav-prev-week"/>')
                             .html('&lt;&lt;')
-                            .click(function () {
+                            .on("click",function () {
                                 core.navigateTo(element, tools.getCellSize() * 7);
                             }))
                         .append($('<button type="button" class="nav-link nav-prev-day"/>')
                             .html('&lt;')
-                            .click(function () {
+                            .on("click",function () {
                                 core.navigateTo(element, tools.getCellSize());
                             }))
                         .append($('<button type="button" class="nav-link nav-now"/>')
                             .html('&#9679;')
-                            .click(function () {
+                            .on("click",function () {
                                 core.navigateTo(element, 'now');
                             }))
                         .append($('<button type="button" class="nav-link nav-next-day"/>')
                             .html('&gt;')
-                            .click(function () {
+                            .on("click",function () {
                                 core.navigateTo(element, tools.getCellSize() * -1);
                             }))
                         .append($('<button type="button" class="nav-link nav-next-week"/>')
                             .html('&gt;&gt;')
-                            .click(function () {
+                            .on("click",function () {
                                 core.navigateTo(element, tools.getCellSize() * -7);
                             }))
                         .append($('<button type="button" class="nav-link nav-end"/>')
                             .html('&gt;&#124;')
-                            .click(function () {
+                            .on("click",function () {
                                 core.navigateTo(element, 'end');
                             }))
                         .append($('<button type="button" class="nav-link nav-zoomIn"/>')
                             .html('&#43;')
-                            .click(function () {
+                            .on("click",function () {
                                 core.zoomInOut(element, -1);
                             }))
                         .append($('<button type="button" class="nav-link nav-zoomOut"/>')
                             .html('&#45;')
-                            .click(function () {
+                            .on("click",function () {
                                 core.zoomInOut(element, 1);
                             }));
                 }
@@ -958,17 +958,17 @@
                         .data("dataObj", dataObj);
                 if (desc) {
                     bar
-                      .mouseenter(function (e) {
+                      .on("mouseenter",function (e) {
                           var hint = $('<div class="fn-gantt-hint" />').html(desc);
                           $("body").append(hint);
                           hint.css("left", e.pageX);
                           hint.css("top", e.pageY);
                           hint.show();
                       })
-                      .mouseleave(function () {
+                      .on("mouseleave",function () {
                           $(".fn-gantt-hint").remove();
                       })
-                      .mousemove(function (e) {
+                      .on("mousemove",function (e) {
                           $(".fn-gantt-hint").css("left", e.pageX);
                           $(".fn-gantt-hint").css("top", e.pageY + 15);
                       });
@@ -976,7 +976,7 @@
                 if (classNames) {
                     bar.addClass(classNames);
                 }
-                bar.click(function (e) {
+                bar.on("click",function (e) {
                     e.stopPropagation();
                     settings.onItemClick($(this).data("dataObj"));
                 });
@@ -1407,7 +1407,7 @@
 
             // waitToggle
             waitToggle: function (element, showCallback) {
-                if ( $.isFunction(showCallback) ) {
+                if ( typeof showCallback === "function" ) {
                     var $elt = $(element);
                     var eo = $elt.offset();
                     var ew = $elt.outerWidth();
@@ -1572,14 +1572,14 @@
             dateDeserialize: function (date) {
                 if (typeof date === "string") {
                     date = date.replace(/\/Date\((.*)\)\//, "$1");
-                    date = $.isNumeric(date) ? parseInt(date, 10) : $.trim(date);
+                    date = isNaN(parseFloat(date)) ? parseInt(date, 10) : String.prototype.trim.call( date == null ? "" : date );
                 }
                 return new Date( date );
             },
 
             // Generate an id for a date
             genId: function (t) { // varargs
-                if ( $.isNumeric(t) ) {
+                if ( isNaN(parseFloat(t)) ) {
                     t = new Date(t);
                 }
                 switch (settings.scale) {
@@ -1631,7 +1631,7 @@
                     }
                     return !!holidays[
                       // assumes numeric dates are already normalized to start-of-day
-                      $.isNumeric(date) ?
+                      isNaN(parseFloat(date)) ?
                       date :
                       ( new Date(date.getFullYear(), date.getMonth(), date.getDate()) ).getTime()
                     ];
