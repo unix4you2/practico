@@ -54,6 +54,7 @@
 		Uso de la variable <Precarga_EstilosBS>
 	*/
 ?>
+<!DOCTYPE html>
 <html lang="<?php echo $IdiomaPredeterminado; ?>">
 <head>
     <script type="text/javascript">
