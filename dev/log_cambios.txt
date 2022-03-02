@@ -54,6 +54,7 @@ mod/pcoder/mod/php-diff-1.0/generador/index.php
 mod/pcoder/mod/php-diff-1.0/lib/Diff/Renderer/Html/Array.php
 mod/pbrowser/*
 mod/pmobile/index.php
+doc/*
 
 
 xml/*
