@@ -117,6 +117,7 @@ LogCambios="
 * Fixed [GANTT]: Actualizada sintaxis obsoleta de trim, Ej: jQuery.trim( text ) por String.prototype.trim.call( text == null ? "" : text )
 * Fixed [GANTT]: Actualizado eventos mouseup,mouseenter,mouseleave,mousemove,mousedown,click en shorthand por nueva sintaxis
 * Fixed [GANTT]: Actualizada sintaxis obsoleta de isFunction por comparaciones mediante typeof
+* Enhan [CORE]: El empaquetador de versiones incluye por defecto la carpeta de documentación de funciones del framework, de manera que los desarrolladores no tengan que buscar en orígenes externos o en el árbol de desarrollo la documentación de funciones y variables comunes.
 
 
 
