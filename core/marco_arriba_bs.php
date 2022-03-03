@@ -234,7 +234,7 @@
 		//document.documentElement.classList.toggle('dark-mode');   
 	</script>
 
-    <link href="inc/summernote/summernote.css" rel="stylesheet">
+    <link href="inc/summernote/summernote.min.css" rel="stylesheet">
     <!-- CSS Personalizado (Plantilla y Practico) -->
     <?php 
         //Evita el cargue si se trata de una opcion especifica

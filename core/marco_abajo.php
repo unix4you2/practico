@@ -199,8 +199,7 @@
     
     <!-- SummerNote -->
     <script src="inc/summernote/summernote.min.js"></script>
-    <script src="inc/summernote/plugin/summernote-ext-video.js"></script>
-    <script src="inc/summernote/lang/summernote-<?php echo $IdiomaPredeterminado; ?>-<?php echo strtoupper($IdiomaPredeterminado); ?>.js"></script>
+    <script src="inc/summernote/lang/summernote-<?php echo $IdiomaPredeterminado; ?>-<?php echo strtoupper($IdiomaPredeterminado); ?>.min.js"></script>
 
     <!-- JavaScript Personalizado del tema -->
     <script src="inc/bootstrap/js/sb-admin-2.js"></script>
@@ -774,9 +773,15 @@ $(document).ready( function() {
 								['Otros', ['fullscreen', 'codeview']], 
 								['Insertar2', ['picture', 'video']],
 								],
-							  onChange: function(contents) { document.datosform.valor_etiqueta.value=contents; }
+							  //ANTERIORonChange: function(contents) { document.datosform.valor_etiqueta.value=contents; }
+                              callbacks: {
+                                onChange: function(contents) {
+                                   document.datosform.valor_etiqueta.value=contents;
+                                }
+                              }
 							});
-							$('#Summer_valor_etiqueta').code(document.datosform.valor_etiqueta.value);
+							//ANTERIOR$('#Summer_valor_etiqueta').code(document.datosform.valor_etiqueta.value);
+							$('#Summer_valor_etiqueta').summernote('code',document.datosform.valor_etiqueta.value);
 						";
 					}
             ?>
