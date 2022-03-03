@@ -2,15 +2,10 @@ Format: 1.5
 
 
 Title: Practico
-SubTitle: Generador de aplicaciones WEB libre
+SubTitle: Low-Code Framework para PHP
 
-Footer: Copyright (c) 2013 - John F. Arroyave Gutierrez |
-
-# You can add a timestamp to your documentation like one of these:
-# Timestamp: Generated on month day, year
-# Timestamp: Updated mm/dd/yyyy
-# Timestamp: Last updated mon day
-#
+Footer: Pr&amp;aacute;ctico Framework
+Timestamp: Copyright (c) 2012-year - John F. Arroyave Gutierrez
 #   m     - One or two digit month.  January is "1"
 #   mm    - Always two digit month.  January is "01"
 #   mon   - Short month word.  January is "Jan"
@@ -47,22 +42,29 @@ Footer: Copyright (c) 2013 - John F. Arroyave Gutierrez |
 # --------------------------------------------------------------------------
 
 
-Text: Copyright (c) 2013
-Link: [John F. Arroyave Gutierrez]  (mailto:unix4you2@gmail.com)
+Group: Indice  {
 
-Group: Core  {
+   Index: General
+   Build Target Index: Build Targets
+   File Index: Files
+   Function Index: Functions
+   }  # Group: Indice
 
-   File: Conexiones PDO  (/var/www/html/practico/core/conexiones_extra.php)
-   File: Conexiones PDO  (/var/www/html/practico/core/conexiones.php)
-   File: documentador.php  (/var/www/html/practico/core/documentador.php)
+Group: Modulos_Centrales  {
+
    File: Introduccion  (/var/www/html/practico/core/doc_intro.php)
+   File: Formularios  (no auto-title, /var/www/html/practico/core/formularios.php)
+   File: Informes  (no auto-title, /var/www/html/practico/core/informes.php)
    File: Libreria base  (/var/www/html/practico/core/comunes.php)
-   File: Modulo actualizar  (/var/www/html/practico/core/actualizacion.php)
+   File: Conexiones base PDO  (no auto-title, /var/www/html/practico/core/conexiones.php)
+   File: Conexiones/Replicaciones  (no auto-title, /var/www/html/practico/core/conexiones_extra.php)
+   File: Funciones JS  (no auto-title, /var/www/html/practico/inc/bootstrap/js/practico.js)
+   File: Nucleo de WebServices  (/var/www/html/practico/core/ws_nucleo.php)
+   }  # Group: Modulos_Centrales
+
+Group: Modulos_de_Apoyo  {
+
    File: Modulo ajax  (/var/www/html/practico/core/ajax.php)
-   File: Modulo correos  (/var/www/html/practico/core/correos.php)
-   File: Modulo formularios  (/var/www/html/practico/core/formularios.php)
-   File: Modulo informes  (/var/www/html/practico/core/informes.php)
-   File: Modulo kanban  (/var/www/html/practico/core/kanban.php)
    File: Modulo mantenimientos  (/var/www/html/practico/core/mantenimiento.php)
    File: Modulo menues  (/var/www/html/practico/core/menus.php)
    File: Modulo monitoreo  (/var/www/html/practico/core/monitoreo.php)
@@ -71,35 +73,36 @@ Group: Core  {
    File: Modulo tablas  (/var/www/html/practico/core/tablas.php)
    File: Modulo tareas programadas  (/var/www/html/practico/core/cron.php)
    File: Modulo usuarios  (/var/www/html/practico/core/usuarios.php)
-   File: Nucleo de WebServices  (/var/www/html/practico/core/ws_nucleo.php)
-   File: Seccion con formularios comunes  (/var/www/html/practico/core/marco_forms.php)
-   File: Seccion con los contactos de Chat disponibles  (/var/www/html/practico/core/marco_chat.php)
-   File: Seccion Configuracion WebServices  (/var/www/html/practico/core/marco_wscfg.php)
+   File: documentador.php  (/var/www/html/practico/core/documentador.php)
+   File: Modulo actualizar  (/var/www/html/practico/core/actualizacion.php)
+   File: Modulo correos  (/var/www/html/practico/core/correos.php)
+   File: Modulo kanban  (/var/www/html/practico/core/kanban.php)
+   File: WS_API  (/var/www/html/practico/core/ws_funciones.php)
+   File: TextoAleatorioCaptcha  (/var/www/html/practico/core/captcha.php)
+   }  # Group: Modulos_de_Apoyo
+
+Group: Secciones_de_Apoyo  {
+
+   File: Seccion superior  (/var/www/html/practico/core/marco_nav.php)
+   File: Seccion superior  (/var/www/html/practico/core/marco_navizq.php)
+   File: Seccion superior  (/var/www/html/practico/core/marco_arriba.php)
+   File: Seccion superior  (/var/www/html/practico/core/marco_arriba_bs.php)
+   File: Seccion inferior  (/var/www/html/practico/core/marco_abajo.php)
    File: Seccion Escritorio Administrativo  (/var/www/html/practico/core/marco_admin.php)
    File: Seccion Escritorio Administrativo  (/var/www/html/practico/core/marco_admin_morris.php)
-   File: Seccion inferior  (/var/www/html/practico/core/marco_abajo.php)
-   File: Seccion marco de configuracion  (/var/www/html/practico/core/marco_conf.php)
-   File: Seccion marco de desarrollo  (/var/www/html/practico/core/marco_dev.php)
-   File: Seccion marco de exportaciones  (/var/www/html/practico/core/marco_export.php)
-   File: Seccion Proveedores OAuth  (/var/www/html/practico/core/marco_param.php)
-   File: Seccion superior  (/var/www/html/practico/core/marco_nav.php)
-   File: Seccion superior  (/var/www/html/practico/core/marco_arriba.php)
-   File: Seccion superior  (/var/www/html/practico/core/marco_navizq.php)
-   File: Seccion superior  (/var/www/html/practico/core/marco_arriba_bs.php)
-   File: TextoAleatorioCaptcha  (/var/www/html/practico/core/captcha.php)
+   File: Marco de configuracion  (no auto-title, /var/www/html/practico/core/marco_conf.php)
+   File: Marco de desarrollo  (no auto-title, /var/www/html/practico/core/marco_dev.php)
+   File: Marco de exportaciones  (no auto-title, /var/www/html/practico/core/marco_export.php)
+   File: Proveedores OAuth  (no auto-title, /var/www/html/practico/core/marco_param.php)
+   File: Formularios comunes  (no auto-title, /var/www/html/practico/core/marco_forms.php)
+   File: Contactos de Chat  (no auto-title, /var/www/html/practico/core/marco_chat.php)
+   File: Configuracion WebServices  (no auto-title, /var/www/html/practico/core/marco_wscfg.php)
+   }  # Group: Secciones_de_Apoyo
+
+Group: Otros  {
+
    File: Variables para aplicacion  (/var/www/html/practico/core/configuracion.php)
-   File: WS_API  (/var/www/html/practico/core/ws_funciones.php)
-   }  # Group: Core
-
-File: PCOJS_MostrarMensaje  (/var/www/html/practico/inc/bootstrap/js/practico.js)
-
-Group: Index  {
-
-   Build Target Index: Build Targets
-   Index: Everything
-   File Index: Files
-   Function Index: Functions
-   }  # Group: Index
+   }  # Group: Otros
 
 
 

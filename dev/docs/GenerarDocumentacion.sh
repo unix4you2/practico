@@ -40,6 +40,8 @@
 #     Usted ha debido de recibir una copia de la Licencia General Pública de
 #     GNU junto con este programa. Si no, vea <http://www.gnu.org/licenses/>
 
+rm -rf ../../doc/*
+
 perl ./NaturalDocs/NaturalDocs -ro \
     -i ../../../practico/core \
     -i ../../../practico/inc/bootstrap/js \
