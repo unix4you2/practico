@@ -47,7 +47,7 @@ Title: Introduccion
 
 	(see ../img/practico_login.png)
 
-	Practico es un proyecto de *software libre publicado bajo licencia GNU GPL v2.0* para la creacion de aplicaciones web de una manera completamente visual, rapida y sin mayores conocimientos previos de programacion.  Su nucleo incorpora los scripts necesarios para una facil instalacion y la generacion dinamica de objetos como formularios, informes, gestion de usuarios y conexion a multiples motores de bases de datos
+	Practico es un proyecto de *software libre publicado bajo licencia GNU GPL v3.0* para la creacion de aplicaciones web de una manera completamente visual, rapida y sin mayores conocimientos previos de programacion.  Su nucleo incorpora los scripts necesarios para una facil instalacion y la generacion dinamica de objetos como formularios, informes, gestion de usuarios y conexion a multiples motores de bases de datos
 
 Section: Principales caracteristicas
 
@@ -86,14 +86,14 @@ Section: Aspectos legales
 		GNU FDL version 1.3. Toda la documentacion asociada a este proyecto se encuentra liberada bajo los terminos de la *GNU FDL version 1.3* de la Free Software Foundation.  Una copia completa se encuentra disponible en Internet en el enlace: http://www.gnu.org/licenses/fdl-1.3.html
 
 	About: Licencia del aplicativo
-		GNU GPL version 2. La herramienta practico ha sido liberada bajo los terminos de la *GNU GPL version 2* de la Free Software Foundation.  Una copia completa se encuentra disponible en Internet en el enlace: http://www.gnu.org/licenses/gpl-2.0.html
+		GNU GPL version 3. La herramienta practico ha sido liberada bajo los terminos de la *GNU GPL version 3* de la Free Software Foundation.  Una copia completa se encuentra disponible en Internet en el enlace: http://www.gnu.org/licenses/gpl-3.0.html
 
 Section: Detalles de licenciamiento (AUTHORS)
 
 	(start code)
 		John F. Arroyave Gutierrez
-		Copyright (c) 2013 John F. Arroyave Gutierrez <unix4you2@gmail.com>
-		License GPLv2
+		Copyright (c) 2012-2022 John F. Arroyave Gutierrez <unix4you2@gmail.com>
+		License GPLv3
 		See the LICENSE file for details
 
 		That is the license for the whole package.
