@@ -205,7 +205,7 @@
 							</a>
 						</li>
 						<li>
-							<a data-toggle="modal" href="javascript:document.PCO_VerReplicaciones.submit();">
+							<a href="javascript:document.PCO_VerReplicaciones.submit();">
 								<div>
 									<i class="fa fa-cubes fa-fw"></i> <?php echo $MULTILANG_ReplicaTitulo; ?>
 									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."replicasbd",""); ?></span>
@@ -230,7 +230,7 @@
 							</a>
 						</li>
 						<li>
-							<a data-toggle="modal" href="javascript:document.PCO_VerTareasCron.submit();">
+							<a href="javascript:document.PCO_VerTareasCron.submit();">
 								<div>
 									<i class="fa fa-clock-o fa-fw"></i> <?php echo $MULTILANG_CronTitulo; ?>
 									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."tareascron",""); ?></span>
@@ -238,7 +238,7 @@
 							</a>
 						</li>
 						<li>
-							<a data-toggle="modal" href="javascript:document.PCO_VerMonitoreo.submit();">
+							<a href="javascript:document.PCO_VerMonitoreo.submit();">
 								<div>
 									<i class="fa fa-lightbulb-o fa-fw"></i> <?php echo $MULTILANG_MonTitulo; ?>
 									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."monitoreo",""); ?></span>
@@ -246,7 +246,7 @@
 							</a>
 						</li>
 						<li>
-							<a data-toggle="modal" href="javascript:document.PCO_AcortadorDirecciones.submit();">
+							<a href="javascript:document.PCO_AcortadorDirecciones.submit();">
 								<div>
 									<i class="fa fa-external-link fa-fw"></i> Generador de URLs cortas
 									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."acortadorurls",""); ?></span>
@@ -271,28 +271,28 @@
                                 }
                         ?>
 						<li>
-							<a data-toggle="modal" href="javascript:document.actualizarad.submit();">
+							<a href="javascript:document.actualizarad.submit();">
 								<div>
 									<i class="fa fa-download fa-fw"></i> <?php echo $MULTILANG_Actualizacion; ?>/<?php echo $MULTILANG_Copias; ?>
 								</div>
 							</a>
 						</li>
 						<li>
-							<a data-toggle="modal" href="doc/index.html" target="_blank">
+							<a href="doc/index.html" target="_blank">
 								<div>
 									<i class="fa fa-book fa-fw"></i> Documentaci&oacute;n del Framework
 								</div>
 							</a>
 						</li>
 						<li>
-							<a data-toggle="modal" href="https://gitter.im/unix4you2/practico/" target="_blank">
+							<a href="https://gitter.im/unix4you2/practico/" target="_blank">
 								<div>
 									<i class="fa fa-comment-o fa-fw"></i> <?php echo $MULTILANG_ChatDevel; ?>
 								</div>
 							</a>
 						</li>
 						<li>
-							<a data-toggle="modal" href="https://www.practico.org/agradecimientos" target="_blank">
+							<a href="https://www.practico.org/agradecimientos" target="_blank">
 								<div>
 									<i class="fa fa-smile-o fa-fw"></i> Da las gracias!&nbsp; <img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg">
 								</div>
