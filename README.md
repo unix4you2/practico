@@ -2,21 +2,24 @@
 ![PHP7](http://dev.practico.org:3000/unix4you2/practico/raw/commit/181fdfd64ef227c94cacc1a2fe45daea89fff22b/dev/misc/php7.png)
 [![Gitter](http://dev.practico.org:3000/unix4you2/practico/raw/branch/master/dev/misc/gitter.png)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Practico es una herramienta de codigo abierto para el diseño automatico de aplicaciones web de manera agil y sin digitar codigo
+Practico es una herramienta de codigo abierto para el diseño de aplicaciones web y progresivas de manera agil.
 
 ## Características
 
+ - Soporta todo el ciclo de desarrollo de software: Elicitacion de requerimientos, Control de tareas o proyecto por Kanban/Gantt, Diseño, Implementación, Pruebas, Gestión de bugs, Documentación, etc.
  - Escrito completamente en PHP, HTML y Javascript
  - Interfaz gráfica de usuario
  - Funciones integradas para operaciones CRUD simples y avanzadas
+ - Controles de flujo rápidos para modelados de proceso y lógicas de negocio
  - Multiplataforma (GNU/Linux, *BSD, Microsoft Windows)
- - Fácilmente personalizable mediante sus propias funciones
+ - Fácilmente personalizable mediante sus propias funciones y maquetación
  - Pequeño, liviano y rápido
  - Reconocimiento de captcha, teclados en pantalla y otros a su gusto
  - Herramientas gráficas para gestionar la base de datos
- - Generación simple y rápida de completos formularios y reportes HTML y PDF
+ - Generación simple y rápida de completos formularios y reportes HTML, PDF, etc.
  - Administración sencilla de las credenciales de usuario
  - Código fuente simple, los fuentes son muy fáciles de entender.
+ - *Muchas otras herramientas* para ayudar a que toda su aplicación y equipo de desarrollo utilice sólo una herramienta.
 
 ## Instalación y uso
 
