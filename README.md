@@ -45,7 +45,7 @@ Un manual completo en formato Google Docs que permite recibir comentarios, así 
 
  * Chat a través de [![Gitter](http://dev.practico.org:3000/unix4you2/practico/raw/branch/master/dev/misc/gitter.png)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
  * Reporte de incidencias (del Framework, no de su aplicación) a través del [Repositorio Git](http://dev.practico.org:3000/unix4you2/practico/issues)
- * Aportar código o desarrollo a través del [Repositorio Git](http://dev.practico.org:3000/unix4you2/practico/issues)
+ * Aportar código o desarrollo a través del [Repositorio Git](http://dev.practico.org:3000/unix4you2/practico/)
 
 
 #### Métricas del proyecto
@@ -54,6 +54,6 @@ Un manual completo en formato Google Docs que permite recibir comentarios, así 
 
 #### Soporte y donaciones al proyecto
 
-Si encuentra útil este proyecto y desea contribuir al desarrollo del mismo puede apoyarnos mediante una donación por un valor voluntario que será destinado exclusivamente para soportar el desarrollo de nuevas funcionalidades.
+Si encuentra útil este proyecto y desea contribuir al desarrollo del mismo puede apoyarnos mediante una donación por un valor voluntario.
 
-[![Donaciones](https://raw.githubusercontent.com/unix4you2/practico/master/dev_web/img/paypal.png)](https://www.paypal.com/cgi-bin/webscr?item_name=Donacion+para+desarrollo+de+funcionalidades+de+Pr%E1ctico&cmd=_donations&business=unix4you2%40gmail.com)
+[![Donaciones](http://dev.practico.org:3000/unix4you2/practico/raw/branch/master/dev/misc/paypal.png)](https://www.paypal.com/cgi-bin/webscr?item_name=Donacion+para+desarrollo+de+funcionalidades+de+Pr%E1ctico&cmd=_donations&business=unix4you2%40gmail.com)
