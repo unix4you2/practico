@@ -28,8 +28,8 @@ Practico es una herramienta de codigo abierto para el diseño de aplicaciones we
    $ tar zxvf practico-<version>.tar.gz  ó
    $ unzip practico-<version>.zip
 ```
- * Abra su navegador en la URL correspondiente y siga las instrucciones
-   del asistente.  Pruebe  http://DomainOrIP/practico (or your folder)
+ * Abra su navegador en la URL o carpeta correspondiente y siga las instrucciones
+   del asistente.
 
 ## Desinstalación de Practico:
 
@@ -43,8 +43,10 @@ Un manual completo en formato Google Docs que permite recibir comentarios, así 
 
 ### Ideas y puntos de contacto
 
- * Chat a través de [![Gitter]](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
- * Espacios de discusión en nuestro [Grupo de Google](https://groups.google.com/forum/#!forum/practicodev)
+ * Chat a través de [![Gitter](http://dev.practico.org:3000/unix4you2/practico/raw/branch/master/dev/misc/gitter.png)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+ * Reporte de incidencias (del Framework, no de su aplicación) a través del [Repositorio Git](http://dev.practico.org:3000/unix4you2/practico/issues)
+ * Aportar código o desarrollo a través del [Repositorio Git](http://dev.practico.org:3000/unix4you2/practico/issues)
+
 
 #### Métricas del proyecto
 
