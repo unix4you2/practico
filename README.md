@@ -1,6 +1,6 @@
 ![PRACTICO](http://dev.practico.org:3000/unix4you2/practico/raw/branch/master/dev/logo/01b.png)
 ![PHP7](http://dev.practico.org:3000/unix4you2/practico/raw/commit/181fdfd64ef227c94cacc1a2fe45daea89fff22b/dev/misc/php7.png)
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](http://dev.practico.org:3000/unix4you2/practico/raw/branch/master/dev/misc/gitter.png)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 Practico es una herramienta de codigo abierto para el diseño automatico de aplicaciones web de manera agil y sin digitar codigo
 
