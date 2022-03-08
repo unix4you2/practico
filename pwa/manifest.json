@@ -66,10 +66,10 @@
 	  "gcm", "storage"
 	],
   
-  "scope": "/practico/",
-  "start_url": "/practico/",
+  "scope": "./",
+  "start_url": "./index.php",
   "dir": "auto",
-  "display": "standalone",
+  "display": "fullscreen",
   "orientation": "portrait",
   "prefer_related_applications": false,
   "theme_color": "#ffffff",

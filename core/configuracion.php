@@ -136,10 +136,10 @@
 	// Especifica si desea activar o no el registro de la aplicacion como una Aplicacion web progresiva PWA y algunos permisos de usuario
 	$PWA_Activa=1;
 	$PWA_DireccionTexto='auto';
-	$PWA_Display='standalone';
+	$PWA_Display='fullscreen';
 	$PWA_Orientacion='portrait';
 	$PWA_FCMSenderID='103953800507';
-	$PWA_Scope='/practico/';
+	$PWA_Scope='';
 	$PWA_AutorizacionGPS='0';
 	$PWA_AutorizacionFCM='0';
 	$PWA_AutorizacionCAM='0';

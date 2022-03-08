@@ -58,6 +58,8 @@ mod/pmobile/index.php
 doc/*
 inc/d3js/*
 inc/summernote/*
+pwa/index.php
+pwa/service-worker.js
 
 
 xml/*
@@ -126,6 +128,7 @@ LogCambios="
 * Fixed [CORE]: Eliminadas clases modal a opciones de menu de configuracion para evitar errores de tokenize de JS
 * Enhan [CORE]: Actualizada version de SummerNote Responsive desde 0.6.7 a 0.8.20
 * Enhan [CORE]: Actualizada la forma de recuperaci{on de valores para los campos tipo SummerNote.  Ahora se utiliza el callbacks de la API del control.
+* Enhan [CORE]: Ajustes sobre PWA mejoran proceso de reconocimiento e instalacion de la aplicación de manera nativa en los navegadores.
 
 pdte: agregar pruebas unitarias campo summernote.  incluyendo internos y creados por el usuario
 

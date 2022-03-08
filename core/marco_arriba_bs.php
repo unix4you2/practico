@@ -53,8 +53,7 @@
 	Ver tambien:
 		Uso de la variable <Precarga_EstilosBS>
 	*/
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="<?php echo $IdiomaPredeterminado; ?>">
 <head>
     <script type="text/javascript">
@@ -320,8 +319,7 @@
         // Agrega soporte para PWA si aplica
         if ($PWA_Activa=="1")
             {
-                echo '<link rel="manifest" href="pwa/manifest.json?'.filemtime('pwa/manifest.json').'">';
-
+                echo '<link rel="manifest" href="pwa/manifest.json">'; //?'.filemtime('pwa/manifest.json').'
     ?>
         	<script language="JavaScript">
                 if (!('serviceWorker' in navigator))

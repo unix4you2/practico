@@ -441,12 +441,12 @@ $salida=sprintf("<?php
 
                     //Define el Scope y la URL inicial
                         $CadenaFinalScope='
-  "scope": "/",
-  "start_url": "/",';
-                    if ($PWA_ScopeNEW!="")
-                        $CadenaFinalScope='
-  "scope": "'.$PWA_ScopeNEW.'",
-  "start_url": "'.$PWA_ScopeNEW.'",';
+  "scope": "./",
+  "start_url": "./index.php",';
+//                     if ($PWA_ScopeNEW!="")
+//                         $CadenaFinalScope='
+//   "scope": "'.$PWA_ScopeNEW.'",
+//   "start_url": "'.$PWA_ScopeNEW.'",';
 
                     if ($Tema_PracticoFramework=="bootstrap") { $PCO_ColorFondoGeneral="#ffffff"; }
                     if ($Tema_PracticoFramework=="cerulean") { $PCO_ColorFondoGeneral="#ffffff"; }

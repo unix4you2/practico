@@ -1414,7 +1414,7 @@
     $MULTILANG_PWAOrientacionPantalla='Orientação da tela';
     $MULTILANG_PWAGCM='ID do Firebase Cloud Messaging';
     $MULTILANG_PWAScope='Alcance (Scope)';
-    $MULTILANG_PWAScopeDes='Se a sua instalação do Practico reside na raiz do seu servidor web ou subdomínio, você pode deixar este espaço em branco. Se a sua instalação reside em qualquer pasta, indique /pasta/ para estabelecer o escopo do Operador de Serviço e do manifesto PWA.';
+    $MULTILANG_PWAScopeDes='Se a sua instalação do Practico reside na raiz do seu servidor web ou subdomínio, você pode deixar este espaço em branco. Se a sua instalação reside em qualquer pasta, indique ./pasta/ para estabelecer o escopo do Operador de Serviço e do manifesto PWA.';
     $MULTILANG_PWAAutorizarGPS='Solicitar autorização para obter localização (GPS)';
     $MULTILANG_PWAAutorizarFCM='Solicitar autorização de envio de notificações (PUSH)';
     $MULTILANG_PWAAutorizarCAM='Request authorization to use video device (CAMERA)';
