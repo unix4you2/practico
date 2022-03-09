@@ -746,10 +746,16 @@ $(document).ready( function() {
 									lang: '".$IdiomaPredeterminado."-".strtoupper($IdiomaPredeterminado)."', // default: 'en-US'
 									  $cadena_altura
 									  $cadena_barraherramientas
-									  onChange: function(contents) { document.datos.$NombreCampoSummer.value=contents; }
+									  //ANTERIORonChange: function(contents) { document.datos.$NombreCampoSummer.value=contents; }
+                                      callbacks: {
+                                        onChange: function(contents) {
+                                           document.datos.$NombreCampoSummer.value=contents;
+                                        }
+                                      }
 									});";
 								//Asigna el valor inicial del textarea al marco visual a manera de codigo
-								echo "$('#Summer_".$NombreCampoSummer."').code(document.datos.".$NombreCampoSummer.".value);";
+								echo "$('#Summer_".$NombreCampoSummer."').summernote('code',document.datos.".$NombreCampoSummer.".value);";
+								//echo "$('#Summer_".$NombreCampoSummer."').code(document.datos.".$NombreCampoSummer.".value);";
 							}
 					}
 					

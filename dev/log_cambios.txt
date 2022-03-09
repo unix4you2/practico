@@ -130,7 +130,7 @@ LogCambios="
 * Enhan [CORE]: Actualizada la forma de recuperaci{on de valores para los campos tipo SummerNote.  Ahora se utiliza el callbacks de la API del control.
 * Enhan [CORE]: Ajustes sobre PWA mejoran proceso de reconocimiento e instalacion de la aplicación de manera nativa en los navegadores.
 
-pdte: agregar pruebas unitarias campo summernote.  incluyendo internos y creados por el usuario
+PDTE formulario de los summer note esta fijo como "datos"
 
 "
 
