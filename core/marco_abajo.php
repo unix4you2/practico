@@ -251,7 +251,7 @@
     <script language="JavaScript">
         //Actualiza tamano del marco principal para garantizar siempre un tamano adecuado de fondo
         //TODO: Verificar consistencia en paginas grades como la administrativa
-        $( document ).ready(function() {
+        $( function() {
             var PCOJSVAR_HayScroll=false;
             //Verifica si hay scroll  METODO 1
             if (document.getElementById("page-wrapper").scrollHeight==$(document).height())
@@ -286,7 +286,7 @@
 
     <script language="JavaScript">
         //Carga las tablas en formato DataTable
-        $(document).ready(function() {
+        $( function() {
             <?php
                 //Desglosa la cadena de posibles tablas con formato DataTable y las convierte
                 $TablasDataTable=@explode("|",$PCO_InformesDataTable);
@@ -544,7 +544,7 @@ $(document).ready( function() {
         });
 
         //Busca por posibles graficos sin datos
-        $(document).ready(function() {
+        $( function() {
             <?php
                 //Desglosa la cadena de posibles graficos sin datos
                 $PCO_MarcosGraficosSinDatos=@explode("|",$PCO_InformesGraficosSinDatos);
@@ -689,7 +689,7 @@ $(document).ready( function() {
 	
     <script language="JavaScript">
 		//Activa visualmente todos los div tipo SummerNote y los asocia a cada textarea
-        $(document).ready(function() {
+        $( function() {
             <?php
                 //Desglosa la cadena de posibles SummerNote
                 $CamposSummerNote=@explode("|",$PCO_CamposSummerNote);

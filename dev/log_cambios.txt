@@ -129,6 +129,8 @@ LogCambios="
 * Enhan [CORE]: Actualizada version de SummerNote Responsive desde 0.6.7 a 0.8.20
 * Enhan [CORE]: Actualizada la forma de recuperaci{on de valores para los campos tipo SummerNote.  Ahora se utiliza el callbacks de la API del control.
 * Enhan [CORE]: Ajustes sobre PWA mejoran proceso de reconocimiento e instalacion de la aplicación de manera nativa en los navegadores.
+* Enhan [CORE]: Reemplazados llamados deprecated tipo  $( document ).ready(function() o $(document).on('ready', function() por la notación nueva $ (function() { }
+
 
 PDTE formulario de los summer note esta fijo como "datos"
 
