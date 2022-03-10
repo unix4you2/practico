@@ -6054,7 +6054,7 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
 		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 		// Muestra el campo
-		$salida.= '<textarea style="    min-height: 500px !important; max-height: 500px !important;"  id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
+		$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
 
 		// Define las barras posibles para el editor
 		$barra_documento="'sourceEditing','|','heading'";
@@ -6124,6 +6124,14 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
 		// Aplica el script del ckeditor al campo
 		if (!$existe_campo_textoformato)
 			$salida.= '<script type="text/javascript" src="inc/ckeditor/ckeditor.js"></script>';
+		
+		//Determina si se requiere un tamano especifico del control y lo usa, sino lo deja en blanco para responsive
+		
+		$CadenaTamanoControl='';
+		if ($registro_campos["alto"]!="" && $registro_campos["alto"]!="0" && $registro_campos["ancho"]!="" && $registro_campos["ancho"]!="0")
+		    $CadenaTamanoControl='  editor.ui.element.style.height = "'.$registro_campos["alto"].'px";
+                    			    editor.ui.element.style.width = "'.$registro_campos["ancho"].'px";';
+		
 		$salida.= '<script>
                     	ClassicEditor
                     		.create( document.querySelector( "#'.$registro_campos["id_html"].'" ), {
@@ -6131,8 +6139,7 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
                     		} )
                     		.then( editor => {
                     			window.editor = editor;
-                    			editor.ui.element.style.height = "'.$registro_campos["alto"].'px";
-                    			editor.ui.element.style.width = "'.$registro_campos["ancho"].'px";
+                    			'.$CadenaTamanoControl.'
                     		} )
                     		.catch( err => {
                     			console.error( err.stack );
@@ -7238,7 +7245,7 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
         $salida.='
 				/*
 				// Genera el vinculo entre el enlace de upload y la funcion
-				$("#upload").bind("click", function ()
+				$("#upload").on("click", function ()
 					{
 						var oCanvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
 						var strDataURI = oCanvas.toDataURL();
