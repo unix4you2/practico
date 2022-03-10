@@ -6054,23 +6054,23 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
 		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 		// Muestra el campo
-		$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="ckeditor" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
+		$salida.= '<textarea style="    min-height: 500px !important; max-height: 500px !important;"  id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
 
 		// Define las barras posibles para el editor
-		$barra_documento="['Source','-','NewPage','DocProps','Preview','Print','-','Templates']";
-		$barra_basica="['Bold', 'Italic', 'Underline', 'Strike', 'Subscript','Superscript','-','RemoveFormat']";
-		$barra_parrafo="['NumberedList','BulletedList','-','Outdent','Indent','-','Blockquote','CreateDiv','-','JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock','-','BidiLtr','BidiRtl']";
-		$barra_enlaces="['Link','Unlink','Anchor']";
-		$barra_estilos="['Styles','Format','Font','FontSize']";
-		$barra_portapapeles="['Cut','Copy','Paste','PasteText','PasteFromWord','-','Undo','Redo']";
-		$barra_edicion="['Find','Replace','-','SelectAll','-','SpellChecker', 'Scayt']";
-		$barra_insertar="['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak','Iframe']";
-		$barra_colores="['TextColor','BGColor']";
-		$barra_formularios="['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField']";
-		$barra_otros="['Maximize', 'ShowBlocks']";
+		$barra_documento="'sourceEditing','|','heading'";
+		$barra_basica="'bold', 'italic', 'underline', 'strikethrough','subscript','superscript','|','removeFormat'";
+		$barra_parrafo="'numberedList','bulletedList','|','outdent','indent','|','blockQuote','|','alignment'";
+		$barra_enlaces="'link'";
+		$barra_estilos="'fontSize','fontFamily'";
+		$barra_portapapeles="'|','undo','redo'";
+		$barra_edicion="'findAndReplace','selectAll','|'";
+		$barra_insertar="'insertTable','horizontalLine','specialCharacters','pageBreak','htmlEmbed'";
+		$barra_colores="'fontColor','fontBackgroundColor','highlight'";
+		$barra_formularios=""; //DEPRECATED en version 5
+		$barra_otros="'code', 'codeBlock'";
 
 		// Construye las barras de herramientas de acuerdo a la seleccion del usuario
-		@$barra_editor.="['-']";
+		@$barra_editor.="'|'";
 		if ($registro_campos["barra_herramientas"]=="0")
 			{
 				$barra_editor.=",".$barra_documento;
@@ -6118,17 +6118,26 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
 				$barra_editor.=",".$barra_edicion;
 				$barra_editor.=",".$barra_insertar;
 				$barra_editor.=",".$barra_colores;
-				$barra_editor.=",".$barra_formularios;
+				//$barra_editor.=",".$barra_formularios;
 				$barra_editor.=",".$barra_otros;
 			}
 		// Aplica el script del ckeditor al campo
 		if (!$existe_campo_textoformato)
 			$salida.= '<script type="text/javascript" src="inc/ckeditor/ckeditor.js"></script>';
-		$salida.= '	<script type="text/javascript">
-					CKEDITOR.replace( \''.$registro_campos["campo"].'\', {	toolbar : [ '.$barra_editor.' ] } );
-					CKEDITOR.config.width = '.$registro_campos["ancho"].';
-					CKEDITOR.config.height = '.$registro_campos["alto"].';
-				</script>';
+		$salida.= '<script>
+                    	ClassicEditor
+                    		.create( document.querySelector( "#'.$registro_campos["id_html"].'" ), {
+                    			toolbar: [ '.$barra_editor.' ]
+                    		} )
+                    		.then( editor => {
+                    			window.editor = editor;
+                    			editor.ui.element.style.height = "'.$registro_campos["alto"].'px";
+                    			editor.ui.element.style.width = "'.$registro_campos["ancho"].'px";
+                    		} )
+                    		.catch( err => {
+                    			console.error( err.stack );
+                    		} );
+                    </script>';
 
 		// Muestra indicadores de obligatoriedad o ayuda
 		if ($registro_campos["obligatorio"]) $salida.= '<a href="#"  data-toggle="tooltip" data-html="true"  data-placement="auto"  title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
@@ -7400,12 +7409,12 @@ function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$for
 				var uri = CANVAS_'.$registro_campos["campo"].'.toDataURL("image/png");
 				}
 
-				var fr;
-				sel.addEventListener(\'change\',function(e){
-				var f = sel.files[0];
-				fr = new FileReader();
-				fr.readAsDataURL(f);
-				})
+				// var fr;
+				// sel.addEventListener(\'change\',function(e){
+				// var f = sel.files[0];
+				// fr = new FileReader();
+				// fr.readAsDataURL(f);
+				// })
 			</script>';
 
 		$salida.='

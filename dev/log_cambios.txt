@@ -58,6 +58,7 @@ mod/pmobile/index.php
 doc/*
 inc/d3js/*
 inc/summernote/*
+inc/ckeditor/*
 pwa/index.php
 pwa/service-worker.js
 
@@ -130,9 +131,9 @@ LogCambios="
 * Enhan [CORE]: Actualizada la forma de recuperaci{on de valores para los campos tipo SummerNote.  Ahora se utiliza el callbacks de la API del control.
 * Enhan [CORE]: Ajustes sobre PWA mejoran proceso de reconocimiento e instalacion de la aplicación de manera nativa en los navegadores.
 * Enhan [CORE]: Reemplazados llamados deprecated tipo  $( document ).ready(function() o $(document).on('ready', function() por la notación nueva $ (function() { }
+* Enhan [CORE]: Actualizada version de CkEditor de 4 a 5 ahora responsive.  Tener presente que en la version nueva las barras han dejado de tener algunos botones.
 
 
-PDTE formulario de los summer note esta fijo como "datos"
 
 "
 
@@ -157,6 +158,10 @@ ScriptPHPAutorun=""
 ########################################################################
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
+
+PDTE formulario de los summer note esta fijo como "datos"
+Comunes L7403 PCO_CargarObjetoCamara comentarios al final
+
 
 Vista de calendario
 Libreria de festivos
