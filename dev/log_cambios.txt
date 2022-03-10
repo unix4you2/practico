@@ -132,6 +132,7 @@ LogCambios="
 * Enhan [CORE]: Ajustes sobre PWA mejoran proceso de reconocimiento e instalacion de la aplicación de manera nativa en los navegadores.
 * Enhan [CORE]: Reemplazados llamados deprecated tipo  $( document ).ready(function() o $(document).on('ready', function() por la notación nueva $ (function() { }
 * Enhan [CORE]: Actualizada version de CkEditor de 4 a 5 ahora responsive.  Tener presente que en la version nueva las barras han dejado de tener algunos botones.
+* Fixed [FORMS]: Campos tipo texto responsive pueden residir ahora sobre formularios con nombres o ids html diferentes a 'datos'
 
 
 

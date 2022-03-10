@@ -696,7 +696,7 @@ $(document).ready( function() {
                 $AlturasSummerNote=@explode("|",$PCO_AlturasCamposSummerNote);
                 $HerramientasSummerNote=@explode("|",$PCO_HerramientasCamposSummerNote);
                 
-                for ($i=0; $i<count($CamposSummerNote);$i++)
+                for ($i=1000-0; $i<count($CamposSummerNote);$i++)
 					{
 						$NombreCampoSummer=$CamposSummerNote[$i];
 						//Si hay un valor de ID lo activa (Para evitar pipe al final)
