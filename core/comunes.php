@@ -5969,7 +5969,6 @@ function PCO_CargarObjetoAreaResponsive($registro_campos,$registro_datos_formula
 	{
 		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 		global $IdiomaPredeterminado,$MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
-		global $PCO_CamposSummerNote,$PCO_AlturasCamposSummerNote,$PCO_HerramientasCamposSummerNote;
 
 		$salida='';
 		$nombre_campo=$registro_campos["campo"];
@@ -5993,83 +5992,68 @@ function PCO_CargarObjetoAreaResponsive($registro_campos,$registro_datos_formula
 		// Muestra el campo
 		$salida.= '<div id="Summer_'.$registro_campos["campo"].'" class="summernote" ></div>';
 
-		//Agrega el campo a la lista de campos de este tipo para ser activados al final
-		$PCO_CamposSummerNote.=$registro_campos["campo"]."|";
-		$PCO_AlturasCamposSummerNote.=$registro_campos["alto"]."|";
-		$PCO_HerramientasCamposSummerNote.=$registro_campos["barra_herramientas"]."|";
-
 		// Agrega el campo del form pero oculto
 		$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' style="visibility:hidden; display:none;" >'.$cadena_valor.'</textarea>';
 
+        //Busca el id_html de formulario para usarlo en la creacion del summernote
+        $NombreFormulario=PCO_EjecutarSQL("SELECT id_html FROM core_formulario WHERE id='".$registro_campos["formulario"]."' ")->fetchColumn();
 
+		//Si el campo tiene una altura la agrega, sino la deja vacia para ser responsive
+        $cadena_altura="";
+		if ($registro_campos["alto"]!="" && $registro_campos["alto"]!="0")
+			$cadena_altura="height: ".$registro_campos["alto"].", ";
 
+		//Construye el tipo de barra de herramientas, iniciando por la completa o sino asignando la que corresponda
+		$cadena_barraherramientas_Base="
+				['Operaciones', ['undo', 'redo']],";
+		$cadena_barraherramientas_Basica="
+			['Caracter', ['bold', 'italic', 'underline', 'strikethrough', 'clear', 'color']],
+			['Parrafo1', ['ul', 'ol']],
+			['Parrafo2', ['paragraph']],
+			['Parrafo3', ['height']],";
+		$cadena_barraherramientas_Estandar="
+			['Estilos', ['style']],
+			['Fuentes1', ['fontname']],
+			['Fuentes2', ['fontsize']],";
+		$cadena_barraherramientas_Extendida="
+			['Insertar1', ['link', 'table', 'hr']],";
+		$cadena_barraherramientas_Avanzada="
+			['Otros', ['fullscreen', 'codeview']], ";
+		$cadena_barraherramientas_Completa="
+			['Insertar2', ['picture', 'video']], ";
 
-$NombreFormulario=PCO_EjecutarSQL("SELECT id_html FROM core_formulario WHERE id='".$registro_campos["formulario"]."' ")->fetchColumn();
+		$cadena_barraherramientas=$cadena_barraherramientas_Base;
+		if ($registro_campos["barra_herramientas"]=="5") //BASICA
+			$cadena_barraherramientas=$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica;
+		if ($registro_campos["barra_herramientas"]=="6") //ESTANDAR
+			$cadena_barraherramientas=$cadena_barraherramientas_Estandar.$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica;								
+		if ($registro_campos["barra_herramientas"]=="7") //EXTENDIDA
+			$cadena_barraherramientas=$cadena_barraherramientas_Estandar.$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica.$cadena_barraherramientas_Extendida;
+		if ($registro_campos["barra_herramientas"]=="8") //AVANZADA
+			$cadena_barraherramientas=$cadena_barraherramientas_Estandar.$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica.$cadena_barraherramientas_Extendida.$cadena_barraherramientas_Avanzada;
+		if ($registro_campos["barra_herramientas"]=="9") //COMPLETA
+			$cadena_barraherramientas=$cadena_barraherramientas_Estandar.$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica.$cadena_barraherramientas_Extendida.$cadena_barraherramientas_Avanzada.$cadena_barraherramientas_Completa;
+		$cadena_barraherramientas="toolbar: [".$cadena_barraherramientas."],";
 
-$cadena_altura="";
-
-								//Si el campo tiene una altura la agrega
-								if ($registro_campos["alto"]!="" && $registro_campos["alto"]!="0")
-									$cadena_altura="height: ".$registro_campos["alto"].", ";
-
-									
-								//Construye el tipo de barra de herramientas, iniciando por la completa o sino asignando la que corresponda
-								$cadena_barraherramientas_Base="
-										['Operaciones', ['undo', 'redo']],";
-								$cadena_barraherramientas_Basica="
-									['Caracter', ['bold', 'italic', 'underline', 'strikethrough', 'clear', 'color']],
-									['Parrafo1', ['ul', 'ol']],
-									['Parrafo2', ['paragraph']],
-									['Parrafo3', ['height']],";
-								$cadena_barraherramientas_Estandar="
-									['Estilos', ['style']],
-									['Fuentes1', ['fontname']],
-									['Fuentes2', ['fontsize']],";
-								$cadena_barraherramientas_Extendida="
-									['Insertar1', ['link', 'table', 'hr']],";
-								$cadena_barraherramientas_Avanzada="
-									['Otros', ['fullscreen', 'codeview']], ";
-								$cadena_barraherramientas_Completa="
-									['Insertar2', ['picture', 'video']], ";
-
-								$cadena_barraherramientas=$cadena_barraherramientas_Base;
-								if ($registro_campos["barra_herramientas"]=="5") //BASICA
-									$cadena_barraherramientas=$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica;
-								if ($registro_campos["barra_herramientas"]=="6") //ESTANDAR
-									$cadena_barraherramientas=$cadena_barraherramientas_Estandar.$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica;								
-								if ($registro_campos["barra_herramientas"]=="7") //EXTENDIDA
-									$cadena_barraherramientas=$cadena_barraherramientas_Estandar.$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica.$cadena_barraherramientas_Extendida;
-								if ($registro_campos["barra_herramientas"]=="8") //AVANZADA
-									$cadena_barraherramientas=$cadena_barraherramientas_Estandar.$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica.$cadena_barraherramientas_Extendida.$cadena_barraherramientas_Avanzada;
-								if ($registro_campos["barra_herramientas"]=="9") //COMPLETA
-									$cadena_barraherramientas=$cadena_barraherramientas_Estandar.$cadena_barraherramientas_Base.$cadena_barraherramientas_Basica.$cadena_barraherramientas_Extendida.$cadena_barraherramientas_Avanzada.$cadena_barraherramientas_Completa;
-
-								$cadena_barraherramientas="toolbar: [".$cadena_barraherramientas."],";
-
-$NombreCampoSummer=$registro_campos["campo"];
-
-								$salida.= "
-								<script language='JavaScript'>
-								$ (function() { 
-									$('#Summer_$NombreCampoSummer').summernote({
-									lang: '".$IdiomaPredeterminado."-".strtoupper($IdiomaPredeterminado)."', // default: 'en-US'
-									  $cadena_altura
-									  $cadena_barraherramientas
-                                      callbacks: {
-                                        onChange: function(contents) {
-                                          document.$NombreFormulario.$NombreCampoSummer.value=contents;
-                                        }
-                                      }
-									});
-									";
-								//Asigna el valor inicial del textarea al marco visual a manera de codigo
-								$salida.= "
-								
-								$('#Summer_".$NombreCampoSummer."').summernote('code',document.$NombreFormulario.".$NombreCampoSummer.".value);
-								
-								});
-								</script>
-								";
+		$salida.= "
+    		<script language='JavaScript'>
+        		$ (function() { 
+        			$('#Summer_".$registro_campos["campo"]."').summernote({
+        			lang: '".$IdiomaPredeterminado."-".strtoupper($IdiomaPredeterminado)."', // default: 'en-US'
+        			  $cadena_altura
+        			  $cadena_barraherramientas
+                      callbacks: {
+                        onChange: function(contents) {
+                          document.$NombreFormulario.".$registro_campos["campo"].".value=contents;
+                        }
+                      }
+        			});
+        
+        		//Asigna el valor inicial del textarea al marco visual a manera de codigo
+        		$('#Summer_".$registro_campos["campo"]."').summernote('code',document.$NombreFormulario.".$registro_campos["campo"].".value);
+        		
+        		});
+    		</script>";
 
 		return $salida;
 	}
