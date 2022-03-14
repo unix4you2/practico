@@ -112,7 +112,6 @@ LogCambios="
 * Enhan [CORE]: Actualizada version de Bootstrap Select desde 1.6.5 a 1.13.18.  Cambiado de repositorio de SilvioMoreto a SnapAppointments
 * Enhan [CORE]: Actualizada version de Ajax-Bootstrap-Select desde 1.4.3 a 1.4.5
 * Enhan [CORE]: Reubicación al llamado de JS de Bootstrap para evitar errores en llamado posterior de librerías.
-* Added [CORE]: Retorno de licencia BSD 2 - GPL 3
 * Enhan [CORE]: Banco de pruebas interno cuenta pruebas para los diferentes tipos de lista desplegable y sus operaciones comunes por JS
 * Enhan [CORE]: Actualizacion en mensajes de error y sesiones inválidas.
 * Enhan [CHAT]: Eliminadas acciones innecesarias de chat incompatibles con nuevas versiones JQuery. Simplificadas funciones de inicializacion, titulos y otras.
@@ -133,6 +132,7 @@ LogCambios="
 * Enhan [CORE]: Reemplazados llamados deprecated tipo  $( document ).ready(function() o $(document).on('ready', function() por la notación nueva $ (function() { }
 * Enhan [CORE]: Actualizada version de CkEditor de 4 a 5 ahora responsive.  Tener presente que en la version nueva las barras han dejado de tener algunos botones.
 * Fixed [FORMS]: Campos tipo texto responsive pueden residir ahora sobre formularios con nombres o ids html diferentes a 'datos'
+* Added [CORE]: Retorno de licencia BSD 2 - GPL 3
 
 
 
@@ -160,9 +160,8 @@ ScriptPHPAutorun=""
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
 
-PDTE formulario de los summer note esta fijo como "datos"
-Comunes L7403 PCO_CargarObjetoCamara comentarios al final
-
+Revisar campo camara
+Data tables panes
 
 Vista de calendario
 Libreria de festivos

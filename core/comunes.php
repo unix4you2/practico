@@ -7420,6 +7420,7 @@ function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$for
             $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).':</label>';
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
+
 		$salida.='
 			<table border=0>
 				<tr>
@@ -7470,12 +7471,12 @@ function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$for
 				var uri = CANVAS_'.$registro_campos["campo"].'.toDataURL("image/png");
 				}
 
-				// var fr;
-				// sel.addEventListener(\'change\',function(e){
-				// var f = sel.files[0];
-				// fr = new FileReader();
-				// fr.readAsDataURL(f);
-				// })
+				var fr;
+				sel.addEventListener(\'change\',function(e){
+				var f = sel.files[0];
+				fr = new FileReader();
+				fr.readAsDataURL(f);
+				})
 			</script>';
 
 		$salida.='
@@ -7502,6 +7503,69 @@ function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$for
             }
         //Cierra marco del control de datos
         $salida.= '</div>';
+
+
+
+
+		$salidaNuevo='';
+        $salidaNuevo.='
+			<table border=0>
+				<tr>
+					<td valign=top>
+						<div id="container" style="margin: 0px auto; width: '.$registro_campos["ancho"].'px; height: '.$registro_campos["alto"].'px; border: 1px solid #acc;">
+							<video id="PCO_WebCam_'.$registro_campos["campo"].'" playsinline autoplay style="width: '.$registro_campos["ancho"].'px; height: '.$registro_campos["alto"].'px;"></video>
+						    <div id="CANVAS_ErrorMsg'.$registro_campos["campo"].'"></div>
+						</div>
+					</td>
+					<td valign=top>
+                        <i id="BotonCaptura_CANVAS_'.$registro_campos["campo"].'" class="fa fa-camera" OnClick="var context = canvas.getContext("2d"); context.drawImage(videoPCO_WebCam_'.$registro_campos["campo"].', 0, 0, '.$registro_campos["ancho"].', '.$registro_campos["alto"].');"></i>
+						<br>
+						<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.(($registro_campos["ancho"])).'" height="'.(($registro_campos["alto"])).'" style="width: '.(($registro_campos["ancho"])).'px; height: '.(($registro_campos["alto"])).'px; background-color: #CCC; visibility:visible;"></canvas>
+					</td>
+				</tr>
+			</table>
+
+			<script language="JavaScript">
+                \'use strict\';
+                
+                const videoPCO_WebCam_'.$registro_campos["campo"].' = document.getElementById("PCO_WebCam_'.$registro_campos["campo"].'");
+                const canvas = document.getElementById("CANVAS_'.$registro_campos["campo"].'");
+                const snap = document.getElementById("snap");
+                const errorMsgElement = document.querySelector("errorMsg");
+                
+                const constraints = {
+                  audio: true,
+                  video: {
+                    width: '.$registro_campos["ancho"].', height: '.$registro_campos["alto"].'
+                  }
+                };
+                
+                // Access webcam
+                async function init() {
+                  try {
+                    const stream = await navigator.mediaDevices.getUserMedia(constraints);
+                    handleSuccess(stream);
+                  } catch (e) {
+                    $("#CANVAS_ErrorMsg'.$registro_campos["campo"].'").html("Error Camara"+"navigator.getUserMedia error:"+e.toString());
+                  }
+                }
+                
+                // Success
+                function handleSuccess(stream) {
+                  window.stream = stream;
+                  videoPCO_WebCam_'.$registro_campos["campo"].'.srcObject = stream;
+                }
+                
+                // Load init
+                init();
+			</script>';
+
+        $salida = $salidaNuevo;
+
+
+
+
+
 		return $salida;
 	}
 
