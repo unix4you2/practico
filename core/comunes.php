@@ -7546,7 +7546,7 @@ function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$for
                     const stream = await navigator.mediaDevices.getUserMedia(constraints);
                     handleSuccess(stream);
                   } catch (e) {
-                    $("#CANVAS_ErrorMsg'.$registro_campos["campo"].'").html("Error Camara"+"navigator.getUserMedia error:"+e.toString());
+                    $("#CANVAS_ErrorMsg'.$registro_campos["campo"].'").html("<b>Error Camara</b><br> "+"navigator.getUserMedia error:"+e.toString());
                   }
                 }
                 
