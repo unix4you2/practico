@@ -79,62 +79,61 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 
-* Enhan [CORE]: Eliminada bandera NO_AUTO_CREATE_USER durante la generacion de conexiones SQL para compatibilidad con motores nuevos
-* Enhan [CORE]: Eliminado soporte discriminado para versiones SE.  Sus funcionalidades serán incluidas poco a poco en las versiones libres.
-* Fixed [CORE]: Eliminada advertencia de índice no definido para la variable e utilizada en el sistema de URLs cortas
-* Enhan [CORE]: El despacho de correos del sistema toma por defecto como remitente al correo del administrador del sistema, de manera que se puedan hacer registros ante sistemas de despacho de correo sin problemas.
-* Fixed [INFORMES]: Agregadas librerias faltantes para los search pane en dataTables
 * Added [FORMS]: Controles de formulario de tipo contraseña incluyen un botón al lado derecho que permite visualizar / ocultar los valores ingresads por el usuario
-* Enhan [CORE]: Seccion de auditoria de usuarios elimina código innecesario al cambiar código por elementos internos
+* Fixed [FORMS]: Asignacion de campo de valor manual para listas de seleccion en diseño de formularios.
+* Fixed [FORMS]: Campos tipo texto responsive pueden residir ahora sobre formularios con nombres o ids html diferentes a 'datos'
+* Fixed [INFORMES]: Agregadas librerias faltantes para los search pane en dataTables
+* Added [INFORMES]: Informes obtenidos mediante conexiones remotas soportan ahora la recuperación de registros mediante AJAX
+* Enhan [INFORMES]: Ajustada la definicion de eventos generados sobre tablas de informes con columnas editables.  Se cambia a trigger en lugar del eventos directo por compatibilidad JQuery 3.6.0
 * Enhan [KANBAN]: Tableros Kanban son ahora 100% responsive en sus columnas.
 * Enhan [KANBAN]: Actividades con descripciones demasiado extensas o con textos que no permitan la propiedad wrap presentan automáticamente barras de desplazamiento para visualizar los detalles de la tarea.
 * Enhan [KANBAN]: Ajustadas fechas de inicio no definidas en tableros kanban como 2000-01-01
 * Enhan [KANBAN]: Fechas de inicio no indicadas en versiones previas son actualizada a su fecha de cierre por compatibilidad hacia versiones nuevas y tableros Gantt.
 * Enhan [KANBAN]: Tableros Kanban cuentan ahora con compatibilidad de vista en diagramas tipo Gantt para facilitar la gestión de actividades en una vista temporal.
-* Fixed [FORMS]: Asignacion de campo de valor manual para listas de seleccion en diseño de formularios.
 * Enhan [KANBAN]: Se asegura form de creación/edición de tareas por usuarios que no son admin y que no tienen ningún tablero compartido.
-* Enhan [CORE]: Acciones internas de PCO_ReportarBugs,PCO_EjecutarPostAccionForm no requieren ser preautorizadas en los parámetros de aplicación.  En adelante sus permisos serán preautorizados según perfil de usuario y su capacidad para abrir el formulario correspondiente.
-* Enhan [CORE]: Actualizada version de AceEditor de {P}Coder desde 1.4.12 a 1.4.14
-* Enhan [CORE]: Actualizada version de GraphEditor desde 4.0.4 a 4.2.2
-* Enhan [CORE]: Actualizada version de ElFinder desde 2.1.39 a 2.1.59
-* Enhan [CORE]: Actualizada version de ReactJS desde 16.13.1 a 17.0.2
-* Fixed [CORE]: Funcion de PCOJS_SanitizarValoresListaMultiple() opera solamente cuando se tenga una lista, evitando error de JS a procesar elemento # inexistente.
-* Enhan [CORE]: Eliminado soporte a JQuery 1.7.2. Aquellos proyectos que por algún motivo hicieran uso manual de dicha librería deberán actualizar sus inclusiones a las disponibles sobre /inc/jquery
+* Fixed [GANTT]: Actualizada sintaxis para los selectores JQuery a los nuevos Pseudo, Ej: jQuery.expr[':'].findmonth a jQuery.expr.pseudos["findmonth"]  por compatibilidad con JQuery 3.6.0.  Cualquier selector que pueda requerir mantenimiento se puede visualizar en consola mediante console.log($.expr.pseudos)
+* Fixed [GANTT]: Actualizada sintaxis obsoleta de isNumeric, Ej: jQuery.isNumeric(string) se reemplaza a isNan(parseFloat(string))
+* Fixed [GANTT]: Actualizada sintaxis obsoleta de trim, Ej: jQuery.trim( text ) por String.prototype.trim.call( text == null ? "" : text )
+* Fixed [GANTT]: Actualizado eventos mouseup,mouseenter,mouseleave,mousemove,mousedown,click en shorthand por nueva sintaxis
+* Fixed [GANTT]: Actualizada sintaxis obsoleta de isFunction por comparaciones mediante typeof
+* Enhan [CHAT]: Eliminadas acciones innecesarias de chat incompatibles con nuevas versiones JQuery. Simplificadas funciones de inicializacion, titulos y otras.
 * Enhan [CORE]: Actualizada version de JQuery desde 2.1.0 a 2.2.4.  Se recomienda a quienes hagan llamados directos a la librería previa buscarlos y actualizarlos previo a su futura eliminación en siguientes versiones.
-* Enhan [CORE]: Agregado paquete transicional de JQuery 3.6.0.  Aunque se contará con la implementación del Migrate Plugin se recomienda ajustar scripts que puedan estar obsoletos y realizar pruebas funcionales con cambio sobre core/marco_arriba_bs.php activando el modo de desarrollo del plugin.  Se recomienda depurar a traves de consola cualquier mensaje referente a JQMIGRATE y asociado a los scripts propios de su aplicación.  Los mensajes de advertencia del plugin pueden ser revisados aqui:  https://github.com/jquery/jquery-migrate/blob/main/warnings.md Lanzamiento final proyectado para 22.9
-* Added [INFORMES]: Informes obtenidos mediante conexiones remotas soportan ahora la recuperación de registros mediante AJAX
-* Enhan [CORE]: Banco de pruebas interno mejora en reporte -DataTables + Responsive (LIMIT 0,30)- para incluir campos largos y mejorar pruebas funcionales.
-* Enhan [CORE]: Banco de pruebas interno cuenta con informe para pruebas funcionales que obtiene sus datos desde una conexión remota, de replicación o alterna y además le aplica DataTables+Recuperación AJAX.
+* Enhan [CORE]: Actualizada version de CkEditor de 4 a 5 ahora responsive.  Tener presente que en la version nueva las barras han dejado de tener algunos botones.
 * Enhan [CORE]: Actualizado DataTables desde 1.10.18 a 1.11.4 compatible Jquery 3.6.0
 * Enhan [CORE]: Actualizada version de DataTables Buttons desde 1.5.6 a 2.2.2
 * Enhan [CORE]: Actualizada version de DataTables Responsive desde 2.2.3 a 2.2.9
 * Enhan [CORE]: Actualizada version de DataTables Select desde 1.3.3 a 1.3.4
 * Enhan [CORE]: Actualizada version de Bootstrap Select desde 1.6.5 a 1.13.18.  Cambiado de repositorio de SilvioMoreto a SnapAppointments
 * Enhan [CORE]: Actualizada version de Ajax-Bootstrap-Select desde 1.4.3 a 1.4.5
+* Enhan [CORE]: Actualizada version de SummerNote Responsive desde 0.6.7 a 0.8.20
+* Enhan [CORE]: Actualizada version de AceEditor de {P}Coder desde 1.4.12 a 1.4.14
+* Enhan [CORE]: Actualizada version de GraphEditor desde 4.0.4 a 4.2.2
+* Enhan [CORE]: Actualizada version de ElFinder desde 2.1.39 a 2.1.59
+* Enhan [CORE]: Actualizada version de ReactJS desde 16.13.1 a 17.0.2
+* Enhan [CORE]: Eliminada bandera NO_AUTO_CREATE_USER durante la generacion de conexiones SQL para compatibilidad con motores nuevos
+* Enhan [CORE]: Eliminado soporte discriminado para versiones SE.  Sus funcionalidades serán incluidas poco a poco en las versiones libres.
+* Fixed [CORE]: Eliminada advertencia de índice no definido para la variable e utilizada en el sistema de URLs cortas
+* Enhan [CORE]: El despacho de correos del sistema toma por defecto como remitente al correo del administrador del sistema, de manera que se puedan hacer registros ante sistemas de despacho de correo sin problemas.
+* Enhan [CORE]: Seccion de auditoria de usuarios elimina código innecesario al cambiar código por elementos internos
+* Enhan [CORE]: Acciones internas de PCO_ReportarBugs,PCO_EjecutarPostAccionForm no requieren ser preautorizadas en los parámetros de aplicación.  En adelante sus permisos serán preautorizados según perfil de usuario y su capacidad para abrir el formulario correspondiente.
+* Fixed [CORE]: Funcion de PCOJS_SanitizarValoresListaMultiple() opera solamente cuando se tenga una lista, evitando error de JS a procesar elemento # inexistente.
+* Enhan [CORE]: Eliminado soporte a JQuery 1.7.2. Aquellos proyectos que por algún motivo hicieran uso manual de dicha librería deberán actualizar sus inclusiones a las disponibles sobre /inc/jquery
+* Enhan [CORE]: Agregado paquete transicional de JQuery 3.6.0.  Aunque se contará con la implementación del Migrate Plugin se recomienda ajustar scripts que puedan estar obsoletos y realizar pruebas funcionales con cambio sobre core/marco_arriba_bs.php activando el modo de desarrollo del plugin.  Se recomienda depurar a traves de consola cualquier mensaje referente a JQMIGRATE y asociado a los scripts propios de su aplicación.  Los mensajes de advertencia del plugin pueden ser revisados aqui:  https://github.com/jquery/jquery-migrate/blob/main/warnings.md Lanzamiento final proyectado para 22.9
+* Enhan [CORE]: Banco de pruebas interno mejora en reporte -DataTables + Responsive (LIMIT 0,30)- para incluir campos largos y mejorar pruebas funcionales.
+* Enhan [CORE]: Banco de pruebas interno cuenta con informe para pruebas funcionales que obtiene sus datos desde una conexión remota, de replicación o alterna y además le aplica DataTables+Recuperación AJAX.
 * Enhan [CORE]: Reubicación al llamado de JS de Bootstrap para evitar errores en llamado posterior de librerías.
 * Enhan [CORE]: Banco de pruebas interno cuenta pruebas para los diferentes tipos de lista desplegable y sus operaciones comunes por JS
 * Enhan [CORE]: Actualizacion en mensajes de error y sesiones inválidas.
-* Enhan [CHAT]: Eliminadas acciones innecesarias de chat incompatibles con nuevas versiones JQuery. Simplificadas funciones de inicializacion, titulos y otras.
-* Enhan [INFORMES]: Ajustada la definicion de eventos generados sobre tablas de informes con columnas editables.  Se cambia a trigger en lugar del eventos directo por compatibilidad JQuery 3.6.0
 * Enhan [CORE]: Ajustado evento de resize y cargue de maquetacion para nuevo JQuery
-* Fixed [GANTT]: Actualizada sintaxis para los selectores JQuery a los nuevos Pseudo, Ej: jQuery.expr[':'].findmonth a jQuery.expr.pseudos["findmonth"]  por compatibilidad con JQuery 3.6.0.  Cualquier selector que pueda requerir mantenimiento se puede visualizar en consola mediante console.log($.expr.pseudos)
-* Fixed [GANTT]: Actualizada sintaxis obsoleta de isNumeric, Ej: jQuery.isNumeric(string) se reemplaza a isNan(parseFloat(string))
-* Fixed [GANTT]: Actualizada sintaxis obsoleta de trim, Ej: jQuery.trim( text ) por String.prototype.trim.call( text == null ? "" : text )
-* Fixed [GANTT]: Actualizado eventos mouseup,mouseenter,mouseleave,mousemove,mousedown,click en shorthand por nueva sintaxis
-* Fixed [GANTT]: Actualizada sintaxis obsoleta de isFunction por comparaciones mediante typeof
 * Enhan [CORE]: El empaquetador de versiones incluye por defecto la carpeta de documentación de funciones del framework, de manera que los desarrolladores no tengan que buscar en orígenes externos o en el árbol de desarrollo la documentación de funciones y variables comunes.
 * Enhan [CORE]: Agregada opcion en barra de navegacion superior que enlaza a la documentacion del Framework
 * Added [CORE]: Agregado soporte para Data-Driven Documents con la librería de D3js ubicada inicialmente sobre /inc/d3js
 * Fixed [CORE]: Eliminadas clases modal a opciones de menu de configuracion para evitar errores de tokenize de JS
-* Enhan [CORE]: Actualizada version de SummerNote Responsive desde 0.6.7 a 0.8.20
-* Enhan [CORE]: Actualizada la forma de recuperaci{on de valores para los campos tipo SummerNote.  Ahora se utiliza el callbacks de la API del control.
+* Enhan [CORE]: Actualizada la forma de recuperacion de valores para los campos tipo SummerNote.  Ahora se utiliza el callbacks de la API del control.
 * Enhan [CORE]: Ajustes sobre PWA mejoran proceso de reconocimiento e instalacion de la aplicación de manera nativa en los navegadores.
 * Enhan [CORE]: Reemplazados llamados deprecated tipo  $( document ).ready(function() o $(document).on('ready', function() por la notación nueva $ (function() { }
-* Enhan [CORE]: Actualizada version de CkEditor de 4 a 5 ahora responsive.  Tener presente que en la version nueva las barras han dejado de tener algunos botones.
-* Fixed [FORMS]: Campos tipo texto responsive pueden residir ahora sobre formularios con nombres o ids html diferentes a 'datos'
+* Enhan [CORE]: Agregado formulario de pruebas funcionales para controles especiales
 * Added [CORE]: Retorno de licencia BSD 2 - GPL 3
-
-
 
 "
 
