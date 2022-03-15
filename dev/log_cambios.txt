@@ -83,6 +83,7 @@ LogCambios="
 * Added [FORMS]: Controles de formulario de tipo contraseña incluyen un botón al lado derecho que permite visualizar / ocultar los valores ingresads por el usuario
 * Fixed [FORMS]: Asignacion de campo de valor manual para listas de seleccion en diseño de formularios.
 * Fixed [FORMS]: Campos tipo texto responsive pueden residir ahora sobre formularios con nombres o ids html diferentes a 'datos'
+* Fixed [FORMS]: Agregada la posibilidad de clasificación mediante módulos de aplicación.
 * Fixed [INFORMES]: Agregadas librerias faltantes para los search pane en dataTables
 * Added [INFORMES]: Informes obtenidos mediante conexiones remotas soportan ahora la recuperación de registros mediante AJAX
 * Enhan [INFORMES]: Ajustada la definicion de eventos generados sobre tablas de informes con columnas editables.  Se cambia a trigger en lugar del eventos directo por compatibilidad JQuery 3.6.0
@@ -158,6 +159,8 @@ CREATE TABLE core_modulos_app (
   UNIQUE (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+ALTER TABLE core_formulario ADD modulo int(11) NULL;
+
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
 "
@@ -170,6 +173,9 @@ ScriptPHPAutorun=""
 ########################################################################
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
+
+Al crear forms, informes o editarlos se debe restringir la lista de modulos disponibles a los visibles por el programador
+
 
 Revisar campo camara
 Data tables panes

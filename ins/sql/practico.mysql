@@ -112,6 +112,7 @@ CREATE TABLE core_formulario (
   estilo_ventana varchar(50) default 'panel-primary',
   pre_script mediumtext,
   post_script mediumtext,
+  modulo int(11) NULL,
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

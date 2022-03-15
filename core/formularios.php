@@ -2964,6 +2964,31 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                             </div>
                         </td>
 					</tr>
+
+					<tr>
+						<td align=center>
+							<label for="modulo">M&oacute;dulo:</label>
+							<div class="form-group input-group">
+                            <select id="modulo" name="modulo" class="form-control">
+                                <option value="0"></option>';
+                                $ModulosApp=PCO_EjecutarSQL("SELECT id,nombre FROM core_modulos_app WHERE 1=1 ORDER BY nombre");                                
+                                while ($RegistroModulo=$ModulosApp->fetch())
+                                    {
+                                        $EstadoSeleccion="";
+                                        if ($RegistroModulo["id"]==$registro_form["modulo"])
+                                            $EstadoSeleccion=" SELECTED ";
+                                        $ContenidoBarraFlotante_EditForm.= '<option value="'.$RegistroModulo["id"].'" '.$EstadoSeleccion.'>'.$RegistroModulo["nombre"].'</option>';
+                                    }
+		$ContenidoBarraFlotante_EditForm.='
+							</select>
+                                <span class="input-group-addon">
+                                    <a  href="#" data-toggle="tooltip" data-html="true"  title="Modulo de la aplicacion al cual pertenece este elemento"><i class="fa fa-info-circle  fa-fw"></i></a>
+                                </span>
+							</div>
+						</td>
+					</tr>
+
+
 					<tr>
 						<td>
                             <div class="form-group input-group">
@@ -3326,7 +3351,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 
 			if ($mensaje_error=="")
 				{
-					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario SET estilo_ventana=?,titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=?,estilo_pestanas=?,id_html=?,tipo_maquetacion=?,css_columnas=?,pre_script=?,post_script=? WHERE id= ? ","$estilo_ventana$_SeparadorCampos_$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$formulario");
+					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario SET modulo=?,estilo_ventana=?,titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=?,estilo_pestanas=?,id_html=?,tipo_maquetacion=?,css_columnas=?,pre_script=?,post_script=? WHERE id= ? ","$modulo$_SeparadorCampos_$estilo_ventana$_SeparadorCampos_$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$formulario");
 					PCO_Auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">
@@ -3376,7 +3401,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 			if ($mensaje_error=="")
 				{
 				    $estilo_ventana='panel-primary';
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'','')","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana");
+					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'','',?)","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana$_SeparadorCampos_$modulo");
 					$id=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 					PCO_Auditar("Crea formulario $id para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
