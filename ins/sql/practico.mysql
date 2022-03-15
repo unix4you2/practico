@@ -357,6 +357,7 @@ CREATE TABLE core_informe (
   pane_controles char(2) DEFAULT 'N',
   pane_control_colapsar char(2) DEFAULT 'N',
   pane_control_ordenar char(2) DEFAULT 'N',
+  modulo int(11) NULL,
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
