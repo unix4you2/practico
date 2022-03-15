@@ -5096,10 +5096,13 @@ function PCO_VentanaLogin()
 
 
                 <!--Login Estandar-->
+                <div id="PCODIV_BarraArribaLogin"></div>
+
                 <div class="row">
                     <?php echo $CadenaMargen_LoginSAML; ?>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xs-offset-0 col-sm-offset-4 col-md-offset-4 col-lg-offset-4" >
                     <br>
+                    <div id="PCODIV_ArribaLogin"></div>
                     <div id="EnfasisLoginZoom" class="EnfasisLoginZoom" style="box-shadow: 3px 3px 3px gray;">
                         <div class="panel panel-default">
                             <div class="panel-heading">
@@ -5121,6 +5124,8 @@ function PCO_VentanaLogin()
                                             <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                                             <input name="clave" value="<?php echo $AUTO_clave; ?>" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>" AutoCompleteType="Disabled" autocomplete="Off">
                                         </div>
+
+                                        <div id="PCODIV_PostClaveLogin"></div>
 
     									<?php
     										//Presenta selector de idiomas si esta habilitado
@@ -5289,9 +5294,14 @@ function PCO_VentanaLogin()
                             </div> <!-- /panel-body -->
                         </div>
                     </div>  <!--FIN Class EnfasisLoginZoom -->
+
+                    <div id="PCODIV_AbajoLogin"></div>
+
                     </div>  <!--FIN Class col -->
                 </div>  <!--FIN Class row -->
                 <!--FIN Login Estandar-->
+                <div id="PCODIV_BarraAbajoLogin"></div>
+
 <?php
     }
 
