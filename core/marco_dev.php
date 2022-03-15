@@ -195,6 +195,9 @@
 								<a class="btn btn-danger btn-block" href="javascript:document.PCO_BugTrackingForm.submit();"><i class="fa fa-bug fa-fw"></i> <?php echo $MULTILANG_BTPanel; ?></a>
                                 <br>
 
+								<a class="btn btn-primary btn-block" href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-32:1"><i class="fa fa-cubes fa-fw"></i> <?php echo $MULTILANG_Modulos.' '.$MULTILANG_Aplicacion; ?></a>
+                                <br>
+
 								<a class="btn btn-default btn-block" href="javascript:PCO_VentanaPopup('mod/pcoder/mod/pboard','PBoard','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=1024, height=700')"><i class="fa fa-paint-brush fa-fw"></i> Editor gr&aacute;fico y pizarra: {P}Board</a>
 								<br>
 								

@@ -775,3 +775,13 @@ CREATE TABLE core_samlconector (
   usuario_plantilla varchar(255) NOT NULL,
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_modulos_app;
+CREATE TABLE core_modulos_app (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  nombre varchar(250) NOT NULL,
+  descripcion text,
+  desarrolladores text,
+  PRIMARY KEY  (id),
+  UNIQUE (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;

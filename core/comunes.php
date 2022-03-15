@@ -9225,7 +9225,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
                     //Agrega titulo o encabezado si esta definido
                     if ( $registro_informe["encabezado_html"] != '' )
-                        $SalidaFinalInforme.= '<div id="titulo-informe-ID'.$registro_informe["id"].'">'.$registro_informe["encabezado_html"].'</div>';
+                        $SalidaFinalInforme.= '<div id="titulo-informe-ID'.$registro_informe["id"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_informe["encabezado_html"]).'</div>';
 
                     //Agrega clases para convertir la tabla a responsive si aplica
                     $ComplementoResponsiveTabla='';

@@ -86,6 +86,7 @@ LogCambios="
 * Fixed [INFORMES]: Agregadas librerias faltantes para los search pane en dataTables
 * Added [INFORMES]: Informes obtenidos mediante conexiones remotas soportan ahora la recuperación de registros mediante AJAX
 * Enhan [INFORMES]: Ajustada la definicion de eventos generados sobre tablas de informes con columnas editables.  Se cambia a trigger en lugar del eventos directo por compatibilidad JQuery 3.6.0
+* Added [INFORMES]: Permitido el reemplazo de variables PHP en formato { $ variable } sobre los encabezados HTML de los informes durante su diagramación.
 * Enhan [KANBAN]: Tableros Kanban son ahora 100% responsive en sus columnas.
 * Enhan [KANBAN]: Actividades con descripciones demasiado extensas o con textos que no permitan la propiedad wrap presentan automáticamente barras de desplazamiento para visualizar los detalles de la tarea.
 * Enhan [KANBAN]: Ajustadas fechas de inicio no definidas en tableros kanban como 2000-01-01
@@ -147,6 +148,15 @@ ScriptBasedatos="
 UPDATE core_kanban SET fecha_inicio='2000-01-01' WHERE fecha_inicio IS NULL;
 UPDATE core_kanban SET fecha_inicio=fecha WHERE fecha_inicio='2000-01-01' AND (fecha IS NOT NULL);
 
+DROP TABLE IF EXISTS core_modulos_app;
+CREATE TABLE core_modulos_app (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  nombre varchar(250) NOT NULL,
+  descripcion text,
+  desarrolladores text,
+  PRIMARY KEY  (id),
+  UNIQUE (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
