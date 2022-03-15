@@ -98,6 +98,7 @@ LogCambios="
 * Fixed [GANTT]: Actualizada sintaxis obsoleta de isFunction por comparaciones mediante typeof
 * Enhan [CHAT]: Eliminadas acciones innecesarias de chat incompatibles con nuevas versiones JQuery. Simplificadas funciones de inicializacion, titulos y otras.
 * Enhan [CORE]: Actualizada version de JQuery desde 2.1.0 a 2.2.4.  Se recomienda a quienes hagan llamados directos a la librería previa buscarlos y actualizarlos previo a su futura eliminación en siguientes versiones.
+* Enhan [CORE]: Agregado paquete transicional de JQuery 3.6.0.  Aunque se contará con la implementación del Migrate Plugin se recomienda ajustar scripts que puedan estar obsoletos y realizar pruebas funcionales con cambio sobre core/marco_arriba_bs.php activando el modo de desarrollo del plugin.  Se recomienda depurar a traves de consola cualquier mensaje referente a JQMIGRATE y asociado a los scripts propios de su aplicación.  Los mensajes de advertencia del plugin pueden ser revisados aqui:  https://github.com/jquery/jquery-migrate/blob/main/warnings.md Lanzamiento final proyectado para 22.9
 * Enhan [CORE]: Actualizada version de CkEditor de 4 a 5 ahora responsive.  Tener presente que en la version nueva las barras han dejado de tener algunos botones.
 * Enhan [CORE]: Actualizado DataTables desde 1.10.18 a 1.11.4 compatible Jquery 3.6.0
 * Enhan [CORE]: Actualizada version de DataTables Buttons desde 1.5.6 a 2.2.2
@@ -118,7 +119,6 @@ LogCambios="
 * Enhan [CORE]: Acciones internas de PCO_ReportarBugs,PCO_EjecutarPostAccionForm no requieren ser preautorizadas en los parámetros de aplicación.  En adelante sus permisos serán preautorizados según perfil de usuario y su capacidad para abrir el formulario correspondiente.
 * Fixed [CORE]: Funcion de PCOJS_SanitizarValoresListaMultiple() opera solamente cuando se tenga una lista, evitando error de JS a procesar elemento # inexistente.
 * Enhan [CORE]: Eliminado soporte a JQuery 1.7.2. Aquellos proyectos que por algún motivo hicieran uso manual de dicha librería deberán actualizar sus inclusiones a las disponibles sobre /inc/jquery
-* Enhan [CORE]: Agregado paquete transicional de JQuery 3.6.0.  Aunque se contará con la implementación del Migrate Plugin se recomienda ajustar scripts que puedan estar obsoletos y realizar pruebas funcionales con cambio sobre core/marco_arriba_bs.php activando el modo de desarrollo del plugin.  Se recomienda depurar a traves de consola cualquier mensaje referente a JQMIGRATE y asociado a los scripts propios de su aplicación.  Los mensajes de advertencia del plugin pueden ser revisados aqui:  https://github.com/jquery/jquery-migrate/blob/main/warnings.md Lanzamiento final proyectado para 22.9
 * Enhan [CORE]: Banco de pruebas interno mejora en reporte -DataTables + Responsive (LIMIT 0,30)- para incluir campos largos y mejorar pruebas funcionales.
 * Enhan [CORE]: Banco de pruebas interno cuenta con informe para pruebas funcionales que obtiene sus datos desde una conexión remota, de replicación o alterna y además le aplica DataTables+Recuperación AJAX.
 * Enhan [CORE]: Reubicación al llamado de JS de Bootstrap para evitar errores en llamado posterior de librerías.
@@ -133,6 +133,7 @@ LogCambios="
 * Enhan [CORE]: Ajustes sobre PWA mejoran proceso de reconocimiento e instalacion de la aplicación de manera nativa en los navegadores.
 * Enhan [CORE]: Reemplazados llamados deprecated tipo  $( document ).ready(function() o $(document).on('ready', function() por la notación nueva $ (function() { }
 * Enhan [CORE]: Agregado formulario de pruebas funcionales para controles especiales
+* Enhan [CORE]: Nuevo marco PCODIV_NombreGenerador disponible en la maquetacion general permite cambiar el nombre de la aplicacion generadora.
 * Added [CORE]: Retorno de licencia BSD 2 - GPL 3
 
 "

@@ -147,7 +147,7 @@
                                                 echo "<strong><i class='fa fa-file-code-o fa-fw'></i> Inclusiones:</strong> ".(count(get_included_files()))."<hr>"; // Retorna arreglo con cantidad de archivos incluidos
                                             }
                                     ?>
-                                    <div align=center>
+                                    <div align=center id="PCODIV_NombreGenerador">
             							<font size=1><i class="fa fa-copyright"></i> <i><?php echo $MULTILANG_GeneradoPor; ?> <a href="http://www.practico.org" target="_BLANK">Pr&aacute;ctico Framework</a></i></font>
                                     </div>
                                 </div>
