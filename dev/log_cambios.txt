@@ -86,6 +86,7 @@ LogCambios="
 * Fixed [FORMS]: Campos tipo texto responsive pueden residir ahora sobre formularios con nombres o ids html diferentes a 'datos'
 * Added [FORMS]: Agregada la posibilidad de clasificación mediante módulos de aplicación.
 * Added [FORMS]: Controles de tipo lista de seleccion permiten especificar un ancho arbitrario en pixeles.
+* Fixed [FORMS]: Evitado error de sintaxis innecesario generado cuando las listas de selección contemploan condiciones de filtro que incluyen comillas dobles.  En su lugar son reemplazadas con un backslash antes para escapara correctamente la cadena.
 * Enhan [FORMS]: Eliminados parámetros innecesarios en informe interno que presenta los formularios.
 * Fixed [INFORMES]: Agregadas librerias faltantes para los search pane en dataTables
 * Added [INFORMES]: Informes obtenidos mediante conexiones remotas soportan ahora la recuperación de registros mediante AJAX
