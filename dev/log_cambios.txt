@@ -27,6 +27,7 @@ core/marco_arriba_bs.php
 core/marco_forms.php
 core/marco_nav.php
 core/marco_navizq.php
+core/menus.php
 core/kanban.php
 core/usuarios.php
 
@@ -85,6 +86,7 @@ LogCambios="
 * Fixed [FORMS]: Asignacion de campo de valor manual para listas de seleccion en diseño de formularios.
 * Fixed [FORMS]: Campos tipo texto responsive pueden residir ahora sobre formularios con nombres o ids html diferentes a 'datos'
 * Added [FORMS]: Agregada la posibilidad de clasificación mediante módulos de aplicación.
+* Added [FORMS]: Controles de tipo lista de seleccion permiten especificar un ancho arbitrario en pixeles.
 * Enhan [FORMS]: Eliminados parámetros innecesarios en informe interno que presenta los formularios.
 * Fixed [INFORMES]: Agregadas librerias faltantes para los search pane en dataTables
 * Added [INFORMES]: Informes obtenidos mediante conexiones remotas soportan ahora la recuperación de registros mediante AJAX
@@ -92,6 +94,7 @@ LogCambios="
 * Added [INFORMES]: Permitido el reemplazo de variables PHP en formato { $ variable } sobre los encabezados HTML de los informes durante su diagramación.
 * Added [INFORMES]: Agregada la posibilidad de clasificación mediante módulos de aplicación.
 * Enhan [INFORMES]: Eliminados parámetros innecesarios en informe interno que presenta los informes.
+* Enhan [MENUS]: Tabla que presenta las opciones de menu de la aplicacion para su administracion es ahora responsive.
 * Enhan [KANBAN]: Tableros Kanban son ahora 100% responsive en sus columnas.
 * Enhan [KANBAN]: Actividades con descripciones demasiado extensas o con textos que no permitan la propiedad wrap presentan automáticamente barras de desplazamiento para visualizar los detalles de la tarea.
 * Enhan [KANBAN]: Ajustadas fechas de inicio no definidas en tableros kanban como 2000-01-01
@@ -178,6 +181,9 @@ ScriptPHPAutorun=""
 ########################################################################
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
+
+depurar errores JS en menu
+
 
 Al crear forms, informes o editarlos se debe restringir la lista de modulos disponibles a los visibles por el programador
 

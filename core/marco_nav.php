@@ -278,16 +278,16 @@
 							</a>
 						</li>
 						<li>
-							<a href="doc/index.html" target="_blank">
+							<a href="https://www.practico.org/documentaci%C3%B3n/documentacion-funciones" target="_blank">
 								<div>
 									<i class="fa fa-book fa-fw"></i> Documentaci&oacute;n del Framework
 								</div>
 							</a>
 						</li>
 						<li>
-							<a href="https://gitter.im/unix4you2/practico/" target="_blank">
+							<a href="https://groups.google.com/g/practico-framework/" target="_blank">
 								<div>
-									<i class="fa fa-comment-o fa-fw"></i> <?php echo $MULTILANG_ChatDevel; ?>
+									<i class="fa fa-comment-o fa-fw"></i> Grupo/<?php echo $MULTILANG_ChatDevel; ?>
 								</div>
 							</a>
 						</li>

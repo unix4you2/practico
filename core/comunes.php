@@ -6291,10 +6291,20 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                 $EstadoObligadoLiveSerachRecuperacionDinamica=" data-live-search=true ";
             }
 
+        //Define cadenas para el ancho del control (si aplica)
+        $CadenaAnchoSelect='  ';
+        $CadenaAnchoOption='  ';
+        if ($registro_campos["ancho"]!="" && $registro_campos["ancho"] !="0")
+            {
+                $CadenaAnchoSelect=' data-width="'.$registro_campos["ancho"].'px" ';
+                $CadenaAnchoOption=" style='width : ".$registro_campos["ancho"]."px;' ";
+            }
+
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
-		$salida.= '<select id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker '.$EstadoRecuperacionDinamica.' combo-'.$registro_campos["campo"].' show-tick" '.@$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' '.$EstadoObligadoLiveSerachRecuperacionDinamica.' '.$EstadoLecturaControl.' >';
+		$salida.= '<select '.$CadenaAnchoSelect.' id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker '.$EstadoRecuperacionDinamica.' combo-'.$registro_campos["campo"].' show-tick" '.@$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' '.$EstadoObligadoLiveSerachRecuperacionDinamica.' '.$EstadoLecturaControl.' >';
+
 
             //Genera Script Ajax y DIV para cambio de opciones en caliente
             $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
@@ -6499,7 +6509,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                             else
                                 $salida.= "</optgroup>";  //Si no se encuentra valor de etiqueta alguno entonces cierra el grupo
                         else
-                            $salida.= "<option value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i],$registro_datos_formulario)."' ".$cadena_predeterminado.">".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i],$registro_datos_formulario)."</option>";
+                            $salida.= "<option ".$CadenaAnchoOption." value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i],$registro_datos_formulario)."' ".$cadena_predeterminado.">".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i],$registro_datos_formulario)."</option>";
                     }
 
             //Cierra DIV para cambio de opciones en caliente

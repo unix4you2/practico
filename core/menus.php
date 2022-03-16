@@ -126,6 +126,26 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0,$Condic
 		while($registro = $resultado->fetch())
 			{
 				echo '<tr>';
+
+				echo '
+						<td align="center">
+							<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
+								<input type="hidden" name="PCO_Accion" value="PCO_EliminarMenu">
+								<input type="hidden" name="PCO_FormularioActivoEdicionMenu" value="'.$PCO_FormularioActivoEdicionMenu.'">
+								<input type="hidden" name="id" value="'.$registro["id"].'">
+                                <a href="javascript:confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
+							</form>
+						</td>
+						<td align="center">
+							<form action="'.$ArchivoCORE.'" method="POST">
+								<input type="hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+								<input type="hidden" name="PCO_Objeto" value="frm:-12:1:id:'.$registro["id"].'">
+								<input type="hidden" name="PCO_FormularioActivoEdicionMenu" value="'.$PCO_FormularioActivoEdicionMenu.'">
+								<input type="hidden" name="id" value="'.$registro["id"].'">
+                                <button type="submit" class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
+							</form>
+						</td>';
+
 				echo '	<td><font color=lightgray>'.$registro["id"].'</font></td>
 						<td style="padding-left:'.$Sangria.'px;" nowrap><i class="'.$registro["imagen"].' fa-2x"></i> <strong>'.$registro["texto"].'</strong></td>
 						<td>'.$registro["seccion"].'</td>
@@ -155,24 +175,7 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0,$Condic
         				      <td align=center style="font-size:9px; color:gray;">Ver padre/See parent</td>';
 				    }
 
-				echo '
-						<td align="center">
-							<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'">
-								<input type="hidden" name="PCO_Accion" value="PCO_EliminarMenu">
-								<input type="hidden" name="PCO_FormularioActivoEdicionMenu" value="'.$PCO_FormularioActivoEdicionMenu.'">
-								<input type="hidden" name="id" value="'.$registro["id"].'">
-                                <a href="javascript:confirmar_evento(\''.$MULTILANG_MnuAdvElimina.'\',f'.$registro["id"].');" class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Eliminar.'"><i class="fa fa-times"></i></a>
-							</form>
-						</td>
-						<td align="center">
-							<form action="'.$ArchivoCORE.'" method="POST">
-								<input type="hidden" name="PCO_Accion" value="PCO_CargarObjeto">
-								<input type="hidden" name="PCO_Objeto" value="frm:-12:1:id:'.$registro["id"].'">
-								<input type="hidden" name="PCO_FormularioActivoEdicionMenu" value="'.$PCO_FormularioActivoEdicionMenu.'">
-								<input type="hidden" name="id" value="'.$registro["id"].'">
-                                <button type="submit" class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
-							</form>
-						</td>
+					echo '
 					</tr>';
 				//Si la opcion es una agrupadora busca sus opciones hijas
 				if ($registro["tipo_menu"]=='grp')
@@ -225,9 +228,11 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 
 		PCO_AbrirVentana($MULTILANG_MnuDefinidos, 'panel-warning');
 		echo '
-		<table class="table table-condensed btn-xs  table-hover table-unbordered">
+		<table width="100%" id="TablaOpcionesMenu" class="table table-condensed btn-xs order-column table-striped  table-hover table-unbordered responsive">
 			<thead>
             <tr>
+				<td></td>
+				<td></td>
 				<td><b>Id</b></td>
 				<td nowrap><b>'.$MULTILANG_MnuTexto.'</b></td>
 				<td><b>'.$MULTILANG_MnuSeccion.'</b></td>
@@ -239,8 +244,6 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
         				<td align=center><b>'.$MULTILANG_MnuCentro.'</b></td>
         				<td align=center><b>'.$MULTILANG_MnuIzquierda.'</b></td>';
 		        echo '		
-				<td></td>
-				<td></td>
 			</tr>
             </thead>
             <tbody>';
@@ -248,6 +251,17 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 		echo '</tbody>
         </table>';
 		 PCO_CerrarVentana();
+
+		echo '
+		    <script language="JavaScript">
+            $( function() {
+                $("#TablaOpcionesMenu").DataTable();
+            } );
+            </script>
+		';
+
+
+
 	}
 
 
@@ -295,6 +309,7 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 			//Realiza el proceso de busqueda solamente si recibe algun criterio
 			if ($PCO_BusquedaPermisos!="")
 				{
+				
 					
 					//Descompone la frase de busqueda en palabras para buscar las cuatro primeras como las mas relevantes
 						$PalabrasBusqueda=explode(" ",$PCO_BusquedaPermisos);

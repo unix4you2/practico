@@ -498,7 +498,7 @@
 	$MULTILANG_FrmDesTeclado='When enabled on the form displays a virtual keyboard for entering information,. For now the keyboard use may violate validations';
 	$MULTILANG_FrmAncho='Width';
 	$MULTILANG_FrmTitAncho='How wide should occupy space control';
-	$MULTILANG_FrmDesAncho='IMPORTANT: in characters number for simple text fields and pixels rich-text fields. Enter a number of columns, however, note that the width in pixels will vary according to the type of font used by the current theme.  For image or bar code fields this value is for the size of the picture.  For canvas objects you can specify the width and the final scale percent using a pipe character. IE: 400|0.3 will create a 400 pixels object but it will save it as 30% of scale.';
+	$MULTILANG_FrmDesAncho='IMPORTANT: in characters number for simple text fields and pixels rich-text fields or drop down lists.  An empty or zero value means automatic.  Enter a number of columns, however, note that the width in pixels will vary according to the type of font used by the current theme.  For image or bar code fields this value is for the size of the picture.  For canvas objects you can specify the width and the final scale percent using a pipe character. IE: 400|0.3 will create a 400 pixels object but it will save it as 30% of scale.';
 	$MULTILANG_FrmDesAncho2='Minimum recommended for rich-text format fields: 350';
 	$MULTILANG_FrmAlto='Height (lines)';
 	$MULTILANG_FrmTitAlto='How many rows should be visible in the control?';
