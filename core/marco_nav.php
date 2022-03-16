@@ -338,7 +338,7 @@
                             				PCO_ImprimirOpcionMenu($registro,'usuario');
                     			    }
                     			//Deterina si se tuvo al menos una opcion para agregar un separador
-                    			$CantidadOpciones=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_usuario=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ");
+                    			$CantidadOpciones=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_usuario=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ")->fetchColumn();
                     			if ($CantidadOpciones>0)
                 			        echo '<li class="divider"></li>';
                             ?>

@@ -259,7 +259,7 @@
     PCO_VerificarExtensionesPHP();
 
     // Valida existencia de versiones nuevas cuando un Administrador esta logueado
-    PCO_BuscarActualizaciones(@$PCOSESS_LoginUsuario,$PCO_Accion);
+    //PCO_BuscarActualizaciones(@$PCOSESS_LoginUsuario,$PCO_Accion);
 
     // Presenta mensajes con errores generales cuando son encontrados durante la ejecucion
     if (@$PCO_ErrorTitulo!="") {
