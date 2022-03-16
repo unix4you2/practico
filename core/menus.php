@@ -166,10 +166,16 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0,$Condic
         				          <td align=center>';
         						    if ($registro["posible_izquierda"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
         				echo    '</td>';
+
+        				echo '  <td align=center>';
+        						    if ($registro["posible_usuario"]==1) echo '<i class="fa fa-check-circle fa-fw fa-2x text-info"></i>';
+        				echo    '</td>';
+
 				    }
 				if ($PCO_FormularioActivoEdicionMenu=="0" && $Sangria!=0)
 				    {
 				        echo '<td align=center style="font-size:9px; color:gray;">Ver padre/See parent</td>
+        				      <td align=center style="font-size:9px; color:gray;">Ver padre/See parent</td>
         				      <td align=center style="font-size:9px; color:gray;">Ver padre/See parent</td>
         				      <td align=center style="font-size:9px; color:gray;">Ver padre/See parent</td>
         				      <td align=center style="font-size:9px; color:gray;">Ver padre/See parent</td>';
@@ -242,7 +248,8 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
         			echo '<td align=center><b>'.$MULTILANG_MnuArriba.'</b></td>
         				<td align=center><b>'.$MULTILANG_MnuEscritorio.'</b></td>
         				<td align=center><b>'.$MULTILANG_MnuCentro.'</b></td>
-        				<td align=center><b>'.$MULTILANG_MnuIzquierda.'</b></td>';
+        				<td align=center><b>'.$MULTILANG_MnuIzquierda.'</b></td>
+        				<td align=center><b>Posible menu de usuario?</b></td>';
 		        echo '		
 			</tr>
             </thead>

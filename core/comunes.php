@@ -665,7 +665,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
 		//Si tiene una URL trata la opcion como enlace estandar, sino como opcion de menu especial
 		if ($RegistroOpcion["url"]!="")
 		    {
-		        if ($Ubicacion=='submenu')
+		        if ($Ubicacion=='submenu' || $Ubicacion=='usuario')
 		        	$CadenaPreOpcion= '<a href="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["url"]).'" target="'.$RegistroOpcion["destino"].'"><i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]);
 		        else
 		        	$CadenaPreOpcion= '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'" href="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["url"]).'" target="'.$RegistroOpcion["destino"].'">';
@@ -676,7 +676,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
                     $CadenaPreOpcion= '<a href="javascript:document.'.$PreUbicacion.'_'.$Ubicacion.'_'.$RegistroOpcion["id"].'.submit();">';
 			    if ($Ubicacion=='centro' || $Ubicacion=='escritorio' || $Ubicacion=='formulario')
 			        $CadenaPreOpcion= '<a title="'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'" href="javascript:document.'.$PreUbicacion.'_'.$Ubicacion.'_'.$RegistroOpcion["id"].'.submit();">';
-			    if ($Ubicacion=='submenu')
+			    if ($Ubicacion=='submenu' || $Ubicacion=='usuario')
 			        $CadenaPreOpcion= '<a href="javascript:document.'.$PreUbicacion.'_'.$Ubicacion.'_'.$RegistroOpcion["id"].'.submit();"><i class="'.$RegistroOpcion["imagen"].' fa-fw"></i> '.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).' '.$TextoAccesoDirecto;
 			}
 
@@ -767,6 +767,16 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
                 if ($Ubicacion=='lateral')
                     {
                         echo '<li style="text-align: left; font-size:0.95em;">';
+                        echo $CadenaPreOpcion;
+                        echo $CadenaInOpcion;
+                        echo $CadenaPosOpcion;
+                        echo '</li>';
+                    }
+
+                //Imprime opciones ubicadas en la barra superior, menu de usuario
+                if ($Ubicacion=='usuario')
+                    {
+                        echo '<li>';
                         echo $CadenaPreOpcion;
                         echo $CadenaInOpcion;
                         echo $CadenaPosOpcion;

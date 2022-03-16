@@ -94,6 +94,8 @@ LogCambios="
 * Added [INFORMES]: Agregada la posibilidad de clasificación mediante módulos de aplicación.
 * Enhan [INFORMES]: Eliminados parámetros innecesarios en informe interno que presenta los informes.
 * Enhan [MENUS]: Tabla que presenta las opciones de menu de la aplicacion para su administracion es ahora responsive.
+* Enhan [MENUS]: Ajustada distribución responsive en formulario de creación de menues y ubicaciones de la opción.
+* Added [MENUS]: Nueva ubicación de opciones de menú en el menú de usuario de la aplicación, justo debajo del perfil de usuario.  En caso de existir al menos una opcion será agregado un separador para diferenciarlas de las opciones del sistema.
 * Enhan [KANBAN]: Tableros Kanban son ahora 100% responsive en sus columnas.
 * Enhan [KANBAN]: Actividades con descripciones demasiado extensas o con textos que no permitan la propiedad wrap presentan automáticamente barras de desplazamiento para visualizar los detalles de la tarea.
 * Enhan [KANBAN]: Ajustadas fechas de inicio no definidas en tableros kanban como 2000-01-01
@@ -167,6 +169,7 @@ CREATE TABLE core_modulos_app (
 
 ALTER TABLE core_formulario ADD modulo int(11) NULL;
 ALTER TABLE core_informe ADD modulo int(11) NULL;
+ALTER TABLE core_menu ADD posible_usuario int(1) DEFAULT 0;
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

@@ -321,6 +321,28 @@
 					</a>
 					<ul class="dropdown-menu dropdown-user">
 						<li><a href="javascript:document.PCO_CargarActualizarPefil.submit();"><?php echo $ComplementoImagenPerfil; ?> <?php echo $Nombre_usuario;?></a><hr style="margin-top:0px; margin-bottom:0px;"></li>
+
+                            <?php
+                                //AGREGA OPCIONES DE MENU DE USUARIO
+                    			// Si el usuario es diferente al administrador agrega condiciones al query
+                    			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+                    				{
+                    					$Complemento_tablas=",".$TablasCore."usuario_menu";
+                    					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+                    				}
+                    			$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_usuario=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
+                                //Crea la tabla para disponer los resultados solamente si encuentra opciones para el usuario
+                    			if($resultado->rowCount()>0) 
+                    			    {
+                            			while($registro = $resultado->fetch())
+                            				PCO_ImprimirOpcionMenu($registro,'usuario');
+                    			    }
+                    			//Deterina si se tuvo al menos una opcion para agregar un separador
+                    			$CantidadOpciones=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_usuario=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ");
+                    			if ($CantidadOpciones>0)
+                			        echo '<li class="divider"></li>';
+                            ?>
+
 						<li><a href="javascript:document.reseteo_clave.submit();"><i class="fa fa-key fa-fw"></i> <?php echo $MULTILANG_UsrReset; ?></a></li>
 	                    <?php
 							/*Carga opcion de chat solamente si esta habilitado

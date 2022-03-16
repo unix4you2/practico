@@ -84,6 +84,7 @@ CREATE TABLE core_menu (
   formulario_vinculado int(11) default '0',
   clase_contenedor varchar(250) default '',
   hash_unico varchar(15) default '',
+  posible_usuario int(1) DEFAULT 0,
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
