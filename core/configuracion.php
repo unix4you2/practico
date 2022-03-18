@@ -142,8 +142,8 @@
 	$PWA_Scope='';
 	$PWA_AutorizacionGPS='0';
 	$PWA_AutorizacionFCM='0';
-	$PWA_AutorizacionCAM='0';
-	$PWA_AutorizacionMIC='0';
+	$PWA_AutorizacionCAM='1';
+	$PWA_AutorizacionMIC='1';
 	$PWA_OcultarBarrasHerramientas='0';
 
 	// Define cadena usada para separar campos en operaciones de bases de datos

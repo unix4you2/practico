@@ -34,6 +34,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 
+* Added [USUARIOS]: Desde edición de usuarios se permite regresar al listado de usuarios.
 
 
 "
