@@ -341,6 +341,9 @@
             } //Fin PWA_Activa
     ?>    
 
+    <!-- JavaScript Personalizado -->
+	<script type="text/javascript" src="mod/personalizadas_js.js?<?php echo filemtime('mod/personalizadas_js.js'); ?>"></script>
+
   <!-- Agrega soporte para "Add to home screen" para Safari en iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">

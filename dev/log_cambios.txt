@@ -16,6 +16,15 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/marco_arriba_bs.php
+
+
+
+
+mod/personalizadas_js.js
+
+
+
 
 
 xml/*
@@ -34,6 +43,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 
+* Added [CORE]: Se cuenta con archivo de inclusión general para código JS ubicado en mod/personalizadas_js.js.  Cualquier código allí incluído se tendrá en cuenta en todas las cargas de página.
 * Added [USUARIOS]: Desde edición de usuarios se permite regresar al listado de usuarios.
 
 
