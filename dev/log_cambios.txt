@@ -48,6 +48,7 @@ LogCambios="
 * Enhan [CORE]: Reubicado ejemplo de módulo MVC hacia carpetas de complementarios desarrollo dev/comp/mvc
 * Enhan [CORE]: Reubicado ejemplo de módulo LDAP hacia carpetas de complementarios desarrollo dev/comp/ldp
 * Enhan [CORE]: Reubicado ejemplo de módulo de autenticación PAM mediante Python hacia carpetas de complementarios desarrollo dev/comp/pam
+* Enhan [CORE]: Reubicado ejemplo de módulo de social parsing hacia carpetas de complementarios desarrollo dev/comp/sop
 
 
 "
