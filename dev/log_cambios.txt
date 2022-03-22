@@ -45,8 +45,9 @@ LogCambios="
 
 * Added [CORE]: Se cuenta con archivo de inclusión general para código JS ubicado en mod/personalizadas_js.js.  Cualquier código allí incluído se tendrá en cuenta en todas las cargas de página.
 * Added [USUARIOS]: Desde edición de usuarios se permite regresar al listado de usuarios.
-* Enhan [CORE]: Reubicado ejemplo de módulo MVC hacia carpetas de complementarios desarrollo dev/comp/mvc para disminuir peso en instaladores
-* Enhan [CORE]: Reubicado ejemplo de módulo LDAP hacia carpetas de complementarios desarrollo dev/comp/ldp para disminuir peso en instaladores
+* Enhan [CORE]: Reubicado ejemplo de módulo MVC hacia carpetas de complementarios desarrollo dev/comp/mvc
+* Enhan [CORE]: Reubicado ejemplo de módulo LDAP hacia carpetas de complementarios desarrollo dev/comp/ldp
+* Enhan [CORE]: Reubicado ejemplo de módulo de autenticación PAM mediante Python hacia carpetas de complementarios desarrollo dev/comp/pam
 
 
 "
