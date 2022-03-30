@@ -17,6 +17,7 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/marco_arriba_bs.php
+core/formularios_post.php
 
 
 
@@ -49,6 +50,7 @@ LogCambios="
 * Enhan [CORE]: Reubicado ejemplo de módulo LDAP hacia carpetas de complementarios desarrollo dev/comp/ldp
 * Enhan [CORE]: Reubicado ejemplo de módulo de autenticación PAM mediante Python hacia carpetas de complementarios desarrollo dev/comp/pam
 * Enhan [CORE]: Reubicado ejemplo de módulo de social parsing hacia carpetas de complementarios desarrollo dev/comp/sop
+* Added [FORMS]: Nueva funcion accion interna (PCO_Accion) llamada PCO_EjecutarPostFormulario permite evaluar el codigo asociado a un POST de formulario.
 
 
 "

@@ -73,6 +73,8 @@
         //header("Allow: GET, POST, OPTIONS, PUT, DELETE");
         //if($_SERVER['REQUEST_METHOD'] == "OPTIONS") { die(); }
 	header('Content-type: text/html; charset=utf-8');
+	header('X-XSS-Protection:0');
+
     
     // Inicio de la sesion
     @session_start();
@@ -201,6 +203,9 @@
 
     //Ejecuta cualquier trabajo Cron definido
     include_once 'core/cron.php';
+
+    //Permite ejecucion de PostAcciones de formulario definidas y protegidas por parametros como la llave de paso u otros segun desarrollador
+    include_once 'core/formularios_post.php';
 
     PCO_LimpiarEntradas(); // Evita XSS
 
