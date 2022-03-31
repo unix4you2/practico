@@ -65,7 +65,7 @@
 */
 	if ($PCO_Accion=="PCO_EjecutarPostFormulario")
 		{
-			if ($LlaveDePaso==$Llave)
+			if ($LlaveDePaso==$Llave && $Formulario!="")
 			    {
         			// Busca el registro del formulario
         			$RegistroFormulario=PCO_EjecutarSQL("SELECT id,post_script FROM ".$TablasCore."formulario WHERE id=? ","$Formulario")->fetch();
