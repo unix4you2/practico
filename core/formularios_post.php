@@ -68,13 +68,13 @@
 			if ($LlaveDePaso==$Llave && $Formulario!="")
 			    {
         			// Busca el registro del formulario
-        			$RegistroFormulario=PCO_EjecutarSQL("SELECT id,post_script FROM ".$TablasCore."formulario WHERE id=? ","$Formulario")->fetch();
+        			$RegistroFormulario=PCO_EjecutarSQL("SELECT id,post_script,titulo FROM ".$TablasCore."formulario WHERE id=? ","$Formulario")->fetch();
         			//Si encuentra codigo lo ejecuta
                     if ($RegistroFormulario["id"]!="")
                         {
                             PCO_EvaluarCodigo($RegistroFormulario["post_script"]);
                             //Lleva auditoria de la ejecucion
-                            PCO_Auditar("Ejecucion post-accion formulario {$Formulario}","API.Practico");
+                            PCO_Auditar("Ejecucion post-accion formulario (Id={$Formulario}) ".PCO_ReemplazarVariablesPHPEnCadena($RegistroFormulario["titulo"]),"API.Practico");
                         }
 			    }
 	        die(); //Finaliza ejecucion despues de cualquier tarea
