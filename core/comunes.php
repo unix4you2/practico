@@ -55,6 +55,45 @@
 ########################################################################
 ########################################################################
 /*
+    Function: PCO_EjecutarCodigoPOST
+	Evalua directamente el codigo asociado a la seccion POST de un formulario.  Esto permite llamados especificos a funciones encapsuladas que pueda contener un formulario asociado a su logica de negocio
+
+	Variables de entrada:
+	
+		Formulario - Id unico del formulario del cual se desea evaluar el codigo POST
+		Llave - Llave de paso que deberia coincidir con la llave del sistema para poder realizar la operacion
+        ByPassDie - Determina si se debe o no evitar un llamado a la funcion die() de PHP.  Por defecto SIEMPRE se hace el llamado.  Asigne un valor diferente de cero (ej. 1) para evitarlo.
+		Otros - Variables que puedan indicar la accion a realizar, los parametros requeridos o cualquier otro control de seguridad o verificacion requerida por el usuario
+
+	Salida:
+		Evaluacion y ejecucion del codigo
+
+	Vea tambien:
+	    <PCO_EjecutarPostFormulario>
+*/
+function PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie=0)
+    {
+        global $LlaveDePaso,$TablasCore;
+		if ($LlaveDePaso==$Llave && $Formulario!="")
+		    {
+    			// Busca el registro del formulario
+    			$RegistroFormulario=PCO_EjecutarSQL("SELECT id,post_script,titulo FROM ".$TablasCore."formulario WHERE id=? ","$Formulario")->fetch();
+    			//Si encuentra codigo lo ejecuta
+                if ($RegistroFormulario["id"]!="")
+                    {
+                        PCO_EvaluarCodigo($RegistroFormulario["post_script"]);
+                        //Lleva auditoria de la ejecucion
+                        PCO_Auditar("Ejecucion post-accion formulario (Id={$Formulario}) ".PCO_ReemplazarVariablesPHPEnCadena($RegistroFormulario["titulo"]),"API.Practico");
+                    }
+		    }
+		if ($ByPassDie==0)
+            die(); //Finaliza ejecucion despues de cualquier evaluacion
+    }
+
+
+########################################################################
+########################################################################
+/*
     Function: PCO_Minimizador_ObtenerSiguientePosicionMinimizacion
 	Dado el arrglo de secuencias minimizadas, busca la siguiente posicion de secuencia que se debe revisar
 

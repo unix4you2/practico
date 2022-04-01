@@ -52,30 +52,14 @@
 /* ################################################################## */
 /*
 	Function: PCO_EjecutarPostFormulario
-	Ejecuta el codigo asociado a la seccion POST de un formulario
+	Alias mediante PCO_Accion para el llamado a la funcion interna PCO_EjecutarCodigoPOST
 
-	Variables de entrada:
-
-		Formulario - Id unico del formulario del cual se desea evaluar el codigo POST
-		Llave - Llave de paso que deberia coincidir con la llave del sistema para poder realizar la operacion
-		Otros - Variables que puedan indicar la accion a realizar, los parametros requeridos o cualquier otro control de seguridad o verificacion requerida por el usuario
-
-	Salida:
-		Ejecucion del codigo completo encontrado dentro del codigo POST del formulario
+	Ver tambien:
+		<PCO_EjecutarCodigoPOST>
 */
 	if ($PCO_Accion=="PCO_EjecutarPostFormulario")
 		{
+		    if ($ByPassDie=="") $ByPassDie=0;
 			if ($LlaveDePaso==$Llave && $Formulario!="")
-			    {
-        			// Busca el registro del formulario
-        			$RegistroFormulario=PCO_EjecutarSQL("SELECT id,post_script,titulo FROM ".$TablasCore."formulario WHERE id=? ","$Formulario")->fetch();
-        			//Si encuentra codigo lo ejecuta
-                    if ($RegistroFormulario["id"]!="")
-                        {
-                            PCO_EvaluarCodigo($RegistroFormulario["post_script"]);
-                            //Lleva auditoria de la ejecucion
-                            PCO_Auditar("Ejecucion post-accion formulario (Id={$Formulario}) ".PCO_ReemplazarVariablesPHPEnCadena($RegistroFormulario["titulo"]),"API.Practico");
-                        }
-			    }
-	        die(); //Finaliza ejecucion despues de cualquier tarea
+                PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie);
 		}
