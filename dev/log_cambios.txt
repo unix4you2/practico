@@ -53,6 +53,9 @@ LogCambios="
 * Enhan [CORE]: Reubicado ejemplo de módulo de autenticación PAM mediante Python hacia carpetas de complementarios desarrollo dev/comp/pam
 * Enhan [CORE]: Reubicado ejemplo de módulo de social parsing hacia carpetas de complementarios desarrollo dev/comp/sop
 * Added [FORMS]: Nueva funcion accion interna (PCO_Accion) llamada PCO_EjecutarPostFormulario permite evaluar directamente el codigo asociado a un POST de formulario permitiendo encapsular funciones con llamados independientes dentro de formularios que tengan la lógica de negocio asociada.  Recordar que por seguridad ninguna variable estara disponible en el scope local.   El llamado esta disponible tambien a modo de funcion mediante PCO_EjecutarCodigoPOST(); caso en el cual las variables requeridas en el scope del formulario deberian estar declaradas previamente o llamadas como globales desde el POST.
+* Enhan [CORE]: Se retorna a version de bootstrap-Select de Silvio Moreto por compatibilidad heredada con listas y valores por defecto.
+
+
 
 
 "
