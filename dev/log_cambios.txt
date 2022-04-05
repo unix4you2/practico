@@ -21,6 +21,8 @@ core/formularios_post.php
 
 
 
+core/marco_devel.php
+
 
 mod/personalizadas_js.js
 
