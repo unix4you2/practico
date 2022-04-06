@@ -27,6 +27,8 @@ core/marco_devel.php
 mod/personalizadas_js.js
 
 
+inc/bootstrap/js/plugins/select/*
+inc/bootstrap/css/plugins/select/*
 
 
 
