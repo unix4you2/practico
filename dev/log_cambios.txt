@@ -18,6 +18,7 @@ index.php
 core/comunes.php
 core/marco_arriba_bs.php
 core/formularios_post.php
+core/usuarios.php
 
 
 
@@ -50,6 +51,8 @@ LogCambios="
 
 * Added [CORE]: Se cuenta con archivo de inclusión general para código JS ubicado en mod/personalizadas_js.js.  Cualquier código allí incluído se tendrá en cuenta en todas las cargas de página.
 * Added [USUARIOS]: Desde edición de usuarios se permite regresar al listado de usuarios.
+* Added [USUARIOS]: Nueva variable especial $ PCO_PlantillaFijaPermisos permite establecer el nombre de un usuario utilizado durante las opciones de asignación de permisos para que sólo sean presentadas las opciones definidas para el mismo.  En caso de no contar con la variable o ser ésta vacía se presentarán todos los permisos derivados de los menues creados para la aplicación.
+* Added [USUARIOS]: Agregado el nombre del usuario en la parte superior durante la asignación de permisos.
 * Enhan [CORE]: Reubicado ejemplo de módulo MVC hacia carpetas de complementarios desarrollo dev/comp/mvc
 * Enhan [CORE]: Reubicado ejemplo de módulo LDAP hacia carpetas de complementarios desarrollo dev/comp/ldp
 * Enhan [CORE]: Reubicado ejemplo de módulo de autenticación PAM mediante Python hacia carpetas de complementarios desarrollo dev/comp/pam

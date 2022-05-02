@@ -112,7 +112,7 @@
 
 	$TipoCaptchaLogin='visual';
 	$CaracteresCaptcha=4;
-	$CodigoGoogleAnalytics='UA-847800-9';
+	$CodigoGoogleAnalytics='G-ZKZP142B9V';
 	
 	// Tipo de motor usado para la autenticacion de usuarios
 	$Auth_TipoMotor='practico';
@@ -142,7 +142,7 @@
 	$PWA_Scope='';
 	$PWA_AutorizacionGPS='0';
 	$PWA_AutorizacionFCM='0';
-	$PWA_AutorizacionCAM='0';
+	$PWA_AutorizacionCAM='1';
 	$PWA_AutorizacionMIC='0';
 	$PWA_OcultarBarrasHerramientas='0';
 

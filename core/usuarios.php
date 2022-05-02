@@ -898,26 +898,48 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 			<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
                 <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
                 <input type="hidden" name="PCO_Accion" value="PCO_AgregarPermiso">
-                <font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrAgreOpc; ?>: <?php echo $usuario; ?></b></font>
+                <font face="" size="3" color="Navy"><b><?php echo $MULTILANG_UsrAgreOpc; ?>: <?php echo $usuario; ?> (<?php echo PCO_EjecutarSQL("SELECT nombre FROM core_usuario WHERE login='$usuario' ")->fetchColumn(); ?>)</b></font>
 				<br>
                 <select name="menu"  class="selectpicker " data-live-search=true data-size=10 data-style="btn btn-default btn-xs ">
 					<?php
-						//Despliega opciones de menu para agregar, Solamente las que no pertenecen a formularios
-						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE (padre=0 OR padre='') AND formulario_vinculado=0 ");
-						while($registro = $resultado->fetch())
-							{
-								echo '<option data-icon="'.$registro["imagen"].' fa-fw" value="'.$registro["hash_unico"].'">'.$registro["texto"].'</option>';
-								//Busca posibles opciones de segundo nivel y las agrega
-								$resultadohijas=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE (padre='".$registro["hash_unico"]."') AND formulario_vinculado=0 ");
-								if ($resultadohijas->rowCount()>0)
-								    echo '<optgroup label="Opciones de/Childs of: '.$registro["texto"].'">';
-        						while($registrohija = $resultadohijas->fetch())
+						if ($PCO_PlantillaFijaPermisos=="")
+						    {
+        						//Despliega opciones de menu para agregar, Solamente las que no pertenecen a formularios Y CUANDO NO SE TIENE UNA PLANTILLA FIJA
+        						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE (padre=0 OR padre='') AND formulario_vinculado=0 ");
+        						while($registro = $resultado->fetch())
         							{
-        								echo '<option data-icon="'.$registrohija["imagen"].' fa-fw" value="'.$registrohija["hash_unico"].'">'.$registrohija["texto"].'</option>';
+        								echo '<option data-icon="'.$registro["imagen"].' fa-fw" value="'.$registro["hash_unico"].'">'.$registro["texto"].'</option>';
+        								//Busca posibles opciones de segundo nivel y las agrega
+        								$resultadohijas=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE (padre='".$registro["hash_unico"]."') AND formulario_vinculado=0 ");
+        								if ($resultadohijas->rowCount()>0)
+        								    echo '<optgroup label="Opciones de/Childs of: '.$registro["texto"].'">';
+                						while($registrohija = $resultadohijas->fetch())
+                							{
+                								echo '<option data-icon="'.$registrohija["imagen"].' fa-fw" value="'.$registrohija["hash_unico"].'">'.$registrohija["texto"].'</option>';
+                							}
+        								if ($resultadohijas->rowCount()>0)
+        								    echo '</optgroup>';
         							}
-								if ($resultadohijas->rowCount()>0)
-								    echo '</optgroup>';
-							}
+						    }
+					    else
+					        {
+        						//Despliega opciones de menu para agregar, cuando se necesita cruzar con una plantilla
+        						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='{$PCO_PlantillaFijaPermisos}' AND (padre=0 OR padre='') AND formulario_vinculado=0 ");
+        						while($registro = $resultado->fetch())
+        							{
+        								echo '<option data-icon="'.$registro["imagen"].' fa-fw" value="'.$registro["hash_unico"].'">'.$registro["texto"].'</option>';
+        								//Busca posibles opciones de segundo nivel y las agrega
+        								$resultadohijas=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='{$PCO_PlantillaFijaPermisos}' AND (padre='".$registro["hash_unico"]."') AND formulario_vinculado=0 ");
+        								if ($resultadohijas->rowCount()>0)
+        								    echo '<optgroup label="Opciones de/Childs of: '.$registro["texto"].'">';
+                						while($registrohija = $resultadohijas->fetch())
+                							{
+                								echo '<option data-icon="'.$registrohija["imagen"].' fa-fw" value="'.$registrohija["hash_unico"].'">'.$registrohija["texto"].'</option>';
+                							}
+        								if ($resultadohijas->rowCount()>0)
+        								    echo '</optgroup>';
+        							}
+					        }
 					?>
 				</select>
                 <button class="btn btn-success btn-xs"  onClick="document.datos.submit()"><i class="fa fa-plus fa-fw"></i> <?php echo $MULTILANG_Agregar; ?></button>
