@@ -59,6 +59,21 @@
 /*
 	Function: fileman_admin_embebido
 	Presenta IFrame con la herramienta de administracion de archivos embebida
+	
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
+	IMPORTANTE:  Este archivo se mantiene por compatibilidad hacia atras con el gestor ElFinder.  Este enlce sera eliminado enversiones 23.x y superiores.  Se recomienda actualizar sus enlaces directos para que usen la nueva version de explorador.
 
 	Salida:
 		IFrame con contenido generado por la herramienta
@@ -67,7 +82,7 @@ if ($PCO_Accion=="fileman_admin_embebido")
 	{
 		echo '
             <div class="embed-responsive embed-responsive-4by3">
-                <iframe src="mod/fileman/elfinder/" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
+                <iframe src="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-34:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&PFE_PresentarCarpetasEspeciales=1&PFE_OcultarMigasPan=1" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
             </div>';
 	}
 
