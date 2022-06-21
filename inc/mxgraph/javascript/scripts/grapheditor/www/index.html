@@ -56,6 +56,9 @@
 	<script type="text/javascript" src="js/Dialogs.js"></script>
 </head>
 <body class="geEditor">
+    
+    
+    
 	<script type="text/javascript">
 		// Extends EditorUi to update I/O action states based on availability of backend
 		(function()
@@ -106,5 +109,81 @@
 			});
 		})();
 	</script>
+	
+
+<!--
+EN EL BODY
+ onload="main(document.getElementById('graphContainer'))"
+ 
+ 
+ 
+   <script type="text/javascript">
+      // Program starts here. Creates a sample graph in the
+      // DOM node with the specified ID. This function is invoked
+      // from the onLoad event handler of the document (see below).
+      function main(container)
+      {
+         // Checks if the browser is supported
+         if (!mxClient.isBrowserSupported())
+         {
+            mxUtils.error('Browser is not supported!', 200, false);
+         }
+         else
+         {
+            // Creates the graph inside the given container
+            var graph = new mxGraph(container);
+
+            // Enables rubberband selection
+            new mxRubberband(graph);
+
+            // Gets the default parent for inserting new cells. This
+            // is normally the first child of the root (ie. layer 0).
+            var parent = graph.getDefaultParent();
+
+            // Adds cells to the model in a single step
+            graph.getModel().beginUpdate();
+            try
+            {
+               var v1 = graph.insertVertex(parent, null,
+                        'Hello,', 20, 120, 80, 30);
+               var v2 = graph.insertVertex(parent, null,
+                        'World!', 200, 150, 80, 30);
+               var e1 = graph.insertEdge(parent, null, '', v1, v2);
+               
+               
+               var e2 = graph.insertVertex(parent, null, 'Hello, World!', 20, 20, 80, 20,'boxstyle');
+               
+            }
+            finally
+            {
+               // Updates the display
+               graph.getModel().endUpdate();
+            }
+         }
+      };
+   </script>
+-->
+
+
+
+    Creates a container for the graph with a grid wallpaper 
+   <div id="graphContainer"
+      style="overflow:hidden;width:321px;height:241px;background:url('editors/images/grid.gif')">
+   </div>
+
+
+<textarea id="Pepe" name="Pepe">
+    <mxGraphModel dx="782" dy="815" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="2" value="" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+      <mxGeometry x="100" y="140" width="120" height="80" as="geometry" />
+    </mxCell>
+  </root>
+</mxGraphModel>
+</textarea>
+
+
 </body>
 </html>

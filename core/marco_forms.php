@@ -111,9 +111,6 @@ if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 		<form name="actualizarad" class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="actualizar_practico">
 		</form>
-        <form method="POST" name="fileman_admin_embebido"  class="oculto_impresion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-            <input type="Hidden" name="PCO_Accion" value="fileman_admin_embebido">
-        </form>
         <form method="POST" name="PCO_EditarConfiguracionOAuth"  class="oculto_impresion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
         	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
         	<input type="Hidden" name="PCO_Objeto" value="frm:-5:1">
