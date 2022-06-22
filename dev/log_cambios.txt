@@ -18,11 +18,12 @@ index.php
 core/comunes.php
 core/marco_arriba_bs.php
 core/marco_forms.php
+core/marco_dev.php
 core/marco_nav.php
 core/formularios_post.php
 core/usuarios.php
-
-
+mod/fileman/index.php
+inc/practico/PCoder
 
 core/marco_devel.php
 

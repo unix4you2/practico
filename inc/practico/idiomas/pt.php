@@ -1495,7 +1495,7 @@
 	$MULTILANG_PCODER_OrdenaSel='Seleção de ordem';
 	$MULTILANG_PCODER_CargarArchivo='Carregar arquivo';
     $MULTILANG_PCODER_Ajuste='Ajuste janela';
-	$MULTILANG_PCODER_DefPcoder='Editor de c&oacute;digo on-line';
+	$MULTILANG_PCODER_DefPcoder='Editor de c&oacute;digo';
 	$MULTILANG_PCODER_EnlacePcoder='Editor de C&oacute;digo {P}Coder';
 	$MULTILANG_PCODER_AtajosTitPcoder='Atalhos do teclado';
 	$MULTILANG_PCODER_PcoderAjuste='Ajuste janela';

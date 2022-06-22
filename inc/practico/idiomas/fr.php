@@ -1494,7 +1494,7 @@
 	$MULTILANG_PCODER_OrdenaSel='Order selection';
 	$MULTILANG_PCODER_CargarArchivo='Load file';
     $MULTILANG_PCODER_Ajuste='Window adjustment';
-	$MULTILANG_PCODER_DefPcoder='Online Code Editor';
+	$MULTILANG_PCODER_DefPcoder='Code Editor';
 	$MULTILANG_PCODER_EnlacePcoder='Code Editor {P}Coder';
 	$MULTILANG_PCODER_AtajosTitPcoder='Keyboard shortcuts';
 	$MULTILANG_PCODER_PcoderAjuste='Window adjustment';
