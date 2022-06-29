@@ -61,10 +61,12 @@
     
 	<script type="text/javascript">
 		// Extends EditorUi to update I/O action states based on availability of backend
+        //var Pepon;
 		(function()
 		{
-			var editorUiInit = EditorUi.prototype.init;
 			
+	    var editorUiInit = EditorUi.prototype.init;
+
 			EditorUi.prototype.init = function()
 			{
 				editorUiInit.apply(this, arguments);
@@ -102,69 +104,13 @@
 				themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement(); 
 				
 				// Main
-				new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
+				PCO_EditorDiagramas=new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
 			}, function()
 			{
 				document.body.innerHTML = '<center style="margin-top:10%;">Error loading resource files. Please check browser console.</center>';
 			});
 		})();
 	</script>
-	
-
-<!--
-EN EL BODY
- onload="main(document.getElementById('graphContainer'))"
- 
- 
- 
-   <script type="text/javascript">
-      // Program starts here. Creates a sample graph in the
-      // DOM node with the specified ID. This function is invoked
-      // from the onLoad event handler of the document (see below).
-      function main(container)
-      {
-         // Checks if the browser is supported
-         if (!mxClient.isBrowserSupported())
-         {
-            mxUtils.error('Browser is not supported!', 200, false);
-         }
-         else
-         {
-            // Creates the graph inside the given container
-            var graph = new mxGraph(container);
-
-            // Enables rubberband selection
-            new mxRubberband(graph);
-
-            // Gets the default parent for inserting new cells. This
-            // is normally the first child of the root (ie. layer 0).
-            var parent = graph.getDefaultParent();
-
-            // Adds cells to the model in a single step
-            graph.getModel().beginUpdate();
-            try
-            {
-               var v1 = graph.insertVertex(parent, null,
-                        'Hello,', 20, 120, 80, 30);
-               var v2 = graph.insertVertex(parent, null,
-                        'World!', 200, 150, 80, 30);
-               var e1 = graph.insertEdge(parent, null, '', v1, v2);
-               
-               
-               var e2 = graph.insertVertex(parent, null, 'Hello, World!', 20, 20, 80, 20,'boxstyle');
-               
-            }
-            finally
-            {
-               // Updates the display
-               graph.getModel().endUpdate();
-            }
-         }
-      };
-   </script>
--->
-
-
 
     Creates a container for the graph with a grid wallpaper 
    <div id="graphContainer"
@@ -183,6 +129,22 @@ EN EL BODY
   </root>
 </mxGraphModel>
 </textarea>
+
+<!--
+ANOTACIONES JOHN:
+Para obtener el codigo en XML en formato PLANO y guardarlo en BD
+    PCO_EditorDiagramas.actions.editorUi.getEditBlankXml()
+    
+Para tomar un XML plano y setearlo en el diagrama
+
+Funciones para menu:
+    -  Eliminar opciones 
+    -  Agregar opciones
+    -  Agregar eventos
+
+    -  Configuracion de idioma
+-->
+
 
 
 </body>

@@ -2926,29 +2926,6 @@ if ($PCO_Accion=="PCO_EditarFormulario")
     			<button type="button" class="btn btn-success" onclick="javascript:document.datosact.submit();">'.$MULTILANG_Actualizar.' Script <i class="fa fa-floppy-o"></i></button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
 
-                    //Modal Editor JavaScript
-                    $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaJAVASCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
-                    $ContenidoBarraFlotante_EditForm.='
-                        <div class="well" style="color:#000000;">'.$MULTILANG_FrmHlpFunciones.'
-                        <textarea name="javascript" id="javascript" data-editor="javascript" class="form-control" style="width: 950px; height: 450px;"></textarea>
-                        </div>';
-                    $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
-
-                    //Modal Editor PRE Script
-                    $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaPRESCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
-                    $ContenidoBarraFlotante_EditForm.='
-                        <div class="well" style="color:#000000;">Script PHP de ejecuci&oacute;n previa al cargue del formulario.  <br>Advertencia: Errores de sintaxis en este script pueden detener totalmente la ejecuci&oacute;n de c&oacute;digo y requerir su ajuste manual a trav&eacute;s de registros para recuperar el sistema, sea cuidadoso.
-                        <textarea name="pre_script" id="pre_script" data-editor="php" class="form-control" style="width: 950px; height: 450px;"></textarea>
-                        </div>';
-                    $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
-        
-                    //Modal Editor POST Script
-                    $ContenidoBarraFlotante_EditForm.=PCO_AbrirDialogoModal("myModalActualizaPOSTSCRIPT",$MULTILANG_FrmTitComandos,"modal-wide",0);
-                    $ContenidoBarraFlotante_EditForm.='
-                        <div class="well" style="color:#000000;">Script PHP de ejecuci&oacute;n posterior a las operaciones de tipo autom&aacute;ticas realizadas por el formulario.    <br>Advertencia: Errores de sintaxis en este script pueden detener totalmente la ejecuci&oacute;n de c&oacute;digo y requerir su ajuste manual a trav&eacute;s de registros para recuperar el sistema, sea cuidadoso.
-                        <textarea name="post_script" id="post_script" data-editor="php" class="form-control" style="width: 950px; height: 450px;"></textarea>
-                        </div>';
-                    $ContenidoBarraFlotante_EditForm.=PCO_CerrarDialogoModal($barra_herramientas_modal,0);
         
         $ContenidoBarraFlotante_EditForm.='
 				<table class="table table-condensed table-unbordered" style="color:#FFFFFF; font-size:12px;">
@@ -3351,7 +3328,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 
 			if ($mensaje_error=="")
 				{
-					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario SET modulo=?,estilo_ventana=?,titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,javascript=?,borde_visible=?,estilo_pestanas=?,id_html=?,tipo_maquetacion=?,css_columnas=?,pre_script=?,post_script=? WHERE id= ? ","$modulo$_SeparadorCampos_$estilo_ventana$_SeparadorCampos_$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$formulario");
+					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."formulario SET modulo=?,estilo_ventana=?,titulo=?,ayuda_titulo=?,ayuda_texto=?,tabla_datos=?,columnas=?,borde_visible=?,estilo_pestanas=?,id_html=?,tipo_maquetacion=?,css_columnas=? WHERE id= ? ","$modulo$_SeparadorCampos_$estilo_ventana$_SeparadorCampos_$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$formulario");
 					PCO_Auditar("Actualiza formulario $formulario para $tabla_datos");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 					<input type="Hidden" name="nombre_tabla" value="'.$tabla_datos.'">

@@ -20,20 +20,16 @@ core/marco_arriba_bs.php
 core/marco_forms.php
 core/marco_dev.php
 core/marco_nav.php
+core/formularios.php
 core/formularios_post.php
+core/informes.php
 core/usuarios.php
+core/marco_devel.php
+mod/personalizadas_js.js
 mod/fileman/index.php
 inc/practico/PCoder
-
-core/marco_devel.php
-
-
-mod/personalizadas_js.js
-
-
 inc/bootstrap/js/plugins/select/*
 inc/bootstrap/css/plugins/select/*
-
 
 
 xml/*
@@ -61,16 +57,30 @@ LogCambios="
 * Enhan [CORE]: Reubicado ejemplo de módulo de autenticación PAM mediante Python hacia carpetas de complementarios desarrollo dev/comp/pam
 * Enhan [CORE]: Reubicado ejemplo de módulo de social parsing hacia carpetas de complementarios desarrollo dev/comp/sop
 * Added [FORMS]: Nueva funcion accion interna (PCO_Accion) llamada PCO_EjecutarPostFormulario permite evaluar directamente el codigo asociado a un POST de formulario permitiendo encapsular funciones con llamados independientes dentro de formularios que tengan la lógica de negocio asociada.  Recordar que por seguridad ninguna variable estara disponible en el scope local.   El llamado esta disponible tambien a modo de funcion mediante PCO_EjecutarCodigoPOST(); caso en el cual las variables requeridas en el scope del formulario deberian estar declaradas previamente o llamadas como globales desde el POST.
+* Added [FORMS]: Edición de Scripts PRE,POST y JS de formularios se hace en ventana independiente y con todas las funcionalidades de PCoder, permitiendo editar los scripts mientras se visualiza por separado el formulario y almacenando historiales de cada edición.
 * Enhan [CORE]: Se retorna a version de bootstrap-Select de Silvio Moreto por compatibilidad heredada con listas y valores por defecto.
 * Enhan [CORE]: Eliminada tabla innecesaria core_pcoder_chat con la migración de Pcoder a objetos nativos.
 * Enhan [CORE]: Actualizado el asistente de instalacion para usar version actualizada de JQuery
-* Enhan [CORE]: Eliminada extension externa de ElFinder y reemplazada por elemento interno.  Se ahorran más de 5MB de código externo con el cambio a objeto propio del framework y se eliminan falsos positivos de reportes tipo -Backdoor:PHP/Yorcirekrikseng.E- generados incorrectamente por Bitdefender sin causa al confundir el código con otro conocido.   En adelante cualquier aplicación que requiera uso de un administrador de archivos para sus usuarios podrá lanzar la carga del formulario -34 estableciendo todos los parámetros de personalizción deseados para el explorador.
-
+* Enhan [CORE]: (frm:-34) Eliminada extension externa de ElFinder y reemplazada por elemento interno.  Se ahorran más de 5MB de código externo con el cambio a objeto propio del framework y se eliminan falsos positivos de reportes tipo -Backdoor:PHP/Yorcirekrikseng.E- generados incorrectamente por Bitdefender sin causa al confundir el código con otro conocido.   En adelante cualquier aplicación que requiera uso de un administrador de archivos para sus usuarios podrá lanzar la carga del formulario -34 estableciendo todos los parámetros de personalizción deseados para el explorador.
 * Enhan [PCODER]: Los historiales de archivo e identificacion de rutas de edición se manejan ahora como rutas relativas a la instalación y no como rutas absolutas sobre el disco del servidor, lo que permite migrar instalaciones conservando la recuperación de historiales de edición de archivos.  Para historiales preliminares a esta versión que puedan ser requeridos agregue la ruta absoluta de servidor a la ruta actual del archivo a la hora de ser recuperados.
+* Enhan [PCODER]: (frm:-33) Reemplazado editor {P}Coder con objeto interno.  Esto permite ahorrar más de 8MB de código en disco requerido por el editor anterior.  Ver otros detalles del nuevo editor en los changelog siguientes.
+* Enhan [PCODER]: {P}Coder permite ahora abrir versiones de solo lectura cuando el archivo se encuentra bloqueado por otro usuario.  Así se permite al menos la exploración del código asociado.
+* Enhan [PCODER]: {P}Coder incluye título descriptivo del contenido que es editado para aquellos casos en que es utilizado para eventos o scripts de formularios.
+* Enhan [CORE]: (frm:-35) Reemplazada herramienta de comparacion externa por objeto propio.  Esto permite ahorrar más de 1MB de código en disco.
+* Enhan [CORE]: El cargue de scripts PRE, POST y JS de formularios, informes y eventos para efectos de edición se realiza ahora en caliente y por demanda.  Solamente cuando sean requeridos serán cargados y de esa manera se evitará tráfico innecesario en tiempo de diseño.
 
 
 
 
+ 
+TODO: Eliminar Pcoder
+pasar demas modulos de pcoder a otras ubicaciones
+Permitir abrir verdsion solo lectura del contenido desde el visor de diferencias con botones en la parte superior
+
+Estadisticas de Pcoder
+
+PENDIENTES EXPLORADOR:
+Proteger carpetas determinadas en las descargas cuando no se es administrador.
 
 "
 

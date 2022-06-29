@@ -64,10 +64,14 @@
 	global $MULTILANG_PCODER_CrearArchivo,$MULTILANG_PCODER_CrearCarpeta,$MULTILANG_PCODER_EditarPermisos,$MULTILANG_PCODER_SubirArchivo,$MULTILANG_PCODER_EliminarElemento;
 	global $MULTILANG_PCODER_Nombre,$MULTILANG_PCODER_Permisos,$MULTILANG_PCODER_Propietario,$MULTILANG_PCODER_Aceptar,$MULTILANG_Cancelar,$MULTILANG_Cerrar;
 	global $MULTILANG_PCODER_Comunes,$MULTILANG_PCODER_Predeterminado,$MULTILANG_PCODER_PathDisco,$MULTILANG_PCODER_PathFull;
+
+//<iframe width="100%" height=400 src="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-34:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&PFE_OcultarMigasPan=0&PFE_VistaBasicaArchivos=1&PFE_VisibleBotonDT=0&PFE_VisibleBotonCargarArchivo=0&PFE_VisibleBotonCargarCloud=0&PFE_VisibleBotonDescargar=0&PFE_ActivarDataTable=0&PFE_VisibleBotonCargarArchivo=0&PFE_VisibleBotonCargarCloud=0&PFE_VisibleBotonDT=0&PFE_OcultarBarraHerramientas=0&PFE_VisibleBotonEliminar=0&PFE_VisibleBotonRenombrar=0&PFE_VisibleBotonPermisos=0&PFE_VisibleBotonNuevoArchivo=0&PFE_VisibleBotonNuevoDirectorio=0&PFE_ActivarCargarEnPcoder=1" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
 	PCO_AbrirDialogoModal("myModalABRIRFS","<b><font color=navy>{P}Coder</font></b> - Abrir/Editar un archivo"); ?>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-12">
-					<iframe width="100%" height=400 src="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-34:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&PFE_OcultarMigasPan=0&PFE_VistaBasicaArchivos=1&PFE_VisibleBotonDT=0&PFE_VisibleBotonCargarArchivo=0&PFE_VisibleBotonCargarCloud=0&PFE_VisibleBotonDescargar=0&PFE_ActivarDataTable=0&PFE_VisibleBotonCargarArchivo=0&PFE_VisibleBotonCargarCloud=0&PFE_VisibleBotonDT=0&PFE_OcultarBarraHerramientas=0&PFE_VisibleBotonEliminar=0&PFE_VisibleBotonRenombrar=0&PFE_VisibleBotonPermisos=0&PFE_VisibleBotonNuevoArchivo=0&PFE_VisibleBotonNuevoDirectorio=0&PFE_ActivarCargarEnPcoder=1" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
+
+
+					
 				</div>
 			</div>
     <?php 
@@ -182,6 +186,7 @@
                                     		//Presenta el cuadro de dialogo
                                     		$('#myModalABRIRFS').modal('show');
                                     		
+                                    		
                                             //Si detecta que se tiene activado el filtro de colores inverso (modo noche) deja el editor en su formato oscuro original revirtiendo el filtro
                                             if ("{$PCO_TransformacionColores}"=="inverso")
                                                 $(".modal-backdrop").css("filter","invert(0%)");
@@ -189,14 +194,14 @@
                             	</script>
 
 								<?php
-									$PCO_EnlacePCODER="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&PCODER_archivo=inc/practico/PCoder','PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=1024, height=700');";
+									$PCO_EnlacePCODER="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&PCODER_archivo=inc/practico/PCoder','PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width='+screen.width+', height='+screen.height);";
                         			//Verifica si esta o no en modo DEMO para hacer la operacion
                         			if ($PCO_ModoDEMO==1)
 									   $PCO_EnlacePCODER="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";
 								?>
 								<div class="row">
-    								<!--<div class="col col-xs-12 col-sm-12 col-md-10 col-lg-10"><a class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: {P}Coder</a></div>-->
-    								<div class="col col-xs-12 col-sm-12 col-md-10 col-lg-10"><a class="btn btn-primary btn-block" href="javascript:var LMQTP=OperacionFS_AbrirArchivo();"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: {P}Coder</a></div>
+    								<div class="col col-xs-12 col-sm-12 col-md-10 col-lg-10"><a class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: {P}Coder</a></div>
+    								<!--<div class="col col-xs-12 col-sm-12 col-md-10 col-lg-10"><a class="btn btn-primary btn-block" href="javascript:var LMQTP=OperacionFS_AbrirArchivo();"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: {P}Coder</a></div>-->
     								<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2"><a data-toggle='tooltip' data-placement='bottom' title='Limpiar almacenamiento local de sesiones de archivo' class="btn btn-info btn-block" href="javascript:localStorage.clear();"><i class="fa fa-trash fa-fw"></i></a></div>
 								</div>
 								

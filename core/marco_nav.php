@@ -256,7 +256,7 @@
 						<li class="divider"></li>
                         <h6 class="dropdown-header"><?php echo ($MULTILANG_Otros); ?>:</h6>
                         <?php
-								$PCO_EnlaceExplorador="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-34:0&Presentar_FullScreen=0&Precarga_EstilosBS=1&PFE_PresentarCarpetasEspeciales=1&PFE_ActivarDataTable=1";
+								$PCO_EnlaceExplorador="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-34:0&Presentar_FullScreen=0&Precarga_EstilosBS=1&PFE_PresentarCarpetasEspeciales=1&PFE_ActivarDataTable=1&PFE_BuscadorArchivos=1";
                     			//Verifica si esta o no en modo DEMO para hacer la operacion
                     			if ($PCO_ModoDEMO==1)
 								   $PCO_EnlaceExplorador="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";
