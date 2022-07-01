@@ -622,7 +622,12 @@ var EditDiagramDialog = function(editorUi)
 	var okBtn = mxUtils.button(mxResources.get('ok'), function()
 	{
 		// Removes all illegal control characters before parsing
-		var data = Graph.zapGremlins(mxUtils.trim(textarea.value));
+		MisDaticos='<mxGraphModel dx="782" dy="815" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169">  <root>    <mxCell id="0" />    <mxCell id="1" parent="0" />    <mxCell id="2" value="" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">      <mxGeometry x="340" y="380" width="120" height="80" as="geometry" />    </mxCell>    <mxCell id="3" value="" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">      <mxGeometry x="250" y="250" width="120" height="80" as="geometry" />    </mxCell>  </root></mxGraphModel>';
+		
+		//var data = Graph.zapGremlins(mxUtils.trim(textarea.value));
+		var data = Graph.zapGremlins(mxUtils.trim(MisDaticos));
+		
+		
 		var error = null;
 		
 		if (select.value == 'new')

@@ -68,6 +68,9 @@ LogCambios="
 * Enhan [PCODER]: {P}Coder incluye título descriptivo del contenido que es editado para aquellos casos en que es utilizado para eventos o scripts de formularios.
 * Enhan [CORE]: (frm:-35) Reemplazada herramienta de comparacion externa por objeto propio.  Esto permite ahorrar más de 1MB de código en disco.
 * Enhan [CORE]: El cargue de scripts PRE, POST y JS de formularios, informes y eventos para efectos de edición se realiza ahora en caliente y por demanda.  Solamente cuando sean requeridos serán cargados y de esa manera se evitará tráfico innecesario en tiempo de diseño.
+* Enhan [CORE]: @foag Cambio de idioma por defecto en editor de diagramas a espanol.
+* Enhan [CORE]: @foag Personalizacion de menues en editor de diagramas.
+* Enhan [CORE]: @foag Funciones de cargue y descargue de XML asociado a editor de diagramas.
 
 
 

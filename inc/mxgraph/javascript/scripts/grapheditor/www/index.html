@@ -57,9 +57,44 @@
 </head>
 <body class="geEditor">
     
+
+	<script type="text/javascript">
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+	function MiCreacion()
+	{
+		// Removes all illegal control characters before parsing
+		MisDaticos='<mxGraphModel dx="782" dy="815" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169">  <root>    <mxCell id="0" />    <mxCell id="1" parent="0" />    <mxCell id="2" value="" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">      <mxGeometry x="340" y="380" width="120" height="80" as="geometry" />    </mxCell>    <mxCell id="3" value="" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">      <mxGeometry x="250" y="250" width="120" height="80" as="geometry" />    </mxCell>  </root></mxGraphModel>';
+		
+		//var data = Graph.zapGremlins(mxUtils.trim(textarea.value));
+		var data = Graph.zapGremlins(mxUtils.trim(MisDaticos));
+		
+		
+		var error = null;
+
+
+			PCO_EditorDiagramas.actions.editorUi.editor.graph.model.beginUpdate();
+			try
+			{
+				PCO_EditorDiagramas.actions.editorUi.editor.setGraphXml(mxUtils.parseXml(data).documentElement);
+			}
+			catch (e)
+			{
+				error = e;
+			}
+			finally
+			{
+				PCO_EditorDiagramas.actions.editorUi.editor.graph.model.endUpdate();				
+			}
+	}
+	</script>
+
     
     
 	<script type="text/javascript">
+	var PCO_EditorDiagramas;
 		// Extends EditorUi to update I/O action states based on availability of backend
         //var Pepon;
 		(function()
@@ -108,8 +143,19 @@
 			}, function()
 			{
 				document.body.innerHTML = '<center style="margin-top:10%;">Error loading resource files. Please check browser console.</center>';
+				
+
 			});
+		
+		    
 		})();
+		
+
+
+window.onload = function() {
+    setTimeout(MiCreacion, 1000);
+
+};
 	</script>
 
     Creates a container for the graph with a grid wallpaper 
@@ -132,17 +178,42 @@
 
 <!--
 ANOTACIONES JOHN:
-Para obtener el codigo en XML en formato PLANO y guardarlo en BD
-    PCO_EditorDiagramas.actions.editorUi.getEditBlankXml()
+
     
 Para tomar un XML plano y setearlo en el diagrama
 
-Funciones para menu:
-    -  Eliminar opciones 
-    -  Agregar opciones
-    -  Agregar eventos
 
-    -  Configuracion de idioma
+MX-GRAPH de Supervivencia:
+==========================
+- Adición de idiomas:
+    En caliente por URL: enviar el parametro lang=xx   (es,en,...)
+    Se deben agregar los archivos correspondientes sobre /resources antes de usarlo
+    Se debe agregar el idioma sobre js/Init.js  Linea 13 y al arreglo mxLanguages Linea  29
+
+-  Agregar opciones:
+    1) Sobre js/Menu.js  L33:  Se agrega el elemento al arreglo defaultMenuItems
+    2) En el archivo de idioma se debe agregar la cadena equivalente.  Con el nombre de menu creado y el texto visual.  Ej Uno=MiLabel
+    3) En js/Menus.js Apro. L500 tomar uno de los elementos y duplicarlo para agregar el nuevo, usando el elemento creado, ej Uno.
+            El orden en que se agregue depende del arreglo defaultMenuItems
+            Puede que requiera eliminar la cache para ver los cambios
+    4) Para las opciones que son comandos cree la accion correspondiente Sobre js/Actions.js en L65 se toma un addAction y se agrega lo deseado cambiando el nombre. ej 'MiComando'
+    5) Para las acciones tipo comando debe tener tambien su equivalente sobre el archivo de idiomas
+    
+- Eliminar opciones:
+    1) Sobre js/Menu.js  buscar la opcion deseada y retirar su codigo en defaultMenuItems  o los items hijos.
+
+- Cambio de accion en un elemento determinado:  Se resume a editar js/Actions.js  para el menu correspondiente
+
+- Ocultar, habilitar o deshabilitar opciones de menu (siguen activos sus key bindings):
+    HABILITAR: PCO_EditorDiagramas.actions.editorUi.actions.actions.saveAs.enabled=true;
+    DESHABILITAR:  PCO_EditorDiagramas.actions.editorUi.actions.actions.save.enabled=false;
+    OCULTAR/MOSTRAR: PCO_EditorDiagramas.actions.editorUi.actions.actions.save.visible=false;
+
+- Para obtener el codigo en XML en formato PLANO y guardarlo en BD
+    PCO_EditorDiagramas.actions.editorUi.getEditBlankXml()
+
+
+
 -->
 
 
