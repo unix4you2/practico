@@ -7969,6 +7969,11 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		//Determina si esta en modo diseno para agregar algunos elementos extra al titulo del form
         if ($modo_diseno_formulario)
             {
+                //Genera llaves de apertura unicos para los archivos de pcoder 
+    			$LlaveVentanaArchivo="Win_".md5("{$path}{$files[$i]["name"]}"); //Genera codigo unico para apertura de ventana  //{$LlaveDePaso}
+
+
+
 
                 $PCO_EnlaceScriptPRE ="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&Origen_Archivo=B&Tabla_Archivo=core_formulario&Campo_Archivo=pre_script&PCODER_extension=php&PCODER_ModoEditor=PHP&PCODER_TipoMenu=Iconos&PCODER_EstadoSimple=1&Llave_Registro={$formulario}&PCODER_Titulo=Script_PRE_Formulario_{$formulario}_(PHP)','PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";  //ANTES  width='+screen.width+', height='+screen.height);
                 $PCO_EnlaceScriptPOST="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&Origen_Archivo=B&Tabla_Archivo=core_formulario&Campo_Archivo=post_script&PCODER_extension=php&PCODER_ModoEditor=PHP&PCODER_TipoMenu=Iconos&PCODER_EstadoSimple=1&Llave_Registro={$formulario}&PCODER_Titulo=Script_POST_Formulario_{$formulario}_(PHP)','PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";  //ANTES  width='+screen.width+', height='+screen.height);

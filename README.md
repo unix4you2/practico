@@ -1,6 +1,5 @@
-![PRACTICO](http://dev.practico.org:3000/unix4you2/practico/raw/branch/master/dev/logo/01b.png)
-![PHP7](http://dev.practico.org:3000/unix4you2/practico/raw/commit/181fdfd64ef227c94cacc1a2fe45daea89fff22b/dev/misc/php7.png)
-[![Gitter](http://dev.practico.org:3000/unix4you2/practico/raw/branch/master/dev/misc/gitter.png)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+![PRACTICO](https://github.com/unix4you2/practico/raw/branch/master/dev/logo/01b.png)
+![PHP7](https://github.com/unix4you2/practico/raw/commit/181fdfd64ef227c94cacc1a2fe45daea89fff22b/dev/misc/php7.png)
 
 Practico es una herramienta de codigo abierto para el diseño de aplicaciones web y progresivas de manera agil.
 
@@ -43,9 +42,9 @@ Un manual completo en formato Google Docs que permite recibir comentarios, así 
 
 ### Ideas y puntos de contacto
 
- * Chat a través de [![Gitter](http://dev.practico.org:3000/unix4you2/practico/raw/branch/master/dev/misc/gitter.png)](https://gitter.im/unix4you2/practico?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
- * Reporte de incidencias (del Framework, no de su aplicación) a través del [Repositorio Git](http://dev.practico.org:3000/unix4you2/practico/issues)
- * Aportar código o desarrollo a través del [Repositorio Git](http://dev.practico.org:3000/unix4you2/practico/)
+ * Chat a través de [![Discussions](https://github.com/unix4you2/practico/raw/branch/master/dev/misc/gitter.png)](https://github.com/unix4you2/practico/discussions)
+ * Reporte de incidencias (del Framework, no de su aplicación) a través del [Repositorio Git](https://github.com/unix4you2/practico/issues)
+ * Aportar código o desarrollo a través del [Repositorio Git](https://github.com/unix4you2/practico/)
 
 
 #### Métricas del proyecto
@@ -56,4 +55,4 @@ Un manual completo en formato Google Docs que permite recibir comentarios, así 
 
 Si encuentra útil este proyecto y desea contribuir al desarrollo del mismo puede apoyarnos mediante una donación por un valor voluntario.
 
-[![Donaciones](http://dev.practico.org:3000/unix4you2/practico/raw/branch/master/dev/misc/paypal.png)](https://www.paypal.com/cgi-bin/webscr?item_name=Donacion+para+desarrollo+de+funcionalidades+de+Pr%E1ctico&cmd=_donations&business=unix4you2%40gmail.com)
+[Donaciones](https://github.com/sponsors/unix4you2/)
