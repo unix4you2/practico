@@ -53,4 +53,4 @@ Un manual completo en formato Google Docs que permite recibir comentarios, así 
 
 Si encuentra útil este proyecto y desea contribuir al desarrollo del mismo puede apoyarnos mediante una donación por un valor voluntario.
 
-[Donaciones](https://github.com/sponsors/unix4you2/)
+💵 [Donaciones](https://github.com/sponsors/unix4you2/)
