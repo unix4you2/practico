@@ -17,7 +17,7 @@ Practico es una herramienta de codigo abierto para el diseño de aplicaciones we
  - Herramientas gráficas para gestionar la base de datos
  - Generación simple y rápida de completos formularios y reportes HTML, PDF, etc.
  - Administración sencilla de las credenciales de usuario
- - Código fuente simple, los fuentes son muy fáciles de entender.
+ - Código fuente simple y fácil de entender.
  - _Muchas otras herramientas_ para ayudar a que toda su aplicación y equipo de desarrollo utilice sólo una herramienta.
 
 ## Instalación y uso
