@@ -5,16 +5,14 @@ Practico es una herramienta de codigo abierto para el diseño de aplicaciones we
 
 ## Características
 
+ - Pequeño, liviano y rápido
  - Soporta todo el ciclo de desarrollo de software: Elicitacion de requerimientos, Control de tareas o proyecto por Kanban/Gantt, Diseño, Implementación, Pruebas, Gestión de bugs, Documentación, etc.
  - Escrito completamente en PHP, HTML y Javascript
- - Interfaz gráfica de usuario
+ - Interfaz gráfica de usuario lista para iniciar con su aplicación
  - Funciones integradas para operaciones CRUD simples y avanzadas
  - Controles de flujo rápidos para modelados de proceso y lógicas de negocio
  - Multiplataforma (GNU/Linux, *BSD, Microsoft Windows)
  - Fácilmente personalizable mediante sus propias funciones y maquetación
- - Pequeño, liviano y rápido
- - Reconocimiento de captcha, teclados en pantalla y otros a su gusto
- - Herramientas gráficas para gestionar la base de datos
  - Generación simple y rápida de completos formularios y reportes HTML, PDF, etc.
  - Administración sencilla de las credenciales de usuario
  - Código fuente simple y fácil de entender.
