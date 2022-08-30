@@ -44,7 +44,7 @@ Un manual completo en formato Google Docs que permite recibir comentarios, así 
 
  * Chat a través de [Discussions](https://github.com/unix4you2/practico/discussions)
  * Reporte de incidencias (del Framework, no de su aplicación) a través del [Repositorio Git](https://github.com/unix4you2/practico/issues)
- * Aportar código o desarrollo a través del [Repositorio Git](https://github.com/unix4you2/practico/)
+ * Aportar código o desarrollo a través de un [Fork del Repositorio Git](https://github.com/unix4you2/practico/fork)
 
 
 #### Métricas del proyecto
