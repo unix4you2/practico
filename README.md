@@ -1,5 +1,5 @@
-![PRACTICO](https://github.com/unix4you2/practico/raw/branch/master/dev/logo/01b.png)
-![PHP7](https://github.com/unix4you2/practico/raw/commit/181fdfd64ef227c94cacc1a2fe45daea89fff22b/dev/misc/php7.png)
+![PRACTICO](https://github.com/unix4you2/practico/raw/master/dev/logo/01b.png)
+![PHP7](https://github.com/unix4you2/practico/raw/master/dev/misc/php7.png)
 
 Practico es una herramienta de codigo abierto para el diseño de aplicaciones web y progresivas de manera agil.
 
@@ -42,7 +42,7 @@ Un manual completo en formato Google Docs que permite recibir comentarios, así 
 
 ### Ideas y puntos de contacto
 
- * Chat a través de [![Discussions](https://github.com/unix4you2/practico/raw/branch/master/dev/misc/gitter.png)](https://github.com/unix4you2/practico/discussions)
+ * Chat a través de [Discussions](https://github.com/unix4you2/practico/discussions)
  * Reporte de incidencias (del Framework, no de su aplicación) a través del [Repositorio Git](https://github.com/unix4you2/practico/issues)
  * Aportar código o desarrollo a través del [Repositorio Git](https://github.com/unix4you2/practico/)
 
