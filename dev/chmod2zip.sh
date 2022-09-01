@@ -66,6 +66,10 @@
     chmod 777 core/configuracion.php
     chmod 777 core/ws_oauth.php
     chmod 777 pwa/manifest.json
+    
+    #Ver22.9 se deja seguridad e inmutabilidad del lado del servidor.  Permisos restablecidos para facilitar edicion.
+    find . -type d -exec chmod 777 {} \;
+    find . -type f -exec chmod 777 {} \;
 
     #chown -R www-data *
     #chown -R www *
