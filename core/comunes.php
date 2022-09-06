@@ -7970,14 +7970,16 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         if ($modo_diseno_formulario)
             {
                 //Genera llaves de apertura unicos para los archivos de pcoder 
-    			$LlaveVentanaArchivo="Win_".md5("{$path}{$files[$i]["name"]}"); //Genera codigo unico para apertura de ventana  //{$LlaveDePaso}
-
-
-
-
+                //FORMA 1: Enlaces estandar (Modo de emergencia o depuracion de PCoder)
                 $PCO_EnlaceScriptPRE ="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&Origen_Archivo=B&Tabla_Archivo=core_formulario&Campo_Archivo=pre_script&PCODER_extension=php&PCODER_ModoEditor=PHP&PCODER_TipoMenu=Iconos&PCODER_EstadoSimple=1&Llave_Registro={$formulario}&PCODER_Titulo=Script_PRE_Formulario_{$formulario}_(PHP)','PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";  //ANTES  width='+screen.width+', height='+screen.height);
                 $PCO_EnlaceScriptPOST="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&Origen_Archivo=B&Tabla_Archivo=core_formulario&Campo_Archivo=post_script&PCODER_extension=php&PCODER_ModoEditor=PHP&PCODER_TipoMenu=Iconos&PCODER_EstadoSimple=1&Llave_Registro={$formulario}&PCODER_Titulo=Script_POST_Formulario_{$formulario}_(PHP)','PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";  //ANTES  width='+screen.width+', height='+screen.height);
                 $PCO_EnlaceScriptJS  ="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&Origen_Archivo=B&Tabla_Archivo=core_formulario&Campo_Archivo=javascript&PCODER_extension=js&PCODER_ModoEditor=JavaScript&PCODER_TipoMenu=Iconos&PCODER_EstadoSimple=1&Llave_Registro={$formulario}&PCODER_Titulo=Script_JS_Formulario_{$formulario}_(JS)' ,'PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";  //ANTES  width='+screen.width+', height='+screen.height);
+                //FORMA 2: Con funcion interna de apertura - Sobreescribe FORMA 1 - Comentar para pasar a modo de emergencia
+
+                $TituloPCoder_COMPLEMENTO=" - <font color=white>".$registro_formulario["titulo"]."</font> ";
+                $PCO_EnlaceScriptPRE ="javascript:PCOJS_CargarArchivoPCoderBD('','','','No','B','core_formulario','pre_script', '{$formulario}','php','PHP'       ,'Iconos','1','<font color=white>Script_PRE</font> Formulario_{$formulario}_(PHP){$TituloPCoder_COMPLEMENTO}');";
+                $PCO_EnlaceScriptPOST="javascript:PCOJS_CargarArchivoPCoderBD('','','','No','B','core_formulario','post_script','{$formulario}','php','PHP'       ,'Iconos','1','<font color=white>Script_POST</font> Formulario_{$formulario}_(PHP){$TituloPCoder_COMPLEMENTO}');";
+                $PCO_EnlaceScriptJS  ="javascript:PCOJS_CargarArchivoPCoderBD('','','','No','B','core_formulario','javascript' ,'{$formulario}','js' ,'JavaScript','Iconos','1','<font color=white>Script_JS</font> Formulario_{$formulario}_(PHP){$TituloPCoder_COMPLEMENTO}');";
 
 				$ComplementoTituloFormulario='
 				<div class="pull-right">

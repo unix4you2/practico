@@ -1,3 +1,85 @@
+function PCOJS_Base64Encode(Cadena) {
+    return btoa(encodeURIComponent(Cadena).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+        return String.fromCharCode('0x' + p1);
+    }));
+}
+
+
+//##############################################################################
+//##############################################################################
+function PCOJS_CargarArchivoPCoder(AnchoVentana,AltoVentana,PCODER_archivo,CerrarModal,Origen_Archivo,Tabla_Archivo,Campo_Archivo,Llave_Registro,PCODER_extension,PCODER_ModoEditor,PCODER_TipoMenu,PCODER_EstadoSimple,PCODER_Titulo)
+    {
+        if (AnchoVentana=="" || typeof AnchoVentana == 'undefined') AnchoVentana=screen.width;
+        if (AltoVentana==""  || typeof AltoVentana ==  'undefined') AltoVentana=screen.height;
+
+        var ParametrosVentana = [
+            'width='+AnchoVentana,
+            'height='+AltoVentana,
+            'location=no',
+            'menubar=no',
+            'resizable=yes',
+            'scrollbars=no',
+            'status=no',
+            'titlebar=no',
+            'toolbar=no',
+            'directories=0',
+            'directories=no',
+            'fullscreen=yes' // only works in IE, but here for completeness
+        ].join(',');
+
+        //Parametros para apertura del archivo
+        var ParametrosArchivo="";
+
+        if (typeof PCODER_archivo !=  'undefined')         ParametrosArchivo+="&PCODER_archivo="+PCODER_archivo;
+        if (typeof Origen_Archivo != 'undefined')          ParametrosArchivo+="&Origen_Archivo="+Origen_Archivo;
+        if (typeof Tabla_Archivo !=  'undefined')          ParametrosArchivo+="&Tabla_Archivo="+Tabla_Archivo;
+        if (typeof Campo_Archivo !=  'undefined')          ParametrosArchivo+="&Campo_Archivo="+Campo_Archivo;
+        if (typeof Llave_Registro !=  'undefined')         ParametrosArchivo+="&Llave_Registro="+Llave_Registro;
+        if (typeof PCODER_extension !=  'undefined')       ParametrosArchivo+="&PCODER_extension="+PCODER_extension;
+        if (typeof PCODER_ModoEditor !=  'undefined')      ParametrosArchivo+="&PCODER_ModoEditor="+PCODER_ModoEditor;
+        if (typeof PCODER_TipoMenu !=  'undefined')        ParametrosArchivo+="&PCODER_TipoMenu="+PCODER_TipoMenu;
+        if (typeof PCODER_EstadoSimple !=  'undefined')    ParametrosArchivo+="&PCODER_EstadoSimple="+PCODER_EstadoSimple;
+        if (typeof PCODER_Titulo !=  'undefined')          ParametrosArchivo+="&PCODER_Titulo="+PCODER_Titulo;
+
+        //Busca que la ventana no se haya abierto todavia, y la abre o crea y sino solo le da foco
+        llave=PCOJS_Base64Encode(PCODER_archivo);
+        //En caso que el archivo sea vacio se trata de un contenido de BD y calcula la llave con tal valor
+        
+        if (typeof PCODER_archivo ==  'undefined' || PCODER_archivo=='')
+            {
+                llave=PCOJS_Base64Encode(Tabla_Archivo+"["+Llave_Registro+"]."+Campo_Archivo);
+            }
+        let ExistenciaVentana = localStorage.getItem(""+llave);
+        if (ExistenciaVentana!="" && ExistenciaVentana!=null && ExistenciaVentana!="null")
+            {
+                if (typeof CerrarModal != 'undefined' && CerrarModal != '' && CerrarModal == 'Si')
+                    parent.OperacionFS_CerrarModalAperturaArchivo();  //Cierra el modal de la ventana padre con el arbol de archivos
+                //Cambia hacia la ventana con ese nombre (Chrome)
+                window.open('javascript:void window.focus()', llave, ParametrosVentana);
+            }
+        else
+            {
+                if (typeof CerrarModal != 'undefined' && CerrarModal != '' && CerrarModal == 'Si')
+                    parent.OperacionFS_CerrarModalAperturaArchivo();  //Cierra el modal de la ventana padre con el arbol de archivos
+                var VentanaEdicionPCoder = window.open("index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&"+ParametrosArchivo, llave, ParametrosVentana).focus();
+                VentanaEdicionPCoder.moveTo(0,0);
+            }
+    }
+function PCOJS_CargarArchivoPCoderFS(AnchoVentana,AltoVentana,PCODER_archivo,CerrarModal)
+    {
+        //Un alias de funcion para llamado a funcion general de carga con menos parametros
+        PCOJS_CargarArchivoPCoder(AnchoVentana,AltoVentana,PCODER_archivo,CerrarModal,"","","","","","","","","");
+    }
+function PCOJS_CargarArchivoPCoderBD(AnchoVentana,AltoVentana,PCODER_archivo,CerrarModal,Origen_Archivo,Tabla_Archivo,Campo_Archivo,Llave_Registro,PCODER_extension,PCODER_ModoEditor,PCODER_TipoMenu,PCODER_EstadoSimple,PCODER_Titulo)
+    {
+        //Un alias de funcion para llamado a funcion general de carga con menos parametros
+        PCOJS_CargarArchivoPCoder(AnchoVentana,AltoVentana,"",CerrarModal,Origen_Archivo,Tabla_Archivo,Campo_Archivo,Llave_Registro,PCODER_extension,PCODER_ModoEditor,PCODER_TipoMenu,PCODER_EstadoSimple,PCODER_Titulo)
+    }
+//##############################################################################
+//##############################################################################
+
+
+
 function ver_navegacion_izquierda_flotante()
     {
         document.getElementById("barra_navegacion_izquierda").style.visibility="visible";
