@@ -94,6 +94,11 @@
     $PCO_TamanoRejilla="10";
     $DiagramaBaseLimpio='<mxGraphModel dx="'.$PCO_PosXDiagrama.'" dy="'.$PCO_PosYDiagrama.'" grid="'.$PCO_HabilitarRejilla.'" gridSize="'.$PCO_TamanoRejilla.'" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="'.$PCO_AnchoPaginaDiagrama.'" pageHeight="'.$PCO_AltoPaginaDiagrama.'">  <root>    <mxCell id="0" />    <mxCell id="1" parent="0" />    </root></mxGraphModel>';
 
+    if (@!defined($PCO_CampoOrigen)) $PCO_CampoOrigen="";
+    if (@!defined($PCO_TablaOrigen)) $PCO_TablaOrigen="";
+    if (@!defined($PCO_CampoLlave)) $PCO_CampoLlave="";
+    if (@!defined($PCO_ValorLlave)) $PCO_ValorLlave="";
+
     //Si la operacion es cargar entonces toma la 
     //if (@$PCO_DiagramaOperacion=="PCO_CargarDiagrama")
         {
@@ -237,7 +242,28 @@
 
     	function PCO_GuardarDiagrama()
         	{
-        	    alert("Guardando");
+        	    //Obtiene el contenido actual del diagrama
+        	    var DiagramaActual=PCO_EditorDiagramas.actions.editorUi.getEditBlankXml();
+        	    
+        	    //Agrega otras variables complementarias
+        	    var DiagramaOK="<?php echo $DiagramaOK; ?>";
+        	    var PCO_CampoOrigen="<?php echo $PCO_CampoOrigen; ?>";
+        	    var PCO_TablaOrigen="<?php echo $PCO_TablaOrigen; ?>";
+        	    var PCO_CampoLlave="<?php echo $PCO_CampoLlave; ?>";
+        	    var PCO_ValorLlave="<?php echo $PCO_ValorLlave; ?>";
+
+                //Determina si cuenta con todo lo necesario para ejecutar o no el almacenamiento
+                if (DiagramaOK == "0")
+                    {
+                        alert("Usted no cuenta con un cargue valido de diagrama.  No se puede ejecutar una operacion de almacenamiento.  Puede usar la opcion Extras->Editar Diagrama si requiere guardar una copia de su trabajo actual.");
+                    }
+                else
+                    {
+                        
+                        
+                        
+                        alert("Sobre registro: Guardando:"+DiagramaActual);
+                    }
         	}
 
     	function PCO_CargarDiagramaInicial()
