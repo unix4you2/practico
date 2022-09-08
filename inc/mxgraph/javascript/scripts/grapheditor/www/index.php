@@ -81,8 +81,96 @@
         }
     else
         $PCO_EsUnAdmin=1;
-?>
 
+
+########################################################################
+########################################################################
+    //Variables basicas de operacion para el diagrama
+    $PCO_PosXDiagrama="782";
+    $PCO_PosYDiagrama="815";
+    $PCO_AnchoPaginaDiagrama="827";
+    $PCO_AltoPaginaDiagrama="1169";
+    $PCO_HabilitarRejilla="1";
+    $PCO_TamanoRejilla="10";
+    $DiagramaBaseLimpio='<mxGraphModel dx="'.$PCO_PosXDiagrama.'" dy="'.$PCO_PosYDiagrama.'" grid="'.$PCO_HabilitarRejilla.'" gridSize="'.$PCO_TamanoRejilla.'" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="'.$PCO_AnchoPaginaDiagrama.'" pageHeight="'.$PCO_AltoPaginaDiagrama.'">  <root>    <mxCell id="0" />    <mxCell id="1" parent="0" />    </root></mxGraphModel>';
+
+    //Si la operacion es cargar entonces toma la 
+    //if (@$PCO_DiagramaOperacion=="PCO_CargarDiagrama")
+        {
+            //Valores de prueba (Anular en produccion)
+            $PCO_CampoOrigen="accion";
+            $PCO_TablaOrigen="core_auditoria";
+            $PCO_CampoLlave="id";
+            $PCO_ValorLlave="4";
+            
+            $DiagramaOK=0;
+            if (@$PCO_CampoOrigen!="" && $PCO_TablaOrigen!="" && $PCO_CampoLlave!="" && $PCO_ValorLlave!="")
+                {
+                    $ConcenidoDiagrama=PCO_EjecutarSQL("SELECT {$PCO_CampoOrigen} as Diagrama FROM {$PCO_TablaOrigen} WHERE {$PCO_CampoLlave}='{$PCO_ValorLlave}' ")->fetchColumn();
+                    //Valida que se tengan algunos contenidos minimos del diagrama para ser considerado valido
+                    if (trim($ConcenidoDiagrama)!="")
+                        if (stripos($ConcenidoDiagrama,"mxGraphModel")>0)
+                            if (stripos($ConcenidoDiagrama,"<root")>0)
+                                if (stripos($ConcenidoDiagrama,"mxCell")>0)
+                                    {
+                                        $DiagramaOK=1;
+                                        //Sanitiza la cadena eliminando todos los saltos porque en la asignacion posterior de JS no los debe tener
+                                        $DiagramaBase=str_replace(array("\r", "\n"), "", $ConcenidoDiagrama);
+                                    }
+                }
+        }
+
+    //SIEMPRE SE ASUME QUE SE LLEGA CON DATOS PARA CARGA DEL DIAGRAMA!!!
+    //Si no encuentra datos validos para el diagrama entonces presenta uno por defecto con la advertencia
+    if ($DiagramaOK==0)
+        $DiagramaBase='<mxGraphModel dx="'.$PCO_PosXDiagrama.'" dy="'.$PCO_PosYDiagrama.'" grid="'.$PCO_HabilitarRejilla.'" gridSize="'.$PCO_TamanoRejilla.'" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="'.$PCO_AnchoPaginaDiagrama.'" pageHeight="'.$PCO_AltoPaginaDiagrama.'">  <root>    <mxCell id="0" />    <mxCell id="1" parent="0" />    <mxCell id="3" value="Framework" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#B3B3B3;fontSize=25;fontStyle=2" parent="1" vertex="1">      <mxGeometry x="332" y="240" width="40" height="20" as="geometry" />    </mxCell>    <mxCell id="7" value="" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#FFC60A;gradientDirection=north;gradientColor=#DE1016;strokeColor=none;" parent="1" vertex="1">      <mxGeometry x="220" y="190" width="70" height="60" as="geometry" />    </mxCell>    <mxCell id="8" value="Pr" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=45;fontColor=#FFFFFF;" parent="1" vertex="1">      <mxGeometry x="240" y="210" width="40" height="20" as="geometry" />    </mxCell>    <mxCell id="15" value="áctico" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=45;" parent="1" vertex="1">      <mxGeometry x="332" y="210" width="40" height="20" as="geometry" />    </mxCell>    <mxCell id="17" value="Si usted visualiza este mensaje es porque los parámetros de carga de su diagrama en {P}Diagram no fueron correctos.&lt;br style=&quot;font-size: 10px;&quot;&gt;&lt;br style=&quot;font-size: 10px;&quot;&gt;Verifique el origen de los datos del diagrama e intente de nuevo" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;labelBackgroundColor=none;fillColor=#FFCCE6;" vertex="1" parent="1">      <mxGeometry x="170" y="280" width="310" height="60" as="geometry" />    </mxCell>    </root></mxGraphModel>';
+
+
+########################################################################
+########################################################################
+/*
+    MX-GRAPH de Supervivencia:
+    ==========================
+    - Adición de idiomas:
+        En caliente por URL: enviar el parametro lang=xx   (es,en,...)
+        Se deben agregar los archivos correspondientes sobre /resources antes de usarlo
+        Se debe agregar el idioma sobre js/Init.js  Linea 13 y al arreglo mxLanguages Linea  29
+    
+    -  Agregar opciones:
+        1) Sobre js/Menu.js  L33:  Se agrega el elemento al arreglo defaultMenuItems
+        2) En el archivo de idioma se debe agregar la cadena equivalente.  Con el nombre de menu creado y el texto visual.  Ej Uno=MiLabel
+        3) En js/Menus.js Apro. L500 tomar uno de los elementos y duplicarlo para agregar el nuevo, usando el elemento creado, ej Uno.
+                El orden en que se agregue depende del arreglo defaultMenuItems
+                Puede que requiera eliminar la cache para ver los cambios
+        4) Para las opciones que son comandos cree la accion correspondiente Sobre js/Actions.js en L65 se toma un addAction y se agrega lo deseado cambiando el nombre. ej 'MiComando'
+        5) Para las acciones tipo comando debe tener tambien su equivalente sobre el archivo de idiomas
+        
+    - Eliminar opciones:
+        1) Sobre js/Menu.js  buscar la opcion deseada y retirar su codigo en defaultMenuItems  o los items hijos.
+    
+    - Cambio de accion en un elemento determinado:  Se resume a editar js/Actions.js  para el menu correspondiente
+    
+    - Ocultar, habilitar o deshabilitar opciones de menu (siguen activos sus key bindings):
+        HABILITAR: PCO_EditorDiagramas.actions.editorUi.actions.actions.saveAs.enabled=true;
+        DESHABILITAR:  PCO_EditorDiagramas.actions.editorUi.actions.actions.save.enabled=false;
+        OCULTAR/MOSTRAR: PCO_EditorDiagramas.actions.editorUi.actions.actions.save.visible=false;
+    
+    - Para obtener el codigo en XML en formato PLANO y guardarlo en BD
+        PCO_EditorDiagramas.actions.editorUi.getEditBlankXml()
+
+    - Para tomar un codigo en XML en formato PLANO y asignarlo/setearlo al editor
+        
+    ------------------------
+    Algunos parametros que pueden ser parseados en la URL por la funcion urlParams = (function(url) SON:
+		lang=xy: Especifica lenguaje en la interfaz de usuario
+		touch=1: Habilita interfaz de usuario tipo Touch
+		storage=local: Habilita almacenamiento local.  Valido HTML5
+		chrome=0: Modo Chromeless
+*/
+
+
+
+?>
 
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
 <!DOCTYPE html>
@@ -93,11 +181,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="styles/grapheditor.css">
 	<script type="text/javascript">
-		// Parses URL parameters. Supported parameters are:
-		// - lang=xy: Specifies the language of the user interface.
-		// - touch=1: Enables a touch-style user interface.
-		// - storage=local: Enables HTML5 local storage.
-		// - chrome=0: Chromeless mode.
 		var urlParams = (function(url)
 		{
 			var result = new Object();
@@ -117,7 +200,6 @@
 					}
 				}
 			}
-			
 			return result;
 		})(window.location.href);
 	
@@ -141,35 +223,34 @@
 	<script type="text/javascript" src="js/Toolbar.js"></script>
 	<script type="text/javascript" src="js/Dialogs.js"></script>
 </head>
+
 <body class="geEditor">
-
-
 	<script type="text/javascript">
         function sleep(ms)
             {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
 
-    	function MiCreacion()
+    	function PCO_CargarDiagramaInicial()
         	{
         		// Removes all illegal control characters before parsing
-        		MisDaticos='<mxGraphModel dx="782" dy="815" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169">  <root>    <mxCell id="0" />    <mxCell id="1" parent="0" />    <mxCell id="2" value="" style="ellipse;shape=cloud;whiteSpace=wrap;html=1;" vertex="1" parent="1">      <mxGeometry x="340" y="380" width="120" height="80" as="geometry" />    </mxCell>    <mxCell id="3" value="" style="shape=document;whiteSpace=wrap;html=1;boundedLbl=1;" vertex="1" parent="1">      <mxGeometry x="250" y="250" width="120" height="80" as="geometry" />    </mxCell>  </root></mxGraphModel>';
+        		MisDaticos='<?php echo $DiagramaBase; ?>';
         		
         		//var data = Graph.zapGremlins(mxUtils.trim(textarea.value));
         		var data = Graph.zapGremlins(mxUtils.trim(MisDaticos));
         		
         		var error = null;
-        
-        			PCO_EditorDiagramas.actions.editorUi.editor.graph.model.beginUpdate();
-        			try
+    
+    			PCO_EditorDiagramas.actions.editorUi.editor.graph.model.beginUpdate();
+    			try
         			{
         				PCO_EditorDiagramas.actions.editorUi.editor.setGraphXml(mxUtils.parseXml(data).documentElement);
         			}
-        			catch (e)
+    			catch (e)
         			{
         				error = e;
         			}
-        			finally
+    			finally
         			{
         				PCO_EditorDiagramas.actions.editorUi.editor.graph.model.endUpdate();				
         			}
@@ -185,28 +266,26 @@
 		// Extends EditorUi to update I/O action states based on availability of backend
 		(function()
     		{
-    			
-    	    var editorUiInit = EditorUi.prototype.init;
+    	        var editorUiInit = EditorUi.prototype.init;
     
     			EditorUi.prototype.init = function()
-    			{
-    				editorUiInit.apply(this, arguments);
-    				this.actions.get('export').setEnabled(false);
-    
-    				// Updates action states which require a backend
-    				if (!Editor.useLocalStorage)
-    				{
-    					mxUtils.post(OPEN_URL, '', mxUtils.bind(this, function(req)
-    					{
-    						var enabled = req.getStatus() != 404;
-    						this.actions.get('open').setEnabled(enabled || Graph.fileSupport);
-    						this.actions.get('import').setEnabled(enabled || Graph.fileSupport);
-    						this.actions.get('save').setEnabled(enabled);
-    						this.actions.get('saveAs').setEnabled(enabled);
-    						this.actions.get('export').setEnabled(enabled);
-    					}));
-    				}
-    			};
+        			{
+        				editorUiInit.apply(this, arguments);
+        				this.actions.get('export').setEnabled(false);
+        				// Actualiza las acciones que seran requeridas en el BackEnd
+        				if (!Editor.useLocalStorage)
+            				{
+            					mxUtils.post(OPEN_URL, '', mxUtils.bind(this, function(req)
+                					{
+                						var enabled = req.getStatus() != 404;
+                						this.actions.get('open').setEnabled(enabled || Graph.fileSupport);
+                						this.actions.get('import').setEnabled(enabled || Graph.fileSupport);
+                						this.actions.get('save').setEnabled(enabled);
+                						this.actions.get('saveAs').setEnabled(enabled);
+                						this.actions.get('export').setEnabled(enabled);
+                					}));
+            				}
+        			};
     			
     			// Adds required resources (disables loading of fallback properties, this can only
     			// be used if we know that all keys are defined in the language specific file)
@@ -216,38 +295,33 @@
     
     			// Fixes possible asynchronous requests
     			mxUtils.getAll([bundle, STYLE_PATH + '/default.xml'], function(xhr)
-    			{
-    				// Adds bundle text to resources
-    				mxResources.parse(xhr[0].getText());
-    				
-    				// Configures the default graph theme
-    				var themes = new Object();
-    				themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement(); 
-    				
-    				// Main
-    				PCO_EditorDiagramas=new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
-    			}, function()
-    			{
-    				document.body.innerHTML = '<center style="margin-top:10%;">Error loading resource files. Please check browser console.</center>';
-    				
-    
-    			});
-    		
-    		    
+        			{
+        				// Adds bundle text to resources
+        				mxResources.parse(xhr[0].getText());
+        				
+        				// Configures the default graph theme
+        				var themes = new Object();
+        				themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement(); 
+        				
+        				// Define el objeto principal para manipular el diagrama
+        				PCO_EditorDiagramas=new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
+        			}, function()
+        			{
+        				document.body.innerHTML = '<center style="margin-top:10%;">Error cargando archivos de recursos. Verifique consola de su navegador.</center>';
+        			});
     		})();
 		
 
-
-window.onload = function() {
-    setTimeout(MiCreacion, 1000);
-
-};
+        //Programa funcion inicial para el cargue de diagrama
+        window.onload = function()
+            {
+                setTimeout(PCO_CargarDiagramaInicial, 1000);
+            };
 	</script>
 
-    Creates a container for the graph with a grid wallpaper 
-   <div id="graphContainer"
-      style="overflow:hidden;width:321px;height:241px;background:url('editors/images/grid.gif')">
-   </div>
+
+    Crea un contenedor para el diagrama con un fondo de rejilla
+    <div id="graphContainer" style="overflow:hidden;width:321px;height:241px;background:url('editors/images/grid.gif')"></div>
 
 
 <textarea id="Pepe" name="Pepe">
@@ -262,45 +336,6 @@ window.onload = function() {
 </mxGraphModel>
 </textarea>
 
-<!--
-ANOTACIONES JOHN:
-
-    
-Para tomar un XML plano y setearlo en el diagrama
-
-
-MX-GRAPH de Supervivencia:
-==========================
-- Adición de idiomas:
-    En caliente por URL: enviar el parametro lang=xx   (es,en,...)
-    Se deben agregar los archivos correspondientes sobre /resources antes de usarlo
-    Se debe agregar el idioma sobre js/Init.js  Linea 13 y al arreglo mxLanguages Linea  29
-
--  Agregar opciones:
-    1) Sobre js/Menu.js  L33:  Se agrega el elemento al arreglo defaultMenuItems
-    2) En el archivo de idioma se debe agregar la cadena equivalente.  Con el nombre de menu creado y el texto visual.  Ej Uno=MiLabel
-    3) En js/Menus.js Apro. L500 tomar uno de los elementos y duplicarlo para agregar el nuevo, usando el elemento creado, ej Uno.
-            El orden en que se agregue depende del arreglo defaultMenuItems
-            Puede que requiera eliminar la cache para ver los cambios
-    4) Para las opciones que son comandos cree la accion correspondiente Sobre js/Actions.js en L65 se toma un addAction y se agrega lo deseado cambiando el nombre. ej 'MiComando'
-    5) Para las acciones tipo comando debe tener tambien su equivalente sobre el archivo de idiomas
-    
-- Eliminar opciones:
-    1) Sobre js/Menu.js  buscar la opcion deseada y retirar su codigo en defaultMenuItems  o los items hijos.
-
-- Cambio de accion en un elemento determinado:  Se resume a editar js/Actions.js  para el menu correspondiente
-
-- Ocultar, habilitar o deshabilitar opciones de menu (siguen activos sus key bindings):
-    HABILITAR: PCO_EditorDiagramas.actions.editorUi.actions.actions.saveAs.enabled=true;
-    DESHABILITAR:  PCO_EditorDiagramas.actions.editorUi.actions.actions.save.enabled=false;
-    OCULTAR/MOSTRAR: PCO_EditorDiagramas.actions.editorUi.actions.actions.save.visible=false;
-
-- Para obtener el codigo en XML en formato PLANO y guardarlo en BD
-    PCO_EditorDiagramas.actions.editorUi.getEditBlankXml()
-
-
-
--->
 
 
 
