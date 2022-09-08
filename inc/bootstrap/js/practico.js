@@ -42,36 +42,36 @@ function PCOJS_CargarArchivoPCoder(LlaveParcial_FirmaSistema,AnchoVentana,AltoVe
         if (typeof PCODER_Titulo !=  'undefined')          ParametrosArchivo+="&PCODER_Titulo="+PCODER_Titulo;
 
         //Busca que la ventana no se haya abierto todavia, y la abre o crea y sino solo le da foco
-        llave=PCOJS_Base64Encode(LlaveParcial_FirmaSistema+""+PCODER_archivo);
-        //En caso que el archivo sea vacio se trata de un contenido de BD y calcula la llave con tal valor
+        LlaveCalculada=PCOJS_Base64Encode(LlaveParcial_FirmaSistema+""+PCODER_archivo);
+        //En caso que el archivo sea vacio se trata de un contenido de BD y calcula la LlaveCalculada con tal valor
         if (typeof PCODER_archivo ==  'undefined' || PCODER_archivo=='')
-            llave=PCOJS_Base64Encode(LlaveParcial_FirmaSistema+""+Tabla_Archivo+"["+Llave_Registro+"]."+Campo_Archivo);
+            LlaveCalculada=PCOJS_Base64Encode(LlaveParcial_FirmaSistema+""+Tabla_Archivo+"["+Llave_Registro+"]."+Campo_Archivo);
 
-        let ExistenciaVentana = localStorage.getItem(""+llave);
+        let ExistenciaVentana = localStorage.getItem(""+LlaveCalculada);
         if (ExistenciaVentana!="" && ExistenciaVentana!=null && ExistenciaVentana!="null")
             {
                 if (typeof CerrarModal != 'undefined' && CerrarModal != '' && CerrarModal == 'Si')
                     parent.OperacionFS_CerrarModalAperturaArchivo();  //Cierra el modal de la ventana padre con el arbol de archivos
                 //Cambia hacia la ventana con ese nombre (Chrome)
-                window.open('javascript:void window.focus()', llave, ParametrosVentana);
+                window.open('javascript:void window.focus()', LlaveCalculada, ParametrosVentana);
             }
         else
             {
                 if (typeof CerrarModal != 'undefined' && CerrarModal != '' && CerrarModal == 'Si')
                     parent.OperacionFS_CerrarModalAperturaArchivo();  //Cierra el modal de la ventana padre con el arbol de archivos
-                var VentanaEdicionPCoder = window.open("index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&"+ParametrosArchivo, llave, ParametrosVentana).focus();
+                var VentanaEdicionPCoder = window.open("index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&"+ParametrosArchivo, LlaveCalculada, ParametrosVentana).focus();
                 VentanaEdicionPCoder.moveTo(0,0);
             }
     }
 function PCOJS_CargarArchivoPCoderFS(LlaveParcial_FirmaSistema,AnchoVentana,AltoVentana,PCODER_archivo,CerrarModal)
     {
-        //Un alias de funcion para llamado a funcion general de carga con menos parametros
-        PCOJS_CargarArchivoPCoder(LlaveParcial_FirmaSistema,AnchoVentana,AltoVentana,PCODER_archivo,CerrarModal,"","","","","","","","","");
+         //Un alias de funcion para llamado a funcion general de carga con menos parametros
+         PCOJS_CargarArchivoPCoder(LlaveParcial_FirmaSistema,AnchoVentana,AltoVentana,PCODER_archivo,CerrarModal,"","","","","","","","","");
     }
 function PCOJS_CargarArchivoPCoderBD(LlaveParcial_FirmaSistema,AnchoVentana,AltoVentana,PCODER_archivo,CerrarModal,Origen_Archivo,Tabla_Archivo,Campo_Archivo,Llave_Registro,PCODER_extension,PCODER_ModoEditor,PCODER_TipoMenu,PCODER_EstadoSimple,PCODER_Titulo)
     {
-        //Un alias de funcion para llamado a funcion general de carga con menos parametros
-        PCOJS_CargarArchivoPCoder(LlaveParcial_FirmaSistema,AnchoVentana,AltoVentana,"",CerrarModal,Origen_Archivo,Tabla_Archivo,Campo_Archivo,Llave_Registro,PCODER_extension,PCODER_ModoEditor,PCODER_TipoMenu,PCODER_EstadoSimple,PCODER_Titulo)
+         //Un alias de funcion para llamado a funcion general de carga con menos parametros
+         PCOJS_CargarArchivoPCoder(LlaveParcial_FirmaSistema,AnchoVentana,AltoVentana,"",CerrarModal,Origen_Archivo,Tabla_Archivo,Campo_Archivo,Llave_Registro,PCODER_extension,PCODER_ModoEditor,PCODER_TipoMenu,PCODER_EstadoSimple,PCODER_Titulo)
     }
 //##############################################################################
 //##############################################################################

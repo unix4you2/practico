@@ -7869,7 +7869,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
 function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno_formulario=0,$ComplementoPestanas="")
   {
         global $ModoDesarrolladorPractico;
-        global $ConexionPDO,$ArchivoCORE,$TablasCore;
+        global $ConexionPDO,$ArchivoCORE,$TablasCore,$LlaveDePaso;
         global $PCO_InformeFiltro,$PCO_FuncionesJSInternasFORM;
 		global $_SeparadorCampos_;
 		// Carga variables de definicion de tablas
