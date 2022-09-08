@@ -194,7 +194,12 @@
                             	</script>
 
 								<?php
+                                    //FORMA 1: Enlaces estandar (Modo de emergencia o depuracion de PCoder)
 									$PCO_EnlacePCODER="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&PCODER_archivo=inc/practico/PCoder','PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width='+screen.width+', height='+screen.height);";
+                                    //FORMA 2: Con funcion interna de apertura - Sobreescribe FORMA 1 - Comentar para pasar a modo de emergencia
+                                    $LlaveParcial_FirmaSistema=substr($LlaveDePaso,-3);
+                                    $PCO_EnlacePCODER ="javascript:var LMQTP=PCOJS_CargarArchivoPCoderFS('{$LlaveParcial_FirmaSistema}','','','inc/practico/PCoder','No');";
+
                         			//Verifica si esta o no en modo DEMO para hacer la operacion
                         			if ($PCO_ModoDEMO==1)
 									   $PCO_EnlacePCODER="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";

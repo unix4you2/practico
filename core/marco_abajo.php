@@ -203,7 +203,8 @@
 
     <!-- JavaScript Personalizado del tema -->
     <script src="inc/bootstrap/js/sb-admin-2.js"></script>
-    <script src="inc/bootstrap/js/practico.min.js?<?php echo filemtime('inc/bootstrap/js/practico.min.js'); ?>"></script>
+<!--    <script src="inc/bootstrap/js/practico.min.js?<?php echo filemtime('inc/bootstrap/js/practico.min.js'); ?>"></script>-->
+    <script src="inc/bootstrap/js/practico.js?<?php echo filemtime('inc/bootstrap/js/practico.js'); ?>"></script>
     <?php
     	//Carga marco de chat solamente si esta habilitado
     	if (isset($Activar_ModuloChat) && $Activar_ModuloChat>0 && @$_SESSION['username']!="")
