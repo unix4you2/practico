@@ -64,11 +64,7 @@ Actions.prototype.init = function()
 		});
 	}).isEnabled = isGraphEnabled;
 	this.addAction('save', function() { 
-	    
-	    alert(PCO_EditorDiagramas.actions.editorUi.getEditBlankXml());
-	    //ui.saveFile(false); 
-	    
-	    
+	    PCO_GuardarDiagrama();
 	}, null, null, Editor.ctrlKey + '+S').isEnabled = isGraphEnabled;
 	this.addAction('saveAs...', function() { ui.saveFile(true); }, null, null, Editor.ctrlKey + '+Shift+S').isEnabled = isGraphEnabled;
 	this.addAction('export...', function() { ui.showDialog(new ExportDialog(ui).container, 300, 296, true, true); });
@@ -81,11 +77,8 @@ Actions.prototype.init = function()
 
 	this.addAction('MiComando', function()
 	{
-		alert();
+		PCO_GuardarDiagrama();
 	});
-
-
-
 
 	this.addAction('pageSetup...', function() { ui.showDialog(new PageSetupDialog(ui).container, 320, 220, true, true); }).isEnabled = isGraphEnabled;
 	this.addAction('print...', function() { ui.showDialog(new PrintDialog(ui).container, 300, 180, true, true); }, null, 'sprite-print', Editor.ctrlKey + '+P');

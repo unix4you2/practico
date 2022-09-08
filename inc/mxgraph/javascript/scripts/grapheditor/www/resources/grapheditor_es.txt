@@ -326,4 +326,4 @@ zoomOut=Alejar
 prueba=Prueba
 colmedicos=Colmedicos
 Uno=MiLabel
-MiComando=Hacer algo
+MiComando=Guardar Diagrama  (Ctrl+S)

@@ -235,6 +235,11 @@
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
 
+    	function PCO_GuardarDiagrama()
+        	{
+        	    alert("Guardando");
+        	}
+
     	function PCO_CargarDiagramaInicial()
         	{
         		// Removes all illegal control characters before parsing
@@ -244,7 +249,7 @@
         		var data = Graph.zapGremlins(mxUtils.trim(MisDaticos));
         		
         		var error = null;
-    
+
     			PCO_EditorDiagramas.actions.editorUi.editor.graph.model.beginUpdate();
     			try
         			{
@@ -258,6 +263,9 @@
         			{
         				PCO_EditorDiagramas.actions.editorUi.editor.graph.model.endUpdate();				
         			}
+
+        		//Habilita algunas opciones propias del editor
+                PCO_EditorDiagramas.actions.editorUi.actions.actions.save.enabled=true;
         	}
 
 		// Extends EditorUi to update I/O action states based on availability of backend
