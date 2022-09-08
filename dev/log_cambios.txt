@@ -31,7 +31,7 @@ mod/fileman/index.php
 inc/practico/PCoder
 inc/bootstrap/js/plugins/select/*
 inc/bootstrap/css/plugins/select/*
-
+inc/mxgraph/*
 
 xml/*
 inc/practico/idiomas/*

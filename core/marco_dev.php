@@ -253,7 +253,7 @@
 								<a class="btn btn-default btn-block" href="javascript:PCO_VentanaPopup('mod/pcoder/mod/pboard','PBoard','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=1024, height=700')"><i class="fa fa-paint-brush fa-fw"></i> Editor gr&aacute;fico y pizarra: {P}Board</a>
 								<br>
 								
-								<a class="btn btn-success btn-block" href="javascript:PCO_VentanaPopup('inc/mxgraph/javascript/scripts/grapheditor/www/','PDiagram','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=1024, height=700')"><i class="fa fa-sitemap fa-fw"></i> Editor de diagramas: {P}Diagram</a>
+								<a class="btn btn-success btn-block" href="javascript:PCO_VentanaPopup('inc/mxgraph/javascript/scripts/grapheditor/www/index.php','PDiagram','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=1024, height=700')"><i class="fa fa-sitemap fa-fw"></i> Editor de diagramas: {P}Diagram</a>
 
 							</div> <!--well-->
 						</div>
