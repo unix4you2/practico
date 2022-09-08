@@ -128,53 +128,51 @@
     //SIEMPRE SE ASUME QUE SE LLEGA CON DATOS PARA CARGA DEL DIAGRAMA!!!
     //Si no encuentra datos validos para el diagrama entonces presenta uno por defecto con la advertencia
     if ($DiagramaOK==0)
-        $DiagramaBase='<mxGraphModel dx="'.$PCO_PosXDiagrama.'" dy="'.$PCO_PosYDiagrama.'" grid="'.$PCO_HabilitarRejilla.'" gridSize="'.$PCO_TamanoRejilla.'" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="'.$PCO_AnchoPaginaDiagrama.'" pageHeight="'.$PCO_AltoPaginaDiagrama.'">  <root>    <mxCell id="0" />    <mxCell id="1" parent="0" />    <mxCell id="3" value="Framework" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#B3B3B3;fontSize=25;fontStyle=2" parent="1" vertex="1">      <mxGeometry x="332" y="240" width="40" height="20" as="geometry" />    </mxCell>    <mxCell id="7" value="" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#FFC60A;gradientDirection=north;gradientColor=#DE1016;strokeColor=none;" parent="1" vertex="1">      <mxGeometry x="220" y="190" width="70" height="60" as="geometry" />    </mxCell>    <mxCell id="8" value="Pr" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=45;fontColor=#FFFFFF;" parent="1" vertex="1">      <mxGeometry x="240" y="210" width="40" height="20" as="geometry" />    </mxCell>    <mxCell id="15" value="áctico" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=45;" parent="1" vertex="1">      <mxGeometry x="332" y="210" width="40" height="20" as="geometry" />    </mxCell>    <mxCell id="17" value="Si usted visualiza este mensaje es porque los parámetros de carga de su diagrama en {P}Diagram no fueron correctos.&lt;br style=&quot;font-size: 10px;&quot;&gt;&lt;br style=&quot;font-size: 10px;&quot;&gt;Verifique el origen de los datos del diagrama e intente de nuevo" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;labelBackgroundColor=none;fillColor=#FFCCE6;" vertex="1" parent="1">      <mxGeometry x="170" y="280" width="310" height="60" as="geometry" />    </mxCell>    </root></mxGraphModel>';
+        $DiagramaBase='<mxGraphModel dx="'.$PCO_PosXDiagrama.'" dy="'.$PCO_PosYDiagrama.'" grid="'.$PCO_HabilitarRejilla.'" gridSize="'.$PCO_TamanoRejilla.'" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="'.$PCO_AnchoPaginaDiagrama.'" pageHeight="'.$PCO_AltoPaginaDiagrama.'"> <root>    <mxCell id="0" />    <mxCell id="1" parent="0" />    <mxCell id="17" value="Si usted visualiza este mensaje es porque los parámetros de carga de su diagrama en {P}Diagram no fueron correctos.&lt;br style=&quot;font-size: 10px;&quot;&gt;&lt;br style=&quot;font-size: 10px;&quot;&gt;Verifique el origen de los datos del diagrama e intente de nuevo" style="rounded=1;whiteSpace=wrap;html=1;fontSize=10;labelBackgroundColor=none;verticalAlign=bottom;arcSize=4;fillColor=#E6D0DE;labelBorderColor=none;glass=1;shadow=1;sketch=0;" parent="1" vertex="1">      <mxGeometry x="170" y="162" width="310" height="180" as="geometry" />    </mxCell>    <mxCell id="3" value="Framework" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=25;fontStyle=2;fontColor=#999999;" parent="1" vertex="1">      <mxGeometry x="332" y="240" width="40" height="20" as="geometry" />    </mxCell>    <mxCell id="7" value="" style="shape=hexagon;perimeter=hexagonPerimeter2;whiteSpace=wrap;html=1;fixedSize=1;fillColor=#FFC60A;gradientDirection=north;gradientColor=#DE1016;strokeColor=none;" parent="1" vertex="1">      <mxGeometry x="220" y="190" width="70" height="60" as="geometry" />    </mxCell>    <mxCell id="8" value="Pr" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=45;fontColor=#FFFFFF;" parent="1" vertex="1">      <mxGeometry x="240" y="210" width="40" height="20" as="geometry" />    </mxCell>    <mxCell id="15" value="áctico" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=45;" parent="1" vertex="1">      <mxGeometry x="332" y="210" width="40" height="20" as="geometry" />    </mxCell>  </root>    </mxGraphModel>';
+
 
 
 ########################################################################
 ########################################################################
-/*
-    MX-GRAPH de Supervivencia:
-    ==========================
-    - Adición de idiomas:
-        En caliente por URL: enviar el parametro lang=xx   (es,en,...)
-        Se deben agregar los archivos correspondientes sobre /resources antes de usarlo
-        Se debe agregar el idioma sobre js/Init.js  Linea 13 y al arreglo mxLanguages Linea  29
-    
-    -  Agregar opciones:
-        1) Sobre js/Menu.js  L33:  Se agrega el elemento al arreglo defaultMenuItems
-        2) En el archivo de idioma se debe agregar la cadena equivalente.  Con el nombre de menu creado y el texto visual.  Ej Uno=MiLabel
-        3) En js/Menus.js Apro. L500 tomar uno de los elementos y duplicarlo para agregar el nuevo, usando el elemento creado, ej Uno.
-                El orden en que se agregue depende del arreglo defaultMenuItems
-                Puede que requiera eliminar la cache para ver los cambios
-        4) Para las opciones que son comandos cree la accion correspondiente Sobre js/Actions.js en L65 se toma un addAction y se agrega lo deseado cambiando el nombre. ej 'MiComando'
-        5) Para las acciones tipo comando debe tener tambien su equivalente sobre el archivo de idiomas
+    /*
+        MX-GRAPH de Supervivencia:
+        ==========================
+        - Adición de idiomas:
+            En caliente por URL: enviar el parametro lang=xx   (es,en,...)
+            Se deben agregar los archivos correspondientes sobre /resources antes de usarlo
+            Se debe agregar el idioma sobre js/Init.js  Linea 13 y al arreglo mxLanguages Linea  29
         
-    - Eliminar opciones:
-        1) Sobre js/Menu.js  buscar la opcion deseada y retirar su codigo en defaultMenuItems  o los items hijos.
-    
-    - Cambio de accion en un elemento determinado:  Se resume a editar js/Actions.js  para el menu correspondiente
-    
-    - Ocultar, habilitar o deshabilitar opciones de menu (siguen activos sus key bindings):
-        HABILITAR: PCO_EditorDiagramas.actions.editorUi.actions.actions.saveAs.enabled=true;
-        DESHABILITAR:  PCO_EditorDiagramas.actions.editorUi.actions.actions.save.enabled=false;
-        OCULTAR/MOSTRAR: PCO_EditorDiagramas.actions.editorUi.actions.actions.save.visible=false;
-    
-    - Para obtener el codigo en XML en formato PLANO y guardarlo en BD
-        PCO_EditorDiagramas.actions.editorUi.getEditBlankXml()
-
-    - Para tomar un codigo en XML en formato PLANO y asignarlo/setearlo al editor
+        -  Agregar opciones:
+            1) Sobre js/Menu.js  L33:  Se agrega el elemento al arreglo defaultMenuItems
+            2) En el archivo de idioma se debe agregar la cadena equivalente.  Con el nombre de menu creado y el texto visual.  Ej Uno=MiLabel
+            3) En js/Menus.js Apro. L500 tomar uno de los elementos y duplicarlo para agregar el nuevo, usando el elemento creado, ej Uno.
+                    El orden en que se agregue depende del arreglo defaultMenuItems
+                    Puede que requiera eliminar la cache para ver los cambios
+            4) Para las opciones que son comandos cree la accion correspondiente Sobre js/Actions.js en L65 se toma un addAction y se agrega lo deseado cambiando el nombre. ej 'MiComando'
+            5) Para las acciones tipo comando debe tener tambien su equivalente sobre el archivo de idiomas
+            
+        - Eliminar opciones:
+            1) Sobre js/Menu.js  buscar la opcion deseada y retirar su codigo en defaultMenuItems  o los items hijos.
         
-    ------------------------
-    Algunos parametros que pueden ser parseados en la URL por la funcion urlParams = (function(url) SON:
-		lang=xy: Especifica lenguaje en la interfaz de usuario
-		touch=1: Habilita interfaz de usuario tipo Touch
-		storage=local: Habilita almacenamiento local.  Valido HTML5
-		chrome=0: Modo Chromeless
-*/
-
-
-
+        - Cambio de accion en un elemento determinado:  Se resume a editar js/Actions.js  para el menu correspondiente
+        
+        - Ocultar, habilitar o deshabilitar opciones de menu (siguen activos sus key bindings):
+            HABILITAR: PCO_EditorDiagramas.actions.editorUi.actions.actions.saveAs.enabled=true;
+            DESHABILITAR:  PCO_EditorDiagramas.actions.editorUi.actions.actions.save.enabled=false;
+            OCULTAR/MOSTRAR: PCO_EditorDiagramas.actions.editorUi.actions.actions.save.visible=false;
+        
+        - Para obtener el codigo en XML en formato PLANO y guardarlo en BD
+            PCO_EditorDiagramas.actions.editorUi.getEditBlankXml()
+    
+        - Para tomar un codigo en XML en formato PLANO y asignarlo/setearlo al editor
+            
+        ------------------------
+        Algunos parametros que pueden ser parseados en la URL por la funcion urlParams = (function(url) SON:
+    		lang=xy: Especifica lenguaje en la interfaz de usuario
+    		touch=1: Habilita interfaz de usuario tipo Touch
+    		storage=local: Habilita almacenamiento local.  Valido HTML5
+    		chrome=0: Modo Chromeless
+    */
 ?>
 
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
@@ -234,11 +232,16 @@
 	    //Genera variable global utilizada para los diferentes eventos sobre el diagrama
 	    var PCO_EditorDiagramas;
 	    
-	    
         function sleep(ms)
             {
                 return new Promise(resolve => setTimeout(resolve, ms));
             }
+
+        function PCOJS_Base64Encode(Cadena) {
+            return btoa(encodeURIComponent(Cadena).replace(/%([0-9A-F]{2})/g, function(match, p1) {
+                return String.fromCharCode('0x' + p1);
+            }));
+        }
 
     	function PCO_GuardarDiagrama()
         	{
@@ -350,5 +353,6 @@
             };
 	</script>
 
+    <iframe src="about:blank" id="IFrameAlmacenamiento" name="IFrameAlmacenamiento"></iframe>
 </body>
 </html>
