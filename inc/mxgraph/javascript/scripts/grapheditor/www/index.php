@@ -98,10 +98,10 @@
     //if (@$PCO_DiagramaOperacion=="PCO_CargarDiagrama")
         {
             //Valores de prueba (Anular en produccion)
-            $PCO_CampoOrigen="accion";
-            $PCO_TablaOrigen="core_auditoria";
-            $PCO_CampoLlave="id";
-            $PCO_ValorLlave="4";
+            // $PCO_CampoOrigen="accion";
+            // $PCO_TablaOrigen="core_auditoria";
+            // $PCO_CampoLlave="id";
+            // $PCO_ValorLlave="4";
             
             $DiagramaOK=0;
             if (@$PCO_CampoOrigen!="" && $PCO_TablaOrigen!="" && $PCO_CampoLlave!="" && $PCO_ValorLlave!="")
@@ -226,6 +226,10 @@
 
 <body class="geEditor">
 	<script type="text/javascript">
+	    //Genera variable global utilizada para los diferentes eventos sobre el diagrama
+	    var PCO_EditorDiagramas;
+	    
+	    
         function sleep(ms)
             {
                 return new Promise(resolve => setTimeout(resolve, ms));
@@ -255,14 +259,7 @@
         				PCO_EditorDiagramas.actions.editorUi.editor.graph.model.endUpdate();				
         			}
         	}
-	</script>
 
-    
-    
-	<script type="text/javascript">
-	    //Genera variable global utilizada para los diferentes eventos sobre el diagrama
-	    var PCO_EditorDiagramas;
-	    
 		// Extends EditorUi to update I/O action states based on availability of backend
 		(function()
     		{
@@ -318,26 +315,6 @@
                 setTimeout(PCO_CargarDiagramaInicial, 1000);
             };
 	</script>
-
-
-    Crea un contenedor para el diagrama con un fondo de rejilla
-    <div id="graphContainer" style="overflow:hidden;width:321px;height:241px;background:url('editors/images/grid.gif')"></div>
-
-
-<textarea id="Pepe" name="Pepe">
-    <mxGraphModel dx="782" dy="815" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169">
-  <root>
-    <mxCell id="0" />
-    <mxCell id="1" parent="0" />
-    <mxCell id="2" value="" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-      <mxGeometry x="100" y="140" width="120" height="80" as="geometry" />
-    </mxCell>
-  </root>
-</mxGraphModel>
-</textarea>
-
-
-
 
 </body>
 </html>
