@@ -149,6 +149,11 @@ if (@$PCO_Accion=="PCO_GuardarDiagrama")
     $PCO_HabilitarRejilla="1";
     $PCO_TamanoRejilla="10";
     $DiagramaBaseLimpio='<mxGraphModel dx="'.$PCO_PosXDiagrama.'" dy="'.$PCO_PosYDiagrama.'" grid="'.$PCO_HabilitarRejilla.'" gridSize="'.$PCO_TamanoRejilla.'" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="'.$PCO_AnchoPaginaDiagrama.'" pageHeight="'.$PCO_AltoPaginaDiagrama.'">  <root>    <mxCell id="0" />    <mxCell id="1" parent="0" />    </root></mxGraphModel>';
+    // IMPORTANTE - IMPORTANTE: 
+    // IMPORTANTE - IMPORTANTE: 
+    // IMPORTANTE - IMPORTANTE: 
+    // Longitud actual de esta cadena DiagramaBaseLimpio en BD es 241: <mxGraphModel dx="782" dy="815" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169"><root><mxCell id="0" /><mxCell id="1" parent="0" /></root></mxGraphModel>
+    // Esa longitud es usada en informes para saber si hay un cambio en el diagrama.  Longitudes SUPERIORES a 250
 
     // $PCO_CampoOrigen=@$_POST["PCO_CampoOrigen"];
     // $PCO_TablaOrigen=@$_POST["PCO_TablaOrigen"];
