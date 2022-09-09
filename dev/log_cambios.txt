@@ -94,6 +94,8 @@ ScriptBasedatos="
 
 DROP TABLE core_pcoder_chat;
 ALTER TABLE core_kanban ADD diagrama_elicitacion mediumtext COLLATE 'utf8_general_ci' NULL;
+UPDATE core_kanban SET diagrama_elicitacion = '<mxGraphModel dx=\"782\" dy=\"815\" grid=\"1\" gridSize=\"10\" guides=\"1\" tooltips=\"1\" connect=\"1\" arrows=\"1\" fold=\"1\" page=\"1\" pageScale=\"1\" pageWidth=\"827\" pageHeight=\"1169\"><root><mxCell id=\"0\" /><mxCell id=\"1\" parent=\"0\" /></root></mxGraphModel>' WHERE 1=1;
+
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
