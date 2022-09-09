@@ -311,7 +311,7 @@
 */
 	function PCO_AgregarFuncionesEdicionTarea($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban,$ResultadoColumnas)
 		{
-		    global $PCOSESS_LoginUsuario,$MULTILANG_ArchivarTareaAdv,$MULTILANG_Error,$MULTILANG_ArchivarTarea,$MULTILANG_DelKanban,$MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
+		    global $PCOSESS_LoginUsuario,$LlaveDePaso,$MULTILANG_ArchivarTareaAdv,$MULTILANG_Error,$MULTILANG_ArchivarTarea,$MULTILANG_DelKanban,$MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
 			$salida='';
             //Determina estados de activacion o no para controles segun valores actuales del registro
             $EstadoDeshabilitadoMoverIzquierda="";
@@ -354,7 +354,11 @@
             if ($PCOSESS_LoginUsuario==$ResultadoColumnas["login_admintablero"] || stripos($RegistroTareas["usuarios_edicion"],$PCOSESS_LoginUsuario)!==false )   
                 {
                     $ComplementoEditar='<a onclick=\'PCO_CargarPopUP(0,0,'.$RegistroTareas["id"].');\' class="btn btn-default btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil"></i></a>';
+
                     $ComplementoDiagrama='<a href="inc/mxgraph/javascript/scripts/grapheditor/www/index.php?PCO_CampoOrigen=diagrama_elicitacion&PCO_TablaOrigen=core_kanban&PCO_CampoLlave=id&PCO_ValorLlave='.$RegistroTareas["id"].'" class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="Editor de Diagramas"><i class="fa fa-sitemap"></i></a>';
+                    $LlaveParcial_FirmaSistema=substr($LlaveDePaso,-3);
+                    $IdentificadorVentana=$LlaveParcial_FirmaSistema.$RegistroTareas["id"];
+                    $ComplementoDiagrama='<a href="javascript:PCO_VentanaPopup(\'inc/mxgraph/javascript/scripts/grapheditor/www/index.php?PCO_CampoOrigen=diagrama_elicitacion&PCO_TablaOrigen=core_kanban&PCO_CampoLlave=id&PCO_ValorLlave='.$RegistroTareas["id"].'\',\'PDiagram'.$IdentificadorVentana.'\',\'toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=1024, height=700\');" class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="Editor de Diagramas"><i class="fa fa-sitemap"></i></a>';
                 }
 
             //Determina si la tarea permite reportar bugs o no
