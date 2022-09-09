@@ -352,11 +352,14 @@
             //Determina si la tarea se puede o no editar
             $ComplementoEditar="";
             if ($PCOSESS_LoginUsuario==$ResultadoColumnas["login_admintablero"] || stripos($RegistroTareas["usuarios_edicion"],$PCOSESS_LoginUsuario)!==false )   
-                $ComplementoEditar='<a onclick=\'PCO_CargarPopUP(0,0,'.$RegistroTareas["id"].');\' class="btn btn-default btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil"></i></a>';
+                {
+                    $ComplementoEditar='<a onclick=\'PCO_CargarPopUP(0,0,'.$RegistroTareas["id"].');\' class="btn btn-default btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil"></i></a>';
+                    $ComplementoDiagrama='<a href="inc/mxgraph/javascript/scripts/grapheditor/www/index.php?PCO_CampoOrigen=diagrama_elicitacion&PCO_TablaOrigen=core_kanban&PCO_CampoLlave=id&PCO_ValorLlave='.$RegistroTareas["id"].'" class="btn btn-warning btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="Editor de Diagramas"><i class="fa fa-sitemap"></i></a>';
+                }
 
             //Determina si la tarea permite reportar bugs o no
             $TituloBUG=urlencode("[Kanban] ".$ResultadoColumnas["titulo"]." [Tarea] ".$RegistroTareas["titulo"]);
-            $ComplementoReporteBugs='&nbsp;<a href=\'index.php?PCO_Accion=PCO_ReportarBugs&PCO_TituloRecibidoBUG='.$TituloBUG.'&PCO_CapturaTrazas=KanbanID:'.$RegistroTareas["id"].'\' class="btn btn-success btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="Reportar Bug o Error asociado a esta tarea"> <i class="fa fa-bug fa-1x"></i></a>';
+            $ComplementoReporteBugs='&nbsp;<a target="_blank" href=\'index.php?PCO_Accion=PCO_ReportarBugs&PCO_TituloRecibidoBUG='.$TituloBUG.'&PCO_CapturaTrazas=KanbanID:'.$RegistroTareas["id"].'\' class="btn btn-success btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="Reportar Bug o Error asociado a esta tarea"> <i class="fa fa-bug fa-1x"></i></a>';
 
             //Pone controles
             $salida='<div class="well well-sm" id="PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'" style=" margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
@@ -375,6 +378,7 @@
                             '.$ComplementoEliminar.'
                             '.$ComplementoArchivar.'
                             '.$ComplementoReporteBugs.'
+                            '.$ComplementoDiagrama.'
                         </div>
                     </div>
                 </div>';

@@ -48,8 +48,23 @@
     // Inicio de la sesion
     @session_start();
 
-	// Agrega las variables de sesion
-	if (!empty($_SESSION)) extract($_SESSION);
+    // Recupera variables recibidas para su uso como globales (equivale a register_globals=on en php.ini)
+    if (!ini_get('register_globals'))
+        {
+            $PCO_NumeroParametros = count($_REQUEST);
+            $PCO_NombresParametros = array_keys($_REQUEST);// obtiene los nombres de las varibles
+            $PCO_ValoresParametros = array_values($_REQUEST);// obtiene los valores de las varibles
+            // crea las variables y les asigna el valor
+            for($i=0;$i<$PCO_NumeroParametros;$i++)
+                {
+                    ${$PCO_NombresParametros[$i]}=$PCO_ValoresParametros[$i];
+                    //Si alguna de las variables proviene de un combo multiple la transforma a su variable original
+					if (strstr($PCO_NombresParametros[$i],"PCO_ComboMultiple_")!=FALSE)
+					    ${substr($PCO_NombresParametros[$i], strlen("PCO_ComboMultiple_"))}=$PCO_ValoresParametros[$i];
+                }
+            // Agrega ademas las variables de sesion
+            if (!empty($_SESSION)) extract($_SESSION);
+        }
 
     // Incluye archivo de configuracion de base
     include_once '../../../../../../core/configuracion.php';
@@ -83,6 +98,47 @@
         $PCO_EsUnAdmin=1;
 
 
+
+
+########################################################################
+########################################################################
+/*
+	Section: Acciones a ser ejecutadas (si aplica) en cada cargue de la herramienta
+*/
+
+########################################################################
+########################################################################
+/*
+	Function: PCO_GuardarDiagrama
+	Almacena el codigo XML asociado a un diagrama
+
+	Variables de entrada:
+
+		Varias - Identificadoras del origen de datos del diagrama
+
+	Salida:
+
+		Valor actualizado en BD y mensaje de retorno de operacion
+*/
+if (@$PCO_Accion=="PCO_GuardarDiagrama")
+	{
+        $MensajeRetorno="";
+        if (@$PCO_CampoOrigen=="" || $PCO_TablaOrigen=="" || $PCO_CampoLlave=="" || $PCO_ValorLlave=="" || $PCO_ContenidoDiagrama=="")
+            $MensajeRetorno="[ERROR]: Parametros insuficientes para almacenar diagrama";
+		if ($MensajeRetorno=="")
+			{
+                //Se agrega al menos un separador de campos en los parametros para que se sanitize la consulta
+                $cadena_nuevos_valores="{$PCO_ContenidoDiagrama}".$_SeparadorCampos_;
+				PCO_EjecutarSQLUnaria("UPDATE $PCO_TablaOrigen SET $PCO_CampoOrigen=? WHERE {$PCO_CampoLlave}=? ",$cadena_nuevos_valores.$PCO_ValorLlave);
+		        PCO_Auditar("Guarda diagrama sobre {$PCO_TablaOrigen}[{$PCO_CampoLlave}={$PCO_ValorLlave}].{$PCO_CampoOrigen}");
+			}
+		echo $MensajeRetorno;
+		//Evita ejecucion del resto del script y recarga de todo el diagrama.
+		die();
+	}
+	
+
+
 ########################################################################
 ########################################################################
     //Variables basicas de operacion para el diagrama
@@ -94,35 +150,28 @@
     $PCO_TamanoRejilla="10";
     $DiagramaBaseLimpio='<mxGraphModel dx="'.$PCO_PosXDiagrama.'" dy="'.$PCO_PosYDiagrama.'" grid="'.$PCO_HabilitarRejilla.'" gridSize="'.$PCO_TamanoRejilla.'" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="'.$PCO_AnchoPaginaDiagrama.'" pageHeight="'.$PCO_AltoPaginaDiagrama.'">  <root>    <mxCell id="0" />    <mxCell id="1" parent="0" />    </root></mxGraphModel>';
 
-    if (@!defined($PCO_CampoOrigen)) $PCO_CampoOrigen="";
-    if (@!defined($PCO_TablaOrigen)) $PCO_TablaOrigen="";
-    if (@!defined($PCO_CampoLlave)) $PCO_CampoLlave="";
-    if (@!defined($PCO_ValorLlave)) $PCO_ValorLlave="";
+    //BANCO DE PRUEBAS (Anular en produccion)
+//     $PCO_CampoOrigen="accion";
+//     $PCO_TablaOrigen="core_auditoria";
+//     $PCO_CampoLlave="id";
+//     $PCO_ValorLlave="4";
 
-    //Si la operacion es cargar entonces toma la 
-    //if (@$PCO_DiagramaOperacion=="PCO_CargarDiagrama")
+    $DiagramaOK=0;
+    if (@$PCO_CampoOrigen!="" && $PCO_TablaOrigen!="" && $PCO_CampoLlave!="" && $PCO_ValorLlave!="")
         {
-            //Valores de prueba (Anular en produccion)
-            // $PCO_CampoOrigen="accion";
-            // $PCO_TablaOrigen="core_auditoria";
-            // $PCO_CampoLlave="id";
-            // $PCO_ValorLlave="4";
-            
-            $DiagramaOK=0;
-            if (@$PCO_CampoOrigen!="" && $PCO_TablaOrigen!="" && $PCO_CampoLlave!="" && $PCO_ValorLlave!="")
-                {
-                    $ConcenidoDiagrama=PCO_EjecutarSQL("SELECT {$PCO_CampoOrigen} as Diagrama FROM {$PCO_TablaOrigen} WHERE {$PCO_CampoLlave}='{$PCO_ValorLlave}' ")->fetchColumn();
-                    //Valida que se tengan algunos contenidos minimos del diagrama para ser considerado valido
-                    if (trim($ConcenidoDiagrama)!="")
-                        if (stripos($ConcenidoDiagrama,"mxGraphModel")>0)
-                            if (stripos($ConcenidoDiagrama,"<root")>0)
-                                if (stripos($ConcenidoDiagrama,"mxCell")>0)
-                                    {
-                                        $DiagramaOK=1;
-                                        //Sanitiza la cadena eliminando todos los saltos porque en la asignacion posterior de JS no los debe tener
-                                        $DiagramaBase=str_replace(array("\r", "\n"), "", $ConcenidoDiagrama);
-                                    }
-                }
+            $ConcenidoDiagrama=PCO_EjecutarSQL("SELECT {$PCO_CampoOrigen} as Diagrama FROM {$PCO_TablaOrigen} WHERE {$PCO_CampoLlave}='{$PCO_ValorLlave}' ")->fetchColumn();
+            //Valida que se tengan algunos contenidos minimos del diagrama para ser considerado valido
+            if (trim($ConcenidoDiagrama)!="")
+                if (stripos($ConcenidoDiagrama,"mxGraphModel")>0)
+                    if (stripos($ConcenidoDiagrama,"<root")>0)
+                        if (stripos($ConcenidoDiagrama,"mxCell")>0)
+                            {
+                                $DiagramaOK=1;
+                                //Sanitiza la cadena eliminando todos los saltos porque en la asignacion posterior de JS no los debe tener
+                                $DiagramaBase=str_replace(array("\r", "\n"), "", $ConcenidoDiagrama);
+                                //Sanitiza posibles comillas simples recuperadas dentro del diagrama. Son escapadas porque posteeriormente la comilla simple se usa en la asignacion de JS al diagrama
+                                $DiagramaBase=str_replace("'", "\'", $DiagramaBase);
+                            }
         }
 
     //SIEMPRE SE ASUME QUE SE LLEGA CON DATOS PARA CARGA DEL DIAGRAMA!!!
@@ -263,9 +312,8 @@
                 else
                     {
                         
-                        
-                        
-                        alert("Sobre registro: Guardando:"+DiagramaActual);
+                        document.PCO_FrmDatosDiagrama.PCO_ContenidoDiagrama.value=DiagramaActual;
+                        document.PCO_FrmDatosDiagrama.submit();
                     }
         	}
 
@@ -353,6 +401,14 @@
             };
 	</script>
 
-    <iframe src="about:blank" id="IFrameAlmacenamiento" name="IFrameAlmacenamiento"></iframe>
+    <iframe src="about:blank" id="IFrameAlmacenamiento" name="IFrameAlmacenamiento" style="width:0px; height:0px; visibility:hidden;"></iframe>
+    <form action="index.php" target="IFrameAlmacenamiento" id="PCO_FrmDatosDiagrama" name="PCO_FrmDatosDiagrama" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="PCO_Accion" value="PCO_GuardarDiagrama">
+        <input type="hidden" name="PCO_CampoOrigen" value="<?php echo $PCO_CampoOrigen; ?>">
+        <input type="hidden" name="PCO_TablaOrigen" value="<?php echo $PCO_TablaOrigen; ?>">
+        <input type="hidden" name="PCO_CampoLlave" value="<?php echo $PCO_CampoLlave; ?>">
+        <input type="hidden" name="PCO_ValorLlave" value="<?php echo $PCO_ValorLlave; ?>">
+        <input type="hidden" name="PCO_ContenidoDiagrama" value="">
+    </form>
 </body>
 </html>

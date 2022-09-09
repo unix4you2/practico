@@ -72,8 +72,7 @@ LogCambios="
 * Enhan [CORE]: @foag Cambio de idioma por defecto en editor de diagramas a espanol.
 * Enhan [CORE]: @foag Personalizacion de menues en editor de diagramas.
 * Enhan [CORE]: @foag Funciones de cargue y descargue de XML asociado a editor de diagramas.
-
-
+* Enhan [KANBAN]: Tareas/Actividades sobre tableros Kanban permiten agregar diagramas de elicitación del requerimiento como skectchs, prototipos, flujos, etc. mediante {P}Diagram
 
 
  
@@ -94,6 +93,7 @@ Proteger carpetas determinadas en las descargas cuando no se es administrador.
 ScriptBasedatos="
 
 DROP TABLE core_pcoder_chat;
+ALTER TABLE core_kanban ADD diagrama_elicitacion mediumtext COLLATE 'utf8_general_ci' NULL;
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
