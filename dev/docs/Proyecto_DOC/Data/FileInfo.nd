@@ -1,170 +1,170 @@
 1.5
 JavaScript
-/var/www/html/practico/core/codigobarras.php	1660333066	0	/var/www/html/practico/core/codigobarras.php
-/var/www/html/practico/core/marco_export.php	1660333066	1	Seccion marco de exportaciones
-/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.pie.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.pie.js
-/var/www/html/practico/core/sesion.php	1660333066	1	Modulo sesion
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.0.0.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.0.0.js
-/var/www/html/practico/inc/bootstrap/js/plugins/metisMenu/metisMenu.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/metisMenu/metisMenu.js
-/var/www/html/practico/core/conexiones_extra.php	1660333066	1	Conexiones PDO
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.fr-FR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.fr-FR.min.js
-/var/www/html/practico/inc/bootstrap/js/npm.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/npm.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-it_IT.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-it_IT.js
-/var/www/html/practico/core/monitoreo.php	1660333066	1	Modulo monitoreo
-/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.responsive.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.responsive.min.js
-/var/www/html/practico/core/formularios_post.php	1660333066	1	Modulo formularios
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-hu_HU.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-hu_HU.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-cs_CZ.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-cs_CZ.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ru-RU.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ru-RU.min.js
-/var/www/html/practico/core/marco_wscfg.php	1660333066	1	Seccion Configuracion WebServices
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-ionicon-1.5.2.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-ionicon-1.5.2.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sl_SI.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sl_SI.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-fr_FR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-fr_FR.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/morris/raphael.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/morris/raphael.min.js
-/var/www/html/practico/core/marco_arriba.php	1660333066	1	Seccion superior
 /var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.select.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.select.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ja-JP.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ja-JP.min.js
-/var/www/html/practico/inc/bootstrap/js/bootstrap.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/bootstrap.min.js
-/var/www/html/practico/core/formularios.php	1660333066	1	Modulo formularios
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-es_CL.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-es_CL.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.de-DE.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.de-DE.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/datepicker/bootstrap-datetimepicker.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/datepicker/bootstrap-datetimepicker.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ua_UA.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ua_UA.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js
-/var/www/html/practico/core/monitoreo_superior.php	1660333066	0	/var/www/html/practico/core/monitoreo_superior.php
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ro_RO.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ro_RO.min.js
-/var/www/html/practico/core/ws_nucleo.php	1660333066	1	Nucleo de WebServices
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.2.0.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.2.0.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.en-US.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.en-US.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_TW.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_TW.js
-/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/jquery.dataTables.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/jquery.dataTables.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-eu.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-eu.min.js
-/var/www/html/practico/inc/bootstrap/js/practico.js	1662645639	1	PCOJS_MostrarMensaje
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ua_UA.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ua_UA.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ja-JP.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ja-JP.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.tr-TR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.tr-TR.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sv_SE.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sv_SE.js
-/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/buttons.html5.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/buttons.html5.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.buttons.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.buttons.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ru_RU.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ru_RU.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-de_DE.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-de_DE.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-es_CL.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-es_CL.js
-/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.tooltip.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.tooltip.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-mapicon-2.1.0.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-mapicon-2.1.0.min.js
-/var/www/html/practico/core/conexiones.php	1660333066	1	Conexiones PDO
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.en-US.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.en-US.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_CN.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_CN.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-de_DE.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-de_DE.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pt_BR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pt_BR.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ru-RU.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ru-RU.js
-/var/www/html/practico/inc/bootstrap/js/plugins/slider/bootstrap-slider.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/slider/bootstrap-slider.js
-/var/www/html/practico/core/mantenimiento.php	1660333066	1	Modulo mantenimientos
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-mapicon-2.1.0.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-mapicon-2.1.0.js
-/var/www/html/practico/inc/bootstrap/js/practico.min.js	1663618096	0	/var/www/html/practico/inc/bootstrap/js/practico.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/flot/flot-data.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/flot/flot-data.js
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-typicon-2.0.6.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-typicon-2.0.6.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-ionicon-1.5.2.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-ionicon-1.5.2.min.js
-/var/www/html/practico/core/objetos.php	1660333066	1	Modulo objetos
 /var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/bootstrap-iconpicker.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/bootstrap-iconpicker.min.js
-/var/www/html/practico/core/documentador.php	1660333066	1	/var/www/html/practico/core/documentador.php
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pl_PL.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pl_PL.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-cs_CZ.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-cs_CZ.js
-/var/www/html/practico/core/marco_navizq.php	1660333066	1	Seccion superior
-/var/www/html/practico/core/cron.php	1660333066	1	Modulo tareas programadas
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pt_BR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pt_BR.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pt-BR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pt-BR.js
+/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sl_SI.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sl_SI.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_TW.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_TW.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ru_RU.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ru_RU.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.tooltip.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.tooltip.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ua_UA.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ua_UA.js
+/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/buttons.html5.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/buttons.html5.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.nl-NL.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.nl-NL.min.js
+/var/www/html/practico/core/mantenimiento.php	1660333066	1	Modulo mantenimientos
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-mapicon-2.1.0.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-mapicon-2.1.0.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-ionicon-1.5.2.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-ionicon-1.5.2.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.cs-CZ.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.cs-CZ.min.js
+/var/www/html/practico/core/kanban.php	1662748034	1	Modulo kanban
+/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/buttons.colVis.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/buttons.colVis.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.tr-TR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.tr-TR.min.js
+/var/www/html/practico/core/marco_admin.php	1660333066	1	Seccion Escritorio Administrativo
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-weathericon-1.2.0.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-weathericon-1.2.0.min.js
+/var/www/html/practico/inc/bootstrap/js/bootstrap.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/bootstrap.js
+/var/www/html/practico/inc/bootstrap/js/plugins/morris/raphael.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/morris/raphael.min.js
+/var/www/html/practico/core/captcha.php	1660333066	1	TextoAleatorioCaptcha
+/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.pie.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.pie.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ko-KR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ko-KR.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_CN.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_CN.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.nl-NL.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.nl-NL.js
+/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.searchPanes.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.searchPanes.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.it-IT.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.it-IT.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sv_SE.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sv_SE.js
 /var/www/html/practico/inc/bootstrap/js/plugins/select/bootstrap-select.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/bootstrap-select.js
+/var/www/html/practico/inc/bootstrap/js/plugins/toggle/bootstrap-toggle.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/toggle/bootstrap-toggle.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pt_BR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pt_BR.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-cs_CZ.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-cs_CZ.js
+/var/www/html/practico/inc/bootstrap/js/plugins/slider/bootstrap-slider.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/slider/bootstrap-slider.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-es_CL.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-es_CL.min.js
+/var/www/html/practico/core/marco_nav.php	1660333066	1	Seccion superior
+/var/www/html/practico/core/marco_navizq.php	1660333066	1	Seccion superior
+/var/www/html/practico/core/usuarios.php	1660333066	1	Modulo usuarios
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.js
+/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.responsive.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.responsive.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pl_PL.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pl_PL.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-glyphicon.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-glyphicon.js
+/var/www/html/practico/core/marco_abajo.php	1662646256	1	Seccion inferior
+/var/www/html/practico/inc/bootstrap/js/plugins/select/bootstrap-select.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/bootstrap-select.min.js
+/var/www/html/practico/core/marco_param.php	1660333066	1	Seccion Proveedores OAuth
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ua_UA.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ua_UA.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/metisMenu/metisMenu.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/metisMenu/metisMenu.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.2.0.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.2.0.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-eu.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-eu.js
+/var/www/html/practico/core/conexiones.php	1660333066	1	Conexiones PDO
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.1.0.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.1.0.js
+/var/www/html/practico/core/marco_wscfg.php	1660333066	1	Seccion Configuracion WebServices
+/var/www/html/practico/inc/bootstrap/js/plugins/toggle/bootstrap-toggle.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/toggle/bootstrap-toggle.js
+/var/www/html/practico/inc/bootstrap/js/npm.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/npm.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-hu_HU.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-hu_HU.min.js
+/var/www/html/practico/core/ws_nucleo.php	1660333066	1	Nucleo de WebServices
+/var/www/html/practico/inc/bootstrap/js/plugins/morris/morris.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/morris/morris.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.fr-FR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.fr-FR.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-octicon-2.1.2.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-octicon-2.1.2.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sl_SI.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sl_SI.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_TW.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_TW.min.js
+/var/www/html/practico/core/doc_static.php	1660333066	0	/var/www/html/practico/core/doc_static.php
+/var/www/html/practico/inc/bootstrap/js/plugins/flot/excanvas.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/flot/excanvas.min.js
+/var/www/html/practico/inc/bootstrap/js/bootstrap.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/bootstrap.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.de-DE.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.de-DE.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.2.0.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.2.0.min.js
+/var/www/html/practico/core/documentador.php	1660333066	1	/var/www/html/practico/core/documentador.php
+/var/www/html/practico/core/marco_dev.php	1663614829	1	Seccion marco de desarrollo
+/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.js
+/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.buttons.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.buttons.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.js
+/var/www/html/practico/core/ws_oauth.php	1660333066	0	/var/www/html/practico/core/ws_oauth.php
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.cs-CZ.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.cs-CZ.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.en-US.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.en-US.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.es-ES.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.es-ES.min.js
+/var/www/html/practico/core/cron.php	1660333066	1	Modulo tareas programadas
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-eu.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-eu.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/flot/flot-data.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/flot/flot-data.js
+/var/www/html/practico/core/actualizacion.php	1660333066	1	Modulo actualizar
+/var/www/html/practico/inc/bootstrap/js/plugins/moment/moment-with-locales.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/moment/moment-with-locales.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-tr_TR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-tr_TR.js
+/var/www/html/practico/core/marco_admin_morris.php	1660333066	1	Seccion Escritorio Administrativo
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ja-JP.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ja-JP.js
+/var/www/html/practico/core/formularios.php	1660333066	1	Modulo formularios
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/bootstrap-iconpicker.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/bootstrap-iconpicker.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-elusiveicon-2.0.0.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-elusiveicon-2.0.0.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-it_IT.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-it_IT.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-typicon-2.0.6.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-typicon-2.0.6.js
+/var/www/html/practico/core/ws_funciones.php	1660333066	1	WS_API
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.en-US.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.en-US.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.it-IT.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.it-IT.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-en_US.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-en_US.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.0.0.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.0.0.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ro_RO.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ro_RO.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-nl_NL.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-nl_NL.js
+/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/jquery.dataTables.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/jquery.dataTables.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pl-PL.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pl-PL.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pl_PL.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pl_PL.js
+/var/www/html/practico/core/monitoreo.php	1660333066	1	Modulo monitoreo
+/var/www/html/practico/core/comunes.php	1663617058	1	Libreria base
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-elusiveicon-2.0.0.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-elusiveicon-2.0.0.js
+/var/www/html/practico/inc/bootstrap/js/practico.min.js	1663621660	0	/var/www/html/practico/inc/bootstrap/js/practico.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-cs_CZ.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-cs_CZ.min.js
 /var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-tr_TR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-tr_TR.min.js
 /var/www/html/practico/inc/bootstrap/js/plugins/morris/regression.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/morris/regression.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/toggle/bootstrap-toggle.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/toggle/bootstrap-toggle.js
-/var/www/html/practico/core/marco_admin.php	1660333066	1	Seccion Escritorio Administrativo
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.it-IT.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.it-IT.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-bg_BG.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-bg_BG.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pt-BR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pt-BR.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.es-ES.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.es-ES.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.de-DE.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.de-DE.js
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.1.0.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.1.0.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.es-ES.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.es-ES.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pt_BR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pt_BR.js
-/var/www/html/practico/core/marco_dev.php	1663614829	1	Seccion marco de desarrollo
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pl-PL.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pl-PL.js
-/var/www/html/practico/core/menus.php	1660333066	1	Modulo menues
-/var/www/html/practico/core/informes.php	1663602812	1	Modulo informes
-/var/www/html/practico/core/doc_intro.php	1660333066	1	Introduccion
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.fr-FR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.fr-FR.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_TW.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_TW.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/flot/excanvas.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/flot/excanvas.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/toggle/bootstrap-toggle.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/toggle/bootstrap-toggle.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-typicon-2.0.6.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-typicon-2.0.6.js
-/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.searchPanes.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.searchPanes.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sv_SE.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sv_SE.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ru_RU.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ru_RU.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pt-BR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pt-BR.min.js
-/var/www/html/practico/core/ajax.php	1660333066	1	Modulo ajax
-/var/www/html/practico/inc/bootstrap/js/plugins/transition.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/transition.js
-/var/www/html/practico/core/ws_funciones.php	1660333066	1	WS_API
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-octicon-2.1.2.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-octicon-2.1.2.min.js
-/var/www/html/practico/core/usuarios.php	1660333066	1	Modulo usuarios
-/var/www/html/practico/core/tablas.php	1660333066	1	Modulo tablas
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.sr-SP.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.sr-SP.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/ajax-bootstrap-select.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.nl-NL.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.nl-NL.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.1.0.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.1.0.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pl-PL.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pl-PL.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-it_IT.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-it_IT.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-es_CL.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-es_CL.js
 /var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ko-KR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ko-KR.js
-/var/www/html/practico/core/marco_conf.php	1660333066	1	Seccion marco de configuracion
-/var/www/html/practico/inc/bootstrap/js/bootstrap.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/bootstrap.js
-/var/www/html/practico/core/actualizacion.php	1660333066	1	Modulo actualizar
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.it-IT.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.it-IT.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-octicon-2.1.2.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-octicon-2.1.2.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ro_RO.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ro_RO.js
-/var/www/html/practico/core/marco_nav.php	1660333066	1	Seccion superior
-/var/www/html/practico/core/configuracion.php	1662647373	1	Variables para aplicacion
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-weathericon-1.2.0.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-weathericon-1.2.0.js
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-weathericon-1.2.0.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-weathericon-1.2.0.min.js
-/var/www/html/practico/core/captcha.php	1660333066	1	TextoAleatorioCaptcha
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.2.0.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.2.0.min.js
-/var/www/html/practico/core/doc_static.php	1660333066	0	/var/www/html/practico/core/doc_static.php
-/var/www/html/practico/core/ws_oauth.php	1660333066	0	/var/www/html/practico/core/ws_oauth.php
-/var/www/html/practico/inc/bootstrap/js/plugins/select/bootstrap-select.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/bootstrap-select.min.js
-/var/www/html/practico/core/marco_abajo.php	1662646256	1	Seccion inferior
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-en_US.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-en_US.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/buttons.colVis.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/buttons.colVis.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-it_IT.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-it_IT.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-glyphicon.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-glyphicon.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ko-KR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ko-KR.min.js
+/var/www/html/practico/core/formularios_post.php	1660333066	1	Modulo formularios
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.es-ES.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.es-ES.js
 /var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-bg_BG.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-bg_BG.js
-/var/www/html/practico/core/correos.php	1660333066	1	Modulo correos
-/var/www/html/practico/inc/bootstrap/js/plugins/moment/moment-with-locales.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/moment/moment-with-locales.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.cs-CZ.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.cs-CZ.js
-/var/www/html/practico/core/kanban.php	1662748034	1	Modulo kanban
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.tr-TR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.tr-TR.min.js
-/var/www/html/practico/core/comunes.php	1663617058	1	Libreria base
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ru-RU.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ru-RU.min.js
+/var/www/html/practico/core/objetos.php	1660333066	1	Modulo objetos
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_CN.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_CN.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-ionicon-1.5.2.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-ionicon-1.5.2.js
 /var/www/html/practico/inc/bootstrap/js/sb-admin-2.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/sb-admin-2.js
-/var/www/html/practico/core/marco_chat.php	1660333066	1	Seccion con los contactos de Chat disponibles
-/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/dataTables/dataTables.bootstrap.min.js
-/var/www/html/practico/core/marco_param.php	1660333066	1	Seccion Proveedores OAuth
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-hu_HU.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-hu_HU.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sl_SI.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sl_SI.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-en_US.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-en_US.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-nl_NL.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-nl_NL.js
-/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-fr_FR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-fr_FR.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-eu.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-eu.js
-/var/www/html/practico/inc/bootstrap/js/plugins/morris/morris.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/morris/morris.min.js
-/var/www/html/practico/core/marco_arriba_bs.php	1660333066	1	Seccion superior
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-tr_TR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-tr_TR.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-nl_NL.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-nl_NL.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.cs-CZ.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.cs-CZ.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/bootstrap-iconpicker.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/bootstrap-iconpicker.js
+/var/www/html/practico/core/sesion.php	1660333066	1	Modulo sesion
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.tr-TR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.tr-TR.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-weathericon-1.2.0.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-weathericon-1.2.0.js
+/var/www/html/practico/core/configuracion.php	1662647373	1	Variables para aplicacion
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.1.0.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.1.0.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-de_DE.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-de_DE.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-octicon-2.1.2.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-octicon-2.1.2.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pl-PL.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pl-PL.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/datepicker/bootstrap-datetimepicker.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/datepicker/bootstrap-datetimepicker.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-bg_BG.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-bg_BG.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-mapicon-2.1.0.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-mapicon-2.1.0.js
+/var/www/html/practico/core/marco_conf.php	1660333066	1	Seccion marco de configuracion
+/var/www/html/practico/core/doc_intro.php	1660333066	1	Introduccion
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.sr-SP.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.sr-SP.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-typicon-2.0.6.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-typicon-2.0.6.min.js
 /var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.sr-SP.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.sr-SP.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ru_RU.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ru_RU.js
 /var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.0.0.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.0.0.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pl_PL.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-pl_PL.min.js
-/var/www/html/practico/core/marco_forms.php	1660333066	1	Seccion con formularios comunes
-/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_CN.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-zh_CN.js
+/var/www/html/practico/core/informes.php	1663602812	1	Modulo informes
+/var/www/html/practico/core/codigobarras.php	1660333066	0	/var/www/html/practico/core/codigobarras.php
+/var/www/html/practico/core/marco_chat.php	1660333066	1	Seccion con los contactos de Chat disponibles
+/var/www/html/practico/inc/bootstrap/js/practico.js	1662645639	1	PCOJS_MostrarMensaje
+/var/www/html/practico/core/marco_export.php	1660333066	1	Seccion marco de exportaciones
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-fr_FR.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-fr_FR.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-nl_NL.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-nl_NL.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/transition.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/transition.js
 /var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.resize.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/flot/jquery.flot.resize.js
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-elusiveicon-2.0.0.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-elusiveicon-2.0.0.min.js
+/var/www/html/practico/core/marco_arriba.php	1660333066	1	Seccion superior
+/var/www/html/practico/core/marco_forms.php	1660333066	1	Seccion con formularios comunes
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.de-DE.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.de-DE.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-en_US.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-en_US.js
+/var/www/html/practico/core/correos.php	1660333066	1	Modulo correos
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-hu_HU.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-hu_HU.js
+/var/www/html/practico/core/ajax.php	1660333066	1	Modulo ajax
 /var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-glyphicon.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-glyphicon.min.js
-/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.nl-NL.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.nl-NL.js
+/var/www/html/practico/core/menus.php	1660333066	1	Modulo menues
 /var/www/html/practico/inc/bootstrap/js/plugins/collapse.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/collapse.js
-/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-elusiveicon-2.0.0.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/iconpicker/iconset/iconset-elusiveicon-2.0.0.js
-/var/www/html/practico/core/marco_admin_morris.php	1660333066	1	Seccion Escritorio Administrativo
+/var/www/html/practico/core/monitoreo_superior.php	1660333066	0	/var/www/html/practico/core/monitoreo_superior.php
+/var/www/html/practico/core/tablas.php	1660333066	1	Modulo tablas
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-fr_FR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-fr_FR.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.fr-FR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.fr-FR.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pt-BR.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.pt-BR.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ro_RO.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-ro_RO.js
+/var/www/html/practico/core/conexiones_extra.php	1660333066	1	Conexiones PDO
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ru-RU.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ru-RU.js
+/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ja-JP.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/ajax-bootstrap-select/locale/ajax-bootstrap-select.ja-JP.min.js
+/var/www/html/practico/core/marco_arriba_bs.php	1660333066	1	Seccion superior
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sv_SE.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-sv_SE.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js
+/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-de_DE.min.js	1660333066	0	/var/www/html/practico/inc/bootstrap/js/plugins/select/i18n/defaults-de_DE.min.js

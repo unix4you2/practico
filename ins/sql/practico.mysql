@@ -532,6 +532,7 @@ CREATE TABLE core_kanban (
   horas_estimadas int(11) NULL DEFAULT '0',
   presupuesto int(11) NULL DEFAULT '0',
   adjunto_elicitacion varchar(255) NULL,
+  diagrama_elicitacion mediumtext NULL,
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 ALTER TABLE core_kanban ADD INDEX columna(columna);

@@ -24,6 +24,7 @@ core/marco_nav.php
 core/formularios.php
 core/formularios_post.php
 core/informes.php
+core/kanban.php
 core/usuarios.php
 core/marco_devel.php
 mod/personalizadas_js.js
