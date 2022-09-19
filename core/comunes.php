@@ -7868,7 +7868,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
     { echo "ERROR: Llamado a funcion obsoleta del framework cargar_formulario().  En su lugar utilice PCO_CargarFormulario() "; }
 function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno_formulario=0,$ComplementoPestanas="")
   {
-        global $ModoDesarrolladorPractico;
+        global $ModoDesarrolladorPractico,$PCO_RegistroDatosFormulario;
         global $ConexionPDO,$ArchivoCORE,$TablasCore,$LlaveDePaso;
         global $PCO_InformeFiltro,$PCO_FuncionesJSInternasFORM;
 		global $_SeparadorCampos_;
