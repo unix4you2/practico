@@ -79,6 +79,7 @@ Group: Modulos_de_Apoyo  {
    File: Modulo kanban  (/var/www/html/practico/core/kanban.php)
    File: WS_API  (/var/www/html/practico/core/ws_funciones.php)
    File: TextoAleatorioCaptcha  (/var/www/html/practico/core/captcha.php)
+   File: Modulo formularios  (/var/www/html/practico/core/formularios_post.php)
    }  # Group: Modulos_de_Apoyo
 
 Group: Secciones_de_Apoyo  {
