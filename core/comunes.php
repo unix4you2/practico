@@ -5699,6 +5699,7 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 		global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
         global $funciones_activacion_datepickers;
 		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_Contrasena;
+		global $TabIndex_Elemento;
 
         //Busca datos del formulario
         $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
@@ -5822,7 +5823,7 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
 		//Abre el marco del control de datos style="display:inline;"
 		$salida.='<div class="form-group input-group '.$cadena_clase_datepicker.'" '.$cadena_ID_datepicker.'>';
         // Muestra el campo
-		$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$cadena_complementaria_datepicker.'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.' >';
+		$salida.='<input tabindex='.$TabIndex_Elemento.' type="'.$tipo_entrada.'" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control " '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$cadena_complementaria_datepicker.'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.' >';
 
 		// Muestra boton de busqueda cuando el campo sea usado para esto
 		if ($registro_campos["etiqueta_busqueda"]!="")
@@ -5951,6 +5952,7 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
 	{
 		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+		global $TabIndex_Elemento;
 
 		$salida='';
 		$nombre_campo=$registro_campos["campo"];
@@ -5992,7 +5994,7 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
-		$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.'  '.$cadena_validacion.' >'.$cadena_valor.'</textarea>';
+		$salida.= '<textarea tabindex='.$TabIndex_Elemento.' id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.'  '.$cadena_validacion.' >'.$cadena_valor.'</textarea>';
 		//Si hay algun indicador adicional del campo abre los add-ons
         if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
             {
@@ -6030,6 +6032,7 @@ function PCO_CargarObjetoAreaResponsive($registro_campos,$registro_datos_formula
 	{
 		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 		global $IdiomaPredeterminado,$MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+        global $TabIndex_Elemento;
 
 		$salida='';
 		$nombre_campo=$registro_campos["campo"];
@@ -6054,7 +6057,7 @@ function PCO_CargarObjetoAreaResponsive($registro_campos,$registro_datos_formula
 		$salida.= '<div id="Summer_'.$registro_campos["campo"].'" class="summernote" ></div>';
 
 		// Agrega el campo del form pero oculto
-		$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' style="visibility:hidden; display:none;" >'.$cadena_valor.'</textarea>';
+		$salida.= '<textarea tabindex='.$TabIndex_Elemento.' id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' style="visibility:hidden; display:none;" >'.$cadena_valor.'</textarea>';
 
         //Busca el id_html de formulario para usarlo en la creacion del summernote
         $NombreFormulario=PCO_EjecutarSQL("SELECT id_html FROM core_formulario WHERE id='".$registro_campos["formulario"]."' ")->fetchColumn();
@@ -6143,6 +6146,7 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
 	{
 		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+        global $TabIndex_Elemento;
 
 		$salida='';
 		$nombre_campo=$registro_campos["campo"];
@@ -6169,7 +6173,7 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
 		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=$registro_datos_formulario["$nombre_campo"];
 
 		// Muestra el campo
-		$salida.= '<textarea id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
+		$salida.= '<textarea tabindex='.$TabIndex_Elemento.' id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].'  >'.$cadena_valor.'</textarea>';
 
 		// Define las barras posibles para el editor
 		$barra_documento="'sourceEditing','|','heading'";
@@ -6294,6 +6298,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
 		global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 		global $PCO_ScriptsListaCombosPostCarga,$PCO_ListaCombosMultiplesJoin;
 		global $MULTILANG_Cargando,$MULTILANG_Buscar,$MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_SeleccioneUno,$MULTILANG_FrmActualizaAjax;
+        global $TabIndex_Elemento;
 
         //Busca datos del formulario
         $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
@@ -6350,7 +6355,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
-		$salida.= '<select '.$CadenaAnchoSelect.' id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker '.$EstadoRecuperacionDinamica.' combo-'.$registro_campos["campo"].' show-tick" '.@$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' '.$EstadoObligadoLiveSerachRecuperacionDinamica.' '.$EstadoLecturaControl.' >';
+		$salida.= '<select '.$CadenaAnchoSelect.' tabindex='.$TabIndex_Elemento.' id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-container="body" class="selectpicker '.$EstadoRecuperacionDinamica.' combo-'.$registro_campos["campo"].' show-tick" '.@$cadena_altura.' title="'.$MULTILANG_SeleccioneUno.'" '.$registro_campos["personalizacion_tag"].' '.$EstadoObligadoLiveSerachRecuperacionDinamica.' '.$EstadoLecturaControl.' >';
 
 
             //Genera Script Ajax y DIV para cambio de opciones en caliente
@@ -6897,6 +6902,7 @@ function PCO_CargarObjetoListaRadio($registro_campos,$registro_datos_formulario,
 	{
 		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+		global $TabIndex_Elemento;
 
 		$salida='';
 		$nombre_campo=$registro_campos["campo"];
@@ -6976,7 +6982,7 @@ function PCO_CargarObjetoListaRadio($registro_campos,$registro_datos_formulario,
 				$cadena_predeterminado='';
 				if ($valores_lista[$i]==$cadena_valor)
 					$cadena_predeterminado=' CHECKED ';
-				$salida.= "<input class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i],$registro_datos_formulario)."' ".$cadena_predeterminado." ".$registro_campos["personalizacion_tag"]." >".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i],$registro_datos_formulario)."<br>";
+				$salida.= "<input tabindex={$TabIndex_Elemento} class='Radios' type='radio' name='".$registro_campos["campo"]."' value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i],$registro_datos_formulario)."' ".$cadena_predeterminado." ".$registro_campos["personalizacion_tag"]." >".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i],$registro_datos_formulario)."<br>";
 			}
 		//Si hay algun indicador adicional del campo abre los add-ons
         if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
@@ -7018,6 +7024,7 @@ function PCO_CargarObjetoCasillaCheck($registro_campos,$registro_datos_formulari
 		global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
         global $funciones_activacion_datepickers;
 		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+		global $TabIndex_Elemento;
 
         //Busca datos del formulario
         $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
@@ -7057,7 +7064,7 @@ function PCO_CargarObjetoCasillaCheck($registro_campos,$registro_datos_formulari
 			<input type="hidden" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor_almacenada.'">
 			<div class="checkbox">
 				<label>
-					<input onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["personalizacion_tag"],$registro_datos_formulario).' > '.$CadenaEtiquetaCheck.'
+					<input tabindex='.$TabIndex_Elemento.' onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["personalizacion_tag"],$registro_datos_formulario).' > '.$CadenaEtiquetaCheck.'
 				</label>
 			</div>
 			<script language="JavaScript">
@@ -7097,6 +7104,7 @@ function PCO_CargarObjetoDeslizador($registro_campos,$registro_datos_formulario)
 	{
 		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$funciones_activacion_sliders;
 		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+		global $TabIndex_Elemento;
 
 		$salida='';
 		$nombre_campo=$registro_campos["campo"];
@@ -7119,7 +7127,7 @@ function PCO_CargarObjetoDeslizador($registro_campos,$registro_datos_formulario)
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
-        $salida.= '<input class="span2" type="text" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-slider-min="'.$registro_campos["valor_minimo"].'" data-slider-max="'.$registro_campos["valor_maximo"].'" data-slider-step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.' '.$registro_campos["personalizacion_tag"].' >';
+        $salida.= '<input tabindex='.$TabIndex_Elemento.' class="span2" type="text" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" data-slider-min="'.$registro_campos["valor_minimo"].'" data-slider-max="'.$registro_campos["valor_maximo"].'" data-slider-step="'.$registro_campos["valor_salto"].'" '.$cadena_valor.' '.$registro_campos["personalizacion_tag"].' >';
         //  data-slider-selection="after" data-slider-tooltip="hide">
 
         //Guarda la funcion para activar el slider posterior a su carga
@@ -7170,6 +7178,7 @@ function PCO_CargarObjetoArchivoAdjunto($registro_campos,$registro_datos_formula
 	{
 		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_FrmArchivoLink,$MULTILANG_Tipo;
+		global $TabIndex_Elemento;
 
 		$salida='';
 		$nombre_campo=$registro_campos["campo"];
@@ -7213,7 +7222,7 @@ function PCO_CargarObjetoArchivoAdjunto($registro_campos,$registro_datos_formula
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
-		$salida.='<input type="'.$tipo_entrada.'" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control btn-default" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$registro_campos["personalizacion_tag"].' >';
+		$salida.='<input tabindex='.$TabIndex_Elemento.' type="'.$tipo_entrada.'" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_valor.' '.$cadena_longitud_visual.' '.$cadena_longitud_permitida.' class="form-control btn-default" '.$cadena_validacion.' '.$registro_campos["solo_lectura"].' '.$registro_campos["personalizacion_tag"].' >';
 
 		//Si hay algun indicador adicional del campo abre los add-ons
         if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
@@ -7665,6 +7674,7 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
 		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
         global $funciones_activacion_datepickers;
 		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
+		global $TabIndex_Elemento;
 		$salida='';
 
         //Determina si el estilo del objeto debe ser inline o no
@@ -7712,7 +7722,7 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
         //Abre el marco del control de datos style="display:inline;"
 		$salida.='<div '.$cadena_identificador.' style="'.$cadena_modo_inline.'" class="form-group input-group">';
         // Muestra el campo
-		$salida.='<a id="'.$registro_campos["id_html"].'" class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).'</a>';
+		$salida.='<a tabindex='.$TabIndex_Elemento.' id="'.$registro_campos["id_html"].'" class="btn '.$registro_campos["personalizacion_tag"].'" '.@$cadena_javascript.'><i class="'.$registro_campos["imagen"].'"></i> '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).'</a>';
         //Cierra marco del control de datos
         $salida.= '</div>';
 
@@ -7878,6 +7888,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         global $PCO_InformesListaColumnasDT,$PCO_InformesRecuperacionAJAX,$PCO_InformesIdCache,$PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF,$PCO_InformesDataTableDefineCOLS,$PCO_InformesDataTable_pane_activado,$PCO_InformesDataTable_pane_cascada,$PCO_InformesDataTable_pane_colapsado,$PCO_InformesDataTable_pane_columnas,$PCO_InformesDataTable_pane_subtotalesrelativos,$PCO_InformesDataTable_pane_conteos,$PCO_InformesDataTable_pane_controles,$PCO_InformesDataTable_pane_control_colapsar,$PCO_InformesDataTable_pane_control_ordenar;
         global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
 		global $PCO_BarraHerramientasFormulario; 
+		global $TabIndex_Elemento;
 
 		// Busca datos del formulario
 		$registro_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario")->fetch();
@@ -8136,6 +8147,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 										$ancho_bordes="border-width: 1px;";
 									}
 
+                                $TabIndex_Elemento=1;
                                 while ($registro_obj_fila_unica = $consulta_obj_fila_unica->fetch())
                                     {
                                         $limite_superior=$registro_obj_fila_unica["peso"];
@@ -8433,6 +8445,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 
                                         //Actualiza limite inferior para siguiente lista de campos
                                         $limite_inferior=$registro_obj_fila_unica["peso"];
+                                        $TabIndex_Elemento++;
                                     }
 
                         if ($conteo_pestanas>1  || $conteo_pestanas_ocultas==1)
