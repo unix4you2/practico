@@ -73,6 +73,8 @@ LogCambios="
 * Enhan [CORE]: @foag Personalizacion de menues en editor de diagramas.
 * Enhan [CORE]: @foag Funciones de cargue y descargue de XML asociado a editor de diagramas.
 * Enhan [KANBAN]: Tareas/Actividades sobre tableros Kanban permiten agregar diagramas de elicitación del requerimiento como skectchs, prototipos, flujos, etc. mediante {P}Diagram
+* Enhan [CRON]: Editor de código para tareas planificadas realiza dicha actividad mediante el nuevo editor {P}Coder dando mayor comodidad y funcionalidad a quienes utilizan esta característica.
+
 
 
  
