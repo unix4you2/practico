@@ -7,7 +7,36 @@
             |___/ 
 ```
 
-## Versión 22.3 (2021-03-13)
+## Versión 22.9 (2022-09-18)
+* Added [CORE]: Se cuenta con archivo de inclusión general para código JS ubicado en mod/personalizadas_js.js.  Cualquier código allí incluído se tendrá en cuenta en todas las cargas de página.
+* Added [USUARIOS]: Desde edición de usuarios se permite regresar al listado de usuarios.
+* Added [USUARIOS]: Nueva variable especial $ PCO_PlantillaFijaPermisos permite establecer el nombre de un usuario utilizado durante las opciones de asignación de permisos para que sólo sean presentadas las opciones definidas para el mismo.  En caso de no contar con la variable o ser ésta vacía se presentarán todos los permisos derivados de los menues creados para la aplicación.
+* Added [USUARIOS]: Agregado el nombre del usuario en la parte superior durante la asignación de permisos.
+* Enhan [CORE]: Reubicado ejemplo de módulo MVC hacia carpetas de complementarios desarrollo dev/comp/mvc
+* Enhan [CORE]: Reubicado ejemplo de módulo LDAP hacia carpetas de complementarios desarrollo dev/comp/ldp
+* Enhan [CORE]: Reubicado ejemplo de módulo de autenticación PAM mediante Python hacia carpetas de complementarios desarrollo dev/comp/pam
+* Enhan [CORE]: Reubicado ejemplo de módulo de social parsing hacia carpetas de complementarios desarrollo dev/comp/sop
+* Added [FORMS]: Nueva funcion accion interna (PCO_Accion) llamada PCO_EjecutarPostFormulario permite evaluar directamente el codigo asociado a un POST de formulario permitiendo encapsular funciones con llamados independientes dentro de formularios que tengan la lógica de negocio asociada.  Recordar que por seguridad ninguna variable estara disponible en el scope local.   El llamado esta disponible tambien a modo de funcion mediante PCO_EjecutarCodigoPOST(); caso en el cual las variables requeridas en el scope del formulario deberian estar declaradas previamente o llamadas como globales desde el POST.
+* Added [FORMS]: Edición de Scripts PRE,POST y JS de formularios se hace en ventana independiente y con todas las funcionalidades de PCoder, permitiendo editar los scripts mientras se visualiza por separado el formulario y almacenando historiales de cada edición.
+* Added [FORMS]: Controles de ingreso de datos comunes en formularios cuentan ahora con un TabIndex definido, de manera que facilite al usuario navegar a través de los campos con la tecla TAB obviando otros elementos gráficos disponibles en el diseño.
+* Enhan [CORE]: Se retorna a version de bootstrap-Select de Silvio Moreto por compatibilidad heredada con listas y valores por defecto.
+* Enhan [CORE]: Eliminada tabla innecesaria core_pcoder_chat con la migración de Pcoder a objetos nativos.
+* Enhan [CORE]: Actualizado el asistente de instalacion para usar version actualizada de JQuery
+* Enhan [CORE]: (frm:-34) Eliminada extension externa de ElFinder y reemplazada por elemento interno.  Se ahorran más de 5MB de código externo con el cambio a objeto propio del framework y se eliminan falsos positivos de reportes tipo -Backdoor:PHP/Yorcirekrikseng.E- generados incorrectamente por Bitdefender sin causa al confundir el código con otro conocido.   En adelante cualquier aplicación que requiera uso de un administrador de archivos para sus usuarios podrá lanzar la carga del formulario -34 estableciendo todos los parámetros de personalizción deseados para el explorador.
+* Enhan [PCODER]: Los historiales de archivo e identificacion de rutas de edición se manejan ahora como rutas relativas a la instalación y no como rutas absolutas sobre el disco del servidor, lo que permite migrar instalaciones conservando la recuperación de historiales de edición de archivos.  Para historiales preliminares a esta versión que puedan ser requeridos agregue la ruta absoluta de servidor a la ruta actual del archivo a la hora de ser recuperados.
+* Enhan [PCODER]: (frm:-33) Reemplazado editor {P}Coder con objeto interno.  Esto permite ahorrar más de 8MB de código en disco requerido por el editor anterior.  Ver otros detalles del nuevo editor en los changelog siguientes.
+* Enhan [PCODER]: {P}Coder permite ahora abrir versiones de solo lectura cuando el archivo se encuentra bloqueado por otro usuario.  Así se permite al menos la exploración del código asociado.
+* Enhan [PCODER]: {P}Coder incluye título descriptivo del contenido que es editado para aquellos casos en que es utilizado para eventos o scripts de formularios.
+* Enhan [CORE]: (frm:-35) Reemplazada herramienta de comparacion externa por objeto propio.  Esto permite ahorrar más de 1MB de código en disco.
+* Enhan [CORE]: El cargue de scripts PRE, POST y JS de formularios, informes y eventos para efectos de edición se realiza ahora en caliente y por demanda.  Solamente cuando sean requeridos serán cargados y de esa manera se evitará tráfico innecesario en tiempo de diseño.
+* Enhan [CORE]: @foag Cambio de idioma por defecto en editor de diagramas a espanol.
+* Enhan [CORE]: @foag Personalizacion de menues en editor de diagramas.
+* Enhan [CORE]: @foag Funciones de cargue y descargue de XML asociado a editor de diagramas.
+* Enhan [KANBAN]: Tareas/Actividades sobre tableros Kanban permiten agregar diagramas de elicitación del requerimiento como skectchs, prototipos, flujos, etc. mediante {P}Diagram
+* Enhan [CRON]: Editor de código para tareas planificadas realiza dicha actividad mediante el nuevo editor {P}Coder dando mayor comodidad y funcionalidad a quienes utilizan esta característica.
+
+
+## Versión 22.3 (2022-03-13)
 * Added [FORMS]: Controles de formulario de tipo contraseña incluyen un botón al lado derecho que permite visualizar / ocultar los valores ingresads por el usuario
 * Fixed [FORMS]: Asignacion de campo de valor manual para listas de seleccion en diseño de formularios.
 * Fixed [FORMS]: Campos tipo texto responsive pueden residir ahora sobre formularios con nombres o ids html diferentes a 'datos'
