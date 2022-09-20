@@ -35,6 +35,7 @@ LogCambios="
 
 * Added [CORE]: Nueva función PCOJS_ValidarExistenciaURL permite validar si una URL existe o no.  Util para procesar solicitudes AJX o similares revisando primero que el destino exista.
 * Added [FORMS]: Controles tipo lista de seleccion reemplazan variables dinámicas PHP en aquellos tags tipo OPTGROUP
+* Added [FORMS]: Controles tipo lista de seleccion permiten la insercion de TAGS extra en cada opción.  Util para indicar cosas como data-icon, data-lang, data-cualquiercosa que usted necesite.  Esto se logra mediante la inclusión automática del valor de un campo llamado tags_extra que si se encuentra disponible en la tabla o vista desde la cual se carga la lista será usado para tomar su valor e inyectarlo como TAGS adicionales al option.
 
 "
 
@@ -49,7 +50,7 @@ DELETE FROM core_opcionlista WHERE identificador_lista='tipos_controles';
 
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', '_OPTGROUP_|{ $ MULTILANG_FrmTipoTit1}', '', '2','');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'texto_corto', '{ $ MULTILANG_FrmTipo1}', '3','data-icon=glyphicon-log-in');
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'texto_clave', '{ $ MULTILANG_FrmTipo10}', '4','data-icon=glyphicon-eye-close');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'texto_clave', '{ $ MULTILANG_FrmTipo10}', '4','data-icon=\'fa fa-eye-slash\'');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'texto_largo', '{ $ MULTILANG_FrmTipo2}', '5','data-icon=glyphicon-text-width');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'texto_formato', '{ $ MULTILANG_FrmTipo3}', '6','data-icon=glyphicon-font');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'area_responsive', '{ $ MULTILANG_FrmTipo17}', '7','data-icon=glyphicon-edit');

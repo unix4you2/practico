@@ -671,7 +671,7 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'I', '{$MULTILANG_Si}, Debajo de la tabla', '4');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', '_OPTGROUP_|{ $ MULTILANG_FrmTipoTit1}', '', '2','');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'texto_corto', '{ $ MULTILANG_FrmTipo1}', '3','data-icon=glyphicon-log-in');
-INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'texto_clave', '{ $ MULTILANG_FrmTipo10}', '4','data-icon=glyphicon-eye-close');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'texto_clave', '{ $ MULTILANG_FrmTipo10}', '4','data-icon=\'fa fa-eye-slash\'');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'texto_largo', '{ $ MULTILANG_FrmTipo2}', '5','data-icon=glyphicon-text-width');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'texto_formato', '{ $ MULTILANG_FrmTipo3}', '6','data-icon=glyphicon-font');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'area_responsive', '{ $ MULTILANG_FrmTipo17}', '7','data-icon=glyphicon-edit');
