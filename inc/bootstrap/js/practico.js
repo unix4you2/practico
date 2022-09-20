@@ -176,6 +176,16 @@ function PCOJS_ValidarTeclado(elEvento, permitidos, permitidos_extra)
 		return permitidos.indexOf(caracter) != -1 || tecla_especial;
 	}
 
+
+function PCO_ValidarExistenciaURL(url) 
+    {
+    	var http = new XMLHttpRequest();
+    	http.open('HEAD', url, false);
+    	http.send();
+    	return http.status!=404;
+    }
+
+
 function PCO_ObtenerContenidoAjax(PCO_ASINCRONICO,PCO_URL,PCO_PARAMETROS)
     {
         var xmlhttp;
