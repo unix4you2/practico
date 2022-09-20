@@ -167,7 +167,7 @@
 	// Tipo de motor usado para la autenticacion de usuarios
 	\$Auth_TipoMotor='%s';
 	\$Auth_ProtoTransporte='%s';
-	\$PCO_ArchivoImagenFondo='img/fondo.jpg';
+	\$PCO_ArchivoImagenFondo='';
 
 	// Configuracion LDAP - Auth_TipoMotor=ldap
 	\$Auth_TipoEncripcion='%s';
