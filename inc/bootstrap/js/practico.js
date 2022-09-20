@@ -177,7 +177,7 @@ function PCOJS_ValidarTeclado(elEvento, permitidos, permitidos_extra)
 	}
 
 
-function PCO_ValidarExistenciaURL(url) 
+function PCOJS_ValidarExistenciaURL(url) 
     {
     	var http = new XMLHttpRequest();
     	http.open('HEAD', url, false);
