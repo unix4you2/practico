@@ -1214,6 +1214,9 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 					// Oculta todos los campos (se debe indicar el valor maximo de los id dados a campoXX
 					OcultarCampos(48);
 					// Muestra campos segun tipo de objeto
+					if (tipo_objeto_activo=="campo_comodin")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,12,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48");
+					
+					
 					if (tipo_objeto_activo=="texto_corto")   VisualizarCampos("1,2,3,4,5,6,7,8,9,10,11,14,17,25,36,37,44,45,46,47,48");
 					if (tipo_objeto_activo=="texto_clave")   VisualizarCampos("1,2,6,7,8,9,10,17,25,36,37,44,45,46,47,48");
 					if (tipo_objeto_activo=="texto_largo")   VisualizarCampos("1,2,5,6,7,8,9,10,14,15,17,36,37,44,45,46,47,48");
@@ -1280,7 +1283,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
             <div class="tab-pane  active" id="propiedades_basicas-tab">
                 
                 <br>
-				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+    				<form name="datosform" id="datosform" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 				<?php 
 					//Define tipo de accion si se trata de creacion o modificacion
 					if (@$popup_activo=="FormularioCampos")
@@ -1297,6 +1300,8 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                         <div class="form-group input-group">
                             <select  id="tipo" name="tipo" class="selectpicker"  data-style="btn-info" OnChange="CambiarCamposVisibles(this.options[this.selectedIndex].value);">
                                 <option value="0"><?php echo $MULTILANG_SeleccioneUno; ?></option>
+                                <option value="campo_comodin"     data-icon="fa fa-pencil"					<?php if (@$registro_campo_editar["tipo"]=="campo_comodin")     echo 'SELECTED'; ?>> COMODIN - VER TODO</option>
+                                
                                 <optgroup label="<?php echo $MULTILANG_FrmTipoTit1; ?>">
                                     <option value="texto_corto"     data-icon="glyphicon-log-in"					<?php if (@$registro_campo_editar["tipo"]=="texto_corto")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo1; ?></option>
                                     <option value="texto_clave"     data-icon="glyphicon-eye-close"					<?php if (@$registro_campo_editar["tipo"]=="texto_clave")     echo 'SELECTED'; ?>> <?php echo $MULTILANG_FrmTipo10; ?></option>

@@ -42,6 +42,39 @@ LogCambios="
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
 
+DELETE FROM core_opcionlista WHERE identificador_lista='tipos_controles';
+
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', '_OPTGROUP_|{ $ MULTILANG_FrmTipoTit1}', '', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'texto_corto', '{ $ MULTILANG_FrmTipo1}[[data-icon=glyphicon-log-in]]', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'texto_clave', '{ $ MULTILANG_FrmTipo10}[[data-icon=glyphicon-eye-close]]', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'texto_largo', '{ $ MULTILANG_FrmTipo2}[[data-icon=glyphicon-text-width]]', '5');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'texto_formato', '{ $ MULTILANG_FrmTipo3}[[data-icon=glyphicon-font]]', '6');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'area_responsive', '{ $ MULTILANG_FrmTipo17}[[data-icon=glyphicon-edit]]', '7');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'lista_seleccion', '{ $ MULTILANG_FrmTipo4}[[data-icon=glyphicon-indent-right]]', '8');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'lista_radio', '{ $ MULTILANG_FrmTipo5}[[data-icon=glyphicon-record]]', '9');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'casilla_check', '{ $ MULTILANG_FrmTipo18}[[data-icon=glyphicon-check]]', '10');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'deslizador', '{ $ MULTILANG_FrmTipo9}[[data-icon=glyphicon-resize-horizontal]]', '11');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'campo_etiqueta', '{ $ MULTILANG_FrmTipo11}[[data-icon=glyphicon-tags]]', '12');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', '_OPTGROUP_', '', '13');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', '_OPTGROUP_|{ $ MULTILANG_FrmTipoTit4}', '', '14');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'archivo_adjunto', '{ $ MULTILANG_FrmTipo12}[[data-icon=glyphicon-file]]', '15');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'objeto_canvas', '{ $ MULTILANG_FrmTipo13}[[data-icon=glyphicon-picture]]', '16');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'objeto_camara', '{ $ MULTILANG_FrmTipo14}[[data-icon=glyphicon-facetime-video]]', '17');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', '_OPTGROUP_', '', '18');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', '_OPTGROUP_|{ $ MULTILANG_FrmTipoTit2}', '', '19');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'etiqueta', '{ $ MULTILANG_FrmTipo6}[[data-icon=glyphicon-pencil]]', '20');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'url_iframe', '{ $ MULTILANG_FrmTipo7}[[data-icon=glyphicon-globe]]', '21');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', '_OPTGROUP_', '', '22');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', '_OPTGROUP_|{ $ MULTILANG_FrmTipoTit3}', '', '23');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'informe', '{ $ MULTILANG_FrmTipo8}[[data-icon=glyphicon-list-alt]]', '24');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'form_consulta', '{ $ MULTILANG_FrmTipo15}[[data-icon=glyphicon-search]]', '25');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', 'boton_comando', '{ $ MULTILANG_FrmTipo16}[[data-icon=glyphicon-flash]]', '26');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_controles', '_OPTGROUP_', '', '27');
+
+
+
+
+
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
 "

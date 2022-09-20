@@ -669,6 +669,12 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'S', '{$MULTILANG_Si}, Arriba de la tabla', '2');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('ubicaciones_panelesfiltro', 'I', '{$MULTILANG_Si}, Debajo de la tabla', '4');
 
+UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
+UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
+
+
+
+
 DROP TABLE IF EXISTS core_bugtracker;
 CREATE TABLE core_bugtracker (
   id int(10) NOT NULL AUTO_INCREMENT,
