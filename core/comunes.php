@@ -6450,11 +6450,15 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                             {
                                 $opciones_lista[] = "";
                                 $valores_lista[] = "";
+                                $tags_lista[] = "";
                             }
                         else
                             {
                                 $opciones_lista = explode(",", $registro_campos["lista_opciones"]);
                                 $valores_lista = explode(",", $registro_campos["lista_opciones"]);
+                                //Crea misma cantidad de tags vacios como valores
+                                foreach ($valores_lista as $recorrido_valores)
+                                    { $tags_lista[] = ""; }
                             }
                     }
 
@@ -6504,13 +6508,28 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                             //Recupera los datos para la lista.  En listas de llenado estandar recupera todo SINO solo los posibles valores ya seleccionados
                             if ($registro_campos["ajax_busqueda_dinamica"]=="0")
                                 {
+                                    //Determina si la tabla en cuestion cuenta con el campo tags_extra.  Si es asi lo usa para generar lista de tags
+                                    $ComplementoCampoTags="";
+                                    if (PCO_ExisteCampoTabla("tags_extra",$nombre_tabla_opciones))
+                                        $ComplementoCampoTags=", tags_extra as tags_extra ";
+                                                
                                     // Consulta los campos para el tag select
-                                    $resultado_opciones=PCO_EjecutarSQL("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas");   //Deprecated.  ORDER BY $campo_opciones
+                                    $resultado_opciones=PCO_EjecutarSQL("SELECT $campo_valores as valores, $campo_opciones as opciones {$ComplementoCampoTags} FROM $nombre_tabla_opciones WHERE $condicion_filtrado_listas");   //Deprecated.  ORDER BY $campo_opciones
                                     // Muestra resultados solo si $resultado_opciones es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch()
                                     while ($resultado_opciones!="1" && $registro_opciones = $resultado_opciones->fetch())
                                         {
                                             $opciones_lista[] = $registro_opciones["opciones"];
                                             $valores_lista[] = $registro_opciones["valores"];
+                                            //Si tiene campo de tags los descompone y usa
+                                            if ($ComplementoCampoTags!="")
+                                                {
+                                                    $CadenaTAGS=$registro_opciones["tags_extra"];
+                                                    $tags_lista[] = $CadenaTAGS;
+                                                }
+                                            else
+                                                {
+                                                    $tags_lista[]="";
+                                                }
                                         }
                                 }
                             else
@@ -6533,13 +6552,28 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                                             $ComplementoValoresYaSeleccionados=substr($ComplementoValoresYaSeleccionados, 0, strlen($ComplementoValoresYaSeleccionados)-3);
                                             $ComplementoValoresYaSeleccionados.=" )  ";  //AND
 
+                                            //Determina si la tabla en cuestion cuenta con el campo tags_extra.  Si es asi lo usa para generar lista de tags
+                                            $ComplementoCampoTags="";
+                                            if (PCO_ExisteCampoTabla("tags_extra",$nombre_tabla_opciones))
+                                                $ComplementoCampoTags=", tags_extra as tags_extra ";
+
                                             // Consulta los campos para el tag select
-                                            $resultado_opciones=PCO_EjecutarSQL("SELECT $campo_valores as valores, $campo_opciones as opciones FROM $nombre_tabla_opciones WHERE $ComplementoValoresYaSeleccionados  ");  
+                                            $resultado_opciones=PCO_EjecutarSQL("SELECT $campo_valores as valores, $campo_opciones as opciones {$ComplementoCampoTags} FROM $nombre_tabla_opciones WHERE $ComplementoValoresYaSeleccionados  ");  
                                             // Muestra resultados solo si $resultado_opciones es diferente de 1 que es el valor retornado cuando hay errores evitando el fatal error del fetch()
                                             while ($resultado_opciones!="1" && $registro_opciones = $resultado_opciones->fetch())
                                                 {
                                                     $opciones_lista[] = $registro_opciones["opciones"];
                                                     $valores_lista[] = $registro_opciones["valores"];
+                                                    //Si tiene campo de tags los descompone y usa
+                                                    if ($ComplementoCampoTags!="")
+                                                        {
+                                                            $CadenaTAGS=$registro_opciones["tags_extra"];
+                                                            $tags_lista[] = $CadenaTAGS;
+                                                        }
+                                                    else
+                                                        {
+                                                            $tags_lista[]="";
+                                                        }
                                                 }
                                         }
                                 }
@@ -6561,7 +6595,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                             else
                                 $salida.= "</optgroup>";  //Si no se encuentra valor de etiqueta alguno entonces cierra el grupo
                         else
-                            $salida.= "<option ".$CadenaAnchoOption." value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i],$registro_datos_formulario)."' ".$cadena_predeterminado.">".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i],$registro_datos_formulario)."</option>";
+                            $salida.= "<option ".$tags_lista[$i]." ".$CadenaAnchoOption." value='".PCO_ReemplazarVariablesPHPEnCadena($valores_lista[$i],$registro_datos_formulario)."' ".$cadena_predeterminado.">".PCO_ReemplazarVariablesPHPEnCadena($opciones_lista[$i],$registro_datos_formulario)."</option>";
                     }
 
             //Cierra DIV para cambio de opciones en caliente
