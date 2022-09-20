@@ -43,7 +43,7 @@ LogCambios="
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
 
-ALTER TABLE `core_opcionlista` ADD `tags_extra` varchar(255) NULL;
+ALTER TABLE core_opcionlista ADD tags_extra varchar(255) NULL;
 
 DELETE FROM core_opcionlista WHERE identificador_lista='tipos_controles';
 
