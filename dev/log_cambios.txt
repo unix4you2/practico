@@ -34,6 +34,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 LogCambios="
 
 * Added [CORE]: Nueva función PCOJS_ValidarExistenciaURL permite validar si una URL existe o no.  Util para procesar solicitudes AJX o similares revisando primero que el destino exista.
+* Added [FORMS]: Controles tipo lista de seleccion reemplazan variables dinámicas PHP en aquellos tags tipo OPTGROUP
 
 "
 
@@ -41,6 +42,8 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+
+ALTER TABLE `core_opcionlista` ADD `tags_extra` varchar(255) NULL;
 
 DELETE FROM core_opcionlista WHERE identificador_lista='tipos_controles';
 

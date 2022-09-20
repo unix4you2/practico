@@ -6557,7 +6557,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
                         $PartesOpcionCombo= explode ( "|" , $valores_lista[$i] );
                         if ( strpos ( $valores_lista[$i] , "_OPTGROUP_" ) !== FALSE )
                             if ( $PartesOpcionCombo[1]!="")
-                                $salida.= "<optgroup label='".$PartesOpcionCombo[1]."'>";
+                                $salida.= "<optgroup label='".PCO_ReemplazarVariablesPHPEnCadena($PartesOpcionCombo[1])."'>";
                             else
                                 $salida.= "</optgroup>";  //Si no se encuentra valor de etiqueta alguno entonces cierra el grupo
                         else
