@@ -695,6 +695,21 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'form_consulta', '{ $ MULTILANG_FrmTipo15}', '25','data-icon=glyphicon-search');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'boton_comando', '{ $ MULTILANG_FrmTipo16}', '26','data-icon=glyphicon-flash');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', '_OPTGROUP_', '', '27','');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', '', '{ $ MULTILANG_Ninguno}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'numerico', '{ $ MULTILANG_FrmValida1}', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'numerico_entero', '{ $ MULTILANG_FrmValida9}', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'alfabetico', '{ $ MULTILANG_FrmValida2}', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'alfanumerico', '{ $ MULTILANG_FrmValida3}', '5');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'personalizado', '{ $ MULTILANG_FrmValida10}', '6');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', '_OPTGROUP_|{ $ MULTILANG_AplicaPara} { $ MULTILANG_FrmTipo1}', '', '7');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'fecha', '{ $ MULTILANG_FrmValida4}', '8');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'fechaxanos', '{ $ MULTILANG_FrmValida7}', '9');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'hora', '{ $ MULTILANG_FrmValida5}', '10');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'fechahora', '{ $ MULTILANG_FrmValida6}', '11');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'fechahorafull', '{ $ MULTILANG_FrmValida8}', '12');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', '_OPTGROUP_', '', '13');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_readonly_nosi', '', '{ $ MULTILANG_No}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_readonly_nosi', 'READONLY', '{ $ MULTILANG_Si}', '2');
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
 
