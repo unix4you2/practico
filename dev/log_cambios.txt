@@ -37,7 +37,7 @@ LogCambios="
 * Added [FORMS]: Controles tipo lista de seleccion reemplazan variables dinámicas PHP en aquellos tags tipo OPTGROUP
 * Added [FORMS]: Controles tipo lista de seleccion permiten la insercion de TAGS extra en cada opción.  Util para indicar cosas como data-icon, data-lang, data-cualquiercosa que usted necesite.  Esto se logra mediante la inclusión automática del valor de un campo llamado tags_extra que si se encuentra disponible en la tabla o vista desde la cual se carga la lista será usado para tomar su valor e inyectarlo como TAGS adicionales al option.
 * Enhan [KANBAN]: @jaimeaba3 Imágen de encabezado de informe es independiente de URL externa.
-* Enhan [COMP]: Dependabot.  Actualizado Guzzle a 7.4.5 en componente de auto-trading-bot. (CVE-2022-27776, RFC9110 Section 15.4, RFC6265 Section 5.3, RFC9110 Section 15.4)
+* Enhan [COMP]: Actualizado Guzzle a 7.4.5 en componente de auto-trading-bot. (CVE-2022-27776,CVE-2022-29248,CVE-2022-31043,CVE-2022-31042,CVE-2022-31090,CVE-2022-31091) (RFC9110 Section 15.4, RFC6265 Section 5.3, RFC9110 Section 15.4)
 
 
 "
