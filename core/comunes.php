@@ -7090,6 +7090,11 @@ function PCO_CargarObjetoCasillaCheck($registro_campos,$registro_datos_formulari
 					$cadena_valor="";
 			}
 
+        //Define si el control tiene o no textos de ayuda
+        $salida_ayuda_check='';
+        if ($registro_campos["ayuda_titulo"] != "") $salida_ayuda_check = '<a href="#"  data-toggle="tooltip" data-html="true" data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"],$registro_datos_formulario).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"],$registro_datos_formulario).'"><i class="fa fa-question-circle"></i></a>';
+
+
         // Muestra el campo
         $CadenaEtiquetaCheck=PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario);
         if($registro_campos["ocultar_etiqueta"]=="1") $CadenaEtiquetaCheck="";
@@ -7098,7 +7103,7 @@ function PCO_CargarObjetoCasillaCheck($registro_campos,$registro_datos_formulari
 			<input type="hidden" id="'.$registro_campos["campo"].'" name="'.$registro_campos["campo"].'" value="'.$cadena_valor_almacenada.'">
 			<div class="checkbox">
 				<label>
-					<input tabindex='.$TabIndex_Elemento.' onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["personalizacion_tag"],$registro_datos_formulario).' > '.$CadenaEtiquetaCheck.'
+					<input tabindex='.$TabIndex_Elemento.' onchange="JSFUNC_Actualizar_'.$registro_campos["campo"].'(this);" type="checkbox" id="JSVAR_'.$registro_campos["campo"].'" name="JSVAR_'.$registro_campos["campo"].'" '.$cadena_valor.' '.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["personalizacion_tag"],$registro_datos_formulario).' > '.$CadenaEtiquetaCheck.' '.$salida_ayuda_check.'
 				</label>
 			</div>
 			<script language="JavaScript">
