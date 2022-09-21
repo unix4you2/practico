@@ -36,6 +36,7 @@ LogCambios="
 * Added [CORE]: Nueva función PCOJS_ValidarExistenciaURL permite validar si una URL existe o no.  Util para procesar solicitudes AJX o similares revisando primero que el destino exista.
 * Added [FORMS]: Controles tipo lista de seleccion reemplazan variables dinámicas PHP en aquellos tags tipo OPTGROUP
 * Added [FORMS]: Controles tipo lista de seleccion permiten la insercion de TAGS extra en cada opción.  Util para indicar cosas como data-icon, data-lang, data-cualquiercosa que usted necesite.  Esto se logra mediante la inclusión automática del valor de un campo llamado tags_extra que si se encuentra disponible en la tabla o vista desde la cual se carga la lista será usado para tomar su valor e inyectarlo como TAGS adicionales al option.
+* Enhan [KANBAN]: @jaimeaba3 Imágen de encabezado de informe es independiente de URL externa.
 
 "
 
