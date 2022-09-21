@@ -94,7 +94,6 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'fechahorafull', '{ $ MULTILANG_FrmValida8}', '12');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', '_OPTGROUP_', '', '13');
 
-
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_readonly_nosi', '', '{ $ MULTILANG_No}', '1');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_readonly_nosi', 'READONLY', '{ $ MULTILANG_Si}', '2');
 
