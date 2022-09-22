@@ -39,7 +39,7 @@ LogCambios="
 * Added [FORMS]: Controles tipo check soportan textos de ayuda.  Serán presentados como icono al lado derecho del texto que acompaña al check.
 * Enhan [KANBAN]: @jaimeaba3 Imágen de encabezado de informe es independiente de URL externa.
 * Enhan [COMP]: Actualizado Guzzle a 7.4.5 en componente de auto-trading-bot. (CVE-2022-27776,CVE-2022-29248,CVE-2022-31043,CVE-2022-31042,CVE-2022-31090,CVE-2022-31091) (RFC9110 Section 15.4, RFC6265 Section 5.3, RFC9110 Section 15.4)
-
+* Enhan [CHAT]:  Agregado índice a campo que indica si un chat ha sido leído o no por el destinatario.
 
 "
 
@@ -113,6 +113,7 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'datamatrix', 'Datamatrix (ASCII+extended)', '16');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'qrcode', 'QR-Code', '17');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', '_OPTGROUP_', '', '18');
+ALTER TABLE core_chat ADD INDEX recd (recd);
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
