@@ -35,7 +35,7 @@ LogCambios="
 
 * Added [CORE]: Nueva función PCOJS_ValidarExistenciaURL permite validar si una URL existe o no.  Util para procesar solicitudes AJX o similares revisando primero que el destino exista.
 * Added [FORMS]: Controles tipo lista de seleccion reemplazan variables dinámicas PHP en aquellos tags tipo OPTGROUP
-* Added [FORMS]: Controles tipo lista de seleccion permiten la insercion de TAGS extra en cada opción.  Util para indicar cosas como data-icon, data-lang, data-cualquiercosa que usted necesite.  Esto se logra mediante la inclusión automática del valor de un campo llamado tags_extra que si se encuentra disponible en la tabla o vista desde la cual se carga la lista será usado para tomar su valor e inyectarlo como TAGS adicionales al option.
+* Added [FORMS]: Controles tipo lista de seleccion permiten la insercion de TAGS extra en cada opción (esto incluye a los tipos de etiqueta OPTION y OPTGROUP).  Util para indicar cosas como data-icon para especificar imágenes en cada opción, data-lang, data-cualquiercosa que usted necesite.  Esto se logra mediante la inclusión automática del valor de un campo llamado tags_extra que si se encuentra disponible en la tabla o vista desde la cual se carga la lista será usado para tomar su valor e inyectarlo como TAGS adicionales al option.
 * Added [FORMS]: Controles tipo check soportan textos de ayuda.  Serán presentados como icono al lado derecho del texto que acompaña al check.
 * Enhan [KANBAN]: @jaimeaba3 Imágen de encabezado de informe es independiente de URL externa.
 * Enhan [COMP]: Actualizado Guzzle a 7.4.5 en componente de auto-trading-bot. (CVE-2022-27776,CVE-2022-29248,CVE-2022-31043,CVE-2022-31042,CVE-2022-31090,CVE-2022-31091) (RFC9110 Section 15.4, RFC6265 Section 5.3, RFC9110 Section 15.4)
@@ -52,6 +52,7 @@ ALTER TABLE core_opcionlista ADD tags_extra varchar(255) NULL;
 
 DELETE FROM core_opcionlista WHERE identificador_lista='tipos_controles';
 DELETE FROM core_opcionlista WHERE identificador_lista='tipos_validacion_datos';
+DELETE FROM core_opcionlista WHERE identificador_lista='formato_salida_etiquetas';
 
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', '_OPTGROUP_|{ $ MULTILANG_FrmTipoTit1}', '', '2','');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'texto_corto', '{ $ MULTILANG_FrmTipo1}', '3','data-icon=glyphicon-log-in');
@@ -79,7 +80,6 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'form_consulta', '{ $ MULTILANG_FrmTipo15}', '25','data-icon=glyphicon-search');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', 'boton_comando', '{ $ MULTILANG_FrmTipo16}', '26','data-icon=glyphicon-flash');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('tipos_controles', '_OPTGROUP_', '', '27','');
-
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', '', '{ $ MULTILANG_Ninguno}', '1');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'numerico', '{ $ MULTILANG_FrmValida1}', '2');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'numerico_entero', '{ $ MULTILANG_FrmValida9}', '3');
@@ -93,11 +93,26 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'fechahora', '{ $ MULTILANG_FrmValida6}', '11');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', 'fechahorafull', '{ $ MULTILANG_FrmValida8}', '12');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_validacion_datos', '_OPTGROUP_', '', '13');
-
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_readonly_nosi', '', '{ $ MULTILANG_No}', '1');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('dicotomico_readonly_nosi', 'READONLY', '{ $ MULTILANG_Si}', '2');
-
-
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', '', '{ $ MULTILANG_MnuTexto}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('formato_salida_etiquetas', '_OPTGROUP_|{ $ MULTILANG_CodigoBarras}', '', '2','data-icon=\'fa fa-barcode\'');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'std25', 'Standard 2 of 5 (industrial, Numerio Sin limite)', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'int25', 'Interleaved 2 of 5', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'ean8', 'EAN 8 (Numerico 7 caracteres)', '5');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'ean13', 'EAN 13 (Numerico 12 caracteres)', '6');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'upc', 'UPC', '7');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'code11', 'Code 11', '8');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'code39', 'Code 39', '9');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'code93', 'Code 93', '10');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'code128', 'Code 128', '11');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'codabar', 'CodaBar', '12');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'msi', 'MSI', '13');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', '_OPTGROUP_', '', '14');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento,tags_extra) VALUES ('formato_salida_etiquetas', '_OPTGROUP_|{ $ MULTILANG_Matriz}', '', '15','data-icon=\'fa fa-qrcode\'');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'datamatrix', 'Datamatrix (ASCII+extended)', '16');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', 'qrcode', 'QR-Code', '17');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('formato_salida_etiquetas', '_OPTGROUP_', '', '18');
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
