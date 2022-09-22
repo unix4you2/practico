@@ -741,6 +741,20 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('pesos_archivo_adjunto', '4000', '4 MB', '9');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('pesos_archivo_adjunto', '8000', '8 MB', '10');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('pesos_archivo_adjunto', '16000', '16 MB', '11');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', '', '{ $ MULTILANG_SeleccioneUno}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', '_OPTGROUP_|{ $ MULTILANG_FrmAccionT1}', '', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', 'interna_guardar', '{ $ MULTILANG_FrmAccionGuardar}', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', 'interna_actualizar', '{ $ MULTILANG_FrmAccionActualizar}', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', 'interna_eliminar', '{ $ MULTILANG_FrmAccionEliminar}', '5');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', 'interna_escritorio', '{ $ MULTILANG_FrmAccionRegresar}', '6');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', 'interna_cargar', '{ $ MULTILANG_FrmAccionCargar}', '7');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', 'interna_limpiar', '{ $ MULTILANG_FrmAccionLimpiar}', '8');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', '_OPTGROUP_', '', '9');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', '_OPTGROUP_|{ $ MULTILANG_FrmAccionT2}', '______', '10');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', 'externa_formulario', '{ $ MULTILANG_FrmAccionExterna}', '11');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', 'externa_postcode', 'Ejecutar s&oacute;lo el c&oacute;digo POST del propio formulario', '12');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', 'externa_javascript', '{ $ MULTILANG_FrmAccionJS}', '13');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', '_OPTGROUP_', '', '14');
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
