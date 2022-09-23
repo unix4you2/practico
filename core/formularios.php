@@ -1201,13 +1201,15 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 
 
 
-
 <?php
+    //PCO_CargarFormulario("-36","0");
     //inicio depuracion panel CONSTRUCCION
-    $DepuracionCreacionFORM_AgregarBloque="Si";
+    $DepuracionCreacionFORM_AgregarBloque="SiXX";
     if ($DepuracionCreacionFORM_AgregarBloque=="Si")
 	{
 ?>
+
+
 		<script TYPE="text/javascript" LANGUAGE="JavaScript">
 			function OcultarCampos(cantidad_campos_existentes)
 				{
@@ -2362,21 +2364,39 @@ if ($PCO_Accion=="PCO_EditarFormulario")
         $barra_herramientas_modal='
             <a href="javascript:  $(\'#myModalElementoFormulario\').modal(\'hide\'); $(\'#myModalDisenoFormulario\').modal(\'show\');"><button type="button" class="btn btn-info">'.$MULTILANG_FrmDisCampos.'</button></a>
             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         PCO_CerrarDialogoModal($barra_herramientas_modal);
     ?>
     <!-- FIN MODAL ADICION DE CAMPOS -->
 
 
+
+
+
+
+
+
 <?php
 	} //Fin depuracion panel CONSTRUCCION
+
 ?>
-
-
-
-
-
-
-
 
 
 
