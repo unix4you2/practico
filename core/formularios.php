@@ -2948,7 +2948,23 @@ if ($PCO_Accion=="PCO_EditarFormulario")
     ?>
     <!-- FIN MODAL DISENO DE BOTONES -->
         
-
+        
+        
+        
+        
+        
+        
+        <script language="JavaScript">
+            function AgregarControlFormulario(){
+                    //Salta a edicion de contratista
+                    var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-36:0&Presentar_FullScreen=1&Precarga_EstilosBS=1";
+                    PCOJS_MostrarMensaje("<?php echo $MULTILANG_FrmMsj1; ?>","Cargando...","modal-wide oculto_impresion");
+                    $("#PCO_Modal_MensajeCuerpo").html('<iframe id="IFrameEmbebido" scrolling="yes" style="margin:10px; border:0px;" height=500 width=100% src="'+URLPopUp+'"></iframe>');
+                    $("#PCO_Modal_MensajeBotones").html('<button id="boton_filtrar" type="button" class="btn btn-outline btn-info" data-dismiss="modal" onclick="CargarFormulario();" >Cerrar</button></a>');
+            }
+        </script>
+            
+            
     <?php
 		// Inicia presentacion de ventana de edicion de formulario
 		$consulta_form=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
@@ -2956,10 +2972,17 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 
         //Barra basica de edicion de contenidos y controles
         $ContenidoBarraFlotante_Herramientas='
+        
+
+        
+        
             <div align=center style="color:#FFFFFF;"><br>
     			'.$MULTILANG_FrmObjetos.'<br>
-                    <a data-toggle="modal" href="#myModalElementoFormulario" title="'.$MULTILANG_FrmDesObjetos.'">
+                    <a data-toggle="modal" href="javascript: var LMQTP=AgregarControlFormulario();" title="'.$MULTILANG_FrmDesObjetos.'">
                             <i class="fa fa-th-list fa-3x fa-fw"></i>
+                    </a>
+                    <a data-toggle="modal" href="#myModalElementoFormulario" title="'.$MULTILANG_FrmDesObjetos.'">
+                            OLD <i class="fa fa-th-list fa-3x fa-fw"></i>
                     </a>                
                     <a data-toggle="modal" href="#myModalDisenoFormulario" title="'.$MULTILANG_FrmDesCampos.'">
                             <i class="fa fa-pencil-square-o fa-3x fa-fw"></i>
