@@ -153,6 +153,19 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '8', '{ $ MULTILANG_FrmBarraTipo4Summer}', '12');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '9', '{ $ MULTILANG_FrmBarraTipo5Summer}', '13');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '_OPTGROUP_', '', '14');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_boton', '', '{ $ MULTILANG_Ninguno}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_boton', ' btn ', '{ $ MULTILANG_BtnEstiloSimple}', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_boton', ' btn btn-default ', '{ $ MULTILANG_BtnEstiloPredeterminado}', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_boton', ' btn btn-primary ', '{ $ MULTILANG_BtnEstiloPrimario}', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_boton', ' btn btn-success ', '{ $ MULTILANG_BtnEstiloFinalizado}', '5');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_boton', ' btn btn-info ', '{ $ MULTILANG_BtnEstiloInformacion}', '6');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_boton', ' btn btn-warning ', '{ $ MULTILANG_BtnEstiloAdvertencia}', '7');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('estilos_boton', ' btn btn-danger ', '{ $ MULTILANG_BtnEstiloPeligro}', '8');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tamanos_boton', '', '{ $ MULTILANG_Predeterminado}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tamanos_boton', ' btn-xs ', '{ $ MULTILANG_Pequeno}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tamanos_boton', ' btn-sm ', '{ $ MULTILANG_Mediano}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tamanos_boton', ' btn-lg ', '{ $ MULTILANG_Grande}', '1');
+
 
 
 ALTER TABLE core_chat ADD INDEX recd (recd);
