@@ -139,7 +139,20 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', 'externa_postcode', 'Ejecutar s&oacute;lo el c&oacute;digo POST del propio formulario', '12');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', 'externa_javascript', '{ $ MULTILANG_FrmAccionJS}', '13');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_accion_botones', '_OPTGROUP_', '', '14');
-
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '_OPTGROUP_|{ $ MULTILANG_FrmBarraCKEditor}', '', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '0', '{ $ MULTILANG_FrmBarraTipo1}', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '1', '{ $ MULTILANG_FrmBarraTipo2}', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '2', '{ $ MULTILANG_FrmBarraTipo3}', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '3', '{ $ MULTILANG_FrmBarraTipo4}', '5');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '4', '{ $ MULTILANG_FrmBarraTipo5}', '6');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '_OPTGROUP_', '', '7');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '_OPTGROUP_|{ $ MULTILANG_FrmBarraSummer}', '', '8');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '5', '{ $ MULTILANG_FrmBarraTipo1Summer}', '9');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '6', '{ $ MULTILANG_FrmBarraTipo2Summer}', '10');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '7', '{ $ MULTILANG_FrmBarraTipo3Summer}', '11');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '8', '{ $ MULTILANG_FrmBarraTipo4Summer}', '12');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '9', '{ $ MULTILANG_FrmBarraTipo5Summer}', '13');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tipos_barra_editores', '_OPTGROUP_', '', '14');
 
 
 ALTER TABLE core_chat ADD INDEX recd (recd);
