@@ -4706,6 +4706,11 @@ function PCO_VerificarExtensionesPHP()
 		if (!extension_loaded('mbstring'))
 			PCO_Mensaje($MULTILANG_ErrExtension,'<b>mbstring:</b> '.$MULTILANG_ErrExtensionGenerica, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
+		//Verifica soporte para funciones POSIX
+		if (!extension_loaded('posix'))
+			PCO_Mensaje($MULTILANG_ErrExtension,'<b>posix:</b> '.$MULTILANG_ErrExtensionGenerica, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+
 		// Bloqueos por IP/pais http://stackoverflow.com/questions/15835274/file-get-contents-failed-to-open-stream-connection-refused
 
 		// Verifica el soporte para funciones especificas PHP
