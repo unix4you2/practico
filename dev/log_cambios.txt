@@ -40,6 +40,7 @@ LogCambios="
 * Enhan [KANBAN]: @jaimeaba3 Imágen de encabezado de informe es independiente de URL externa.
 * Enhan [COMP]: Actualizado Guzzle a 7.4.5 en componente de auto-trading-bot. (CVE-2022-27776,CVE-2022-29248,CVE-2022-31043,CVE-2022-31042,CVE-2022-31090,CVE-2022-31091) (RFC9110 Section 15.4, RFC6265 Section 5.3, RFC9110 Section 15.4)
 * Enhan [CHAT]:  Agregado índice a campo que indica si un chat ha sido leído o no por el destinatario.
+* Enhan [CORE]: Actualizado D3JS de 7.3.0 a 7.6.1
 
 "
 
