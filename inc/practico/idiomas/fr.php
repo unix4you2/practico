@@ -1124,7 +1124,7 @@
 	$MULTILANG_CumplirRequisitos='Doit rencontrer les éléments suivants';
 	$MULTILANG_CumplirPDO='Extension PDO activée';
 	$MULTILANG_CumplirDrivers='Pilote PDO pour le type de moteur de votre base de données cible';
-	$MULTILANG_CumplirGD='GD Extension 2 + gestion des graphiques et support pour FreeType 2 +. <Li> Extension SimpleXML';
+	$MULTILANG_CumplirGD='GD Extension 2 + gestion des graphiques et support pour FreeType 2 +. <Li> Extension SimpleXML.<li>Extension POSIX';
 	$MULTILANG_ChequeoDirectorios1='Vérification des répertoires';
 	$MULTILANG_ChequeoDirectorios2='Les fichiers et répertoires suivants doivent disposer d autorisations d écriture pour que l application fonctionne correctement';
 	$MULTILANG_ErrorEscritura='<b> trouvé des erreurs en essayant d écrire dans les répertoires d installation! </b>: <br> le chemin de la règle doit appartenir à l utilisateur qui exécute le serveur Web Scripts pratiques (usually apache <br> www, www-data or similar) and have 755 permissions for folders and 644 case for. <br> Un moyen rapide de mettre à jour ces autorisations peut être exécuté depuis la racine des commandes Practical: <li> find. -type d-exec chmod 755 {} \; (change all folder permissions) <li> find. -type f-exec chmod 644 {} \; (modifier toutes les autorisations de fichiers) <li> chown-R www-data * (en supposant que www-data est l utilisateur qui exécute le service Web)';
