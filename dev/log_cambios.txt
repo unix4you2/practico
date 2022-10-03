@@ -184,6 +184,30 @@ ScriptPHPAutorun=""
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
 
+Workaround:  //exec  shell_exec  system  passthru
+$Res=shell_exec("python dev/test/t_run_python.py john");
+echo "<hr>".$Res;
+
+$Res=shell_exec("perl dev/test/t_run_perl.pl john");
+echo "<hr>".$Res;
+
+$Res=shell_exec("nodejs dev/test/t_run_nodejs.js john");
+echo "<hr>".$Res;
+
+$Res=shell_exec("awk -e dev/test/t_run_awk.awk john");
+echo "<hr>".$Res;
+
+$Res=shell_exec("bash dev/test/t_run_bash.sh john");
+echo "<hr>".$Res;
+
+$Res=shell_exec("lua dev/test/t_run_lua.lua john");
+echo "<hr>".$Res;
+
+$Res=shell_exec("Rscript dev/test/t_run_rlang.r john");
+echo "<hr>".$Res;
+
+
+
 BPM
 
 
