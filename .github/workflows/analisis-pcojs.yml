@@ -1,4 +1,4 @@
-name: "CodeQL_PCOJSBasico"
+name: "CodeQL_PCO"
 
 on:
 #  push:
@@ -14,7 +14,6 @@ jobs:
   Trabajo01:
     name: Analisis_JS_Practico
     runs-on: ubuntu-latest
-    using: "composite"
 
 #    permissions:
 #      actions: read
