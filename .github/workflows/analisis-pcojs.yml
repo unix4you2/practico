@@ -15,11 +15,6 @@ jobs:
     name: Analisis_JS_Practico
     runs-on: ubuntu-latest
 
-#    permissions:
-#      actions: read
-#      contents: read
-#      security-events: write
-
 #    strategy:
 #      fail-fast: false
 #      matrix:
@@ -30,14 +25,13 @@ jobs:
     steps:
     - name: Instalando_BaseOS
       shell: bash
-      run: apt-get update
-           apt-get install git
+      run: apt-get -y update
+      run: apt-get -y install git
            
 
     - name: Pasando_JS
       shell: bash
       run: echo "Iniciando analisis JS"
-           apt-get update
           #script: echo "Generado"
 
     # Initializes the CodeQL tools for scanning.
