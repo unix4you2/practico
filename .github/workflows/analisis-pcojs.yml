@@ -23,16 +23,19 @@ jobs:
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
-    - name: Instalando_BaseOS
+    - name: Instalando: BaseOS+DEVTools
       shell: bash
-      run: apt-get -y update
-      run: apt-get -y install git
-           
+      run: apt-get -y update; apt-get -y upgrade; apt-get -y install git
 
-    - name: Pasando_JS
+    - name: Revision de versiones
       shell: bash
-      run: echo "Iniciando analisis JS"
+      run: echo "Revision de versiones"; php -v; git --version
+
+    - name: Activacion servicios basicos
+      shell: bash
+      run: systemctl stop mono-xsp4; systemctl start apache2
           #script: echo "Generado"
+
 
     # Initializes the CodeQL tools for scanning.
 #    - name: Initialize CodeQL
