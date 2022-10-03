@@ -25,7 +25,7 @@ jobs:
     steps:
     - name: Instalando BaseOS+DEVTools
       shell: bash
-      run: apt-get -y update; apt-get -y upgrade; apt-get -y install git
+      run: sudo apt-get -y update; sudo apt-get -y upgrade; sudo apt-get -y install git
 
     - name: Revision de versiones
       shell: bash
@@ -33,7 +33,7 @@ jobs:
 
     - name: Activacion servicios basicos
       shell: bash
-      run: systemctl stop mono-xsp4; systemctl start apache2
+      run: sudo systemctl stop mono-xsp4; sudo systemctl start apache2
           #script: echo "Generado"
 
 
