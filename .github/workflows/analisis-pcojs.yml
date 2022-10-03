@@ -1,4 +1,4 @@
-name: "CodeQL_PCO"
+name: "CodeQL_PCO_Fmk"
 
 on:
 #  push:
@@ -12,29 +12,27 @@ on:
 
 jobs:
   Trabajo01:
-    name: Analisis_JS_Practico
+    name: Pruebas Generales
     runs-on: ubuntu-latest
 
-#    strategy:
-#      fail-fast: false
-#      matrix:
-#        language: [ 'javascript' ]
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby' ]
-        # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
-
     steps:
-    - name: Instalando BaseOS+DEVTools
+    - name: PRE-Pruebas - Instalando BaseOS+DEVTools
       shell: bash
       run: sudo apt-get -y update; sudo apt-get -y upgrade; sudo apt-get -y install git
 
-    - name: Revision de versiones
+    - name: PRE-Pruebas - Activacion servicios basicos
       shell: bash
-      run: echo "Revision de versiones"; php -v; git --version
-
-    - name: Activacion servicios basicos
-      shell: bash
-      run: sudo systemctl stop mono-xsp4; sudo systemctl start apache2
+      run: sudo systemctl stop mono-xsp4; sudo systemctl start apache2; sudo systemctl status apache2
           #script: echo "Generado"
+
+    - name: PRE-Pruebas - Revision de versiones
+      shell: bash
+      run: echo "Revision de versiones"; php -v; git --version; ls /var
+
+    - name: PRE-Pruebas - Impresion exploratoria
+      shell: bash
+      run: sudo ls /var/www/html; pwd
+
 
 
     # Initializes the CodeQL tools for scanning.
