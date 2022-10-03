@@ -23,7 +23,7 @@ jobs:
         # Learn more about CodeQL language support at https://aka.ms/codeql-docs/language-support
 
     steps:
-    - name: Instalando: BaseOS+DEVTools
+    - name: Instalando BaseOS+DEVTools
       shell: bash
       run: apt-get -y update; apt-get -y upgrade; apt-get -y install git
 
