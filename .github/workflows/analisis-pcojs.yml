@@ -23,11 +23,17 @@ jobs:
     - name: PRE-Pruebas - Activacion servicios basicos
       shell: bash
       run: sudo systemctl stop mono-xsp4; sudo systemctl start apache2; sudo systemctl status apache2
-          #script: echo "Generado"
 
     - name: PRE-Pruebas - Revision de versiones
       shell: bash
-      run: echo "Revision de versiones"; php -v; git --version; ls /var
+      run: php -v; git --version
+
+    - name: PRE-Pruebas - Clonacion Repositorio
+      shell: bash
+      working-directory: /var/www/html
+      env:
+         Vble: MiVBLE
+      run: sudo rm -rf *; sudo git clone https://github.com/unix4you2/practico.git; sudo chmod -R 777 *
 
     - name: PRE-Pruebas - Impresion exploratoria
       shell: bash
@@ -67,3 +73,7 @@ jobs:
 #      uses: github/codeql-action/analyze@v2
 #      with:
 #        category: "/language:${{matrix.language}}"
+
+
+#https://docs.github.com/es/actions/using-workflows/workflow-syntax-for-github-actions
+#https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2004-Readme.md
