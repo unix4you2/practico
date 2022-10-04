@@ -22,7 +22,7 @@ jobs:
 
     - name: PRE-Pruebas - Activacion servicios basicos
       shell: bash
-      run: sudo systemctl stop mono-xsp4; sudo systemctl start apache2; sudo systemctl status apache2
+      run: sudo systemctl stop mono-xsp4; sudo systemctl start apache2; sudo systemctl status apache2; sudo systemctl start mysql.service
 
     - name: PRE-Pruebas - Revision de versiones
       shell: bash
@@ -33,11 +33,13 @@ jobs:
       working-directory: /var/www/html
       env:
          Vble: MiVBLE
-      run: sudo rm -rf *; sudo git clone https://github.com/unix4you2/practico.git; sudo chmod -R 777 *
+      run: sudo rm -rf *; sudo git clone https://github.com/unix4you2/practico.git; sudo chmod -R 777 *; cp dev/test/t_conf.php /var/www/html/practico/configuracion.php
+
+
 
     - name: PRE-Pruebas - Impresion exploratoria
       shell: bash
-      run: sudo ls /var/www/html; pwd
+      run: sudo ls /var/www/html/practico/; pwd; cat /var/www/html/practico/configuracion.php
 
 
 
