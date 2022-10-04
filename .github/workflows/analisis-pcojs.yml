@@ -33,7 +33,7 @@ jobs:
       working-directory: /var/www/html
       env:
          Vble: MiVBLE
-      run: sudo rm -rf *; sudo git clone https://github.com/unix4you2/practico.git; sudo chmod -R 777 *; cp dev/test/t_conf.php /var/www/html/practico/configuracion.php
+      run: sudo rm -rf *; sudo git clone https://github.com/unix4you2/practico.git; sudo chmod -R 777 *; cp /var/www/html/practico/dev/test/t_conf.php /var/www/html/practico/configuracion.php
 
 
 
