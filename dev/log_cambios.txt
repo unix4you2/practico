@@ -41,6 +41,15 @@ LogCambios="
 * Enhan [COMP]: Actualizado Guzzle a 7.4.5 en componente de auto-trading-bot. (CVE-2022-27776,CVE-2022-29248,CVE-2022-31043,CVE-2022-31042,CVE-2022-31090,CVE-2022-31091) (RFC9110 Section 15.4, RFC6265 Section 5.3, RFC9110 Section 15.4)
 * Enhan [CHAT]:  Agregado índice a campo que indica si un chat ha sido leído o no por el destinatario.
 * Enhan [CORE]: Actualizado D3JS de 7.3.0 a 7.6.1  (CWE-400: Uncontrolled Resource Consumption)
+* Enhan [CORE]: Compatibilidad PHP 8.1. Actualizada sintaxis en generacion de cadenas aleatorias en notacion de arreglos
+* Enhan [CORE]: Compatibilidad PHP 8.1. Ajustada sintaxis obsoleta de funcion PCO_BackupObtenerDatosTabla, parámetro vacío de PCO_NombreTabla
+* Enhan [CORE]: Compatibilidad PHP 8.1. Ajustada sintaxis obsoleta de funcion PCO_BackupObtenerTablasBD, parámetro vacío de PCO_ListaTablas
+* Enhan [CORE]: Compatibilidad PHP 8.1. Ajustada sintaxis obsoleta de funcion PCO_BackupObtenerTablasBD, parámetro vacío de TipoDeCopia
+* Enhan [CORE]: Compatibilidad PHP 8.1. Ajustada sintaxis obsoleta de funcion PCO_BuscarActualizaciones, parámetro vacío de PCOSESS_LoginUsuario
+* Enhan [CORE]: Compatibilidad PHP 8.1. Ajustada sintaxis obsoleta de funcion PCO_Mensaje, parámetro vacío de DEPRECATED_ancho
+* Enhan [CORE]: Compatibilidad PHP 8.1. Ajustada sintaxis obsoleta de funcion PCO_GenerarEtiquetasConsulta, parámetro vacío de ConsultaSQL
+
+
 
 "
 

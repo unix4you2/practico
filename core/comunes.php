@@ -2655,7 +2655,7 @@ function PCO_EsAdministrador($Usuario)
 	Salida:
 		Sentencias necesarias para insertar los datos en las tablas
 */
-function PCO_BackupObtenerDatosTabla($PCO_NombreTabla="",$codificacion_actual,$codificacion_destino,$transliterar_conversion)
+function PCO_BackupObtenerDatosTabla($PCO_NombreTabla,$codificacion_actual,$codificacion_destino,$transliterar_conversion)
 	{
 		$RegistrosEncontrados = PCO_EjecutarSQL('SELECT * FROM '.$PCO_NombreTabla)->fetchAll(PDO::FETCH_NUM);
 		$Datos = '';
@@ -2720,8 +2720,9 @@ function PCO_BackupObtenerColumnasTabla($PCO_NombreTabla="")
 		Retorna un arreglo con todas las tablas y su backup dividido en tres campos logicos de Nombre, SentenciaCreate y SentenciaInsert
 		Retorna 0 cuando se obtiene algun error
 */
-function PCO_BackupObtenerTablasBD($PCO_ListaTablas="",$TipoDeCopia="Estructura",$codificacion_actual,$codificacion_destino,$transliterar_conversion)
+function PCO_BackupObtenerTablasBD($PCO_ListaTablas,$TipoDeCopia,$codificacion_actual,$codificacion_destino,$transliterar_conversion)
 	{
+	    if ($TipoDeCopia=="") $TipoDeCopia="Estructura";
 		$TablasExistentes = PCO_EjecutarSQL('SHOW TABLES')->fetchAll();
 		$TablasSolicitadasBackup=explode(",",$PCO_ListaTablas);
 		$i=0;
@@ -4734,7 +4735,7 @@ function PCO_VerificarExtensionesPHP()
 	Salida:
 		Mensaje informativo en pantalla cuando se encuentren actualizaciones disponibles
 */
-function PCO_BuscarActualizaciones($PCOSESS_LoginUsuario='',$PCO_Accion)
+function PCO_BuscarActualizaciones($PCOSESS_LoginUsuario,$PCO_Accion)
 	{
 		global $MULTILANG_Atencion,$MULTILANG_ActAlertaVersion;
 		// Genera un aleatorio entre 1 y 10 para no sacar siempre el aviso y buscar nuevas versiones.
@@ -5543,7 +5544,7 @@ function PCO_ObtenerMicrotime()
         ancho - Ancho del espacio de trabajo definido en pixels o porcentaje sobre el contenedor principal.
         estilo - Especifica el punto donde sera publicado el mensaje para definir la hoja de estilos correspondiente.
 */
-function PCO_Mensaje($titulo,$texto,$DEPRECATED_ancho="",$icono,$estilo)
+function PCO_Mensaje($titulo,$texto,$DEPRECATED_ancho,$icono,$estilo)
     {
         global $MULTILANG_Cerrar;
         echo '<div class="'.$estilo.'" role="alert">
@@ -8980,7 +8981,7 @@ function PCO_ConstruirConsultaInforme($informe,$evitar_campos_ocultos=0)
 	Ver tambien:
 		<PCO_CargarInforme>
 */
-function PCO_GenerarEtiquetasConsulta($ConsultaSQL="",$informe)
+function PCO_GenerarEtiquetasConsulta($ConsultaSQL,$informe)
 	{
 		global $ConexionPDO,$ArchivoCORE,$TablasCore,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
