@@ -20,6 +20,8 @@
 	$NombreCortoEmpresa="Practico";
 	$NombreAplicacion="Framework";
 	$VersionAplicacion="1.0";
+	//Inclusiones de idioma basicos para resultados implicitos de framework
+	include_once("../../inc/practico/idiomas/es.php");
 
 	// Ejecuta los scripts de creacion de la BD si se requiere
 	$total_ejecutadas=0;
