@@ -60,7 +60,7 @@ jobs:
 
     - name: POST-Pruebas - Multicomando
       shell: bash
-      - run: |
+      run:
         echo "Run 01"
         echo "Run 02"
         ls
@@ -68,3 +68,4 @@ jobs:
 # CodeQL de supervivencia
 # WorkFlow Syntax:          https://docs.github.com/es/actions/using-workflows/workflow-syntax-for-github-actions
 # Paquetes Runner-Image:    https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2004-Readme.md
+# Validador Sintaxis YAML:  https://jsonformatter.org/yaml-validator
