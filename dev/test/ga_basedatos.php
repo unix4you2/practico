@@ -20,6 +20,7 @@
 	$NombreCortoEmpresa="Practico";
 	$NombreAplicacion="Framework";
 	$VersionAplicacion="1.0";
+	$PCOConnMotorBD="mysql";
 	//Inclusiones de idioma basicos para resultados implicitos de framework
 	include_once("../../inc/practico/idiomas/es.php");
 
@@ -39,7 +40,7 @@
 			$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
 			fclose($archivo_consultas);
  
-    echo ">>> Volcado de SCRIPTS: ".$total_consultas;
+    //echo ">>> Volcado de SCRIPTS: ".$total_consultas;
 
 			$arreglo_consultas = PCO_SegmentarSQL($total_consultas);
 			foreach($arreglo_consultas as $consulta)
