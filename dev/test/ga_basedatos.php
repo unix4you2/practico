@@ -16,6 +16,7 @@
 */
 
 	// Ejecuta los scripts de creacion de la BD si se requiere
+	$mensaje_final="";//Evita warning por falta de variable en inclusion manual
 	$total_ejecutadas=0;
 
 			include_once("../../core/configuracion.php");
@@ -25,15 +26,14 @@
 			//Abre el archivo con los queries dependiendo del motor
 			$RutaScriptSQL="../../ins/sql/practico.mysql";
 			
-			echo ">>> Ejecutando SCRIPTS en ".$RutaScriptSQL;
+	echo ">>> Ejecutando SCRIPTS en ".$RutaScriptSQL;
 			
 			$archivo_consultas=fopen($RutaScriptSQL,"r");
 			$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
 			fclose($archivo_consultas);
  
-        	echo ">>> Volcado de SCRIPTS: ".$total_consultas;
+    echo ">>> Volcado de SCRIPTS: ".$total_consultas;
 
- 
 			$arreglo_consultas = PCO_SegmentarSQL($total_consultas);
 			foreach($arreglo_consultas as $consulta)
 				{
@@ -71,5 +71,6 @@
             echo ">>> Se encontraron ERRORES al ejecutar: ";
             exit(1); //Finaliza con error
 		}
-	exit(0);
+	else
+	    exit(0);
 ?>
