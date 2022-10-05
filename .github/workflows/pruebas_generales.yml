@@ -1,0 +1,70 @@
+#
+#	 _
+#	|_) _ _  _ _|_. _ _					  	Copyright (C) 2012-2022
+#	|  | (_|(_  | |(_(_) 				  	John F. Arroyave Gutiérrez
+#	  www.practico.org					  	unix4you2@gmail.com
+#                                            All rights reserved.
+#   
+#	====================================
+#	   Set de pruebas: CodeQL y Otros
+#	====================================
+#	DESCRIPCION:    Archivo de definicion de pruebas automatizadas CodeQL+Github Actions+Otros
+#	                Se provee como reemplazo a las pruebas realizadas anteriormente en TravisCI
+#
+name: "PruebasGenerales"
+
+on:
+#  push:
+#    branches: [ "master" ]
+#  pull_request:
+#    branches: [ "master" ]
+#  schedule:
+#    - cron: '42 14 * * 0'
+  workflow_dispatch:
+    branches: [ "master" ]
+
+jobs:
+  Trabajo01:
+    name: Pruebas Generales
+    runs-on: ubuntu-latest
+    with:
+      queries: security-extended,security-and-quality
+
+    steps:
+    - name: PRE-Pruebas - Instalando BaseOS+DEVTools
+      shell: bash
+      run: sudo apt-get -y update; sudo apt-get -y upgrade; sudo apt-get -y install git
+
+    - name: PRE-Pruebas - Activacion servicios basicos
+      shell: bash
+      run: sudo systemctl stop mono-xsp4; sudo systemctl start apache2; sudo systemctl status apache2; sudo systemctl start mysql.service
+
+    - name: PRE-Pruebas - Revision de versiones
+      shell: bash
+      run: php -v; git --version
+
+    - name: PRE-Pruebas - Clonacion Repositorio
+      shell: bash
+      working-directory: /var/www/html
+      env:
+         Vble: MiVBLE
+      run: sudo rm -rf *; sudo git clone https://github.com/unix4you2/practico.git; sudo chmod -R 777 *; cp /var/www/html/practico/dev/test/ga_configuracion.php /var/www/html/practico/configuracion.php
+
+    - name: IN-Pruebas - Generacion de Base de Datos
+      shell: bash
+      run: sudo wget 'http://localhost/practico/dev/test/ga_basedatos.php'
+
+    - name: POST-Pruebas - Impresion exploratoria
+      shell: bash
+      run: sudo ls /var/www/html/practico/; pwd; cat /var/www/html/practico/configuracion.php
+
+    - name: POST-Pruebas - Multicomando
+      shell: bash
+      - run: |
+        echo "Run 01"
+        echo "Run 02"
+        ls
+
+# CodeQL de supervivencia
+# WorkFlow Syntax:          https://docs.github.com/es/actions/using-workflows/workflow-syntax-for-github-actions
+# Paquetes Runner-Image:    https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2004-Readme.md
