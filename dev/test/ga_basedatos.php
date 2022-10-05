@@ -15,8 +15,13 @@
 
 */
 
+    //Define variables requeridas (en ejeucion normal recibidas desde paso 3 del asistente)
+	$mensaje_final="";
+	$NombreCortoEmpresa="Practico";
+	$NombreAplicacion="Framework";
+	$VersionAplicacion="1.0";
+
 	// Ejecuta los scripts de creacion de la BD si se requiere
-	$mensaje_final="";//Evita warning por falta de variable en inclusion manual
 	$total_ejecutadas=0;
 
 			include_once("../../core/configuracion.php");

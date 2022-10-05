@@ -79,7 +79,7 @@ jobs:
         pwd
         sudo ls /var/www/html/practico/
         cat /var/www/html/practico/configuracion.php
-        cat ga_basedatos.php
+#        cat ga_basedatos.php
 
 
 # CodeQL de supervivencia
