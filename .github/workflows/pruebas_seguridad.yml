@@ -1,0 +1,27 @@
+#
+#	 _
+#	|_) _ _  _ _|_. _ _					  	Copyright (C) 2012-2022
+#	|  | (_|(_  | |(_(_) 				  	John F. Arroyave Gutiérrez
+#	  www.practico.org					  	unix4you2@gmail.com
+#                                            All rights reserved.
+#   
+#	====================================
+#	   Set de pruebas: CodeQL y Otros
+#	====================================
+#	DESCRIPCION:    Archivo de definicion de pruebas automatizadas CodeQL+Github Actions+Otros
+#	                Se provee como reemplazo a las pruebas realizadas anteriormente en TravisCI
+#
+name: "PruebasSeguridad_PSALM"
+
+on: [push, pull_request]
+
+jobs:
+  psalm:
+    name: Psalm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Psalm
+        uses: docker://vimeo/psalm-github-actions

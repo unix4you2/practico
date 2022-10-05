@@ -33,30 +33,48 @@ jobs:
     steps:
     - name: PRE-Pruebas - Instalando BaseOS+DEVTools
       shell: bash
-      run: sudo apt-get -y update; sudo apt-get -y upgrade; sudo apt-get -y install git
+      run: | 
+        sudo apt-get -y update; sudo apt-get -y upgrade
+        sudo apt-get -y install git
 
     - name: PRE-Pruebas - Activacion servicios basicos
       shell: bash
-      run: sudo systemctl stop mono-xsp4; sudo systemctl start apache2; sudo systemctl status apache2; sudo systemctl start mysql.service
+      run: | 
+        sudo systemctl stop mono-xsp4
+        sudo systemctl start apache2
+        sudo systemctl status apache2
+        sudo systemctl start mysql.service
 
-    - name: PRE-Pruebas - Revision de versiones
+    - name: PRE-Pruebas - Revision de versiones y paquetes
       shell: bash
-      run: php -v; git --version
+      run: | 
+        apache2 -v
+        php -v
+        git --version
 
     - name: PRE-Pruebas - Clonacion Repositorio
       shell: bash
       working-directory: /var/www/html
       env:
          Vble: MiVBLE
-      run: sudo rm -rf *; sudo git clone https://github.com/unix4you2/practico.git; sudo chmod -R 777 *; cp /var/www/html/practico/dev/test/ga_configuracion.php /var/www/html/practico/configuracion.php
+      run: | 
+        sudo rm -rf *
+        sudo git clone https://github.com/unix4you2/practico.git
+        sudo chmod -R 777 *
+        cp /var/www/html/practico/dev/test/ga_configuracion.php /var/www/html/practico/configuracion.php
 
     - name: IN-Pruebas - Generacion de Base de Datos
       shell: bash
-      run: sudo wget 'http://localhost/practico/dev/test/ga_basedatos.php'
+      run: | 
+        sudo wget 'http://localhost/practico/dev/test/ga_basedatos.php'
 
     - name: POST-Pruebas - Impresion exploratoria
       shell: bash
-      run: sudo ls /var/www/html/practico/; pwd; cat /var/www/html/practico/configuracion.php
+      run: | 
+        pwd
+        sudo ls /var/www/html/practico/
+        cat /var/www/html/practico/configuracion.php
+        cat ga_basedatos.php
 
     - name: POST-Pruebas - Multicomando
       shell: bash
