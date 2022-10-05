@@ -12,8 +12,8 @@
 #	                Se provee como reemplazo a las pruebas realizadas anteriormente en TravisCI
 #
 name: "PruebasGenerales"
-  with:
-    queries: security-extended,security-and-quality
+#  with:
+#    queries: security-extended,security-and-quality
 
 on:
 #  push:
