@@ -184,6 +184,8 @@ ScriptPHPAutorun=""
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
 
+Chequeo de versiones:  https://onlinephp.io/
+
 Workaround:  //exec  shell_exec  system  passthru
 $Res=shell_exec("python dev/test/t_run_python.py john");
 echo "<hr>".$Res;
