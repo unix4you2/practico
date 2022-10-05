@@ -12,6 +12,8 @@
 #	                Se provee como reemplazo a las pruebas realizadas anteriormente en TravisCI
 #
 name: "PruebasGenerales"
+  with:
+    queries: security-extended,security-and-quality
 
 on:
 #  push:
@@ -27,8 +29,6 @@ jobs:
   Trabajo01:
     name: Pruebas Generales
     runs-on: ubuntu-latest
-    with:
-      queries: security-extended,security-and-quality
 
     steps:
     - name: PRE-Pruebas - Instalando BaseOS+DEVTools
@@ -60,12 +60,13 @@ jobs:
 
     - name: POST-Pruebas - Multicomando
       shell: bash
-      run:
+      run: | 
         echo "Run 01"
         echo "Run 02"
         ls
 
 # CodeQL de supervivencia
 # WorkFlow Syntax:          https://docs.github.com/es/actions/using-workflows/workflow-syntax-for-github-actions
+# Analisis de seguridad:    https://docs.github.com/es/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning
 # Paquetes Runner-Image:    https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2004-Readme.md
 # Validador Sintaxis YAML:  https://jsonformatter.org/yaml-validator
