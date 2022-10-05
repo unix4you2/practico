@@ -51,6 +51,7 @@ jobs:
         apache2 -v
         php -v
         git --version
+        apt-cache search php
 
     - name: PRE-Pruebas - Clonacion Repositorio
       shell: bash
@@ -58,6 +59,7 @@ jobs:
       env:
          Vble: MiVBLE
       run: | 
+        pwd
         sudo rm -rf *
         sudo git clone https://github.com/unix4you2/practico.git
         sudo chmod -R 777 *
@@ -65,8 +67,11 @@ jobs:
 
     - name: IN-Pruebas - Generacion de Base de Datos
       shell: bash
+      working-directory: /var/www/html/practico/dev/test
       run: | 
-        sudo wget 'http://localhost/practico/dev/test/ga_basedatos.php'
+         pwd
+         php ga_basedatos.php
+#        sudo wget 'http://localhost/practico/dev/test/ga_basedatos.php'
 
     - name: POST-Pruebas - Impresion exploratoria
       shell: bash
@@ -76,12 +81,6 @@ jobs:
         cat /var/www/html/practico/configuracion.php
         cat ga_basedatos.php
 
-    - name: POST-Pruebas - Multicomando
-      shell: bash
-      run: | 
-        echo "Run 01"
-        echo "Run 02"
-        ls
 
 # CodeQL de supervivencia
 # WorkFlow Syntax:          https://docs.github.com/es/actions/using-workflows/workflow-syntax-for-github-actions
