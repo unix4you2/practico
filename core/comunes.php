@@ -3677,7 +3677,7 @@ function PCO_TextoAleatorio($longitud)
 		$clave="";
 		for($i=0;$i<$longitud;$i++)
 			{
-				$clave .= $plantilla{rand(0,strlen($plantilla)-1)};
+				$clave .= $plantilla[rand(0,strlen($plantilla)-1)];
 			}
 		return $clave;
 	}
