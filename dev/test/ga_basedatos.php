@@ -28,9 +28,11 @@
 	include_once("../../inc/practico/idiomas/es.php");
 
 	// Ejecuta los scripts de creacion de la BD si se requiere
+	$hay_error=0;
 	$total_ejecutadas=0;
 
-			include_once("../../core/configuracion.php");
+			//include_once("../../core/configuracion.php");
+			require("../../dev/test/ga_configuracion.php"); //Reemplaza configuracion estandar por el set de pruebas
 			include_once("../../core/conexiones.php");
 			include_once("../../core/comunes.php");
 			
@@ -43,7 +45,7 @@
 			$total_consultas= fread($archivo_consultas,filesize($RutaScriptSQL));
 			fclose($archivo_consultas);
  
-    //echo ">>> Volcado de SCRIPTS: ".$total_consultas;
+    //echo ">>> Volcado de SCRIPTS: ".$total_consultas;  //En caso de desear un eco de todas las consultas a ejecutar sobre el CI
 
 			$arreglo_consultas = PCO_SegmentarSQL($total_consultas);
 			foreach($arreglo_consultas as $consulta)

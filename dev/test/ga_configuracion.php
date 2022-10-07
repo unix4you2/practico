@@ -14,9 +14,9 @@
 	
 */
 $ServidorBD='localhost';
-$BaseDatos='practico';
+$BaseDatos='practico_testqa';       //Base de datos en la maquina de pruebas C.I.
 $UsuarioBD='root';
-$PasswordBD='root';
+$PasswordBD='root';                 //Password de motor en maquina de pruebas C.I.
 $MotorBD='mysql';
 $PuertoBD='';
 $NombreRAD='Practico';
