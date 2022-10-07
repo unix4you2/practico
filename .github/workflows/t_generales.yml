@@ -69,11 +69,12 @@ jobs:
       shell: bash
       working-directory: /var/www/html/practico/dev/test
       run: | 
+         mysql -uroot -p'mypass' -e 'CREATE DATABASE practico;'
+         mysql -uroot -p'mypass' -e 'GRANT ALL PRIVILEGES ON practico.* TO root@localhost IDENTIFIED BY "mypass" '
          pwd
          php ga_basedatos.php
 #        sudo wget 'http://localhost/practico/dev/test/ga_basedatos.php'
-#mysql -uroot -p$*PASSWORD_OF_MYSQL_ROOT_USER* -e "CREATE DATABASE $MAINDB"
-#mysql -uroot -p$*PASSWORD_OF_MYSQL_ROOT_USER* -e "GRANT ALL PRIVILEGES ON $MAINDB.* TO $MAINDB@localhost IDENTIFIED BY '$PASSWDDB!'"
+
 
     - name: POST-Pruebas - Impresion exploratoria
       shell: bash
