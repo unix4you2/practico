@@ -905,3 +905,16 @@ CREATE TABLE core_modulos_app (
   PRIMARY KEY  (id),
   UNIQUE (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_scripts;
+CREATE TABLE core_scripts (
+  id int(10) AUTO_INCREMENT,
+  titulo varchar(255) default '',
+  codigo_script varchar(255),
+  fecha_creacion date NOT NULL,
+  descripcion varchar(255) default '',
+  creado_por varchar(255) default '',
+  lenguaje varchar(20) default '',
+  cuerpo mediumtext,
+  PRIMARY KEY  (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
