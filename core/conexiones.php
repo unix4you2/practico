@@ -96,7 +96,7 @@
 	function PCO_NuevaConexionBD($PCOConnMotorBD,$PCOConnPuertoBD,$PCOConnBaseDatos,$PCOConnServidorBD,$PCOConnUsuarioBD,$PCOConnPasswordBD)
 		{
 			global $MULTILANG_Detalles,$MULTILANG_Basedatos,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_TipoMotor,$MULTILANG_Servidor;
-			global $PCOVAR_Administradores,$ZonaHoraria;
+			global $PCOVAR_Administradores,$ZonaHoraria,$mensaje_final;
 			try
 				{
 					// Crea la conexion de acuerdo al tipo de motor

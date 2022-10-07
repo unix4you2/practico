@@ -16,11 +16,14 @@
 */
 
     //Define variables requeridas (en ejeucion normal recibidas desde paso 3 del asistente)
+	global $mensaje_final;
 	$mensaje_final="";
 	$NombreCortoEmpresa="Practico";
 	$NombreAplicacion="Framework";
 	$VersionAplicacion="1.0";
 	$PCOConnMotorBD="mysql";
+	$NombreRAD="Practico";
+	
 	//Inclusiones de idioma basicos para resultados implicitos de framework
 	include_once("../../inc/practico/idiomas/es.php");
 

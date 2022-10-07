@@ -16,6 +16,7 @@ ArchivoVersion=" inc/version_actual.txt "
 ListaArchivos="
 index.php
 core/comunes.php
+core/conexiones.php
 
 xml/*
 inc/practico/idiomas/*
@@ -48,6 +49,7 @@ LogCambios="
 * Enhan [CORE]: Compatibilidad PHP 8.1. Ajustada sintaxis obsoleta de funcion PCO_BuscarActualizaciones, parámetro vacío de PCOSESS_LoginUsuario
 * Enhan [CORE]: Compatibilidad PHP 8.1. Ajustada sintaxis obsoleta de funcion PCO_Mensaje, parámetro vacío de DEPRECATED_ancho
 * Enhan [CORE]: Compatibilidad PHP 8.1. Ajustada sintaxis obsoleta de funcion PCO_GenerarEtiquetasConsulta, parámetro vacío de ConsultaSQL
+* Enhan [CORE]: Compatibilidad PHP 8.1. Ajustada sintaxis obsoleta de variable no definida NombreRAD
 * Enhan [CORE]: Capacidad de multilenguaje.  Ahora el Framweork permite interactuar con múltiples lenguajes de programación, configurables por sus parámetros y mediante los cuales se podría tener una aplicación desarrollada en múltiples lenguajes a la vez, donde todos convergen al mismo punto.   La sintaxis de variables en notacion PHP y su reemplazo dinámico sobre cada script permite además que variables de PHP sean pasadas de manera transparente a cualquier otro lenguaje de programción disponible del lado del servidor.
 
 
