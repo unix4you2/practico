@@ -20,7 +20,15 @@
             "homepage": "https://github.com/unix4you2"
         }
     ],
-    
+
+    "support": 
+        {
+            "issues": "https://github.com/unix4you2/practico/issues",
+            "forum": "https://github.com/unix4you2/practico/discussions",
+            "wiki": "https://github.com/unix4you2/practico/wiki",
+            "source": "https://github.com/unix4you2/practico"
+        },
+
     "minimum-stability": "stable",
     
     "config": {
