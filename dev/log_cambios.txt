@@ -17,8 +17,10 @@ ListaArchivos="
 index.php
 core/comunes.php
 core/conexiones.php
+inc/components/*
 
 xml/*
+inc/autoload.php
 inc/practico/idiomas/*
 inc/practico/def_basedatos.php
 inc/bootstrap/js/practico*
