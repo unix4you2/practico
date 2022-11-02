@@ -51,7 +51,6 @@ jobs:
         apache2 -v
         php -v
         git --version
-        apt-cache search php
 
     - name: PRE-Pruebas - Clonacion Repositorio
       shell: bash
@@ -76,13 +75,47 @@ jobs:
 #        sudo wget 'http://localhost/practico/dev/test/ga_basedatos.php'
 
 
+
+
+
+
+    - name: IN-Sintaxis - Verificacion de compatibilidad versiones emergentes
+      shell: bash
+      working-directory: /var/www/html/practico/dev/test
+      run: | 
+        pwd
+        sh dev/test/t_sintaxis.sh
+
+    - name: IN-FuncionesObsoletas - Verificacion funciones obsoletas - deprecated
+      shell: bash
+      working-directory: /var/www/html/practico/dev/test
+      run: | 
+        pwd
+        php dev/test/t_obsoletas.php
+
+    - name: IN-ArchivosNucleares
+      shell: bash
+      working-directory: /var/www/html/practico/dev/test
+      run: | 
+        pwd
+        php dev/test/t_archivos.php
+
+
+
+
+
+
+#Para chequeos de sintaxis JS y CSS revisar repo https://github.com/elementary/website
+#  - dev/parche2zip.sh                 # Script para generacion de parches entre versiones
+#  - dev/practico2zip.sh              # Script para empaquetado y distribución de nuevas versiones
+
     - name: POST-Pruebas - Impresion exploratoria
       shell: bash
       run: | 
         pwd
-        sudo ls /var/www/html/practico/
-        cat /var/www/html/practico/configuracion.php
-#        cat ga_basedatos.php
+        echo "Configuracion de basse para el Framework de pruebas"; cat /var/www/html/practico/configuracion.php
+        echo "Paqueteria y versiones disponibles de PHP"; apt-cache search php
+
 
 
 # CodeQL de supervivencia
