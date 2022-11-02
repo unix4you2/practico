@@ -1,0 +1,84 @@
+{
+    "name": "practico/framework",
+    "description": "Practico Framework es una herramienta low-code de código abierto para el diseño automático de aplicaciones web y progresivas de manera ágil",
+    "type": "project",
+    "homepage": "https://www.practico.org",
+
+    "keywords": ["framework","php framework","web development","agile","low code"],
+
+    "require": {
+        "php": ">=5.3.0 || ^7.2 || ^8.0",
+        "components/jquery": "3.6.0"
+    },
+    
+    "license": "GPL-3.0",
+    
+    "authors": [
+        {
+            "name": "John F. Arroyave Gutierrez",
+            "email": "unix4you2@gmail.com",
+            "homepage": "https://github.com/unix4you2"
+        }
+    ],
+    
+    "minimum-stability": "stable",
+    
+    "config": {
+        "vendor-dir": "inc/"
+    },
+
+    "_PCORem01": "###########################################################",
+    "_PCORem02": "######## Configuraciones comunes. NO USADAS (XXX_) ########",
+    "_PCORem03": "###########################################################",
+    "XXX_autoload": {
+        "classmap": [
+          "test/"
+        ],
+        "psr-4": {
+            "Composer\\Pcre\\": "src"
+        },
+        "files": [
+          "test/Supposition/format.php",
+          "test/Supposition/provided.php"
+        ]
+    },
+    "XXX_extra": {
+        "branch-alias": {
+            "dev-main": "2.x-dev"
+        },
+        "thanks": {
+            "name": "symfony/contracts",
+            "url": "https://github.com/symfony/contracts"
+        }
+    },
+    "XXX_scripts": {
+        "test": "SYMFONY_PHPUNIT_REMOVE_RETURN_TYPEHINT=1 vendor/bin/simple-phpunit",
+        "test-ci": "vendor/bin/simple-phpunit --coverage-text",
+        "phpstan": "phpstan analyse"
+    },
+    "XXX_config": {
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "XXX_archive": {
+        "exclude": [
+            "/test/**",
+            "/test"]
+    },
+
+    "_PCORem04": "###########################################################",
+    "_PCORem05": "########         Composer de supervivencia         ########",
+    "_PCORem06": "###########################################################",
+    "_PCORem07": "Sitio: https://getcomposer.org/   Paquetes: https://packagist.org/",
+    "_PCORem08": "Descarga: curl https://getcomposer.org/installer -o composer-setup.php",
+    "_PCORem09": "Instalacion: php composer-setup.php --install-dir=/usr/local/bin --filename=composer",
+    "_PCORem10": "Configuracion: composer init (crea el .json base)",
+    "_PCORem11": "Adicion de un paquete: composer require vendor/package",
+    "_PCORem12": "Instalar todas las dependencias: composer install ",
+    "_PCORem13": "Actualizar dependencias si se ha cambiado el JSON: composer update  O  composer update su-dependencia",
+    "_PCORem14": "Usar carga automatica en el proyecto:  require_once(__DIR__ . '/inc/autoload.php');  VER https://www.php-fig.org/psr/psr-4/",
+    "_PCORem15": "Escribir un nuevo cargador bajo demanda: composer dump-autoload",
+    "_PCORem16": "Ejecutar un script definido en el json bajo demanda: composer run su-script",
+    "_PCORem17": "Validar JSON antes de publicar en https://packagist.org/: composer validate",
+    "_PCORem18": "Actualizar composer a su ultima version: composer self-update"
+}
