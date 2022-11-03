@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bed9f5def4deb85370360c62b2f5015a",
+    "content-hash": "9351d06f500f6145361d84f674025e00",
     "packages": [
         {
             "name": "components/jquery",
@@ -54,6 +54,20 @@
                 "wiki": "http://docs.jquery.com/"
             },
             "time": "2021-03-20T19:13:42+00:00"
+        },
+        {
+            "name": "jbdemonte/barcode",
+            "version": "2.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jbdemonte/barcode",
+                "reference": "tags/php-barcode-2.0.3/"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/jbdemonte/barcode/releases/download/php-barcode-2.0.3/php-barcode-2.0.3.zip"
+            },
+            "type": "library"
         }
     ],
     "packages-dev": [],

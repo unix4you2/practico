@@ -51,6 +51,23 @@
                 "wiki": "http://docs.jquery.com/"
             },
             "install-path": "../components/jquery"
+        },
+        {
+            "name": "jbdemonte/barcode",
+            "version": "2.0.3",
+            "version_normalized": "2.0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jbdemonte/barcode",
+                "reference": "tags/php-barcode-2.0.3/"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/jbdemonte/barcode/releases/download/php-barcode-2.0.3/php-barcode-2.0.3.zip"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "install-path": "../jbdemonte/barcode"
         }
     ],
     "dev": true,

@@ -42,7 +42,7 @@
      GNU junto con este programa. Si no, vea <http://www.gnu.org/licenses/>
 */
 
-  require '../inc/bargen/php-barcode.php';
+  require '../inc/jbdemonte/barcode/php-barcode.php';
   
 	// Recupera variables recibidas para su uso como globales (equivale a register_globals=on en php.ini)
 	if (!ini_get('register_globals'))

@@ -6,9 +6,29 @@
 
     "keywords": ["framework","php framework","web development","agile","low code"],
 
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "jbdemonte/barcode",
+                "version": "2.0.3",
+                "dist": {
+                    "url": "https://github.com/jbdemonte/barcode/releases/download/php-barcode-2.0.3/php-barcode-2.0.3.zip",
+                    "type": "zip"
+                },
+                "source": {
+                    "url": "https://github.com/jbdemonte/barcode",
+                    "type": "git",
+                    "reference": "tags/php-barcode-2.0.3/"
+                }
+            }
+        }
+    ],
+
     "require": {
         "php": ">=5.3.0 || ^7.2 || ^8.0",
-        "components/jquery": "3.6.0"
+        "components/jquery": "3.6.0",
+        "jbdemonte/barcode":"2.0.3"
     },
     
     "license": "GPL-3.0",
