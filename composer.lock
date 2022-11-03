@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9351d06f500f6145361d84f674025e00",
+    "content-hash": "584948c4163b3d9c94fd9a073800e872",
     "packages": [
         {
             "name": "components/jquery",
@@ -54,6 +54,20 @@
                 "wiki": "http://docs.jquery.com/"
             },
             "time": "2021-03-20T19:13:42+00:00"
+        },
+        {
+            "name": "d3js/d3js",
+            "version": "7.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/d3js/d3js",
+                "reference": "tags/v7.6.1/"
+            },
+            "dist": {
+                "type": "tar",
+                "url": "https://registry.npmjs.org/d3/-/d3-7.6.1.tgz"
+            },
+            "type": "library"
         },
         {
             "name": "jbdemonte/barcode",

@@ -22,13 +22,30 @@
                     "reference": "tags/php-barcode-2.0.3/"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "d3js/d3js",
+                "version": "7.6.1",
+                "dist": {
+                    "url": "https://registry.npmjs.org/d3/-/d3-7.6.1.tgz",
+                    "type": "tar"
+                },
+                "source": {
+                    "url": "https://github.com/d3js/d3js",
+                    "type": "git",
+                    "reference": "tags/v7.6.1/"
+                }
+            }
         }
     ],
 
     "require": {
         "php": ">=5.3.0 || ^7.2 || ^8.0",
         "components/jquery": "3.6.0",
-        "jbdemonte/barcode":"2.0.3"
+        "jbdemonte/barcode": "2.0.3",
+        "d3js/d3js": "7.6.1"
     },
     
     "license": "GPL-3.0",
