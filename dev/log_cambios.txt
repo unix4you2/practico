@@ -20,6 +20,7 @@ core/codigobarras.php
 core/conexiones.php
 inc/components/*
 inc/jbdemonte/*
+inc/d3js/*
 
 xml/*
 inc/autoload.php
@@ -214,6 +215,15 @@ ScriptPHPAutorun=""
 ########################################################################
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
+
+PARA PASAR A DEPENDENCIA_
+ace                        chat        elusive-iconfont  http        map-icons  phpexcel     reactjs
+ace_practico               ckeditor    face-detect       index.html  mxgraph    php-saml     summernote
+font-awesome      ionicons    oauth      practico     typicons
+bootstrap                  composer    fonts            octicons   practico_se  version_actual.txt
+bootstrap-material-design     html2canvas       jquery      pclzip     qrcode       weather-icons
+
+
 
 Chequeo de versiones:  https://onlinephp.io/
 
