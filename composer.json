@@ -38,18 +38,21 @@
     "_PCORem01": "###########################################################",
     "_PCORem02": "######## Configuraciones comunes. NO USADAS (XXX_) ########",
     "_PCORem03": "###########################################################",
+    
+    "_PCORem19": "Propiedad autoload para cuando se requiera cargar clases propias. Cambios aqui requieren composer dump-autoload para actualizar el autoload.php",
     "XXX_autoload": {
         "classmap": [
           "test/"
         ],
         "psr-4": {
-            "Composer\\Pcre\\": "src"
+            "MiNamespace\\": "mi_carpeta/"
         },
         "files": [
           "test/Supposition/format.php",
           "test/Supposition/provided.php"
         ]
     },
+    
     "XXX_extra": {
         "branch-alias": {
             "dev-main": "2.x-dev"
@@ -88,5 +91,7 @@
     "_PCORem15": "Escribir un nuevo cargador bajo demanda: composer dump-autoload",
     "_PCORem16": "Ejecutar un script definido en el json bajo demanda: composer run su-script",
     "_PCORem17": "Validar JSON antes de publicar en https://packagist.org/: composer validate",
-    "_PCORem18": "Actualizar composer a su ultima version: composer self-update"
+    "_PCORem18": "Actualizar composer a su ultima version: composer self-update",
+    "_PCORem98": "Error tiempo de proceso de composer EJ:  [...] The process git clone [...] exceeded the timeout of 300 seconds.  SLN: instalar cambiando el tiempo: COMPOSER_PROCESS_TIMEOUT=3600 composer install",
+    "_PCORem99": "Error de memoria limite EJ: Fatal error: Allowed memory size of 536870912 bytes exhausted. SLN: Ampliar valor de memory_limit = xxx en php.ini"
 }
