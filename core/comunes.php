@@ -758,7 +758,7 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
         			    if ($Ubicacion=='formulario')
                             $CadenaInOpcion= '<ul type="button" class="btn '.$RegistroOpcion["clase_contenedor"].'"><i class="'.$RegistroOpcion["imagen"].' fa-fw"></i><span>'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'</span></ul>';
         			    if ($Ubicacion=='escritorio')
-                            $CadenaInOpcion= '<button class="btn btn-default"><i class="'.$RegistroOpcion["imagen"].' fa-3x fa-fw"></i><br><span class="btn-xs">'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'</span></button>';
+                            $CadenaInOpcion= '<button style="margin-left:7px;margin-bottom:7px;" class="btn btn-default"><i class="'.$RegistroOpcion["imagen"].' fa-3x fa-fw"></i><br><span class="btn-xs">'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]).'</span></button>';
         			    if ($Ubicacion=='lateral')
                             $CadenaInOpcion= '<i class="'.$RegistroOpcion["imagen"].'"></i>'.PCO_ReemplazarVariablesPHPEnCadena($RegistroOpcion["texto"]);
         			}
