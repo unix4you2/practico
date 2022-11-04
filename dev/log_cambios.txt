@@ -66,6 +66,7 @@ LogCambios="
 * Enhan [CORE]: Adicion de jbdemonte/barcode como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 * Enhan [CORE]: Adicion de D3JS como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 * Enhan [CORE]: Adicion y actualizacion de jquery/migrate version 3.3.2 a 3.4.0 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
+* Enhan [CORE]: Eliminacion dependencia innecesaria JQuery-UI 1.8.  Cualquier uso manual de la misma continúa con compatibilidad en versiones actualizadas, versiones nuevas no la traerán por defecto.
 
 
 "
