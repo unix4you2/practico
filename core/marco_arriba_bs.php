@@ -284,7 +284,7 @@
 	</script>
 
     <!-- jQuery -->
-	<script type="text/javascript" src="inc/jquery/jquery-3.6.0.min.js"></script>
+	<script type="text/javascript" src="inc/jquery/jquery/jquery-3.6.1.min.js"></script>
 	<script type="text/javascript" src="inc/jquery/plugins/jquery-migrate-3.3.2.min.js"></script> <!-- sin min para desarrollo -->
 
     <!-- Bootstrap Core JavaScript -->

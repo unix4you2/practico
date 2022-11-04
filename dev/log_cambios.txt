@@ -18,9 +18,11 @@ index.php
 core/comunes.php
 core/codigobarras.php
 core/conexiones.php
-inc/components/*
+core/marco_arriba_bs.php
+inc/jquery/jquery/*
 inc/jbdemonte/*
 inc/d3js/*
+ins/core/marco_abajo.php
 
 xml/*
 inc/autoload.php
@@ -58,7 +60,7 @@ LogCambios="
 * Enhan [CORE]: Compatibilidad PHP 8.1. Ajustada sintaxis obsoleta de variable no definida NombreRAD
 * Enhan [CORE]: Capacidad de multilenguaje.  Ahora el Framweork permite interactuar con múltiples lenguajes de programación, configurables por sus parámetros y mediante los cuales se podría tener una aplicación desarrollada en múltiples lenguajes a la vez, donde todos convergen al mismo punto.   La sintaxis de variables en notacion PHP y su reemplazo dinámico sobre cada script permite además que variables de PHP sean pasadas de manera transparente a cualquier otro lenguaje de programción disponible del lado del servidor.
 * Enhan [CORE]: Inclusion de Composer sobre el nucleo de desarrollo
-* Enhan [CORE]: Adicion de components/jquery version 3.6.0 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
+* Enhan [CORE]: Adicion de jquery/jquery version 3.6.1 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 * Enhan [CORE]: Adicion de jbdemonte/barcode como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 * Enhan [CORE]: Adicion de D3JS como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 
