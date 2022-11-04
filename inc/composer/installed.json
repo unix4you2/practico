@@ -18,6 +18,30 @@
             "install-path": "../d3js/d3js"
         },
         {
+            "name": "facebook/react",
+            "version": "18.2.0",
+            "version_normalized": "18.2.0.0",
+            "dist": {
+                "type": "file",
+                "url": "https://unpkg.com/react@18.2.0/umd/react.production.min.js"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "install-path": "../facebook/react"
+        },
+        {
+            "name": "facebook/react-dom",
+            "version": "18.2.0",
+            "version_normalized": "18.2.0.0",
+            "dist": {
+                "type": "file",
+                "url": "https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"
+            },
+            "type": "library",
+            "installation-source": "dist",
+            "install-path": "../facebook/react-dom"
+        },
+        {
             "name": "jbdemonte/barcode",
             "version": "2.0.3",
             "version_normalized": "2.0.3.0",

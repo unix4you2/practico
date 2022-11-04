@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "594bf91878cf4915c46d46c55cc83238",
+    "content-hash": "3dd992c588776f778fa29f7fbbd23c06",
     "packages": [
         {
             "name": "d3js/d3js",
@@ -17,6 +17,24 @@
             "dist": {
                 "type": "tar",
                 "url": "https://registry.npmjs.org/d3/-/d3-7.6.1.tgz"
+            },
+            "type": "library"
+        },
+        {
+            "name": "facebook/react",
+            "version": "18.2.0",
+            "dist": {
+                "type": "file",
+                "url": "https://unpkg.com/react@18.2.0/umd/react.production.min.js"
+            },
+            "type": "library"
+        },
+        {
+            "name": "facebook/react-dom",
+            "version": "18.2.0",
+            "dist": {
+                "type": "file",
+                "url": "https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js"
             },
             "type": "library"
         },
