@@ -39,7 +39,6 @@
                 }
             }
         },
-
         {
             "type": "package",
             "package": {
@@ -51,12 +50,39 @@
                     "type": "file"
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "jquery/migrate",
+                "version": "3.4.0",
+                "type": "jquery",
+                "dist": {
+                    "url": "https://code.jquery.com/jquery-migrate-3.4.0.min.js",
+                    "type": "file"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "jquery/migrate-devel",
+                "version": "3.4.0",
+                "type": "jquery",
+                "dist": {
+                    "url": "https://code.jquery.com/jquery-migrate-3.4.0.js",
+                    "type": "file"
+                }
+            }
         }
+
     ],
 
     "require": {
         "php": ">=5.3.0 || ^7.2 || ^8.0",
         "jquery/jquery": "3.6.1",
+        "jquery/migrate": "3.4.0",
+        "jquery/migrate-devel": "3.4.0",
         "jbdemonte/barcode": "2.0.3",
         "d3js/d3js": "7.6.1"
     },

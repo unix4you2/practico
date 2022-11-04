@@ -20,6 +20,8 @@ core/codigobarras.php
 core/conexiones.php
 core/marco_arriba_bs.php
 inc/jquery/jquery/*
+inc/jquery/migrate/*
+inc/jquery/migrate-devel/*
 inc/jbdemonte/*
 inc/d3js/*
 ins/core/marco_abajo.php
@@ -63,6 +65,7 @@ LogCambios="
 * Enhan [CORE]: Adicion y actualizacion de jquery/jquery version 3.6.0 a 3.6.1 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 * Enhan [CORE]: Adicion de jbdemonte/barcode como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 * Enhan [CORE]: Adicion de D3JS como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
+* Enhan [CORE]: Adicion y actualizacion de jquery/migrate version 3.3.2 a 3.4.0 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 
 
 "

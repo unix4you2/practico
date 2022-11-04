@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4b36f375856c6d0cb0e65a869900403e",
+    "content-hash": "594bf91878cf4915c46d46c55cc83238",
     "packages": [
         {
             "name": "d3js/d3js",
@@ -40,6 +40,24 @@
             "dist": {
                 "type": "file",
                 "url": "https://code.jquery.com/jquery-3.6.1.min.js"
+            },
+            "type": "jquery"
+        },
+        {
+            "name": "jquery/migrate",
+            "version": "3.4.0",
+            "dist": {
+                "type": "file",
+                "url": "https://code.jquery.com/jquery-migrate-3.4.0.min.js"
+            },
+            "type": "jquery"
+        },
+        {
+            "name": "jquery/migrate-devel",
+            "version": "3.4.0",
+            "dist": {
+                "type": "file",
+                "url": "https://code.jquery.com/jquery-migrate-3.4.0.js"
             },
             "type": "jquery"
         }
