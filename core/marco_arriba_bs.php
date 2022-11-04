@@ -312,8 +312,8 @@
     <link  rel="stylesheet" href="inc/bootstrap/css/plugins/ajax-bootstrap-select/ajax-bootstrap-select.min.css" rel="stylesheet">
 
     <!-- ReactJS -->
-    <script src="inc/reactjs/react.production.min.js" crossorigin></script>  <!-- react.production.min.js | react.development.js -->
-    <script src="inc/reactjs/react-dom.production.min.js" crossorigin></script>
+    <script src="inc/facebook/react/react.production.min.js" crossorigin></script>  <!-- react.production.min.js | react.development.js -->
+    <script src="inc/facebook/react-dom/react-dom.production.min.js" crossorigin></script>
 
     <?php
         // Agrega soporte para PWA si aplica
