@@ -47,5 +47,7 @@
 echo "##############################"
 echo " Verificando sintaxis general"
 echo "##############################"
+cd ..
+cd ..
 find core -name "*.php" -print0 | xargs -0 -n1 -P8 php -l
 #find mod/pcoder -name "*.php" -print0 | xargs -0 -n1 -P8 php -l
