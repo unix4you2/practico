@@ -209,8 +209,11 @@ CREATE TABLE core_scripts (
   creado_por varchar(255) default '',
   lenguaje varchar(20) default '',
   cuerpo mediumtext,
+  es_snippet int(1) DEFAULT '0',
+  modulo int(11),
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+ALTER TABLE core_scripts ADD INDEX codigo_script (codigo_script);
 
 ALTER TABLE core_chat ADD INDEX recd (recd);
 
