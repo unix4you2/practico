@@ -55,6 +55,48 @@
 ########################################################################
 ########################################################################
 /*
+	Function: PCO_EvaluarCodigoExterno
+	Ejecuta codigo de un lenguaje determinado recibido dentro de una cadena.
+
+	Variables de entrada:
+
+		CadenaCodigo - Cadena con todo el codigo a evaluar
+		Lenguaje - Codigo del lenguaje de programacion requerido.  Debe ser uno de los habilitados en el framework
+
+	Salida:
+		Evaluacion y ejecucion del codigo correspondiente mediante la inclusion de un archivo temporal con su contenido
+*/
+function PCO_EvaluarCodigoExterno($CadenaCodigo,$Lenguaje)
+{
+    //Sin importar el lenguaje, reemplaza cualquier variable en notacion PHP sobre el script deseado dando asi compatibilidad al transporte de variables entre lenguajes
+    $CadenaCodigo=PCO_ReemplazarVariablesPHPEnCadena($CadenaCodigo);
+    
+    $ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal
+    $MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
+    $RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
+    fwrite ( $ArchivoInclusionTemporal, $CadenaCodigo );
+
+    //Ejecuta el script
+    try
+        {
+            //$ResultadoInclusion = include ($RutaArchivoTemporal);
+            $ResultadoInclusion="Ejecutando ".$Lenguaje;
+        }
+    catch (Exception $e)
+        {
+            echo "Se ha detectado un error durante la ejecucion del archivo {$RutaArchivoTemporal} requerido en lenguaje {$Lenguaje}: ",  $e->getMessage();
+        }
+
+    //Cierra el archivo de script y ademas lo elimina
+    fclose ( $ArchivoInclusionTemporal );
+
+    return $ResultadoInclusion;
+}
+
+
+########################################################################
+########################################################################
+/*
     Function: PCO_EjecutarCodigoPOST
 	Evalua directamente el codigo asociado a la seccion POST de un formulario.  Esto permite llamados especificos a funciones encapsuladas que pueda contener un formulario asociado a su logica de negocio
 
