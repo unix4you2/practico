@@ -66,10 +66,15 @@
 	Salida:
 		Evaluacion y ejecucion del codigo correspondiente mediante la inclusion de un archivo temporal con su contenido
 */
-function PCO_EvaluarCodigoExterno($CadenaCodigo,$Lenguaje)
+function PCO_EvaluarCodigoExterno($CadenaCodigo,$Lenguaje,$SilenciarSalida)
 {
     //Sin importar el lenguaje, reemplaza cualquier variable en notacion PHP sobre el script deseado dando asi compatibilidad al transporte de variables entre lenguajes
     $CadenaCodigo=PCO_ReemplazarVariablesPHPEnCadena($CadenaCodigo);
+    
+    //Determina si debe o no silenciar la salida de la ejecucion.  Cualquier valor silencia la salida
+    $SilenciarSalida="No";
+    if ($SilenciarSalida!="") 
+        $SilenciarSalida="Si";
     
     $ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal
     $MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
@@ -90,7 +95,11 @@ function PCO_EvaluarCodigoExterno($CadenaCodigo,$Lenguaje)
     //Cierra el archivo de script y ademas lo elimina
     fclose ( $ArchivoInclusionTemporal );
 
-    return $ResultadoInclusion;
+    //Entrega salida de ejecucion del script (si se requiere)
+    if ($SilenciarSalida=="No")
+        return $ResultadoInclusion;
+    else
+        return "";
 }
 
 
