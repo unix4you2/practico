@@ -920,5 +920,14 @@ CREATE TABLE core_scripts (
   modulo int(11),
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
 ALTER TABLE core_scripts ADD INDEX codigo_script (codigo_script);
+
+DROP TABLE IF EXISTS core_scripts_lenguajes;
+CREATE TABLE core_scripts_lenguajes (
+  id int(10) AUTO_INCREMENT,
+  nombre varchar(255) default '',
+  extensiones varchar(255),
+  comando_compilacion varchar(255),
+  comando_ejecucion varchar(255),
+  PRIMARY KEY  (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
