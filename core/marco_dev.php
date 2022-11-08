@@ -210,9 +210,12 @@
     								<!--<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2"><a data-toggle='tooltip' data-placement='bottom' title='Limpiar almacenamiento local de sesiones de archivo' class="btn btn-info btn-block" href="javascript:localStorage.clear();"><i class="fa fa-trash fa-fw"></i></a></div>-->
 								</div>
 
+								<?php
+									$PCO_EnlaceScriptsPersonalizados="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-38:1";
+								?>
 								<div class="row" style="margin-top:5px;">
     								<div class="col col-xs-6 col-sm-6 col-md-3 col-lg-3"><a data-toggle='tooltip' data-placement='bottom' title='Limpiar almacenamiento local de sesiones de archivo' class="btn btn-info btn-block" href="javascript:localStorage.clear();"><i class="fa fa-trash fa-fw"></i></a></div>
-    								<div class="col col-xs-6 col-sm-6 col-md-9 col-lg-9"><a data-toggle='tooltip' data-placement='bottom' title='Articule cualquier script o lenguaje con su aplicaci&oacute;n' class="btn btn-success btn-block" href="javascript:localStorage.clear();"><i class="fa fa-code fa-fw"></i> Scripts personalizados</a></div>
+    								<div class="col col-xs-6 col-sm-6 col-md-9 col-lg-9"><a data-toggle='tooltip' data-placement='bottom' title='Articule cualquier script o lenguaje con su aplicaci&oacute;n' class="btn btn-success btn-block" href="<?php echo $PCO_EnlaceScriptsPersonalizados; ?>"><i class="fa fa-code fa-fw"></i> Scripts personalizados</a></div>
 								</div>
 
 								<!-- Formulario para la carga directa de PMyDB -->
