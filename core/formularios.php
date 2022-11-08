@@ -2978,9 +2978,11 @@ if ($PCO_Accion=="PCO_EditarFormulario")
         
             <div align=center style="color:#FFFFFF;"><br>
     			'.$MULTILANG_FrmObjetos.'<br>
+    			<!--
                     <a data-toggle="modal" href="javascript: var LMQTP=AgregarControlFormulario();" title="'.$MULTILANG_FrmDesObjetos.'">
                             <i class="fa fa-th-list fa-3x fa-fw"></i>
                     </a>
+                -->
                     <a data-toggle="modal" href="#myModalElementoFormulario" title="'.$MULTILANG_FrmDesObjetos.'">
                             OLD <i class="fa fa-th-list fa-3x fa-fw"></i>
                     </a>                
