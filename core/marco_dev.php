@@ -205,11 +205,16 @@
 									   $PCO_EnlacePCODER="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";
 								?>
 								<div class="row">
-    								<div class="col col-xs-12 col-sm-12 col-md-10 col-lg-10"><a class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: {P}Coder</a></div>
+    								<div class="col col-xs-12 col-sm-12 col-md-12 col-lg-12"><a class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: {P}Coder</a></div>
     								<!--<div class="col col-xs-12 col-sm-12 col-md-10 col-lg-10"><a class="btn btn-primary btn-block" href="javascript:var LMQTP=OperacionFS_AbrirArchivo();"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: {P}Coder</a></div>-->
-    								<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2"><a data-toggle='tooltip' data-placement='bottom' title='Limpiar almacenamiento local de sesiones de archivo' class="btn btn-info btn-block" href="javascript:localStorage.clear();"><i class="fa fa-trash fa-fw"></i></a></div>
+    								<!--<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2"><a data-toggle='tooltip' data-placement='bottom' title='Limpiar almacenamiento local de sesiones de archivo' class="btn btn-info btn-block" href="javascript:localStorage.clear();"><i class="fa fa-trash fa-fw"></i></a></div>-->
 								</div>
-								
+
+								<div class="row" style="margin-top:5px;">
+    								<div class="col col-xs-6 col-sm-6 col-md-3 col-lg-3"><a data-toggle='tooltip' data-placement='bottom' title='Limpiar almacenamiento local de sesiones de archivo' class="btn btn-info btn-block" href="javascript:localStorage.clear();"><i class="fa fa-trash fa-fw"></i></a></div>
+    								<div class="col col-xs-6 col-sm-6 col-md-9 col-lg-9"><a data-toggle='tooltip' data-placement='bottom' title='Articule cualquier script o lenguaje con su aplicaci&oacute;n' class="btn btn-success btn-block" href="javascript:localStorage.clear();"><i class="fa fa-code fa-fw"></i> Scripts personalizados</a></div>
+								</div>
+
 								<!-- Formulario para la carga directa de PMyDB -->
 								<form target="_blank" action='mod/pmydb/index.php' method='post' name="PMyDB" style="display:inline;">
 									<?php 
