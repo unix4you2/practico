@@ -1007,15 +1007,15 @@ INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,coman
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('ObjectiveC', 'm|mm',                                                         '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('OCaml', 'ml|mli',                                                            '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Pascal', 'pas|p|dfm',                                                        '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Perl', 'pl|pm',                                                              '', '');
+INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Perl', 'pl|pm',                                                              '', 'perl');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('pgSQL', 'pgsql',                                                             '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('PHP', 'php|phtml|inc|ctp|snt',                                               '', '');
+INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('PHP', 'php|phtml|inc|ctp|snt',                                               '', 'php');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Powershell', 'ps1',                                                          '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Praat', 'praat|praatscript|psc|proc',                                        '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Prolog', 'plg|prolog',                                                       '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Properties', 'properties',                                                   '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Protobuf', 'proto',                                                          '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Python', 'py',                                                               '', '');
+INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Python', 'py',                                                               '', 'python3');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('R', 'r',                                                                     '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('RDoc', 'Rd',                                                                 '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('RHTML', 'Rhtml',                                                             '', '');
@@ -1050,3 +1050,4 @@ INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,coman
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('XML', 'xml|rdf|rss|wsdl|xsl|xslt|atom|mathml|mml|xul|xbl',                   '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('XQuery', 'xq',                                                               '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('YAML', 'yaml|yml',                                                           '', '');
+
