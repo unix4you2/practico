@@ -2956,7 +2956,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
         
         <script language="JavaScript">
             function AgregarControlFormulario(){
-                    //Salta a edicion de contratista
+                    //Salta a edicion de control
                     var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-36:0&Presentar_FullScreen=1&Precarga_EstilosBS=1";
                     PCOJS_MostrarMensaje("<?php echo $MULTILANG_FrmMsj1; ?>","Cargando...","modal-wide oculto_impresion");
                     $("#PCO_Modal_MensajeCuerpo").html('<iframe id="IFrameEmbebido" scrolling="yes" style="margin:10px; border:0px;" height=500 width=100% src="'+URLPopUp+'"></iframe>');
