@@ -20,6 +20,7 @@ core/estado.php
 core/codigobarras.php
 core/conexiones.php
 core/marco_arriba_bs.php
+core/marco_abajo.php
 core/marco_dev.php
 inc/jquery/jquery/*
 inc/jquery/migrate/*

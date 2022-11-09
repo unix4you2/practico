@@ -81,7 +81,7 @@ jobs:
 
     - name: IN-Sintaxis - Verificacion de compatibilidad versiones emergentes
       shell: bash
-      working-directory: /var/www/html/practico/dev/test
+      working-directory: /var/www/html/practico
       run: | 
         pwd
         sh t_sintaxis.sh
