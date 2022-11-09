@@ -84,21 +84,21 @@ jobs:
       working-directory: /var/www/html/practico
       run: | 
         pwd
-        sh t_sintaxis.sh
+        sh dev/test/t_sintaxis.sh
 
     - name: IN-FuncionesObsoletas - Verificacion funciones obsoletas - deprecated
       shell: bash
-      working-directory: /var/www/html/practico/dev/test
+      working-directory: /var/www/html/practico
       run: | 
         pwd
-        php t_obsoletas.php
+        php dev/test/t_obsoletas.php
 
     - name: IN-ArchivosNucleares
       shell: bash
-      working-directory: /var/www/html/practico/dev/test
+      working-directory: /var/www/html/practico
       run: | 
         pwd
-        php t_archivos.php
+        php dev/test/t_archivos.php
 
 
 

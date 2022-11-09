@@ -1204,7 +1204,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 <?php
     //PCO_CargarFormulario("-36","0");
     //inicio depuracion panel CONSTRUCCION
-    $DepuracionCreacionFORM_AgregarBloque="SiXX";
+    $DepuracionCreacionFORM_AgregarBloque="Si";
     if ($DepuracionCreacionFORM_AgregarBloque=="Si")
 	{
 ?>
