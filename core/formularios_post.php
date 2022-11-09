@@ -48,8 +48,8 @@
 	*/
 
 
-/* ################################################################## */
-/* ################################################################## */
+########################################################################
+########################################################################
 /*
 	Function: PCO_EjecutarPostFormulario
 	Alias mediante PCO_Accion para el llamado a la funcion interna PCO_EjecutarCodigoPOST
@@ -62,4 +62,20 @@
 		    if ($ByPassDie=="") $ByPassDie=0;
 			if ($LlaveDePaso==$Llave && $Formulario!="")
                 PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie);
+		}
+
+
+########################################################################
+########################################################################
+/*
+	Function: PCO_EvaluarCodigoExterno
+	Alias mediante PCO_Accion para el llamado a la funcion interna PCO_EvaluarCodigoExterno
+
+	Ver tambien:
+		<PCO_EvaluarCodigoExterno>
+*/
+	if ($PCO_Accion=="PCO_EvaluarCodigoExterno")
+		{
+			if ($LlaveDePaso==$Llave && $Codigo!="")
+                PCO_EvaluarCodigoExterno($Codigo,$Llave);
 		}
