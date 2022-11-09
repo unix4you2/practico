@@ -60,20 +60,23 @@
 
 	Variables de entrada:
 
-		CadenaCodigo - Cadena con todo el codigo a evaluar
-		Lenguaje - Codigo del lenguaje de programacion requerido.  Debe ser uno de los habilitados en el framework
+		CodigoUnicoScript - Cadena que identifica de manera unica el script en la aplicacion
+		Silenciar - Determina si se muestra o no la salida de la ejecucion
 
 	Salida:
 		Evaluacion y ejecucion del codigo correspondiente mediante la inclusion de un archivo temporal con su contenido
 */
-function PCO_EvaluarCodigoExterno($CadenaCodigo,$Lenguaje,$SilenciarSalida)
+function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
 {
     //Sin importar el lenguaje, reemplaza cualquier variable en notacion PHP sobre el script deseado dando asi compatibilidad al transporte de variables entre lenguajes
+    echo "Run: $CodigoUnicoScript,$Silenciar";
+    //Buscar esta cadena desde el registro
+    
     $CadenaCodigo=PCO_ReemplazarVariablesPHPEnCadena($CadenaCodigo);
     
     //Determina si debe o no silenciar la salida de la ejecucion.  Cualquier valor silencia la salida
     $SilenciarSalida="No";
-    if ($SilenciarSalida!="") 
+    if ($Silenciar!="") 
         $SilenciarSalida="Si";
     
     $ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal

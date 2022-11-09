@@ -76,6 +76,7 @@
 */
 	if ($PCO_Accion=="PCO_EvaluarCodigoExterno")
 		{
+		    if ($Silenciar=="") $Silenciar='No';
 			if ($LlaveDePaso==$Llave && $Codigo!="")
-                PCO_EvaluarCodigoExterno($Codigo,$Llave);
+                PCO_EvaluarCodigoExterno($Codigo,$Silenciar);
 		}
