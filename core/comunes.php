@@ -4828,6 +4828,21 @@ function PCO_VerificarExtensionesPHP()
 		$funcion_evaluada='simplexml_load_string';
 		if (!function_exists($funcion_evaluada))
             PCO_Mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+		// Verifica el soporte para funciones especificas PHP
+		$funcion_evaluada='simplexml_load_string';
+		if (!function_exists($funcion_evaluada))
+            PCO_Mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+		// Verifica el soporte para funciones especificas PHP
+		$funcion_evaluada='posix_getpwuid';
+		if (!function_exists($funcion_evaluada))
+            PCO_Mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+
+		// Verifica el soporte para funciones especificas PHP
+		$funcion_evaluada='posix_getgrgid';
+		if (!function_exists($funcion_evaluada))
+            PCO_Mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 	}
 
 

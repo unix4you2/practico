@@ -74,6 +74,7 @@ LogCambios="
 * Enhan [CORE]: Eliminacion dependencia innecesaria JQuery-UI 1.8.  Cualquier uso manual de la misma continúa con compatibilidad en versiones actualizadas, versiones nuevas no la traerán por defecto.
 * Enhan [CORE]: Adicion y actualizacion de facebook/react version 17.0.2 a 18.2.0 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 * Enhan [CORE]: Incluido script que retorna estado general del sistema en JSON, conectividad, motor de base de datos, etc. todo basado en una sesion particular.
+* Enhan [CORE]: Agregada alerta sobre no existencia o instalacion de las funciones POSIX de PHP sobre el servidor que corre el Framework.
 
 
 
