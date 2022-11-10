@@ -93,9 +93,13 @@
 			if ($LlaveDePaso==$Llave && $Codigo!="")
 			    {
 			        //Copia sobre el registro -1 del propio del framework los datos para probar el lenguaje
-			        
-			        
-			        
-                    PCO_EvaluarCodigoExterno($Codigo,'No');
+			        $RegistroLenguaje=PCO_EjecutarSQL("SELECT * FROM core_scripts_lenguajes WHERE id={$Codigo}")->fetch();
+			        $LenguajePrueba=$RegistroLenguaje["nombre"];
+			        $LenguajeCuerpo=$RegistroLenguaje["hola_mundo"];
+			        if (trim($LenguajeCuerpo)!="")
+			            {
+        			        PCO_EjecutarSQLUnaria("UPDATE core_scripts SET cuerpo=?,lenguaje='$LenguajePrueba'  WHERE id='-1'","$LenguajeCuerpo");
+                            PCO_EvaluarCodigoExterno('PCO-LMQTP01','No');
+			            }
 			    }
 		}
