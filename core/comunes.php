@@ -105,9 +105,6 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                 //Valida que el lenguaje si este configurado para ejecutarse en el entorno actual
                 if ($Lenguaje_CMD_EJECUCION!="")
                     {
-                        echo "Run: $CodigoUnicoScript,$Silenciar";
-                        //Buscar esta cadena desde el registro
-            
                         $ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal
                         $MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
                         $RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
@@ -126,6 +123,7 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                                 //TODO: Considerar ejecucion de comandos de compilacion y posterior ejecucion
             
                                 //Por ahora asume comando solo de ejecucion (lenguajes interpretados)
+                                PCO_Auditar("{$PCOSESS_LoginUsuario} Ejecuta Script={$CodigoUnicoScript} en Modo={$Script_MODOEJECUCION} mediante Comando={$Lenguaje_CMD_EJECUCION} sobre Archivo={$RutaArchivoTemporal}","SQLog:admin");
                                 if ($Script_MODOEJECUCION=="shell_exec")    $ResultadoEvaluacionScript=shell_exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
                                 if ($Script_MODOEJECUCION=="exec")          $ResultadoEvaluacionScript=exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
                                 if ($Script_MODOEJECUCION=="system")        $ResultadoEvaluacionScript=system($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
@@ -141,19 +139,19 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                     }
                 else
                     {
-                        PCO_Auditar("{$PCOSESS_LoginUsuario} Intenta ejecucion Script sin configurar entorno de ejecucion: {$CodigoUnicoScript}","SECLog");
+                        PCO_Auditar("{$PCOSESS_LoginUsuario} Intenta ejecucion Script sin configurar entorno de ejecucion: {$CodigoUnicoScript}","SECLog:event");
                     }
             }
         else
             {
-                PCO_Auditar("{$PCOSESS_LoginUsuario} Intenta ejecucion Script inexistente: {$CodigoUnicoScript}","SECLog");
+                PCO_Auditar("{$PCOSESS_LoginUsuario} Intenta ejecucion Script inexistente: {$CodigoUnicoScript}","SECLog:event");
             }
     
         //Entrega salida de ejecucion del script (si se requiere)
         if ($SilenciarSalida=="No")
-            return $ResultadoEvaluacionScript;
+            echo $ResultadoEvaluacionScript;
         else
-            return "";
+            echo "";
     }
 
 
