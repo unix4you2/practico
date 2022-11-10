@@ -923,6 +923,7 @@ CREATE TABLE core_scripts (
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 ALTER TABLE core_scripts ADD INDEX codigo_script (codigo_script);
+INSERT INTO core_scripts (id,titulo,modo_ejecucion,fecha_creacion) VALUES (-1,'Script de pruebas internas de lenguaje','system','2023-01-01');
 
 DROP TABLE IF EXISTS core_scripts_lenguajes;
 CREATE TABLE core_scripts_lenguajes (

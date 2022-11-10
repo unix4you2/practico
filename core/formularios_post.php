@@ -80,3 +80,22 @@
 			if ($LlaveDePaso==$Llave && $Codigo!="")
                 PCO_EvaluarCodigoExterno($Codigo,$Silenciar);
 		}
+		
+
+########################################################################
+########################################################################
+/*
+	Function: PCO_ProbarSoporteLenguaje
+	Permite copiar sobre un registro de prueba un script simple de HolaMundo en un lenguaje determinado para revisar su soporte del lado del servidor
+*/
+	if ($PCO_Accion=="PCO_ProbarSoporteLenguaje")
+		{
+			if ($LlaveDePaso==$Llave && $Codigo!="")
+			    {
+			        //Copia sobre el registro -1 del propio del framework los datos para probar el lenguaje
+			        
+			        
+			        
+                    PCO_EvaluarCodigoExterno($Codigo,'No');
+			    }
+		}
