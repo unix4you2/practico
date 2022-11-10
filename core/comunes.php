@@ -121,47 +121,15 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                                 $Lenguaje_CMD_COMPILACION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_COMPILACION);
                                 $Lenguaje_CMD_EJECUCION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_EJECUCION);
 
-            //TODO intentar la ejecucion del comando base para determinar su codigo de salida y posible error previamente
+                                //TODO OPCIONAL: intentar la ejecucion del comando base para determinar su codigo de salida y posible error previamente
             
+                                //TODO: Considerar ejecucion de comandos de compilacion y posterior ejecucion
             
-            
-            
-            
-            
-
-
-//system(string $command, int &$return_var = ?): string
-//system — Ejecutar un programa externo y mostrar su salida
-
-
-                                
-                                
-                                //shell_exec(string $cmd): string
-//shell_exec — Ejecutar un comando mediante el intérprete de comandos y devolver la salida completa como una cadena
-                                
-                                
-                                
-                                
-                                //exec(string $command, array &$output = ?, int &$return_var = ?): string
-                                
-                                
-                                
-    //passthru(string $command, int &$return_var = ?): void
-    //                                La función passthru() es parecida a la función exec() que ejecuta un command. Esta función deberia ser usada en lugar de exec() o system() cuando la salida desde la línea de comandos de Unix sean datos binarios, los cuales sea necesario pasar directamente al navegador
-                                
-                                
-                              //Nota: Si ejecutamos un programa con esta función y queremos dejarlo ejecutándose en segundo plano, hay que asegurarse que la salida del mismo es redireccionada a un fichero u otro flujo de salida o PHP se quedará esperando hasta que la ejecución del programa termine.  
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                
-                                //$ResultadoEvaluacionScript = include ($RutaArchivoTemporal);
-                                $ResultadoEvaluacionScript="Ejecutando ".$Lenguaje;
+                                //Por ahora asume comando solo de ejecucion (lenguajes interpretados)
+                                if ($Script_MODOEJECUCION=="shell_exec")    $ResultadoEvaluacionScript=shell_exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+                                if ($Script_MODOEJECUCION=="exec")          $ResultadoEvaluacionScript=exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+                                if ($Script_MODOEJECUCION=="system")        $ResultadoEvaluacionScript=system($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+                                if ($Script_MODOEJECUCION=="passthru")      $ResultadoEvaluacionScript=passthru($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
                             }
                         catch (Exception $e)
                             {
