@@ -151,7 +151,7 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
     
         //Entrega salida de ejecucion del script (si se requiere)
         if ($SilenciarSalida=="No")
-            echo $ResultadoEvaluacionScript;
+            echo($ResultadoEvaluacionScript);
         else
             echo "";
     }
