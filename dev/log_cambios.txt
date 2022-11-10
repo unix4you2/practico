@@ -215,6 +215,7 @@ CREATE TABLE core_scripts (
   es_snippet int(1) DEFAULT '0',
   moduloapp int(11),
   ejecuciones int(11) DEFAULT '0',
+  modo_ejecucion varchar(20) default 'shell_exec',
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 ALTER TABLE core_scripts ADD INDEX codigo_script (codigo_script);
