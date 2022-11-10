@@ -100,11 +100,11 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                 
                 //Escapa las cadenas asociadas a compilacion y ejecucion
                 //Advertencia: Si se va a permitir que datos provenientes del usuario son escapados para asegurarse que el usuario no intenta engañar al sistema para que ejecute comandos arbitrarios
-                // $Lenguaje_CMD_COMPILACION = escapeshellcmd($Lenguaje_CMD_COMPILACION);
-                // $Lenguaje_CMD_EJECUCION = escapeshellcmd($Lenguaje_CMD_EJECUCION);
-                // //Escapa espacios, en caso de estar corriendo un PHP bajo windows y donde el comando tenga espacios en su path
-                // $Lenguaje_CMD_COMPILACION = preg_replace('`(?<!^) `', '^ ', escapeshellcmd($Lenguaje_CMD_COMPILACION));
-                // $Lenguaje_CMD_EJECUCION = preg_replace('`(?<!^) `', '^ ', escapeshellcmd($Lenguaje_CMD_EJECUCION));
+                $Lenguaje_CMD_COMPILACION = escapeshellcmd($Lenguaje_CMD_COMPILACION);
+                $Lenguaje_CMD_EJECUCION = escapeshellcmd($Lenguaje_CMD_EJECUCION);
+                //Escapa espacios, en caso de estar corriendo un PHP bajo windows y donde el comando tenga espacios en su path
+                $Lenguaje_CMD_COMPILACION = preg_replace('`(?<!^) `', '^ ', escapeshellcmd($Lenguaje_CMD_COMPILACION));
+                $Lenguaje_CMD_EJECUCION = preg_replace('`(?<!^) `', '^ ', escapeshellcmd($Lenguaje_CMD_EJECUCION));
 
                 //Valida que el lenguaje si este configurado para ejecutarse en el entorno actual
                 if ($Lenguaje_CMD_EJECUCION!="")
@@ -159,9 +159,7 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                                 $Lenguaje_CMD_EJECUCION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_EJECUCION);
 
                                 //TODO OPCIONAL: intentar la ejecucion del comando base para determinar su codigo de salida y posible error previamente
-            
-                                //TODO: Considerar ejecucion de comandos de compilacion y posterior ejecucion
-            
+
                                 //Por ahora asume comando solo de ejecucion (lenguajes interpretados)
                                 PCO_Auditar("{$PCOSESS_LoginUsuario} Ejecuta Script={$CodigoUnicoScript} Lenguaje={$Script_LENGUAJE} Modo={$Script_MODOEJECUCION} Comando={$Lenguaje_CMD_EJECUCION} Archivo={$RutaArchivoTemporal}","SQLog:admin");
                                 if ($Script_MODOEJECUCION=="shell_exec")    $ResultadoEvaluacionScript=shell_exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
