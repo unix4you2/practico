@@ -228,6 +228,7 @@ CREATE TABLE core_scripts_lenguajes (
   extensiones varchar(255),
   comando_compilacion varchar(255),
   comando_ejecucion varchar(255),
+  hola_mundo varchar(2048),
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('ABAP', 'abap',                                                               '', '');
@@ -334,7 +335,7 @@ INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,coman
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('SQL', 'sql|dblib|dblib_mssql|fbd|ibm|ifmx|mssql|odbc|oracle|sqlite|sqlsrv',  '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Stylus', 'styl|stylus',                                                      '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('SVG', 'svg',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Tcl', 'tcl',                                                                 '', '');
+INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Tcl', 'tcl',                                                                 '', 'tclsh');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Tex', 'tex',                                                                 '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Text', 'txt|nfo|dat|inf|log|csv|tab|url|1st|fountain|me|now|readme|rft|cst|pl1|pli|plc|src|swift|tk',    '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Textile', 'textile',                                                         '', '');

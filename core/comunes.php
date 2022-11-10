@@ -69,6 +69,8 @@
 */
 function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
     {
+        global $PCO_ArchivoScript;
+        
         //Determina si debe o no silenciar la salida de la ejecucion.  Cualquier valor silencia la salida
         $SilenciarSalida="No";
         if ($Silenciar!="") 
@@ -93,29 +95,67 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                 $Lenguaje_CMD_COMPILACION=trim($RegistroLenguaje["comando_compilacion"]);
                 $Lenguaje_CMD_EJECUCION=trim($RegistroLenguaje["comando_ejecucion"]);
                 $Lenguaje_EXTENSIONES=trim($RegistroLenguaje["extensiones"]);
+                $Lenguaje_PRIMERAEXTENSION=explode("|",$Lenguaje_EXTENSIONES);
+                $Lenguaje_PRIMERAEXTENSION=$Lenguaje_PRIMERAEXTENSION[0];
                 
                 //Escapa las cadenas asociadas a compilacion y ejecucion
                 //Advertencia: Si se va a permitir que datos provenientes del usuario son escapados para asegurarse que el usuario no intenta engañar al sistema para que ejecute comandos arbitrarios
-                $Lenguaje_CMD_COMPILACION = escapeshellcmd($Lenguaje_CMD_COMPILACION);
-                $Lenguaje_CMD_EJECUCION = escapeshellcmd($Lenguaje_CMD_EJECUCION);
-                //Escapa espacios, en caso de estar corriendo un PHP bajo windows y donde el comando tenga espacios en su path
-                $Lenguaje_CMD_COMPILACION = preg_replace('`(?<!^) `', '^ ', escapeshellcmd($Lenguaje_CMD_COMPILACION));
-                $Lenguaje_CMD_EJECUCION = preg_replace('`(?<!^) `', '^ ', escapeshellcmd($Lenguaje_CMD_EJECUCION));
+                // $Lenguaje_CMD_COMPILACION = escapeshellcmd($Lenguaje_CMD_COMPILACION);
+                // $Lenguaje_CMD_EJECUCION = escapeshellcmd($Lenguaje_CMD_EJECUCION);
+                // //Escapa espacios, en caso de estar corriendo un PHP bajo windows y donde el comando tenga espacios en su path
+                // $Lenguaje_CMD_COMPILACION = preg_replace('`(?<!^) `', '^ ', escapeshellcmd($Lenguaje_CMD_COMPILACION));
+                // $Lenguaje_CMD_EJECUCION = preg_replace('`(?<!^) `', '^ ', escapeshellcmd($Lenguaje_CMD_EJECUCION));
 
                 //Valida que el lenguaje si este configurado para ejecutarse en el entorno actual
                 if ($Lenguaje_CMD_EJECUCION!="")
                     {
+                        //Crea un archivo temporal con el contenido del script
                         $ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal
                         $MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
                         $RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
                         fwrite ( $ArchivoInclusionTemporal, $Script_CUERPO );
+
+                        //Si el lenguaje esta configurado para ser compilado entonces hace proceso de compilacion
+                        if ($Lenguaje_CMD_COMPILACION!="")
+                            {
+                                //Ejecuta reemplazo de variable PCO_ArchivoScript dentro de los compandos en caso que se requiera
+                                $PCO_ArchivoScript=$RutaArchivoTemporal; //Asigna ruta generada temporal a la variable para que sea reemplazada en el comando
+                                $Lenguaje_CMD_COMPILACION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_COMPILACION);
+
+                        
+                        
+                                // $RutaArchivoFuente = $RutaArchivoTemporal.".".$Lenguaje_PRIMERAEXTENSION;
+                                // //@rename($RutaArchivoTemporal, $RutaArchivoFuente);
+                                // @link($RutaArchivoTemporal, $RutaArchivoFuente);
+                                
+
+                                // unlink ($RutaArchivoTemporal);
+
+                                // touch("/tmp/jj.txt");
+
+
+                                // system($Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
+                                // //system("cp {$RutaArchivoTemporal}  {$RutaArchivoFuente}");
+
+                                // $ResultadoCompilacion=system($Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
+                                
+                                // echo "Temp=".$RutaArchivoTemporal;
+                                // echo "Comp=".$RutaArchivoFuente;
+                                // echo "CMD=".$Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente;
+                                // $RutaArchivoTemporal=$RutaArchivoTemporal.".out";
+                                // $Lenguaje_CMD_EJECUCION="./";
+                                // $ResultadoEvaluacionScript=system($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+
+
+
+                            }
+
                     
                         //Ejecuta el script
                         try
                             {
                                 //Ejecuta reemplazo de variable PCO_ArchivoScript dentro de los compandos en caso que se requiera
                                 $PCO_ArchivoScript=$RutaArchivoTemporal; //Asigna ruta generada temporal a la variable para que sea reemplazada en el comando
-                                $Lenguaje_CMD_COMPILACION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_COMPILACION);
                                 $Lenguaje_CMD_EJECUCION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_EJECUCION);
 
                                 //TODO OPCIONAL: intentar la ejecucion del comando base para determinar su codigo de salida y posible error previamente
