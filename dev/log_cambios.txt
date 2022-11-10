@@ -75,8 +75,12 @@ LogCambios="
 * Enhan [CORE]: Adicion y actualizacion de facebook/react version 17.0.2 a 18.2.0 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 * Enhan [CORE]: Incluido script que retorna estado general del sistema en JSON, conectividad, motor de base de datos, etc. todo basado en una sesion particular.
 * Enhan [CORE]: Agregada alerta sobre no existencia o instalacion de las funciones POSIX de PHP sobre el servidor que corre el Framework.
+* Enhan [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).
 
 
+
+
+TODO:  EXPORTAR LA TABLA DE LENGUAJES.
 
 "
 
@@ -84,6 +88,9 @@ LogCambios="
 ########################################################################
 #[ScriptBasedatos] Usado para tmp/par_sql.txt
 ScriptBasedatos="
+
+ALTER TABLE core_usuario ADD vectores_faciales text NULL;
+
 
 ALTER TABLE core_opcionlista ADD tags_extra varchar(255) NULL;
 

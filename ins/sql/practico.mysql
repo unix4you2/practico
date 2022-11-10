@@ -43,6 +43,7 @@ CREATE TABLE core_usuario (
   idioma varchar(5) NOT NULL DEFAULT '',
   avatar varchar(255) NOT NULL DEFAULT '',
   redes_permitidas text,
+  vectores_faciales text,
   PRIMARY KEY  (login),
   UNIQUE (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
