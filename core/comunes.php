@@ -123,7 +123,7 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                                 //TODO: Considerar ejecucion de comandos de compilacion y posterior ejecucion
             
                                 //Por ahora asume comando solo de ejecucion (lenguajes interpretados)
-                                PCO_Auditar("{$PCOSESS_LoginUsuario} Ejecuta Script={$CodigoUnicoScript} en Modo={$Script_MODOEJECUCION} mediante Comando={$Lenguaje_CMD_EJECUCION} sobre Archivo={$RutaArchivoTemporal}","SQLog:admin");
+                                PCO_Auditar("{$PCOSESS_LoginUsuario} Ejecuta Script={$CodigoUnicoScript} Lenguaje={$Script_LENGUAJE} Modo={$Script_MODOEJECUCION} Comando={$Lenguaje_CMD_EJECUCION} Archivo={$RutaArchivoTemporal}","SQLog:admin");
                                 if ($Script_MODOEJECUCION=="shell_exec")    $ResultadoEvaluacionScript=shell_exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
                                 if ($Script_MODOEJECUCION=="exec")          $ResultadoEvaluacionScript=exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
                                 if ($Script_MODOEJECUCION=="system")        $ResultadoEvaluacionScript=system($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
@@ -131,7 +131,9 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                             }
                         catch (Exception $e)
                             {
-                                echo "Se ha detectado un error durante la ejecucion del archivo {$RutaArchivoTemporal} requerido en lenguaje {$Lenguaje}: ",  $e->getMessage();
+                                $MensajeErrorEjecucion="{$PCOSESS_LoginUsuario} Error de ejecucion Script={$CodigoUnicoScript} Lenguaje={$Script_LENGUAJE} Archivo={$RutaArchivoTemporal}: ".$e->getMessage();
+                                echo $MensajeErrorEjecucion;
+                                PCO_Auditar($MensajeErrorEjecucion,"SECLog:event");
                             }
                     
                         //Cierra el archivo de script y ademas lo elimina
@@ -139,12 +141,12 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                     }
                 else
                     {
-                        PCO_Auditar("{$PCOSESS_LoginUsuario} Intenta ejecucion Script sin configurar entorno de ejecucion: {$CodigoUnicoScript}","SECLog:event");
+                        PCO_Auditar("{$PCOSESS_LoginUsuario} Error Script={$CodigoUnicoScript} Lenguaje={$Script_LENGUAJE}: Entorno de ejecucion no configurado","SECLog:event");
                     }
             }
         else
             {
-                PCO_Auditar("{$PCOSESS_LoginUsuario} Intenta ejecucion Script inexistente: {$CodigoUnicoScript}","SECLog:event");
+                PCO_Auditar("{$PCOSESS_LoginUsuario} Error Script={$CodigoUnicoScript} inexistente!","SECLog:event");
             }
     
         //Entrega salida de ejecucion del script (si se requiere)
