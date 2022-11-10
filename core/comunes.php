@@ -62,6 +62,7 @@
 
 		CodigoUnicoScript - Cadena que identifica de manera unica el script en la aplicacion
 		Silenciar - Determina si se muestra o no la salida de la ejecucion
+		PCO_ArchivoScript - En los casos donde el comando de compilacion o ejecucion contenga esta variable en notacion PHP entonces sera reemplazada por la ruta del archivo temporal generado
 
 	Salida:
 		Evaluacion y ejecucion del codigo correspondiente mediante la inclusion de un archivo temporal con su contenido
@@ -85,6 +86,7 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                 //Sin importar el lenguaje, reemplaza cualquier variable en notacion PHP sobre el script deseado dando asi compatibilidad al transporte de variables entre lenguajes
                 $Script_CUERPO=PCO_ReemplazarVariablesPHPEnCadena($RegistroScript["cuerpo"]);
                 $Script_LENGUAJE=trim($RegistroScript["lenguaje"]);
+                $Script_MODOEJECUCION=trim($RegistroScript["modo_ejecucion"]);
                 
                 //Segun el lenguaje busca como ejecutarlo
                 $RegistroLenguaje=PCO_EjecutarSQL("SELECT * FROM core_scripts_lenguajes WHERE nombre='$Script_LENGUAJE'")->fetch();
@@ -106,7 +108,6 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                         echo "Run: $CodigoUnicoScript,$Silenciar";
                         //Buscar esta cadena desde el registro
             
-                        
                         $ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal
                         $MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
                         $RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
@@ -115,7 +116,10 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                         //Ejecuta el script
                         try
                             {
-
+                                //Ejecuta reemplazo de variable PCO_ArchivoScript dentro de los compandos en caso que se requiera
+                                $PCO_ArchivoScript=$RutaArchivoTemporal; //Asigna ruta generada temporal a la variable para que sea reemplazada en el comando
+                                $Lenguaje_CMD_COMPILACION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_COMPILACION);
+                                $Lenguaje_CMD_EJECUCION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_EJECUCION);
 
             //TODO intentar la ejecucion del comando base para determinar su codigo de salida y posible error previamente
             
@@ -135,7 +139,12 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                                 //shell_exec(string $cmd): string
 //shell_exec — Ejecutar un comando mediante el intérprete de comandos y devolver la salida completa como una cadena
                                 
+                                
+                                
+                                
                                 //exec(string $command, array &$output = ?, int &$return_var = ?): string
+                                
+                                
                                 
     //passthru(string $command, int &$return_var = ?): void
     //                                La función passthru() es parecida a la función exec() que ejecuta un command. Esta función deberia ser usada en lugar de exec() o system() cuando la salida desde la línea de comandos de Unix sean datos binarios, los cuales sea necesario pasar directamente al navegador
