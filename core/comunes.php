@@ -68,46 +68,53 @@
 */
 function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
 {
+    $ResultadoInclusion="";
     //Recupera detalles del script 
     $RegistroScript=PCO_EjecutarSQL("SELECT * FROM core_scripts WHERE codigo_script='$CodigoUnicoScript'")->fetch();
-    
-    //Lleva estadística de ejecuciones 
-    PCO_EjecutarSQLUnaria("UPDATE core_scripts SET ejecuciones=ejecuciones+1 WHERE codigo_script='$CodigoUnicoScript'");
-    
-    //Sin importar el lenguaje, reemplaza cualquier variable en notacion PHP sobre el script deseado dando asi compatibilidad al transporte de variables entre lenguajes
-    echo "Run: $CodigoUnicoScript,$Silenciar";
-    //Buscar esta cadena desde el registro
-    
-    $CadenaCodigo=PCO_ReemplazarVariablesPHPEnCadena($RegistroScript["cuerpo"]);
-    $LenguajeScript=$RegistroScript["lenguaje"];
-    
-    //Segun el lenguaje busca como ejecutarlo
-    $RegistroLenguaje=PCO_EjecutarSQL("SELECT * FROM core_scripts_lenguajes WHERE nombre='$LenguajeScript'")->fetch();
-    
-    
-    //Determina si debe o no silenciar la salida de la ejecucion.  Cualquier valor silencia la salida
-    $SilenciarSalida="No";
-    if ($Silenciar!="") 
-        $SilenciarSalida="Si";
-    
-    $ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal
-    $MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
-    $RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
-    fwrite ( $ArchivoInclusionTemporal, $CadenaCodigo );
-
-    //Ejecuta el script
-    try
+    if ($RegistroScript["id"]!="")
         {
-            //$ResultadoInclusion = include ($RutaArchivoTemporal);
-            $ResultadoInclusion="Ejecutando ".$Lenguaje;
+            //Lleva estadística de ejecuciones 
+            PCO_EjecutarSQLUnaria("UPDATE core_scripts SET ejecuciones=ejecuciones+1 WHERE codigo_script='$CodigoUnicoScript'");
+            
+            //Sin importar el lenguaje, reemplaza cualquier variable en notacion PHP sobre el script deseado dando asi compatibilidad al transporte de variables entre lenguajes
+            echo "Run: $CodigoUnicoScript,$Silenciar";
+            //Buscar esta cadena desde el registro
+            
+            $CadenaCodigo=PCO_ReemplazarVariablesPHPEnCadena($RegistroScript["cuerpo"]);
+            $LenguajeScript=$RegistroScript["lenguaje"];
+            
+            //Segun el lenguaje busca como ejecutarlo
+            $RegistroLenguaje=PCO_EjecutarSQL("SELECT * FROM core_scripts_lenguajes WHERE nombre='$LenguajeScript'")->fetch();
+            
+            
+            //Determina si debe o no silenciar la salida de la ejecucion.  Cualquier valor silencia la salida
+            $SilenciarSalida="No";
+            if ($Silenciar!="") 
+                $SilenciarSalida="Si";
+            
+            $ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal
+            $MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
+            $RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
+            fwrite ( $ArchivoInclusionTemporal, $CadenaCodigo );
+        
+            //Ejecuta el script
+            try
+                {
+                    //$ResultadoInclusion = include ($RutaArchivoTemporal);
+                    $ResultadoInclusion="Ejecutando ".$Lenguaje;
+                }
+            catch (Exception $e)
+                {
+                    echo "Se ha detectado un error durante la ejecucion del archivo {$RutaArchivoTemporal} requerido en lenguaje {$Lenguaje}: ",  $e->getMessage();
+                }
+        
+            //Cierra el archivo de script y ademas lo elimina
+            fclose ( $ArchivoInclusionTemporal );
         }
-    catch (Exception $e)
+    else
         {
-            echo "Se ha detectado un error durante la ejecucion del archivo {$RutaArchivoTemporal} requerido en lenguaje {$Lenguaje}: ",  $e->getMessage();
+            PCO_Auditar("{$PCOSESS_LoginUsuario} Intenta ejecucion Script inexistente {$CodigoUnicoScript}","SECLog");
         }
-
-    //Cierra el archivo de script y ademas lo elimina
-    fclose ( $ArchivoInclusionTemporal );
 
     //Entrega salida de ejecucion del script (si se requiere)
     if ($SilenciarSalida=="No")
