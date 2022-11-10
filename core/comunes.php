@@ -68,11 +68,22 @@
 */
 function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
 {
+    //Recupera detalles del script 
+    $RegistroScript=PCO_EjecutarSQL("SELECT * FROM core_scripts WHERE codigo_script='$CodigoUnicoScript'")->fetch();
+    
+    //Lleva estadística de ejecuciones 
+    PCO_EjecutarSQLUnaria("UPDATE core_scripts SET ejecuciones=ejecuciones+1 WHERE codigo_script='$CodigoUnicoScript'");
+    
     //Sin importar el lenguaje, reemplaza cualquier variable en notacion PHP sobre el script deseado dando asi compatibilidad al transporte de variables entre lenguajes
     echo "Run: $CodigoUnicoScript,$Silenciar";
     //Buscar esta cadena desde el registro
     
-    $CadenaCodigo=PCO_ReemplazarVariablesPHPEnCadena($CadenaCodigo);
+    $CadenaCodigo=PCO_ReemplazarVariablesPHPEnCadena($RegistroScript["cuerpo"]);
+    $LenguajeScript=$RegistroScript["lenguaje"];
+    
+    //Segun el lenguaje busca como ejecutarlo
+    $RegistroLenguaje=PCO_EjecutarSQL("SELECT * FROM core_scripts_lenguajes WHERE nombre='$LenguajeScript'")->fetch();
+    
     
     //Determina si debe o no silenciar la salida de la ejecucion.  Cualquier valor silencia la salida
     $SilenciarSalida="No";
