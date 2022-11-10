@@ -229,7 +229,7 @@ CREATE TABLE core_scripts_lenguajes (
   extensiones varchar(255),
   comando_compilacion varchar(255),
   comando_ejecucion varchar(255),
-  hola_mundo varchar(2048),
+  hola_mundo text,
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('ABAP', 'abap',                                                               '', '');
