@@ -50,3 +50,5 @@ echo "##############################"
 
 find core -name "*.php" -print0 | xargs -0 -n1 -P8 php -l
 #find mod/pcoder -name "*.php" -print0 | xargs -0 -n1 -P8 php -l
+
+# TODO:  Agregar guion PHP con extraccion de PRE y POST en formularios e informes sobre archivos independientes y hacer chequeo.
