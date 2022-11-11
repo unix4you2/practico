@@ -115,38 +115,43 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                         $RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
                         fwrite ( $ArchivoInclusionTemporal, $Script_CUERPO );
 
+                        //Hace una copia del archivo temporal sobre la carpeta temporal del framework que se garantiza escritura para proceso de compilacion
+                        $ArchivoAleatorio=PCO_TextoAleatorio(20);
+                        $RutaArchivoFuente = "tmp/".$ArchivoAleatorio.".".$Lenguaje_PRIMERAEXTENSION;
+                        @copy($RutaArchivoTemporal, $RutaArchivoFuente);
+
                         //Si el lenguaje esta configurado para ser compilado entonces hace proceso de compilacion
                         if ($Lenguaje_CMD_COMPILACION!="")
                             {
                                 //Ejecuta reemplazo de variable PCO_ArchivoScript dentro de los compandos en caso que se requiera
-                                $PCO_ArchivoScript=$RutaArchivoTemporal; //Asigna ruta generada temporal a la variable para que sea reemplazada en el comando
+                                $PCO_ArchivoScript=$RutaArchivoFuente; //Asigna ruta generada temporal a la variable para que sea reemplazada en el comando
                                 $Lenguaje_CMD_COMPILACION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_COMPILACION);
 
-                        
-                        
-                                // $RutaArchivoFuente = $RutaArchivoTemporal.".".$Lenguaje_PRIMERAEXTENSION;
-                                // //@rename($RutaArchivoTemporal, $RutaArchivoFuente);
-                                // @link($RutaArchivoTemporal, $RutaArchivoFuente);
+
+
+                                //Su ubica en el path de instalacion del Framework para correr desde alli los comandos de compilacion
+                                chdir(getcwd()."/tmp");
+                                //echo system("cd ".getcwd()."/tmp"."; ".$Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
                                 
+                                
+                                
+                                system("gcc -o {$ArchivoAleatorio}.out {$ArchivoAleatorio}.c ");
+                                system("./{$ArchivoAleatorio}.out");
 
-                                // unlink ($RutaArchivoTemporal);
-
-                                // touch("/tmp/jj.txt");
 
 
-                                // system($Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
-                                // //system("cp {$RutaArchivoTemporal}  {$RutaArchivoFuente}");
 
                                 // $ResultadoCompilacion=system($Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
                                 
-                                // echo "Temp=".$RutaArchivoTemporal;
-                                // echo "Comp=".$RutaArchivoFuente;
-                                // echo "CMD=".$Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente;
+// echo "Temp=".$RutaArchivoTemporal;
+// echo "Comp=".$RutaArchivoFuente;
+// echo "CMD=".$Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente;
                                 // $RutaArchivoTemporal=$RutaArchivoTemporal.".out";
                                 // $Lenguaje_CMD_EJECUCION="./";
                                 // $ResultadoEvaluacionScript=system($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
 
-
+                                //Elimina archivo fuente copiado para compilacio
+                                @unlink ($RutaArchivoFuente);
 
                             }
 

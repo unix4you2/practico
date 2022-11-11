@@ -1,4 +1,4 @@
-  //----------------------------GLOBAL VARIABLE FOR FACE MATCHER------------------------------------
+//----------------------------GLOBAL VARIABLE FOR FACE MATCHER------------------------------------
   var faceMatcher = undefined
   //----------------------------------------------------------------------------------------------
 
@@ -53,17 +53,17 @@
 
   $(document).ready(async function(){
 
-    var counter = 3;
+    var PCOJS_CantidadMuestras = 1;
     const descriptions = [];
 
     $("#reg_disp").show();
-    $("#tries").html("Intentos Restantes : " + counter)
+    $("#tries").html("Intentos Restantes : " + PCOJS_CantidadMuestras)
     $("#capture").click(async function(){
       var LlaveParent=parent.ConocerLlaveRegistro();
       console.log("Tu llave en parent es: "+LlaveParent);
       var data = LlaveParent;
       const label = data;
-        if(counter <= 3 && counter >= 0 ){
+        if(PCOJS_CantidadMuestras > 0 ){
           var canvas = document.createElement('canvas');
           var context = canvas.getContext('2d');
           var video = document.getElementById('vidDisplay');
@@ -83,9 +83,9 @@
           if( detections != null){
             descriptions.push(detections.descriptor);
             var descrip = descriptions;
-            counter--;
-            $("#tries").html("Intentos Restantes : " + counter)
-            if(counter == 0){
+            PCOJS_CantidadMuestras--;
+            $("#tries").html("Intentos Restantes : " + PCOJS_CantidadMuestras)
+            if(PCOJS_CantidadMuestras == 0){
               //guardar imagen
               $.ajax({
                   type: "POST",

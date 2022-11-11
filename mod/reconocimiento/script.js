@@ -44,9 +44,10 @@
 
 
   async function onPlay() {
-      const videoEl = $('#vidDisplay').get(0)
-      if(videoEl.paused || videoEl.ended )
-        return setTimeout(() => onPlay())
+      //RETIRADO ELIMINACION JQUERY 
+    //   const videoEl = $('#vidDisplay').get(0)
+    //   if(videoEl.paused || videoEl.ended )
+    //     return setTimeout(() => onPlay())
 
         $("#overlay").show()
         const canvas = $('#overlay').get(0)
@@ -79,7 +80,9 @@
             })
             //---------------------------------------------------------------------  
           }
-      setTimeout(() => onPlay())
+          
+        //Establece el tiempo entre cada captura en milisegundos
+      setTimeout(() => onPlay(),3000)
     }
 
   async function run() {
