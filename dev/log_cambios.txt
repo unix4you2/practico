@@ -76,6 +76,7 @@ LogCambios="
 * Enhan [CORE]: Incluido script que retorna estado general del sistema en JSON, conectividad, motor de base de datos, etc. todo basado en una sesion particular.
 * Enhan [CORE]: Agregada alerta sobre no existencia o instalacion de las funciones POSIX de PHP sobre el servidor que corre el Framework.
 * Enhan [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).
+* Enhan [DEV]: Las funciones automáticas de regeneración de elementos desde los XML y ejecución de scripts no son llamadas en entornos de desarrollo del framework.  Esto permitirá trazabilidad sobre archivos específicos.
 
 
 
