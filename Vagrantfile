@@ -77,7 +77,8 @@ Vagrant.configure("2") do |config|
     #Actualiza llaves de paso de usuarios segun valor del archivo configuracion
     cd /var/www/html/ins
     php paso_llave.php
-    php paso_regenerar.php
+    cd ..
+    php ins/paso_regenerar.php
 
 	echo "-------------- FIN APROVISIONAMIENTO --------------"
 	echo " "

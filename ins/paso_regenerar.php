@@ -46,9 +46,9 @@
 
 
     //Incluye librerias base.  Sobretodo la configuracion que contiene el valor de llave aleatorio
-	include_once("../core/configuracion.php");
-	include_once("../core/conexiones.php");
-	include_once("../core/comunes.php");
+	include_once("core/configuracion.php");
+	include_once("core/conexiones.php");
+	include_once("core/comunes.php");
 
 	//Hace la regeneracion de elementos existentes dentro de /xml cuando el entorno lo requiere por primera ejecucion
 	//Se ejecuta mediante ByPass para casos de clonacion de repo en modo desarrollador para Vagrant, Heroku, Similares
