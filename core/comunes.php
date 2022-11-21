@@ -1272,30 +1272,37 @@ function PCO_EliminarFormulario($formulario="")
 */
 function PCO_ImportarDefinicionesXML()
     {
-		//Se desactiva el limite de tiempo para ejecucion del script
-		set_time_limit (0) ;
-		
-        $ArregloElementos = array();
-        //Obtiene lista de archivos en xml/ para ser ejecutados
-        $DirectorioXML = dir("xml/");
-        while (false !== ($ArchivoXML = $DirectorioXML->read()))
-            if(strtolower(substr($ArchivoXML, -4))==".xml") //Considera solo los XML
-                $ArregloElementos[]=$ArchivoXML;
-        $DirectorioXML->close();
-
-        //Por cada archivo ejecuta el proceso de importacion correspondiente
-        foreach ($ArregloElementos as $ArchivoXML)
+        global $ModoDesarrolladorPractico;
+        
+        //Hace ejecucion de solamente si no esta en desarrollo de framework
+        //Esto permite que los fuentes permanezcan con los XML y scripts en trazabilidad
+        if ($ModoDesarrolladorPractico>=0)
             {
-                //Identifica el tipo de elemento contenido en el archivo para saber como procesarlo
-                $cadena_xml_importado = file_get_contents("xml/".$ArchivoXML);
-				$xml_importado = @simplexml_load_string($cadena_xml_importado); // Usa SimpleXML Directamente para interpretar cadena
-                //Procesa el archivo segun su tipo
-                if ($xml_importado->descripcion[0]->tipo_objeto=="Informe")
-                    $ResultadoImportacion=PCO_ImportarXMLInforme($cadena_xml_importado);
-                if ($xml_importado->descripcion[0]->tipo_objeto=="Formulario")
-                    $ResultadoImportacion=PCO_ImportarXMLFormulario($cadena_xml_importado);
-                //Una vez procesado el archivo lo elimina
-                unlink("xml/".$ArchivoXML);
+        		//Se desactiva el limite de tiempo para ejecucion del script
+        		set_time_limit (0) ;
+        		
+                $ArregloElementos = array();
+                //Obtiene lista de archivos en xml/ para ser ejecutados
+                $DirectorioXML = dir("xml/");
+                while (false !== ($ArchivoXML = $DirectorioXML->read()))
+                    if(strtolower(substr($ArchivoXML, -4))==".xml") //Considera solo los XML
+                        $ArregloElementos[]=$ArchivoXML;
+                $DirectorioXML->close();
+        
+                //Por cada archivo ejecuta el proceso de importacion correspondiente
+                foreach ($ArregloElementos as $ArchivoXML)
+                    {
+                        //Identifica el tipo de elemento contenido en el archivo para saber como procesarlo
+                        $cadena_xml_importado = file_get_contents("xml/".$ArchivoXML);
+        				$xml_importado = @simplexml_load_string($cadena_xml_importado); // Usa SimpleXML Directamente para interpretar cadena
+                        //Procesa el archivo segun su tipo
+                        if ($xml_importado->descripcion[0]->tipo_objeto=="Informe")
+                            $ResultadoImportacion=PCO_ImportarXMLInforme($cadena_xml_importado);
+                        if ($xml_importado->descripcion[0]->tipo_objeto=="Formulario")
+                            $ResultadoImportacion=PCO_ImportarXMLFormulario($cadena_xml_importado);
+                        //Una vez procesado el archivo lo elimina
+                        unlink("xml/".$ArchivoXML);
+                    }
             }
     }
 
@@ -1312,22 +1319,29 @@ function PCO_ImportarDefinicionesXML()
 */
 function PCO_ImportarScriptsPHP()
     {
-        global $PCO_FechaOperacion,$PCO_HoraOperacion;
-        $ArregloElementos = array();
-        //Obtiene lista de archivos en xml/ para ser ejecutados
-        $DirectorioScripts = dir("xml/");
-        while (false !== ($ArchivoPHP = $DirectorioScripts->read()))
-            if(strtolower(substr($ArchivoPHP, -4))==".php") //Considera solo los PHP
-                $ArregloElementos[]=$ArchivoPHP;
-        $DirectorioScripts->close();
+        global $ModoDesarrolladorPractico;
 
-        //Por cada archivo ejecuta el proceso de ejecucion correspondiente
-        foreach ($ArregloElementos as $ArchivoPHP)
+        //Hace ejecucion de solamente si no esta en desarrollo de framework
+        //Esto permite que los fuentes permanezcan con los XML y scripts en trazabilidad
+        if ($ModoDesarrolladorPractico>=0)
             {
-                //Incluye el codigo
-                include_once("xml/".$ArchivoPHP);
-                //Una vez procesado el archivo lo renombra para no ser ejecutado mas
-                rename("xml/".$ArchivoPHP, "xml/".$ArchivoPHP.".Run_".$PCO_FechaOperacion."-".$PCO_HoraOperacion);
+                global $PCO_FechaOperacion,$PCO_HoraOperacion;
+                $ArregloElementos = array();
+                //Obtiene lista de archivos en xml/ para ser ejecutados
+                $DirectorioScripts = dir("xml/");
+                while (false !== ($ArchivoPHP = $DirectorioScripts->read()))
+                    if(strtolower(substr($ArchivoPHP, -4))==".php") //Considera solo los PHP
+                        $ArregloElementos[]=$ArchivoPHP;
+                $DirectorioScripts->close();
+        
+                //Por cada archivo ejecuta el proceso de ejecucion correspondiente
+                foreach ($ArregloElementos as $ArchivoPHP)
+                    {
+                        //Incluye el codigo
+                        include_once("xml/".$ArchivoPHP);
+                        //Una vez procesado el archivo lo renombra para no ser ejecutado mas
+                        rename("xml/".$ArchivoPHP, "xml/".$ArchivoPHP.".Run_".$PCO_FechaOperacion."-".$PCO_HoraOperacion);
+                    }
             }
     }
 
