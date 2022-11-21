@@ -43,12 +43,18 @@
 	*/
 
 
-
+    //Cambia configuraciones de PHP para permitir la ejecucion del script
+    //ini_set('memory_limit', '-1');
+    
+    //Se ubica en la raiz para hacer llamados en la misma forma que el index.php central
+    chdir("..");
 
     //Incluye librerias base.  Sobretodo la configuracion que contiene el valor de llave aleatorio
 	include_once("core/configuracion.php");
-	include_once("core/conexiones.php");
+	include_once("inc/practico/idiomas/es.php");
 	include_once("core/comunes.php");
+	include_once("core/conexiones.php");
+	include_once("inc/practico/def_basedatos.php");
 
 	//Hace la regeneracion de elementos existentes dentro de /xml cuando el entorno lo requiere por primera ejecucion
 	//Se ejecuta mediante ByPass para casos de clonacion de repo en modo desarrollador para Vagrant, Heroku, Similares

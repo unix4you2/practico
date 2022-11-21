@@ -6,6 +6,16 @@
 # EJECUCION DE LA CAJA    5) vagrant up 
 # SUPERUSUARIO DE CAJA    root / vagrant       vagrant/vagrant
 
+
+
+# FINALIZAR:  generic/centos7  generic/openbsd7  generic/ubuntu2204  generic/freebsd13  generic/alpine316 
+# https://www.thisprogrammingthing.com/2015/multiple-vagrant-vms-in-one-vagrantfile/
+# https://developer.hashicorp.com/vagrant/docs/multi-machine
+
+
+
+
+
 Vagrant.configure("2") do |config|
 
   # SI 4: config.vm.box = "CentOS7_Practico"
@@ -64,11 +74,13 @@ Vagrant.configure("2") do |config|
 
 
 	#Instalacion de MariaDB
+	echo "Instalando Motor MariaDB"
 	sudo yum -y install mariadb-server mariadb
 	sudo systemctl start mariadb.service
 	sudo systemctl enable mariadb.service
 	
 	#Instalacion de la base de datos
+	echo "Instalando base de datos generica (version de desarrollo)"
 	mysql --user=root -e "CREATE DATABASE IF NOT EXISTS practico;"	
 	mysql -h "localhost" --user=root --database=practico < "/var/www/html/ins/sql/practico.mysql"
 	mysql --user=root -e "FLUSH PRIVILEGES;"		
@@ -76,8 +88,10 @@ Vagrant.configure("2") do |config|
 
     #Actualiza llaves de paso de usuarios segun valor del archivo configuracion
     cd /var/www/html/ins
+    echo "Regenerando usuarios para coincidir con Llave de Paso configurada"
     php paso_llave.php
     cd ..
+    echo "Regenerando elementos y scripts sobre /xml"
     php ins/paso_regenerar.php
 
 	echo "-------------- FIN APROVISIONAMIENTO --------------"
