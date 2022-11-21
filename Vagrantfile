@@ -58,7 +58,11 @@ Vagrant.configure("2") do |config|
 	mv practico html
 	cd html
 	chmod -R 777 *
-	
+	sudo systemctl disable firewalld.service
+	sudo systemctl stop firewalld.service
+
+    #TODO: Descargar XMLs de ultima version y descomprimir
+
 	#Instalacion de MariaDB
 	sudo yum -y install mariadb-server mariadb
 	sudo systemctl start mariadb.service
