@@ -51,4 +51,7 @@
 	include_once("../core/comunes.php");
 
 	//Hace la regeneracion de elementos existentes dentro de /xml cuando el entorno lo requiere por primera ejecucion
-	
+	//Se ejecuta mediante ByPass para casos de clonacion de repo en modo desarrollador para Vagrant, Heroku, Similares
+    PCO_ImportarDefinicionesXML(1);
+    PCO_ImportarScriptsPHP(1);
+    
