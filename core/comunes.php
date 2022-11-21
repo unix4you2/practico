@@ -1270,13 +1270,13 @@ function PCO_EliminarFormulario($formulario="")
 
 		Ejecucion automatica de los scripts residentes para la generacion de los elementos internos correspondientes
 */
-function PCO_ImportarDefinicionesXML()
+function PCO_ImportarDefinicionesXML($ByPassControlDesarrollo)
     {
         global $ModoDesarrolladorPractico;
         
         //Hace ejecucion de solamente si no esta en desarrollo de framework
         //Esto permite que los fuentes permanezcan con los XML y scripts en trazabilidad
-        if ($ModoDesarrolladorPractico>=0)
+        if ($ModoDesarrolladorPractico>=0 || $ByPassControlDesarrollo==1)
             {
         		//Se desactiva el limite de tiempo para ejecucion del script
         		set_time_limit (0) ;
@@ -1317,13 +1317,13 @@ function PCO_ImportarDefinicionesXML()
 
 		Ejecucion automatica de los scripts residentes y renombrado de los mismos para evitar su posterior ejecucion
 */
-function PCO_ImportarScriptsPHP()
+function PCO_ImportarScriptsPHP($ByPassControlDesarrollo)
     {
         global $ModoDesarrolladorPractico;
-
+        
         //Hace ejecucion de solamente si no esta en desarrollo de framework
         //Esto permite que los fuentes permanezcan con los XML y scripts en trazabilidad
-        if ($ModoDesarrolladorPractico>=0)
+        if ($ModoDesarrolladorPractico>=0 || $ByPassControlDesarrollo==1)
             {
                 global $PCO_FechaOperacion,$PCO_HoraOperacion;
                 $ArregloElementos = array();

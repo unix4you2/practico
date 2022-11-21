@@ -61,7 +61,7 @@ Vagrant.configure("2") do |config|
 	sudo systemctl disable firewalld.service
 	sudo systemctl stop firewalld.service
 
-    #TODO: Descargar XMLs de ultima version y descomprimir
+
 
 	#Instalacion de MariaDB
 	sudo yum -y install mariadb-server mariadb
@@ -77,6 +77,7 @@ Vagrant.configure("2") do |config|
     #Actualiza llaves de paso de usuarios segun valor del archivo configuracion
     cd /var/www/html/ins
     php paso_llave.php
+    php paso_regenerar.php
 
 	echo "-------------- FIN APROVISIONAMIENTO --------------"
 	echo " "
