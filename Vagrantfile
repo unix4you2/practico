@@ -1,106 +1,362 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+#	 _
+#	|_) _ _  _ _|_. _ _					  	Copyright (C) 2012-2022
+#	|  | (_|(_  | |(_(_) 				  	John F. Arroyave Gutiérrez
+#	  www.practico.org					  	unix4you2@gmail.com
+#                                            All rights reserved.
+#    
+#	 This program is free software: you can redistribute it and/or modify
+#	 it under the terms of the GNU General Public License as published by
+#	 the Free Software Foundation, either version 3 of the License, or
+#	 (at your option) any later version.
+#
+#	 This program is distributed in the hope that it will be useful,
+#	 but WITHOUT ANY WARRANTY; without even the implied warranty of
+#	 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#	 GNU General Public License for more details.
+#
+#	 You should have received a copy of the GNU General Public License
+#	 along with this program.  If not, see <http://www.gnu.org/licenses/>
+#	 
+#	            --- TRADUCCION NO OFICIAL DE LA LICENCIA ---
+#
+#     Esta es una traducción no oficial de la Licencia Pública General de
+#     GNU al español. No ha sido publicada por la Free Software Foundation
+#     y no establece los términos jurídicos de distribución del software 
+#     publicado bajo la GPL 3 de GNU, solo la GPL de GNU original en inglés
+#     lo hace. De todos modos, esperamos que esta traducción ayude a los
+#     hispanohablantes a comprender mejor la GPL de GNU:
+#	 
+#     Este programa es software libre: puede redistribuirlo y/o modificarlo
+#     bajo los términos de la Licencia General Pública de GNU publicada por
+#     la Free Software Foundation, ya sea la versión 3 de la Licencia, o 
+#     (a su elección) cualquier versión posterior.
+#
+#     Este programa se distribuye con la esperanza de que sea útil pero SIN
+#     NINGUNA GARANTÍA; incluso sin la garantía implícita de MERCANTIBILIDAD
+#     o CALIFICADA PARA UN PROPÓSITO EN PARTICULAR. Vea la Licencia General
+#     Pública de GNU para más detalles.
+#
+#     Usted ha debido de recibir una copia de la Licencia General Pública de
+#     GNU junto con este programa. Si no, vea <http://www.gnu.org/licenses/>
 
-# VAGRANT PARA PEREZOSOS  1) apt install vagrant   2) git clone https://github.com/unix4you2/practico   3) cd practico
-# ADICION MANUAL DE CAJA  4) vagrant box add CentOS7_Practico https://github.com/CommanderK5/packer-centos-template/releases/download/0.7.1/vagrant-centos-7.1.box
-# EJECUCION DE LA CAJA    5) vagrant up 
-# SUPERUSUARIO DE CAJA    root / vagrant       vagrant/vagrant
 
+############################################################################
+#                         VAGRANT DE SUPERVIVENCIA
+#
+#  Tenga en cuenta: Vagrant esta destinado a levantar entornos de desarrollo
+#                   y pruebas de manera automatizada.  Especialmente para
+#     INTROITO      desarrolladores del Framework.  Si usted desea crear
+#   EXCULPATORIO    aplicaciones o usar esto en produccion deberia ejecutar
+#                   los comandos equivalentes sobre un servidor destinado
+#                   para produccion, configurado para tal fin y con una
+#                   version de instalador del Framework obtenida desde
+#                   https://www.practico.org y no con una version desde Git
+#
+############################################################################
+#
+#  1) INSTALACION (comandos segun su plataforma) Ej:   apt install vagrant
 
+#  2) DESCARGA el archivo de definicion sobre una carpeta limpia: 
+#     Ej1: mkdir practico; cd practico; wget https://github.com/unix4you2/practico/raw/master/Vagrantfile
+#     Ej2: mkdir practico; cd practico; curl -L -o Vagrantfile https://github.com/unix4you2/practico/raw/master/Vagrantfile
 
-# FINALIZAR:  generic/centos7  generic/openbsd7  generic/ubuntu2204  generic/freebsd13  generic/alpine316 
-# https://www.thisprogrammingthing.com/2015/multiple-vagrant-vms-in-one-vagrantfile/
-# https://developer.hashicorp.com/vagrant/docs/multi-machine
-
+#  3) Levante la máquina virtual de pruebas que desee.  Ejs: 
+#        vagrant up             (Levanta todas en paralelo)
+#        vagrant up ubuntu
+#        vagrant up centos
+#        vagrant up openbsd
+#        vagrant up freebsd
+#        vagrant up alpine
+#
+#=============================================================================
+# CAJAS    OS       APACHE   PHP      MotorBD          CREDENCIALES
+#-----------------------------------------------------------------------------
+# centos   7.9      2.4.6    5.4.16   MariaDB 5.5.68   vagrant/vagrant
+# ubuntu   22.04.1  2.4.52   8.1.2    MariaDB 10.6.7   vagrant/vagrant
+# openbsd  7.2               7.4.33
+# freebsd  
+# alpine   
+#-----------------------------------------------------------------------------
 
 
 
 
 Vagrant.configure("2") do |config|
 
-  # SI 4: config.vm.box = "CentOS7_Practico"
-  config.vm.box="generic/centos7"
+  $Encabezado_Aprovisionamiento = <<-SCRIPT
+      echo "--------------------------------------------------- "
+      echo "    /\\  _  _ _   . _. _  _  _  _ _ . _  _ _|_ _    "
+      echo "   /~~\\|_)| (_)\\/|_\\|(_)| |(_|| | ||(/_| | | (_) "
+      echo "       |                                            "
+      echo "--------------------------------------------------- "
+    SCRIPT
+  config.vm.provision "shell", inline: $Encabezado_Aprovisionamiento
+ 
 
-  # Redireccion del puerto apache en la VM para su uso local sobre el puerto 81 del anfitrion
-    config.vm.network :forwarded_port, host: 8181, guest: 80
+  config.vm.define "centos" do |centos|
+	  centos.vm.box="generic/centos7"
 
-  # Red privada (host-only)
-  config.vm.network "private_network", ip: "192.168.56.100"
+	  centos.vm.provider "virtualbox" do |vm_detalles|
+	    vm_detalles.cpus = "1"
+	    vm_detalles.memory = "1024"
+	  end
 
-  # Red en modo Bridge
-  # config.vm.network "public_network"
-  # config.vm.network "public_network", ip: "192.168.0.17"
+	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
+	    centos.vm.network :forwarded_port, host: 8181, guest: 80
+	    centos.vm.network :forwarded_port, host: 9191, guest: 443
+	    
+	  # ------------------- CONFIGURACIONES DE RED -------------------
+	  # Red privada (host-only)
+	  #  config.vm.network "private_network", ip: "192.168.56.100"
+	  # Red en modo Bridge
+	  #  config.vm.network "public_network"
+	  #  config.vm.network "public_network", ip: "192.168.0.17"
+	  # Carpetas compartidas adicionales
+	  #  config.vm.synced_folder "../data", "/vagrant_data"
+	  # Configuraciones especificas del proveedor
+	  #  config.vm.provider "virtualbox" do |vb|
+	  #    vb.gui = true
+	  #    vb.memory = "1024"
+	  #  end
 
-  # Carpetas compartidas adicionales
-  # config.vm.synced_folder "../data", "/vagrant_data"
-
-  # Configuraciones especificas del proveedor
-  #  config.vm.provider "virtualbox" do |vb|
-  #    vb.gui = true
-  #    vb.memory = "1024"
-  #  end
-
-  config.vm.provision "shell", inline: <<-SHELL
-	echo "    /\\  _  _ _   . _. _  _  _  _ _ . _  _ _|_ _    "
-	echo "   /~~\\|_)| (_)\\/|_\\|(_)| |(_|| | ||(/_| | | (_)   "
-	echo "       |                                           "
-	echo "---------------------------------------------------"
-
-	#Instalacion de Apache
-	sudo yum -y update
-	sudo yum -y install httpd
-	sudo systemctl start httpd.service
-	sudo systemctl enable httpd.service
-
-	#Instalacion de PHP
-	sudo yum -y install php php-process php-mysql php-gd php-ldap php-odbc php-pear php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel
-	sudo systemctl restart httpd.service
-
-	#Instalacion de herramientas de desarrollo
-	sudo yum -y install git git-gui
-	
-	#Enlaza la carpeta del servidor web a la carpeta donde reside el repo
-	sudo mv /var/www/html /var/www/html_old
-	#sudo ln -s /vagrant /var/www/html
-	cd /var/www
-	git clone https://github.com/unix4you2/practico.git
-	chmod 777 practico
-	mv practico html
-	cd html
-	chmod -R 777 *
-	sudo systemctl disable firewalld.service
-	sudo systemctl stop firewalld.service
+	  centos.vm.provision "shell", inline: $ScriptAprovisionamiento_CentOS
+  end
 
 
+  config.vm.define "ubuntu" do |ubuntu|
+	  ubuntu.vm.box="generic/ubuntu2204"
 
-	#Instalacion de MariaDB
-	echo "Instalando Motor MariaDB"
-	sudo yum -y install mariadb-server mariadb
-	sudo systemctl start mariadb.service
-	sudo systemctl enable mariadb.service
-	
-	#Instalacion de la base de datos
-	echo "Instalando base de datos generica (version de desarrollo)"
-	mysql --user=root -e "CREATE DATABASE IF NOT EXISTS practico;"	
-	mysql -h "localhost" --user=root --database=practico < "/var/www/html/ins/sql/practico.mysql"
-	mysql --user=root -e "FLUSH PRIVILEGES;"		
-	mysql --user=root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');"
+	  ubuntu.vm.provider "virtualbox" do |vm_detalles|
+	    vm_detalles.cpus = "2"
+	    vm_detalles.memory = "2048"
+	  end
+	  
+	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
+	    ubuntu.vm.network :forwarded_port, host: 8282, guest: 80
+	    ubuntu.vm.network :forwarded_port, host: 9292, guest: 443
+	    
+	  ubuntu.vm.provision "shell", inline: $ScriptAprovisionamiento_Ubuntu
+  end
 
-    #Actualiza llaves de paso de usuarios segun valor del archivo configuracion
-    cd /var/www/html/ins
-    echo "Regenerando usuarios para coincidir con Llave de Paso configurada"
-    php paso_llave.php
-    cd ..
-    echo "Regenerando elementos y scripts sobre /xml"
-    php ins/paso_regenerar.php
 
-	echo "-------------- FIN APROVISIONAMIENTO --------------"
-	echo " "
-	echo "  Puede ingresar mediante http://localhost:8181 "
-	echo "                          http://192.168.56.100 "
-	echo " "
-	echo "  Usuario y Contrasena:   admin / admin"
-	echo "---------------------------------------------------"
-  SHELL
+  config.vm.define "openbsd" do |openbsd|
+	  openbsd.vm.box="generic/openbsd7"
+
+	  openbsd.vm.provider "virtualbox" do |vm_detalles|
+	    vm_detalles.cpus = "1"
+	    vm_detalles.memory = "512"
+	  end
+	  
+	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
+	    openbsd.vm.network :forwarded_port, host: 8383, guest: 80
+	    openbsd.vm.network :forwarded_port, host: 9393, guest: 443
+	    
+	  openbsd.vm.provision "shell", inline: $ScriptAprovisionamiento_OpenBSD
+  end
+
+
+  config.vm.define "freebsd" do |freebsd|
+	  freebsd.vm.box="generic/freebsd13"
+
+	  freebsd.vm.provider "virtualbox" do |vm_detalles|
+	    vm_detalles.cpus = "1"
+	    vm_detalles.memory = "512"
+	  end
+
+	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
+	    freebsd.vm.network :forwarded_port, host: 8484, guest: 80
+	    freebsd.vm.network :forwarded_port, host: 9494, guest: 443
+	    
+	  freebsd.vm.provision "shell", inline: $ScriptAprovisionamiento_FreeBSD
+  end
+
+
+  config.vm.define "alpine" do |alpine|
+	  alpine.vm.box="generic/alpine316"
+	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
+	    alpine.vm.network :forwarded_port, host: 8585, guest: 80
+	    alpine.vm.network :forwarded_port, host: 9595, guest: 443
+	    
+	  alpine.vm.provision "shell", inline: $ScriptAprovisionamiento_AlpineLinux
+  end
+
 
 end
+
+
+
+
+############################################################################
+#         SCRIPTS DE APROVISIONAMIENTO POR CADA SISTEMA OPERATIVO          #
+############################################################################
+
+
+#   ██████╗███████╗███╗   ██╗████████╗ ██████╗ ███████╗
+#  ██╔════╝██╔════╝████╗  ██║╚══██╔══╝██╔═══██╗██╔════╝
+#  ██║     █████╗  ██╔██╗ ██║   ██║   ██║   ██║███████╗
+#  ██║     ██╔══╝  ██║╚██╗██║   ██║   ██║   ██║╚════██║
+#  ╚██████╗███████╗██║ ╚████║   ██║   ╚██████╔╝███████║
+#   ╚═════╝╚══════╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚══════╝
+	$ScriptAprovisionamiento_CentOS = <<-SCRIPT
+	    #Instalacion de Apache
+	    sudo yum -y update
+	    sudo yum -y install httpd mod_ssl
+
+	    #Instalacion de PHP y sus extensiones
+	    sudo yum -y install php php-process php-mysql php-gd php-ldap php-odbc php-pear 
+	    sudo yum -y install php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel
+
+	    #Instalacion de MariaDB
+	    sudo yum -y install mariadb-server mariadb
+
+	    #Instalacion de herramientas basicas de desarrollo
+	    sudo yum -y install git
+
+	    #Habilita, enciende y apaga servicios
+	    sudo systemctl disable firewalld.service
+	    sudo systemctl stop firewalld.service
+	    sudo systemctl enable httpd.service
+	    sudo systemctl restart httpd.service
+	    sudo systemctl start mariadb.service
+	    sudo systemctl enable mariadb.service
+
+	    #Instala repositorio directo sobre carpeta del servidor web y carpetas de pruebas
+	    cd /var/www/html
+	    rm -rf practico
+	    mkdir practico_tests
+	    git clone https://github.com/unix4you2/practico.git
+	    chmod -R 777 *
+	    
+	    #Instalacion de la base de datos
+	    mysql --user=root -e "CREATE DATABASE IF NOT EXISTS practico;"	
+	    mysql -h "localhost" --user=root --database=practico < "/var/www/html/practico/ins/sql/practico.mysql"
+	    mysql --user=root -e "FLUSH PRIVILEGES;"		
+	    mysql --user=root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');"
+
+	    #Actualiza llaves en BD de usuarios segun valor del archivo configuracion y regenera elementos
+	    cd /var/www/html/practico/ins
+	    php paso_llave.php
+	    php paso_regenerar.php
+
+	    echo "--------------------------------------------------------------"
+	    echo "  Ingrese a  http://localhost:8181/practico  "
+	    echo "             https://localhost:9191/practico (Aceptando SSL)"
+	    echo " "
+	    echo "  Usuario y Contrasena:   admin / admin"
+	    echo "--------------------------------------------------------------"
+	  SCRIPT
+
+
+
+#  ██╗   ██╗██████╗ ██╗   ██╗███╗   ██╗████████╗██╗   ██╗
+#  ██║   ██║██╔══██╗██║   ██║████╗  ██║╚══██╔══╝██║   ██║
+#  ██║   ██║██████╔╝██║   ██║██╔██╗ ██║   ██║   ██║   ██║
+#  ██║   ██║██╔══██╗██║   ██║██║╚██╗██║   ██║   ██║   ██║
+#  ╚██████╔╝██████╔╝╚██████╔╝██║ ╚████║   ██║   ╚██████╔╝
+#   ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═══╝   ╚═╝    ╚═════╝ 
+	$ScriptAprovisionamiento_Ubuntu = <<-SCRIPT
+	    #Instalacion de Apache
+	    sudo apt-get -y update
+	    sudo apt-get -y install apache2
+	    
+	    #Instalacion de PHP y sus extensiones
+	    sudo apt-get -y install php php-posix php-mysql php-gd php-ldap php-odbc php-pear 
+	    sudo apt-get -y install php-xml php-xmlrpc php-mbstring php-snmp php-soap curl
+
+	    #Instalacion de MariaDB
+	    sudo apt-get -y install mariadb-server mariadb-client
+
+	    #Instalacion de herramientas basicas de desarrollo
+	    sudo apt-get -y install git git-gui
+	    
+	    #Habilita, enciende y apaga servicios
+	    sudo ufw disable
+	    sudo systemctl enable apache2.service
+	    sudo systemctl restart apache2.service
+	    sudo systemctl start mariadb.service
+	    sudo systemctl enable mariadb.service
+
+	    #Instala repositorio directo sobre carpeta del servidor web y carpetas de pruebas
+	    cd /var/www/html
+	    rm -rf practico
+	    mkdir practico_tests
+	    git clone https://github.com/unix4you2/practico.git
+	    chmod -R 777 *
+
+	    #Instalacion de la base de datos
+	    mysql --user=root -e "CREATE DATABASE IF NOT EXISTS practico;"	
+	    mysql -h "localhost" --user=root --database=practico < "/var/www/html/practico/ins/sql/practico.mysql"
+	    mysql --user=root -e "FLUSH PRIVILEGES;"		
+	    mysql --user=root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');"
+
+	    #Actualiza llaves en BD de usuarios segun valor del archivo configuracion y regenera elementos
+	    cd /var/www/html/practico/ins
+	    php paso_llave.php
+	    php paso_regenerar.php
+
+	    #Solo para Ubuntu, instala y configura herramientas extra usadas por desarrollador principal
+	    sudo apt-get -y install mc unzip 
+
+	    echo "--------------------------------------------------------------"
+	    echo "  Ingrese a  http://localhost:8282/practico "
+	    echo "             https://localhost:9292/practico (Aceptando SSL)"
+	    echo " "
+	    echo "  Usuario y Contrasena:   admin / admin"
+	    echo "--------------------------------------------------------------"
+	  SCRIPT
+
+
+
+#   ██████╗ ██████╗ ███████╗███╗   ██╗██████╗ ███████╗██████╗ 
+#  ██╔═══██╗██╔══██╗██╔════╝████╗  ██║██╔══██╗██╔════╝██╔══██╗
+#  ██║   ██║██████╔╝█████╗  ██╔██╗ ██║██████╔╝███████╗██║  ██║
+#  ██║   ██║██╔═══╝ ██╔══╝  ██║╚██╗██║██╔══██╗╚════██║██║  ██║
+#  ╚██████╔╝██║     ███████╗██║ ╚████║██████╔╝███████║██████╔╝
+#   ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═════╝ 
+	$ScriptAprovisionamiento_OpenBSD = <<-SCRIPT
+	    echo "--------------------------------------------------------------"
+	    echo "  Ingrese a  http://localhost:8383/practico "
+	    echo "             https://localhost:9393/practico (Aceptando SSL)"
+	    echo " "
+	    echo "  Usuario y Contrasena:   admin / admin"
+	    echo "--------------------------------------------------------------"
+	    #Instalacion de PHP y sus extensiones
+	    sudo pkg_add php-7.4.33 php-process php-mysql php-gd php-ldap php-odbc php-pear 
+	    sudo pkg_add php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel
+	  SCRIPT
+
+
+
+#  ███████╗██████╗ ███████╗███████╗██████╗ ███████╗██████╗ 
+#  ██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗██╔════╝██╔══██╗
+#  █████╗  ██████╔╝█████╗  █████╗  ██████╔╝███████╗██║  ██║
+#  ██╔══╝  ██╔══██╗██╔══╝  ██╔══╝  ██╔══██╗╚════██║██║  ██║
+#  ██║     ██║  ██║███████╗███████╗██████╔╝███████║██████╔╝
+#  ╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝╚═════╝ ╚══════╝╚═════╝ 
+	$ScriptAprovisionamiento_FreeBSD = <<-SCRIPT
+	    echo "--------------------------------------------------------------"
+	    echo "  Ingrese a  http://localhost:8484/practico "
+	    echo "             https://localhost:9494/practico (Aceptando SSL)"
+	    echo " "
+	    echo "  Usuario y Contrasena:   admin / admin"
+	    echo "--------------------------------------------------------------"
+	  SCRIPT
+	  
+
+
+#  █████╗ ██╗     ██████╗ ██╗███╗   ██╗███████╗
+# ██╔══██╗██║     ██╔══██╗██║████╗  ██║██╔════╝
+# ███████║██║     ██████╔╝██║██╔██╗ ██║█████╗  
+# ██╔══██║██║     ██╔═══╝ ██║██║╚██╗██║██╔══╝  
+# ██║  ██║███████╗██║     ██║██║ ╚████║███████╗
+# ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝                                           
+	$ScriptAprovisionamiento_FreeBSD = <<-SCRIPT
+	    echo "--------------------------------------------------------------"
+	    echo "  Ingrese a  http://localhost:8585/practico "
+	    echo "             https://localhost:9595/practico (Aceptando SSL)"
+	    echo " "
+	    echo "  Usuario y Contrasena:   admin / admin"
+	    echo "--------------------------------------------------------------"
+	  SCRIPT
