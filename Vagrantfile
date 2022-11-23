@@ -352,7 +352,8 @@ end
 	    echo '</IfModule>' 					>> /usr/local/etc/apache24/Includes/php.conf
 
 	    #Instalacion de MySQL
-	    sudo pkg install -y mysql57-server mysql57-client
+	    #sudo pkg install -y mysql57-server mysql57-client
+	    sudo pkg install -y mariadb103-server mariadb103-client
 
 	    #Instalacion de herramientas basicas de desarrollo
 	    sudo pkg install -y git
