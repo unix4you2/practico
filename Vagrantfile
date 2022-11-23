@@ -106,6 +106,7 @@ Vagrant.configure("2") do |config|
 	  end
 
 	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
+	    centos.vm.network :forwarded_port, host: 7171, guest: 22
 	    centos.vm.network :forwarded_port, host: 8181, guest: 80
 	    centos.vm.network :forwarded_port, host: 9191, guest: 443
 	    
@@ -134,6 +135,7 @@ Vagrant.configure("2") do |config|
 	  end
 	  
 	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
+	    ubuntu.vm.network :forwarded_port, host: 7272, guest: 22
 	    ubuntu.vm.network :forwarded_port, host: 8282, guest: 80
 	    ubuntu.vm.network :forwarded_port, host: 9292, guest: 443
 	    
@@ -152,6 +154,7 @@ Vagrant.configure("2") do |config|
 	  end
 	  
 	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
+	    openbsd.vm.network :forwarded_port, host: 7373, guest: 22
 	    openbsd.vm.network :forwarded_port, host: 8383, guest: 80
 	    openbsd.vm.network :forwarded_port, host: 9393, guest: 443
 	    
@@ -170,6 +173,7 @@ Vagrant.configure("2") do |config|
 	  end
 
 	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
+	    freebsd.vm.network :forwarded_port, host: 7474, guest: 22
 	    freebsd.vm.network :forwarded_port, host: 8484, guest: 80
 	    freebsd.vm.network :forwarded_port, host: 9494, guest: 443
 	    
@@ -187,6 +191,7 @@ Vagrant.configure("2") do |config|
 	  end
 	  
 	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
+	    alpine.vm.network :forwarded_port, host: 7575, guest: 22
 	    alpine.vm.network :forwarded_port, host: 8585, guest: 80
 	    alpine.vm.network :forwarded_port, host: 9595, guest: 443
 	    
@@ -371,8 +376,8 @@ end
 	    	service mysql-server start
 	    mysql --user=root -e "CREATE DATABASE IF NOT EXISTS practico;"	
 	    mysql -h "localhost" --user=root --database=practico < "/usr/local/www/apache24/data/practico/ins/sql/practico.mysql"
-	    mysql --user=root -e "FLUSH PRIVILEGES;"		
-	    mysql --user=root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');"
+	    mysql --user=root -e "update user set authentication_string=password('mypass') where user='root';" mysql
+	    mysql --user=root -e "FLUSH PRIVILEGES;"
 	    	service mysql-server stop
 	    	sysrc -x mysql_args
 	    	service mysql-server start
