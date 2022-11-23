@@ -75,8 +75,8 @@
 #-----------------------------------------------------------------------------
 # centos   7.9      2.4.6    5.4.16   MariaDB 5.5.68   vagrant/vagrant
 # ubuntu   22.04.1  2.4.52   8.1.2    MariaDB 10.6.7   vagrant/vagrant
+# freebsd  13.1     2.4.54   7.4.33   MySQL 5.7.40     vagrant/vagrant
 # openbsd  7.2               7.4.33
-# freebsd  
 # alpine   
 #-----------------------------------------------------------------------------
 
@@ -101,6 +101,8 @@ Vagrant.configure("2") do |config|
 	  centos.vm.provider "virtualbox" do |vm_detalles|
 	    vm_detalles.cpus = "1"
 	    vm_detalles.memory = "1024"
+	    vm_detalles.customize ["modifyvm", :id, "--vram", "32"]
+	    vm_detalles.gui = false
 	  end
 
 	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
@@ -115,11 +117,7 @@ Vagrant.configure("2") do |config|
 	  #  config.vm.network "public_network", ip: "192.168.0.17"
 	  # Carpetas compartidas adicionales
 	  #  config.vm.synced_folder "../data", "/vagrant_data"
-	  # Configuraciones especificas del proveedor
-	  #  config.vm.provider "virtualbox" do |vb|
-	  #    vb.gui = true
-	  #    vb.memory = "1024"
-	  #  end
+
 
 	  centos.vm.provision "shell", inline: $ScriptAprovisionamiento_CentOS
   end
@@ -131,6 +129,8 @@ Vagrant.configure("2") do |config|
 	  ubuntu.vm.provider "virtualbox" do |vm_detalles|
 	    vm_detalles.cpus = "2"
 	    vm_detalles.memory = "2048"
+	    vm_detalles.customize ["modifyvm", :id, "--vram", "128"]
+	    vm_detalles.gui = false
 	  end
 	  
 	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
@@ -147,6 +147,8 @@ Vagrant.configure("2") do |config|
 	  openbsd.vm.provider "virtualbox" do |vm_detalles|
 	    vm_detalles.cpus = "1"
 	    vm_detalles.memory = "512"
+	    vm_detalles.customize ["modifyvm", :id, "--vram", "32"]
+	    vm_detalles.gui = false
 	  end
 	  
 	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
@@ -163,6 +165,8 @@ Vagrant.configure("2") do |config|
 	  freebsd.vm.provider "virtualbox" do |vm_detalles|
 	    vm_detalles.cpus = "1"
 	    vm_detalles.memory = "512"
+	    vm_detalles.customize ["modifyvm", :id, "--vram", "32"]
+	    vm_detalles.gui = false
 	  end
 
 	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
@@ -175,6 +179,13 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "alpine" do |alpine|
 	  alpine.vm.box="generic/alpine316"
+	  alpine.vm.provider "virtualbox" do |vm_detalles|
+	    vm_detalles.cpus = "1"
+	    vm_detalles.memory = "512"
+	    vm_detalles.customize ["modifyvm", :id, "--vram", "32"]
+	    vm_detalles.gui = false
+	  end
+	  
 	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
 	    alpine.vm.network :forwarded_port, host: 8585, guest: 80
 	    alpine.vm.network :forwarded_port, host: 9595, guest: 443
@@ -309,33 +320,68 @@ end
 
 
 
-#   ██████╗ ██████╗ ███████╗███╗   ██╗██████╗ ███████╗██████╗ 
-#  ██╔═══██╗██╔══██╗██╔════╝████╗  ██║██╔══██╗██╔════╝██╔══██╗
-#  ██║   ██║██████╔╝█████╗  ██╔██╗ ██║██████╔╝███████╗██║  ██║
-#  ██║   ██║██╔═══╝ ██╔══╝  ██║╚██╗██║██╔══██╗╚════██║██║  ██║
-#  ╚██████╔╝██║     ███████╗██║ ╚████║██████╔╝███████║██████╔╝
-#   ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═════╝ 
-	$ScriptAprovisionamiento_OpenBSD = <<-SCRIPT
-	    echo "--------------------------------------------------------------"
-	    echo "  Ingrese a  http://localhost:8383/practico "
-	    echo "             https://localhost:9393/practico (Aceptando SSL)"
-	    echo " "
-	    echo "  Usuario y Contrasena:   admin / admin"
-	    echo "--------------------------------------------------------------"
-	    #Instalacion de PHP y sus extensiones
-	    sudo pkg_add php-7.4.33 php-process php-mysql php-gd php-ldap php-odbc php-pear 
-	    sudo pkg_add php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel
-	  SCRIPT
-
-
-
-#  ███████╗██████╗ ███████╗███████╗██████╗ ███████╗██████╗ 
-#  ██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗██╔════╝██╔══██╗
-#  █████╗  ██████╔╝█████╗  █████╗  ██████╔╝███████╗██║  ██║
-#  ██╔══╝  ██╔══██╗██╔══╝  ██╔══╝  ██╔══██╗╚════██║██║  ██║
-#  ██║     ██║  ██║███████╗███████╗██████╔╝███████║██████╔╝
-#  ╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝╚═════╝ ╚══════╝╚═════╝ 
+#  ███████╗██████╗ ███████╗███████╗   ██████╗ ███████╗██████╗ 
+#  ██╔════╝██╔══██╗██╔════╝██╔════╝   ██╔══██╗██╔════╝██╔══██╗
+#  █████╗  ██████╔╝█████╗  █████╗     ██████╔╝███████╗██║  ██║
+#  ██╔══╝  ██╔══██╗██╔══╝  ██╔══╝     ██╔══██╗╚════██║██║  ██║
+#  ██║     ██║  ██║███████╗███████╗   ██████╔╝███████║██████╔╝
+#  ╚═╝     ╚═╝  ╚═╝╚══════╝╚══════╝   ╚═════╝ ╚══════╝╚═════╝ 
 	$ScriptAprovisionamiento_FreeBSD = <<-SCRIPT
+	    #Instalacion de Apache
+	    sudo pkg install -y apache24
+
+	    #Instalacion de PHP y sus extensiones
+	    sudo pkg install -y php74 php74-session php74-hash php74-simplexml php74-pdo php74-gd php74-json
+	    sudo pkg install -y php74-pdo_mysql php74-mysqli mod_php74 php74-mbstring php74-zlib php74-curl
+	    sudo cp /usr/local/etc/php.ini-production /usr/local/etc/php.ini
+	    #sudo rehash
+	    sudo touch /usr/local/etc/apache24/Includes/php.conf
+	    echo '<IfModule dir_module>' 			>> /usr/local/etc/apache24/Includes/php.conf
+	    echo 'DirectoryIndex index.php index.html' 		>> /usr/local/etc/apache24/Includes/php.conf
+	    echo '<FilesMatch "\.php$">' 			>> /usr/local/etc/apache24/Includes/php.conf
+	    echo 'SetHandler application/x-httpd-php' 		>> /usr/local/etc/apache24/Includes/php.conf
+	    echo '</FilesMatch>' 				>> /usr/local/etc/apache24/Includes/php.conf
+	    echo '<FilesMatch "\.phps$">' 			>> /usr/local/etc/apache24/Includes/php.conf
+	    echo 'SetHandler application/x-httpd-php-source' 	>> /usr/local/etc/apache24/Includes/php.conf
+	    echo '</FilesMatch>' 				>> /usr/local/etc/apache24/Includes/php.conf
+	    echo '</IfModule>' 					>> /usr/local/etc/apache24/Includes/php.conf
+
+	    #Instalacion de MySQL
+	    sudo pkg install -y mysql57-server mysql57-client
+
+	    #Instalacion de herramientas basicas de desarrollo
+	    sudo pkg install -y git
+
+	    #Habilita, enciende y apaga servicios
+	    sudo service apache24 enable
+	    sudo service apache24 start
+	    sudo service mysql-server enable
+	    sudo service mysql-server start
+
+	    #Instala repositorio directo sobre carpeta del servidor web y carpetas de pruebas
+	    cd /usr/local/www/apache24/data
+	    rm -rf practico
+	    mkdir practico_tests
+	    git clone https://github.com/unix4you2/practico.git
+	    chmod -R 777 *
+
+	    #Instalacion de la base de datos
+	    	service mysql-server stop
+	    	sysrc mysql_args="--skip-grant-tables"
+	    	service mysql-server start
+	    mysql --user=root -e "CREATE DATABASE IF NOT EXISTS practico;"	
+	    mysql -h "localhost" --user=root --database=practico < "/usr/local/www/apache24/data/practico/ins/sql/practico.mysql"
+	    mysql --user=root -e "FLUSH PRIVILEGES;"		
+	    mysql --user=root -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('mypass');"
+	    	service mysql-server stop
+	    	sysrc -x mysql_args
+	    	service mysql-server start
+
+	    #Actualiza llaves en BD de usuarios segun valor del archivo configuracion y regenera elementos
+	    cd /usr/local/www/apache24/data/practico/ins
+	    php paso_llave.php
+	    php paso_regenerar.php
+	    
 	    echo "--------------------------------------------------------------"
 	    echo "  Ingrese a  http://localhost:8484/practico "
 	    echo "             https://localhost:9494/practico (Aceptando SSL)"
@@ -344,6 +390,23 @@ end
 	    echo "--------------------------------------------------------------"
 	  SCRIPT
 	  
+	  
+
+#   ██████╗ ██████╗ ███████╗███╗   ██╗   ██████╗ ███████╗██████╗ 
+#  ██╔═══██╗██╔══██╗██╔════╝████╗  ██║   ██╔══██╗██╔════╝██╔══██╗
+#  ██║   ██║██████╔╝█████╗  ██╔██╗ ██║   ██████╔╝███████╗██║  ██║
+#  ██║   ██║██╔═══╝ ██╔══╝  ██║╚██╗██║   ██╔══██╗╚════██║██║  ██║
+#  ╚██████╔╝██║     ███████╗██║ ╚████║   ██████╔╝███████║██████╔╝
+#   ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝   ╚═════╝ ╚══════╝╚═════╝ 
+	$ScriptAprovisionamiento_OpenBSD = <<-SCRIPT
+	    echo "--------------------------------------------------------------"
+	    echo "  Ingrese a  http://localhost:8383/practico "
+	    echo "             https://localhost:9393/practico (Aceptando SSL)"
+	    echo " "
+	    echo "  Usuario y Contrasena:   admin / admin"
+	    echo "--------------------------------------------------------------"
+	  SCRIPT
+
 
 
 #  █████╗ ██╗     ██████╗ ██╗███╗   ██╗███████╗
@@ -352,7 +415,7 @@ end
 # ██╔══██║██║     ██╔═══╝ ██║██║╚██╗██║██╔══╝  
 # ██║  ██║███████╗██║     ██║██║ ╚████║███████╗
 # ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝                                           
-	$ScriptAprovisionamiento_FreeBSD = <<-SCRIPT
+	$ScriptAprovisionamiento_AlpineLinux = <<-SCRIPT
 	    echo "--------------------------------------------------------------"
 	    echo "  Ingrese a  http://localhost:8585/practico "
 	    echo "             https://localhost:9595/practico (Aceptando SSL)"
