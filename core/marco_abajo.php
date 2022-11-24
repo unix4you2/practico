@@ -335,7 +335,7 @@
                         if ($TablasDataTable[$i]!="")
                             {
                                 $Paginacion=trim($TablasDataTablePaginaciones[$i]);
-                                $ColumnaTotales=trim($TablasDataTableTotales[$i])-1;
+                                $ColumnaTotales=intval(trim($TablasDataTableTotales[$i]))-1;
                                 $ColumnaTotalesVisual=trim($TablasDataTableTotales[$i]);
                                 $CadenaFormateadaTotales=trim($TablasDataTableFormatosTotales[$i]);
                                 $CadenaExportaCLP=trim($TablasDataTableExportaCLP[$i]); if ($CadenaExportaCLP=="S") $CadenaExportaCLP='{ extend: "copy",    className: "InformeBotonCopiar" },'; else $CadenaExportaCLP='';
