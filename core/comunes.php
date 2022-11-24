@@ -9210,7 +9210,7 @@ function PCO_GenerarEtiquetasConsulta($ConsultaSQL,$informe)
                             }
                     }
 			}
-		@$Resultados[]=array(ColumnasVisibles => $PCO_ColumnasVisibles, NumerosColumnasOcultas=>$PCO_NumerosColumnasOcultas	,NumeroColumnas => $numero_columnas);
+		@$Resultados[]=array("ColumnasVisibles" => $PCO_ColumnasVisibles, "NumerosColumnasOcultas"=>$PCO_NumerosColumnasOcultas	,"NumeroColumnas" => $numero_columnas);
 		return $Resultados;
 	}
 
@@ -9325,7 +9325,7 @@ function PCO_CamposRealesInforme($informe)
 						}
 				}
 
-		@$Resultados[]=array(ListaCampos_NombreCompleto => $ListaCampos_NombreCompleto, ListaCampos_NombreSimple=>$ListaCampos_NombreSimple	,ListaTablas_NombreSimple => $ListaTablas_NombreSimple, ListaCampos_PermitirEdicion => $ListaCampos_PermitirEdicion);
+		@$Resultados[]=array("ListaCampos_NombreCompleto" => $ListaCampos_NombreCompleto, "ListaCampos_NombreSimple"=>$ListaCampos_NombreSimple	,"ListaTablas_NombreSimple" => $ListaTablas_NombreSimple, "ListaCampos_PermitirEdicion" => $ListaCampos_PermitirEdicion);
 		return $Resultados;
 	}
 
@@ -9669,6 +9669,10 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         
         							for ($i=0;$i<$EtiquetasConsulta[0]["NumeroColumnas"];$i++)
         								{
+        									//Si no hay definidos numeros de columnas ocultas crea el arreglo vacio para compatibilidad PHP 8+
+        									if (@!isset($EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
+        									    $EtiquetasConsulta[0]["NumerosColumnasOcultas"]=array();
+        									
         									//Muestra la columna solo si no se trata de una de las ocultas
         									if (@!in_array($i,$EtiquetasConsulta[0]["NumerosColumnasOcultas"]))
         										{
