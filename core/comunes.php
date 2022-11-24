@@ -9164,6 +9164,9 @@ function PCO_GenerarEtiquetasConsulta($ConsultaSQL,$informe)
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 
+        $PCO_ColumnasVisibles=array();
+        $PCO_NumerosColumnasOcultas=array();
+
 		// Busca datos del informe
         if ($informe!="")
         	$registro_informe=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe")->fetch();
