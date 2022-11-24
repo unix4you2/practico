@@ -257,6 +257,9 @@ end
 	    php paso_llave.php
 	    php paso_regenerar.php
 
+	    echo " "
+	    echo "=============================================================="
+	    echo "                 APROVISIONAMIENTO FINALIZADO"
 	    echo "--------------------------------------------------------------"
 	    echo "  Ingrese a  http://localhost:8181/practico  "
 	    echo "             https://localhost:9191/practico  (Aceptando SSL)"
@@ -318,22 +321,34 @@ end
 	    #SOLO PARA UBUNTU - Instala y configura herramientas extra usadas por desarrollador principal
 	    sudo apt-get -y install git-gui gitg geany mc unzip p7zip 
 	    sudo apt-get -y install xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils nano
-	    sudo apt-get -y install google-chrome-stable chromium-browser firefox
+	    sudo apt-get -y install chromium-browser firefox
 	    sudo apt-get -y install xrdp
 	    sudo systemctl enable xrdp.service
 	    sudo systemctl stop xrdp.service
 	    sudo adduser xrdp ssl-cert
    	    echo 'exec startxfce4' >> /etc/xrdp/xrdp.ini
 	    sudo systemctl start xrdp.service
-	    
+    	    cd /var/www/html/
+    	    sudo chown -R vagrant *
+
+	    echo " "
+	    echo "=============================================================="
+	    echo "                 APROVISIONAMIENTO FINALIZADO"
 	    echo "--------------------------------------------------------------"
-	    echo "  Ingrese a  http://localhost:8282/practico "
-	    echo "             https://localhost:9292/practico  (Aceptando SSL)"
+	    echo "  Acceso WEB   (Practico Framework)"
+	    echo "               http://localhost:8282/practico "
+	    echo "               https://localhost:9292/practico (Aceptando SSL)"
 	    echo " "
-	    echo "             USUARIO Y CONTRASENA:   admin / admin"
+	    echo "               USUARIO Y CONTRASENA:   admin / admin"
 	    echo " "
-	    echo "             ssh -l vagrant -p 7272 localhost (Acceso SSH)"
-	    echo "             ssh -l vagrant -p 6262 localhost (Acceso RDP)"
+	    echo "--------------------------------------------------------------"
+	    echo "  Acceso SSH   (Secure Shell)"
+	    echo "               ssh -l vagrant -p 7272 localhost"
+	    echo "               (puede requerir -o HostKeyAlgorithms=CIFRADO)"
+	    echo " "
+	    echo "  Acceso RDP   (Remote Desktop)"
+	    echo "               rdesktop -u vagrant -p vagrant localhost:6262"
+	    echo " "
 	    echo "--------------------------------------------------------------"
 	  SCRIPT
 
@@ -402,6 +417,9 @@ end
 	    php paso_llave.php
 	    php paso_regenerar.php
 	    
+	    echo " "
+	    echo "=============================================================="
+	    echo "                 APROVISIONAMIENTO FINALIZADO"
 	    echo "--------------------------------------------------------------"
 	    echo "  Ingrese a  http://localhost:8484/practico "
 	    echo "             https://localhost:9494/practico  (Aceptando SSL)"
@@ -421,6 +439,9 @@ end
 #  ╚██████╔╝██║     ███████╗██║ ╚████║   ██████╔╝███████║██████╔╝
 #   ╚═════╝ ╚═╝     ╚══════╝╚═╝  ╚═══╝   ╚═════╝ ╚══════╝╚═════╝ 
 	$ScriptAprovisionamiento_OpenBSD = <<-SCRIPT
+	    echo " "
+	    echo "=============================================================="
+	    echo "                 APROVISIONAMIENTO FINALIZADO"
 	    echo "--------------------------------------------------------------"
 	    echo "  Ingrese a  http://localhost:8383/practico "
 	    echo "             https://localhost:9393/practico  (Aceptando SSL)"
@@ -433,13 +454,16 @@ end
 
 
 
-#  █████╗ ██╗     ██████╗ ██╗███╗   ██╗███████╗
-# ██╔══██╗██║     ██╔══██╗██║████╗  ██║██╔════╝
-# ███████║██║     ██████╔╝██║██╔██╗ ██║█████╗  
-# ██╔══██║██║     ██╔═══╝ ██║██║╚██╗██║██╔══╝  
-# ██║  ██║███████╗██║     ██║██║ ╚████║███████╗
-# ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝                                           
+#   █████╗ ██╗     ██████╗ ██╗███╗   ██╗███████╗
+#  ██╔══██╗██║     ██╔══██╗██║████╗  ██║██╔════╝
+#  ███████║██║     ██████╔╝██║██╔██╗ ██║█████╗  
+#  ██╔══██║██║     ██╔═══╝ ██║██║╚██╗██║██╔══╝  
+#  ██║  ██║███████╗██║     ██║██║ ╚████║███████╗
+#  ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝                                           
 	$ScriptAprovisionamiento_AlpineLinux = <<-SCRIPT
+	    echo " "
+	    echo "=============================================================="
+	    echo "                 APROVISIONAMIENTO FINALIZADO"
 	    echo "--------------------------------------------------------------"
 	    echo "  Ingrese a  http://localhost:8585/practico "
 	    echo "             https://localhost:9595/practico  (Aceptando SSL)"
