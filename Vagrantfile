@@ -135,6 +135,7 @@ Vagrant.configure("2") do |config|
 	  end
 	  
 	  # Redireccion del puerto apache en la VM para su uso local en puerto del anfitrion
+	    ubuntu.vm.network :forwarded_port, host: 6262, guest: 3389
 	    ubuntu.vm.network :forwarded_port, host: 7272, guest: 22
 	    ubuntu.vm.network :forwarded_port, host: 8282, guest: 80
 	    ubuntu.vm.network :forwarded_port, host: 9292, guest: 443
@@ -314,9 +315,17 @@ end
 	    php paso_llave.php
 	    php paso_regenerar.php
 
-	    #Solo para Ubuntu, instala y configura herramientas extra usadas por desarrollador principal
-	    sudo apt-get -y install git-gui mc unzip p7zip google-chrome-stable chromium-browser firefox xfce4
-
+	    #SOLO PARA UBUNTU - Instala y configura herramientas extra usadas por desarrollador principal
+	    sudo apt-get -y install git-gui gitg geany mc unzip p7zip 
+	    sudo apt-get -y install xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils nano
+	    sudo apt-get -y install google-chrome-stable chromium-browser firefox
+	    sudo apt-get -y install xrdp
+	    sudo systemctl enable xrdp.service
+	    sudo systemctl stop xrdp.service
+	    sudo adduser xrdp ssl-cert
+   	    echo 'exec startxfce4' >> /etc/xrdp/xrdp.ini
+	    sudo systemctl start xrdp.service
+	    
 	    echo "--------------------------------------------------------------"
 	    echo "  Ingrese a  http://localhost:8282/practico "
 	    echo "             https://localhost:9292/practico  (Aceptando SSL)"
@@ -324,6 +333,7 @@ end
 	    echo "             USUARIO Y CONTRASENA:   admin / admin"
 	    echo " "
 	    echo "             ssh -l vagrant -p 7272 localhost (Acceso SSH)"
+	    echo "             ssh -l vagrant -p 6262 localhost (Acceso RDP)"
 	    echo "--------------------------------------------------------------"
 	  SCRIPT
 
