@@ -70,6 +70,7 @@ LogCambios="
 * Fixed [CORE]: Compatibilidad PHP 8+ Eliminados errores de sintaxis incompatible en definición de arreglos asociativos mediante constantes
 * Fixed [CORE]: Compatibilidad PHP 8+ Eliminados errores de sintaxis incompatible para funciones in_array que obligan a que su segundo parametro sea un dato tipo arreglo.
 * Fixed [CORE]: Compatibilidad PHP 8+ Compatibilidad entre operaciones aritméticas de tipos string e integer
+* Fixed [CORE]: Compatibilidad PHP 8+ Arreglos con llaves constantes en lugar de cadenas para editor PCoder
 
 
 * Enhan [CORE]: Capacidad de multilenguaje.  Ahora el Framweork permite interactuar con múltiples lenguajes de programación, configurables por sus parámetros y mediante los cuales se podría tener una aplicación desarrollada en múltiples lenguajes a la vez, donde todos convergen al mismo punto.   La sintaxis de variables en notacion PHP y su reemplazo dinámico sobre cada script permite además que variables de PHP sean pasadas de manera transparente a cualquier otro lenguaje de programción disponible del lado del servidor.
