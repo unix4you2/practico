@@ -94,11 +94,12 @@
                 //case 'ini_get_all':           echo ImprimirArregloCompleto(ini_get_all(),", "); break;
                 //case 'debug_backtrace':       echo ImprimirArregloCompleto(debug_backtrace(),"\\n    "); break;
                 //case 'getallheaders':         echo ImprimirArregloCompleto(getallheaders(),"\\n    "); break;
+                //case 'request':               echo ImprimirArregloCompleto(array_keys($_REQUEST),"\\n    "); break;
                 case 'get_loaded_extensions': echo "Obsoleto en PHP 8+"; break;
                 case 'ini_get_all':           echo "Obsoleto en PHP 8+"; break;
                 case 'debug_backtrace':       echo "Obsoleto en PHP 8+"; break;
                 case 'getallheaders':         echo "Obsoleto en PHP 8+"; break;
-                case 'request':               echo ImprimirArregloCompleto(array_keys($_REQUEST),"\\n    "); break;
+                case 'request':               echo "Obsoleto en PHP 8+"; break;
                 case 'get_browser':           echo ImprimirArregloCompleto(get_browser(null, true),"\\n    "); break;
             }
         }
@@ -458,8 +459,8 @@
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="MEMORY_PEAK_USAGE: <?php echo memory_get_peak_usage(); ?> bytes"+"\n";
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nOS CLIENTE: <?php echo PCO_DetectarSistemaOperativoCliente(); ?>"+"\n";
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_BROWSER: <?php ImprimirArregloVariablesInternas('get_browser'); ?>"+"\n";
-            document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_DEFINED_VARS: <?php ImprimirArregloVariablesInternas('request'); ?>"+"\n";
             //Las siguientes continuan con el llamado pero han sido marcadas como obsoletas en PHP 8+
+            document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_DEFINED_VARS: <?php ImprimirArregloVariablesInternas('request'); ?>"+"\n";
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_ALL_HEADERS: <?php ImprimirArregloVariablesInternas('getallheaders'); ?>"+"\n"; //Removido compatibilidad GAE
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nGET_LOADED_EXTENSIONS: <?php ImprimirArregloVariablesInternas('get_loaded_extensions'); ?>"+"\n";
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="\nDEBUG_TRACE: <?php ImprimirArregloVariablesInternas('debug_backtrace'); ?>"+"\n";

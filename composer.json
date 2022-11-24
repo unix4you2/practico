@@ -110,6 +110,7 @@
         "facebook/react": "18.2.0",
         "facebook/react-dom": "18.2.0",
         "jbdemonte/barcode": "2.0.3",
+        "phpoffice/phpspreadsheet": "1.19.0",
         "d3js/d3js": "7.6.1"
     },
     

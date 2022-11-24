@@ -79,7 +79,9 @@ LogCambios="
 * Enhan [CORE]: Agregada alerta sobre no existencia o instalacion de las funciones POSIX de PHP sobre el servidor que corre el Framework.
 * Enhan [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).
 * Enhan [DEV]: Las funciones automáticas de regeneración de elementos desde los XML y ejecución de scripts no son llamadas en entornos de desarrollo del framework.  Esto permitirá trazabilidad sobre archivos específicos.
+* Enhan [CORE]: Agregados entornos adicionales al archivo de despliegue de Vagrant
 
+* Enhan [CORE]: Adicion de PHPSpreadSheet 1.19.0 como dependencia de composer y no como libreria independiente en reemplazo de PHPExcel.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.  IMPORTANTE:  El uso de este paquete requiere PHP 7.2+
 
 
 
