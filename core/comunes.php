@@ -9080,6 +9080,10 @@ function PCO_ConstruirConsultaInforme($informe,$evitar_campos_ocultos=0)
 					//Evalua casos donde se tienen variables PHP escapadas por llaves.  Ej  "%{$Variable}%" si fuera para una operacion cualquiera sobre el campo.
                     $OrigenValorCampo=PCO_ReemplazarVariablesPHPEnCadena($OrigenValorCampo);
 					$nombre_campo=$OrigenValorCampo.$posfijo_campo;
+					
+					//Compatibilidad PHP 8+.  Si no recibe nada lo convierte a array para garantizar el tipo en in_array
+					if (gettype($PCO_ColumnasOcultas)!="array")
+					    $PCO_ColumnasOcultas=array();
 
 					//Agrega el campo a la consulta si no se encuentra en el arreglo de ocultos o no se quieren evitar esos campos
 					if (@!in_array($nombre_campo,$PCO_ColumnasOcultas) || $evitar_campos_ocultos==0)
