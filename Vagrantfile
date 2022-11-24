@@ -245,7 +245,9 @@ end
 	    mkdir practico_tests
 	    git clone https://github.com/unix4you2/practico.git
 	    chmod -R 777 *
-	    
+	    rm -f index.html
+	    cp practico/tmp/index.html index.html
+
 	    #Instalacion de la base de datos
 	    mysql --user=root -e "CREATE DATABASE IF NOT EXISTS practico;"	
 	    mysql -h "localhost" --user=root --database=practico < "/var/www/html/practico/ins/sql/practico.mysql"
@@ -306,6 +308,8 @@ end
 	    mkdir practico_tests
 	    git clone https://github.com/unix4you2/practico.git
 	    chmod -R 777 *
+	    rm -f index.html
+	    cp practico/tmp/index.html index.html
 
 	    #Instalacion de la base de datos
 	    mysql --user=root -e "CREATE DATABASE IF NOT EXISTS practico;"	
@@ -316,7 +320,7 @@ end
 	    #Actualiza llaves en BD de usuarios segun valor del archivo configuracion y regenera elementos
 	    cd /var/www/html/practico/ins
 	    php paso_llave.php
-	    php paso_regenerar.php
+	    php paso_regenerar_nodel.php
 
 	    #SOLO PARA UBUNTU - Instala y configura herramientas extra usadas por desarrollador principal
 	    sudo apt-get -y install git-gui gitg geany mc unzip p7zip 
@@ -399,6 +403,8 @@ end
 	    mkdir practico_tests
 	    git clone https://github.com/unix4you2/practico.git
 	    chmod -R 777 *
+	    rm -f index.html
+	    cp practico/tmp/index.html index.html
 
 	    #Instalacion de la base de datos
 	    	service mysql-server stop
