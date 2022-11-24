@@ -324,6 +324,7 @@ end
 
 	    #SOLO PARA UBUNTU - Instala y configura herramientas extra usadas por desarrollador principal
 	    sudo apt-get -y install git-gui gitg geany mc unzip p7zip 
+	    sudo apt-get -y install gcc golang-go default-jdk nodejs newlisp
 	    sudo apt-get -y install xfce4 xfce4-goodies xorg dbus-x11 x11-xserver-utils nano
 	    sudo apt-get -y install chromium-browser firefox
 	    sudo apt-get -y install xrdp
