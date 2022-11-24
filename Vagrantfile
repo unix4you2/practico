@@ -336,7 +336,7 @@ end
 	    sudo pkg install -y apache24
 
 	    #Instalacion de PHP y sus extensiones
-	    sudo pkg install -y php74 php74-session php74-hash php74-simplexml php74-pdo php74-gd php74-json
+	    sudo pkg install -y php74 php74-session php74-hash php74-simplexml php74-xml php74-xmlrpc php74-pdo php74-gd php74-json
 	    sudo pkg install -y php74-pdo_mysql php74-mysqli mod_php74 php74-mbstring php74-zlib php74-curl
 	    sudo cp /usr/local/etc/php.ini-production /usr/local/etc/php.ini
 	    #sudo rehash
