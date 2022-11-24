@@ -258,9 +258,11 @@ end
 
 	    echo "--------------------------------------------------------------"
 	    echo "  Ingrese a  http://localhost:8181/practico  "
-	    echo "             https://localhost:9191/practico (Aceptando SSL)"
+	    echo "             https://localhost:9191/practico  (Aceptando SSL)"
 	    echo " "
-	    echo "  Usuario y Contrasena:   admin / admin"
+	    echo "             USUARIO Y CONTRASENA:   admin / admin"
+	    echo " "
+	    echo "             ssh -l vagrant -p 7171 localhost (Acceso SSH)"
 	    echo "--------------------------------------------------------------"
 	  SCRIPT
 
@@ -285,7 +287,7 @@ end
 	    sudo apt-get -y install mariadb-server mariadb-client
 
 	    #Instalacion de herramientas basicas de desarrollo
-	    sudo apt-get -y install git git-gui
+	    sudo apt-get -y install git
 	    
 	    #Habilita, enciende y apaga servicios
 	    sudo ufw disable
@@ -313,13 +315,15 @@ end
 	    php paso_regenerar.php
 
 	    #Solo para Ubuntu, instala y configura herramientas extra usadas por desarrollador principal
-	    sudo apt-get -y install mc unzip 
+	    sudo apt-get -y install git-gui mc unzip p7zip google-chrome-stable chromium-browser firefox xfce4
 
 	    echo "--------------------------------------------------------------"
 	    echo "  Ingrese a  http://localhost:8282/practico "
-	    echo "             https://localhost:9292/practico (Aceptando SSL)"
+	    echo "             https://localhost:9292/practico  (Aceptando SSL)"
 	    echo " "
-	    echo "  Usuario y Contrasena:   admin / admin"
+	    echo "             USUARIO Y CONTRASENA:   admin / admin"
+	    echo " "
+	    echo "             ssh -l vagrant -p 7272 localhost (Acceso SSH)"
 	    echo "--------------------------------------------------------------"
 	  SCRIPT
 
@@ -390,9 +394,11 @@ end
 	    
 	    echo "--------------------------------------------------------------"
 	    echo "  Ingrese a  http://localhost:8484/practico "
-	    echo "             https://localhost:9494/practico (Aceptando SSL)"
+	    echo "             https://localhost:9494/practico  (Aceptando SSL)"
 	    echo " "
-	    echo "  Usuario y Contrasena:   admin / admin"
+	    echo "             USUARIO Y CONTRASENA:   admin / admin"
+	    echo " "
+	    echo "             ssh -l vagrant -p 7474 localhost (Acceso SSH)"
 	    echo "--------------------------------------------------------------"
 	  SCRIPT
 	  
@@ -407,9 +413,11 @@ end
 	$ScriptAprovisionamiento_OpenBSD = <<-SCRIPT
 	    echo "--------------------------------------------------------------"
 	    echo "  Ingrese a  http://localhost:8383/practico "
-	    echo "             https://localhost:9393/practico (Aceptando SSL)"
+	    echo "             https://localhost:9393/practico  (Aceptando SSL)"
 	    echo " "
-	    echo "  Usuario y Contrasena:   admin / admin"
+	    echo "             USUARIO Y CONTRASENA:   admin / admin"
+	    echo " "
+	    echo "             ssh -l vagrant -p 7373 localhost (Acceso SSH)"
 	    echo "--------------------------------------------------------------"
 	  SCRIPT
 
@@ -424,8 +432,10 @@ end
 	$ScriptAprovisionamiento_AlpineLinux = <<-SCRIPT
 	    echo "--------------------------------------------------------------"
 	    echo "  Ingrese a  http://localhost:8585/practico "
-	    echo "             https://localhost:9595/practico (Aceptando SSL)"
+	    echo "             https://localhost:9595/practico  (Aceptando SSL)"
 	    echo " "
-	    echo "  Usuario y Contrasena:   admin / admin"
+	    echo "             USUARIO Y CONTRASENA:   admin / admin"
+	    echo " "
+	    echo "             ssh -l vagrant -p 7575 localhost (Acceso SSH)"
 	    echo "--------------------------------------------------------------"
 	  SCRIPT
