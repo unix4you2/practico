@@ -87,7 +87,15 @@ LogCambios="
 
 
 
-TODO:  EXPORTAR LA TABLA DE LENGUAJES.
+
+
+
+Falta:
+Texto "Valor de la etiqueta (será impresa en el formulario en formato HTML):"  justo arriba del campo de etiqueta.  Debajo del mensaje de Atención este tipo de controles debería ser almacenadodentro de campo texto largo....
+Espacio de vista previa actualizado dinamicamente
+
+
+
 
 "
 
@@ -97,6 +105,9 @@ TODO:  EXPORTAR LA TABLA DE LENGUAJES.
 ScriptBasedatos="
 
 ALTER TABLE core_usuario ADD vectores_faciales text NULL;
+
+
+
 
 
 ALTER TABLE core_opcionlista ADD tags_extra varchar(255) NULL;

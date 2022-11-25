@@ -7,8 +7,8 @@
 		<sistema_origen>Framework</sistema_origen>
 		<version>21.5</version>
 		<usuario_generador>admin</usuario_generador>
-		<fecha_exportacion>2022-11-24</fecha_exportacion>
-		<hora_exportacion>15:37</hora_exportacion>
+		<fecha_exportacion>2022-11-25</fecha_exportacion>
+		<hora_exportacion>14:45</hora_exportacion>
 	</descripcion>
 	<core_formulario>
 	<id>LTM2</id>
@@ -3210,7 +3210,7 @@
 	<accion_usuario></accion_usuario>
 	<valor_check_activo></valor_check_activo>
 	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder></valor_placeholder>
+	<valor_placeholder>RWo6IGZhIGZhLXRyYXNo</valor_placeholder>
 	<ocultar_etiqueta>MA==</ocultar_etiqueta>
 	<id_html>aW1hZ2Vu</id_html>
 	<validacion_extras></validacion_extras>
