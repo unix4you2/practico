@@ -936,122 +936,123 @@ CREATE TABLE core_scripts_lenguajes (
   hola_mundo text,
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('ABAP', 'abap',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('ActionScript', 'as',                                                         '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('ADA', 'ada|adb|ads',                                                         '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Apache_Conf', 'htaccess|htgroups|htpasswd|conf|htaccess|htgroups|htpasswd',  '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('AsciiDoc', 'asciidoc|adoc|ans|asc',                                          '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Assembly_x86', 'asm',                                                        '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('AutoHotKey', 'ahk',                                                          '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('BatchFile', 'bat|cmd|pif|wsf',                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('C9Search', 'c9search_results',                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('C_Cpp', 'cpp|c|cc|cxx|h|hh|hpp|bcp|tcc',                                     '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Cirru', 'cirru|cr',                                                          '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Clojure', 'clj|cljs',                                                        '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Cobol', 'CBL|COB',                                                           '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('coffee', 'coffee|cf|cson|Cakefile',                                          '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('ColdFusion', 'cfm',                                                          '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('CSharp', 'cs|csx',                                                           '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('CSS', 'css',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Curly', 'curly',                                                             '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('D', 'd|di',                                                                  '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Dart', 'dart',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Diff', 'diff|patch',                                                         '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Dockerfile', 'Dockerfile',                                                   '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Dot', 'dot',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Dummy', 'dummy',                                                             '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('DummySyntax', 'dummy',                                                       '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Eiffel', 'e',                                                                '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('EJS', 'ejs',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Elixir', 'ex|exs',                                                           '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Elm', 'elm',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Erlang', 'erl|hrl',                                                          '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Forth', 'frt|fs|ldr|4th|forth',                                              '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('FTL', 'ftl',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Gcode', 'gcode',                                                             '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Gherkin', 'feature',                                                         '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Gitignore', 'gitignore|gcloudignore',                                        '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Glsl', 'glsl|frag|vert',                                                     '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('golang', 'go',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Groovy', 'groovy',                                                           '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('HAML', 'haml',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Handlebars', 'hbs|handlebars|tpl|mustache',                                  '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Haskell', 'hs|has|lhs|lit',                                                  '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('haXe', 'hx',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('HTML', 'html|htm|xhtml|asp|aspx',                                            '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('HTML_Ruby', 'erb|rhtml',                                                     '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('INI', 'ini|cfg|prefs',                                                       '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Io', 'io',                                                                   '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Jack', 'jack',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Jade', 'jade',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Java', 'java',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('JavaScript', 'js|jsm',                                                       '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('JSON', 'json',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('JSONiq', 'jq',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('JSP', 'jsp',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('JSX', 'jsx',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Julia', 'jl',                                                                '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('LaTeX', 'tex|latex|ltx|bib|sty',                                             '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('LESS', 'less',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Liquid', 'liquid',                                                           '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Lisp', 'lisp|lsp',                                                           '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('LiveScript', 'ls',                                                           '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('LogiQL', 'logic|lql',                                                        '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('LSL', 'lsl',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Lua', 'lua',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('LuaPage', 'lp',                                                              '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Lucene', 'lucene',                                                           '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Makefile', 'Makefile|GNUmakefile|makefile|OCamlMakefile|make|am',            '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Markdown', 'md|markdown|markdn',                                             '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Mask', 'mask',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('MATLAB', 'matlab',                                                           '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('MEL', 'mel',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('MUSHCode', 'mc|mush',                                                        '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('MySQL', 'mysql',                                                             '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Nix', 'nix',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('ObjectiveC', 'm|mm',                                                         '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('OCaml', 'ml|mli',                                                            '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Pascal', 'pas|p|dfm',                                                        '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Perl', 'pl|pm',                                                              '', 'perl');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('pgSQL', 'pgsql',                                                             '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('PHP', 'php|phtml|inc|ctp|snt',                                               '', 'php');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Powershell', 'ps1',                                                          '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Praat', 'praat|praatscript|psc|proc',                                        '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Prolog', 'plg|prolog',                                                       '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Properties', 'properties',                                                   '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Protobuf', 'proto',                                                          '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Python', 'py',                                                               '', 'python3');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('R', 'r',                                                                     '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('RDoc', 'Rd',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('RHTML', 'Rhtml',                                                             '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Ruby', 'rb|ru|gemspec|rake|Guardfile|Rakefile|Gemfile',                      '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Rust', 'rs',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('SASS', 'sass',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('SCAD', 'scad',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Scala', 'scala',                                                             '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Scheme', 'scm|rkt',                                                          '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('SCSS', 'scss',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('SH', 'sh|bash|bashrc|bsh',                                                   '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('SJS', 'sjs',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Smarty', 'smarty|tpl',                                                       '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('snippets', 'snippets',                                                       '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Soy_Template', 'soy',                                                        '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Space', 'space',                                                             '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('SQL', 'sql|dblib|dblib_mssql|fbd|ibm|ifmx|mssql|odbc|oracle|sqlite|sqlsrv',  '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Stylus', 'styl|stylus',                                                      '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('SVG', 'svg',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Tcl', 'tcl',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Tex', 'tex',                                                                 '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Text', 'txt|nfo|dat|inf|log|csv|tab|url|1st|fountain|me|now|readme|rft|cst|pl1|pli|plc|src|swift|tk',    '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Textile', 'textile',                                                         '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Toml', 'toml',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Twig', 'twig',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Typescript', 'ts|typescript|str',                                            '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Vala', 'vala',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('VBScript', 'bas|vbs|vb|b|sb',                                                '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Velocity', 'vm',                                                             '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('Verilog', 'v|vh|sv|svh',                                                     '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('VHDL', 'vhd|vhdl',                                                           '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('XML', 'xml|rdf|rss|wsdl|xsl|xslt|atom|mathml|mml|xul|xbl',                   '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('XQuery', 'xq',                                                               '', '');
-INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('YAML', 'yaml|yml',                                                           '', '');
+INSERT INTO `core_scripts_lenguajes` (`id`, `nombre`, `extensiones`, `comando_compilacion`, `comando_ejecucion`, `hola_mundo`) VALUES
+(1,	'ABAP',	'abap',	'',	'',	'REPORT zgoodbyeworld.\r\n  WRITE \"Practico Framework! Prueba de lenguaje ABAP generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\".'),
+(2,	'ActionScript',	'as',	'',	'',	''),
+(3,	'ADA',	'ada|adb|ads',	'',	'',	'with Ada.Text_IO; use Ada.Text_IO;\r\nprocedure Main is\r\nbegin\r\n  Put_Line (\"Practico Framework! Prueba de lenguaje ADA generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\nend Main;'),
+(4,	'Apache_Conf',	'htaccess|htgroups|htpasswd|conf|htaccess|htgroups|htpasswd',	'',	'',	''),
+(5,	'AsciiDoc',	'asciidoc|adoc|ans|asc',	'',	'',	''),
+(6,	'Assembly_x86',	'asm',	'',	'',	'DOSSEG\r\n.MODEL TINY\r\n.DATA\r\nTXT DB \"Practico Framework! Prueba de lenguaje ASSEMBLY_x86 generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}$\"\r\n.CODE\r\nSTART:\r\n	MOV ax, @DATA\r\n	MOV ds, ax\r\n	\r\n	MOV ah, 09h		; prepare output function\r\n	MOV dx, OFFSET TXT	; set offset\r\n	INT 21h			; output string TXT\r\n	\r\n	MOV AX, 4C00h 		; go back to DOS\r\n	INT 21h\r\nEND START'),
+(7,	'AutoHotKey',	'ahk',	'',	'',	''),
+(8,	'BatchFile',	'bat|cmd|pif|wsf',	'',	'',	''),
+(9,	'C9Search',	'c9search_results',	'',	'',	''),
+(10,	'C_Cpp',	'c|cpp|cc|cxx|h|hh|hpp|bcp|tcc',	'gcc -o {$PCO_ArchivoScript}.out',	'./{$PCO_ArchivoScript}.out',	'#include <stdio.h>\r\nint main(void)\r\n{\r\n    printf(\"Practico Framework! Prueba de lenguaje C/CPP generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\n}\r\n'),
+(11,	'Cirru',	'cirru|cr',	'',	'',	''),
+(12,	'Clojure',	'clj|cljs',	'',	'',	'(println \"Practico Framework! Prueba de lenguaje CLOJURE generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\")'),
+(13,	'Cobol',	'CBL|COB',	'',	'',	'	program-id. hello.\r\n	procedure division.\r\n		display \"Practico Framework! Prueba de lenguaje COBOL generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\".\r\n		stop run.'),
+(14,	'coffee',	'coffee|cf|cson|Cakefile',	'',	'',	'console.log \"Practico Framework! Prueba de lenguaje COFFEE generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(15,	'ColdFusion',	'cfm',	'',	'',	'<cfoutput>Practico Framework! Prueba de lenguaje COLDFUSION generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}</cfoutput>\r\n'),
+(16,	'CSharp',	'cs|csx',	'',	'',	'namespace HelloWorld\r\n{\r\n    class Program\r\n    {\r\n        static void Main(string[] args)\r\n        {\r\n            System.Console.WriteLine(\"Practico Framework! Prueba de lenguaje CSharp generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\n        }\r\n    }\r\n}'),
+(17,	'CSS',	'css',	'',	'',	''),
+(18,	'Curly',	'curly',	'',	'',	''),
+(19,	'D',	'd|di',	'',	'',	'import std.stdio;\r\n\r\nvoid main() {\r\n    writeln(\"Practico Framework! Prueba de lenguaje D generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\n}'),
+(20,	'Dart',	'dart',	'',	'',	'main() {\r\n    var bye = \"Practico Framework! Prueba de lenguaje DART generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\";\r\n    print(\"$bye\");\r\n}'),
+(21,	'Diff',	'diff|patch',	'',	'',	''),
+(22,	'Dockerfile',	'Dockerfile',	'',	'',	''),
+(23,	'Dot',	'dot',	'',	'',	''),
+(24,	'Dummy',	'dummy',	'',	'',	''),
+(25,	'DummySyntax',	'dummy',	'',	'',	''),
+(26,	'Eiffel',	'e',	'',	'',	'class\r\n    HELLO_WORLD\r\ncreate\r\n    make\r\nfeature\r\n    make\r\n        do\r\n            print (\"Practico Framework! Prueba de lenguaje EIFFEL generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\")\r\n        end\r\nend'),
+(27,	'EJS',	'ejs',	'',	'',	''),
+(28,	'Elixir',	'ex|exs',	'',	'',	'IO.puts \"Practico Framework! Prueba de lenguaje ELIXIR generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(29,	'Elm',	'elm',	'',	'',	'main = text \"Practico Framework! Prueba de lenguaje ELM generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(30,	'Erlang',	'erl|hrl',	'',	'',	'io:format(\"Practico Framework! Prueba de lenguaje ERLANG generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\").'),
+(31,	'Forth',	'frt|fs|ldr|4th|forth',	'',	'',	': goodbye ( -- )   .\" Practico Framework! Prueba de lenguaje FORTH generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\" CR ;'),
+(32,	'FTL',	'ftl',	'',	'',	''),
+(33,	'Gcode',	'gcode',	'',	'',	''),
+(34,	'Gherkin',	'feature',	'',	'',	''),
+(35,	'Gitignore',	'gitignore|gcloudignore',	'',	'',	''),
+(36,	'Glsl',	'glsl|frag|vert',	'',	'',	''),
+(37,	'golang',	'go',	'',	'go run',	'package main\r\nimport \"fmt\"\r\nfunc main() {\r\n    fmt.Println(\"Practico Framework! Prueba de lenguaje GO generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\")\r\n}\r\n'),
+(38,	'Groovy',	'groovy',	'',	'',	''),
+(39,	'HAML',	'haml',	'',	'',	''),
+(40,	'Handlebars',	'hbs|handlebars|tpl|mustache',	'',	'',	''),
+(41,	'Haskell',	'hs|has|lhs|lit',	'',	'',	'main = putStrLn \"Practico Framework! Prueba de lenguaje HASKELL generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(42,	'haXe',	'hx',	'',	'',	'trace(\"Practico Framework! Prueba de lenguaje HAXE generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");'),
+(43,	'HTML',	'html|htm|xhtml|asp|aspx',	'',	'',	''),
+(44,	'HTML_Ruby',	'erb|rhtml',	'',	'',	''),
+(45,	'INI',	'ini|cfg|prefs',	'',	'',	''),
+(46,	'Io',	'io',	'',	'',	''),
+(47,	'Jack',	'jack',	'',	'',	'class Main {\r\n  function void main () {\r\n    do Output.printString(\"Practico Framework! Prueba de lenguaje JACK generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\n    do Output.println();\r\n    return;\r\n  }\r\n}'),
+(48,	'Jade',	'jade',	'',	'',	''),
+(49,	'Java',	'java',	'javac  {$PCO_ArchivoScript}.java',	'java {$PCO_ArchivoScript}.class',	'public class HelloWorld\r\n{\r\n public static void main(String[] args)\r\n {\r\n  System.out.println(\"Practico Framework! Prueba de lenguaje JAVA generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\n }\r\n}'),
+(50,	'JavaScript',	'js|jsm',	'',	'node',	'console.log(\"Practico Framework! Prueba de lenguaje JAVASCRIPT generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");'),
+(51,	'JSON',	'json',	'',	'',	''),
+(52,	'JSONiq',	'jq',	'',	'',	''),
+(53,	'JSP',	'jsp',	'',	'',	''),
+(54,	'JSX',	'jsx',	'',	'',	''),
+(55,	'Julia',	'jl',	'',	'',	'println(\"Practico Framework! Prueba de lenguaje JULIA generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\")'),
+(56,	'LaTeX',	'tex|latex|ltx|bib|sty',	'',	'',	'\\documentclass{minimal}\r\n\\begin{document}\r\nPractico Framework! Prueba de lenguaje LATEX generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\r\n\\end{document}'),
+(57,	'LESS',	'less',	'',	'',	''),
+(58,	'Liquid',	'liquid',	'',	'',	''),
+(59,	'Lisp',	'lisp|lsp',	'',	'newlisp',	'(println \"Practico Framework! Prueba de lenguaje LISP generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\")'),
+(60,	'LiveScript',	'ls',	'',	'',	''),
+(61,	'LogiQL',	'logic|lql',	'',	'',	''),
+(62,	'LSL',	'lsl',	'',	'',	''),
+(63,	'Lua',	'lua',	'',	'',	'print \"Practico Framework! Prueba de lenguaje LUA generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(64,	'LuaPage',	'lp',	'',	'',	''),
+(65,	'Lucene',	'lucene',	'',	'',	''),
+(66,	'Makefile',	'Makefile|GNUmakefile|makefile|OCamlMakefile|make|am',	'',	'',	''),
+(67,	'Markdown',	'md|markdown|markdn',	'',	'',	''),
+(68,	'Mask',	'mask',	'',	'',	''),
+(69,	'MATLAB',	'matlab',	'',	'',	'>> disp(\"Practico Framework! Prueba de lenguaje MATLAB generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\")'),
+(70,	'MEL',	'mel',	'',	'',	'proc helloWorld () {\r\n   print \"Practico Framework! Prueba de lenguaje MEL generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\";\r\n}'),
+(71,	'MUSHCode',	'mc|mush',	'',	'',	''),
+(72,	'MySQL',	'mysql',	'',	'',	''),
+(73,	'Nix',	'nix',	'',	'',	'\"Practico Framework! Prueba de lenguaje NIX generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(74,	'ObjectiveC',	'm|mm',	'',	'',	'#import <Foundation/Foundation.h>\r\n\r\nint main() {\r\n    @autoreleasepool {\r\n        NSLog(@\"Practico Framework! Prueba de lenguaje OBJECTIVE-C generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\n    }\r\n}'),
+(75,	'OCaml',	'ml|mli',	'',	'',	'print_endline \"Practico Framework! Prueba de lenguaje OCAML generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(76,	'Pascal',	'pas|p|dfm',	'',	'',	'program byeworld;\r\nbegin\r\n writeln(\"Practico Framework! Prueba de lenguaje PASCAL generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\nend.'),
+(77,	'Perl',	'pl|pm',	'',	'perl',	'print \"Practico Framework! Prueba de lenguaje PERL generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(78,	'pgSQL',	'pgsql',	'',	'',	''),
+(79,	'PHP',	'php|phtml|inc|ctp|snt',	'',	'php',	'<?php\r\necho \"Practico Framework! Prueba de lenguaje PHP generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\";\r\n'),
+(80,	'Powershell',	'ps1',	'',	'',	'\"Practico Framework! Prueba de lenguaje POWERSHELL generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(81,	'Praat',	'praat|praatscript|psc|proc',	'',	'',	''),
+(82,	'Prolog',	'plg|prolog',	'',	'',	':- write(\"Practico Framework! Prueba de lenguaje PROLOG generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"), nl.'),
+(83,	'Properties',	'properties',	'',	'',	''),
+(84,	'Protobuf',	'proto',	'',	'',	''),
+(85,	'Python',	'py',	'',	'python3',	'print (\"Practico Framework! Prueba de lenguaje PYTHON generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\")'),
+(86,	'R',	'r',	'',	'',	'print(\"Practico Framework! Prueba de lenguaje R generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\")'),
+(87,	'RDoc',	'Rd',	'',	'',	''),
+(88,	'RHTML',	'Rhtml',	'',	'',	''),
+(89,	'Ruby',	'rb|ru|gemspec|rake|Guardfile|Rakefile|Gemfile',	'',	'',	'puts \"Practico Framework! Prueba de lenguaje RUBY generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(90,	'Rust',	'rs',	'',	'',	'fn main() {\r\n   print!(\"Practico Framework! Prueba de lenguaje RUST generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\n}'),
+(91,	'SASS',	'sass',	'',	'',	''),
+(92,	'SCAD',	'scad',	'',	'',	''),
+(93,	'Scala',	'scala',	'',	'',	'println(\"Practico Framework! Prueba de lenguaje SCALA generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\")'),
+(94,	'Scheme',	'scm|rkt',	'',	'',	'\"Practico Framework! Prueba de lenguaje TCL generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(95,	'SCSS',	'scss',	'',	'',	''),
+(96,	'SH',	'sh|bash|bashrc|bsh',	'',	'sh',	'#!/bin/sh\r\necho \"Practico Framework! Prueba de lenguaje UnixShell-SH generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(97,	'SJS',	'sjs',	'',	'',	''),
+(98,	'Smarty',	'smarty|tpl',	'',	'',	''),
+(99,	'snippets',	'snippets',	'',	'',	''),
+(100,	'Soy_Template',	'soy',	'',	'',	''),
+(101,	'Space',	'space',	'',	'',	''),
+(102,	'SQL',	'sql|dblib|dblib_mssql|fbd|ibm|ifmx|mssql|odbc|oracle|sqlite|sqlsrv',	'',	'',	''),
+(103,	'Stylus',	'styl|stylus',	'',	'',	''),
+(104,	'SVG',	'svg',	'',	'',	''),
+(105,	'Tcl',	'tcl',	'',	'tclsh',	'puts stdout {Practico Framework! Prueba de lenguaje TCL generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}}'),
+(106,	'Tex',	'tex',	'',	'',	''),
+(107,	'Text',	'txt|nfo|dat|inf|log|csv|tab|url|1st|fountain|me|now|readme|rft|cst|pl1|pli|plc|src|swift|tk',	'',	'',	''),
+(108,	'Textile',	'textile',	'',	'',	''),
+(109,	'Toml',	'toml',	'',	'',	''),
+(110,	'Twig',	'twig',	'',	'',	''),
+(111,	'Typescript',	'ts|typescript|str',	'',	'',	''),
+(112,	'Vala',	'vala',	'',	'',	'void main(){\r\n	stdout.printf(\"Practico Framework! Prueba de lenguaje VALA generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\n}'),
+(113,	'VBScript',	'bas|vbs|vb|b|sb',	'',	'',	'WScript.Echo \"Practico Framework! Prueba de lenguaje VBSCRIPT generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"'),
+(114,	'Velocity',	'vm',	'',	'',	''),
+(115,	'Verilog',	'v|vh|sv|svh',	'',	'',	'module main;\r\n  initial begin\r\n      $display(\"Practico Framework! Prueba de lenguaje VERILOG generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\n      $finish ;\r\n    end\r\nendmodule'),
+(116,	'VHDL',	'vhd|vhdl',	'',	'',	'LIBRARY std;\r\nUSE std.TEXTIO.all;\r\n\r\nentity test is\r\nend entity test;\r\n\r\narchitecture beh of test is\r\nbegin\r\n  process\r\n    variable line_out : line;\r\n  begin\r\n    write(line_out, string\'(\"Practico Framework! Prueba de lenguaje VHDL generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\"));\r\n    writeline(OUTPUT, line_out);\r\n    wait; -- needed to stop the execution\r\n  end process;\r\nend architecture beh;'),
+(117,	'XML',	'xml|rdf|rss|wsdl|xsl|xslt|atom|mathml|mml|xul|xbl',	'',	'',	''),
+(118,	'XQuery',	'xq',	'',	'',	''),
+(119,	'YAML',	'yaml|yml',	'',	'',	'');
