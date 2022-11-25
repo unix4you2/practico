@@ -373,8 +373,10 @@ INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,coman
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('XQuery', 'xq',                                                               '', '');
 INSERT INTO core_scripts_lenguajes (nombre,extensiones,comando_compilacion,comando_ejecucion) VALUES ('YAML', 'yaml|yml',                                                           '', '');
 
-
 ALTER TABLE core_chat ADD INDEX recd (recd);
+
+UPDATE core_opcionlista SET identificador_lista='exportaciones_informe_DEPRECATED' WHERE identificador_lista='exportaciones_informe' AND (valor_interno='S' OR valor_interno='A');
+
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
