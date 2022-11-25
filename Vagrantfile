@@ -74,7 +74,7 @@
 # CAJAS    OS       APACHE   PHP      MotorBD          CREDENCIALES
 #-----------------------------------------------------------------------------
 # centos   7.9      2.4.6    5.4.16   MariaDB 5.5.68   vagrant/vagrant
-# ubuntu   22.04.1  2.4.52   8.1.2    MariaDB 10.6.7   vagrant/vagrant
+# ubuntu   22.04.1  2.4.52   7.4.33   MariaDB 10.6.7   vagrant/vagrant
 # freebsd  13.1     2.4.54   7.4.33   MySQL 5.7.40     vagrant/vagrant
 # openbsd  7.2               7.4.33
 # alpine   
