@@ -73,11 +73,11 @@
 #=============================================================================
 # CAJAS    OS       APACHE   PHP      MotorBD          CREDENCIALES
 #-----------------------------------------------------------------------------
+# alpine   3.15.0   2.4.54   7.4.33   MariaDB 10.6.10  vagrant/vagrant
 # centos   7.9      2.4.6    5.4.16   MariaDB 5.5.68   vagrant/vagrant
 # ubuntu   22.04.1  2.4.52   7.4.33   MariaDB 10.6.7   vagrant/vagrant
 # freebsd  13.1     2.4.54   7.4.33   MySQL 5.7.40     vagrant/vagrant
 # openbsd  7.2               7.4.33
-# alpine   
 #-----------------------------------------------------------------------------
 
 
@@ -469,15 +469,60 @@ end
 #  ██║  ██║███████╗██║     ██║██║ ╚████║███████╗
 #  ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝╚═╝  ╚═══╝╚══════╝                                           
 	$ScriptAprovisionamiento_AlpineLinux = <<-SCRIPT
+	    #Instalacion de Apache
+	    sudo apk add apache2
+
+	    #Instalacion de PHP y sus extensiones
+	    sudo apk add php7 php7-session php7-simplexml php7-xml php7-xmlrpc php7-pdo php7-gd php7-json php7-pdo_mysql php7-mysqli php7-mbstring php7-zlib php7-curl php7-zip php7-posix
+	    sudo apk add php7-apache2
+
+	    #Instalacion de MariaDB
+	    sudo apk add mariadb mariadb-client
+	    sudo /etc/init.d/mariadb setup
+
+	    #Instalacion de herramientas basicas de desarrollo
+	    sudo apk add git
+	    
+	    #Habilita, enciende y apaga servicios
+	    sudo rc-update add apache2 default
+	    sudo rc-service apache2 restart
+	    sudo rc-update add mariadb default
+	    sudo rc-service mariadb restart
+
+	    #Instala repositorio directo sobre carpeta del servidor web y carpetas de pruebas
+	    sudo chmod 777 /var/www/localhost/htdocs
+	    cd /var/www/localhost/htdocs
+	    rm -rf practico
+	    mkdir practico_tests
+	    git clone https://github.com/unix4you2/practico.git
+	    sudo chmod -R 777 *
+	    rm -f index.html
+	    cp practico/tmp/index.html index.html
+
+	    #Instalacion de la base de datos
+	    sudo mysqladmin create practico
+	    sudo mysqladmin -u root password mypass
+	    sudo mysql -h "localhost" --user=root --database=practico < "/var/www/localhost/htdocs/practico/ins/sql/practico.mysql"
+
+	    #Actualiza llaves en BD de usuarios segun valor del archivo configuracion y regenera elementos
+	    cd /var/www/localhost/htdocs/practico/ins
+	    php paso_llave.php
+	    php paso_regenerar.php
+
 	    echo " "
 	    echo "=============================================================="
 	    echo "                 APROVISIONAMIENTO FINALIZADO"
 	    echo "--------------------------------------------------------------"
-	    echo "  Ingrese a  http://localhost:8585/practico "
-	    echo "             https://localhost:9595/practico  (Aceptando SSL)"
+	    echo "  Acceso WEB   (Practico Framework)"
+	    echo "               http://localhost:8585/practico "
+	    echo "               https://localhost:9595/practico (Aceptando SSL)"
 	    echo " "
-	    echo "             USUARIO Y CONTRASENA:   admin / admin"
+	    echo "               USUARIO Y CONTRASENA:   admin / admin"
 	    echo " "
-	    echo "             ssh -l vagrant -p 7575 localhost (Acceso SSH)"
+	    echo "--------------------------------------------------------------"
+	    echo "  Acceso SSH   (Secure Shell)"
+	    echo "               ssh -l vagrant -p 7575 localhost"
+	    echo "               (puede requerir -o HostKeyAlgorithms=CIFRADO)"
+	    echo " "
 	    echo "--------------------------------------------------------------"
 	  SCRIPT
