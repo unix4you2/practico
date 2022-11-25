@@ -67,18 +67,6 @@ Chat
 	Made by: Copyright (c) 2009 Anant Garg
 	See (anantgarg dot com | inscripts dot com)
 
-ElFinder
-	Location: mod/fileman/*
-	License: 3-clauses BSD license
-	Made by: Copyright (c) 2009-2012, Studio 42
-	http://elfinder.org/
-	Chief developer: Dmitry "dio" Levashov <dio@std42.ru>
-	Maintainer: Troex Nevelin <troex@fury.scancode.ru>
-	Developers: Alexey Sukhotin <strogg@yandex.ru>,
-	Naoki Sawada <hypweb@gmail.com>
-	Icons: [PixelMixer](http://pixelmixer.ru),
-	[Yusuke Kamiyamane](http://p.yusukekamiyamane.com)
-
 Font-Awesome
 	Location: inc/font-awesome/fonts/*
 	Font License: SIL OFL 1.1
@@ -100,12 +88,6 @@ TCPDF
 	Location: inc/tcpdf_min/*
 	License: GNU Lesser Public License
     URL: http://www.tcpdf.org/
-
-Php2Excel
-	Location: inc/phpexcel/*
-	License: GNU Lesser Public License
-    URL: https://phpexcel.codeplex.com/
-	Created and Maintained by CodePlex team
 
 SummerNote
 	Location: inc/summernote/*
