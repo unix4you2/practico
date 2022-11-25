@@ -183,7 +183,7 @@ Vagrant.configure("2") do |config|
 
 
   config.vm.define "alpine" do |alpine|
-	  alpine.vm.box="generic/alpine316"
+	  alpine.vm.box="generic/alpine315"
 	  alpine.vm.provider "virtualbox" do |vm_detalles|
 	    vm_detalles.cpus = "1"
 	    vm_detalles.memory = "512"
