@@ -1274,9 +1274,9 @@ function PCO_ImportarDefinicionesXML($ByPassControlDesarrollo)
     {
         global $ModoDesarrolladorPractico;
         
-        //Hace ejecucion de solamente si no esta en desarrollo de framework
+        //Hace ejecucion de solamente si no esta en desarrollo de framework o si se hace el ByPass (1=Regenera y Borra,2=Regenera y dejar archivos)
         //Esto permite que los fuentes permanezcan con los XML y scripts en trazabilidad
-        if ($ModoDesarrolladorPractico>=0 || $ByPassControlDesarrollo==1)
+        if ($ModoDesarrolladorPractico>=0 || $ByPassControlDesarrollo>0)
             {
         		//Se desactiva el limite de tiempo para ejecucion del script
         		set_time_limit (0) ;
@@ -1301,7 +1301,8 @@ function PCO_ImportarDefinicionesXML($ByPassControlDesarrollo)
                         if ($xml_importado->descripcion[0]->tipo_objeto=="Formulario")
                             $ResultadoImportacion=PCO_ImportarXMLFormulario($cadena_xml_importado);
                         //Una vez procesado el archivo lo elimina
-                        unlink("xml/".$ArchivoXML);
+                        if ($ByPassControlDesarrollo<2)
+                            unlink("xml/".$ArchivoXML);
                     }
             }
     }
@@ -1323,7 +1324,7 @@ function PCO_ImportarScriptsPHP($ByPassControlDesarrollo)
         
         //Hace ejecucion de solamente si no esta en desarrollo de framework
         //Esto permite que los fuentes permanezcan con los XML y scripts en trazabilidad
-        if ($ModoDesarrolladorPractico>=0 || $ByPassControlDesarrollo==1)
+        if ($ModoDesarrolladorPractico>=0 || $ByPassControlDesarrollo>0)
             {
                 global $PCO_FechaOperacion,$PCO_HoraOperacion;
                 $ArregloElementos = array();
@@ -1340,7 +1341,8 @@ function PCO_ImportarScriptsPHP($ByPassControlDesarrollo)
                         //Incluye el codigo
                         include_once("xml/".$ArchivoPHP);
                         //Una vez procesado el archivo lo renombra para no ser ejecutado mas
-                        rename("xml/".$ArchivoPHP, "xml/".$ArchivoPHP.".Run_".$PCO_FechaOperacion."-".$PCO_HoraOperacion);
+                        if ($ByPassControlDesarrollo<2)
+                            rename("xml/".$ArchivoPHP, "xml/".$ArchivoPHP.".Run_".$PCO_FechaOperacion."-".$PCO_HoraOperacion);
                     }
             }
     }

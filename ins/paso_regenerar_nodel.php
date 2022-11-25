@@ -58,6 +58,5 @@
 
 	//Hace la regeneracion de elementos existentes dentro de /xml cuando el entorno lo requiere por primera ejecucion
 	//Se ejecuta mediante ByPass para casos de clonacion de repo en modo desarrollador para Vagrant, Heroku, Similares
-    PCO_ImportarDefinicionesXML(0);
-    PCO_ImportarScriptsPHP(0);
-    
+    PCO_ImportarDefinicionesXML(2);  //2=Regenera sin borrar
+    PCO_ImportarScriptsPHP(1);      //1=Ejecuta y renombra
