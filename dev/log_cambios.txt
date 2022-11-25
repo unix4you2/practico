@@ -86,6 +86,7 @@ LogCambios="
 * Enhan [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).
 * Enhan [DEV]: Las funciones automáticas de regeneración de elementos desde los XML y ejecución de scripts no son llamadas en entornos de desarrollo del framework.  Esto permitirá trazabilidad sobre archivos específicos.
 * Enhan [CORE]: Agregados entornos adicionales al archivo de despliegue de Vagrant
+* Enhan [CORE]: Por mejoramiento de compatibilidad entre versiones y mejoras de seguridad se retira el soporte nativo para generacion/exportación de datos en csv, xls, ods, pdf mediante librería PHPExcel.  Aquellas instalaciones que actualmente hacen uso de dicha opción lo podrán seguir haciendo mediante su inclusión manual en la sección de aplicación que así lo requiera.  Instalaciones nuevas ya no traerán la librería base asociada en /inc/phpexcel.
 
 
 
