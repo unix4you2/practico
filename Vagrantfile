@@ -286,8 +286,9 @@ end
 	    sudo apt-get -y install apache2
 	    
 	    #Instalacion de PHP y sus extensiones
-	    sudo apt-get -y install php php-posix php-mysql php-gd php-ldap php-odbc php-pear php-zip
-	    sudo apt-get -y install php-xml php-xmlrpc php-mbstring php-snmp php-soap curl
+	    sudo add-apt-repository ppa:ondrej/php --yes &> /dev/null
+	    sudo apt-get -y install php7.4 php7.4-common php7.4-mysql php7.4-gd php7.4-ldap php7.4-odbc 
+	    sudo apt-get -y install php7.4-xml php7.4-xmlrpc php7.4-mbstring php7.4-snmp php7.4-soap curl
 
 	    #Instalacion de MariaDB
 	    sudo apt-get -y install mariadb-server mariadb-client
