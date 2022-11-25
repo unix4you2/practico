@@ -94,11 +94,6 @@ LogCambios="
 
 
 
-* Enhan [CORE]: Adicion de PHPSpreadSheet 1.19.0 como dependencia de composer y no como libreria independiente en reemplazo de PHPExcel.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.  IMPORTANTE:  El uso de este paquete requiere PHP 7.2+
-
-
-
-
 TODO:  EXPORTAR LA TABLA DE LENGUAJES.
 
 "
