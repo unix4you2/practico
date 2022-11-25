@@ -222,7 +222,7 @@ end
 	    sudo yum -y install httpd mod_ssl
 
 	    #Instalacion de PHP y sus extensiones
-	    sudo yum -y install php php-process php-mysql php-gd php-ldap php-odbc php-pear 
+	    sudo yum -y install php php-process php-mysql php-gd php-ldap php-odbc php-pear php-zip
 	    sudo yum -y install php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel
 
 	    #Instalacion de MariaDB
@@ -286,7 +286,7 @@ end
 	    sudo apt-get -y install apache2
 	    
 	    #Instalacion de PHP y sus extensiones
-	    sudo apt-get -y install php php-posix php-mysql php-gd php-ldap php-odbc php-pear 
+	    sudo apt-get -y install php php-posix php-mysql php-gd php-ldap php-odbc php-pear php-zip
 	    sudo apt-get -y install php-xml php-xmlrpc php-mbstring php-snmp php-soap curl
 
 	    #Instalacion de MariaDB
@@ -371,7 +371,7 @@ end
 
 	    #Instalacion de PHP y sus extensiones
 	    sudo pkg install -y php74 php74-session php74-hash php74-simplexml php74-xml php74-xmlrpc php74-pdo php74-gd php74-json
-	    sudo pkg install -y php74-pdo_mysql php74-mysqli mod_php74 php74-mbstring php74-zlib php74-curl
+	    sudo pkg install -y php74-pdo_mysql php74-mysqli mod_php74 php74-mbstring php74-zlib php74-curl php74-zip
 	    sudo cp /usr/local/etc/php.ini-production /usr/local/etc/php.ini
 	    #sudo rehash
 	    sudo touch /usr/local/etc/apache24/Includes/php.conf
