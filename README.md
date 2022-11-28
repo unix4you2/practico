@@ -1,5 +1,7 @@
 ![PRACTICO](https://github.com/unix4you2/practico/raw/master/dev/logo/01b.png)
 ![PHP7](https://github.com/unix4you2/practico/raw/master/dev/misc/php7.png)
+[![StandWithUkraine](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg)](https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md)
+
 
 Practico es una herramienta de codigo abierto para el diseño de aplicaciones web y progresivas de manera agil.
 
