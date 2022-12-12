@@ -397,6 +397,8 @@ ScriptPHPAutorun=""
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
 
+https://packagist.org/packages/filp/whoops
+http://phpdebugbar.com/
 
 /////////* Enhan [CORE]: Por mejoramiento de compatibilidad entre versiones PHP y mejoras de seguridad se retira el soporte nativo para generacion/exportación de datos en csv, xls, ods, pdf mediante librería PHPExcel.  Aquellas instalaciones que actualmente hacen uso de dicha opción lo podrán seguir haciendo mediante su inclusión manual en la sección de aplicación que así lo requiera.  Instalaciones nuevas ya no traerán la librería base asociada en /inc/phpexcel.   Esto ahorra 5MB de código.
 

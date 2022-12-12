@@ -2957,7 +2957,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
         <script language="JavaScript">
             function AgregarControlFormulario(){
                     //Salta a edicion de control
-                    var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-36:0&Presentar_FullScreen=1&Precarga_EstilosBS=1";
+                    var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-36:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&formulario=<?php echo $formulario; ?>&PCO_TipoControlDirecto=";
                     PCOJS_MostrarMensaje("<?php echo $MULTILANG_FrmMsj1; ?>","Cargando...","modal-wide oculto_impresion");
                     $("#PCO_Modal_MensajeCuerpo").html('<iframe id="IFrameEmbebido" scrolling="yes" style="margin:10px; border:0px;" height=500 width=100% src="'+URLPopUp+'"></iframe>');
                     $("#PCO_Modal_MensajeBotones").html('<button id="boton_filtrar" type="button" class="btn btn-outline btn-info" data-dismiss="modal" onclick="CargarFormulario();" >Cerrar</button></a>');
@@ -2978,14 +2978,17 @@ if ($PCO_Accion=="PCO_EditarFormulario")
         
             <div align=center style="color:#FFFFFF;"><br>
     			'.$MULTILANG_FrmObjetos.'<br>
-    			<!--
+    			
                     <a data-toggle="modal" href="javascript: var LMQTP=AgregarControlFormulario();" title="'.$MULTILANG_FrmDesObjetos.'">
                             <i class="fa fa-th-list fa-3x fa-fw"></i>
                     </a>
-                -->
+                
+                    <!--
                     <a data-toggle="modal" href="#myModalElementoFormulario" title="'.$MULTILANG_FrmDesObjetos.'">
                             OLD <i class="fa fa-th-list fa-3x fa-fw"></i>
                     </a>                
+                    -->
+                    
                     <a data-toggle="modal" href="#myModalDisenoFormulario" title="'.$MULTILANG_FrmDesCampos.'">
                             <i class="fa fa-pencil-square-o fa-3x fa-fw"></i>
                     </a>
