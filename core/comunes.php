@@ -5347,6 +5347,15 @@ function PCO_VentanaLogin()
                             <div align=center class="panel-body btn-xs">
                     <?php echo $CadenaOcultamiento_LoginEstandarPRE; ?>
 
+                                    <?php
+                                        //Genera nombres aleatorios para los campos de login y clave
+                                        $NombreCampoLogin=md5(PCO_TextoAleatorio(15));
+                                        $NombreCampoClave=md5(PCO_TextoAleatorio(15));
+                                        $_SESSION['NombreCampoLogin'] = (string)$NombreCampoLogin;
+                                        $_SESSION['NombreCampoClave'] = (string)$NombreCampoClave;
+                                        $PCO_FirmaLogin=md5($NombreCampoLogin." ".$NombreCampoClave." ".$_SESSION['captcha_temporal']);
+                                    ?>
+
                                     <form role="form" name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
                                     <input type="Hidden" name="PCO_Accion" value="Iniciar_login">
                                         <div class="form-group">
@@ -5354,11 +5363,11 @@ function PCO_VentanaLogin()
                                         </div>
                                         <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                            <input name="uid" value="<?php echo $AUTO_uid; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>" AutoCompleteType="Disabled" autocomplete="Off">
+                                            <input name="<?php echo $NombreCampoLogin; ?>" value="<?php echo $AUTO_uid; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>" AutoCompleteType="Disabled" autocomplete="Off">
                                         </div>
                                         <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                                            <input name="clave" value="<?php echo $AUTO_clave; ?>" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>" AutoCompleteType="Disabled" autocomplete="Off">
+                                            <input name="<?php echo $NombreCampoClave; ?>" value="<?php echo $AUTO_clave; ?>" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>" AutoCompleteType="Disabled" autocomplete="Off">
                                         </div>
 
                                         <div id="PCODIV_PostClaveLogin"></div>

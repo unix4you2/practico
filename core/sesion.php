@@ -79,6 +79,10 @@
 */
 	if ($PCO_Accion=="Iniciar_login") 
 		{
+		    //Convierte las variables desde los campos aleatorios a los valores usados comunmente para el login
+		    $uid=${$NombreCampoLogin};
+		    $clave=${$NombreCampoClave};
+
 			//Filtra cadenas recibidas para evitar sql injection
 			$uid_orig=$uid;
 			$clave_orig=$clave;
