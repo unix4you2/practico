@@ -739,9 +739,17 @@ function PCO_EvaluarCodigo($CadenaCodigoPHP,$ByPassSintaxis=0,$DescComplemento="
 {
     global $PCO_ChequeoDinamicoSintaxis;
 
-    $ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal
-    $MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
-    $RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
+	if (function_exists('tmpfile'))
+		{
+			$ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal   
+			$MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
+			$RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
+		}
+	else
+		{		
+			$RutaArchivoTemporal="tmp/PCO_TempFile_".PCO_TextoAleatorio(30);
+			$ArchivoInclusionTemporal=fopen($RutaArchivoTemporal, "w");	
+		}
     fwrite ( $ArchivoInclusionTemporal, $CadenaCodigoPHP );
 
     //Busca si se tienen errores o no para saber si incluye el archivo 
@@ -759,8 +767,8 @@ function PCO_EvaluarCodigo($CadenaCodigoPHP,$ByPassSintaxis=0,$DescComplemento="
                     echo "Se ha detectado un error durante la inclusion del archivo {$RutaArchivoTemporal}: ",  $e->getMessage();
                 }
         }
-
     fclose ( $ArchivoInclusionTemporal );
+    unlink ($RutaArchivoTemporal);
     return $ResultadoInclusion;
 }
 
