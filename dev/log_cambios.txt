@@ -85,6 +85,7 @@ LogCambios="
 * Enhan [DEV]: Las funciones automáticas de regeneración de elementos desde los XML y ejecución de scripts no son llamadas en entornos de desarrollo del framework.  Esto permitirá trazabilidad sobre archivos específicos.
 * Enhan [CORE]: Agregados entornos adicionales al archivo de despliegue de Vagrant
 * Enhan [CORE]: Nombres de campo aleatorios en formulario de login.  Esto permite evitar ataques automatizados de fuerza bruta cuando el atacante conoce los nombres de los campos y la acción del formulario.
+* Enhan [CORE]: @oscarcaldering Mejora a editor de código, explorador de archivos y funciones internas de evaluación de código.  Se permite que en hostings compartidos que bloquean o deshabilitan algunas funciones Posix y de creación de archivos temporales se evite el uso de dichas funciones para que la operatividad del Framework continúe.
 
 
 
@@ -95,7 +96,8 @@ Falta:
 Texto "Valor de la etiqueta (será impresa en el formulario en formato HTML):"  justo arriba del campo de etiqueta.  Debajo del mensaje de Atención este tipo de controles debería ser almacenadodentro de campo texto largo....
 Espacio de vista previa actualizado dinamicamente
 
-
+Revisar uso de funciones apagadas:
+dl,exec,passthru,proc_open,proc_close,shell_exec,memory_limit,system,popen,show_source,symlink,link,leak,listen,diskfreespace,tmpfile,ignore_user_abord,highlight_file,source,show_source,fpaththru,virtual,posix_ctermid,posix_getcwd,posix_getegid,posix_geteuid,posix_getgid,posix_getgrgid,posix_getgrnam,posix_getgroups,posix_getlogin,posix_getpgid,posix_getpgrp,posix_getpid,posix,posix_getppid,posix_getpwnam,posix_getpwuid,posix_getrlimit,posix_getsid,posix_getuid,posix_isatty,posix_kill,posix_mkfifo,posix_setegid,posix_seteuid,posix_setgid,posix_setpgid,posix_setsid,posix_setid,posix_times,posix_ttyname,posix_uname,proc_get_status,proc_nice,proc_terminate	
 
 
 "
