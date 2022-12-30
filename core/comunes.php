@@ -110,9 +110,10 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                 if ($Lenguaje_CMD_EJECUCION!="")
                     {
                         //Crea un archivo temporal con el contenido del script
-                        $ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal
-                        $MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
-                        $RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
+                    	$ArchivoInclusionTemporal=PCO_GenerarArchivoTemporal();
+                    	$MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
+                    	$RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
+
                         fwrite ( $ArchivoInclusionTemporal, $Script_CUERPO );
 
                         //Hace una copia del archivo temporal sobre la carpeta temporal del framework que se garantiza escritura para proceso de compilacion
