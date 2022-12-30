@@ -725,6 +725,35 @@ function PCO_AgregarFaroAnalytics()
 ########################################################################
 ########################################################################
 /*
+	Function: PCO_GenerarArchivoTemporal
+	Verifica disponibilidad de funciones internas de PHP o genera funcion propia para crear archivos temporales en modo W+
+
+	Salida:
+		Gestor de archivo o descriptor de archivo creado similar al retornado por tmpfile o fopen del que se puede extraer luego el puntero, URI o demas datos
+*/
+function PCO_GenerarArchivoTemporal()
+{
+	if (function_exists('tmpfile'))
+		$DescriptorArchivo = tmpfile();
+	else
+		{		
+            try
+                {
+                    $RutaArchivoTemporal="tmp/PCO_TempFile_".PCO_TextoAleatorio(30);
+        			$DescriptorArchivo=fopen($RutaArchivoTemporal, "w+");	
+                }
+            catch (Exception $e)
+                {
+                    $DescriptorArchivo=null;
+                }
+		}
+    return $DescriptorArchivo;
+}
+
+
+########################################################################
+########################################################################
+/*
 	Function: PCO_EvaluarCodigo
 	Ejecuta codigo PHP recibido dentro de una cadena.  Reemplazo para la funcion eval que pasa a ser obsoleta por seguridad
 
@@ -739,17 +768,10 @@ function PCO_EvaluarCodigo($CadenaCodigoPHP,$ByPassSintaxis=0,$DescComplemento="
 {
     global $PCO_ChequeoDinamicoSintaxis;
 
-	if (function_exists('tmpfile'))
-		{
-			$ArchivoInclusionTemporal = tmpfile(); //Crea un archivo temporal   
-			$MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
-			$RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
-		}
-	else
-		{		
-			$RutaArchivoTemporal="tmp/PCO_TempFile_".PCO_TextoAleatorio(30);
-			$ArchivoInclusionTemporal=fopen($RutaArchivoTemporal, "w+");	
-		}
+	$ArchivoInclusionTemporal=PCO_GenerarArchivoTemporal();
+	$MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
+	$RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
+		
     fwrite ( $ArchivoInclusionTemporal, $CadenaCodigoPHP );
 
     //Busca si se tienen errores o no para saber si incluye el archivo 
