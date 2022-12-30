@@ -242,6 +242,11 @@
 								</form><br>
 								<?php
 									$PCO_EnlacePMyDB="javascript:if(confirm('$MULTILANG_ConfirmaPMyDB'))document.PMyDB.submit();";
+									
+									//Determina si debe cambiar el enlace de PMyDB cuando no se tiene soporte de funcion tmpfile en versiones 22.9 o superiores
+									if (!function_exists('tmpfile'))
+    									$PCO_EnlacePMyDB="javascript:alert('Su instalacion de PHP en el servidor no cuenta con la funcion tmpfile() requerida por el gestor de bases de datos. Tiene dos opciones:\\n\\n1. Habilitar la funcion\\n2. Sobreescribir el archivo mod/pmydb/index.php de su instalacion con uno usado por la version 22.3 del Framework');";
+
                         			//Verifica si esta o no en modo DEMO para hacer la operacion
                         			if ($PCO_ModoDEMO==1)
 									   $PCO_EnlacePMyDB="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";
