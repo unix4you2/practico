@@ -748,7 +748,7 @@ function PCO_EvaluarCodigo($CadenaCodigoPHP,$ByPassSintaxis=0,$DescComplemento="
 	else
 		{		
 			$RutaArchivoTemporal="tmp/PCO_TempFile_".PCO_TextoAleatorio(30);
-			$ArchivoInclusionTemporal=fopen($RutaArchivoTemporal, "w");	
+			$ArchivoInclusionTemporal=fopen($RutaArchivoTemporal, "w+");	
 		}
     fwrite ( $ArchivoInclusionTemporal, $CadenaCodigoPHP );
 
@@ -768,7 +768,8 @@ function PCO_EvaluarCodigo($CadenaCodigoPHP,$ByPassSintaxis=0,$DescComplemento="
                 }
         }
     fclose ( $ArchivoInclusionTemporal );
-    unlink ($RutaArchivoTemporal);
+	if (!function_exists('tmpfile'))
+        unlink ($RutaArchivoTemporal);
     return $ResultadoInclusion;
 }
 

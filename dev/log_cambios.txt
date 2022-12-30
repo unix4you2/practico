@@ -90,6 +90,7 @@ LogCambios="
 
 
 
+funcion tmpfile en ejecucion de codigo externo
 
 
 Falta:
