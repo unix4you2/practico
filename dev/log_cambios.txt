@@ -87,11 +87,10 @@ LogCambios="
 * Enhan [CORE]: Nombres de campo aleatorios en formulario de login.  Esto permite evitar ataques automatizados de fuerza bruta cuando el atacante conoce los nombres de los campos y la acción del formulario.
 * Enhan [CORE]: @oscarcaldering Mejora a editor de código, explorador de archivos y funciones internas de evaluación de código.  Se permite que en hostings compartidos que bloquean o deshabilitan algunas funciones Posix y de creación de archivos temporales se evite el uso de dichas funciones para que la operatividad del Framework continúe.
 * Enhan [CORE]: Nueva funcion PCO_GenerarArchivoTemporal() permite crear punteros de manera dinámica hacia archivos temporales según su tipo de instalación.
+* Enhan [CORE]: Actualizados enlaces en navegación hacia foros de desarrolladores (Github/Discuccions)
+* Enhan [CORE]: Adevertencia desplegada para instalaciones sin soporte a funciones PHP tmpfile y que requieren hacer uso de PMyDB/Adminer deben usar el modulo de versiones 22.3 o inferiores que no requieren dicha funcion.  Simplemente se sobreescribe el contenido del index del módulo.
 
 
-
-
-funcion tmpfile en ejecucion de codigo externo
 
 
 Falta:

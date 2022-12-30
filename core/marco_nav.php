@@ -290,14 +290,14 @@
 							</a>
 						</li>
 						<li>
-							<a href="https://groups.google.com/g/practico-framework/" target="_blank">
+							<a href="https://github.com/unix4you2/practico/discussions" target="_blank">
 								<div>
 									<i class="fa fa-comment-o fa-fw"></i> Grupo/<?php echo $MULTILANG_ChatDevel; ?>
 								</div>
 							</a>
 						</li>
 						<li>
-							<a href="https://www.practico.org/agradecimientos" target="_blank">
+							<a href="https://github.com/unix4you2/practico/discussions/1" target="_blank">
 								<div>
 									<i class="fa fa-smile-o fa-fw"></i> Da las gracias!&nbsp; <img src="https://img.shields.io/badge/Say%20Thanks-!-1EAEDB.svg">
 								</div>
