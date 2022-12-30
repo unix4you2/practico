@@ -790,8 +790,7 @@ function PCO_EvaluarCodigo($CadenaCodigoPHP,$ByPassSintaxis=0,$DescComplemento="
                 }
         }
     fclose ( $ArchivoInclusionTemporal );
-	if (!function_exists('tmpfile'))
-        unlink ($RutaArchivoTemporal);
+    @unlink ($RutaArchivoTemporal);
     return $ResultadoInclusion;
 }
 
