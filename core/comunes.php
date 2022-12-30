@@ -740,15 +740,15 @@ function PCO_GenerarArchivoTemporal()
 		{		
             try
                 {
-                    $RutaArchivoTemporal="tmp/PCO_TempFile_".PCO_TextoAleatorio(30);
-        			$DescriptorArchivo=fopen($RutaArchivoTemporal, "w+");	
+                    $RutaArchivoTemporal=sys_get_temp_dir().DIRECTORY_SEPARATOR."PCO_TempFile_".PCO_TextoAleatorio(30);
+			        $DescriptorArchivo=fopen($RutaArchivoTemporal, "w+");	
                 }
             catch (Exception $e)
                 {
                     try
                         {
-                            $RutaArchivoTemporal=sys_get_temp_dir().DIRECTORY_SEPARATOR."PCO_TempFile_".PCO_TextoAleatorio(30);
-        			        $DescriptorArchivo=fopen($RutaArchivoTemporal, "w+");	
+                            $RutaArchivoTemporal="tmp/PCO_TempFile_".PCO_TextoAleatorio(30);
+                			$DescriptorArchivo=fopen($RutaArchivoTemporal, "w+");	
                         }
                     catch (Exception $e)
                         {
