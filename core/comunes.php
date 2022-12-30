@@ -168,10 +168,34 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
 
                                 //Por ahora asume comando solo de ejecucion (lenguajes interpretados)
                                 PCO_Auditar("{$PCOSESS_LoginUsuario} Ejecuta Script={$CodigoUnicoScript} Lenguaje={$Script_LENGUAJE} Modo={$Script_MODOEJECUCION} Comando={$Lenguaje_CMD_EJECUCION} Archivo={$RutaArchivoTemporal}","SQLog:admin");
-                                if ($Script_MODOEJECUCION=="shell_exec")    $ResultadoEvaluacionScript=shell_exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
-                                if ($Script_MODOEJECUCION=="exec")          $ResultadoEvaluacionScript=exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
-                                if ($Script_MODOEJECUCION=="system")        $ResultadoEvaluacionScript=system($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
-                                if ($Script_MODOEJECUCION=="passthru")      $ResultadoEvaluacionScript=passthru($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+                                if ($Script_MODOEJECUCION=="shell_exec")
+                                    {
+                                    	if (function_exists('shell_exec'))
+                                            $ResultadoEvaluacionScript=shell_exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+                                        else
+                                            echo "Su instalacion de PHP en el servidor no tiene soporte para la funcion shell_exec";
+                                    }
+                                if ($Script_MODOEJECUCION=="exec")
+                                    {
+                                        if (function_exists('exec'))
+                                            $ResultadoEvaluacionScript=exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+                                        else
+                                            echo "Su instalacion de PHP en el servidor no tiene soporte para la funcion exec";
+                                    }
+                                if ($Script_MODOEJECUCION=="system")
+                                    {
+                                        if (function_exists('system'))
+                                            $ResultadoEvaluacionScript=system($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+                                        else
+                                            echo "Su instalacion de PHP en el servidor no tiene soporte para la funcion system";
+                                    }
+                                if ($Script_MODOEJECUCION=="passthru")
+                                    {
+                                        if (function_exists('passthru'))
+                                            $ResultadoEvaluacionScript=passthru($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+                                        else
+                                            echo "Su instalacion de PHP en el servidor no tiene soporte para la funcion passthru";
+                                    }
                             }
                         catch (Exception $e)
                             {
