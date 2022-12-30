@@ -745,7 +745,15 @@ function PCO_GenerarArchivoTemporal()
                 }
             catch (Exception $e)
                 {
-                    $DescriptorArchivo=null;
+                    try
+                        {
+                            $RutaArchivoTemporal=sys_get_temp_dir().DIRECTORY_SEPARATOR."PCO_TempFile_".PCO_TextoAleatorio(30);
+        			        $DescriptorArchivo=fopen($RutaArchivoTemporal, "w+");	
+                        }
+                    catch (Exception $e)
+                        {
+                            $DescriptorArchivo=null;
+                        }
                 }
 		}
     return $DescriptorArchivo;
