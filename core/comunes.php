@@ -3535,7 +3535,6 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "PCO_GuardarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_EliminarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_EditarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
-		if ($PCO_Accion== "PCO_GuardarCampoFormulario")			$retorno = PCO_PermisoAgregadoAccion("PCO_EditarFormulario");
 		if ($PCO_Accion== "PCO_EliminarCampoFormulario")		$retorno = PCO_PermisoAgregadoAccion("PCO_EditarFormulario");
 		if ($PCO_Accion== "PCO_GuardarAccionFormulario")		$retorno = PCO_PermisoAgregadoAccion("PCO_EditarFormulario");
 		if ($PCO_Accion== "PCO_EliminarAccionFormulario")		$retorno = PCO_PermisoAgregadoAccion("PCO_EditarFormulario");
@@ -8061,8 +8060,8 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                 $EstadoDeshabilitadoMoverIzquierda="";
                 $EstadoDeshabilitadoMoverDerecha="";
                 $EstadoDeshabilitadoMoverArriba="";
-                if($registro_campos["columna"]-1<=0) $EstadoDeshabilitadoMoverIzquierda="disabled";
-                if($registro_campos["columna"]+1>$registro_formulario["columnas"]) $EstadoDeshabilitadoMoverDerecha="disabled";
+                if($registro_campos["PCOBD_Columna"]-1<=0) $EstadoDeshabilitadoMoverIzquierda="disabled";
+                if($registro_campos["PCOBD_Columna"]+1>$registro_formulario["columnas"]) $EstadoDeshabilitadoMoverDerecha="disabled";
                 if($registro_campos["peso"]-1<=0) $EstadoDeshabilitadoMoverArriba="disabled";
 
                 //Busca si el elemento tiene o no eventos para poner un boton de enlace
@@ -8107,7 +8106,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                                 <a onclick=\'return confirm("'.$MULTILANG_FrmDesplazarObjetos.'\n\n'.$MULTILANG_FrmEstaSeguro.'");\' class="btn btn-xs btn-success" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDesplazarObjetos.'" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_DesplazarObjetosForm&idObjetoForm='.$registro_campos["id"].'&accion_retorno=PCO_EditarFormulario&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-step-forward fa-rotate-90"></i></a>                                
                             </div>
                             <div style="display: inline-block;">
-                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["columna"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-left"></i></a>
+                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=PCOBD_Columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["PCOBD_Columna"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-left"></i></a>
                             </div>
                             <div style="display: inline-block;">
                                 <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($registro_campos["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["peso"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-up"></i></a>
@@ -8115,7 +8114,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                                 <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($registro_campos["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["peso"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-down"></i></a>
                             </div>
                             <div style="display: inline-block;">
-                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
+                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=PCOBD_Columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["PCOBD_Columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
                             </div>
                             
                             <div style="display: inline-block; vertical-align:top;">
@@ -8467,7 +8466,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                         for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
                                             {
                                                 //Busca los elementos de la coumna actual del formulario con peso menor o igual al peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
-                                                $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
+                                                $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND PCOBD_Columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
 
                                                     //Define tipo_maquetacion JJJ
                                                     if($registro_formulario["tipo_maquetacion"]=="responsive")

@@ -21,6 +21,7 @@ core/codigobarras.php
 core/conexiones.php
 core/marco_arriba_bs.php
 core/marco_nav.php
+core/formularios.php
 core/formularios_post.php
 core/marco_abajo.php
 core/marco_dev.php
@@ -54,6 +55,7 @@ LogCambios="
 * Added [FORMS]: Controles tipo lista de seleccion reemplazan variables dinámicas PHP en aquellos tags tipo OPTGROUP
 * Added [FORMS]: Controles tipo lista de seleccion permiten la insercion de TAGS extra en cada opción (esto incluye a los tipos de etiqueta OPTION y OPTGROUP).  Util para indicar cosas como data-icon para especificar imágenes en cada opción, data-lang, data-cualquiercosa que usted necesite.  Esto se logra mediante la inclusión automática del valor de un campo llamado tags_extra que si se encuentra disponible en la tabla o vista desde la cual se carga la lista será usado para tomar su valor e inyectarlo como TAGS adicionales al option.
 * Added [FORMS]: Controles tipo check soportan textos de ayuda.  Serán presentados como icono al lado derecho del texto que acompaña al check.
+* Added [FORMS]: Eliminadas sobre código acciones de adicion de controles a formularios.  Ahora son realizadas directamente por el formulario interno -36
 * Enhan [KANBAN]: @jaimeaba3 Imágen de encabezado de informe es independiente de URL externa.
 * Enhan [COMP]: Actualizado Guzzle a 7.4.5 en componente de auto-trading-bot. (CVE-2022-27776,CVE-2022-29248,CVE-2022-31043,CVE-2022-31042,CVE-2022-31090,CVE-2022-31091) (RFC9110 Section 15.4, RFC6265 Section 5.3, RFC9110 Section 15.4)
 * Enhan [CHAT]:  Agregado índice a campo que indica si un chat ha sido leído o no por el destinatario.
@@ -89,6 +91,9 @@ LogCambios="
 * Enhan [CORE]: Nueva funcion PCO_GenerarArchivoTemporal() permite crear punteros de manera dinámica hacia archivos temporales según su tipo de instalación.
 * Enhan [CORE]: Actualizados enlaces en navegación hacia foros de desarrolladores (Github/Discuccions)
 * Enhan [CORE]: Adevertencia desplegada para instalaciones sin soporte a funciones PHP tmpfile y que requieren hacer uso de PMyDB/Adminer deben usar el modulo de versiones 22.3 o inferiores que no requieren dicha funcion.  Simplemente se sobreescribe el contenido del index del módulo.
+
+
+* Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna
 
 
 
@@ -386,6 +391,8 @@ INSERT INTO `core_scripts_lenguajes` (`id`, `nombre`, `extensiones`, `comando_co
 ALTER TABLE core_chat ADD INDEX recd (recd);
 
 UPDATE core_opcionlista SET identificador_lista='exportaciones_informe_DEPRECATED' WHERE identificador_lista='exportaciones_informe' AND (valor_interno='S' OR valor_interno='A');
+
+ALTER TABLE core_formulario_objeto CHANGE columna PCOBD_Columna int(1) NULL DEFAULT '1';
 
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');

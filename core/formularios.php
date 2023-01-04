@@ -901,85 +901,6 @@
 		}
 
 
-
-########################################################################
-########################################################################
-/*
-	Function: PCO_GuardarCampoFormulario
-	Agrega un campo de datos, etiqueta, marco externo o informe a un formulario
-
-	Variables de entrada:
-
-		multiples - Recibidas mediante formulario unico asociado al proceso de creacion del elemento.
-
-	(start code)
-		INSERT INTO ".$TablasCore."formulario_objeto VALUES (0,'$tipo_objeto','$titulo','$campo','$ayuda_titulo','$ayuda_texto','$formulario','$peso','$columna','$obligatorio','$visible','$valor_predeterminado','$validacion_datos','$etiqueta_busqueda','$ajax_busqueda','$valor_unico','$solo_lectura','$teclado_virtual','$ancho','$alto','$barra_herramientas','$fila_unica','$lista_opciones','$origen_lista_opciones','$origen_lista_valores','$valor_etiqueta','$url_iframe','$objeto_en_ventana','$informe_vinculado')
-	(end)
-
-	Salida:
-		Registro agregado y formulario actualizado en pantalla
-
-	Ver tambien:
-		<PCO_EliminarCampoFormulario>
-*/
-	if ($PCO_Accion=="PCO_GuardarCampoFormulario")
-		{
-			$mensaje_error="";
-			$tipo_objeto=$tipo;
-
-			//Concatena el campo manual en caso de encontrar alguno
-			$campo=$campo.$campo_manual;
-			$origen_lista_opciones=$origen_lista_opciones_manual;
-			$origen_lista_valores=$origen_lista_valores_manual;
-
-			if (@$valor_unico=="on") $valor_unico=1; else $valor_unico=0;
-			if (@$ajax_busqueda=="on") $ajax_busqueda=1; else $ajax_busqueda=0;
-			if (@$ajax_busqueda_dinamica=="on") $ajax_busqueda_dinamica=1; else $ajax_busqueda_dinamica=0;
-			if (@$titulo=="" && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta") ) $mensaje_error=$MULTILANG_ErrFrmCampo1;
-			if (@$campo==""  && ($tipo_objeto!="etiqueta" && $tipo_objeto!="url_iframe" && $tipo_objeto!="informe" && $tipo_objeto!="frm" && $tipo_objeto!="form_consulta" && $tipo_objeto!="boton_comando" ) ) $mensaje_error=$MULTILANG_ErrFrmCampo2;
-
-			if ($mensaje_error=="")
-				{
-					//Genera la lista de campos a ser insertados desde la definicion de tabla para no olvidar ninguno
-					$ListaCampos=explode(",",$ListaCamposSinID_formulario_objeto);
-					$ListaInterrogantes="";
-					for ($i=0; $i<count($ListaCampos);$i++)
-						{
-							$ListaInterrogantes.="?,";
-							$NombreVariableGarbage=$ListaCampos[$i];
-							@$ListaCamposyValores.=${$NombreVariableGarbage}.$_SeparadorCampos_;
-						}
-					//Elimina partes finales innecesarias (coma y separador de campos)
-					$ListaInterrogantes = substr ($ListaInterrogantes, 0, - 1);
-					$ListaCamposyValores = substr ($ListaCamposyValores, 0, strlen($_SeparadorCampos_)*(-1));
-					// Define la consulta de insercion del nuevo campo
-					$consulta_insercion="INSERT INTO ".$TablasCore."formulario_objeto (".$ListaCamposSinID_formulario_objeto.") VALUES (".$ListaInterrogantes.")";
-					PCO_EjecutarSQLUnaria($consulta_insercion,"$ListaCamposyValores");
-					$id=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
-					PCO_Auditar("Crea campo $id para formulario $formulario");
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-					    <input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
-						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
-						<input type="Hidden" name="popup_activo" value="">
-						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-				}
-			else
-				{
-					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
-						<input type="Hidden" name="PCO_Accion" value="PCO_EditarFormulario">
-						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrFrmDatos.'">
-						<input type="Hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-						<input type="Hidden" name="formulario" value="'.$formulario.'">
-						<input type="Hidden" name="popup_activo" value="">
-						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
-						</form>
-						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-				}
-		}
-
-
-
 ########################################################################
 ########################################################################
 /*
@@ -1118,10 +1039,10 @@ if (@$PCO_Accion=="PCO_DesplazarObjetosForm")
 			{
 			    $RegistroObjetoBase=PCO_EjecutarSQL("SELECT id,$ListaCamposSinID_formulario_objeto FROM {$TablasCore}formulario_objeto WHERE id='{$idObjetoForm}' ")->fetch();
 			    $peso=$RegistroObjetoBase["peso"];
-			    $columna=$RegistroObjetoBase["columna"];
+			    $PCOBD_Columna=$RegistroObjetoBase["PCOBD_Columna"];
 			    $pestana=$RegistroObjetoBase["pestana_objeto"];
 			    $formulario=$RegistroObjetoBase["formulario"];
-				PCO_EjecutarSQLUnaria("UPDATE {$TablasCore}formulario_objeto  SET peso=peso+1  WHERE formulario='{$formulario}' AND columna='{$columna}' AND pestana_objeto='{$pestana}' AND peso>={$peso} ");
+				PCO_EjecutarSQLUnaria("UPDATE {$TablasCore}formulario_objeto  SET peso=peso+1  WHERE formulario='{$formulario}' AND PCOBD_Columna='{$PCOBD_Columna}' AND pestana_objeto='{$pestana}' AND peso>={$peso} ");
 				@PCO_Auditar("Desplaza elementos de formulario ");
 				
 				if (@$PCO_CambioEstado_NegarRetorno=="")
@@ -2672,7 +2593,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                 //Determina cual es la pestana para agregar el titulo cada que cambie en el listado
                 $pestana_actual="";
 				//Busca los controles
-                $consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY pestana_objeto,columna,peso","$formulario");
+                $consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY pestana_objeto,PCOBD_Columna,peso","$formulario");
 				while($registro = $consulta->fetch())
 					{
 						//Si el registro cambia de pestana entonces agrega el titulo
@@ -2712,7 +2633,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 										<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 										<input type="hidden" name="id" value="'.$registro["id"].'">
 										<input type="hidden" name="tabla" value="formulario_objeto">
-										<input type="hidden" name="campo" value="columna">
+										<input type="hidden" name="campo" value="PCOBD_Columna">
 										<input type="hidden" name="formulario" value="'.$formulario.'">
 										<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 										<input type="hidden" name="accion_retorno" value="PCO_EditarFormulario">
@@ -2726,7 +2647,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 										while($i <= $columnas_formulario)
 											{
 												// Determina si la opcion actual es la del registro
-												if ($registro["columna"]==$i)
+												if ($registro["PCOBD_Columna"]==$i)
 													echo '<option value="'.$i.'" selected>'.$i.'</option>';
 												else
 													echo '<option value="'.$i.'">'.$i.'</option>';
@@ -3274,9 +3195,9 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                 //Busca posibles campos huerfanos para presentar advertencia si aplica
                 $MensajeCamposHuerfanos='';
                 $CantidadColumnasDiseno=$registro_form["columnas"];
-                $ConsultaCamposHuerfanos=PCO_EjecutarSQL("SELECT id,$ListaCamposSinID_formulario_objeto FROM ".$TablasCore."formulario_objeto WHERE formulario=$formulario AND (columna>$CantidadColumnasDiseno OR columna<1) ");
+                $ConsultaCamposHuerfanos=PCO_EjecutarSQL("SELECT id,$ListaCamposSinID_formulario_objeto FROM ".$TablasCore."formulario_objeto WHERE formulario=$formulario AND (PCOBD_Columna>$CantidadColumnasDiseno OR PCOBD_Columna<1) ");
                 while ($RegistroCamposHuerfanos=$ConsultaCamposHuerfanos->fetch())
-                    $MensajeCamposHuerfanos.='<li style="padding-left: 50px;">ID:<b>'.$RegistroCamposHuerfanos["id"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Titulo.':<b>'.$RegistroCamposHuerfanos["titulo"].'</b>&nbsp;&nbsp;&nbsp; Campo:<b>'.$RegistroCamposHuerfanos["campo"].'</b>&nbsp;&nbsp;&nbsp; ID_HTML:<b>'.$RegistroCamposHuerfanos["id_html"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Columna.':<b>'.$RegistroCamposHuerfanos["columna"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Pestana.':<b>'.$RegistroCamposHuerfanos["pestana_objeto"].'</b></li>';
+                    $MensajeCamposHuerfanos.='<li style="padding-left: 50px;">ID:<b>'.$RegistroCamposHuerfanos["id"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Titulo.':<b>'.$RegistroCamposHuerfanos["titulo"].'</b>&nbsp;&nbsp;&nbsp; Campo:<b>'.$RegistroCamposHuerfanos["campo"].'</b>&nbsp;&nbsp;&nbsp; ID_HTML:<b>'.$RegistroCamposHuerfanos["id_html"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Columna.':<b>'.$RegistroCamposHuerfanos["PCOBD_Columna"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Pestana.':<b>'.$RegistroCamposHuerfanos["pestana_objeto"].'</b></li>';
                 if ($MensajeCamposHuerfanos!='')
                     PCO_Mensaje($MULTILANG_FrmHuerfanos,"$MULTILANG_FrmCamposAProposito $MensajeCamposHuerfanos","","fa fa-fw fa-2x fa-info-circle","alert alert-dismissible alert-warning btn-xs");
 
@@ -3284,7 +3205,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                 $MensajeCamposDuplicados='';
                 $ConsultaCamposDuplicadosIDHTML=PCO_EjecutarSQL("SELECT * FROM (SELECT COUNT(*) AS ConteoDuplicados, id,$ListaCamposSinID_formulario_objeto FROM ".$TablasCore."formulario_objeto WHERE id_html<>'' AND formulario=$formulario GROUP BY id_html UNION ALL SELECT COUNT(*) AS ConteoDuplicados, id,$ListaCamposSinID_formulario_objeto FROM ".$TablasCore."formulario_objeto WHERE campo<>'' AND formulario=$formulario GROUP BY campo) as UnionRegistros");
                 while ($RegistroCamposDuplicados=$ConsultaCamposDuplicadosIDHTML->fetch())
-                    if ($RegistroCamposDuplicados["ConteoDuplicados"]>1) $MensajeCamposDuplicados.='<li style="padding-left: 50px;">ID:<b>'.$RegistroCamposDuplicados["id"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Titulo.':<b>'.$RegistroCamposDuplicados["titulo"].'</b>&nbsp;&nbsp;&nbsp; Campo:<b>'.$RegistroCamposDuplicados["campo"].'</b>&nbsp;&nbsp;&nbsp; ID_HTML:<b>'.$RegistroCamposDuplicados["id_html"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Columna.':<b>'.$RegistroCamposDuplicados["columna"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Pestana.':<b>'.$RegistroCamposDuplicados["pestana_objeto"].'</b></li>';
+                    if ($RegistroCamposDuplicados["ConteoDuplicados"]>1) $MensajeCamposDuplicados.='<li style="padding-left: 50px;">ID:<b>'.$RegistroCamposDuplicados["id"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Titulo.':<b>'.$RegistroCamposDuplicados["titulo"].'</b>&nbsp;&nbsp;&nbsp; Campo:<b>'.$RegistroCamposDuplicados["campo"].'</b>&nbsp;&nbsp;&nbsp; ID_HTML:<b>'.$RegistroCamposDuplicados["id_html"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Columna.':<b>'.$RegistroCamposDuplicados["PCOBD_Columna"].'</b>&nbsp;&nbsp;&nbsp; '.$MULTILANG_Pestana.':<b>'.$RegistroCamposDuplicados["pestana_objeto"].'</b></li>';
 
                 if ($MensajeCamposDuplicados!='')
                     PCO_Mensaje($MULTILANG_FrmIDHTMDuplicado,"$MULTILANG_FrmCamposAProposito $MensajeCamposDuplicados","","fa fa-fw fa-2x fa-info-circle","alert alert-dismissible alert-warning btn-xs");
