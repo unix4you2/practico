@@ -1785,7 +1785,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$ArregloCampos=explode(',',$ListaCamposSinID_formulario_objeto);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de formulario_objeto
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER by peso,id","$formulario");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER by PCOBD_Peso,id","$formulario");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -1917,7 +1917,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$Contenido_XML .= "
 	</core_formulario>";
 							// Registros de formulario_objeto
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY peso,id","$formulario");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY PCOBD_Peso,id","$formulario");
 							$conteo_elementos_xml=0;
 							while($registro = $consulta->fetch())
 								{
@@ -8062,7 +8062,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                 $EstadoDeshabilitadoMoverArriba="";
                 if($registro_campos["PCOBD_Columna"]-1<=0) $EstadoDeshabilitadoMoverIzquierda="disabled";
                 if($registro_campos["PCOBD_Columna"]+1>$registro_formulario["columnas"]) $EstadoDeshabilitadoMoverDerecha="disabled";
-                if($registro_campos["peso"]-1<=0) $EstadoDeshabilitadoMoverArriba="disabled";
+                if($registro_campos["PCOBD_Peso"]-1<=0) $EstadoDeshabilitadoMoverArriba="disabled";
 
                 //Busca si el elemento tiene o no eventos para poner un boton de enlace
                 $ComplementoBotonEventos="";
@@ -8109,9 +8109,9 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                                 <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverIzquierda.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Anterior.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=PCOBD_Columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["PCOBD_Columna"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-left"></i></a>
                             </div>
                             <div style="display: inline-block;">
-                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($registro_campos["peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["peso"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-up"></i></a>
+                                <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverArriba.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmDisminuyePeso.' a '.($registro_campos["PCOBD_Peso"]-1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=PCOBD_Peso&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["PCOBD_Peso"]-1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-up"></i></a>
                                 <br>
-                                <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($registro_campos["peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=peso&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["peso"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-down"></i></a>
+                                <a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_FrmAumentaPeso.' a '.($registro_campos["PCOBD_Peso"]+1).'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=PCOBD_Peso&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["PCOBD_Peso"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-down"></i></a>
                             </div>
                             <div style="display: inline-block;">
                                 <a class="btn btn-xs btn-info '.$EstadoDeshabilitadoMoverDerecha.'" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Siguiente.' '.$MULTILANG_Columna.'" href=\''.$ArchivoCORE.'?PCO_Accion=cambiar_estado_campo&id='.$registro_campos["id"].'&tabla=formulario_objeto&campo=PCOBD_Columna&formulario='.$registro_campos["formulario"].'&accion_retorno=PCO_EditarFormulario&valor='.($registro_campos["PCOBD_Columna"]+1).'&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-arrow-right"></i></a>
@@ -8153,8 +8153,8 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
 
 	(start code)
 		SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'
-		SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso
-		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 AND peso >'$limite_inferior' AND peso <='$limite_superior' ORDER BY peso
+		SELECT id,PCOBD_Peso,visible FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY PCOBD_Peso
+		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 AND PCOBD_Peso >'$limite_inferior' AND PCOBD_Peso <='$limite_superior' ORDER BY PCOBD_Peso
 		Por cada registro
 			Llamar creacion de objeto correspondiente
 		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND id='$ultimo_id'
@@ -8432,7 +8432,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                 $constante_limite_superior=+9999;
                                 $limite_superior=$constante_limite_superior; // Peso superior a tener en cuenta en el query
                                 //Busca todos los objetos marcados como fila_unica=1 y agrega un registro mas con el limite superior
-                                $consulta_obj_fila_unica=PCO_EjecutarSQL("SELECT id,peso,visible FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario");
+                                $consulta_obj_fila_unica=PCO_EjecutarSQL("SELECT id,PCOBD_Peso,visible FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY PCOBD_Peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario");
                                 //Define si debe o no dibujar borde de las celdas
                                 $estilo_bordes="table-unbordered";
                                 $ancho_bordes="border-width: 0px;";
@@ -8445,7 +8445,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                 $TabIndex_Elemento=1;
                                 while ($registro_obj_fila_unica = $consulta_obj_fila_unica->fetch())
                                     {
-                                        $limite_superior=$registro_obj_fila_unica["peso"];
+                                        $limite_superior=$registro_obj_fila_unica["PCOBD_Peso"];
                                         $ultimo_id=$registro_obj_fila_unica["id"];
 
                                         //Define tipo_maquetacion
@@ -8465,8 +8465,8 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                         //Recorre todas las comunas definidas para el formulario buscando objetos
                                         for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
                                             {
-                                                //Busca los elementos de la coumna actual del formulario con peso menor o igual al peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
-                                                $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND PCOBD_Columna=? AND visible=1 AND peso >? AND peso <=? ORDER BY peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
+                                                //Busca los elementos de la coumna actual del formulario con PCOBD_Peso menor o igual al PCOBD_Peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
+                                                $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND PCOBD_Columna=? AND visible=1 AND PCOBD_Peso >? AND PCOBD_Peso <=? ORDER BY PCOBD_Peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
 
                                                     //Define tipo_maquetacion JJJ
                                                     if($registro_formulario["tipo_maquetacion"]=="responsive")
@@ -8739,7 +8739,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                             }
 
                                         //Actualiza limite inferior para siguiente lista de campos
-                                        $limite_inferior=$registro_obj_fila_unica["peso"];
+                                        $limite_inferior=$registro_obj_fila_unica["PCOBD_Peso"];
                                         $TabIndex_Elemento++;
                                     }
 

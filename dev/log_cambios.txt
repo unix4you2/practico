@@ -93,7 +93,7 @@ LogCambios="
 * Enhan [CORE]: Adevertencia desplegada para instalaciones sin soporte a funciones PHP tmpfile y que requieren hacer uso de PMyDB/Adminer deben usar el modulo de versiones 22.3 o inferiores que no requieren dicha funcion.  Simplemente se sobreescribe el contenido del index del módulo.
 
 
-* Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna
+* Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna, peso->PCOBD_Peso
 
 
 
@@ -393,6 +393,7 @@ ALTER TABLE core_chat ADD INDEX recd (recd);
 UPDATE core_opcionlista SET identificador_lista='exportaciones_informe_DEPRECATED' WHERE identificador_lista='exportaciones_informe' AND (valor_interno='S' OR valor_interno='A');
 
 ALTER TABLE core_formulario_objeto CHANGE columna PCOBD_Columna int(1) NULL DEFAULT '1';
+ALTER TABLE core_formulario_objeto CHANGE peso PCOBD_Peso int(1) NULL DEFAULT '1';
 
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');

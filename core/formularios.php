@@ -1020,7 +1020,7 @@
 ########################################################################
 /*
 	Function: PCO_DesplazarObjetosForm
-	Cambia el peso de todos los elementos de un formulario sumando uno +1 para dejar un espacio donde se pueda insertar un nuevo elemento
+	Cambia el PCOBD_Peso de todos los elementos de un formulario sumando uno +1 para dejar un espacio donde se pueda insertar un nuevo elemento
 
 	Variables de entrada:
 
@@ -1038,11 +1038,11 @@ if (@$PCO_Accion=="PCO_DesplazarObjetosForm")
 		if ($mensaje_error=="")
 			{
 			    $RegistroObjetoBase=PCO_EjecutarSQL("SELECT id,$ListaCamposSinID_formulario_objeto FROM {$TablasCore}formulario_objeto WHERE id='{$idObjetoForm}' ")->fetch();
-			    $peso=$RegistroObjetoBase["peso"];
+			    $PCOBD_Peso=$RegistroObjetoBase["PCOBD_Peso"];
 			    $PCOBD_Columna=$RegistroObjetoBase["PCOBD_Columna"];
 			    $pestana=$RegistroObjetoBase["pestana_objeto"];
 			    $formulario=$RegistroObjetoBase["formulario"];
-				PCO_EjecutarSQLUnaria("UPDATE {$TablasCore}formulario_objeto  SET peso=peso+1  WHERE formulario='{$formulario}' AND PCOBD_Columna='{$PCOBD_Columna}' AND pestana_objeto='{$pestana}' AND peso>={$peso} ");
+				PCO_EjecutarSQLUnaria("UPDATE {$TablasCore}formulario_objeto  SET PCOBD_Peso=PCOBD_Peso+1  WHERE formulario='{$formulario}' AND PCOBD_Columna='{$PCOBD_Columna}' AND pestana_objeto='{$pestana}' AND PCOBD_Peso>={$PCOBD_Peso} ");
 				@PCO_Auditar("Desplaza elementos de formulario ");
 				
 				if (@$PCO_CambioEstado_NegarRetorno=="")
@@ -1081,7 +1081,7 @@ if (@$PCO_Accion=="PCO_DesplazarObjetosForm")
 		formulario - ID unico de identificacion del formulario sobre el cual se hace la edicion
 
 	(start code)
-		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' ORDER BY columna,peso,titulo
+		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' ORDER BY PCOBD_Columna,PCOBD_Peso,titulo
 	(end)
 
 	Salida:
@@ -1857,14 +1857,14 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 						<div id='campo9' style="display:none;">
                             <div class="row">
                                 <div class="col-md-6">
-                                        <label for="peso"><?php echo $MULTILANG_Peso; ?>:</label>
+                                        <label for="PCOBD_Peso"><?php echo $MULTILANG_Peso; ?>:</label>
                                         <div class="form-group input-group">
-                                            <select id="peso" name="peso" class="form-control input-sm" >
+                                            <select id="PCOBD_Peso" name="PCOBD_Peso" class="form-control input-sm" >
                                                 <?php
                                                     for ($i=1;$i<=100;$i++)
                                                         {
                                                             $seleccion_campo="";
-                                                            if (@$registro_campo_editar["peso"]==$i)
+                                                            if (@$registro_campo_editar["PCOBD_Peso"]==$i)
                                                                 $seleccion_campo="SELECTED";														
                                                             echo '<option value="'.$i.'" '.$seleccion_campo.'>'.$i.'</option>';
                                                         }
@@ -2593,7 +2593,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                 //Determina cual es la pestana para agregar el titulo cada que cambie en el listado
                 $pestana_actual="";
 				//Busca los controles
-                $consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY pestana_objeto,PCOBD_Columna,peso","$formulario");
+                $consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY pestana_objeto,PCOBD_Columna,PCOBD_Peso","$formulario");
 				while($registro = $consulta->fetch())
 					{
 						//Si el registro cambia de pestana entonces agrega el titulo
@@ -2606,8 +2606,8 @@ if ($PCO_Accion=="PCO_EditarFormulario")
                                 $pestana_actual=$registro["pestana_objeto"];
                             }
                         
-                        $peso_aumentado=$registro["peso"]+1;
-						if ($registro["peso"]-1>=1) $peso_disminuido=$registro["peso"]-1; else $peso_disminuido=1;
+                        $peso_aumentado=$registro["PCOBD_Peso"]+1;
+						if ($registro["PCOBD_Peso"]-1>=1) $peso_disminuido=$registro["PCOBD_Peso"]-1; else $peso_disminuido=1;
 						
                         //Si el elemento es un formulario o informe embebido busca ademas el nombre del mismo
                         $Complemento_NombreEmbebido="";
@@ -2663,7 +2663,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 											<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 											<input type="hidden" name="id" value="'.$registro["id"].'">
 											<input type="hidden" name="tabla" value="formulario_objeto">
-											<input type="hidden" name="campo" value="peso">
+											<input type="hidden" name="campo" value="PCOBD_Peso">
 											<input type="hidden" name="formulario" value="'.$formulario.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 											<input type="hidden" name="accion_retorno" value="PCO_EditarFormulario">
@@ -2674,7 +2674,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 											<input type="hidden" name="PCO_Accion" value="cambiar_estado_campo">
 											<input type="hidden" name="id" value="'.$registro["id"].'">
 											<input type="hidden" name="tabla" value="formulario_objeto">
-											<input type="hidden" name="campo" value="peso">
+											<input type="hidden" name="campo" value="PCOBD_Peso">
 											<input type="hidden" name="formulario" value="'.$formulario.'">
 											<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
 											<input type="hidden" name="accion_retorno" value="PCO_EditarFormulario">
@@ -2686,7 +2686,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 								if ($registro["campo"]!="id")
 									echo '
 										<a href="javascript:ifoce'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmAumentaPeso.'" class="btn btn-success btn-xs"><i class="fa fa-arrow-down"></i></a> 
-										'.$registro["peso"].'
+										'.$registro["PCOBD_Peso"].'
 										<a href="javascript:ifopa'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmDisminuyePeso.'" class="btn btn-success btn-xs"><i class="fa fa-arrow-up"></i></a>
 										';
 								
@@ -2726,7 +2726,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 									else
 										echo '<input type="hidden" name="valor" value="1"><a href="javascript:if'.$registro["id"].'.submit();" title="'.$MULTILANG_FrmHlpCambiaEstado.'" class="btn btn-default btn-xs"><i class="fa fa-lightbulb-o"></i></a>';
 								echo '</form></td>';
-								if ($registro["peso"]!="0")
+								if ($registro["PCOBD_Peso"]!="0")
 									{
 										echo '<td align="center">
 												<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["id"].'" id="f'.$registro["id"].'" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
