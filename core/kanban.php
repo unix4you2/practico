@@ -323,7 +323,7 @@
 
             //Determina si la tarea esta en la ultima columna (candidata a ser archivada)
             $ComplementoArchivar="";
-            if ($RegistroTareas["columna"]==$ColumnasDisponibles && $PCOSESS_LoginUsuario==$ResultadoColumnas["login_admintablero"])
+            if ($RegistroTareas["columna"]==$ColumnasDisponibles && ($PCOSESS_LoginUsuario==$ResultadoColumnas["login_admintablero"] || stripos($RegistroTareas["usuarios_edicion"],$PCOSESS_LoginUsuario)!==false))
                 {
                     //Deja archivar la tarea solo si no esta pendiente por alguna prueba
                     if (($RegistroTareas["aceptacion_pf"]!="No" || trim($RegistroTareas["pruebas_funcionales"])=="") && ($RegistroTareas["aceptacion_pnf"]!="No" || trim($RegistroTareas["pruebas_nofuncionales"])==""))
