@@ -3531,7 +3531,6 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "PCO_ActualizarFormulario")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_CopiarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_DefinirCopiaFormularios")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
-		if ($PCO_Accion== "PCO_ActualizarCampoFormulario")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_GuardarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_EliminarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_EditarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
@@ -8078,7 +8077,13 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                                 $CadenaDetalleEventos.="<li><b>".$RegistroEventos["evento"]."</b> (".$RegistroEventos["bytes_codigo"]." bytes)";
                                 $ConteoEventos++;
                             }
-                        $ComplementoBotonEventos='<br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)'.$CadenaDetalleEventos.'" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&pestana_activa_editor=eventos_objeto-tab&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>
+
+
+                        $ComplementoBotonEventos='
+                        <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\'javascript:PCOJS_ActualizarControlFormulario('.$registro_campos["formulario"].','.$registro_campos["id"].',3);\'><i class="fa fa-fw fa-pencil">!!!</i></a>
+
+
+                        <br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)'.$CadenaDetalleEventos.'" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&pestana_activa_editor=eventos_objeto-tab&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>
                         ';
                     }
 
@@ -8100,6 +8105,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                 //Pone controles
                 $salida='<div id="PCOEditorContenedor_'.$registro_campos["id"].'" style="margin:2px; display:none; visibility:hidden; position: absolute; z-index:1000;">
                             <div style="display: inline-block; vertical-align:top;">
+                                <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\'javascript:PCOJS_ActualizarControlFormulario('.$registro_campos["formulario"].','.$registro_campos["id"].',1);\'><i class="fa fa-fw fa-pencil">!!!</i></a>
                                 <a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-fw fa-pencil"></i></a>
                                 '.$ComplementoBotonEventos.'
                                 <br><br>
@@ -8238,6 +8244,22 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 
 		</script>
 		<!--<input type=button onclick=\'AgregarElemento("1","1","hello world");\'>-->';
+
+        if ($modo_diseno_formulario==1)
+            {
+        		echo '<script type="text/javascript">
+                        function PCOJS_ActualizarControlFormulario(idformulario,idcontrol,pestana_activa){
+                                //Salta a edicion de control
+                                var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-36:0:id:"+idcontrol+"&Presentar_FullScreen=1&Precarga_EstilosBS=1&formulario="+idformulario+"&pestana_activa_apertura="+pestana_activa+"&PCO_TipoControlDirecto=";
+                                PCOJS_MostrarMensaje("'.$MULTILANG_FrmMsj1.'","Cargando...","modal-wide oculto_impresion");
+                                $("#PCO_Modal_MensajeCuerpo").html(\'<iframe id="IFrameEmbebido" scrolling="yes" style="margin:10px; border:0px;" height=500 width=100% src="\'+URLPopUp+\'"></iframe>\');
+                                $("#PCO_Modal_MensajeBotones").html(\'<button id="boton_filtrar" type="button" class="btn btn-outline btn-info" data-dismiss="modal" onclick="CargarFormulario();" >Cerrar</button></a>\');
+                        }
+        		    </script>';
+
+                
+            }
+
 
 
 		//Si no encuentra formulario presenta error

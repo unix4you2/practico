@@ -23,6 +23,7 @@ core/marco_arriba_bs.php
 core/marco_nav.php
 core/formularios.php
 core/formularios_post.php
+core/kanban.php
 core/marco_abajo.php
 core/marco_dev.php
 inc/jquery/jquery/*
@@ -57,8 +58,9 @@ LogCambios="
 * Added [FORMS]: Controles tipo check soportan textos de ayuda.  Serán presentados como icono al lado derecho del texto que acompaña al check.
 * Added [FORMS]: Eliminadas sobre código acciones de adicion de controles a formularios.  Ahora son realizadas directamente por el formulario interno -36
 * Enhan [KANBAN]: @jaimeaba3 Imágen de encabezado de informe es independiente de URL externa.
+* Enhan [KANBAN]: @jaimeaba3 Issue 21.  Permisos de archivado de tareas sobre tableros de otro propietario.
 * Enhan [COMP]: Actualizado Guzzle a 7.4.5 en componente de auto-trading-bot. (CVE-2022-27776,CVE-2022-29248,CVE-2022-31043,CVE-2022-31042,CVE-2022-31090,CVE-2022-31091) (RFC9110 Section 15.4, RFC6265 Section 5.3, RFC9110 Section 15.4)
-* Enhan [CHAT]:  Agregado índice a campo que indica si un chat ha sido leído o no por el destinatario.
+* Enhan [CHAT]: Agregado índice a campo que indica si un chat ha sido leído o no por el destinatario.
 * Enhan [CORE]: Actualizado D3JS de 7.3.0 a 7.6.1  (CWE-400: Uncontrolled Resource Consumption)
 * Enhan [CORE]: Compatibilidad PHP 8+ Actualizada sintaxis en generacion de cadenas aleatorias en notacion de arreglos
 * Enhan [CORE]: Compatibilidad PHP 8+ Ajustada sintaxis obsoleta de funcion PCO_BackupObtenerDatosTabla, parámetro vacío de PCO_NombreTabla
