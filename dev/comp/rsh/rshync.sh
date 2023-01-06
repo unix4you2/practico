@@ -59,9 +59,9 @@ SHYNC_EncodeParametersUsingBase64=1						# 0|1 If you want to convert all the pa
 	SHYNC_Ampersand="&" 							# Usefull to concat variables
 	SHYNC_AmpersandEncoded="%26" 					# Usefull to concat variables
 	SHYNC_InternalFieldSeparator="[[--]]";			# Usefull to avoid problems with some strings concat or transfers
-	SHYNC_AuthorURLPush="http://app.practico.org/"	# To send statistics about use:  http://app.practico.org/index.php?PCO_WSOn=1&PCO_WSKey=TD7J7Y9J74&PCO_WSSecret=9AHVHVO2ZL&PCO_WSId=push_node_info
-	SHYNC_WSKey="TD7J7Y9J74"						# API Key
-	SHYNC_WSSecret="9AHVHVO2ZL"						# API Secret
+	SHYNC_AuthorURLPush="http://dev.practico.org/practico/"	# To send statistics about use:  http://app.practico.org/index.php?PCO_WSOn=1&PCO_WSKey=TD7J7Y9J74&PCO_WSSecret=9AHVHVO2ZL&PCO_WSId=push_node_info
+	SHYNC_WSKey="TTPHFCDTO5"						# API Key
+	SHYNC_WSSecret="TTAD6TIAR9"						# API Secret
 	SHYNC_WSMethod_Collect="push_node_info"			# To collect info about nodes: push_node_info
 	SHYNC_WSMethod_GetOperation="get_node_command"	# To get instructions to run in nodes: get_node_command
 	SHYNC_WSMethod_SaveOutput="push_node_output"	# To save the output of a remote command: push_node_output
@@ -76,7 +76,7 @@ SHYNC_EncodeParametersUsingBase64=1						# 0|1 If you want to convert all the pa
 	#					| | --------- Day of month (1 - 31)
 	#					| ----------- Hour (0 - 23)
 	#					------------- Minute (0 - 59)
-	SHYNC_UpgradePath="https://raw.githubusercontent.com/unix4you2/rshync/master/rshync.sh"		# Set from where should the tool download upgrades
+	SHYNC_UpgradePath="https://raw.githubusercontent.com/unix4you2/practico/master/dev/comp/rsh/rshync.sh"		# Set from where should the tool download upgrades
 
 
 ########################################################################
