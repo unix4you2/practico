@@ -1,4 +1,3 @@
-
 if ($PCO_WSId=="push_node_info") 
 	{
         // Datos de fecha, hora y direccion IP para algunas operaciones
@@ -48,13 +47,13 @@ if ($PCO_WSId=="push_node_info")
             }
 	    
         //Verify if the node exists
-	    $RegistroHost=ejecutar_sql("SELECT * FROM app_rshync_hosts WHERE SHYNC_SystemUUID='$SHYNC_SystemUUID' ")->fetch();
+	    $RegistroHost=PCO_EjecutarSQL("SELECT * FROM app_rshync_hosts WHERE SHYNC_SystemUUID='$SHYNC_SystemUUID' ")->fetch();
 
 	    //Inserta el host si no existe
 	    if ($RegistroHost["id"]=="")
 	        {
 	            auditar("Reportada maquina nueva $SHYNC_SystemUUID");
-	            ejecutar_sql_unaria("INSERT INTO app_rshync_hosts (SHYNC_ScriptVersion,SHYNC_OperativeSystem,SHYNC_KernelName,SHYNC_KernelRelease,SHYNC_KernelVersion,SHYNC_Machine,SHYNC_Processor,SHYNC_HardwarePlatform,SHYNC_NodeName,SHYNC_HostName,SHYNC_CPUsCount,SHYNC_KernelSerial,SHYNC_HardDrivesSUM,SHYNC_BIOSVendor,SHYNC_BIOSVersion,SHYNC_BIOSAddress,SHYNC_SystemVendor,SHYNC_SystemProductName,SHYNC_SystemSerialNumber,SHYNC_SystemUUID,SHYNC_BoardVendor,SHYNC_BoardProductName,SHYNC_BoardSerialNumber,SHYNC_ChassisVendor,SHYNC_ChassisType,SHYNC_ChassisSerialNumber,SHYNC_ProcessorFamily,SHYNC_ProcessorVersion,SHYNC_ProcessorCoreCount,SHYNC_ProcessorID,PHP_REMOTE_ADDR,PHP_HTTP_CLIENT_IP,PHP_HTTP_X_FORWARDED_FOR) VALUES ('$SHYNC_ScriptVersion','$SHYNC_OperativeSystem','$SHYNC_KernelName','$SHYNC_KernelRelease','$SHYNC_KernelVersion','$SHYNC_Machine','$SHYNC_Processor','$SHYNC_HardwarePlatform','$SHYNC_NodeName','$SHYNC_HostName','$SHYNC_CPUsCount','$SHYNC_KernelSerial','$SHYNC_HardDrivesSUM','$SHYNC_BIOSVendor','$SHYNC_BIOSVersion','$SHYNC_BIOSAddress','$SHYNC_SystemVendor','$SHYNC_SystemProductName','$SHYNC_SystemSerialNumber','$SHYNC_SystemUUID','$SHYNC_BoardVendor','$SHYNC_BoardProductName','$SHYNC_BoardSerialNumber','$SHYNC_ChassisVendor','$SHYNC_ChassisType','$SHYNC_ChassisSerialNumber','$SHYNC_ProcessorFamily','$SHYNC_ProcessorVersion','$SHYNC_ProcessorCoreCount','$SHYNC_ProcessorID','$PHP_REMOTE_ADDR','$PHP_HTTP_CLIENT_IP','$PHP_HTTP_X_FORWARDED_FOR')");
+	            PCO_EjecutarSQLUnaria("INSERT INTO app_rshync_hosts (SHYNC_ScriptVersion,SHYNC_OperativeSystem,SHYNC_KernelName,SHYNC_KernelRelease,SHYNC_KernelVersion,SHYNC_Machine,SHYNC_Processor,SHYNC_HardwarePlatform,SHYNC_NodeName,SHYNC_HostName,SHYNC_CPUsCount,SHYNC_KernelSerial,SHYNC_HardDrivesSUM,SHYNC_BIOSVendor,SHYNC_BIOSVersion,SHYNC_BIOSAddress,SHYNC_SystemVendor,SHYNC_SystemProductName,SHYNC_SystemSerialNumber,SHYNC_SystemUUID,SHYNC_BoardVendor,SHYNC_BoardProductName,SHYNC_BoardSerialNumber,SHYNC_ChassisVendor,SHYNC_ChassisType,SHYNC_ChassisSerialNumber,SHYNC_ProcessorFamily,SHYNC_ProcessorVersion,SHYNC_ProcessorCoreCount,SHYNC_ProcessorID,PHP_REMOTE_ADDR,PHP_HTTP_CLIENT_IP,PHP_HTTP_X_FORWARDED_FOR) VALUES ('$SHYNC_ScriptVersion','$SHYNC_OperativeSystem','$SHYNC_KernelName','$SHYNC_KernelRelease','$SHYNC_KernelVersion','$SHYNC_Machine','$SHYNC_Processor','$SHYNC_HardwarePlatform','$SHYNC_NodeName','$SHYNC_HostName','$SHYNC_CPUsCount','$SHYNC_KernelSerial','$SHYNC_HardDrivesSUM','$SHYNC_BIOSVendor','$SHYNC_BIOSVersion','$SHYNC_BIOSAddress','$SHYNC_SystemVendor','$SHYNC_SystemProductName','$SHYNC_SystemSerialNumber','$SHYNC_SystemUUID','$SHYNC_BoardVendor','$SHYNC_BoardProductName','$SHYNC_BoardSerialNumber','$SHYNC_ChassisVendor','$SHYNC_ChassisType','$SHYNC_ChassisSerialNumber','$SHYNC_ProcessorFamily','$SHYNC_ProcessorVersion','$SHYNC_ProcessorCoreCount','$SHYNC_ProcessorID','$PHP_REMOTE_ADDR','$PHP_HTTP_CLIENT_IP','$PHP_HTTP_X_FORWARDED_FOR')");
 	        }
         else
             {
@@ -62,7 +61,7 @@ if ($PCO_WSId=="push_node_info")
             }
 
         # Actualiza ultimo registro del host
-        ejecutar_sql_unaria("UPDATE app_rshync_hosts SET PHP_REMOTE_ADDR='$PHP_REMOTE_ADDR',PHP_HTTP_CLIENT_IP='$PHP_HTTP_CLIENT_IP',PHP_HTTP_X_FORWARDED_FOR='$PHP_HTTP_X_FORWARDED_FOR', SHYNC_LastBeat=NOW() WHERE SHYNC_SystemUUID='$SHYNC_SystemUUID' ");
+        PCO_EjecutarSQLUnaria("UPDATE app_rshync_hosts SET PHP_REMOTE_ADDR='$PHP_REMOTE_ADDR',PHP_HTTP_CLIENT_IP='$PHP_HTTP_CLIENT_IP',PHP_HTTP_X_FORWARDED_FOR='$PHP_HTTP_X_FORWARDED_FOR', SHYNC_LastBeat=NOW() WHERE SHYNC_SystemUUID='$SHYNC_SystemUUID' ");
         //Finish
         ob_clean();
 	}
@@ -73,7 +72,7 @@ if ($PCO_WSId=="push_node_output")
 	    //Decode all parameters received
 	    $SHYNC_CommandLine=base64_decode($SHYNC_CommandLine);
 	    $SHYNC_CommandOutput=base64_decode($SHYNC_CommandOutput);
-	    ejecutar_sql_unaria("INSERT INTO app_rshync_commands (SHYNC_CommandLine,SHYNC_CommandOutput,SHYNC_SystemUUID) VALUES ('$SHYNC_CommandLine','$SHYNC_CommandOutput','$SHYNC_SystemUUID')");
+	    PCO_EjecutarSQLUnaria("INSERT INTO app_rshync_commands (SHYNC_CommandLine,SHYNC_CommandOutput,SHYNC_SystemUUID) VALUES ('$SHYNC_CommandLine','$SHYNC_CommandOutput','$SHYNC_SystemUUID')");
         //Limpia buffer y entrega solo el comando
         ob_clean();
 	}
@@ -82,9 +81,9 @@ if ($PCO_WSId=="push_node_output")
 if ($PCO_WSId=="get_node_command") 
 	{
         //Busca por un comando pendiente por ejecucion
-	    $RegistroHost=ejecutar_sql("SELECT SHYNC_CommandToRun FROM app_rshync_hosts WHERE SHYNC_SystemUUID='$SHYNC_SystemUUID' ")->fetch();
+	    $RegistroHost=PCO_EjecutarSQL("SELECT SHYNC_CommandToRun FROM app_rshync_hosts WHERE SHYNC_SystemUUID='$SHYNC_SystemUUID' ")->fetch();
         //Limpia el comando para evitar ejecuciones dobles
-        ejecutar_sql_unaria("UPDATE app_rshync_hosts SET SHYNC_CommandToRun='' WHERE SHYNC_SystemUUID='$SHYNC_SystemUUID' ");
+        PCO_EjecutarSQLUnaria("UPDATE app_rshync_hosts SET SHYNC_CommandToRun='' WHERE SHYNC_SystemUUID='$SHYNC_SystemUUID' ");
         //Limpia buffer y entrega solo el comando
         ob_clean();
         if ($RegistroHost["SHYNC_CommandToRun"]!="")
