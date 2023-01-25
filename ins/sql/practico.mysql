@@ -20,6 +20,7 @@ CREATE TABLE core_parametros (
   federado_encripcion varchar(255) NULL DEFAULT '',
   federado_puerto varchar(255) NULL DEFAULT '',
   requiere_aceptar_licencia int(1) NULL DEFAULT '0',
+  api_openai varchar(255) NULL DEFAULT '',
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
