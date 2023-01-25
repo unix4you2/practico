@@ -282,6 +282,7 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 
 ALTER TABLE core_parametros ADD requiere_aceptar_licencia int(1) NULL DEFAULT '0';
 ALTER TABLE core_parametros ADD api_openai varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD url_openai varchar(255) NULL DEFAULT '';
 
 DROP TABLE IF EXISTS core_scripts;
 CREATE TABLE core_scripts (

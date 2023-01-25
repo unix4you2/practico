@@ -267,6 +267,46 @@ function PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie=0)
 ########################################################################
 ########################################################################
 /*
+    Function: PCO_OpenAI_CODEX
+	Hace un llamado a la API de OpenAI, modelo CODEX
+
+	Variables de entrada:
+	
+		Modelo - Indica el modelo a utilizar, puede ser:
+		         code-davinci-002
+		         code-davinci-003
+		         code-cushman-001
+		Prompt - El texto con el cual se alimenta el modelo
+
+	Salida:
+		Resultado de llamado a la API
+
+	Vea tambien:
+	    <PCO_EjecutarPostFormulario> <https://beta.openai.com/docs/models/codex>
+*/
+function PCO_OpenAI_Codex($Modelo="code-davinci-002")
+    {
+        global $LlaveDePaso,$TablasCore;
+        $RespuestaAPI="";
+        
+        //Si no define un modelo se usa el mas completo
+        if ($Modelo=="") $Modelo="code-davinci-002";
+
+		$PCO_API_OpenAI=PCO_EjecutarSQL("SELECT api_openai FROM ".$TablasCore."parametros WHERE id=1")->fetchColumn();
+		//Si encuentra un valor de API KEY sigue adelante
+        if ($PCO_API_OpenAI!="")
+            {
+                
+                
+            }
+
+        return $RespuestaAPI;
+    }
+
+
+########################################################################
+########################################################################
+/*
     Function: PCO_Minimizador_ObtenerSiguientePosicionMinimizacion
 	Dado el arrglo de secuencias minimizadas, busca la siguiente posicion de secuencia que se debe revisar
 
