@@ -220,7 +220,7 @@
 						<li class="divider"></li>
                         <h6 class="dropdown-header"><?php echo $MULTILANG_Aplicacion; ?>:</h6>
 						<li>
-							<a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-39:1:id:1" data-toggle="modal" hrefxxx="#myModalPARAMETROS">
+							<a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-39:1:id:1" data-toggle="modal">
 								<div>
 									<i class="fa fa-tasks fa-fw"></i> <?php echo $MULTILANG_ParamApp; ?>
 								</div>
