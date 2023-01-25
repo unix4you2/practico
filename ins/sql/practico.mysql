@@ -782,6 +782,47 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tamanos_boton', ' btn-xs ', '{ $ MULTILANG_Pequeno}', '1');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tamanos_boton', ' btn-sm ', '{ $ MULTILANG_Mediano}', '1');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tamanos_boton', ' btn-lg ', '{ $ MULTILANG_Grande}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'plano', 'Texto plano/Plain text', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'md5', 'MD5', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'md4', 'MD4', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'md2', 'MD2', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'sha1', 'SHA 1', '5');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'sha256', 'SHA 256', '6');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'sha384', 'SHA 384', '7');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'sha512', 'SHA 512', '8');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'crc32', 'CRC 32', '9');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'crc32b', 'CRC 32B', '10');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'adler32', 'Adler 32', '11');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'gost', 'Gost', '12');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'whirlpool', 'Whirlpool', '13');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'snefru', 'Snefru', '14');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'ripemd128', 'Ripemd 128', '15');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'ripemd160', 'Ripemd 160', '16');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'ripemd256', 'Ripemd 256', '17');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'ripemd320', 'Ripemd 320', '18');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'tiger128,3', 'Tiger 128,3', '19');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'tiger128,4', 'Tiger 128,4', '20');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'tiger160,3', 'Tiger 160,3', '21');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'tiger160,4', 'Tiger 160,4', '22');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'tiger192,3', 'Tiger 192,3', '23');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'tiger192,4', 'Tiger 192,4', '24');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval128,3', 'Haval 128,3', '25');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval128,4', 'Haval 128,4', '26');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval128,5', 'Haval 128,5', '27');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval160,3', 'Haval 160,3', '28');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval160,4', 'Haval 160,4', '29');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval160,5', 'Haval 160,5', '30');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval192,3', 'Haval 192,3', '31');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval192,4', 'Haval 192,4', '32');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval192,5', 'Haval 192,5', '33');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval224,3', 'Haval 224,3', '34');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval224,4', 'Haval 224,4', '35');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval224,5', 'Haval 224,5', '36');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval256,3', 'Haval 256,3', '37');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval256,4', 'Haval 256,4', '38');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval256,5', 'Haval 256,5', '39');
+
+
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
 

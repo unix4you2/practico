@@ -98,60 +98,6 @@ LogCambios="
 * Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna, peso->PCOBD_Peso
 
 
-
-
-
-agregar lista           algoritmos_cifrado
-
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="plano") echo "SELECTED"; ?> value="plano">Texto plano/Plain text</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="md5") echo "SELECTED"; ?> value="md5">MD5</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="md4") echo "SELECTED"; ?> value="md4">MD4</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="md2") echo "SELECTED"; ?> value="md2">MD2</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="sha1") echo "SELECTED"; ?> value="sha1">SHA 1</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="sha256") echo "SELECTED"; ?> value="sha256">SHA 256</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="sha384") echo "SELECTED"; ?> value="sha384">SHA 384</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="sha512") echo "SELECTED"; ?> value="sha512">SHA 512</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="crc32") echo "SELECTED"; ?> value="crc32">CRC 32</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="crc32b") echo "SELECTED"; ?> value="crc32b">CRC 32B</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="adler32") echo "SELECTED"; ?> value="adler32">Adler 32</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="gost") echo "SELECTED"; ?> value="gost">Gost</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="whirlpool") echo "SELECTED"; ?> value="whirlpool">Whirlpool</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="snefru") echo "SELECTED"; ?> value="snefru">Snefru</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="ripemd128") echo "SELECTED"; ?> value="ripemd128">Ripemd 128</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="ripemd160") echo "SELECTED"; ?> value="ripemd160">Ripemd 160</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="ripemd256") echo "SELECTED"; ?> value="ripemd256">Ripemd 256</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="ripemd320") echo "SELECTED"; ?> value="ripemd320">Ripemd 320</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="tiger128,3") echo "SELECTED"; ?> value="tiger128,3">Tiger 128,3</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="tiger128,4") echo "SELECTED"; ?> value="tiger128,4">Tiger 128,4</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="tiger160,3") echo "SELECTED"; ?> value="tiger160,3">Tiger 160,3</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="tiger160,4") echo "SELECTED"; ?> value="tiger160,4">Tiger 160,4</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="tiger192,3") echo "SELECTED"; ?> value="tiger192,3">Tiger 192,3</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="tiger192,4") echo "SELECTED"; ?> value="tiger192,4">Tiger 192,4</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval128,3") echo "SELECTED"; ?> value="haval128,3">Haval 128,3</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval128,4") echo "SELECTED"; ?> value="haval128,4">Haval 128,4</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval128,5") echo "SELECTED"; ?> value="haval128,5">Haval 128,5</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval160,3") echo "SELECTED"; ?> value="haval160,3">Haval 160,3</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval160,4") echo "SELECTED"; ?> value="haval160,4">Haval 160,4</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval160,5") echo "SELECTED"; ?> value="haval160,5">Haval 160,5</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval192,3") echo "SELECTED"; ?> value="haval192,3">Haval 192,3</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval192,4") echo "SELECTED"; ?> value="haval192,4">Haval 192,4</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval192,5") echo "SELECTED"; ?> value="haval192,5">Haval 192,5</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval224,3") echo "SELECTED"; ?> value="haval224,3">Haval 224,3</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval224,4") echo "SELECTED"; ?> value="haval224,4">Haval 224,4</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval224,5") echo "SELECTED"; ?> value="haval224,5">Haval 224,5</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval256,3") echo "SELECTED"; ?> value="haval256,3">Haval 256,3</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval256,4") echo "SELECTED"; ?> value="haval256,4">Haval 256,4</option>
-                                            <option  <?php if (@$parametros["federado_encripcion"]=="haval256,5") echo "SELECTED"; ?> value="haval256,5">Haval 256,5</option>
-
-
-
-
-
-
-
-
-
-
 Falta:
 Texto "Valor de la etiqueta (será impresa en el formulario en formato HTML):"  justo arriba del campo de etiqueta.  Debajo del mensaje de Atención este tipo de controles debería ser almacenadodentro de campo texto largo....
 Espacio de vista previa actualizado dinamicamente
@@ -290,6 +236,45 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tamanos_boton', ' btn-xs ', '{ $ MULTILANG_Pequeno}', '1');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tamanos_boton', ' btn-sm ', '{ $ MULTILANG_Mediano}', '1');
 INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('tamanos_boton', ' btn-lg ', '{ $ MULTILANG_Grande}', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'plano', 'Texto plano/Plain text', '1');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'md5', 'MD5', '2');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'md4', 'MD4', '3');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'md2', 'MD2', '4');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'sha1', 'SHA 1', '5');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'sha256', 'SHA 256', '6');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'sha384', 'SHA 384', '7');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'sha512', 'SHA 512', '8');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'crc32', 'CRC 32', '9');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'crc32b', 'CRC 32B', '10');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'adler32', 'Adler 32', '11');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'gost', 'Gost', '12');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'whirlpool', 'Whirlpool', '13');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'snefru', 'Snefru', '14');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'ripemd128', 'Ripemd 128', '15');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'ripemd160', 'Ripemd 160', '16');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'ripemd256', 'Ripemd 256', '17');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'ripemd320', 'Ripemd 320', '18');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'tiger128,3', 'Tiger 128,3', '19');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'tiger128,4', 'Tiger 128,4', '20');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'tiger160,3', 'Tiger 160,3', '21');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'tiger160,4', 'Tiger 160,4', '22');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'tiger192,3', 'Tiger 192,3', '23');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'tiger192,4', 'Tiger 192,4', '24');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval128,3', 'Haval 128,3', '25');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval128,4', 'Haval 128,4', '26');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval128,5', 'Haval 128,5', '27');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval160,3', 'Haval 160,3', '28');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval160,4', 'Haval 160,4', '29');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval160,5', 'Haval 160,5', '30');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval192,3', 'Haval 192,3', '31');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval192,4', 'Haval 192,4', '32');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval192,5', 'Haval 192,5', '33');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval224,3', 'Haval 224,3', '34');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval224,4', 'Haval 224,4', '35');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval224,5', 'Haval 224,5', '36');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval256,3', 'Haval 256,3', '37');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval256,4', 'Haval 256,4', '38');
+INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ordenamiento) VALUES ('algoritmos_cifrado', 'haval256,5', 'Haval 256,5', '39');
 
 DROP TABLE IF EXISTS core_scripts;
 CREATE TABLE core_scripts (
