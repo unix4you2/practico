@@ -76,6 +76,7 @@ LogCambios="
 * Fixed [CORE]: Compatibilidad PHP 8+ Eliminados errores de sintaxis incompatible para funciones in_array que obligan a que su segundo parametro sea un dato tipo arreglo.
 * Fixed [CORE]: Compatibilidad PHP 8+ Compatibilidad entre operaciones aritméticas de tipos string e integer
 * Fixed [CORE]: Compatibilidad PHP 8+ Arreglos con llaves constantes en lugar de cadenas para editor PCoder
+* Fixed [USUARIOS]: @jaimeaba3 Correccion en ficha de usuarios que no recuperaba correctamente la plantilla asignada en procesos de actualizacion.
 * Enhan [CORE]: Capacidad de multilenguaje.  Ahora el Framweork permite interactuar con múltiples lenguajes de programación, configurables por sus parámetros y mediante los cuales se podría tener una aplicación desarrollada en múltiples lenguajes a la vez, donde todos convergen al mismo punto.   La sintaxis de variables en notacion PHP y su reemplazo dinámico sobre cada script permite además que variables de PHP sean pasadas de manera transparente a cualquier otro lenguaje de programción disponible del lado del servidor.
 * Enhan [CORE]: Inclusion de Composer sobre el nucleo de desarrollo
 * Enhan [CORE]: Adicion y actualizacion de jquery/jquery version 3.6.0 a 3.6.1 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
@@ -97,7 +98,8 @@ LogCambios="
 * Enhan [CORE]: Parametros de aplicacion son ahor gestionados desde objeto interno FRM -39.  Se elimina todo el código asociado equivalente a 560K
 * Enhan [CORE]: Nuevos parámetros de aplicación contienen los créditos del autor o empresa, el texto de licencia asociado a la aplicación y un campo para indicar si los usuarios en su primer ingreso tienen que aceptar la licencia o no.
 * Enhan [CORE]: Nuevo parámetros de aplicación permite almacenar llave de API para consumos de OpenAI desde las diferentes funciones del Framework.
-
+* Enhan [KANBAN]: Reporte de tareas archivadas por tablero es ahora exportable en excel.
+* Enhan [KANBAN]: Se agrega nuevo boton con reporte de tareas activas en el tablero con posibilidad de descarga.
 
 * Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna, peso->PCOBD_Peso
 
