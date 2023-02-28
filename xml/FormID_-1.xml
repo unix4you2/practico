@@ -7,8 +7,8 @@
 		<sistema_origen>Framework</sistema_origen>
 		<version>21.5</version>
 		<usuario_generador>admin</usuario_generador>
-		<fecha_exportacion>2022-11-24</fecha_exportacion>
-		<hora_exportacion>15:37</hora_exportacion>
+		<fecha_exportacion>2023-02-28</fecha_exportacion>
+		<hora_exportacion>07:47</hora_exportacion>
 	</descripcion>
 	<core_formulario>
 	<id>LTE=</id>
@@ -36,8 +36,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>MQ==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MQ==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -94,8 +94,8 @@
 	<ayuda_titulo>IA==</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGVzVGl0dWxvfQ==</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>MQ==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MQ==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MQ==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -152,8 +152,8 @@
 	<ayuda_titulo>IA==</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGVzRGVzY3JpcH0=</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>Mw==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>Mw==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -210,8 +210,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>NA==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>NA==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -268,8 +268,8 @@
 	<ayuda_titulo>IA==</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGVzQ2F0ZWd9</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>NQ==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>NQ==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MQ==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -326,8 +326,8 @@
 	<ayuda_titulo>eyRNVUxUSUxBTkdfSW5mVGl0QW5jaG99</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGVzQW5jaG99</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>Ng==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>Ng==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MA==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -384,8 +384,8 @@
 	<ayuda_titulo>eyRNVUxUSUxBTkdfSW5mVGl0QWx0b30=</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGVzQWx0b30=</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>Nw==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>Nw==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MA==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -442,8 +442,8 @@
 	<ayuda_titulo>eyRNVUxUSUxBTkdfSW5mVGl0Rm9ybWF0b30=</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGVzRm9ybWF0b30=</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>OA==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>OA==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado>VA==</valor_predeterminado>
@@ -500,8 +500,8 @@
 	<ayuda_titulo>eyRNVUxUSUxBTkdfQ29ubkFkdkNhbWJpb09yaWdlbn0=</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfQ29ubk9yaWdlbkRhdG9zRGVzfQ==</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>OQ==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>OQ==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -558,8 +558,8 @@
 	<ayuda_titulo>eyRNVUxUSUxBTkdfSW5mR2VuZXJhUERGSW5mb1RpdH0=</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mR2VuZXJhUERGSW5mb0Rlc2N9</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>MTA=</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MTA=</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MA==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -616,8 +616,8 @@
 	<ayuda_titulo>IA==</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mVmJsZXNEZXNGaWx0cm99</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>MTE=</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MTE=</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MA==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -674,8 +674,8 @@
 	<ayuda_titulo>IA==</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRm9ybUZpbHRyYWRvRGVzfQ==</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>MTI=</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MTI=</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MA==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -732,8 +732,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>MTY=</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MTY=</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MA==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -790,8 +790,8 @@
 	<ayuda_titulo>IA==</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mUGFnaW5hY2lvbkRhdGF0YWJsZURlc30=</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>MTY=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MTY=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MA==</visible>
 	<valor_predeterminado>MTA=</valor_predeterminado>
@@ -848,8 +848,8 @@
 	<ayuda_titulo>eyRNVUxUSUxBTkdfQXl1ZGF9</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mRGF0YVRhYmxlRGVzfQ==</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>MTc=</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MTc=</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MA==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -906,8 +906,8 @@
 	<ayuda_titulo>IA==</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mU3VidG90YWxlc0Zvcm1hdG9EZXN9</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>MTc=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MTc=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MA==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -964,8 +964,8 @@
 	<ayuda_titulo>IA==</ayuda_titulo>
 	<ayuda_texto>eyRNVUxUSUxBTkdfSW5mU3VidG90YWxlc0NvbHVtbmFEZXN9</ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>MTg=</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MTg=</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MA==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1022,8 +1022,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>MTk=</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MTk=</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1080,8 +1080,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTE=</formulario>
-	<peso>MjE=</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MjE=</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>

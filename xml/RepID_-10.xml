@@ -7,8 +7,8 @@
 		<sistema_origen>Framework</sistema_origen>
 		<version>21.5</version>
 		<usuario_generador>admin</usuario_generador>
-		<fecha_exportacion>2022-11-21</fecha_exportacion>
-		<hora_exportacion>12:23</hora_exportacion>
+		<fecha_exportacion>2023-02-28</fecha_exportacion>
+		<hora_exportacion>07:48</hora_exportacion>
 	</descripcion>
 	<core_informe>
 	<id>LTEw</id>
@@ -28,7 +28,7 @@
 	<tamano_paginacion>MTA=</tamano_paginacion>
 	<subtotales_columna></subtotales_columna>
 	<subtotales_formato></subtotales_formato>
-	<conexion_origen_datos></conexion_origen_datos>
+	<conexion_origen_datos>UHJlZGV0ZXJtaW5hZG8gKE1pc21hIGNvbmV4acOzbiB1c2FkYSBwb3IgUHJhY3RpY28p</conexion_origen_datos>
 	<consulta_sql></consulta_sql>
 	<tooltip_titulo>Tg==</tooltip_titulo>
 	<exportar_dtclp>Tg==</exportar_dtclp>
@@ -38,7 +38,7 @@
 	<ocultar_encabezado>MA==</ocultar_encabezado>
 	<ocultar_piepagina>MA==</ocultar_piepagina>
 	<anular_acciones>MA==</anular_acciones>
-	<encabezado_html></encabezado_html>
+	<encabezado_html>PGRpdiBzdHlsZT0idGV4dC1hbGlnbjogY2VudGVyOyI+PGltZyBzcmM9Imh0dHBzOi8vd3d3LmZyZXNocG9ydHMub3JnL2ltYWdlcy9ub3RidWcuZ2lmIiBhbHQ9Im5vdGJ1ZyI+PGJyPjwvZGl2Pg==</encabezado_html>
 	<tabla_responsive>Tg==</tabla_responsive>
 	<permitido_home>Tg==</permitido_home>
 	<javascript></javascript>

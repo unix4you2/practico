@@ -7,8 +7,8 @@
 		<sistema_origen>Framework</sistema_origen>
 		<version>21.5</version>
 		<usuario_generador>admin</usuario_generador>
-		<fecha_exportacion>2022-11-24</fecha_exportacion>
-		<hora_exportacion>15:37</hora_exportacion>
+		<fecha_exportacion>2023-02-28</fecha_exportacion>
+		<hora_exportacion>07:47</hora_exportacion>
 	</descripcion>
 	<core_formulario>
 	<id>LTIz</id>
@@ -36,8 +36,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MQ==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MQ==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MQ==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado>eyRJRF9UYWJsZXJvS2FuYmFufQ==</valor_predeterminado>
@@ -94,8 +94,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MQ==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MQ==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado>eyRQQ09TRVNTX0xvZ2luVXN1YXJpb30=</valor_predeterminado>
@@ -152,8 +152,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MQ==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MQ==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -210,8 +210,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MQ==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MQ==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado>MQ==</valor_predeterminado>
@@ -268,8 +268,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MQ==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MQ==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado>MQ==</valor_predeterminado>
@@ -326,8 +326,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MQ==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MQ==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado>MA==</valor_predeterminado>
@@ -384,8 +384,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MQ==</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MQ==</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -442,8 +442,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MQ==</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MQ==</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -500,8 +500,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MQ==</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MQ==</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -551,64 +551,6 @@
 	<etiqueta_colapsable></etiqueta_colapsable>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
-	<id>MTM3NjE=</id>
-	<tipo>dGV4dG9fbGFyZ28=</tipo>
-	<titulo>SGlzdG9yaWFs</titulo>
-	<campo>aGlzdG9yaWFs</campo>
-	<ayuda_titulo></ayuda_titulo>
-	<ayuda_texto></ayuda_texto>
-	<formulario>LTIz</formulario>
-	<peso>MQ==</peso>
-	<columna>Mg==</columna>
-	<obligatorio>MA==</obligatorio>
-	<visible>MQ==</visible>
-	<valor_predeterminado></valor_predeterminado>
-	<validacion_datos></validacion_datos>
-	<etiqueta_busqueda></etiqueta_busqueda>
-	<ajax_busqueda>MA==</ajax_busqueda>
-	<valor_unico>MA==</valor_unico>
-	<solo_lectura></solo_lectura>
-	<ancho>ODA=</ancho>
-	<alto>MTA=</alto>
-	<barra_herramientas>MA==</barra_herramientas>
-	<fila_unica>MA==</fila_unica>
-	<lista_opciones></lista_opciones>
-	<origen_lista_opciones></origen_lista_opciones>
-	<origen_lista_valores></origen_lista_valores>
-	<valor_etiqueta></valor_etiqueta>
-	<url_iframe></url_iframe>
-	<objeto_en_ventana>MA==</objeto_en_ventana>
-	<informe_vinculado>MA==</informe_vinculado>
-	<maxima_longitud>MA==</maxima_longitud>
-	<valor_minimo>MA==</valor_minimo>
-	<valor_maximo>MA==</valor_maximo>
-	<valor_salto>MA==</valor_salto>
-	<formato_salida></formato_salida>
-	<plantilla_archivo></plantilla_archivo>
-	<peso_archivo>NTA=</peso_archivo>
-	<tamano_pincel>MQ==</tamano_pincel>
-	<color_trazo>IzAwMDAwMA==</color_trazo>
-	<formulario_vinculado>MA==</formulario_vinculado>
-	<formulario_campo_vinculo></formulario_campo_vinculo>
-	<formulario_campo_foraneo></formulario_campo_foraneo>
-	<condicion_filtrado_listas></condicion_filtrado_listas>
-	<pestana_objeto>UENPX05vVmlzaWJsZQ==</pestana_objeto>
-	<personalizacion_tag></personalizacion_tag>
-	<modo_inline>MA==</modo_inline>
-	<imagen></imagen>
-	<tipo_accion></tipo_accion>
-	<accion_usuario></accion_usuario>
-	<valor_check_activo></valor_check_activo>
-	<valor_check_inactivo></valor_check_inactivo>
-	<valor_placeholder></valor_placeholder>
-	<ocultar_etiqueta>MA==</ocultar_etiqueta>
-	<id_html>aGlzdG9yaWFs</id_html>
-	<validacion_extras></validacion_extras>
-	<clase_contenedor>Y29sLXhzLTEyIGNvbC1zbS0xMiBjb2wtbWQtMTIgY29sLWxnLTEy</clase_contenedor>
-	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
-	<etiqueta_colapsable></etiqueta_colapsable>
-	</core_formulario_objeto>
-	<core_formulario_objeto>
 	<id>MTM3NjI=</id>
 	<tipo>ZXRpcXVldGE=</tipo>
 	<titulo></titulo>
@@ -616,8 +558,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>Mw==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>Mw==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -674,8 +616,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>Mw==</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>Mw==</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -732,8 +674,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>Mw==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>Mw==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -790,8 +732,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>NA==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>NA==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MQ==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -848,8 +790,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>NA==</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>NA==</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado>eyRQQ09fRmVjaGFPcGVyYWNpb25HdWlvbmVzfQ==</valor_predeterminado>
@@ -906,8 +848,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>NQ==</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>NQ==</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado>eyRQQ09fRmVjaGFPcGVyYWNpb25HdWlvbmVzfQ==</valor_predeterminado>
@@ -964,8 +906,8 @@
 	<ayuda_titulo>TGl2aWFub3MgbyBtZW5vcmVzIGZsb3Rhbg==</ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>NQ==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>NQ==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1022,8 +964,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>NQ==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>NQ==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1080,8 +1022,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>Ng==</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>Ng==</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1138,8 +1080,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>Ng==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>Ng==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1196,8 +1138,8 @@
 	<ayuda_titulo>UGxhbnRpbGxhcyBkZSB0ZXh0byBwcmVkaXNlbmFkYXMgLyBUZXh0IHRlbXBsYXRlcw==</ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>Nw==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>Nw==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1254,8 +1196,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>Nw==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>Nw==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado>Tm8=</valor_predeterminado>
@@ -1312,8 +1254,8 @@
 	<ayuda_titulo>eyRNVUxUSUxBTkdfRGVzVGFyZWF9</ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>OA==</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>OA==</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1370,8 +1312,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>OQ==</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>OQ==</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado>eyRDb250ZW9Db2x1bW5hfQ==</valor_predeterminado>
@@ -1428,8 +1370,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MTA=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MTA=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1442,7 +1384,7 @@
 	<alto>MA==</alto>
 	<barra_herramientas>MA==</barra_herramientas>
 	<fila_unica>MA==</fila_unica>
-	<lista_opciones>LF9PUFRHUk9VUF98UG9yIGFycXVpdGVjdHVyYSxGcm9udEVuZCxCYWNrRW5kLEFtYm9zLF9PUFRHUk9VUF8sX09QVEdST1VQX3xQb3IgZmFzZSBkZWwgY2ljbG8sUmUtRWxpY2l0YWNpb24sTWVqb3JhLENvcnJlY2Npb24sX09QVEdST1VQXw==</lista_opciones>
+	<lista_opciones>LF9PUFRHUk9VUF98UG9yIGFycXVpdGVjdHVyYSxGcm9udEVuZCxCYWNrRW5kLEFtYm9zLF9PUFRHUk9VUF8sX09QVEdST1VQX3xQb3IgZmFzZSBkZWwgY2ljbG8sUmUtRWxpY2l0YWNpb24sTWVqb3JhLENvcnJlY2Npb24sX09QVEdST1VQXyxfT1BUR1JPVVBffE90cm9zIHBlcnNvbmFsaXphZG9zLFByb3llY3RvcyxPcGVyYWNpw7NuLEZhY3R1cmFjacOzbixDb21wcmFzLENvbWVyY2lhbCxDYXJ0ZXJhLFJlZCBOYWNpb25hbCxJbmZyYWVzdHJ1Y3R1cmEsR2VzdGnDs24gSHVtYW5hLEhhYmlsaXRhY2nDs24sQ29uc3VsdG9yw61hLFRJLExvZ8Otc3RpY2EsSnVyw61kaWNhLEZyYSB5IENvbnRhYmlsaWRhZCxTSUcsSW5mb3JtZXMsRXN0cmF0ZWdpYSxDZW50cmFsaXphY2nDs24sX09QVEdST1VQXw==</lista_opciones>
 	<origen_lista_opciones></origen_lista_opciones>
 	<origen_lista_valores></origen_lista_valores>
 	<valor_etiqueta></valor_etiqueta>
@@ -1486,8 +1428,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MTA=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MTA=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1544,8 +1486,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MTE=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MTE=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1602,8 +1544,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MTE=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MTE=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1660,8 +1602,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MTI=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MTI=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1718,8 +1660,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MTI=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MTI=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado>Tm8=</valor_predeterminado>
@@ -1776,8 +1718,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MTQ=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MTQ=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1834,8 +1776,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MTQ=</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MTQ=</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1892,8 +1834,8 @@
 	<ayuda_titulo>eyRNVUxUSUxBTkdfQXNpZ25hZG9BRGVzfQ==</ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MTU=</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MTU=</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -1950,8 +1892,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MTY=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MTY=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -2008,8 +1950,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MjA=</peso>
-	<columna>MQ==</columna>
+	<PCOBD_Peso>MjA=</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -2066,8 +2008,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MjA=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MjA=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -2117,6 +2059,64 @@
 	<etiqueta_colapsable>Pj4+IFZlciBtw6FzIGRldGFsbGVz</etiqueta_colapsable>
 	</core_formulario_objeto>
 	<core_formulario_objeto>
+	<id>MTM3NjE=</id>
+	<tipo>dGV4dG9fbGFyZ28=</tipo>
+	<titulo>SGlzdG9yaWFsIC8gRXN0YWRv</titulo>
+	<campo>aGlzdG9yaWFs</campo>
+	<ayuda_titulo></ayuda_titulo>
+	<ayuda_texto></ayuda_texto>
+	<formulario>LTIz</formulario>
+	<PCOBD_Peso>MjQ=</PCOBD_Peso>
+	<PCOBD_Columna>MQ==</PCOBD_Columna>
+	<obligatorio>MA==</obligatorio>
+	<visible>MQ==</visible>
+	<valor_predeterminado></valor_predeterminado>
+	<validacion_datos></validacion_datos>
+	<etiqueta_busqueda></etiqueta_busqueda>
+	<ajax_busqueda>MA==</ajax_busqueda>
+	<valor_unico>MA==</valor_unico>
+	<solo_lectura></solo_lectura>
+	<ancho>ODA=</ancho>
+	<alto>Mw==</alto>
+	<barra_herramientas>MA==</barra_herramientas>
+	<fila_unica>MA==</fila_unica>
+	<lista_opciones></lista_opciones>
+	<origen_lista_opciones></origen_lista_opciones>
+	<origen_lista_valores></origen_lista_valores>
+	<valor_etiqueta></valor_etiqueta>
+	<url_iframe></url_iframe>
+	<objeto_en_ventana>MA==</objeto_en_ventana>
+	<informe_vinculado>MA==</informe_vinculado>
+	<maxima_longitud>MA==</maxima_longitud>
+	<valor_minimo>MA==</valor_minimo>
+	<valor_maximo>MA==</valor_maximo>
+	<valor_salto>MA==</valor_salto>
+	<formato_salida></formato_salida>
+	<plantilla_archivo></plantilla_archivo>
+	<peso_archivo>NTA=</peso_archivo>
+	<tamano_pincel>MQ==</tamano_pincel>
+	<color_trazo>IzAwMDAwMA==</color_trazo>
+	<formulario_vinculado>MA==</formulario_vinculado>
+	<formulario_campo_vinculo></formulario_campo_vinculo>
+	<formulario_campo_foraneo></formulario_campo_foraneo>
+	<condicion_filtrado_listas></condicion_filtrado_listas>
+	<pestana_objeto></pestana_objeto>
+	<personalizacion_tag></personalizacion_tag>
+	<modo_inline>MA==</modo_inline>
+	<imagen></imagen>
+	<tipo_accion></tipo_accion>
+	<accion_usuario></accion_usuario>
+	<valor_check_activo></valor_check_activo>
+	<valor_check_inactivo></valor_check_inactivo>
+	<valor_placeholder></valor_placeholder>
+	<ocultar_etiqueta>MA==</ocultar_etiqueta>
+	<id_html>aGlzdG9yaWFs</id_html>
+	<validacion_extras></validacion_extras>
+	<clase_contenedor>Y29sLXhzLTEyIGNvbC1zbS0xMiBjb2wtbWQtMTIgY29sLWxnLTEy</clase_contenedor>
+	<ajax_busqueda_dinamica>MA==</ajax_busqueda_dinamica>
+	<etiqueta_colapsable></etiqueta_colapsable>
+	</core_formulario_objeto>
+	<core_formulario_objeto>
 	<id>MTM3ODg=</id>
 	<tipo>ZXRpcXVldGE=</tipo>
 	<titulo></titulo>
@@ -2124,8 +2124,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MjM=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MjU=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -2182,8 +2182,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MjQ=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>MjY=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
@@ -2240,8 +2240,8 @@
 	<ayuda_titulo></ayuda_titulo>
 	<ayuda_texto></ayuda_texto>
 	<formulario>LTIz</formulario>
-	<peso>MjU=</peso>
-	<columna>Mg==</columna>
+	<PCOBD_Peso>Mjc=</PCOBD_Peso>
+	<PCOBD_Columna>Mg==</PCOBD_Columna>
 	<obligatorio>MA==</obligatorio>
 	<visible>MQ==</visible>
 	<valor_predeterminado></valor_predeterminado>
