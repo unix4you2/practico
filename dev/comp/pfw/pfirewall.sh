@@ -126,6 +126,13 @@ Modo de empleo: ./pfirewall.sh -P [ListaCSV] -B [ListaCSV] -s
 
   * Ej: ./pfirewall.sh -P co,cl  Bloquea todo menos Colommbia y Chile
   * Ej: ./pfirewall.sh -B af,br Permite todo menos Afganistan y Brasil
+
+  Listas de direcciones:  Una lista de direcciones en formatos CIDR
+                          por cada pais pueden ser descargadas actualizadas
+                          desde alguno de los siguientes sitios:
+
+    1) https://www.ipdeny.com/ipblocks/
+    2) https://www.ip2location.com/free/visitor-blocker (Formato CIDR)
 "
    cd $SCRIPTPATH
    IFS=$SeparadorElementosActual
@@ -366,4 +373,3 @@ $Cortafuegos -I INPUT -p tcp --dport 443 -j ACCEPT		# Puerto SSL para Apache
 cd $SCRIPTPATH
 IFS=$SeparadorElementosActual
 exit 0
- 
