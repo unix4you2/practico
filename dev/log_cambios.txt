@@ -103,6 +103,11 @@ LogCambios="
 * Enhan [KANBAN]: Agregados campos de historial y fecha de inicio a informes exportables de tareas activas y archivadas por tablero.
 * Enhan [KANBAN]: Ajustado informe interno de tareas archivadas (-3) para generarse a través de consulta directa y no de elementos individuales.
 * Fixed [PCODER]: @jaimeaba3 Al intentar almacenar valores vacíos en scripts PRE,POS y JS se obtiene mensaje de error de BD al no recibir valor para almacenar.
+* Enhan [CORE]: Sobre motores MySQL/MariaDB El framework agrega como comentario a todos los queries enviados de manera que se pueda visualizar por logs del motor qué usuario envía cada consulta.
+* Enhan [CORE]: La funcion PCO_FileGetContents_CURL puede recibiar ademas de la URL un segundo parámetro en JSON con la lista de opciones que serán utilizadas para inicializar el objeto cURL.  De esta manera cada llamada puede ser personalizada por el desarrollador cuando consuma orígenes o servicios externos.
+
+
+
 
 * Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna, peso->PCOBD_Peso
 

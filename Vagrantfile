@@ -259,7 +259,7 @@ end
 
 	    #Instalacion de PHP y sus extensiones
 	    sudo yum -y install php php-process php-mysql php-gd php-ldap php-odbc php-pear php-zip
-	    sudo yum -y install php-xml php-xmlrpc php-mbstring php-snmp php-soap curl curl-devel
+	    sudo yum -y install php-xml php-xmlrpc php-mbstring php-snmp php-soap php-curl curl curl-devel
 
 	    #Instalacion de MariaDB
 	    sudo yum -y install mariadb-server mariadb
@@ -324,7 +324,7 @@ end
 	    #Instalacion de PHP y sus extensiones
 	    sudo add-apt-repository ppa:ondrej/php --yes &> /dev/null
 	    sudo apt-get -y install php7.4 php7.4-common php7.4-mysql php7.4-gd php7.4-ldap php7.4-odbc 
-	    sudo apt-get -y install php7.4-xml php7.4-xmlrpc php7.4-mbstring php7.4-snmp php7.4-soap curl
+	    sudo apt-get -y install php7.4-xml php7.4-xmlrpc php7.4-mbstring php7.4-snmp php7.4-soap php-curl curl
 
 	    #Instalacion de MariaDB
 	    sudo apt-get -y install mariadb-server mariadb-client

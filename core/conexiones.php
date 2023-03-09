@@ -168,6 +168,10 @@
                 			//Establece algunas variables para estar disponibles sobre el motor
                 			$ConexionPDO->exec("SET @PCOVAR_Administradores='$PCOVAR_Administradores';");
                 			
+                			//Si se tiene usuario activo lo define como usuario para informacion en la consulta
+                			if (@$PCOSESS_LoginUsuario!="")
+                			    $ConexionPDO->exec("SET @PCOVAR_LoginUsuario='$PCOSESS_LoginUsuario';");
+                			
                 			//Establece zona horaria por defecto
                 			//NOTA: Se pùede establecer sobre el my.cnf mediante  default-time-zone='SuZona/Horaria'  PERO primero debe llenar las zonas horarias sobre el motor asi:   mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -u root mysql -p
                 			$ConexionPDO->exec("SET @PCOVAR_ZonaHoraria='$ZonaHoraria';");

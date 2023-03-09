@@ -296,8 +296,34 @@ function PCO_OpenAI_Codex($Modelo="code-davinci-002")
 		//Si encuentra un valor de API KEY sigue adelante
         if ($PCO_API_OpenAI!="")
             {
+                $URLFinal=$PCO_API_OpenAI."/completions";  //https://api.openai.com/v1/completions
                 
                 
+                $OpcionesCURL='{
+                                    "CURLOPT_HEADER":0,
+                                    "CURLOPT_ENCODING":"",
+                                    "CURLOPT_MAXREDIRS":10,
+                                    "CURLOPT_TIMEOUT":0,
+                                    "CURLOPT_FOLLOWLOCATION":true,
+                                    "CURLOPT_HTTP_VERSION":CURL_HTTP_VERSION_1_1,
+                                    "CURLOPT_CUSTOMREQUEST":"POST",
+                                    "CURLOPT_POSTFIELDS":"
+                                    
+{
+  "model": "text-davinci-002",
+  "prompt": "PHP crea un script para insertar un cliente en mysql",
+  "max_tokens": 100,
+  "temperature": 0.1,
+  "n": 1,
+  "stop": ""
+}                                    ",
+                                    "CURLOPT_HTTPHEADER":"array(
+    \'Content-Type: application/json\',
+    \'Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\'
+  )",
+                                    "CURLOPT_RETURNTRANSFER":true
+                }';
+                $RespuestaAPI=PCO_FileGetContents_CURL($URLFinal,$OpcionesCURL);
             }
 
         return $RespuestaAPI;
@@ -4158,13 +4184,17 @@ function PCO_EjecutarSQL($query,$lista_parametros="",$ConexionBD="",$EvitarLogSQ
 		else
 			$ConexionPDO=$ConexionBD;
 
-		global $ModoDepuracion;
+		global $ModoDepuracion,$MotorBD;
 		global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_Archivo;
 		global $PCO_Accion;
 		global $PCOSESS_LoginUsuario,$_SeparadorCampos_,$DepuracionSQL;
 
 		// Filtra la cadena antes de ser ejecutada
 		$query=PCO_FiltrarCadenaSQL($query);
+		
+		//Agrega comentario al query con nombre del usuario si aplica
+		if (@$PCOSESS_LoginUsuario!="" && @$MotorBD=="mysql")
+		    $query="/*US={$PCOSESS_LoginUsuario}*/ ".$query;
 
 		try
 			{
@@ -4296,7 +4326,12 @@ function PCO_EjecutarNoSQL($ConexionNoSQL,$LlaveRegistro="")
     { echo "ERROR: Llamado a funcion obsoleta del framework ejecutar_sql_unaria().  En su lugar utilice PCO_EjecutarSQLUnaria() "; }
 function PCO_EjecutarSQLUnaria($query,$lista_parametros="",$ConexionBD="",$ReplicaRecursiva=1,$EvitarLogSQL=0)
 	{
-		global $ListaCamposSinID_replicasbd,$TablasCore,$DepuracionSQL;
+		global $ListaCamposSinID_replicasbd,$TablasCore,$DepuracionSQL,$MotorBD,$PCOSESS_LoginUsuario;
+
+		//Agrega comentario al query con nombre del usuario si aplica
+		if (@$PCOSESS_LoginUsuario!="" && @$MotorBD=="mysql")
+		    $query="/*US={$PCOSESS_LoginUsuario}*/ ".$query;
+
 		//Si aplica la replica recursiva entonces busca las conexiones
 		if ($ReplicaRecursiva==1)
 			{
@@ -4318,7 +4353,7 @@ function PCO_EjecutarSQLUnaria($query,$lista_parametros="",$ConexionBD="",$Repli
 			$ConexionPDO=$ConexionBD;
 
 		global $ModoDepuracion;
-		global $PCOSESS_LoginUsuario,$_SeparadorCampos_;
+		global $_SeparadorCampos_;
 		global $MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Detalles,$MULTILANG_ErrorSoloAdmin,$MULTILANG_ContacteAdmin,$MULTILANG_MotorBD;
 		try
 			{
@@ -4794,25 +4829,40 @@ function PCO_ExisteCampoTabla($campo,$tabla,$ConexionAlterna="",$MotorAlterno=""
 /*
 	Function: PCO_FileGetContents_CURL
 	Un reemplazo para la funcion file_get_contents utilizando cURL
+	
+	Variables de entrada:
 
+		URLBase - La URL base del recurso que se desea cargar
+		OpcionesJSON - Un arreglo de opciones para inicializar y personalizar el objeto CURL e formato JSON. Ej:  {"CURLOPT_MAXREDIRS":10,"CURLOPT_FOLLOWLOCATION":true}
+		
 	Salida:
 		Contenido de la URL recibida
 */
-function PCO_FileGetContents_CURL($url)
+function PCO_FileGetContents_CURL($URLBase,$OpcionesJSON)
 	{
 		global $MULTILANG_ErrExtension,$MULTILANG_ErrCURL;
+		
+		//Por defecto inicializa opciones minimas para compatibilidad hacia atras
+		if ($OpcionesJSON=="")
+		    $OpcionesJSON='{"CURLOPT_HEADER":0,"CURLOPT_RETURNTRANSFER":1}';
+
 		//Verifica soporte para cURL
 		if (!extension_loaded('curl'))
             PCO_Mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrCURL, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 		//Verifica que la funcion se encuentre activada
 		$funcion_evaluada='curl_init'; $valor_esperado='1';
-		if (ini_get($funcion_evaluada)==$valor_esperado)
+		if (function_exists($funcion_evaluada)==$valor_esperado)
 			{
 				//Inicializa el objeto cURL y procesa la solicitud
 				$objeto_curl = curl_init();
-				curl_setopt($objeto_curl, CURLOPT_HEADER, 0);
-				curl_setopt($objeto_curl, CURLOPT_RETURNTRANSFER, 1);
-				curl_setopt($objeto_curl, CURLOPT_URL, $url);
+
+                //Decodifica los parametros
+                $ArregloParametros = json_decode($OpcionesJSON, true);
+                foreach ($ArregloParametros as $key => $value) {
+    				curl_setopt($objeto_curl, $key, $value);
+                }
+				curl_setopt($objeto_curl, CURLOPT_URL, $URLBase);
+
 				$datos_recibidos = curl_exec($objeto_curl);
 				curl_close($objeto_curl);
 			}
