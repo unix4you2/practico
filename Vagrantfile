@@ -98,13 +98,6 @@ Vagrant.configure("2") do |config|
   config.vm.define "centos" do |centos|
 	  centos.vm.box="generic/centos7"
 
-      #Ajustes especificos para login y aprovisionamiento por SSH
-      centos.ssh.insert_key = false
-      centos.ssh.verify_host_key = false
-      centos.ssh.username = "vagrant"
-      centos.ssh.password = "vagrant"
-      #centos.ssh.ciphers = ["aes256-cbc", "3des-cbc", "blowfish-cbc", "cast128-cbc", "arcfour", "aes192-cbc", "aes128-cbc"]
-
 	  centos.vm.provider "virtualbox" do |vm_detalles|
 	    vm_detalles.cpus = "1"
 	    vm_detalles.memory = "1024"
@@ -186,13 +179,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "freebsd" do |freebsd|
 	  freebsd.vm.box="generic/freebsd13"
-
-      #Ajustes especificos para login y aprovisionamiento por SSH
-      freebsd.ssh.insert_key = false
-      freebsd.ssh.verify_host_key = false
-      freebsd.ssh.username = "vagrant"
-      freebsd.ssh.password = "vagrant"
-      #freebsd.ssh.ciphers = ["aes256-cbc", "3des-cbc", "blowfish-cbc", "cast128-cbc", "arcfour", "aes192-cbc", "aes128-cbc"]
 
 	  freebsd.vm.provider "virtualbox" do |vm_detalles|
 	    vm_detalles.cpus = "1"

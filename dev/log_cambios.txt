@@ -105,6 +105,7 @@ LogCambios="
 * Fixed [PCODER]: @jaimeaba3 Al intentar almacenar valores vacíos en scripts PRE,POS y JS se obtiene mensaje de error de BD al no recibir valor para almacenar.
 * Enhan [CORE]: Sobre motores MySQL/MariaDB El framework agrega como comentario a todos los queries enviados de manera que se pueda visualizar por logs del motor qué usuario envía cada consulta.
 * Enhan [CORE]: La funcion PCO_FileGetContents_CURL puede recibiar ademas de la URL un segundo parámetro en JSON con la lista de opciones que serán utilizadas para inicializar el objeto cURL.  De esta manera cada llamada puede ser personalizada por el desarrollador cuando consuma orígenes o servicios externos.
+* Fixed [CORE]: @foag Validacion de escenarios de despliegue a entornos vagabundos
 
 
 
