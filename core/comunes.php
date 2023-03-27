@@ -2624,10 +2624,10 @@ function PCO_ManejadorExcepciones($DetalleExcepcion)
         if ($ModoDepuracion)
             {
                 $Detalles=error_get_last();
-                $Tipo=$Detalles["type"];
-                $Mensaje=$Detalles["message"];
-                $Archivo=$Detalles["file"];
-                $Linea=$Detalles["line"];
+                $Tipo=@$Detalles["type"];
+                $Mensaje=@$Detalles["message"];
+                $Archivo=@$Detalles["file"];
+                $Linea=@$Detalles["line"];
                 if ($Archivo!="" && $Mensaje!="")
                     PCO_Mensaje($MULTILANG_Atencion." (PHP Exception cod $Tipo)","$Archivo (linea $Linea)<br>$Mensaje", '', 'fa fa-exclamation-triangle texto-rojo texto-blink', 'alert alert-warning');
             }
@@ -2649,10 +2649,10 @@ function PCO_ManejadorErrores($DetalleExcepcion)
         if ($ModoDepuracion)
             {
                 $Detalles=error_get_last();
-                $Tipo=$Detalles["type"];
-                $Mensaje=$Detalles["message"];
-                $Archivo=$Detalles["file"];
-                $Linea=$Detalles["line"];
+                $Tipo=@$Detalles["type"];
+                $Mensaje=@$Detalles["message"];
+                $Archivo=@$Detalles["file"];
+                $Linea=@$Detalles["line"];
                 if ($Archivo!="" && $Mensaje!="")
                     PCO_Mensaje($MULTILANG_Atencion." (PHP Error cod $Tipo)","$Archivo (linea $Linea)<br>$Mensaje", '', 'fa fa-exclamation-triangle texto-rojo texto-blink', 'alert alert-danger');
             }
