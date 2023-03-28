@@ -379,7 +379,15 @@
     					<?php
                             //Busca si tiene tableros kanban o le han compartido alguno
                             $RegistroTableros=PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND (login_admintablero='$PCOSESS_LoginUsuario' OR compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%') LIMIT 0,1 ")->fetch();
-                            if ($RegistroTableros["id"]!="")
+                            
+                            //Busca si es un administrador de tableros Kanban
+                            $PCOVAR_EsAdminKanban=0;
+                            $RegistroAdminTableros=PCO_EjecutarSQL("SELECT usuarios_admin_kanban FROM ".$TablasCore."parametros WHERE 1=1 LIMIT 0,1 ")->fetchColumn();
+                            $RegistroAdminTableros=",".$RegistroAdminTableros.","; //Concatena siempre comas para facilitar la busqueda
+                            if (strpos($RegistroAdminTableros,$PCOSESS_LoginUsuario)!=false)
+                                $PCOVAR_EsAdminKanban=1;
+                            
+                            if ($RegistroTableros["id"]!="" || $PCOVAR_EsAdminKanban==1)
                                 echo '<li><a href="javascript:document.PCO_ExplorarTablerosKanban.submit();"><i class="fa fa-sticky-note fa-fw"></i> '.$MULTILANG_TablerosKanban.'</a></li>';
                         ?>
 
