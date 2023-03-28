@@ -22,10 +22,25 @@ CREATE TABLE core_parametros (
   requiere_aceptar_licencia int(1) NULL DEFAULT '0',
   api_openai varchar(255) NULL DEFAULT '',
   url_openai varchar(255) NULL DEFAULT 'https://api.openai.com/v1',
+  usuarios_desarroladores varchar(1024) NULL DEFAULT 'admin',
+  usuarios_admin_kanban varchar(1024) NULL DEFAULT 'admin',
+  api_nombre_1 varchar(255) NULL DEFAULT '',
+  api_llave_1  varchar(255) NULL DEFAULT '',
+  api_url_1    varchar(255) NULL DEFAULT '',
+  api_nombre_2 varchar(255) NULL DEFAULT '',
+  api_llave_2  varchar(255) NULL DEFAULT '',
+  api_url_2    varchar(255) NULL DEFAULT '',
+  api_nombre_3 varchar(255) NULL DEFAULT '',
+  api_llave_3  varchar(255) NULL DEFAULT '',
+  api_url_3    varchar(255) NULL DEFAULT '',
+  api_nombre_4 varchar(255) NULL DEFAULT '',
+  api_llave_4  varchar(255) NULL DEFAULT '',
+  api_url_4    varchar(255) NULL DEFAULT '',
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 INSERT INTO core_parametros (nombre_empresa_largo,nombre_empresa_corto,nombre_aplicacion,version,fecha_lanzamiento,licencia,creditos) VALUES ('Nombre completo de su empresa','PAR_NombreCortoEmpresa','PAR_NombreAplicacion','PAR_VersionApp','20150101','Texto de su licencia','Texto asociado a los creditos de su aplicacion');
+
 
 DROP TABLE IF EXISTS core_usuario;
 CREATE TABLE core_usuario (
@@ -449,6 +464,18 @@ CREATE TABLE core_llaves_api (
   dominio_autorizado varchar(255) NOT NULL,
   ip_autorizada varchar(255) NOT NULL,
   funciones_autorizadas text,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_llaves_api_externas;
+CREATE TABLE core_llaves_api_externas (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  nombre varchar(50) NOT NULL,
+  api_key varchar(150) NOT NULL,
+  api_secret varchar(150) NOT NULL,
+  url_consumo varchar(255) NOT NULL,
+  url_redireccion varchar(255) NOT NULL,
+  script mediumtext,
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

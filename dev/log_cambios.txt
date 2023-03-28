@@ -106,6 +106,9 @@ LogCambios="
 * Enhan [CORE]: Sobre motores MySQL/MariaDB El framework agrega como comentario a todos los queries enviados de manera que se pueda visualizar por logs del motor qué usuario envía cada consulta.
 * Enhan [CORE]: La funcion PCO_FileGetContents_CURL puede recibiar ademas de la URL un segundo parámetro en JSON con la lista de opciones que serán utilizadas para inicializar el objeto cURL.  De esta manera cada llamada puede ser personalizada por el desarrollador cuando consuma orígenes o servicios externos.
 * Fixed [CORE]: @foag Validacion de escenarios de despliegue a entornos vagabundos
+* Added [CORE]: Formulario de parámetros incluye acceso a nueva sección para definir proveedores genéricos para posibles API de integración, permitiendo definir su nombre, llave, secretos, URL base de consumo y scripts.  Esta información podría ser usada directamente desde cualquier script de Práctico teniendo así un sitio para almacenar llaves sin quedar expuestas por código.
+* Added [CORE]: Módulo complementario para despacho de correos electrónicos mediante API de Twilio Sendgrid se encuentra disponible sobre la carpeta complementaria.  Quien lo desee habilitar puede mover la carpeta a su carpeta de módulos de la instalación y pegar el código del servicio web asociado o crear su propio código.
+
 
 
 
@@ -294,6 +297,38 @@ INSERT INTO core_opcionlista (identificador_lista,valor_interno,valor_visual,ord
 ALTER TABLE core_parametros ADD requiere_aceptar_licencia int(1) NULL DEFAULT '0';
 ALTER TABLE core_parametros ADD api_openai varchar(255) NULL DEFAULT '';
 ALTER TABLE core_parametros ADD url_openai varchar(255) NULL DEFAULT 'https://api.openai.com/v1';
+
+ALTER TABLE core_parametros ADD usuarios_desarroladores varchar(1024) NULL DEFAULT 'admin';
+ALTER TABLE core_parametros ADD usuarios_admin_kanban varchar(1024) NULL DEFAULT 'admin';
+
+ALTER TABLE core_parametros ADD api_nombre_1 varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD api_llave_1 varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD api_url_1 varchar(255) NULL DEFAULT '';
+
+ALTER TABLE core_parametros ADD api_nombre_2 varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD api_llave_2 varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD api_url_2 varchar(255) NULL DEFAULT '';
+
+ALTER TABLE core_parametros ADD api_nombre_3 varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD api_llave_3 varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD api_url_3 varchar(255) NULL DEFAULT '';
+
+ALTER TABLE core_parametros ADD api_nombre_4 varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD api_llave_4 varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD api_url_4 varchar(255) NULL DEFAULT '';
+
+
+CREATE TABLE core_llaves_api_externas (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  nombre varchar(50) NOT NULL,
+  api_key varchar(150) NOT NULL,
+  api_secret varchar(150) NOT NULL,
+  url_consumo varchar(255) NOT NULL,
+  url_redireccion varchar(255) NOT NULL,
+  script mediumtext,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
 
 DROP TABLE IF EXISTS core_scripts;
 CREATE TABLE core_scripts (
