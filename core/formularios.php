@@ -1112,17 +1112,6 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 				}
 		</script>
 
-        <script language="JavaScript">
-            function PCOJS_PopUpEventosJavascript()
-                {
-                    //Verifica que se haya seleccionado un evento y abre el popup, sino muestra error
-                    if ($("#tipo_evento").val()!="")
-                        PCO_VentanaPopup('index.php?PCO_Accion=PCO_EditarEventoObjeto&id_objeto_evento='+document.datosform.idcampomodificado.value+'&evento_objeto='+$("#tipo_evento").val()+'&tipo='+document.datosform.tipo.value+'&Presentar_FullScreen=1&Precarga_EstilosBS=1','Evento_'+$("#tipo_evento").val()+'_ID'+document.datosform.idcampomodificado.value,'toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=no, resizable=no, fullscreen=no, width=850, height=600');
-                    else
-                        alert("<?php echo $MULTILANG_Seleccionar; ?> <?php echo $MULTILANG_Evento; ?> !!!");
-                }
-        </script>
-
     <!-- INICIO MODAL ADICION DE CAMPOS -->
     <?php PCO_AbrirDialogoModal("myModalElementoFormulario",$MULTILANG_FrmMsj1,"modal-wide oculto_impresion"); ?>
 
@@ -2664,14 +2653,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 										</td>
 
 										<td align="center">
-												<form action="'.$ArchivoCORE.'" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-														<input type="hidden" name="PCO_Accion" value="PCO_EditarFormulario">
-														<input type="hidden" name="campo" value="'.$registro["id"].'">
-														<input type="hidden" name="formulario" value="'.$formulario.'">
-														<input type="hidden" name="nombre_tabla" value="'.$nombre_tabla.'">
-														<input type="Hidden" name="popup_activo" value="FormularioCampos">
-                                                        <button type="submit" class="btn btn-info btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'"><i class="fa fa-pencil-square-o"></i></button>
-												</form>
+        										<a class="btn btn-xs btn-info" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\'javascript:PCOJS_ActualizarControlFormulario('.$formulario.','.$registro["id"].',1);\'><i class="fa fa-pencil-square-o"></i></a>
 										</td>';
 									}
 								else
