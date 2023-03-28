@@ -24,18 +24,6 @@ CREATE TABLE core_parametros (
   url_openai varchar(255) NULL DEFAULT 'https://api.openai.com/v1',
   usuarios_desarroladores varchar(1024) NULL DEFAULT 'admin',
   usuarios_admin_kanban varchar(1024) NULL DEFAULT 'admin',
-  api_nombre_1 varchar(255) NULL DEFAULT '',
-  api_llave_1  varchar(255) NULL DEFAULT '',
-  api_url_1    varchar(255) NULL DEFAULT '',
-  api_nombre_2 varchar(255) NULL DEFAULT '',
-  api_llave_2  varchar(255) NULL DEFAULT '',
-  api_url_2    varchar(255) NULL DEFAULT '',
-  api_nombre_3 varchar(255) NULL DEFAULT '',
-  api_llave_3  varchar(255) NULL DEFAULT '',
-  api_url_3    varchar(255) NULL DEFAULT '',
-  api_nombre_4 varchar(255) NULL DEFAULT '',
-  api_llave_4  varchar(255) NULL DEFAULT '',
-  api_url_4    varchar(255) NULL DEFAULT '',
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

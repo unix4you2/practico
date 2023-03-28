@@ -301,23 +301,6 @@ ALTER TABLE core_parametros ADD url_openai varchar(255) NULL DEFAULT 'https://ap
 ALTER TABLE core_parametros ADD usuarios_desarroladores varchar(1024) NULL DEFAULT 'admin';
 ALTER TABLE core_parametros ADD usuarios_admin_kanban varchar(1024) NULL DEFAULT 'admin';
 
-ALTER TABLE core_parametros ADD api_nombre_1 varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD api_llave_1 varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD api_url_1 varchar(255) NULL DEFAULT '';
-
-ALTER TABLE core_parametros ADD api_nombre_2 varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD api_llave_2 varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD api_url_2 varchar(255) NULL DEFAULT '';
-
-ALTER TABLE core_parametros ADD api_nombre_3 varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD api_llave_3 varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD api_url_3 varchar(255) NULL DEFAULT '';
-
-ALTER TABLE core_parametros ADD api_nombre_4 varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD api_llave_4 varchar(255) NULL DEFAULT '';
-ALTER TABLE core_parametros ADD api_url_4 varchar(255) NULL DEFAULT '';
-
-
 CREATE TABLE core_llaves_api_externas (
   id int(10) NOT NULL AUTO_INCREMENT,
   nombre varchar(50) NOT NULL,
