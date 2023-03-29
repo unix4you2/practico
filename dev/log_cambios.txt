@@ -33,6 +33,7 @@ inc/jquery/migrate-devel/*
 inc/jbdemonte/*
 inc/d3js/*
 inc/facebook/*
+inc/mxgraph/javascript/scripts/grapheditor/www/index.php
 ins/core/marco_abajo.php
 
 xml/*
@@ -109,6 +110,7 @@ LogCambios="
 * Added [CORE]: Formulario de parámetros incluye acceso a nueva sección para definir proveedores genéricos para posibles API de integración, permitiendo definir su nombre, llave, secretos, URL base de consumo y scripts.  Esta información podría ser usada directamente desde cualquier script de Práctico teniendo así un sitio para almacenar llaves sin quedar expuestas por código.
 * Added [CORE]: Módulo complementario para despacho de correos electrónicos mediante API de Twilio Sendgrid se encuentra disponible sobre la carpeta complementaria.  Quien lo desee habilitar puede mover la carpeta a su carpeta de módulos de la instalación y pegar el código del servicio web asociado o crear su propio código.
 * Added [KANBAN]: Formulario de parámetros permite especificar usuarios que son administradores de tableros Kanban, los cuales tendrán acceso a la herramienta con la posibilidad de crear tableros aún sin ser administradores generales o desarrolladores.
+* Added [KANBAN]: Editor de diagramas Kanban detecta si el usuario tiene acceso a la tarea en modo de edición y le permite su edición de diagrama asociado.
 
 
 

@@ -88,8 +88,18 @@
 			die();
 		}
 
+    //Busca si el usuario tiene acceso a la edición de esta tarea o es administrador del tablero
+    $UsuarioHabilitado_EdicionKanban=0;
+    if (@$PCO_TablaOrigen=="core_kanban" && @$PCO_CampoOrigen=="diagrama_elicitacion")
+        {
+            $UsuariosEditoresTarea=PCO_EjecutarSQL("SELECT login_admintablero,usuarios_edicion FROM core_kanban WHERE id='{$PCO_ValorLlave}' ")->fetch();
+            $UsuariosRecuperados=",".$UsuariosEditoresTarea["usuarios_edicion"].",";
+            if (strpos($UsuariosRecuperados,$PCOSESS_LoginUsuario)!=false || $UsuariosEditoresTarea["login_admintablero"]==$PCOSESS_LoginUsuario)
+                $UsuarioHabilitado_EdicionKanban=1;
+        }
+
     // Determina si es un usuario administrador para poder abrir el editor
-    if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+    if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $UsuarioHabilitado_EdicionKanban==0)
         {
 			echo '<head><title>Error</title><style type="text/css"> body { background-color: #000000; color: #7f7f7f; font-family: sans-serif,helvetica; } </style></head><body><table width="100%" height="100%" border=0><tr><td align=center>&#9827; Acceso no autorizado !</td></tr></table></body>';
 			die();

@@ -1147,9 +1147,9 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanbanResumido")
         $ResultadoTablerosPropios=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND login_admintablero='$PCOSESS_LoginUsuario' ")->fetchColumn();
         $ResultadoTablerosCompartidos=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%' ")->fetchColumn();
 
+        //Verifica si tiene tableros compartidos y agrega el/los botones para explorar globalmente tareas de cada tablero
         if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
             {
-                //Verifica si tiene tableros compartidos y agrega el/los botones para explorar globalmente tareas de cada tablero
                 $CadenaExploracionTareas="";
                 if ($ResultadoTablerosPropios!=0 || $ResultadoTablerosCompartidos!=0)
                     $CadenaExploracionTareas.= "
@@ -1157,8 +1157,17 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanbanResumido")
                         &nbsp;&nbsp;&nbsp;&nbsp; <div class='pull-left'><a class='btn btn-default' href='index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=inf:-34:1'><i class='fa fa-eye fa-fw fa-1x'></i> Ver todas las tareas archivadas</a></div>
                         &nbsp;&nbsp;&nbsp;&nbsp; <div class='pull-left'><a class='btn btn-success' href='index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=inf:-40:1'><i class='fa fa-check fa-fw fa-1x'></i> Banco de pruebas</a></div>
                         ";
+            }
 
-                //Presenta botones de crear tablero y volver al menu                
+        //Busca si es un administrador de tableros Kanban
+        $PCOVAR_EsAdminKanban=0;
+        $RegistroAdminTableros=PCO_EjecutarSQL("SELECT usuarios_admin_kanban FROM ".$TablasCore."parametros WHERE 1=1 LIMIT 0,1 ")->fetchColumn();
+        $RegistroAdminTableros=",".$RegistroAdminTableros.","; //Concatena siempre comas para facilitar la busqueda
+        if (strpos($RegistroAdminTableros,$PCOSESS_LoginUsuario)!=false)
+            $PCOVAR_EsAdminKanban=1;
+        //Presenta botones de crear tablero y volver al menu         
+        if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) || $PCOVAR_EsAdminKanban==1)
+            {
                 echo "      
                     <div class='row'>
                         <div class='col col-md-12 col-sm-12 col-lg-12 col-xs-12'>
