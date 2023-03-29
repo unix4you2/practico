@@ -111,6 +111,7 @@ LogCambios="
 * Added [CORE]: Módulo complementario para despacho de correos electrónicos mediante API de Twilio Sendgrid se encuentra disponible sobre la carpeta complementaria.  Quien lo desee habilitar puede mover la carpeta a su carpeta de módulos de la instalación y pegar el código del servicio web asociado o crear su propio código.
 * Added [KANBAN]: Formulario de parámetros permite especificar usuarios que son administradores de tableros Kanban, los cuales tendrán acceso a la herramienta con la posibilidad de crear tableros aún sin ser administradores generales o desarrolladores.
 * Added [KANBAN]: Editor de diagramas Kanban detecta si el usuario tiene acceso a la tarea en modo de edición y le permite su edición de diagrama asociado.
+* Added [FORMS]: Edición de eventos sobre controles de formulario es realizada sobre nuevo editor de PCoder, permitiendo heredar funcionalidades clave como backups automáticos, visor de diferencias, entre otros.
 
 
 
