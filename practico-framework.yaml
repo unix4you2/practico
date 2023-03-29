@@ -42,8 +42,8 @@
 #   Configuraciones de aplicacion para Google App Engine
 #   Referencia: https://cloud.google.com/appengine/docs/standard/python/config/appref
 
-runtime: php72  # Reemplazar con php73 tpara dicha version
-service: practico-framework-pmydb
+runtime: php72  # Reemplazar con php73 para dicha version
+service: practico-framework
 
 handlers:
 # Sirve todas las imagenes como recursos estaticos
