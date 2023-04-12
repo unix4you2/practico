@@ -6346,13 +6346,121 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
 		if ($registro_campos["validacion_datos"]!="" && $registro_campos["validacion_datos"]!="fecha" && $registro_campos["validacion_datos"]!="hora" && $registro_campos["validacion_datos"]!="fechahora" && $registro_campos["validacion_datos"]!="fechaxanos" && $registro_campos["validacion_datos"]!="fechahorafull")
 			$cadena_validacion=' onkeypress="return PCOJS_ValidarTeclado(event, \''.$registro_campos["validacion_datos"].'\', \''.$registro_campos["validacion_extras"].'\');" ';
 
+
+        //Determina si se tendran conversiones de campo a campo con TAGS
+        //$registro_campos["personalizacion_tag"]
+        if (strstr($registro_campos["personalizacion_tag"],"PCO_Tags")!=FALSE )
+            {
+                $PCO_Tags_OcultamientoCampo=" style='visibility:hidden;' ";
+                $PCO_PreDIVTags=' <div id="Todo" style="border:solid; border-width:1px; border-color:lightgray;" ><div id="ContenedorTags" class="tags"> </div>
+                
+                
+                <input type="text" name="textarea_tags" id="textarea_tags" placeholder=" >>> Ingrese Tags separados por coma" style="font-size:10px; margin-top:3px; background-color:transparent; border-width:0px; width:100%;"  onblur="PCOJS_AgregarTag(event,true)" onkeydown="PCOJS_AgregarTag(event,false)" onkeyup="PCOJS_AgregarTag(event,false)">
+                <div align="right" style="font-size:10px; color:gray;">Total elementos: <b><div id="ConteoElementosTag" style="display:inline">0</div></b>&nbsp;</div>
+                
+                </div>';
+
+                
+                
+                $PCO_JavaScriptTags='
+                
+                <script language="JavaScript">
+
+                    let PCOVAR_ArregloTags = [];
+                    
+                    
+                    function createTag(EtiquetaTagRecibida){
+                    	ContenedorTags=document.getElementById("ContenedorTags");
+                    	ContenedorTags.innerHTML=ContenedorTags.innerHTML+\'&nbsp;<div class="badge">\'+EtiquetaTagRecibida+\' <a><i style="color:white;" class="fa fa-times-circle" onclick="removeTag(\\\'\'+EtiquetaTagRecibida+\'\\\');"></i></a></div>\';
+                    }
+                    
+                    function LimpiarTodo(ID_HTML_Campo)
+                    	{
+                            //$("#"+ID_HTML_Campo).val("");
+                    		//$("#ContenedorTags").html("");
+                    		ContenedorTags=document.getElementById("ContenedorTags");
+                    		ContenedorTags.innerHTML="";
+                    		RegenerarDesdeValor(ID_HTML_Campo);
+                    	}
+                    
+                    function RegenerarDesdeValor(ID_HTML_Campo)
+                    	{
+                    	    //Limpia el arreglo actual de los tags y lo genera desde cero usando el valor del textarea
+                    	    PCOVAR_ArregloTags.length = 0;
+                    	
+                            //$("#ContenedorTags").html("");
+                            ContenedorTags=document.getElementById("ContenedorTags");
+                            ContenedorTags.innerHTML="";
+                            PCOVAR_ValorTag=$("#"+ID_HTML_Campo).val();
+                            if(PCOVAR_ValorTag.length > 1 && !PCOVAR_ArregloTags.includes(PCOVAR_ValorTag)){
+                                    PCOVAR_ValorTag.split(",").forEach(PCOVAR_ValorTag => {
+                                        PCOVAR_ValorTag=PCOVAR_ValorTag.replace(/\n/g, "");
+                                        PCOVAR_ArregloTags.push(PCOVAR_ValorTag);
+                                        console.log(PCOVAR_ArregloTags);
+                                        createTag(PCOVAR_ValorTag);
+                                    });
+                            }
+                    	}
+
+                    function removeTag(tag){
+                        let index = PCOVAR_ArregloTags.indexOf(tag);
+                        PCOVAR_ArregloTags = [...PCOVAR_ArregloTags.slice(0, index), ...PCOVAR_ArregloTags.slice(index + 1)];
+                        PCOJS_RefrescarValoresTag("'.$registro_campos["id_html"].'");
+                        
+                        LimpiarTodo("'.$registro_campos["id_html"].'");
+                        RegenerarDesdeValor("'.$registro_campos["id_html"].'");
+                    }
+                    
+                    function PCOJS_RefrescarValoresTag(ID_HTML_Campo)
+                    	{
+                    		$("#"+ID_HTML_Campo).val("");
+                    		$("#"+ID_HTML_Campo).val(  PCOVAR_ArregloTags.join(",")  );
+                    		$("#ConteoElementosTag").html(""+PCOVAR_ArregloTags.length);
+                    	}
+                    
+                    function PCOJS_AgregarTag(e,ByPass){
+                        if(e.key=="Enter" || ByPass)
+                        {
+                            PCOVAR_ValorTag=e.target.value;
+                            PCOVAR_ValorTag=PCOVAR_ValorTag.replace(/\n/g, "");
+
+                            if(PCOVAR_ValorTag.length > 1 && PCOVAR_ArregloTags.includes(PCOVAR_ValorTag)==false){
+                                    PCOVAR_ValorTag.split(",").forEach(PCOVAR_ValorTag => {
+                                    
+                                        if (PCOVAR_ArregloTags.includes(PCOVAR_ValorTag)==false)
+                                        {
+                                        PCOVAR_ArregloTags.push(PCOVAR_ValorTag);
+                                        createTag(PCOVAR_ValorTag);
+                                        }
+                                    });
+                            }
+                            e.target.value = "";
+                        }
+                        PCOJS_RefrescarValoresTag("'.$registro_campos["id_html"].'");
+                    }
+                
+                
+                
+                $(function() {
+                    RegenerarDesdeValor("'.$registro_campos["id_html"].'");
+                    $("#ConteoElementosTag").html(""+PCOVAR_ArregloTags.length);
+                });
+                
+                
+                </script>
+                ';
+            }
+
+
+
+
         //Agrega etiqueta del campo si es diferente de vacio
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
             $salida.='<label for="'.$registro_campos["campo"].'">'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["titulo"],$registro_datos_formulario).':</label>';
 		//Abre el marco del control de datos
 		$salida.='<div class="form-group input-group">';
 		// Muestra el campo
-		$salida.= '<textarea tabindex="'.$TabIndex_Elemento.'" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class="form-control" '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.'  '.$cadena_validacion.' >'.$cadena_valor.'</textarea>';
+		$salida.= $PCO_JavaScriptTags.$PCO_PreDIVTags.'<textarea '.$PCO_Tags_OcultamientoCampo.' tabindex="'.$TabIndex_Elemento.'" id="'.$registro_campos["id_html"].'" name="'.$registro_campos["campo"].'" '.$cadena_longitud_visual.' class=" form-control " '.$registro_campos["solo_lectura"].'  '.$registro_campos["personalizacion_tag"].' '.$cadena_placeholder.'  '.$cadena_validacion.' >'.$cadena_valor.'</textarea>';
 		//Si hay algun indicador adicional del campo abre los add-ons
         if ($registro_campos["valor_unico"] == "1" || $registro_campos["obligatorio"] || $registro_campos["ayuda_titulo"] != "")
             {
