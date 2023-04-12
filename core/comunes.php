@@ -6098,7 +6098,14 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
     	    {
     			$valor_variable_escapada=$registro_datos_formulario["$nombre_campo"];
     			//$valor_variable_escapada=addslashes ( '"'.$valor_variable_escapada.'"' );
-    			//$valor_variable_escapada=htmlentities($valor_variable_escapada); //Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
+    			//$valor_variable_escapada=urlencode($valor_variable_escapada);
+    			
+    			
+    			//Agregado 23.4
+    			$valor_variable_escapada=htmlentities($valor_variable_escapada); //Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
+    			//Metodo Opcional: Determinar si la cadena tiene comilla doble y encerrar en comilla simple.  Determinar si tiene comilla simple y encerrar en dobles.
+    			
+    			
     			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=' value="'.$valor_variable_escapada.'" ';
     	    }
 
