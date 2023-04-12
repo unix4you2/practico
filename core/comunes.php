@@ -6102,7 +6102,7 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
     			
     			
     			//Agregado 23.4
-    			$valor_variable_escapada=htmlentities($valor_variable_escapada); //Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
+    			$valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_QUOTES); //Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
     			//Metodo Opcional: Determinar si la cadena tiene comilla doble y encerrar en comilla simple.  Determinar si tiene comilla simple y encerrar en dobles.
     			
     			
