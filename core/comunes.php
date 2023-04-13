@@ -6351,7 +6351,7 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
         //$registro_campos["personalizacion_tag"]
         if (strstr($registro_campos["personalizacion_tag"],"PCO_Tags")!=FALSE )
             {
-                $PCO_Tags_OcultamientoCampo=" style='visibility:hidden;' ";
+                $PCO_Tags_OcultamientoCampo=" style='visibility:hidden; height:0px;' ";
                 $PCO_PreDIVTags='
                     <div id="PCODIV_ContenedorTAGS_'.$registro_campos["id_html"].'" style="border:solid; border-width:1px; border-color:lightgray;" >
                         <div id="PCODIV_Tags_'.$registro_campos["id_html"].'"></div>
@@ -8272,8 +8272,8 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                                 $CadenaDetalleEventos.="<li><b>".$RegistroEventos["evento"]."</b> (".$RegistroEventos["bytes_codigo"]." bytes)";
                                 $ConteoEventos++;
                             }
-                        $ComplementoBotonEventosAntiguoDEPRECATED='<br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)'.$CadenaDetalleEventos.'" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&pestana_activa_editor=eventos_objeto-tab&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>';
-                        $ComplementoBotonEventos='<a class="btn btn-xs btn-warning" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.'" href=\'javascript:PCOJS_ActualizarControlFormulario('.$registro_campos["formulario"].','.$registro_campos["id"].',3);\'><i class="fa fa-fw fa-pencil"></i></a>';
+                        $ComplementoBotonEventos_DEPRECATED='<br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)'.$CadenaDetalleEventos.'" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&campo='.$registro_campos["id"].'&formulario='.$registro_campos["formulario"].'&popup_activo=FormularioCampos&pestana_activa_editor=eventos_objeto-tab&nombre_tabla='.$registro_formulario["tabla_datos"].'\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>';
+                        $ComplementoBotonEventos='<br><a class="btn btn-xs btn-default" data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Evento.'(s)'.$CadenaDetalleEventos.'" href=\'javascript:PCOJS_ActualizarControlFormulario('.$registro_campos["formulario"].','.$registro_campos["id"].',3);\'><i class="fa fa-bolt fa-fw texto-blink"></i></a>';
                     }
 
                 //Si el elemento es un formulario o informe embebido busca ademas el nombre del mismo
