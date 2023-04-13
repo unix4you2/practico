@@ -6356,7 +6356,7 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
                     <div id="PCODIV_ContenedorTAGS_'.$registro_campos["id_html"].'" style="border:solid; border-width:1px; border-color:lightgray;" >
                         <div id="PCODIV_Tags_'.$registro_campos["id_html"].'"></div>
                         <input type="text" name="PCOVAR_CajaEntradaTags_'.$registro_campos["id_html"].'" id="PCOVAR_CajaEntradaTags_'.$registro_campos["id_html"].'" placeholder=" >>> Ingrese valores separados por coma" style="font-size:10px; margin-top:3px; background-color:transparent; border-width:0px; width:100%;"  onblur="PCOJS_GenerarCadenaTags_'.$registro_campos["id_html"].'(event,true)" onkeydown="PCOJS_GenerarCadenaTags_'.$registro_campos["id_html"].'(event,false)" onkeyup="PCOJS_GenerarCadenaTags_'.$registro_campos["id_html"].'(event,false)">
-                        <div align="right" style="font-size:10px; color:gray;">Total elementos: <b><div id="PCODIV_ConteoTags_'.$registro_campos["id_html"].'" style="display:inline">0</div></b>&nbsp;</div>
+                        <div align="right" style="font-size:10px; color:gray;"><i class="fa fa-tag"></i> Total elementos: <b><div id="PCODIV_ConteoTags_'.$registro_campos["id_html"].'" style="display:inline">0</div></b>&nbsp;</div>
                     </div>';
 
                 $PCO_JavaScriptTags='
@@ -6366,7 +6366,7 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
 
                         function PCOJS_AgregarTag_'.$registro_campos["id_html"].'(Texto){
                         	PCODIV_Tags_'.$registro_campos["id_html"].'=document.getElementById("PCODIV_Tags_'.$registro_campos["id_html"].'");
-                        	PCODIV_Tags_'.$registro_campos["id_html"].'.innerHTML=PCODIV_Tags_'.$registro_campos["id_html"].'.innerHTML+\'&nbsp;<div class="badge">\'+Texto+\' <a><i style="color:white;" class="fa fa-times-circle" onclick="PCOJS_RemoverTag_'.$registro_campos["id_html"].'(\\\'\'+Texto+\'\\\');"></i></a></div>\';
+                        	PCODIV_Tags_'.$registro_campos["id_html"].'.innerHTML=PCODIV_Tags_'.$registro_campos["id_html"].'.innerHTML+\'&nbsp;<div class="badge">\'+Texto+\' &nbsp;<a><i style="color:white;" class="fa fa-times-circle" onclick="PCOJS_RemoverTag_'.$registro_campos["id_html"].'(\\\'\'+Texto+\'\\\');"></i></a></div>\';
                         }
                         
                         function PCOJS_LimpiarTags_'.$registro_campos["id_html"].'(ID_HTML_Campo)
