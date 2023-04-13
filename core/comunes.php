@@ -6352,107 +6352,91 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
         if (strstr($registro_campos["personalizacion_tag"],"PCO_Tags")!=FALSE )
             {
                 $PCO_Tags_OcultamientoCampo=" style='visibility:hidden;' ";
-                $PCO_PreDIVTags=' <div id="Todo" style="border:solid; border-width:1px; border-color:lightgray;" ><div id="ContenedorTags" class="tags"> </div>
-                
-                
-                <input type="text" name="textarea_tags" id="textarea_tags" placeholder=" >>> Ingrese Tags separados por coma" style="font-size:10px; margin-top:3px; background-color:transparent; border-width:0px; width:100%;"  onblur="PCOJS_AgregarTag(event,true)" onkeydown="PCOJS_AgregarTag(event,false)" onkeyup="PCOJS_AgregarTag(event,false)">
-                <div align="right" style="font-size:10px; color:gray;">Total elementos: <b><div id="ConteoElementosTag" style="display:inline">0</div></b>&nbsp;</div>
-                
-                </div>';
+                $PCO_PreDIVTags='
+                    <div id="PCODIV_ContenedorTAGS_'.$registro_campos["id_html"].'" style="border:solid; border-width:1px; border-color:lightgray;" >
+                        <div id="PCODIV_Tags_'.$registro_campos["id_html"].'"></div>
+                        <input type="text" name="PCOVAR_CajaEntradaTags_'.$registro_campos["id_html"].'" id="PCOVAR_CajaEntradaTags_'.$registro_campos["id_html"].'" placeholder=" >>> Ingrese valores separados por coma" style="font-size:10px; margin-top:3px; background-color:transparent; border-width:0px; width:100%;"  onblur="PCOJS_GenerarCadenaTags_'.$registro_campos["id_html"].'(event,true)" onkeydown="PCOJS_GenerarCadenaTags_'.$registro_campos["id_html"].'(event,false)" onkeyup="PCOJS_GenerarCadenaTags_'.$registro_campos["id_html"].'(event,false)">
+                        <div align="right" style="font-size:10px; color:gray;">Total elementos: <b><div id="PCODIV_ConteoTags_'.$registro_campos["id_html"].'" style="display:inline">0</div></b>&nbsp;</div>
+                    </div>';
 
-                
-                
                 $PCO_JavaScriptTags='
-                
-                <script language="JavaScript">
+                    <script language="JavaScript">
+                        //Define arreglo para almacenar todos los Tags
+                        let PCOVAR_ArregloTags_'.$registro_campos["id_html"].' = [];
 
-                    let PCOVAR_ArregloTags = [];
-                    
-                    
-                    function createTag(EtiquetaTagRecibida){
-                    	ContenedorTags=document.getElementById("ContenedorTags");
-                    	ContenedorTags.innerHTML=ContenedorTags.innerHTML+\'&nbsp;<div class="badge">\'+EtiquetaTagRecibida+\' <a><i style="color:white;" class="fa fa-times-circle" onclick="removeTag(\\\'\'+EtiquetaTagRecibida+\'\\\');"></i></a></div>\';
-                    }
-                    
-                    function LimpiarTodo(ID_HTML_Campo)
-                    	{
-                            //$("#"+ID_HTML_Campo).val("");
-                    		//$("#ContenedorTags").html("");
-                    		ContenedorTags=document.getElementById("ContenedorTags");
-                    		ContenedorTags.innerHTML="";
-                    		RegenerarDesdeValor(ID_HTML_Campo);
-                    	}
-                    
-                    function RegenerarDesdeValor(ID_HTML_Campo)
-                    	{
-                    	    //Limpia el arreglo actual de los tags y lo genera desde cero usando el valor del textarea
-                    	    PCOVAR_ArregloTags.length = 0;
-                    	
-                            //$("#ContenedorTags").html("");
-                            ContenedorTags=document.getElementById("ContenedorTags");
-                            ContenedorTags.innerHTML="";
-                            PCOVAR_ValorTag=$("#"+ID_HTML_Campo).val();
-                            if(PCOVAR_ValorTag.length > 1 && !PCOVAR_ArregloTags.includes(PCOVAR_ValorTag)){
-                                    PCOVAR_ValorTag.split(",").forEach(PCOVAR_ValorTag => {
-                                        PCOVAR_ValorTag=PCOVAR_ValorTag.replace(/\n/g, "");
-                                        PCOVAR_ArregloTags.push(PCOVAR_ValorTag);
-                                        console.log(PCOVAR_ArregloTags);
-                                        createTag(PCOVAR_ValorTag);
-                                    });
-                            }
-                    	}
-
-                    function removeTag(tag){
-                        let index = PCOVAR_ArregloTags.indexOf(tag);
-                        PCOVAR_ArregloTags = [...PCOVAR_ArregloTags.slice(0, index), ...PCOVAR_ArregloTags.slice(index + 1)];
-                        PCOJS_RefrescarValoresTag("'.$registro_campos["id_html"].'");
-                        
-                        LimpiarTodo("'.$registro_campos["id_html"].'");
-                        RegenerarDesdeValor("'.$registro_campos["id_html"].'");
-                    }
-                    
-                    function PCOJS_RefrescarValoresTag(ID_HTML_Campo)
-                    	{
-                    		$("#"+ID_HTML_Campo).val("");
-                    		$("#"+ID_HTML_Campo).val(  PCOVAR_ArregloTags.join(",")  );
-                    		$("#ConteoElementosTag").html(""+PCOVAR_ArregloTags.length);
-                    	}
-                    
-                    function PCOJS_AgregarTag(e,ByPass){
-                        if(e.key=="Enter" || ByPass)
-                        {
-                            PCOVAR_ValorTag=e.target.value;
-                            PCOVAR_ValorTag=PCOVAR_ValorTag.replace(/\n/g, "");
-
-                            if(PCOVAR_ValorTag.length > 1 && PCOVAR_ArregloTags.includes(PCOVAR_ValorTag)==false){
-                                    PCOVAR_ValorTag.split(",").forEach(PCOVAR_ValorTag => {
-                                    
-                                        if (PCOVAR_ArregloTags.includes(PCOVAR_ValorTag)==false)
-                                        {
-                                        PCOVAR_ArregloTags.push(PCOVAR_ValorTag);
-                                        createTag(PCOVAR_ValorTag);
-                                        }
-                                    });
-                            }
-                            e.target.value = "";
+                        function PCOJS_AgregarTag_'.$registro_campos["id_html"].'(Texto){
+                        	PCODIV_Tags_'.$registro_campos["id_html"].'=document.getElementById("PCODIV_Tags_'.$registro_campos["id_html"].'");
+                        	PCODIV_Tags_'.$registro_campos["id_html"].'.innerHTML=PCODIV_Tags_'.$registro_campos["id_html"].'.innerHTML+\'&nbsp;<div class="badge">\'+Texto+\' <a><i style="color:white;" class="fa fa-times-circle" onclick="PCOJS_RemoverTag_'.$registro_campos["id_html"].'(\\\'\'+Texto+\'\\\');"></i></a></div>\';
                         }
-                        PCOJS_RefrescarValoresTag("'.$registro_campos["id_html"].'");
-                    }
-                
-                
-                
-                $(function() {
-                    RegenerarDesdeValor("'.$registro_campos["id_html"].'");
-                    $("#ConteoElementosTag").html(""+PCOVAR_ArregloTags.length);
-                });
-                
-                
-                </script>
-                ';
+                        
+                        function PCOJS_LimpiarTags_'.$registro_campos["id_html"].'(ID_HTML_Campo)
+                        	{
+                        		PCODIV_Tags_'.$registro_campos["id_html"].'=document.getElementById("PCODIV_Tags_'.$registro_campos["id_html"].'");
+                        		PCODIV_Tags_'.$registro_campos["id_html"].'.innerHTML="";
+                        		PCOJS_RegenerarTagsDesdeValor_'.$registro_campos["id_html"].'(ID_HTML_Campo);
+                        	}
+                        
+                        function PCOJS_RegenerarTagsDesdeValor_'.$registro_campos["id_html"].'(ID_HTML_Campo)
+                        	{
+                        	    //Limpia el arreglo actual de los tags y lo genera desde cero usando el valor del textarea
+                        	    PCOVAR_ArregloTags_'.$registro_campos["id_html"].'.length = 0;
+                        	
+                                PCODIV_Tags_'.$registro_campos["id_html"].'=document.getElementById("PCODIV_Tags_'.$registro_campos["id_html"].'");
+                                PCODIV_Tags_'.$registro_campos["id_html"].'.innerHTML="";
+                                PCOVAR_ValorTag=$("#"+ID_HTML_Campo).val();
+                                if(PCOVAR_ValorTag.length > 1 && !PCOVAR_ArregloTags_'.$registro_campos["id_html"].'.includes(PCOVAR_ValorTag)){
+                                        PCOVAR_ValorTag.split(",").forEach(PCOVAR_ValorTag => {
+                                            PCOVAR_ValorTag=PCOVAR_ValorTag.replace(/\n/g, "");
+                                            PCOVAR_ArregloTags_'.$registro_campos["id_html"].'.push(PCOVAR_ValorTag);
+                                            PCOJS_AgregarTag_'.$registro_campos["id_html"].'(PCOVAR_ValorTag);
+                                        });
+                                }
+                        	}
+    
+                        function PCOJS_RemoverTag_'.$registro_campos["id_html"].'(Texto){
+                            let IndiceTag = PCOVAR_ArregloTags_'.$registro_campos["id_html"].'.indexOf(Texto);
+                            PCOVAR_ArregloTags_'.$registro_campos["id_html"].' = [...PCOVAR_ArregloTags_'.$registro_campos["id_html"].'.slice(0, IndiceTag), ...PCOVAR_ArregloTags_'.$registro_campos["id_html"].'.slice(IndiceTag + 1)];
+                            PCOJS_RefrescarValoresTag_'.$registro_campos["id_html"].'("'.$registro_campos["id_html"].'");
+                            
+                            PCOJS_LimpiarTags_'.$registro_campos["id_html"].'("'.$registro_campos["id_html"].'");
+                            PCOJS_RegenerarTagsDesdeValor_'.$registro_campos["id_html"].'("'.$registro_campos["id_html"].'");
+                        }
+                        
+                        function PCOJS_RefrescarValoresTag_'.$registro_campos["id_html"].'(ID_HTML_Campo)
+                        	{
+                        		$("#"+ID_HTML_Campo).val("");
+                        		$("#"+ID_HTML_Campo).val(  PCOVAR_ArregloTags_'.$registro_campos["id_html"].'.join(",")  );
+                        		$("#PCODIV_ConteoTags_'.$registro_campos["id_html"].'").html(""+PCOVAR_ArregloTags_'.$registro_campos["id_html"].'.length);
+                        	}
+                        
+                        function PCOJS_GenerarCadenaTags_'.$registro_campos["id_html"].'(e,ByPass){
+                            if(e.key=="Enter" || e.key=="," || ByPass)
+                            {
+                                PCOVAR_ValorTag=e.target.value;
+                                PCOVAR_ValorTag=PCOVAR_ValorTag.replace(/\n/g, "");
+    
+                                if(PCOVAR_ValorTag.length > 1 && PCOVAR_ArregloTags_'.$registro_campos["id_html"].'.includes(PCOVAR_ValorTag)==false){
+                                        PCOVAR_ValorTag.split(",").forEach(PCOVAR_ValorTag => {
+                                        
+                                            if (PCOVAR_ArregloTags_'.$registro_campos["id_html"].'.includes(PCOVAR_ValorTag)==false)
+                                            {
+                                            PCOVAR_ArregloTags_'.$registro_campos["id_html"].'.push(PCOVAR_ValorTag);
+                                            PCOJS_AgregarTag_'.$registro_campos["id_html"].'(PCOVAR_ValorTag);
+                                            }
+                                        });
+                                }
+                                e.target.value = "";
+                            }
+                            PCOJS_RefrescarValoresTag_'.$registro_campos["id_html"].'("'.$registro_campos["id_html"].'");
+                        }
+
+                        //Hace los llamados iniciales para regenerar en los casos en que se recupera un registro y actualizar el conteo
+                        $(function() {
+                            PCOJS_RegenerarTagsDesdeValor_'.$registro_campos["id_html"].'("'.$registro_campos["id_html"].'");
+                            $("#PCODIV_ConteoTags_'.$registro_campos["id_html"].'").html(""+PCOVAR_ArregloTags_'.$registro_campos["id_html"].'.length);
+                        });
+                    </script>';
             }
-
-
-
 
         //Agrega etiqueta del campo si es diferente de vacio
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
