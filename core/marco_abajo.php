@@ -168,14 +168,6 @@
 
     <!-- Plugins JavaScript requeridos por DateTimePicker -->
     <script src="inc/bootstrap/js/plugins/datepicker/bootstrap-datetimepicker.min.js"></script>
-
-    <!-- Morris Charts JavaScript -->
-    <?php
-        //Carga solo Morris cuando es pagina principal por ahora para evitar conflictos con DatePicker
-        if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$PCOSESS_SesionAbierta && @$PCO_Accion=="PCO_VerMenu")
-        // Incluye archivo con las consultas y datos para ser diagramados por Morris
-            include_once("core/marco_admin_morris.php");
-    ?>
     
     <!-- Gantt -->
     <script src="inc/jquery/plugins/gantt-master/js/jquery.fn.gantt.js"></script>
