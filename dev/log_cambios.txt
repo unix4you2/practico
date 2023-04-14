@@ -478,6 +478,10 @@ UPDATE core_opcionlista SET identificador_lista='exportaciones_informe_DEPRECATE
 ALTER TABLE core_formulario_objeto CHANGE columna PCOBD_Columna int(1) NULL DEFAULT '1';
 ALTER TABLE core_formulario_objeto CHANGE peso PCOBD_Peso int(1) NULL DEFAULT '1';
 
+ALTER TABLE core_kanban
+ADD INDEX fecha (fecha),
+ADD INDEX fecha_inicio (fecha_inicio);
+ALTER TABLE core_kanban ADD INDEX categoria(categoria);
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');

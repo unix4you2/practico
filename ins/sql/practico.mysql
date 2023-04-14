@@ -566,6 +566,7 @@ ADD INDEX archivado (archivado);
 ALTER TABLE core_kanban
 ADD INDEX fecha (fecha),
 ADD INDEX fecha_inicio (fecha_inicio);
+ALTER TABLE core_kanban ADD INDEX categoria(categoria);
 
 
 DROP TABLE IF EXISTS core_opcionlista;
