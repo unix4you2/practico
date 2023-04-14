@@ -503,7 +503,9 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
             global $MULTILANG_BtnEstiloPredeterminado,$MULTILANG_BtnEstiloPrimario,$MULTILANG_BtnEstiloFinalizado,$MULTILANG_BtnEstiloInformacion,$MULTILANG_BtnEstiloAdvertencia,$MULTILANG_BtnEstiloPeligro;
             global $MULTILANG_AsignadoA,$MULTILANG_SeleccioneUno,$MULTILANG_AsignadoADes,$MULTILANG_Peso,$MULTILANG_Prioridad;
             global $CadenaTablerosDisponibles,$MULTILANG_Actualizar,$MULTILANG_InfDataTableRegTotal,$MULTILANG_Tareas,$MULTILANG_ListaCategorias;
-
+            
+            global $CadenaFiltradoTareasKanban;
+            
             //Busca las columnas definidas en el tablero
             $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo FROM ".$TablasCore."kanban WHERE id='$ID_TableroKanban' ")->fetch();
             $ArregloColumnasTablero=explode(",",$ResultadoColumnas["descripcion"]);
@@ -623,12 +625,12 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                     <tr>
                         <td valign=top align=center>
                             <b><i class='fa fa-tags fa-fw fa-2x'></i>Actividades por categor&iacute;a / Activities by cathegory</b><br>";
-                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT categoria as '{$MULTILANG_ListaCategorias}', COUNT(*) as '{$MULTILANG_Tareas}'  FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' GROUP BY categoria ORDER BY categoria ");
+                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT categoria as '{$MULTILANG_ListaCategorias}', COUNT(*) as '{$MULTILANG_Tareas}'  FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' {$CadenaFiltradoTareasKanban} GROUP BY categoria ORDER BY categoria ");
         echo "          </td>
                         <td>&nbsp;&nbsp;</td>
                         <td valign=top align=center>
                             <b><i class='fa fa-user fa-fw fa-2x'></i>Tareas por usuario / Tasks by user</b><br>";
-                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT asignado_a as '{$MULTILANG_AsignadoA}', COUNT(*) as '{$MULTILANG_Tareas}' FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' GROUP BY asignado_a ORDER BY asignado_a ");
+                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT asignado_a as '{$MULTILANG_AsignadoA}', COUNT(*) as '{$MULTILANG_Tareas}' FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' {$CadenaFiltradoTareasKanban} GROUP BY asignado_a ORDER BY asignado_a ");
         echo "          </td>
                     </tr>
                 </table>";
@@ -670,11 +672,11 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                                             //echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='$(\"#myModalActividadKanban$ID_TableroKanban\").modal(\"show\"); document.datosfield$ID_TableroKanban.columna.value=$ConteoColumna;'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
                                             echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='PCO_CargarPopUP($ID_TableroKanban,$ConteoColumna,0);'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
                                             echo "<br>";
-                                            
+
                                             echo "<div id='MarcoTareasColumna$ConteoColumna'>
                                             <br><br><div id='ColumnaKanbanMarcoArrastre".$ConteoColumna."'></div>";
                                             //Busca las tarjetas de la columna siempre y cuando no esten ya archivadas
-                                            $ResultadoTareas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND columna=$ConteoColumna AND tablero='$ID_TableroKanban' ORDER BY peso ASC, id ASC ");
+                                            $ResultadoTareas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND columna=$ConteoColumna AND tablero='$ID_TableroKanban' {$CadenaFiltradoTareasKanban} ORDER BY peso ASC, id ASC ");
                                             while ($RegistroTareas=$ResultadoTareas->fetch())
                                                 echo PCO_PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban,$ResultadoColumnas);
                                     echo "</div>";
@@ -794,7 +796,8 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                         <form name='recarga_tablero_kanban' action='$ArchivoCORE' method='POST' style='font-size:13px; display: inline!important;'>
                             <input type='Hidden' name='PCO_Accion' value='PCO_ExplorarTablerosGantt'>
                             <input type='Hidden' name='PCO_Valor' value='{$PCO_Valor}'>
-                            <input type='Hidden' name='CadenaTablerosAVisualizar' value=''>
+                            <input type='Hidden' name='CadenaTablerosAVisualizar' value='{$CadenaTablerosAVisualizar}'>
+                            <input type='Hidden' name='CadenaFiltradoTareasKanban' value=''>
                             <input placeholder='Filas Gantt' type='number' step='1' min='5' class='btn btn-sm' size='5' name='PCO_CantidadFilasGantt' id='PCO_CantidadFilasGantt' value='{$PCO_CantidadFilasGantt}' style='display:inline !important; width:100px;'>
 
                             Navegaci&oacute;n:<select name='PCO_TipoScrollGantt' class='btn btn-sm'>
@@ -886,7 +889,7 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                         //Define titulo de columna actual
                         $Columna="<div class='btn btn-xs btn-success' onclick='PCO_CargarPopUP({$PCO_Valor},{$PosicionColumna},0);'><i class='fa fa-plus fa-fw' ></i></div> ".$Columna;
 
-                        $TareasTablero=PCO_EjecutarSQL("SELECT * FROM {$TablasCore}kanban WHERE archivado = 0 AND tablero = '{$PCO_Valor}' AND columna='{$PosicionColumna}' ORDER BY peso, id  ");
+                        $TareasTablero=PCO_EjecutarSQL("SELECT * FROM {$TablasCore}kanban WHERE archivado = 0 AND tablero = '{$PCO_Valor}' AND columna='{$PosicionColumna}'  ORDER BY peso, id  ");
                         while ($RegistroTarea=$TareasTablero->fetch())
                             {
                                 //Define los valores a presentar en el grafico                                
@@ -1004,7 +1007,8 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
 
         echo "<form name='recarga_tablero_kanban' action='$ArchivoCORE' method='POST' style='display: inline!important;'>
             <input type='Hidden' name='PCO_Accion' value='PCO_ExplorarTablerosKanban'>
-            <input type='Hidden' name='CadenaTablerosAVisualizar' value=''>
+            <input type='Hidden' name='CadenaTablerosAVisualizar' value='{$CadenaTablerosAVisualizar}'>
+            <input type='Hidden' name='CadenaFiltradoTareasKanban' value=''>
             </form>";
     ?>
 
