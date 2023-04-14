@@ -117,10 +117,12 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
     <div class="well well-sm" style="margin-bottom:0px;">
 
             <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <h3 class="page-header" style="margin-top:0px;"><b><i class="fa fa-dashboard fa-fw"></i> <?php echo $MULTILANG_Aplicacion; ?></b> <i>(<?php echo $MULTILANG_MonEstado; ?>)</i></h3>
                 </div>
-                <!-- /.col-lg-12 -->
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                    <div class="pull-right" style="margin-top:0px;"><a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-42:0" class="btn btn-info"><i class="fa fa-bar-chart-o fa-fw"></i> Ver anal&iacute;tica</a></div>
+                </div>
             </div>
             <div class="row">
                 <?php

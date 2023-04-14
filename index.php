@@ -74,8 +74,10 @@
         //if($_SERVER['REQUEST_METHOD'] == "OPTIONS") { die(); }
 	header('Content-type: text/html; charset=utf-8');
 	header('X-XSS-Protection:0');
+    //Cabeceras para evitar el error de err_cache_miss al hacer clic en el boton de atras del navegador
+    //header('Cache-Control: no cache');            //No guarda cache de sitio
+    //session_cache_limiter('private_no_expire');   // Define el limitador de cache actual.  El valor public tambien opera
 
-    
     // Inicio de la sesion
     @session_start();
  
