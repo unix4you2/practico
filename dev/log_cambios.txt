@@ -483,6 +483,8 @@ ADD INDEX fecha (fecha),
 ADD INDEX fecha_inicio (fecha_inicio);
 ALTER TABLE core_kanban ADD INDEX categoria(categoria);
 
+ALTER TABLE core_kanban CHANGE categoria categoria varchar(255) COLLATE 'utf8_general_ci' DEFAULT '';
+
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
 "

@@ -582,7 +582,7 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
 
         echo "
             <!-- Barra de herramientas del tablero -->
-            <div class='well well-sm'>
+            <div class='wesll wesll-sm  alert alert-info'>
                 <div class='row'>
                     <div align=center style='font-size:18px;' class='col col-md-12 col-sm-12 col-lg-12 col-xs-12'>
                         <i class='fa fa-sticky-note text-orange' style='color:orange'></i> Kanban <b>".$ResultadoColumnas["titulo"]." </b><i>(ID: $ID_TableroKanban $MULTILANG_Tareas: $CantidadTareasTotal)</i>
@@ -610,7 +610,13 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                 </div>
             </div>";
 
-
+        //Carga formulario para construir variable general de filtrado para las tareas a visualizar
+        echo "<div class='well well-sm'>";
+        global $PCOVAR_NombreTableroKanban;
+        $PCOVAR_NombreTableroKanban=$ResultadoColumnas["titulo"];
+        PCO_CargarFormulario(-41,0);
+        echo "</div>";
+        
         //Estadisticas basicas del tablero 
         echo "
                 <table width='100%' border=0 cellspacing=15 cellpadding=15>
@@ -979,6 +985,7 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
 */
 if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
     {
+        
         //Si recibe un ID de tablero desde el informe de resumen entonces lo usa para ser visualizado
         if ($PCO_Valor!="" || $PCOSESS_TableroKanbanActivo!="")
             {

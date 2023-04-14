@@ -530,7 +530,7 @@ CREATE TABLE core_kanban (
   titulo varchar(255),
   descripcion text,
   asignado_a varchar(250),
-  categoria varchar(255),
+  categoria varchar(255) NOT NULL DEFAULT '',
   columna int(11),
   peso int(11),
   estilo varchar(15),
