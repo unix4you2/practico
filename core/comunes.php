@@ -3597,9 +3597,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "PCO_EliminarDatosFormulario")		$retorno = 1;
 		if ($PCO_Accion== "PCO_ActualizarDatosFormulario")		$retorno = 1;
 		if ($PCO_Accion== "PCO_EjecutarPostAccionForm")		    $retorno = 1;
-		if ($PCO_Accion== "PCO_ActualizarJavaEvento")		    $retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_EditarEventoObjeto")		        $retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
-		if ($PCO_Accion== "PCO_EliminarEventoObjeto")		    $retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_ActualizarFormulario")			$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_CopiarFormulario")				$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
 		if ($PCO_Accion== "PCO_DefinirCopiaFormularios")		$retorno = PCO_PermisoAgregadoAccion("PCO_AdministrarFormularios");
@@ -6351,7 +6349,7 @@ function PCO_CargarObjetoTextoLargo($registro_campos,$registro_datos_formulario)
         //$registro_campos["personalizacion_tag"]
         if (strstr($registro_campos["personalizacion_tag"],"PCO_Tags")!=FALSE )
             {
-                $PCO_Tags_OcultamientoCampo=" style='visibility:hidden; height:0px;' ";
+                $PCO_Tags_OcultamientoCampo=" style='visibility:hidden; height:0px; ' ";
                 $PCO_PreDIVTags='
                     <div id="PCODIV_ContenedorTAGS_'.$registro_campos["id_html"].'" style="border:solid; border-width:1px; border-color:lightgray;" >
                         <div id="PCODIV_Tags_'.$registro_campos["id_html"].'"></div>
@@ -8488,9 +8486,9 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
             {
                 //Genera llaves de apertura unicos para los archivos de pcoder 
                 //FORMA 1: Enlaces estandar (Modo de emergencia o depuracion de PCoder)
-                $PCO_EnlaceScriptPRE ="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&Origen_Archivo=B&Tabla_Archivo=core_formulario&Campo_Archivo=pre_script&PCODER_extension=php&PCODER_ModoEditor=PHP&PCODER_TipoMenu=Iconos&PCODER_EstadoSimple=1&Llave_Registro={$formulario}&PCODER_Titulo=Script_PRE_Formulario_{$formulario}_(PHP)','PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";  //ANTES  width='+screen.width+', height='+screen.height);
-                $PCO_EnlaceScriptPOST="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&Origen_Archivo=B&Tabla_Archivo=core_formulario&Campo_Archivo=post_script&PCODER_extension=php&PCODER_ModoEditor=PHP&PCODER_TipoMenu=Iconos&PCODER_EstadoSimple=1&Llave_Registro={$formulario}&PCODER_Titulo=Script_POST_Formulario_{$formulario}_(PHP)','PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";  //ANTES  width='+screen.width+', height='+screen.height);
-                $PCO_EnlaceScriptJS  ="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&Origen_Archivo=B&Tabla_Archivo=core_formulario&Campo_Archivo=javascript&PCODER_extension=js&PCODER_ModoEditor=JavaScript&PCODER_TipoMenu=Iconos&PCODER_EstadoSimple=1&Llave_Registro={$formulario}&PCODER_Titulo=Script_JS_Formulario_{$formulario}_(JS)' ,'PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";  //ANTES  width='+screen.width+', height='+screen.height);
+                // $PCO_EnlaceScriptPRE ="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&Origen_Archivo=B&Tabla_Archivo=core_formulario&Campo_Archivo=pre_script&PCODER_extension=php&PCODER_ModoEditor=PHP&PCODER_TipoMenu=Iconos&PCODER_EstadoSimple=1&Llave_Registro={$formulario}&PCODER_Titulo=Script_PRE_Formulario_{$formulario}_(PHP)','PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";  //ANTES  width='+screen.width+', height='+screen.height);
+                // $PCO_EnlaceScriptPOST="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&Origen_Archivo=B&Tabla_Archivo=core_formulario&Campo_Archivo=post_script&PCODER_extension=php&PCODER_ModoEditor=PHP&PCODER_TipoMenu=Iconos&PCODER_EstadoSimple=1&Llave_Registro={$formulario}&PCODER_Titulo=Script_POST_Formulario_{$formulario}_(PHP)','PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";  //ANTES  width='+screen.width+', height='+screen.height);
+                // $PCO_EnlaceScriptJS  ="javascript:PCO_VentanaPopup('index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-33:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&Origen_Archivo=B&Tabla_Archivo=core_formulario&Campo_Archivo=javascript&PCODER_extension=js&PCODER_ModoEditor=JavaScript&PCODER_TipoMenu=Iconos&PCODER_EstadoSimple=1&Llave_Registro={$formulario}&PCODER_Titulo=Script_JS_Formulario_{$formulario}_(JS)' ,'PcoderNG','toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=800, height=600');";  //ANTES  width='+screen.width+', height='+screen.height);
                 //FORMA 2: Con funcion interna de apertura - Sobreescribe FORMA 1 - Comentar para pasar a modo de emergencia
                 $TituloPCoder_COMPLEMENTO=" - <font color=white>".$registro_formulario["titulo"]."</font> ";
                 $LlaveParcial_FirmaSistema=substr($LlaveDePaso,-3);

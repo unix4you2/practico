@@ -880,63 +880,6 @@
 ########################################################################
 ########################################################################
 /*
-	Function: PCO_EditarEventoObjeto
-	Edita el evento asociado a un objeto determinado en una ventana independiente que se lanza como popup
-*/
-	if ($PCO_Accion=="PCO_EditarEventoObjeto")
-		{
-			//Busca si ya existe un evento del mismo tipo para ese objeto
-			$registro_evento_previo=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."evento_objeto WHERE objeto=? AND evento=? ","$id_objeto_evento$_SeparadorCampos_$evento_objeto")->fetch();
-            $IdEventoPrevio=$registro_evento_previo["id"];
-            $JavaScriptEventoPrevio=$registro_evento_previo["javascript"];
-            
-            //Busca el ID_HTML del objeto
-			$registro_objeto=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario_objeto WHERE id=? ","$id_objeto_evento")->fetch();
-            
-            $NaturalDocs_PlantillaFuncion="\n/*\nFunction: SUNOMBRE_$evento_objeto\n\tIngrese aqui la descripcion de su funcion, procedimiento o proceso realizado por este evento\n\n\tParametros:\n\n\t\tParametro1 - Descripcion del primer parametro de entrada\n\t\tParametro2 - Descripcion del segundo parametro de entrada\n\n\tProceso simplificado:\n\t\t(start code)\n\t\t\tInstrucciones especificas importantes, Scripts u operaciones de BD, Etc\n\t\t(end)\n\n\tSalida:\n\n\t\tDescriba la salida de esta funcion, procedimiento o proceso\n\n\tVea tambien:\n\n\t\t<FuncionRelacionada1> | <FuncionRelacionada2> | <FuncionRelacionada3>\n*/\n\n";
-            //Agrega una plantilla base cuando se esta creando el evento
-            if($JavaScriptEventoPrevio=="") $JavaScriptEventoPrevio=$NaturalDocs_PlantillaFuncion;
-        ?>
-            <iframe name="iframe_almacenamiento" src="about:blank" style="visibility: hidden; display: none;"></iframe>
-            <form name="form_evento" target="iframe_almacenamiento" action="<?php echo $ArchivoCORE; ?>" style="padding: 0px; margin: 0px;" class="well btn-xs">
-                <input type="Hidden" name="PCO_Accion" value="PCO_ActualizarJavaEvento">
-                <?php echo $MULTILANG_Evento?>: <input type="text" name="evento_objeto" value="<?php echo $evento_objeto; ?>" readonly style="width:200px; background-color: transparent; border: 0px solid; font-weight: bold;  color: #0000FF;">
-                ID_HTML: <input type="text" name="id_html_visual" value="<?php echo $registro_objeto["id_html"]; ?>" readonly style="width:200px; background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
-                <br><?php echo $MULTILANG_Tipo?> <?php echo $MULTILANG_Objeto?>: <input type="text" name="tipo" value="<?php echo $tipo; ?>" readonly style="width:175px; background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
-                <?php echo $MULTILANG_Objeto?> ID: <input type="text" name="id_objeto_evento" value="<?php echo $id_objeto_evento; ?>" readonly style="width:200px; background-color: transparent; border: 0px solid; font-weight: bold; color: #0000FF;">
-                <input type="Hidden" name="Presentar_FullScreen" value="1">
-                <input type="Hidden" name="Precarga_EstilosBS" value="0">
-                <div class="well" style="margin: 0px; padding: 0px;">
-                <textarea id="javascript_eventos" name="javascript_eventos" data-editor="javascript" class="form-control" style="width: 783px; height: 480px;"><?php echo $JavaScriptEventoPrevio; ?></textarea>
-                </div>
-            </form>
-            <form name="form_evento_eliminar" action="<?php echo $ArchivoCORE; ?>" style="padding: 0px; margin: 0px;">
-                <input type="Hidden" name="PCO_Accion" value="PCO_EliminarEventoObjeto">
-                <input type="Hidden" name="evento" value="<?php echo $IdEventoPrevio; ?>">
-                <input type="Hidden" name="Presentar_FullScreen" value="1">
-                <input type="Hidden" name="Precarga_EstilosBS" value="0">
-            </form>
-            <?php 
-                echo '<br>
-                <div class="row">
-                    <div class="col col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <button type="button" class="btn btn-success" onclick="PCOJS_MostrarMensajeCargandoSimple(1000); document.form_evento.submit();"><i class="fa fa-save"></i> '.$MULTILANG_Guardar.' </button>
-                        &nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-default" onclick="window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</button>
-                    </div>
-                    <div class="col col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <button type="button" class="btn btn-danger" onclick="form_evento_eliminar.submit();"><i class="fa fa-trash"></i> '.$MULTILANG_Eliminar.' '.$MULTILANG_Evento.'</button>
-                    </div>
-                    <div class="col col-xs-4 col-sm-4 col-md-4 col-lg-4" align=right>
-                        <!--<button type="button" class="btn btn-info" data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_DocumentarDes.'" onclick="$(\'#javascript_eventos\').val(\''.$NaturalDocs_PlantillaFuncion.'\');"><i class="fa fa-file-code-o"></i> '.$MULTILANG_Documentar.'</button>-->
-                        <a class="btn btn-primary" data-toggle="tooltip" data-html="true"  data-placement="auto" title="'.$MULTILANG_DocumentarLink.'" href="http://www.naturaldocs.org/reference/formatting/" target="_blank"><i class="fa fa-book"></i>&nbsp;</a>
-                    </div>
-                </div>';
-		}
-
-
-########################################################################
-########################################################################
-/*
 	Section: Acciones a ser ejecutadas (si aplica) en cada cargue de la herramienta
 */
 
@@ -1972,53 +1915,6 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 			PCO_EliminarFormulario($formulario);
 			echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_AdministrarFormularios"></form>
 					<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
-		}
-
-
-########################################################################
-########################################################################
-/*
-	Function: PCO_EliminarEventoObjeto
-	Elimina el script asociado a un evento javascript de un control de formulario
-
-	Salida:
-		Elimina un evento asociado a un objeto
-*/
-	if ($PCO_Accion=="PCO_EliminarEventoObjeto")
-		{
-			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."evento_objeto WHERE id=? ","$evento");
-			PCO_Auditar("Elimina evento javascript $evento");
-			echo '<script TYPE="text/javascript" LANGUAGE="JavaScript">
-    			alert("'.$MULTILANG_Eliminar.' '.$MULTILANG_Evento.' '.$MULTILANG_Finalizado.'");
-    			window.close();
-			</script>';
-		}
-
-
-########################################################################
-########################################################################
-/*
-	Function: PCO_ActualizarJavaEvento
-	Actualiza el script asociado a un evento javascript de un control de formulario
-
-	Salida:
-		Registro de evento creado o actualizado
-*/
-	if ($PCO_Accion=="PCO_ActualizarJavaEvento")
-		{
-			//Busca si ya existe un evento del mismo tipo para ese objeto
-			$registro_evento_previo=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."evento_objeto WHERE objeto=? AND evento=? ","$id_objeto_evento$_SeparadorCampos_$evento_objeto")->fetch();
-			if ($registro_evento_previo["id"]=="")
-			    {
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."evento_objeto (".$ListaCamposSinID_evento_objeto.") VALUES (?,?,?)","$id_objeto_evento$_SeparadorCampos_$evento_objeto$_SeparadorCampos_$javascript_eventos");
-					PCO_Auditar("Agrega evento javascript para $id_objeto_evento");
-			    }
-			else
-			    {
-					PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."evento_objeto SET javascript=? WHERE objeto=? AND evento=? ","$javascript_eventos$_SeparadorCampos_$id_objeto_evento$_SeparadorCampos_$evento_objeto");
-					PCO_Auditar("Actualiza evento javascript para $id_objeto_evento");
-			    }
-			die();
 		}
 
 
