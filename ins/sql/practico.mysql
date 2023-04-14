@@ -559,11 +559,14 @@ ALTER TABLE core_kanban ADD INDEX columna(columna);
 ALTER TABLE core_kanban ADD INDEX login_admintablero(login_admintablero);
 ALTER TABLE core_kanban ADD INDEX usuario_aceptacion_pf(usuario_aceptacion_pf);
 ALTER TABLE core_kanban ADD INDEX usuario_aceptacion_pnf(usuario_aceptacion_pnf);
-
 ALTER TABLE core_kanban
 ADD INDEX aceptacion_pf (aceptacion_pf),
 ADD INDEX aceptacion_pnf (aceptacion_pnf),
 ADD INDEX archivado (archivado);
+ALTER TABLE core_kanban
+ADD INDEX fecha (fecha),
+ADD INDEX fecha_inicio (fecha_inicio);
+
 
 DROP TABLE IF EXISTS core_opcionlista;
 CREATE TABLE core_opcionlista (
