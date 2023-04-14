@@ -115,7 +115,6 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
 
 <!-- Presenta DashBoard del admin -->
     <div class="well well-sm" style="margin-bottom:0px;">
-
             <div class="row">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                     <h3 class="page-header" style="margin-top:0px;"><b><i class="fa fa-dashboard fa-fw"></i> <?php echo $MULTILANG_Aplicacion; ?></b> <i>(<?php echo $MULTILANG_MonEstado; ?>)</i></h3>
@@ -142,68 +141,6 @@ function ObtenerEntradas_GitHub($ID_Usuario="",$Cantidad=5)
                     echo PCO_ImprimirPanelSimpleDashboard("col-xs-12 col-sm-6 col-md-3 col-lg-2",   "red",          "fa-globe fa-3x",                   PCO_ContarRegistrosTabla($TablasCore."acortadorurls"),                                  "URL(s)",                       "$MULTILANG_Detalles",      "javascript:document.PCO_AcortadorDirecciones.submit();",       "");
                     echo PCO_ImprimirPanelSimpleDashboard("col-xs-12 col-sm-6 col-md-3 col-lg-2",   "default",      "fa-bell fa-3x",                    PCO_ContarRegistrosTabla($TablasCore."monitoreo"),                                      "Monitor(es)",                  "$MULTILANG_Detalles",      "javascript:document.PCO_VerMonitoreo.submit();",               "");
                 ?>
-            </div>
-    
-            <div class="row">
-                    <div  class="col-md-4 col-lg-4 ">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $MULTILANG_MsjFinal2; ?>
-                            </div>
-                            <div class="panel-body">
-                                <div id="uso-general-aplicativo"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div  class=" col-md-4 col-lg-4">
-
-
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <i class="fa fa-users fa-fw"></i> Usuarios activos (&uacute;ltimos d&iacute;as)
-                                </div>
-                                <div class="panel-body">
-                                    <div id="">
-
-                                    <table width="100%">
-                                        <tr>
-                                            <td width=33% align=center>
-                                                    Hoy<br>
-                                                    <i class="fa-2x" style="color:green;"><b>     <?php echo PCO_EjecutarSQL("SELECT COUNT(DISTINCT usuario_login) FROM core_auditoria WHERE fecha=DATE(NOW()) ")->fetchColumn(); ?>                          </i></b>
-                                            </td>
-                                            <td width=33% align=center>
-                                                    Semana<br>
-                                                    <i class="fa-2x" style="color:navy;"><b>     <?php echo PCO_EjecutarSQL("SELECT COUNT(DISTINCT usuario_login) FROM core_auditoria WHERE fecha >= date_sub(now(),INTERVAL 1 WEEK) ")->fetchColumn(); ?>   </i></b>                                   
-                                            </td>
-                                            <td width=33% align=center>
-                                                    Mes<br>
-                                                    <i class="fa-2x" style="color:red;"><b>     <?php echo PCO_EjecutarSQL("SELECT COUNT(DISTINCT usuario_login) FROM core_auditoria WHERE fecha >= date_sub(now(),INTERVAL 4 WEEK) ")->fetchColumn(); ?>   </i></b>                                    
-                                            </td>
-                                        </tr>
-                                    </table>
-      
-                                        
-                                    </div>
-                                </div>
-                            </div>
-
-                        <?php
-                                            //$informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0,$anular_acciones=0,$anular_piepagina=0,$anular_encabezado=0,$SQLPuro="")
-                            PCO_CargarInforme(-28,1,"","",1,1,0,0,"");
-                        ?>
-
-                    </div>            
-                    <div  class="col-md-4 col-lg-4">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <i class="fa fa-bar-chart-o fa-fw"></i> <?php echo $MULTILANG_TotalRegistros; ?>
-                            </div>
-                            <div class="panel-body">
-                                <div id="conteos-generales-aplicacion"></div>
-                            </div>
-                        </div>
-                    </div>
-
             </div>
     </div>
 

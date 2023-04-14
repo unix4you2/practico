@@ -23,6 +23,7 @@ core/marco_abajo.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
 core/marco_nav.php
+core/marco_admin.php
 core/formularios.php
 core/formularios_post.php
 core/kanban.php
