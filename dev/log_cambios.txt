@@ -119,6 +119,7 @@ LogCambios="
 * Added [FORMS]: @foag Creada nueva palabra clave sobre controles de texto libre que permite transformarlos en contenedores de Tags separados por coma automáticamente.  Para esto simplemente agregar la palabra clave PCO_Tags en la personalización del control.
 * Added [FORMS]: Edición de eventos de controles de formulario se hace ahora mediante el nuevo {P}Coder
 * Added [FORMS]: Informes básicos de analítica de aplicación son reemplazados por objetos internos en lugar de código.
+* Added [MODULOS]: Para informes y formularios registrados bajo un módulo se presentan sólo aquellos a los cuales el usuario desarrollador tiene acceso.  Aquellos elementos no asociados a ningún módulo (huérfanos) serán siempre presentados.  Esto permite la segmentación de funciones entre desarrolladores de una misma aplicación.
 
 
 
