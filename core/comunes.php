@@ -276,6 +276,7 @@ function PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie=0)
 		         code-davinci-002
 		         code-davinci-003
 		         code-cushman-001
+		         text-davinci-002
 		Prompt - El texto con el cual se alimenta el modelo
 
 	Salida:
@@ -284,48 +285,54 @@ function PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie=0)
 	Vea tambien:
 	    <PCO_EjecutarPostFormulario> <https://beta.openai.com/docs/models/codex>
 */
-function PCO_OpenAI_Codex($Modelo="code-davinci-002")
+function PCO_OpenAI_Codex($Modelo,$Prompt,$MaximoTokens,$Temperatura,$TokenParada)
     {
+
         global $LlaveDePaso,$TablasCore;
         $RespuestaAPI="";
         
         //Si no define un modelo se usa el mas completo
         if ($Modelo=="") $Modelo="code-davinci-002";
+        
+        if ($MaximoTokens=="") $MaximoTokens="100";
+        if ($Temperatura=="") $Temperatura="0.1";
 
-		$PCO_API_OpenAI=PCO_EjecutarSQL("SELECT api_openai FROM ".$TablasCore."parametros WHERE id=1")->fetchColumn();
+		$PCO_RegistroAPI_OpenAI=PCO_EjecutarSQL("SELECT api_openai,url_openai FROM ".$TablasCore."parametros WHERE 1=1 LIMIT 0,1")->fetch();
+		$PCO_API_OpenAI=$PCO_RegistroAPI_OpenAI["api_openai"];
+		$PCO_URL_OpenAI=$PCO_RegistroAPI_OpenAI["url_openai"];
 		//Si encuentra un valor de API KEY sigue adelante
-        if ($PCO_API_OpenAI!="")
+        if ($PCO_API_OpenAI!="" && $Prompt!="")
             {
-                $URLFinal=$PCO_API_OpenAI."/completions";  //https://api.openai.com/v1/completions
-                
-                
-                $OpcionesCURL='{
-                                    "CURLOPT_HEADER":0,
-                                    "CURLOPT_ENCODING":"",
-                                    "CURLOPT_MAXREDIRS":10,
-                                    "CURLOPT_TIMEOUT":0,
-                                    "CURLOPT_FOLLOWLOCATION":true,
-                                    "CURLOPT_HTTP_VERSION":CURL_HTTP_VERSION_1_1,
-                                    "CURLOPT_CUSTOMREQUEST":"POST",
-                                    "CURLOPT_POSTFIELDS":"
-                                    
-{
-  "model": "text-davinci-002",
-  "prompt": "PHP crea un script para insertar un cliente en mysql",
-  "max_tokens": 100,
-  "temperature": 0.1,
-  "n": 1,
-  "stop": ""
-}                                    ",
-                                    "CURLOPT_HTTPHEADER":"array(
-    \'Content-Type: application/json\',
-    \'Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\'
-  )",
-                                    "CURLOPT_RETURNTRANSFER":true
-                }';
-                $RespuestaAPI=PCO_FileGetContents_CURL($URLFinal,$OpcionesCURL);
-            }
+                $URLFinal=$PCO_URL_OpenAI."/engines/davinci/completions";  //https://api.openai.com/v1/engines/davinci-codex/completions
+                $URLFinal=$PCO_URL_OpenAI."/completions";  //https://api.openai.com/v1/completions
 
+                $OpcionesCURL='{
+                                    CURLOPT_RETURNTRANSFER:true,
+                                    CURLOPT_ENCODING:"",
+                                    CURLOPT_MAXREDIRS:10,
+                                    CURLOPT_TIMEOUT:0,
+                                    CURLOPT_FOLLOWLOCATION:true,
+                                    CURLOPT_HTTP_VERSION:"CURL_HTTP_VERSION_1_1",
+                                    CURLOPT_CUSTOMREQUEST:"POST",
+                                }';
+
+                $CabecerasCURL=array(
+                                    "Content-Type: application/json",
+                                    "Authorization: Bearer ".$PCO_API_OpenAI
+                                );
+
+                $PostCURL='
+                                {
+                                    "model": "'.$Modelo.'",
+                                    "prompt": "'.$Prompt.'",
+                                    "max_tokens": '.$MaximoTokens.',
+                                    "temperature": '.$Temperatura.',
+                                    "n": 1,
+                                    "stop": "'.$TokenParada.'"
+                                }';
+
+                $RespuestaAPI=PCO_FileGetContents_CURL($URLFinal,$OpcionesCURL,$CabecerasCURL,$PostCURL);
+            }
         return $RespuestaAPI;
     }
 
@@ -4838,17 +4845,20 @@ function PCO_ExisteCampoTabla($campo,$tabla,$ConexionAlterna="",$MotorAlterno=""
 
 		URLBase - La URL base del recurso que se desea cargar
 		OpcionesJSON - Un arreglo de opciones para inicializar y personalizar el objeto CURL e formato JSON. Ej:  {"CURLOPT_MAXREDIRS":10,"CURLOPT_FOLLOWLOCATION":true}
-		
+		CabecerasArray - ARREGLO DE PHP de cabeceras que son utilizadas en la conexion.  Ej:  array("Content-Type: application/json","Authorization: Bearer XXXXX" );
+		PostJSON - Arreglo con variables y valores a transportar en peticiones POST.  Ej:    {  "model": "MiValor1","max_tokens": 200, "n": 1 }
+
+
 	Salida:
 		Contenido de la URL recibida
 */
-function PCO_FileGetContents_CURL($URLBase,$OpcionesJSON)
+function PCO_FileGetContents_CURL($URLBase,$OpcionesJSON,$CabecerasArray,$PostJSON)
 	{
 		global $MULTILANG_ErrExtension,$MULTILANG_ErrCURL;
 		
 		//Por defecto inicializa opciones minimas para compatibilidad hacia atras
 		if ($OpcionesJSON=="")
-		    $OpcionesJSON='{"CURLOPT_HEADER":0,"CURLOPT_RETURNTRANSFER":1}';
+		    $OpcionesJSON='{"CURLOPT_HEADER":0,"CURLOPT_RETURNTRANSFER":true}';
 
 		//Verifica soporte para cURL
 		if (!extension_loaded('curl'))
@@ -4860,11 +4870,19 @@ function PCO_FileGetContents_CURL($URLBase,$OpcionesJSON)
 				//Inicializa el objeto cURL y procesa la solicitud
 				$objeto_curl = curl_init();
 
+                // Establecer los valores de los encabezados personalizados en la llamada CURL
+				if ($CabecerasArray!="")
+                    curl_setopt($objeto_curl, CURLOPT_HTTPHEADER, $CabecerasArray);
+
                 //Decodifica los parametros
-                $ArregloParametros = json_decode($OpcionesJSON, true);
-                foreach ($ArregloParametros as $key => $value) {
-    				curl_setopt($objeto_curl, $key, $value);
+                $OpcionesJSON = json_decode($OpcionesJSON, true);
+                foreach ($OpcionesJSON as $OpcionCURL => $ValorOpcion) {
+                  curl_setopt($objeto_curl, constant($OpcionCURL), $ValorOpcion);
                 }
+
+				if ($PostJSON!="")
+				    curl_setopt($objeto_curl, CURLOPT_POSTFIELDS, $PostJSON);
+
 				curl_setopt($objeto_curl, CURLOPT_URL, $URLBase);
 
 				$datos_recibidos = curl_exec($objeto_curl);
