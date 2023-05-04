@@ -287,15 +287,14 @@ function PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie=0)
 */
 function PCO_OpenAI_Codex($Modelo,$Prompt,$MaximoTokens,$Temperatura,$TokenParada)
     {
-
-        global $LlaveDePaso,$TablasCore;
+        global $TablasCore;
         $RespuestaAPI="";
         
         //Si no define un modelo se usa el mas completo
-        if ($Modelo=="") $Modelo="code-davinci-002";
+        if ($Modelo=="") $Modelo="gpt-3.5-turbo";
         
         if ($MaximoTokens=="") $MaximoTokens="100";
-        if ($Temperatura=="") $Temperatura="0.1";
+        if ($Temperatura=="") $Temperatura="0.7";
 
 		$PCO_RegistroAPI_OpenAI=PCO_EjecutarSQL("SELECT api_openai,url_openai FROM ".$TablasCore."parametros WHERE 1=1 LIMIT 0,1")->fetch();
 		$PCO_API_OpenAI=$PCO_RegistroAPI_OpenAI["api_openai"];
@@ -303,8 +302,8 @@ function PCO_OpenAI_Codex($Modelo,$Prompt,$MaximoTokens,$Temperatura,$TokenParad
 		//Si encuentra un valor de API KEY sigue adelante
         if ($PCO_API_OpenAI!="" && $Prompt!="")
             {
-                $URLFinal=$PCO_URL_OpenAI."/engines/davinci/completions";  //https://api.openai.com/v1/engines/davinci-codex/completions
-                $URLFinal=$PCO_URL_OpenAI."/completions";  //https://api.openai.com/v1/completions
+                //La API puede ser usada para multiples cosas, aqui se establece para completación de chat solamente
+                $URLFinal=$PCO_URL_OpenAI."/v1/chat/completions";
 
                 $OpcionesCURL='{
                                     CURLOPT_RETURNTRANSFER:true,
@@ -324,13 +323,19 @@ function PCO_OpenAI_Codex($Modelo,$Prompt,$MaximoTokens,$Temperatura,$TokenParad
                 $PostCURL='
                                 {
                                     "model": "'.$Modelo.'",
-                                    "prompt": "'.$Prompt.'",
                                     "max_tokens": '.$MaximoTokens.',
                                     "temperature": '.$Temperatura.',
                                     "n": 1,
-                                    "stop": "'.$TokenParada.'"
+                                    "stop": "'.$TokenParada.'",
+                                    "messages": [
+                                        {"role": "user", "content": "'.$Prompt.'"}
+                                    ]
                                 }';
-
+                                    /*
+                                        //Las respuestas previas pueden ser enviadas de manera acumulativa para mantener el hilo de la conversacion
+                                        {"role": "user", "content": "'.$Prompt.'"}
+                                        {"role": "assistant", "content": "Respuesta..."},
+                                    */
                 $RespuestaAPI=PCO_FileGetContents_CURL($URLFinal,$OpcionesCURL,$CabecerasCURL,$PostCURL);
             }
         return $RespuestaAPI;
