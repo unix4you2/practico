@@ -30,15 +30,17 @@ CREATE TABLE core_parametros (
 INSERT INTO core_parametros (nombre_empresa_largo,nombre_empresa_corto,nombre_aplicacion,version,fecha_lanzamiento,licencia,creditos) VALUES ('Nombre completo de su empresa','PAR_NombreCortoEmpresa','PAR_NombreAplicacion','PAR_VersionApp','20150101','Texto de su licencia','Texto asociado a los creditos de su aplicacion');
 
 
+DROP TABLE IF EXISTS core_documentacion;
 CREATE TABLE core_documentacion (
   id int(11) NOT NULL AUTO_INCREMENT,
   hash_unico varchar(255) NOT NULL,
+  titulo varchar(255) NOT NULL,
   estructura_tipo varchar(10) NOT NULL COMMENT 'Seccion,Menu,Funcion',
   estructura_seccion varchar(255) NOT NULL,
   estructura_funcion varchar(255) NOT NULL,
   origen varchar(10) NOT NULL COMMENT 'Archivo,Formulario,Informe',
   detalle_origen varchar(255) NOT NULL COMMENT 'IdObjeto,Path',
-  formato varchar(255) NOT NULL DEFAULT 'HTML' COMMENT 'Texto,XML,HTML,Enriquecido,Codigo,Diagrama',
+  formato varchar(255) NOT NULL DEFAULT 'Enriquecido' COMMENT 'Enriquecido,Diagrama',
   documentacion mediumtext NOT NULL,
   visibilidad varchar(255) NOT NULL DEFAULT 'Dev' COMMENT 'Dev,Usuario',
   PRIMARY KEY (`id`)
