@@ -121,6 +121,7 @@ LogCambios="
 * Added [FORMS]: Informes básicos de analítica de aplicación son reemplazados por objetos internos en lugar de código.  Se agregan además los informes de usos sobre edición de código.
 * Added [MODULOS]: Para informes y formularios registrados bajo un módulo se presentan sólo aquellos a los cuales el usuario desarrollador tiene acceso.  Aquellos elementos no asociados a ningún módulo (huérfanos) serán siempre presentados.  Esto permite la segmentación de funciones entre desarrolladores de una misma aplicación.  Usuario admin siempre verá el 100% de los elementos para evitar ocultamientos por error.
 * Added [CORE]: Agregadas tablas de documentacion de sistema.  A través de estas se podrá almacenar toda la documentación interna asociada a procesos de desarrollo y documentación visible para usuarios finales bajo diferentes tipos de formato.
+* Enhan [CORE]: Agregada variable de PCOSESS_LoginUsuario al scope cuando se establecen conexiones al motor de manera que este disponible como una variable más de SQL.
 
 
 
