@@ -504,7 +504,7 @@ CREATE TABLE core_documentacion (
   detalle_origen varchar(255) NOT NULL COMMENT 'IdObjeto,Path',
   formato varchar(255) NOT NULL DEFAULT 'Enriquecido' COMMENT 'Enriquecido,Diagrama',
   documentacion mediumtext NOT NULL,
-  visibilidad varchar(255) NOT NULL DEFAULT 'Dev' COMMENT 'Dev,Usuario',
+  visibilidad varchar(255) NOT NULL DEFAULT 'Desarrollo' COMMENT 'Desarrollo,Usuario',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
