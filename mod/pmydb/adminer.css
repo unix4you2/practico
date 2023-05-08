@@ -13,6 +13,7 @@ https://raw.github.com/vrana/adminer/master/designs/ng9/adminer.css
 	color:#333333;
 	margin:0px;
 	padding:0px;
+	border-radius: 5px;
 }
 
 body{
@@ -328,9 +329,9 @@ input[name=logout]:hover {
 input[type=submit] {
 	font-size:13px;	
 	font-weight:normal;
-	-moz-border-radius:1px;
-	-webkit-border-radius:1px;
-	border-radius:1px;
+	-moz-border-radius:9px;
+	-webkit-border-radius:9px;
+	border-radius:9px;
 	border:0px solid #469df5;
 	padding:4px 12px;
 	text-decoration:none;	
