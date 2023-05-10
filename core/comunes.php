@@ -8395,7 +8395,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		global $_SeparadorCampos_;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton,$ListaCamposSinID_menu;
-		global $MULTILANG_Formularios,$MULTILANG_Editar,$MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
+		global $MULTILANG_Formularios,$MULTILANG_Editar,$MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado,$MULTILANG_FrmMsj1,$MULTILANG_Documentar;
         global $PCO_InformesListaColumnasDT,$PCO_InformesRecuperacionAJAX,$PCO_InformesIdCache,$PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF,$PCO_InformesDataTableDefineCOLS,$PCO_InformesDataTable_pane_activado,$PCO_InformesDataTable_pane_cascada,$PCO_InformesDataTable_pane_colapsado,$PCO_InformesDataTable_pane_columnas,$PCO_InformesDataTable_pane_subtotalesrelativos,$PCO_InformesDataTable_pane_conteos,$PCO_InformesDataTable_pane_controles,$PCO_InformesDataTable_pane_control_colapsar,$PCO_InformesDataTable_pane_control_ordenar;
         global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
 		global $PCO_BarraHerramientasFormulario; 
@@ -8451,7 +8451,6 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 				    BasuritaVar2=$(NombreMarcoOpciones).css({\'visibility\':\'hidden\'});
 				    BasuritaVar3=$(NombreMarcoOpciones).css({\'display\':\'none\'});
 			    }
-
 		</script>
 		<!--<input type=button onclick=\'AgregarElemento("1","1","hello world");\'>-->';
 
@@ -8459,17 +8458,41 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
             {
         		echo '<script type="text/javascript">
                         function PCOJS_ActualizarControlFormulario(idformulario,idcontrol,pestana_activa){
-                                //Salta a edicion de control
-                                var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-36:0:id:"+idcontrol+"&Presentar_FullScreen=1&Precarga_EstilosBS=1&formulario="+idformulario+"&pestana_activa_apertura="+pestana_activa+"&PCO_TipoControlDirecto=";
-                                PCOJS_MostrarMensaje("'.$MULTILANG_FrmMsj1.'","Cargando...","modal-wide oculto_impresion");
-                                $("#PCO_Modal_MensajeCuerpo").html(\'<iframe id="IFrameEmbebido" scrolling="yes" style="margin:10px; border:0px;" height=500 width=100% src="\'+URLPopUp+\'"></iframe>\');
-                                $("#PCO_Modal_MensajeBotones").html(\'<button id="boton_filtrar" type="button" class="btn btn-outline btn-info" data-dismiss="modal" onclick="CargarFormulario();" >Cerrar</button></a>\');
+                            //Salta a edicion de control
+                            var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-36:0:id:"+idcontrol+"&Presentar_FullScreen=1&Precarga_EstilosBS=1&formulario="+idformulario+"&pestana_activa_apertura="+pestana_activa+"&PCO_TipoControlDirecto=";
+                            PCOJS_MostrarMensaje("'.$MULTILANG_FrmMsj1.'","Cargando...","modal-wide oculto_impresion");
+                            $("#PCO_Modal_MensajeCuerpo").html(\'<iframe id="IFrameEmbebido" scrolling="yes" style="margin:10px; border:0px;" height=500 width=100% src="\'+URLPopUp+\'"></iframe>\');
+                            $("#PCO_Modal_MensajeBotones").html(\'<button id="boton_filtrar" type="button" class="btn btn-outline btn-info" data-dismiss="modal" onclick="CargarFormulario();" >Cerrar</button></a>\');
                         }
+                        function PCOJS_DocumentacionFormulario(idformulario){
+                            //Presenta informe con documentacion del formulario o posibilidad de crear nueva documentacion
+                            var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=inf:-55:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&origen=Formulario&detalle_origen="+idformulario+"&lista_campos_documentacion=titulo as Titulo,formato as Formato,visibilidad as Visible";
+                            PCOJS_MostrarMensaje("'.$MULTILANG_Documentar.'","Cargando...","modal-wide oculto_impresion");
+                            $("#PCO_Modal_MensajeCuerpo").html(\'<iframe id="IFrameEmbebido" scrolling="yes" style="margin:10px; border:0px;" height=500 width=100% src="\'+URLPopUp+\'"></iframe>\');
+                            $("#PCO_Modal_MensajeBotones").html(\'<button id="boton_filtrar" type="button" class="btn btn-outline btn-info" data-dismiss="modal" onclick="CargarFormulario();" >Cerrar</button></a>\');
+                        }
+                        
+                        //TODO: Pasar a JS general para permitir llamado desde otros apartados, ej, Kanban
+                        //IdDocumentacion contiene dos datos, IdRegistro|TipoDocumentacion
+                        //TipoDocCreacion contiene el formato de documentacion (redundante con parte del primer parametro pero usado solo en creacion)
+                        function PCOJS_EditarDocumentacion(IdDocumentacion,TipoDocCreacion)
+                            {
+                                IdDocumentacion=IdDocumentacion+"";
+                                PartesIdDocumentacion=IdDocumentacion.split("|");
+                                //Determina tipo de documentacion para establecer el tipo de llamado.
+                                
+                                IdRegistro=PartesIdDocumentacion[0];
+                                TipoRegistro=PartesIdDocumentacion[1];
+                                if (IdRegistro!="" && IdRegistro!="0")
+                                    var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-43:0:id:"+IdRegistro+"&Presentar_FullScreen=1&Precarga_EstilosBS=1&origen=Formulario&formato="+TipoRegistro;
+                                else
+                                    var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-43:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&origen_creacion=Formulario&detalle_origen_creacion='.$registro_formulario["id"].'&formato_creacion="+TipoDocCreacion;
+                                
+                                //Carga el editor de documentacion
+                                PCO_VentanaPopup(URLPopUp,"Docs"+IdRegistro,"toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=900, height=700");
+                            }
         		    </script>';
-
-                
             }
-
 
 
 		//Si no encuentra formulario presenta error
@@ -8518,9 +8541,13 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                 $PCO_EnlaceScriptPRE ="javascript:PCOJS_CargarArchivoPCoderBD('{$LlaveParcial_FirmaSistema}','','','','No','B','core_formulario','pre_script', '{$formulario}','php','PHP'       ,'Iconos','1','<font color=white>Script_PRE</font> Formulario_{$formulario}_(PHP){$TituloPCoder_COMPLEMENTO}');";
                 $PCO_EnlaceScriptPOST="javascript:PCOJS_CargarArchivoPCoderBD('{$LlaveParcial_FirmaSistema}','','','','No','B','core_formulario','post_script','{$formulario}','php','PHP'       ,'Iconos','1','<font color=white>Script_POST</font> Formulario_{$formulario}_(PHP){$TituloPCoder_COMPLEMENTO}');";
                 $PCO_EnlaceScriptJS  ="javascript:PCOJS_CargarArchivoPCoderBD('{$LlaveParcial_FirmaSistema}','','','','No','B','core_formulario','javascript' ,'{$formulario}','js' ,'JavaScript','Iconos','1','<font color=white>Script_JS</font> Formulario_{$formulario}_(PHP){$TituloPCoder_COMPLEMENTO}');";
+                $PCO_EnlaceScriptDOCS  ="javascript:LMQTP=PCOJS_DocumentacionFormulario('{$formulario}');";
 
 				$ComplementoTituloFormulario='
 				<div class="pull-right">
+                    <a class="btn btn-default btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="'.$PCO_EnlaceScriptDOCS.'">
+                        <div><i class="fa fa-file-word-o"></i> Docs</div>
+                    </a>
                     <a class="btn btn-primary btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="'.$PCO_EnlaceScriptPRE.'">
                         <div><i class="fa fa-file-code-o"></i> PRE</div>
                     </a>
