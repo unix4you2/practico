@@ -123,6 +123,7 @@ LogCambios="
 * Added [CORE]: Agregadas tablas de documentacion de sistema.  A través de estas se podrá almacenar toda la documentación interna asociada a procesos de desarrollo y documentación visible para usuarios finales bajo diferentes tipos de formato.
 * Enhan [CORE]: Agregada variable de PCOSESS_LoginUsuario al scope cuando se establecen conexiones al motor de manera que este disponible como una variable más de SQL.
 * Added [FORMS]: Campos de tipo texto largo presentan (ya permitían) el establecimiento de su variable de valor predeterminado durante el diseño del campo.
+* Enhan [CORE]: @rafaelposadaf PR #24: mejoras estéticas css pmydb
 
 
 
