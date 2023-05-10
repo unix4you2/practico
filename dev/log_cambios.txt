@@ -56,7 +56,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 
-* Added [CORE]: Nueva función PCOJS_ValidarExistenciaURL permite validar si una URL existe o no.  Util para procesar solicitudes AJX o similares revisando primero que el destino exista.
+* Added [CORE]: Nueva función PCOJS_ValidarExistenciaURL permite validar si una URL existe o no.  Util para procesar solicitudes AJAX o similares revisando primero que el destino exista.
 * Added [FORMS]: Controles tipo lista de seleccion reemplazan variables dinámicas PHP en aquellos tags tipo OPTGROUP
 * Added [FORMS]: Controles tipo lista de seleccion permiten la insercion de TAGS extra en cada opción (esto incluye a los tipos de etiqueta OPTION y OPTGROUP).  Util para indicar cosas como data-icon para especificar imágenes en cada opción, data-lang, data-cualquiercosa que usted necesite.  Esto se logra mediante la inclusión automática del valor de un campo llamado tags_extra que si se encuentra disponible en la tabla o vista desde la cual se carga la lista será usado para tomar su valor e inyectarlo como TAGS adicionales al option.
 * Added [FORMS]: Controles tipo check soportan textos de ayuda.  Serán presentados como icono al lado derecho del texto que acompaña al check.
@@ -80,7 +80,7 @@ LogCambios="
 * Fixed [CORE]: Compatibilidad PHP 8+ Compatibilidad entre operaciones aritméticas de tipos string e integer
 * Fixed [CORE]: Compatibilidad PHP 8+ Arreglos con llaves constantes en lugar de cadenas para editor PCoder
 * Fixed [USUARIOS]: @jaimeaba3 Correccion en ficha de usuarios que no recuperaba correctamente la plantilla asignada en procesos de actualizacion.
-* Enhan [CORE]: Capacidad de multilenguaje.  Ahora el Framweork permite interactuar con múltiples lenguajes de programación, configurables por sus parámetros y mediante los cuales se podría tener una aplicación desarrollada en múltiples lenguajes a la vez, donde todos convergen al mismo punto.   La sintaxis de variables en notacion PHP y su reemplazo dinámico sobre cada script permite además que variables de PHP sean pasadas de manera transparente a cualquier otro lenguaje de programción disponible del lado del servidor.
+* Added [CORE]: Capacidad de multilenguaje.  Ahora el Framweork permite interactuar con múltiples lenguajes de programación, configurables por sus parámetros y mediante los cuales se podría tener una aplicación desarrollada en múltiples lenguajes a la vez, donde todos convergen al mismo punto.   La sintaxis de variables en notacion PHP y su reemplazo dinámico sobre cada script permite además que variables de PHP sean pasadas de manera transparente a cualquier otro lenguaje de programción disponible del lado del servidor.
 * Enhan [CORE]: Inclusion de Composer sobre el nucleo de desarrollo
 * Enhan [CORE]: Adicion y actualizacion de jquery/jquery version 3.6.0 a 3.6.1 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 * Enhan [CORE]: Adicion de jbdemonte/barcode como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
@@ -90,7 +90,6 @@ LogCambios="
 * Enhan [CORE]: Adicion y actualizacion de facebook/react version 17.0.2 a 18.2.0 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 * Enhan [CORE]: Incluido script que retorna estado general del sistema en JSON, conectividad, motor de base de datos, etc. todo basado en una sesion particular.
 * Enhan [CORE]: Agregada alerta sobre no existencia o instalacion de las funciones POSIX de PHP sobre el servidor que corre el Framework.
-* Enhan [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).
 * Enhan [DEV]: Las funciones automáticas de regeneración de elementos desde los XML y ejecución de scripts no son llamadas en entornos de desarrollo del framework.  Esto permitirá trazabilidad sobre archivos específicos.
 * Enhan [CORE]: Agregados entornos adicionales al archivo de despliegue de Vagrant
 * Enhan [CORE]: Nombres de campo aleatorios en formulario de login.  Esto permite evitar ataques automatizados de fuerza bruta cuando el atacante conoce los nombres de los campos y la acción del formulario.
@@ -98,9 +97,8 @@ LogCambios="
 * Enhan [CORE]: Nueva funcion PCO_GenerarArchivoTemporal() permite crear punteros de manera dinámica hacia archivos temporales según su tipo de instalación.
 * Enhan [CORE]: Actualizados enlaces en navegación hacia foros de desarrolladores (Github/Discuccions)
 * Enhan [CORE]: Adevertencia desplegada para instalaciones sin soporte a funciones PHP tmpfile y que requieren hacer uso de PMyDB/Adminer deben usar el modulo de versiones 22.3 o inferiores que no requieren dicha funcion.  Simplemente se sobreescribe el contenido del index del módulo.
-* Enhan [CORE]: Parametros de aplicacion son ahor gestionados desde objeto interno FRM -39.  Se elimina todo el código asociado equivalente a 560K
+* Enhan [CORE]: Parametros de aplicacion son ahora gestionados desde objeto interno FRM -39.  Se elimina todo el código asociado equivalente a 560K
 * Enhan [CORE]: Nuevos parámetros de aplicación contienen los créditos del autor o empresa, el texto de licencia asociado a la aplicación y un campo para indicar si los usuarios en su primer ingreso tienen que aceptar la licencia o no.
-* Enhan [CORE]: Nuevo parámetros de aplicación permite almacenar llave de API para consumos de OpenAI desde las diferentes funciones del Framework.
 * Enhan [KANBAN]: Reporte de tareas archivadas por tablero es ahora exportable en excel.
 * Enhan [KANBAN]: Se agrega nuevo boton con reporte de tareas activas en el tablero con posibilidad de descarga.
 * Enhan [KANBAN]: Agregados campos de historial y fecha de inicio a informes exportables de tareas activas y archivadas por tablero.
@@ -126,7 +124,14 @@ LogCambios="
 * Enhan [CORE]: @rafaelposadaf PR#24: mejoras estéticas css pmydb 3c773f0521112170e584ae40001b287373e9ad9e
 
 
+* Enhan [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).
 
+
+* Enhan [CORE]: Nuevo parámetros de aplicación permite almacenar llave de API para consumos de OpenAI desde las diferentes funciones del Framework.  Esto incluye funciones extendidas de I.A. hacia el editor {P}Coder como código predictivo, análsis de vulnerabilidades, documentación automatizadas, entre otros.
+
+
+categorias kanban
+campo de camara no captura foto
 
 
 * Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna, peso->PCOBD_Peso
