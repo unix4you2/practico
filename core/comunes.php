@@ -8484,7 +8484,13 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                 IdRegistro=PartesIdDocumentacion[0];
                                 TipoRegistro=PartesIdDocumentacion[1];
                                 if (IdRegistro!="" && IdRegistro!="0")
-                                    var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-43:0:id:"+IdRegistro+"&Presentar_FullScreen=1&Precarga_EstilosBS=1&origen=Formulario&formato="+TipoRegistro;
+                                    {
+                                        //Determina si va a editar un contenido enriquecido o un diagrama
+                                        if (TipoRegistro=="Enriquecido" || TipoDocCreacion=="Enriquecido")
+                                            var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-43:0:id:"+IdRegistro+"&Presentar_FullScreen=1&Precarga_EstilosBS=1&origen=Formulario&formato="+TipoRegistro;
+                                        if (TipoRegistro=="Diagrama")
+                                            var URLPopUp="inc/mxgraph/javascript/scripts/grapheditor/www/index.php?PCO_CampoOrigen=documentacion&PCO_TablaOrigen=core_documentacion&PCO_CampoLlave=id&PCO_ValorLlave="+IdRegistro;
+                                    }
                                 else
                                     var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-43:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&origen_creacion=Formulario&detalle_origen_creacion='.$registro_formulario["id"].'&formato_creacion="+TipoDocCreacion;
                                 

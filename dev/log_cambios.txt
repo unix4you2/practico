@@ -120,10 +120,10 @@ LogCambios="
 * Added [FORMS]: Edición de eventos de controles de formulario se hace ahora mediante el nuevo {P}Coder
 * Added [FORMS]: Informes básicos de analítica de aplicación son reemplazados por objetos internos en lugar de código.  Se agregan además los informes de usos sobre edición de código.
 * Added [MODULOS]: Para informes y formularios registrados bajo un módulo se presentan sólo aquellos a los cuales el usuario desarrollador tiene acceso.  Aquellos elementos no asociados a ningún módulo (huérfanos) serán siempre presentados.  Esto permite la segmentación de funciones entre desarrolladores de una misma aplicación.  Usuario admin siempre verá el 100% de los elementos para evitar ocultamientos por error.
-* Added [CORE]: Agregadas tablas de documentacion de sistema.  A través de estas se podrá almacenar toda la documentación interna asociada a procesos de desarrollo y documentación visible para usuarios finales bajo diferentes tipos de formato.
+* Added [CORE]: Agregadas tablas de documentacion de sistema.  A través de estas se podrá almacenar toda la documentación interna asociada a procesos de desarrollo y documentación visible para usuarios finales bajo diferentes tipos de formato.  Por ahora se deja disponible en formularios pero su funcionalidad es extensible al resto de módulos del Framework.
 * Enhan [CORE]: Agregada variable de PCOSESS_LoginUsuario al scope cuando se establecen conexiones al motor de manera que este disponible como una variable más de SQL.
 * Added [FORMS]: Campos de tipo texto largo presentan (ya permitían) el establecimiento de su variable de valor predeterminado durante el diseño del campo.
-* Enhan [CORE]: @rafaelposadaf PR #24: mejoras estéticas css pmydb 3c773f0521112170e584ae40001b287373e9ad9e
+* Enhan [CORE]: @rafaelposadaf PR#24: mejoras estéticas css pmydb 3c773f0521112170e584ae40001b287373e9ad9e
 
 
 
