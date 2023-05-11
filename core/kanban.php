@@ -134,7 +134,7 @@
 	if ($PCO_Accion=="GuardarPersonalizacionKanban")
 		{
 			// Actualiza los datos
-			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."kanban SET descripcion='$titulos_columnas',compartido_rw='$compartido_rw'    WHERE categoria='[PRACTICO][ColumnasTablero]' AND id='$ID_TableroKanban'  ");
+			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."kanban SET historial='$categorias_personalizadas',descripcion='$titulos_columnas',compartido_rw='$compartido_rw'    WHERE categoria='[PRACTICO][ColumnasTablero]' AND id='$ID_TableroKanban'  ");
 			PCO_Auditar("Actualiza propiedades de tablero Kanban $ID_TableroKanban");
 			PCO_RedireccionATableroKanban($ID_TableroKanban);
 		}
@@ -239,7 +239,7 @@
 		{
 			$mensaje_error="";
 			// Agrega los datos
-			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw) VALUES ('$PCOSESS_LoginUsuario','$titulo_tablero','$titulos_columnas','','[PRACTICO][ColumnasTablero]','-2','0','','20000101','0','') ");
+			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw,historial) VALUES ('$PCOSESS_LoginUsuario','$titulo_tablero','$titulos_columnas','','[PRACTICO][ColumnasTablero]','-2','0','','20000101','0','','$categorias_personalizadas') ");
 			$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 			PCO_Auditar("Agrega Tablero Kanban $titulo_tablero Id:$idObjetoInsertado");
 			$_SESSION["PCOSESS_TableroKanbanActivo"]=(string)$idObjetoInsertado;
@@ -507,7 +507,7 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
             global $CadenaFiltradoTareasKanban;
             
             //Busca las columnas definidas en el tablero
-            $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo FROM ".$TablasCore."kanban WHERE id='$ID_TableroKanban' ")->fetch();
+            $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo,historial FROM ".$TablasCore."kanban WHERE id='$ID_TableroKanban' ")->fetch();
             $ArregloColumnasTablero=explode(",",$ResultadoColumnas["descripcion"]);
 
 
@@ -536,6 +536,14 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                                     <textarea class="input input-sm btn-block" id="compartido_rw" name="compartido_rw"><?php echo $ResultadoColumnas["compartido_rw"]; ?></textarea>
                                     <span class="input-group-addon">
                                         <a  href="#" data-toggle="tooltip" data-html="true"  title="Encerrados siempre por barras de canalizacion. Ej: |pepito.perez|maria.robles|<br>Always enclosed by pipes. Ej: |pepito.perez|maria.robles|"><i class="fa fa-info"></i></a>
+                                    </span>
+                                </div>
+
+                                <label for="categorias_personalizadas">Categorias extra personalizadas (Separadas por coma)</label>
+                                <div class="form-group input-group">
+                                    <input type="text" id="categorias_personalizadas" name="categorias_personalizadas" class="form-control" value="<?php echo $ResultadoColumnas["historial"]; ?>">
+                                    <span class="input-group-addon">
+                                        <a  href="#" data-toggle="tooltip" data-html="true"  title="Separadas unicamente por comas, seran agregadas a las categorias minimas por defecto del Kanban"><i class="fa fa-info-circle"></i></a>
                                     </span>
                                 </div>
             			</div>
@@ -1140,6 +1148,14 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanbanResumido")
                                     <input type="text" id="titulos_columnas" name="titulos_columnas" class="form-control" value="">
                                     <span class="input-group-addon">
                                         <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_TitObligatorio; ?>"><i class="fa fa-exclamation-triangle icon-orange"></i></a>
+                                    </span>
+                                </div>
+
+                                <label for="categorias_personalizadas">Categorias extra personalizadas (Separadas por coma)</label>
+                                <div class="form-group input-group">
+                                    <input type="text" id="categorias_personalizadas" name="categorias_personalizadas" class="form-control" value="">
+                                    <span class="input-group-addon">
+                                        <a  href="#" data-toggle="tooltip" data-html="true"  title="Separadas unicamente por comas, seran agregadas a las categorias minimas por defecto del Kanban"><i class="fa fa-info-circle"></i></a>
                                     </span>
                                 </div>
             			</div>

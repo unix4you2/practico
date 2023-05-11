@@ -584,7 +584,7 @@ ALTER TABLE core_kanban
 ADD INDEX fecha (fecha),
 ADD INDEX fecha_inicio (fecha_inicio);
 ALTER TABLE core_kanban ADD INDEX categoria(categoria);
-
+ALTER TABLE core_kanban CHANGE historial historial text COLLATE 'utf8_general_ci' NULL COMMENT 'Guarda categorias en tableros padre';
 
 DROP TABLE IF EXISTS core_opcionlista;
 CREATE TABLE core_opcionlista (
