@@ -360,7 +360,7 @@ $(document).ready( function() {
 */
 
 								//Realiza operaciones de reemplazo de patrones sobre la cadena de formato de Totales si aplica
-								$CadenaFormateadaTotales=str_replace("_TOTAL_PAGINA_","'+pageTota	l +'",$CadenaFormateadaTotales);
+								$CadenaFormateadaTotales=str_replace("_TOTAL_PAGINA_","'+pageTotal +'",$CadenaFormateadaTotales);
 								$CadenaFormateadaTotales=str_replace("_TOTAL_INFORME_","'+total +'",$CadenaFormateadaTotales);
 								$CadenaFormateadaTotales=str_replace("_COLUMNA_","$ColumnaTotalesVisual",$CadenaFormateadaTotales);
 
