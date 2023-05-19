@@ -276,6 +276,7 @@ function PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie=0)
 		         code-davinci-002
 		         code-davinci-003
 		         code-cushman-001
+		         text-davinci-002
 		Prompt - El texto con el cual se alimenta el modelo
 
 	Salida:
@@ -284,48 +285,59 @@ function PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie=0)
 	Vea tambien:
 	    <PCO_EjecutarPostFormulario> <https://beta.openai.com/docs/models/codex>
 */
-function PCO_OpenAI_Codex($Modelo="code-davinci-002")
+function PCO_OpenAI_Codex($Modelo,$Prompt,$MaximoTokens,$Temperatura,$TokenParada)
     {
-        global $LlaveDePaso,$TablasCore;
+        global $TablasCore;
         $RespuestaAPI="";
         
         //Si no define un modelo se usa el mas completo
-        if ($Modelo=="") $Modelo="code-davinci-002";
+        if ($Modelo=="") $Modelo="gpt-3.5-turbo";
+        
+        if ($MaximoTokens=="") $MaximoTokens="100";
+        if ($Temperatura=="") $Temperatura="0.7";
 
-		$PCO_API_OpenAI=PCO_EjecutarSQL("SELECT api_openai FROM ".$TablasCore."parametros WHERE id=1")->fetchColumn();
+		$PCO_RegistroAPI_OpenAI=PCO_EjecutarSQL("SELECT api_openai,url_openai FROM ".$TablasCore."parametros WHERE 1=1 LIMIT 0,1")->fetch();
+		$PCO_API_OpenAI=$PCO_RegistroAPI_OpenAI["api_openai"];
+		$PCO_URL_OpenAI=$PCO_RegistroAPI_OpenAI["url_openai"];
 		//Si encuentra un valor de API KEY sigue adelante
-        if ($PCO_API_OpenAI!="")
+        if ($PCO_API_OpenAI!="" && $Prompt!="")
             {
-                $URLFinal=$PCO_API_OpenAI."/completions";  //https://api.openai.com/v1/completions
-                
-                
-                $OpcionesCURL='{
-                                    "CURLOPT_HEADER":0,
-                                    "CURLOPT_ENCODING":"",
-                                    "CURLOPT_MAXREDIRS":10,
-                                    "CURLOPT_TIMEOUT":0,
-                                    "CURLOPT_FOLLOWLOCATION":true,
-                                    "CURLOPT_HTTP_VERSION":CURL_HTTP_VERSION_1_1,
-                                    "CURLOPT_CUSTOMREQUEST":"POST",
-                                    "CURLOPT_POSTFIELDS":"
-                                    
-{
-  "model": "text-davinci-002",
-  "prompt": "PHP crea un script para insertar un cliente en mysql",
-  "max_tokens": 100,
-  "temperature": 0.1,
-  "n": 1,
-  "stop": ""
-}                                    ",
-                                    "CURLOPT_HTTPHEADER":"array(
-    \'Content-Type: application/json\',
-    \'Authorization: Bearer XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\'
-  )",
-                                    "CURLOPT_RETURNTRANSFER":true
-                }';
-                $RespuestaAPI=PCO_FileGetContents_CURL($URLFinal,$OpcionesCURL);
-            }
+                //La API puede ser usada para multiples cosas, aqui se establece para completación de chat solamente
+                $URLFinal=$PCO_URL_OpenAI."/v1/chat/completions";
 
+                $OpcionesCURL='{
+                                    CURLOPT_RETURNTRANSFER:true,
+                                    CURLOPT_ENCODING:"",
+                                    CURLOPT_MAXREDIRS:10,
+                                    CURLOPT_TIMEOUT:0,
+                                    CURLOPT_FOLLOWLOCATION:true,
+                                    CURLOPT_HTTP_VERSION:"CURL_HTTP_VERSION_1_1",
+                                    CURLOPT_CUSTOMREQUEST:"POST",
+                                }';
+
+                $CabecerasCURL=array(
+                                    "Content-Type: application/json",
+                                    "Authorization: Bearer ".$PCO_API_OpenAI
+                                );
+
+                $PostCURL='
+                                {
+                                    "model": "'.$Modelo.'",
+                                    "max_tokens": '.$MaximoTokens.',
+                                    "temperature": '.$Temperatura.',
+                                    "n": 1,
+                                    "stop": "'.$TokenParada.'",
+                                    "messages": [
+                                        {"role": "user", "content": "'.$Prompt.'"}
+                                    ]
+                                }';
+                                    /*
+                                        //Las respuestas previas pueden ser enviadas de manera acumulativa para mantener el hilo de la conversacion
+                                        {"role": "user", "content": "'.$Prompt.'"}
+                                        {"role": "assistant", "content": "Respuesta..."},
+                                    */
+                $RespuestaAPI=PCO_FileGetContents_CURL($URLFinal,$OpcionesCURL,$CabecerasCURL,$PostCURL);
+            }
         return $RespuestaAPI;
     }
 
@@ -4838,17 +4850,20 @@ function PCO_ExisteCampoTabla($campo,$tabla,$ConexionAlterna="",$MotorAlterno=""
 
 		URLBase - La URL base del recurso que se desea cargar
 		OpcionesJSON - Un arreglo de opciones para inicializar y personalizar el objeto CURL e formato JSON. Ej:  {"CURLOPT_MAXREDIRS":10,"CURLOPT_FOLLOWLOCATION":true}
-		
+		CabecerasArray - ARREGLO DE PHP de cabeceras que son utilizadas en la conexion.  Ej:  array("Content-Type: application/json","Authorization: Bearer XXXXX" );
+		PostJSON - Arreglo con variables y valores a transportar en peticiones POST.  Ej:    {  "model": "MiValor1","max_tokens": 200, "n": 1 }
+
+
 	Salida:
 		Contenido de la URL recibida
 */
-function PCO_FileGetContents_CURL($URLBase,$OpcionesJSON)
+function PCO_FileGetContents_CURL($URLBase,$OpcionesJSON,$CabecerasArray,$PostJSON)
 	{
 		global $MULTILANG_ErrExtension,$MULTILANG_ErrCURL;
 		
 		//Por defecto inicializa opciones minimas para compatibilidad hacia atras
 		if ($OpcionesJSON=="")
-		    $OpcionesJSON='{"CURLOPT_HEADER":0,"CURLOPT_RETURNTRANSFER":1}';
+		    $OpcionesJSON='{"CURLOPT_HEADER":0,"CURLOPT_RETURNTRANSFER":true}';
 
 		//Verifica soporte para cURL
 		if (!extension_loaded('curl'))
@@ -4860,11 +4875,19 @@ function PCO_FileGetContents_CURL($URLBase,$OpcionesJSON)
 				//Inicializa el objeto cURL y procesa la solicitud
 				$objeto_curl = curl_init();
 
+                // Establecer los valores de los encabezados personalizados en la llamada CURL
+				if ($CabecerasArray!="")
+                    curl_setopt($objeto_curl, CURLOPT_HTTPHEADER, $CabecerasArray);
+
                 //Decodifica los parametros
-                $ArregloParametros = json_decode($OpcionesJSON, true);
-                foreach ($ArregloParametros as $key => $value) {
-    				curl_setopt($objeto_curl, $key, $value);
+                $OpcionesJSON = json_decode($OpcionesJSON, true);
+                foreach ($OpcionesJSON as $OpcionCURL => $ValorOpcion) {
+                  curl_setopt($objeto_curl, constant($OpcionCURL), $ValorOpcion);
                 }
+
+				if ($PostJSON!="")
+				    curl_setopt($objeto_curl, CURLOPT_POSTFIELDS, $PostJSON);
+
 				curl_setopt($objeto_curl, CURLOPT_URL, $URLBase);
 
 				$datos_recibidos = curl_exec($objeto_curl);
@@ -8372,7 +8395,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		global $_SeparadorCampos_;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_formulario,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton,$ListaCamposSinID_menu;
-		global $MULTILANG_Formularios,$MULTILANG_Editar,$MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado;
+		global $MULTILANG_Formularios,$MULTILANG_Editar,$MULTILANG_Elementos,$MULTILANG_Agregar,$MULTILANG_Configuracion,$MULTILANG_AvisoSistema,$MULTILANG_ErrFrmObligatorio,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_ObjetoNoExiste,$MULTILANG_ContacteAdmin,$MULTILANG_Formularios,$MULTILANG_VistaImpresion,$MULTILANG_InfRetornoFormFiltrado,$MULTILANG_FrmMsj1,$MULTILANG_Documentar;
         global $PCO_InformesListaColumnasDT,$PCO_InformesRecuperacionAJAX,$PCO_InformesIdCache,$PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF,$PCO_InformesDataTableDefineCOLS,$PCO_InformesDataTable_pane_activado,$PCO_InformesDataTable_pane_cascada,$PCO_InformesDataTable_pane_colapsado,$PCO_InformesDataTable_pane_columnas,$PCO_InformesDataTable_pane_subtotalesrelativos,$PCO_InformesDataTable_pane_conteos,$PCO_InformesDataTable_pane_controles,$PCO_InformesDataTable_pane_control_colapsar,$PCO_InformesDataTable_pane_control_ordenar;
         global $POSTForm_ListaCamposObligatorios,$POSTForm_ListaTitulosObligatorios;
 		global $PCO_BarraHerramientasFormulario; 
@@ -8428,7 +8451,6 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 				    BasuritaVar2=$(NombreMarcoOpciones).css({\'visibility\':\'hidden\'});
 				    BasuritaVar3=$(NombreMarcoOpciones).css({\'display\':\'none\'});
 			    }
-
 		</script>
 		<!--<input type=button onclick=\'AgregarElemento("1","1","hello world");\'>-->';
 
@@ -8436,17 +8458,64 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
             {
         		echo '<script type="text/javascript">
                         function PCOJS_ActualizarControlFormulario(idformulario,idcontrol,pestana_activa){
-                                //Salta a edicion de control
-                                var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-36:0:id:"+idcontrol+"&Presentar_FullScreen=1&Precarga_EstilosBS=1&formulario="+idformulario+"&pestana_activa_apertura="+pestana_activa+"&PCO_TipoControlDirecto=";
-                                PCOJS_MostrarMensaje("'.$MULTILANG_FrmMsj1.'","Cargando...","modal-wide oculto_impresion");
-                                $("#PCO_Modal_MensajeCuerpo").html(\'<iframe id="IFrameEmbebido" scrolling="yes" style="margin:10px; border:0px;" height=500 width=100% src="\'+URLPopUp+\'"></iframe>\');
-                                $("#PCO_Modal_MensajeBotones").html(\'<button id="boton_filtrar" type="button" class="btn btn-outline btn-info" data-dismiss="modal" onclick="CargarFormulario();" >Cerrar</button></a>\');
+                            //Salta a edicion de control
+                            var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-36:0:id:"+idcontrol+"&Presentar_FullScreen=1&Precarga_EstilosBS=1&formulario="+idformulario+"&pestana_activa_apertura="+pestana_activa+"&PCO_TipoControlDirecto=";
+                            PCOJS_MostrarMensaje("'.$MULTILANG_FrmMsj1.'","Cargando...","modal-wide oculto_impresion");
+                            $("#PCO_Modal_MensajeCuerpo").html(\'<iframe id="IFrameEmbebido" scrolling="yes" style="margin:10px; border:0px;" height=500 width=100% src="\'+URLPopUp+\'"></iframe>\');
+                            $("#PCO_Modal_MensajeBotones").html(\'<button id="boton_filtrar" type="button" class="btn btn-outline btn-info" data-dismiss="modal" onclick="CargarFormulario();" >Cerrar</button></a>\');
                         }
         		    </script>';
-
-                
             }
 
+        //Funciones asociadas a documentacion
+		echo '<script type="text/javascript">
+                function PCOJS_DocumentacionFormulario(idformulario,IdInforme){
+                    //Presenta informe con documentacion del formulario o posibilidad de crear nueva documentacion
+                    
+                    //Define los campos segun el informe a utilizar
+                    lista_campos_segun_informe="titulo as Titulo,formato as Formato,visibilidad as Visible";
+                    if (IdInforme==-56) lista_campos_segun_informe="titulo as Titulo,formato as Formato";
+                    
+                    //Define ancho de ventana segun tipo de informe/usuario
+                    estilo_ancho_ventana="modal-wide ";
+                    if (IdInforme==-56) estilo_ancho_ventana="";
+
+                    var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=inf:"+IdInforme+":0&Presentar_FullScreen=1&Precarga_EstilosBS=1&origen=Formulario&detalle_origen="+idformulario+"&lista_campos_documentacion="+lista_campos_segun_informe;
+                    PCOJS_MostrarMensaje("'.$MULTILANG_Documentar.'","Cargando...",estilo_ancho_ventana+" oculto_impresion");
+                    $("#PCO_Modal_MensajeCuerpo").html(\'<iframe id="IFrameEmbebido" scrolling="yes" style="margin:10px; border:0px;" height=450 width=100% src="\'+URLPopUp+\'"></iframe>\');
+                    $("#PCO_Modal_MensajeBotones").html(\'<button id="boton_filtrar" type="button" class="btn btn-outline btn-info" data-dismiss="modal" onclick="CargarFormulario();" >Cerrar</button></a>\');
+                }
+                
+                //TODO: Pasar a JS general para permitir llamado desde otros apartados, ej, Kanban
+                //IdDocumentacion contiene dos datos, IdRegistro|TipoDocumentacion
+                //TipoDocCreacion contiene el formato de documentacion (redundante con parte del primer parametro pero usado solo en creacion)
+                function PCOJS_EditarDocumentacion(IdDocumentacion,TipoDocCreacion)
+                    {
+                        IdDocumentacion=IdDocumentacion+"";
+                        PartesIdDocumentacion=IdDocumentacion.split("|");
+                        //Determina tipo de documentacion para establecer el tipo de llamado.
+                        
+                        IdRegistro=PartesIdDocumentacion[0];
+                        TipoRegistro=PartesIdDocumentacion[1];
+                        if (IdRegistro!="" && IdRegistro!="0")
+                            {
+                                //Determina si va a editar un contenido enriquecido o un diagrama
+                                if (TipoRegistro=="Enriquecido" || TipoDocCreacion=="Enriquecido")
+                                    var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-43:0:id:"+IdRegistro+"&Presentar_FullScreen=1&Precarga_EstilosBS=1&origen=Formulario&formato="+TipoRegistro;
+                                if (TipoRegistro=="Diagrama")
+                                    var URLPopUp="inc/mxgraph/javascript/scripts/grapheditor/www/index.php?PCO_CampoOrigen=documentacion&PCO_TablaOrigen=core_documentacion&PCO_CampoLlave=id&PCO_ValorLlave="+IdRegistro;
+                            }
+                        else
+                            var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-43:0&Presentar_FullScreen=1&Precarga_EstilosBS=1&origen_creacion=Formulario&detalle_origen_creacion='.$registro_formulario["id"].'&formato_creacion="+TipoDocCreacion;
+                        
+                        //Carga el editor de documentacion
+                        PCO_VentanaPopup(URLPopUp,"Docs"+IdRegistro,"toolbar=no, location=no, directories=0, directories=no, status=no, location=no, menubar=no ,scrollbars=no, resizable=yes, fullscreen=no, titlebar=no, width=900, height=700");
+                    }
+                function PCOJS_VisualizarDocumentacion(IdDocumentacion)
+                    {
+                        alert("Sin acceso a elemento: "+IdDocumentacion);
+                    }
+		    </script>';
 
 
 		//Si no encuentra formulario presenta error
@@ -8495,9 +8564,13 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                 $PCO_EnlaceScriptPRE ="javascript:PCOJS_CargarArchivoPCoderBD('{$LlaveParcial_FirmaSistema}','','','','No','B','core_formulario','pre_script', '{$formulario}','php','PHP'       ,'Iconos','1','<font color=white>Script_PRE</font> Formulario_{$formulario}_(PHP){$TituloPCoder_COMPLEMENTO}');";
                 $PCO_EnlaceScriptPOST="javascript:PCOJS_CargarArchivoPCoderBD('{$LlaveParcial_FirmaSistema}','','','','No','B','core_formulario','post_script','{$formulario}','php','PHP'       ,'Iconos','1','<font color=white>Script_POST</font> Formulario_{$formulario}_(PHP){$TituloPCoder_COMPLEMENTO}');";
                 $PCO_EnlaceScriptJS  ="javascript:PCOJS_CargarArchivoPCoderBD('{$LlaveParcial_FirmaSistema}','','','','No','B','core_formulario','javascript' ,'{$formulario}','js' ,'JavaScript','Iconos','1','<font color=white>Script_JS</font> Formulario_{$formulario}_(PHP){$TituloPCoder_COMPLEMENTO}');";
+                $PCO_EnlaceScriptDOCS  ="javascript:LMQTP=PCOJS_DocumentacionFormulario('{$formulario}',-55);";
 
 				$ComplementoTituloFormulario='
 				<div class="pull-right">
+                    <a class="btn btn-default btn-xs" data-toggle="modal" href="'.$PCO_EnlaceScriptDOCS.'">
+                        <div><i class="fa fa-file-word-o"></i> Docs</div>
+                    </a>
                     <a class="btn btn-primary btn-xs" data-toggle="modal" title="'.$MULTILANG_FrmAdvScriptForm.'" href="'.$PCO_EnlaceScriptPRE.'">
                         <div><i class="fa fa-file-code-o"></i> PRE</div>
                     </a>
@@ -8512,6 +8585,21 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 						<div><i class="fa fa-cog fa-spin fa-fw"></i> '.$MULTILANG_Configuracion.' / '.$MULTILANG_Agregar.' '.$MULTILANG_Elementos.'</div>
 					</a>
 				</div>';
+            }
+        else
+            {
+                //Determina si el formulario tiene documentacion asociada y muestra el boton
+                $TotalDocumentacionElemento=PCO_EjecutarSQL("SELECT COUNT(*) FROM core_documentacion WHERE origen='Formulario' AND detalle_origen='{$formulario}' AND visibilidad='Usuario' ")->fetchColumn();
+                if ($TotalDocumentacionElemento!="0")
+                    {
+                        $PCO_EnlaceScriptDOCS  ="javascript:LMQTP=PCOJS_DocumentacionFormulario('{$formulario}',-56);";
+        				$ComplementoTituloFormulario='
+        				<div class="pull-right">
+                            <a class="btn btn-info btn-xs" data-toggle="modal" href="'.$PCO_EnlaceScriptDOCS.'">
+                                <div><i class="fa fa-file-word-o"></i> Docs</div>
+                            </a>
+        				</div>';                        
+                    }
             }
 
 		// Crea ventana si aplica para el form

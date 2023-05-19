@@ -56,7 +56,7 @@ ArchivosFijos=" tmp/par_cambios.txt tmp/par_sql.txt tmp/par_compat.txt tmp/leame
 #Agregar un texto para parches sin version que al menos recomiende la minima:  SE RECOMIENDA APLICAR A UNA VERSION MINIMA DE xx.xx
 LogCambios="
 
-* Added [CORE]: Nueva función PCOJS_ValidarExistenciaURL permite validar si una URL existe o no.  Util para procesar solicitudes AJX o similares revisando primero que el destino exista.
+* Added [CORE]: Nueva función PCOJS_ValidarExistenciaURL permite validar si una URL existe o no.  Util para procesar solicitudes AJAX o similares revisando primero que el destino exista.
 * Added [FORMS]: Controles tipo lista de seleccion reemplazan variables dinámicas PHP en aquellos tags tipo OPTGROUP
 * Added [FORMS]: Controles tipo lista de seleccion permiten la insercion de TAGS extra en cada opción (esto incluye a los tipos de etiqueta OPTION y OPTGROUP).  Util para indicar cosas como data-icon para especificar imágenes en cada opción, data-lang, data-cualquiercosa que usted necesite.  Esto se logra mediante la inclusión automática del valor de un campo llamado tags_extra que si se encuentra disponible en la tabla o vista desde la cual se carga la lista será usado para tomar su valor e inyectarlo como TAGS adicionales al option.
 * Added [FORMS]: Controles tipo check soportan textos de ayuda.  Serán presentados como icono al lado derecho del texto que acompaña al check.
@@ -80,7 +80,7 @@ LogCambios="
 * Fixed [CORE]: Compatibilidad PHP 8+ Compatibilidad entre operaciones aritméticas de tipos string e integer
 * Fixed [CORE]: Compatibilidad PHP 8+ Arreglos con llaves constantes en lugar de cadenas para editor PCoder
 * Fixed [USUARIOS]: @jaimeaba3 Correccion en ficha de usuarios que no recuperaba correctamente la plantilla asignada en procesos de actualizacion.
-* Enhan [CORE]: Capacidad de multilenguaje.  Ahora el Framweork permite interactuar con múltiples lenguajes de programación, configurables por sus parámetros y mediante los cuales se podría tener una aplicación desarrollada en múltiples lenguajes a la vez, donde todos convergen al mismo punto.   La sintaxis de variables en notacion PHP y su reemplazo dinámico sobre cada script permite además que variables de PHP sean pasadas de manera transparente a cualquier otro lenguaje de programción disponible del lado del servidor.
+* Added [CORE]: Capacidad de multilenguaje.  Ahora el Framweork permite interactuar con múltiples lenguajes de programación, configurables por sus parámetros y mediante los cuales se podría tener una aplicación desarrollada en múltiples lenguajes a la vez, donde todos convergen al mismo punto.   La sintaxis de variables en notacion PHP y su reemplazo dinámico sobre cada script permite además que variables de PHP sean pasadas de manera transparente a cualquier otro lenguaje de programción disponible del lado del servidor.
 * Enhan [CORE]: Inclusion de Composer sobre el nucleo de desarrollo
 * Enhan [CORE]: Adicion y actualizacion de jquery/jquery version 3.6.0 a 3.6.1 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 * Enhan [CORE]: Adicion de jbdemonte/barcode como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
@@ -90,7 +90,6 @@ LogCambios="
 * Enhan [CORE]: Adicion y actualizacion de facebook/react version 17.0.2 a 18.2.0 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
 * Enhan [CORE]: Incluido script que retorna estado general del sistema en JSON, conectividad, motor de base de datos, etc. todo basado en una sesion particular.
 * Enhan [CORE]: Agregada alerta sobre no existencia o instalacion de las funciones POSIX de PHP sobre el servidor que corre el Framework.
-* Enhan [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).
 * Enhan [DEV]: Las funciones automáticas de regeneración de elementos desde los XML y ejecución de scripts no son llamadas en entornos de desarrollo del framework.  Esto permitirá trazabilidad sobre archivos específicos.
 * Enhan [CORE]: Agregados entornos adicionales al archivo de despliegue de Vagrant
 * Enhan [CORE]: Nombres de campo aleatorios en formulario de login.  Esto permite evitar ataques automatizados de fuerza bruta cuando el atacante conoce los nombres de los campos y la acción del formulario.
@@ -98,16 +97,15 @@ LogCambios="
 * Enhan [CORE]: Nueva funcion PCO_GenerarArchivoTemporal() permite crear punteros de manera dinámica hacia archivos temporales según su tipo de instalación.
 * Enhan [CORE]: Actualizados enlaces en navegación hacia foros de desarrolladores (Github/Discuccions)
 * Enhan [CORE]: Adevertencia desplegada para instalaciones sin soporte a funciones PHP tmpfile y que requieren hacer uso de PMyDB/Adminer deben usar el modulo de versiones 22.3 o inferiores que no requieren dicha funcion.  Simplemente se sobreescribe el contenido del index del módulo.
-* Enhan [CORE]: Parametros de aplicacion son ahor gestionados desde objeto interno FRM -39.  Se elimina todo el código asociado equivalente a 560K
+* Enhan [CORE]: Parametros de aplicacion son ahora gestionados desde objeto interno FRM -39.  Se elimina todo el código asociado equivalente a 560K
 * Enhan [CORE]: Nuevos parámetros de aplicación contienen los créditos del autor o empresa, el texto de licencia asociado a la aplicación y un campo para indicar si los usuarios en su primer ingreso tienen que aceptar la licencia o no.
-* Enhan [CORE]: Nuevo parámetros de aplicación permite almacenar llave de API para consumos de OpenAI desde las diferentes funciones del Framework.
 * Enhan [KANBAN]: Reporte de tareas archivadas por tablero es ahora exportable en excel.
 * Enhan [KANBAN]: Se agrega nuevo boton con reporte de tareas activas en el tablero con posibilidad de descarga.
 * Enhan [KANBAN]: Agregados campos de historial y fecha de inicio a informes exportables de tareas activas y archivadas por tablero.
 * Enhan [KANBAN]: Ajustado informe interno de tareas archivadas (-3) para generarse a través de consulta directa y no de elementos individuales.
 * Fixed [PCODER]: @jaimeaba3 Al intentar almacenar valores vacíos en scripts PRE,POS y JS se obtiene mensaje de error de BD al no recibir valor para almacenar.
 * Enhan [CORE]: Sobre motores MySQL/MariaDB El framework agrega como comentario a todos los queries enviados de manera que se pueda visualizar por logs del motor qué usuario envía cada consulta.
-* Enhan [CORE]: La funcion PCO_FileGetContents_CURL puede recibiar ademas de la URL un segundo parámetro en JSON con la lista de opciones que serán utilizadas para inicializar el objeto cURL.  De esta manera cada llamada puede ser personalizada por el desarrollador cuando consuma orígenes o servicios externos.
+* Enhan [CORE]: La funcion PCO_FileGetContents_CURL puede recibir ademas de la URL otros parámetros en JSON con la lista de opciones que serán utilizadas para inicializar el objeto cURL.  De esta manera cada llamada puede ser personalizada por el desarrollador cuando consuma orígenes o servicios externos.  Los parámetros extra considerados son: OpcionesJSON para establecer los curl_setopt, CabecerasJSON que establecen el arreglo de CURLOPT_HTTPHEADER y PostJSON que establece los valores de CURLOPT_POSTFIELDS cuando aplique.   Cualquier llamado previo a dicha funcion deberá incluir los parámetros nuevos, aún cuando sean vacíos.
 * Fixed [CORE]: @foag Validacion de escenarios de despliegue a entornos vagabundos
 * Added [CORE]: Formulario de parámetros incluye acceso a nueva sección para definir proveedores genéricos para posibles API de integración, permitiendo definir su nombre, llave, secretos, URL base de consumo y scripts.  Esta información podría ser usada directamente desde cualquier script de Práctico teniendo así un sitio para almacenar llaves sin quedar expuestas por código.
 * Added [CORE]: Módulo complementario para despacho de correos electrónicos mediante API de Twilio Sendgrid se encuentra disponible sobre la carpeta complementaria.  Quien lo desee habilitar puede mover la carpeta a su carpeta de módulos de la instalación y pegar el código del servicio web asociado o crear su propio código.
@@ -115,16 +113,33 @@ LogCambios="
 * Added [KANBAN]: Editor de diagramas Kanban detecta si el usuario tiene acceso a la tarea en modo de edición y le permite su edición de diagrama asociado.
 * Added [KANBAN]: Tableros kanban cuentan con filtro adicional en la parte superior que permite visualizar sobre el tablero sólo aquellas tareas que cumplan con los criterios deseados.
 * Enhan [KANBAN]: Nuevos índices por fechas en tablas para actividades Kanban.
+* Added [KANBAN]: Tableros Kanban permiten crear categorias personalizadas para la clasificación y filtrado posterior de tareas.
 * Added [FORMS]: Edición de eventos sobre controles de formulario es realizada sobre nuevo editor de PCoder, permitiendo heredar funcionalidades clave como backups automáticos, visor de diferencias, entre otros.
 * Added [FORMS]: @foag Creada nueva palabra clave sobre controles de texto libre que permite transformarlos en contenedores de Tags separados por coma automáticamente.  Para esto simplemente agregar la palabra clave PCO_Tags en la personalización del control.
 * Added [FORMS]: Edición de eventos de controles de formulario se hace ahora mediante el nuevo {P}Coder
-* Added [FORMS]: Informes básicos de analítica de aplicación son reemplazados por objetos internos en lugar de código.
+* Added [FORMS]: Informes básicos de analítica de aplicación son reemplazados por objetos internos en lugar de código.  Se agregan además los informes de usos sobre edición de código.
+* Added [MODULOS]: Para informes y formularios registrados bajo un módulo se presentan sólo aquellos a los cuales el usuario desarrollador tiene acceso.  Aquellos elementos no asociados a ningún módulo (huérfanos) serán siempre presentados.  Esto permite la segmentación de funciones entre desarrolladores de una misma aplicación.  Usuario admin siempre verá el 100% de los elementos para evitar ocultamientos por error.
+* Added [CORE]: Agregadas tablas de documentacion de sistema.  A través de estas se podrá almacenar toda la documentación interna asociada a procesos de desarrollo y documentación visible para usuarios finales bajo diferentes tipos de formato.  Por ahora se deja disponible en formularios pero su funcionalidad es extensible al resto de módulos del Framework.   Un botón de documentación será presentado automáticamente al usuario final cuando se cargue un formulario que contenga documentos asociados y visibles a usuario final.
+* Enhan [CORE]: Agregada variable de PCOSESS_LoginUsuario al scope cuando se establecen conexiones al motor de manera que este disponible como una variable más de SQL.
+* Added [FORMS]: Campos de tipo texto largo presentan (ya permitían) el establecimiento de su variable de valor predeterminado durante el diseño del campo.
+* Enhan [CORE]: @rafaelposadaf PR#24: mejoras estéticas css pmydb 3c773f0521112170e584ae40001b287373e9ad9e
 
+
+
+
+* Added [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).
+
+
+* Added [CORE]: Nuevo parámetros de aplicación permite almacenar llave de API para consumos de OpenAI desde las diferentes funciones del Framework.  Esto incluye funciones extendidas de I.A. hacia el editor {P}Coder como código predictivo, análsis de vulnerabilidades, documentación automatizadas, entre otros.
 
 
 
 
 * Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna, peso->PCOBD_Peso
+
+
+campo de camara no captura foto
+
 
 
 Falta:
@@ -488,6 +503,24 @@ ADD INDEX fecha_inicio (fecha_inicio);
 ALTER TABLE core_kanban ADD INDEX categoria(categoria);
 
 ALTER TABLE core_kanban CHANGE categoria categoria varchar(255) COLLATE 'utf8_general_ci' DEFAULT '';
+
+DROP TABLE IF EXISTS core_documentacion;
+CREATE TABLE core_documentacion (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  hash_unico varchar(255) NOT NULL,
+  titulo varchar(255) NOT NULL,
+  estructura_tipo varchar(10) NOT NULL COMMENT 'Seccion,Menu,Funcion',
+  estructura_seccion varchar(255) NOT NULL,
+  estructura_funcion varchar(255) NOT NULL,
+  origen varchar(10) NOT NULL COMMENT 'Archivo,Formulario,Informe',
+  detalle_origen varchar(255) NOT NULL COMMENT 'IdObjeto,Path',
+  formato varchar(255) NOT NULL DEFAULT 'Enriquecido' COMMENT 'Enriquecido,Diagrama',
+  documentacion mediumtext NOT NULL,
+  visibilidad varchar(255) NOT NULL DEFAULT 'Desarrollo' COMMENT 'Desarrollo,Usuario',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+ALTER TABLE core_kanban CHANGE historial historial text COLLATE 'utf8_general_ci' NULL COMMENT 'Guarda categorias en tableros padre';
 
 UPDATE core_opcionlista SET valor_visual = REPLACE(valor_visual, '{ $ ', '{$');
 UPDATE core_opcionlista SET valor_interno = REPLACE(valor_interno, '{ $ ', '{$');
