@@ -97,6 +97,7 @@
 		{
 			global $MULTILANG_Detalles,$MULTILANG_Basedatos,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_TipoMotor,$MULTILANG_Servidor;
 			global $PCOVAR_Administradores,$ZonaHoraria,$mensaje_final;
+			global $PCOSESS_LoginUsuario;
 			try
 				{
 					// Crea la conexion de acuerdo al tipo de motor

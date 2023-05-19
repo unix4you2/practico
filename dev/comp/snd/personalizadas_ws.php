@@ -61,9 +61,12 @@
 		DeNombre - Nombre visual del remitente.  Si no es recibido se usa el mismo valor de DeCorreo
 		ParaCorreo - (obligatorio) Direccion de correo del destinatario 
 		ParaNombre - Nombre visual del destinatario.  Si no es recibido se usa el mismo valor de ParaCorreo
-		Icono - Un icono, simbolo en UNICODE o cualquier otro prefiejo que quiera agregar al comienzo de su asunto de correo
 		Asunto - Asunto del mensaje de correo
 		Mensaje - Cuerpo del mensaje.  Debe coincidir su formato con la variable Formato
+		Icono - Un icono, simbolo codificado en UNICODE o cualquier otro prefiejo que quiera agregar al comienzo de su asunto de correo.  Refs: https://symbl.cc/en/ - https://www.compart.com/en/unicode/
+                Ejemplos:   Caduceo         &#9764;     ☤
+                            Informacion     &#8505;     ℹ
+                            Advertencia     &#9888;     ⚠
 
 	Salida:
 		Evaluacion de variables, envio del mensaje y almacenamiento de estadisticas
@@ -91,7 +94,7 @@
             ADD INDEX destinatario (destinatario),
             ADD INDEX aceptado (aceptado);
             
-    Ejemplo de llamado por GET: https://mailgw.colmedicos.com:8443/index.php?PCO_WSOn=1&PCO_WSKey=S97E674E4O&PCO_WSSecret=VJN93T996Y&PCO_WSId=PCOWS_MailGateway_Sendgrid&Token=e45ee7ce7e88149af8dd32b27f9512ce&Formato=dGV4dC9odG1s&DeCorreo=bm9yZXBseUBjb2xtZWRpY29zLmNvbQ==&DeNombre=RVJQIENvbG1lZGljb3M=&ParaCorreo=dW5peDR5b3UyQGdtYWlsLmNvbQ==&ParaNombre=Sm9obiBBcnJveWF2ZSBHLg==&Asunto=TWVuc2FqZSBkZSBwcnVlYmE=&Mensaje=SG9sYSBlc3RlIGVzIGVsIGN1ZXJvIDxiPmRlIGNvcnJlbzwvYj4hIQ==&Icono=JiMxMDAxNzsgJiM5ODg4OyA=
+    Ejemplo de llamado por GET: https://host.sudominio.com:8443/index.php?PCO_WSOn=1&PCO_WSKey=3231474E4O&PCO_WSSecret=VJN9356193&PCO_WSId=PCOWS_MailGateway_Sendgrid&Token=e45ee7ce7e88149af8dd32b27f9512ce&Formato=dGV4dC9odG1s&DeCorreo=bm9yZXBseUBjb2xtZWRpY29zLmNvbQ==&DeNombre=RVJQIENvbG1lZGljb3M=&ParaCorreo=dW5peDR5b3UyQGdtYWlsLmNvbQ==&ParaNombre=Sm9obiBBcnJveWF2ZSBHLg==&Asunto=TWVuc2FqZSBkZSBwcnVlYmE=&Mensaje=SG9sYSBlc3RlIGVzIGVsIGN1ZXJvIDxiPmRlIGNvcnJlbzwvYj4hIQ==&Icono=JiMxMDAxNzsgJiM5ODg4OyA=
     Quienes requieran envío de correos de gran peso pueden hacer el llamado al servicio con todos sus datos mediante POST.
 */
 if ($PCO_WSId=="PCOWS_MailGateway_Sendgrid")
