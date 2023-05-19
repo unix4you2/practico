@@ -205,49 +205,31 @@
                 <script type="text/javascript" src="inc/chat/js/chat.js"></script>
     <?php
     	    }
-    ?>
 
-
-    <?php
         //Si el usuario es admin por defecto presenta la barra lateral activa
         // DEPRECATED: (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$PCOSESS_SesionAbierta && @$PCO_Accion=="PCO_VerMenu") || 
         if ((@$PCOSESS_LoginUsuario!="" && @$PCOSESS_SesionAbierta && @$VerNavegacionIzquierdaResponsive==1))
-            echo '<script language="JavaScript">
-                    ver_navegacion_izquierda_responsive();
-                </script>';
-    ?>
+            echo '<script language="JavaScript"> ver_navegacion_izquierda_responsive(); </script>';
 
-    <?php
-        // Habilita el popup activo
-        if (@$popup_activo=="FormularioCampos")	
-            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalElementoFormulario").modal("show"); }); </script>';
-        if (@$popup_activo=="FormularioBotones")
-            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalBotonFormulario").modal("show"); }); </script>';
-        if (@$popup_activo=="FormularioDiseno")
-            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalDisenoFormulario").modal("show"); }); </script>';
-        if (@$popup_activo=="FormularioAcciones")
-            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalDisenoBotones").modal("show"); }); </script>';
-        if (@$popup_activo=="InformeAcciones")
-            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalEditaAccionesInforme").modal("show"); }); </script>';
-        if (@$popup_activo=="InformeCampos")
-            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalCamposInforme").modal("show"); }); </script>';
-        if (@$popup_activo=="InformeTablas")
-            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalTablaInforme").modal("show"); }); </script>';
-        if (@$popup_activo=="InformeCondiciones")
-            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalCondicionesInforme").modal("show"); }); </script>';
-        //Habilita pesatanas activas en el popup activo
-        if (@$pestana_activa_editor=="eventos_objeto-tab")
-            echo '<script type="text/javascript"> $(window).load(function(){ $(\'.nav-tabs a[href="#eventos_objeto-tab"]\').tab(\'show\'); }); </script>';
-    ?>
+		// Habilita el popup activo
+		if (@$popup_activo=="FormularioCampos")	 echo '<script type="text/javascript"> $(window).load(() => { $("#myModalElementoFormulario").modal("show");}); </script>';
+		if (@$popup_activo=="FormularioBotones") echo '<script type="text/javascript"> $(window).load(() => { $("#myModalBotonFormulario").modal("show");	}); </script>';
+		if (@$popup_activo=="FormularioDiseno")	 echo '<script type="text/javascript"> $(window).load(() => { $("#myModalDisenoFormulario").modal("show");	}); </script>';
+		if (@$popup_activo=="FormularioAcciones")echo '<script type="text/javascript"> $(window).load(() => { $("#myModalDisenoBotones").modal("show");		}); </script>';
+		if (@$popup_activo=="InformeCampos")	 echo '<script type="text/javascript"> $(window).load(() => { $("#myModalCamposInforme").modal("show");		}); </script>';
+		if (@$popup_activo=="InformeTablas")	 echo '<script type="text/javascript"> $(window).load(() => { $("#myModalTablaInforme").modal("show");		}); </script>';
+		if (@$popup_activo=="InformeCondiciones")echo '<script type="text/javascript"> $(window).load(() => { $("#myModalCondicionesInforme").modal("show");}); </script>';
+		if (@$popup_activo=="InformeAcciones")	 echo '<script type="text/javascript"> $(window).load(() => { $("#myModalEditaAccionesInforme").modal("show"); }); </script>';
+		//Habilita pesatanas activas en el popup activo
+		if (@$pestana_activa_editor=="eventos_objeto-tab")echo '<script type="text/javascript"> $(window).load(() => { $(\'.nav-tabs a[href="#eventos_objeto-tab"]\').tab(\'show\'); }); </script>';
+	?>
 
     <script language="JavaScript">
         //Actualiza tamano del marco principal para garantizar siempre un tamano adecuado de fondo
         //TODO: Verificar consistencia en paginas grades como la administrativa
         $( function() {
-            var PCOJSVAR_HayScroll=false;
             //Verifica si hay scroll  METODO 1
-            if (document.getElementById("page-wrapper").scrollHeight==$(document).height())
-                PCOJSVAR_HayScroll=true;
+            const PCOJSVAR_HayScroll=document.getElementById("page-wrapper").scrollHeight==$(document).height();
             //Si hay scroll el alto debe tener !important para que se estire hasta abajo en la página.  Si no hay scroll solo 100%
             if( PCOJSVAR_HayScroll )
                 {
@@ -264,16 +246,12 @@
 
     <script language="JavaScript">
         //Carga los tooltips programados en la hoja.  Por defecto todos los elementos con data-toggle=tootip
-        $(function () {
-          $('[data-toggle="tooltip"]').tooltip({'container':'body'});
-        })
+        $(function () { $('[data-toggle="tooltip"]').tooltip({'container':'body'}); })
     </script>
 
     <script language="JavaScript">
         //Carga los popovers programados en la hoja.  Por defecto todos los elementos con data-toggle=popover
-        $(function () {
-          $('[data-toggle="popover"]').popover()
-        })
+        $(function () { $('[data-toggle="popover"]').popover() })
     </script>
 
     <script language="JavaScript">
@@ -321,60 +299,51 @@
                         PCO_InformesListaColumnasDT=$PCO_InformesListaColumnasDT
                     */";
                 
-                for ($i=0; $i<count($TablasDataTable);$i++)
+				foreach ($TablasDataTable as $i => $TablaDataTable)
                     {
                         //Agrega codigo para activacion de DataTable solamente cuando se tenga un ID de tabla valido
-                        if ($TablasDataTable[$i]!="")
+                        if ($TablaDataTable!="")
                             {
                                 $Paginacion=trim($TablasDataTablePaginaciones[$i]);
                                 $ColumnaTotales=intval(trim($TablasDataTableTotales[$i]))-1;
                                 $ColumnaTotalesVisual=trim($TablasDataTableTotales[$i]);
                                 $CadenaFormateadaTotales=trim($TablasDataTableFormatosTotales[$i]);
-                                $CadenaExportaCLP=trim($TablasDataTableExportaCLP[$i]); if ($CadenaExportaCLP=="S") $CadenaExportaCLP='{ extend: "copy",    className: "InformeBotonCopiar" },'; else $CadenaExportaCLP='';
-                                $CadenaExportaCSV=trim($TablasDataTableExportaCSV[$i]); if ($CadenaExportaCSV=="S") $CadenaExportaCSV='{ extend: "csv",     className: "InformeBotonCsv" },   '; else $CadenaExportaCSV='';
-                                $CadenaExportaXLS=trim($TablasDataTableExportaXLS[$i]); if ($CadenaExportaXLS=="S") $CadenaExportaXLS='{ extend: "excel",   className: "InformeBotonExcel" ,  title: "" }, '; else $CadenaExportaXLS='';
-                                $CadenaExportaPDF=trim($TablasDataTableExportaPDF[$i]); if ($CadenaExportaPDF=="S") $CadenaExportaPDF='{ extend: "pdf",     className: "InformeBotonPdf" },   '; else $CadenaExportaPDF='';
-                                $CadenaPersonalizarColumnas=trim($TablasDataTableDefineCOLS[$i]); if ($CadenaPersonalizarColumnas=="S") $CadenaPersonalizarColumnas='{ extend: "colvis",  text:"'.$MULTILANG_Columna.'(s)",  className: "InformeBotonCopiar" }, '; else $CadenaPersonalizarColumnas='';
+								$CadenaFormateadaTotales=trim($TablasDataTableFormatosTotales[$i]);
+								$CadenaExportaCLP=trim($TablasDataTableExportaCLP[$i])=="S" ?			'{ extend: "copy",	className: "InformeBotonCopiar" },' : '';
+								$CadenaExportaCSV=trim($TablasDataTableExportaCSV[$i])=="S" ?			'{ extend: "csv",	className: "InformeBotonCsv" },	' : '';
+								$CadenaExportaXLS=trim($TablasDataTableExportaXLS[$i])=="S" ?			'{ extend: "excel", className: "InformeBotonExcel" , title: "" }, ' : '';
+								$CadenaExportaPDF=trim($TablasDataTableExportaPDF[$i])=="S" ?			'{ extend: "pdf",	className: "InformeBotonPdf" },	' : '';
+								$CadenaPersonalizarColumnas=trim($TablasDataTableDefineCOLS[$i])=="S" ? '{ extend: "colvis", text:"'.$MULTILANG_Columna.'(s)", className: "InformeBotonCopiar" }, ' : '';
 
                                 //DEFINE CADENAS EN PANELES DE FILTRADO
-                                $CadenaPosicionPanelesArriba="";
-                                $CadenaPosicionPanelesAbajo="";
-                                $Cadena_pane_cascada="";
-                                $Cadena_pane_colapsado="";
-                                $Cadena_pane_columnas="";
-                                $Cadena_pane_subtotalesrelativos="";
-                                $Cadena_pane_conteos="";
-                                $Cadena_pane_controles="";
-                                $Cadena_pane_control_colapsar="";
-                                $Cadena_pane_control_ordenar="";
-                                if ($TablasDataTable_pane_activado[$i]=="S") $CadenaPosicionPanelesArriba="P";
-                                if ($TablasDataTable_pane_activado[$i]=="I") $CadenaPosicionPanelesAbajo="P";
-                                if ($TablasDataTable_pane_cascada[$i]=="S") $Cadena_pane_cascada=" cascadePanes: true, ";
-                                if ($TablasDataTable_pane_colapsado[$i]=="S") $Cadena_pane_colapsado=" initCollapsed: true, ";
-                                if ($TablasDataTable_pane_columnas[$i]!="") $Cadena_pane_columnas=' layout: "columns-'.$TablasDataTable_pane_columnas[$i].'", ';
-                                if ($TablasDataTable_pane_subtotalesrelativos[$i]=="S") $Cadena_pane_subtotalesrelativos=" viewTotal: false, ";
-                                if ($TablasDataTable_pane_conteos[$i]!="S") $Cadena_pane_conteos=" viewCount: false, ";
-                                if ($TablasDataTable_pane_controles[$i]!="S") $Cadena_pane_controles=" controls: false, ";
-                                if ($TablasDataTable_pane_control_colapsar[$i]!="S") $Cadena_pane_control_colapsar=" collapse: false, ";
-                                if ($TablasDataTable_pane_control_ordenar[$i]!="S") $Cadena_pane_control_ordenar=" orderable: false, ";
+								$CadenaPosicionPanelesArriba=$TablasDataTable_pane_activado[$i] =="S" ? "P" : "";
+								$CadenaPosicionPanelesAbajo=$TablasDataTable_pane_activado[$i]	=="I" ? "P" : "";
+								$Cadena_pane_cascada=		$TablasDataTable_pane_cascada[$i]	=="S" ? " cascadePanes: true, " : "";
+								$Cadena_pane_colapsado=		$TablasDataTable_pane_colapsado[$i] =="S" ? " initCollapsed: true, " : "";
+								$Cadena_pane_columnas=		$TablasDataTable_pane_columnas[$i]	!=""  ? ' layout: "columns-'.$TablasDataTable_pane_columnas[$i].'", ' : "";
+								$Cadena_pane_conteos=		$TablasDataTable_pane_conteos[$i]	!="S" ? " viewCount: false, " : "";
+								$Cadena_pane_controles=		$TablasDataTable_pane_controles[$i] !="S" ? " controls: false, " : "";
+								$Cadena_pane_subtotalesrelativos=	 $TablasDataTable_pane_subtotalesrelativos[$i]	=="S" ? " viewTotal: false, " : "";
+								$Cadena_pane_control_colapsar=		 $TablasDataTable_pane_control_colapsar[$i]		!="S" ? " collapse: false, " : "";
+								$Cadena_pane_control_ordenar=		 $TablasDataTable_pane_control_ordenar[$i]		!="S" ? " orderable: false, " : "";
                                 $CadenaPanelesFiltrado='
-                                            searchPanes:
-                                                {
-                                                    '.$Cadena_pane_cascada.'
-                                                    '.$Cadena_pane_colapsado.'
-                                                    '.$Cadena_pane_columnas.'
-                                                    '.$Cadena_pane_subtotalesrelativos.'
-                                                    '.$Cadena_pane_conteos.'
-                                                    '.$Cadena_pane_controles.'
-                                                    '.$Cadena_pane_control_colapsar.'
-                                                    '.$Cadena_pane_control_ordenar.'
-                                                },
-                                        ';
+									searchPanes:
+										{
+											'.$Cadena_pane_cascada.'
+											'.$Cadena_pane_colapsado.'
+											'.$Cadena_pane_columnas.'
+											'.$Cadena_pane_subtotalesrelativos.'
+											'.$Cadena_pane_conteos.'
+											'.$Cadena_pane_controles.'
+											'.$Cadena_pane_control_colapsar.'
+											'.$Cadena_pane_control_ordenar.'
+										},
+									';
 
 /*
 INICIALIZACION CON AJAX
 $(document).ready( function() {
-  var table = $('#example').DataTable({
+  const table = $('#example').DataTable({
     ajax: '../resources/options.json',
     dom: 'Plfrtip',
     columns: [
@@ -397,11 +366,11 @@ $(document).ready( function() {
                                 $CadenaFormateadaTotales=str_replace("_TOTAL_PAGINA_","'+pageTotal +'",$CadenaFormateadaTotales);
                                 $CadenaFormateadaTotales=str_replace("_TOTAL_INFORME_","'+total +'",$CadenaFormateadaTotales);
                                 $CadenaFormateadaTotales=str_replace("_COLUMNA_","$ColumnaTotalesVisual",$CadenaFormateadaTotales);
-        
+
                                 if ($Paginacion=="" || $Paginacion==0) $Paginacion=10;  //Si no hay paginacion personalizada pone 10 por defecto
 
                                 echo '
-                                    var oTable'.$i.' = $("#'.$TablasDataTable[$i].'").dataTable(
+                                    const oTable'.$i.' = $("#'.$TablaDataTable.'").dataTable(
                                         {
                                             destroy: true,   //Habilita autodestruccion de objeto si se necesita reinicializar
                                             dom: "'.$CadenaPosicionPanelesArriba.'Blfrtip'.$CadenaPosicionPanelesAbajo.'",  //Ej:  Blfrtip  Da formato a la tabla: Ver https://datatables.net/reference/option/dom
@@ -414,17 +383,17 @@ $(document).ready( function() {
                                                 //{ extend: "print", className: "InformeBotonPrint" }
                                             ],
                                             '.$CadenaPanelesFiltrado.'
-                                            "pageLength": '.$Paginacion.',
-                                            //"responsive": true, //Opcional, no necesario activarlo si la tabla ya tiene la clase nowrap y responsive (y ya esto se hace en la generacion del informe)
-                                            "scrollX": true,
-                                            "bAutoWidth": true,
-                                            //"bSort": false,
-                                            //"autoWidth": true,
+                                            pageLength: '.$Paginacion.',
+                                            //responsive: true, //Opcional, no necesario activarlo si la tabla ya tiene la clase nowrap y responsive (y ya esto se hace en la generacion del informe)
+                                            scrollX: true,
+                                            bAutoWidth: true,
+                                            //bSort: false,
+                                            //autoWidth: true,
                                             //aoColumns: [ { sWidth: "45%" }, { sWidth: "45%" }, { sWidth: "10%", bSearchable: false, bSortable: false } ],
-                                            //"aaSorting": [],  //Un alias a versiones viejas de order:
-                                            "order": [],
-                                            "fnInitComplete": function() {
-                                            this.fnAdjustColumnSizing(true);
+                                            //aaSorting: [],  //Un alias a versiones viejas de order:
+                                            order: [],
+                                            fnInitComplete: function() {
+                                            	this.fnAdjustColumnSizing(true);
                                             },';
 
                                 //Agrega configuraciones especificas para tablas con recuperacion por AJAX
@@ -437,17 +406,13 @@ $(document).ready( function() {
                                         foreach ($ListaCamposDT as $CampoDT)
                                             $CadenaCamposDT.="{ data: '{$CampoDT}' } ,";
                                         echo "
-                                            'processing': true,
-                                            'serverSide': true,
-                                            'serverMethod': 'post',
-                                            
-                                            'ajax': {
-                                                'url':'core/ajax.php?PCO_Accion=PCO_RecuperarRecordsetJSON_DataTable&IdRegistro_CacheSQL=".$TablasDataTableIdCache[$i]."&NroFilasBase={$Paginacion}'
+                                            processing: true,
+                                            serverSide: true,
+                                            serverMethod: 'post',
+                                            ajax: {
+                                                url:'core/ajax.php?PCO_Accion=PCO_RecuperarRecordsetJSON_DataTable&IdRegistro_CacheSQL=".$TablasDataTableIdCache[$i]."&NroFilasBase={$Paginacion}'
                                             },
-                                            
-                                            'columns': [
-                                                {$CadenaCamposDT}
-                                            ],
+                                            columns: [{ $CadenaCamposDT }],
     columnDefs: [{
         searchPanes: {
             show: true,
@@ -456,45 +421,41 @@ $(document).ready( function() {
     }],
                                         ";
                                     }
-        
+
                                 //Agrega al datatable el footer con autosuma cuando aplica
                                 if (trim($TablasDataTableTotales[$i])!="" && $CadenaFormateadaTotales!="")
                                     echo '
-                                            "footerCallback": function ( row, data, start, end, display ) {
-                                                var api = this.api(), data;
+                                            footerCallback: function ( row, data, start, end, display ) {
+                                                const api = this.api();
                                                 // Remueve el formato de la celda para obtener solamente el numero entero para la suma
-                                                    var intVal = function ( i ) {
-                                                        return typeof i === \'string\' ?
-                                                            i.replace(/[\$,]/g, \'\')*1 :
-                                                            typeof i === \'number\' ?
-                                                                i : 0;
+                                                    const intVal = function ( i ) {
+                                                        return typeof i === \'string\' 
+															? i.replace(/[\$,]/g, \'\')*1
+															: typeof i === \'number\'
+															? i : 0;
                                                     };
                                                 // Total de todas las paginas
                                                     total = api
                                                         .column( '.$ColumnaTotales.' )
                                                         .data()
-                                                        .reduce( function (a, b) {
-                                                            return intVal(a) + intVal(b);
-                                                        }, 0 );
+                                                        .reduce( function (a, b) { return intVal(a) + intVal(b); }, 0 );
                                                 // Total de la pagina actual
                                                     pageTotal = api
                                                         .column( '.$ColumnaTotales.', { page: \'current\'} )
                                                         .data()
-                                                        .reduce( function (a, b) {
-                                                            return intVal(a) + intVal(b);
-                                                        }, 0 );
+                                                        .reduce( function (a, b) { return intVal(a) + intVal(b); }, 0 );
                                                 // Actualiza el pie de pagina del datatable siempre en la columna 0
                                                 $( api.column( 0 ).footer() ).html(
                                                     \''.$CadenaFormateadaTotales.'\'
                                                 );
                                             },';
                                 echo '
-                                            "language": {
-                                                    "lengthMenu": "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
-                                                    "zeroRecords": "Nothing found - sorry",
-                                                    "info": "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
-                                                    "infoEmpty": "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
-                                                    "infoFiltered": "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
+                                            language: {
+                                                    lengthMenu: "'.$MULTILANG_Mostrando.' _MENU_ '.$MULTILANG_InfDataTableResXPag.'",
+                                                    zeroRecords: "Nothing found - sorry",
+                                                    info: "'.$MULTILANG_InfDataTableViendoP.' _PAGE_ '.$MULTILANG_InfDataTableDe.' _PAGES_",
+                                                    infoEmpty: "'.$MULTILANG_InfDataTableNoRegistrosDisponibles.'",
+                                                    infoFiltered: "('.$MULTILANG_InfDataTableFiltradoDe.' _MAX_ '.$MULTILANG_InfDataTableRegTotal.')",
                                                     oPaginate: { sFirst:"'.$MULTILANG_Primero.'",sLast:"'.$MULTILANG_Ultimo.'",sNext:"'.$MULTILANG_Siguiente.'",sPrevious:"'.$MULTILANG_Previo.'" },
                                                     sEmptyTable:"'.$MULTILANG_InfDataTableNoDatos.'",
                                                     sSearch:"'.$MULTILANG_Buscar.':",
@@ -503,22 +464,22 @@ $(document).ready( function() {
                                                     sZeroRecords:"'.$MULTILANG_InfDataTableNoRegistros.'",
 
                                                     searchPanes: {
-                                                            title: {
-                                                                _: "Filtros aplicados: %d",
-                                                                0: "Sin filtros aplicados",
-                                                                1: "Un filtro aplicado",
-                                                            },
-                                                            collapse: {
-                                                                0: "Opciones de filtro",
-                                                                1: "Filtro (uno aplicado)",
-                                                                _: "Opciones de filtro (%d)"
-                                                            },
-                                                            collapseMessage: "Colapsar todo",
-                                                            showMessage: "Mostrar todo",
-                                                            clearMessage: "Quitar filtros",
-                                                            count: "{total}",
-                                                            countFiltered: "{shown} / ({total})"
-                                                        }
+														title: {
+															_: "Filtros aplicados: %d",
+															0: "Sin filtros aplicados",
+															1: "Un filtro aplicado",
+														},
+														collapse: {
+															0: "Opciones de filtro",
+															1: "Filtro (uno aplicado)",
+															_: "Opciones de filtro (%d)"
+														},
+														collapseMessage: "Colapsar todo",
+														showMessage: "Mostrar todo",
+														clearMessage: "Quitar filtros",
+														count: "{total}",
+														countFiltered: "{shown} / ({total})"
+													}
                                                 }
                                         }
                                     );
@@ -526,13 +487,10 @@ $(document).ready( function() {
                             } //Fin si hay un ID valido de DataTable
                     } //Fin activacion de todas las DT
             ?>
-            
+
             //Ejecucion de algunas funciones para correcion de estilos y responsive sobre datatables
             //Ref: https://www.gyrocode.com/articles/jquery-datatables-column-width-issues-with-bootstrap-tabs/
-            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){
-               $($.fn.dataTable.tables(true)).DataTable()
-                  .columns.adjust();
-            });
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function(e){ $($.fn.dataTable.tables(true)).DataTable().columns.adjust(); });
         });
 
         //Busca por posibles graficos sin datos
@@ -550,17 +508,13 @@ $(document).ready( function() {
 		$(function(){
 			$("td[contenteditable=true]").on("blur", function(){
 			//$("td[contenteditable=true]").blur( function(){
-				var nuevo_valor_campo = $(this).text();
-				var datos_campo_peticion = $(this).attr("id");
-				var partes_campo_peticion = datos_campo_peticion.split(":");
-				var tabla_peticion=partes_campo_peticion[0];
-				var campo_peticion=partes_campo_peticion[1];
-				var PCO_CambioEstado_CampoLlave=partes_campo_peticion[2];
-				var id_peticion=partes_campo_peticion[3];
-				
-				var ParametrosApertura="PCO_Accion=cambiar_estado_campo&Presentar_FullScreen=1&PCO_CambioEstado_NoUsarCore=1&PCO_CambioEstado_NegarRetorno=1&tabla="+tabla_peticion+"&campo="+campo_peticion+"&id="+id_peticion+"&valor="+nuevo_valor_campo+"&PCO_CambioEstado_CampoLlave="+PCO_CambioEstado_CampoLlave;
-				Actualizacion=PCO_ObtenerContenidoAjax(1,"index.php",ParametrosApertura);
-				
+				const nuevo_valor_campo = $(this).text();
+				const datos_campo_peticion = $(this).attr("id");
+				const [tabla_peticion, campo_peticion, PCO_CambioEstado_CampoLlave, id_peticion] = datos_campo_peticion.split(":");
+
+				const ParametrosApertura="PCO_Accion=cambiar_estado_campo&Presentar_FullScreen=1&PCO_CambioEstado_NoUsarCore=1&PCO_CambioEstado_NegarRetorno=1&tabla="+tabla_peticion+"&campo="+campo_peticion+"&id="+id_peticion+"&valor="+nuevo_valor_campo+"&PCO_CambioEstado_CampoLlave="+PCO_CambioEstado_CampoLlave;
+				PCO_ObtenerContenidoAjax(1,"index.php",ParametrosApertura);
+
 				//Presenta mensaje temporal de actualizacion durante 1 segundo
 				PCOJS_MostrarMensajeCargandoSimple(1000);
 			});
@@ -572,17 +526,12 @@ $(document).ready( function() {
     <?php
         //Carga las funciones activadoras de diferentes tipos de control (si fue encontrado algun campo de ese tipo)
         //DatePicker
-        if (@$funciones_activacion_datepickers!="")
-            echo '<script type="text/javascript">'.$funciones_activacion_datepickers.'</script>';
+        if (@$funciones_activacion_datepickers!="") echo '<script type="text/javascript">'.$funciones_activacion_datepickers.'</script>';
         //Deslizadores
-        if (@$funciones_activacion_sliders!="")
-            echo '<script type="text/javascript">'.$funciones_activacion_sliders.'</script>';
+        if (@$funciones_activacion_sliders!="") echo '<script type="text/javascript">'.$funciones_activacion_sliders.'</script>';
         //Canvas
-        if (@$funciones_activacion_canvas!="")
-            echo '<script type="text/javascript">'.$funciones_activacion_canvas.'</script>';
-    ?>
+        if (@$funciones_activacion_canvas!="") echo '<script type="text/javascript">'.$funciones_activacion_canvas.'</script>';
 
-    <?php
         // Calcula tiempos de ejecucion del script
         $tiempo_final_script = PCO_ObtenerMicrotime();
         $tiempo_total_script = $tiempo_final_script - @$tiempo_inicio_script;
@@ -601,36 +550,18 @@ $(document).ready( function() {
     ?>
         <script language="JavaScript">
             //Crea evento para el selector de iconos (cuando aplica)
-            $('#lib_glyphicon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value='glyphicon '+e.icon;
-            });
-            $('#lib_ionicon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value='fa '+e.icon;
-            });
-            $('#lib_fontawesome').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value='fa '+e.icon;
-            });
-            $('#lib_weathericon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value='wi fa '+e.icon;
-            });
-            $('#lib_mapicon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value=e.icon;
-            });
-            $('#lib_octicon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value='octicon '+e.icon;
-            });
-            $('#lib_typicon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value='typcn fa '+e.icon;
-            });
-            $('#lib_elusiveicon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value=e.icon;
-            });
+			$('#lib_glyphicon').iconpicker().on('change',	(e) => { document.PCO_FormItemMenu.imagen.value='glyphicon '+e.icon; });
+			$('#lib_ionicon').iconpicker().on('change',		(e) => { document.PCO_FormItemMenu.imagen.value='fa '+e.icon; });
+			$('#lib_fontawesome').iconpicker().on('change', (e) => { document.PCO_FormItemMenu.imagen.value='fa '+e.icon; });
+			$('#lib_weathericon').iconpicker().on('change', (e) => { document.PCO_FormItemMenu.imagen.value='wi fa '+e.icon; });
+			$('#lib_octicon').iconpicker().on('change',		(e) => { document.PCO_FormItemMenu.imagen.value='octicon '+e.icon; });
+			$('#lib_typicon').iconpicker().on('change',		(e) => { document.PCO_FormItemMenu.imagen.value='typcn fa '+e.icon; });
+			$('#lib_mapicon').iconpicker().on('change',		(e) => { document.PCO_FormItemMenu.imagen.value=e.icon; });
+			$('#lib_elusiveicon').iconpicker().on('change', (e) => { document.PCO_FormItemMenu.imagen.value=e.icon; });
         </script>
     <?php
             } //Fin de eventos para selector de iconos
-    ?>
 
-    <?php
         // Si existe el directorio para el editor ACE lo incluye
         if (@file_exists("inc/ace"))
             {
@@ -640,11 +571,9 @@ $(document).ready( function() {
                 // Habilita el editor ACE para los textareas con el atributo data-editor
                 $(function () {
                     $('textarea[data-editor]').each(function () {
-                        var textarea = $(this);
-
-                        var mode = textarea.data('editor');
-
-                        var editDiv = $('<div>', {
+                        const textarea = $(this);
+                        const mode = textarea.data('editor');
+                        const editDiv = $('<div>', {
                             position: 'absolute',
                             width: textarea.width(),
                             height: textarea.height(),
@@ -654,12 +583,12 @@ $(document).ready( function() {
                         textarea.css('visibility', 'hidden');
                         textarea.css('display', 'none');
 
-                        var editor = ace.edit(editDiv[0]);
+                        const editor = ace.edit(editDiv[0]);
                         //editor.renderer.setShowGutter(false); //Ocultar numero de lineas, ayudas, opciones de colapsar, etc
                         editor.getSession().setValue(textarea.val());
                         editor.getSession().setMode("ace/mode/" + mode);
                         editor.setTheme("ace/theme/eclipse"); //Establece el tema a utilizar twilight|eclipse
-                        
+
                         /*
                         // copy back to textarea on form submit...
                         textarea.closest('form').submit(function () {
@@ -688,7 +617,7 @@ $(document).ready( function() {
 					{
 						echo "
 							$('#Summer_valor_etiqueta').summernote({
-							lang: 'es-ES',
+							  lang: 'es-ES',
 							  height: 300,
 							  toolbar: [
 								['Estilos', ['style']],
@@ -705,9 +634,7 @@ $(document).ready( function() {
 								],
 							  //ANTERIORonChange: function(contents) { document.datosform.valor_etiqueta.value=contents; }
                               callbacks: {
-                                onChange: function(contents) {
-                                   document.datosform.valor_etiqueta.value=contents;
-                                }
+                                onChange: function(contents) { document.datosform.valor_etiqueta.value=contents; }
                               }
 							});
 							//ANTERIOR$('#Summer_valor_etiqueta').code(document.datosform.valor_etiqueta.value);
@@ -731,7 +658,7 @@ $(document).ready( function() {
 		//Activa visualmente todos los div tipo SummerNote y los asocia a cada textarea
         $(document).ready(function() {
 			$('#Summer_valor_etiqueta').summernote({
-			lang: 'es-ES',
+			  lang: 'es-ES',
 			  height: 300,
 			  toolbar: [
 				['Estilos', ['style']],
@@ -758,35 +685,26 @@ $(document).ready( function() {
         //Agrega funcion para la intercepcion del submit del formulario
         echo '
         <script type="text/javascript">
-            PCOJS_ListaCamposValidar="'.$POSTForm_ListaCamposObligatorios.'".split("|");
-            PCOJS_ListaCombosMultiplesJoin="'.@$PCO_ListaCombosMultiplesJoin.'".split("|");
-            PCOJS_ListaTitulosValidar="'.PCO_ReemplazarVariablesPHPEnCadena($POSTForm_ListaTitulosObligatorios).'".split("|");
+            const PCOJS_ListaCamposValidar="'.$POSTForm_ListaCamposObligatorios.'".split("|");
+            const PCOJS_ListaCombosMultiplesJoin="'.@$PCO_ListaCombosMultiplesJoin.'".split("|");
+            const PCOJS_ListaTitulosValidar="'.PCO_ReemplazarVariablesPHPEnCadena($POSTForm_ListaTitulosObligatorios).'".split("|");
             
             function PCOJS_SanitizarValoresListaMultiple()
                 {
                     //Antes de hacer el submit definitivo sanitiza valores de combos multiples
-                    for (var ComboMultiple of PCOJS_ListaCombosMultiplesJoin) 
+                    for (ComboMultiple of PCOJS_ListaCombosMultiplesJoin) 
                         {
-                            ComboMultiple=ComboMultiple.trim();             //Elimina posibles espacios en el id del elemento
-                            if (ComboMultiple!="")
+                            const ComboMultipleTrim=ComboMultiple.trim();             //Elimina posibles espacios en el id del elemento
+                            if (ComboMultipleTrim!="")
                                 {
-                                    ValorComboMultiple=$("#"+ComboMultiple).val();
-                                    if (ValorComboMultiple!=null)
-                                        {
-                                            ValorSanitizadoComboMultiple=$("#"+ComboMultiple).val().join(",");
-                                            //Asigna al campo extra del combo multiple los valores sanitizados
-                                            $("#PCO_ComboMultiple_"+ComboMultiple).val(ValorSanitizadoComboMultiple);
-                                        }
-                                    else
-                                        {
-                                            //Si el combo es null porque se dejo sin valores entonces limpia campo sanitizado
-                                            $("#PCO_ComboMultiple_"+ComboMultiple).val("");
-                                        }
+									//Asigna al campo extra del combo multiple los valores sanitizados, sino es porque se dejo sin valores entonces limpia campo sanitizado
+                                    const ValorComboMultiple=$("#"+ComboMultipleTrim).val();
+									$("#PCO_ComboMultiple_"+ComboMultipleTrim).val(ValorComboMultiple ? ValorComboMultiple.join(",") : "");
                                 }
                         }
                 }
-            
-            
+
+
             function PCOJS_ValidarCamposYProcesarFormulario(FormularioProcesar="datos",AnularSubmit=0)
                 {
                     MensajeCamposObligatorios="";
@@ -819,11 +737,8 @@ $(document).ready( function() {
         </script> ';
 
 		//Si existen funciones JavaScript generadas por algun formulario del usuario entonces las imprime
-		if(@$PCO_FuncionesJSInternasFORM!="")
-			echo $PCO_FuncionesJSInternasFORM;
-	?>
+		if(@$PCO_FuncionesJSInternasFORM!="") echo $PCO_FuncionesJSInternasFORM;
 
-	<?php
         //Agrega funcion para verificar periodicamente la conectividad del cliente
         if (@$PCOSESS_SesionAbierta)
             echo '
@@ -834,76 +749,54 @@ $(document).ready( function() {
                             url: "inc/version_actual.txt",
                             cache: false
                         })
-                        .done(function( contenido_respuesta_html ) {
-                            $("#PCO_Modal_MensajeCargando").modal("hide");
-                        });
+                        .done(function( contenido_respuesta_html ) { $("#PCO_Modal_MensajeCargando").modal("hide"); });
                     }
-                var ValidadorConexion = setInterval(VerificarConectividad, 5000);
+                const ValidadorConexion = setInterval(VerificarConectividad, 5000);
                 $(document).ajaxError(function(){
                     if (window.console && window.console.error) {
                         PCOJS_MostrarMensajeCargando("'.$MULTILANG_EventoTipoInternet.'", " <i class=\"fa fa-4x fa-globe fa-pull-left fa-border \"></i>'.$MULTILANG_ErrorConexionInternet.'", 0, 100);
                     }
                 });
             </script> ';
-	?>
 
-	<?php
 	    //Carga tema de MaterialDesign cuando aplica
         if ($Tema_PracticoFramework=="material")
             {
                 echo '
                     <script src="inc/bootstrap-material-design/js/material.min.js"></script>
                     <script src="inc/bootstrap-material-design/js/ripples.min.js"></script>
-                
-                    <script language="JavaScript">
-                        $.material.init();
-                    </script>';
-            }
-	?>
 
-	<?php
-	    //Solicita autorizacion de ubicar al usuario de acuerdo a la configuracion actual
-        if ($PWA_AutorizacionGPS=="1")
-            {
-                echo '<script language="JavaScript">
-                        PCOJS.GeoLocalizarUsuario();
-                    </script>';
+                    <script language="JavaScript"> $.material.init(); </script>';
             }
+
+	    //Solicita autorizacion de ubicar al usuario de acuerdo a la configuracion actual
+        if ($PWA_AutorizacionGPS=="1") echo '<script language="JavaScript"> PCOJS.GeoLocalizarUsuario(); </script>';
 
 	    //Solicita autorizacion para uso de camara y microfono de acuerdo a la configuracion actual
         if ($PWA_AutorizacionCAM=="1" || $PWA_AutorizacionMIC=="1")
             {
-                $PCO_SolicitudCAM='false';
-                $PCO_SolicitudMIC='false';
-                if ($PWA_AutorizacionCAM==1) $PCO_SolicitudCAM='true';
-                if ($PWA_AutorizacionMIC==1) $PCO_SolicitudMIC='true';
+                $PCO_SolicitudCAM = $PWA_AutorizacionCAM==1 ? 'true' : 'false';
+                $PCO_SolicitudMIC = $PWA_AutorizacionMIC==1 ? 'true' : 'false';
                 echo '<script language="JavaScript">
-                        navigator.getUserMedia = ( navigator.getUserMedia ||
-                                               navigator.webkitGetUserMedia ||
-                                               navigator.mozGetUserMedia ||
-                                               navigator.msGetUserMedia);
+                        navigator.getUserMedia = ( navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
                         navigator.getUserMedia (
 
-                           // Indica el tipo de medio al que se solicita el acceso
-                               {
-                                  video: '.$PCO_SolicitudCAM.',
-                                  audio: '.$PCO_SolicitudMIC.'
-                               },
-                           // Si no hay error, es devuelto en el objeto LocalMediaStream en un tag video:
-                               function(localMediaStream) {
-                                  var video = document.querySelector(video);
-                                  video.src = window.URL.createObjectURL(localMediaStream);
-                               },
-                           // Si hay errores lleva log a consola de depuracion
-                               function(err) {
-                                console.log("Practico Framework: No autorizado el uso de dispositivo de video/audio: " + err);
-                               }
+							// Indica el tipo de medio al que se solicita el acceso
+							{
+								video: '.$PCO_SolicitudCAM.',
+								audio: '.$PCO_SolicitudMIC.'
+							},
+							// Si no hay error, es devuelto en el objeto LocalMediaStream en un tag video:
+							function(localMediaStream) {
+								const video = document.querySelector(video);
+								video.src = window.URL.createObjectURL(localMediaStream);
+							},
+							// Si hay errores lleva log a consola de depuracion
+							function(err) { console.log("Practico Framework: No autorizado el uso de dispositivo de video/audio: " + err); }
                         );
                     </script>';
             }
-	?>
 
-    <?php
         // Estadisticas de uso anonimo con GABeacon(Deprecated) Directo por Google Analytics
         PCO_AgregarFaroAnalytics();
     ?>
@@ -919,8 +812,8 @@ $(document).ready( function() {
         ?>
 
         //Actualiza marco con el tiempo de carga JavaScript (tiempo de carga y transferencia)
-        var tiempo_final_javascript = (new Date()).getTime();
-        var tiempo_final_javascript_segs = (tiempo_final_javascript-tiempo_inicio_javascript)/1000;
+        const tiempo_final_javascript = (new Date()).getTime();
+        const tiempo_final_javascript_segs = (tiempo_final_javascript-tiempo_inicio_javascript)/1000;
         $('#PCO_TCargaJS').text(tiempo_final_javascript_segs);
 
         //Mensajes de advertencia en consola de desarrollo del navegador
