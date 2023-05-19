@@ -205,25 +205,39 @@
                 <script type="text/javascript" src="inc/chat/js/chat.js"></script>
     <?php
     	    }
+    ?>
 
+
+    <?php
         //Si el usuario es admin por defecto presenta la barra lateral activa
         // DEPRECATED: (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$PCOSESS_SesionAbierta && @$PCO_Accion=="PCO_VerMenu") || 
         if ((@$PCOSESS_LoginUsuario!="" && @$PCOSESS_SesionAbierta && @$VerNavegacionIzquierdaResponsive==1))
             echo '<script language="JavaScript">
                     ver_navegacion_izquierda_responsive();
                 </script>';
+    ?>
 
+    <?php
         // Habilita el popup activo
-        if (@$popup_activo=="FormularioCampos")     echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalElementoFormulario").modal("show"); }); </script>';
-        if (@$popup_activo=="FormularioBotones")    echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalBotonFormulario").modal("show"); }); </script>';
-        if (@$popup_activo=="FormularioDiseno")     echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalDisenoFormulario").modal("show"); }); </script>';
-        if (@$popup_activo=="FormularioAcciones")   echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalDisenoBotones").modal("show"); }); </script>';
-        if (@$popup_activo=="InformeAcciones")      echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalEditaAccionesInforme").modal("show"); }); </script>';
-        if (@$popup_activo=="InformeCampos")        echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalCamposInforme").modal("show"); }); </script>';
-        if (@$popup_activo=="InformeTablas")        echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalTablaInforme").modal("show"); }); </script>';
-        if (@$popup_activo=="InformeCondiciones")   echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalCondicionesInforme").modal("show"); }); </script>';
+        if (@$popup_activo=="FormularioCampos")	
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalElementoFormulario").modal("show"); }); </script>';
+        if (@$popup_activo=="FormularioBotones")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalBotonFormulario").modal("show"); }); </script>';
+        if (@$popup_activo=="FormularioDiseno")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalDisenoFormulario").modal("show"); }); </script>';
+        if (@$popup_activo=="FormularioAcciones")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalDisenoBotones").modal("show"); }); </script>';
+        if (@$popup_activo=="InformeAcciones")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalEditaAccionesInforme").modal("show"); }); </script>';
+        if (@$popup_activo=="InformeCampos")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalCamposInforme").modal("show"); }); </script>';
+        if (@$popup_activo=="InformeTablas")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalTablaInforme").modal("show"); }); </script>';
+        if (@$popup_activo=="InformeCondiciones")
+            echo '<script type="text/javascript"> $(window).load(function(){ $("#myModalCondicionesInforme").modal("show"); }); </script>';
         //Habilita pesatanas activas en el popup activo
-        if (@$pestana_activa_editor=="eventos_objeto-tab") echo '<script type="text/javascript"> $(window).load(function(){ $(\'.nav-tabs a[href="#eventos_objeto-tab"]\').tab(\'show\'); }); </script>';
+        if (@$pestana_activa_editor=="eventos_objeto-tab")
+            echo '<script type="text/javascript"> $(window).load(function(){ $(\'.nav-tabs a[href="#eventos_objeto-tab"]\').tab(\'show\'); }); </script>';
     ?>
 
     <script language="JavaScript">
@@ -558,12 +572,17 @@ $(document).ready( function() {
     <?php
         //Carga las funciones activadoras de diferentes tipos de control (si fue encontrado algun campo de ese tipo)
         //DatePicker
-        if (@$funciones_activacion_datepickers!="") echo '<script type="text/javascript">'.$funciones_activacion_datepickers.'</script>';
+        if (@$funciones_activacion_datepickers!="")
+            echo '<script type="text/javascript">'.$funciones_activacion_datepickers.'</script>';
         //Deslizadores
-        if (@$funciones_activacion_sliders!="") echo '<script type="text/javascript">'.$funciones_activacion_sliders.'</script>';
+        if (@$funciones_activacion_sliders!="")
+            echo '<script type="text/javascript">'.$funciones_activacion_sliders.'</script>';
         //Canvas
-        if (@$funciones_activacion_canvas!="") echo '<script type="text/javascript">'.$funciones_activacion_canvas.'</script>';
+        if (@$funciones_activacion_canvas!="")
+            echo '<script type="text/javascript">'.$funciones_activacion_canvas.'</script>';
+    ?>
 
+    <?php
         // Calcula tiempos de ejecucion del script
         $tiempo_final_script = PCO_ObtenerMicrotime();
         $tiempo_total_script = $tiempo_final_script - @$tiempo_inicio_script;
@@ -609,7 +628,9 @@ $(document).ready( function() {
         </script>
     <?php
             } //Fin de eventos para selector de iconos
+    ?>
 
+    <?php
         // Si existe el directorio para el editor ACE lo incluye
         if (@file_exists("inc/ace"))
             {
@@ -800,7 +821,9 @@ $(document).ready( function() {
 		//Si existen funciones JavaScript generadas por algun formulario del usuario entonces las imprime
 		if(@$PCO_FuncionesJSInternasFORM!="")
 			echo $PCO_FuncionesJSInternasFORM;
+	?>
 
+	<?php
         //Agrega funcion para verificar periodicamente la conectividad del cliente
         if (@$PCOSESS_SesionAbierta)
             echo '
@@ -822,7 +845,9 @@ $(document).ready( function() {
                     }
                 });
             </script> ';
+	?>
 
+	<?php
 	    //Carga tema de MaterialDesign cuando aplica
         if ($Tema_PracticoFramework=="material")
             {
@@ -834,7 +859,9 @@ $(document).ready( function() {
                         $.material.init();
                     </script>';
             }
+	?>
 
+	<?php
 	    //Solicita autorizacion de ubicar al usuario de acuerdo a la configuracion actual
         if ($PWA_AutorizacionGPS=="1")
             {
@@ -874,7 +901,9 @@ $(document).ready( function() {
                         );
                     </script>';
             }
+	?>
 
+    <?php
         // Estadisticas de uso anonimo con GABeacon(Deprecated) Directo por Google Analytics
         PCO_AgregarFaroAnalytics();
     ?>
