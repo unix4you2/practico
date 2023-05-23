@@ -303,7 +303,7 @@ function PCO_OpenAI_CODEX($Modelo,$Prompt,$MaximoTokens,$Temperatura,$TokenParad
 		$PCO_API_OpenAI=$PCO_RegistroAPI_OpenAI["api_openai"];
 		$PCO_URL_OpenAI=$PCO_RegistroAPI_OpenAI["url_openai"];
 		//Si encuentra un valor de API KEY sigue adelante
-        if ($PCO_API_OpenAIa!="")
+        if ($PCO_API_OpenAI!="")
             {
                 if ($Prompt!="")
                     {
