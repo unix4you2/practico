@@ -8108,7 +8108,7 @@ function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$for
 						</div>
 					</td>
 					<td valign=top>
-                        <i id="BotonCaptura_CANVAS_'.$registro_campos["campo"].'" class="fa fa-camera" OnClick="var context = canvas.getContext("2d"); context.drawImage(videoPCO_WebCam_'.$registro_campos["campo"].', 0, 0, '.$registro_campos["ancho"].', '.$registro_campos["alto"].');"></i>
+                        <i id="BotonCaptura_CANVAS_'.$registro_campos["campo"].'" class="fa fa-camera" OnClick="var context = canvas.getContext(\'2d\'); context.drawImage(videoPCO_WebCam_'.$registro_campos["campo"].', 0, 0, '.$registro_campos["ancho"].', '.$registro_campos["alto"].');"></i>
 						<br>
 						<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.(($registro_campos["ancho"])).'" height="'.(($registro_campos["alto"])).'" style="width: '.(($registro_campos["ancho"])).'px; height: '.(($registro_campos["alto"])).'px; background-color: #CCC; visibility:visible;"></canvas>
 					</td>

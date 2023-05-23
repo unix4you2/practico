@@ -124,6 +124,7 @@ LogCambios="
 * Added [FORMS]: Campos de tipo texto largo presentan (ya permitían) el establecimiento de su variable de valor predeterminado durante el diseño del campo.
 * Enhan [CORE]: @rafaelposadaf PR#24: mejoras estéticas css pmydb 3c773f0521112170e584ae40001b287373e9ad9e
 * Enhan [CORE]: @rafaelposadaf PR#30: optimizaciones marco_abajo https://github.com/unix4you2/practico/pull/30
+* Fixed [CORE]: @foag Bug#23 https://github.com/unix4you2/practico/issues/23
 
 
 
