@@ -69,29 +69,27 @@
 	Ver tambien:
 		<Seccion inferior> | <Articulador>
 	*/
-?>
 
-<?php
     //Segun el tema actual asigna la variable body-bg del tema al background de los elementos principales y escritorio
-    if ($Tema_PracticoFramework=="bootstrap") { $PCO_ColorFondoGeneral="#ffffff"; }
-    if ($Tema_PracticoFramework=="cerulean") { $PCO_ColorFondoGeneral="#ffffff"; }
-    if ($Tema_PracticoFramework=="cosmo") { $PCO_ColorFondoGeneral="#060606"; }
-    if ($Tema_PracticoFramework=="cyborg") { $PCO_ColorFondoGeneral="#060606"; }
-    if ($Tema_PracticoFramework=="darkly") { $PCO_ColorFondoGeneral="#222222"; }
-    if ($Tema_PracticoFramework=="flatly") { $PCO_ColorFondoGeneral="#2f324a"; }
-    if ($Tema_PracticoFramework=="journal") { $PCO_ColorFondoGeneral="#ffffff"; }
-    if ($Tema_PracticoFramework=="lumen") { $PCO_ColorFondoGeneral="#ffffff"; }
-    if ($Tema_PracticoFramework=="paper") { $PCO_ColorFondoGeneral="#ffffff"; }
-    if ($Tema_PracticoFramework=="readable") { $PCO_ColorFondoGeneral="#ffffff"; }
-    if ($Tema_PracticoFramework=="sandstone") { $PCO_ColorFondoGeneral="#1a221c"; }
-    if ($Tema_PracticoFramework=="simplex") { $PCO_ColorFondoGeneral="#fcfcfc"; }
-    if ($Tema_PracticoFramework=="slate") { $PCO_ColorFondoGeneral="#272b30"; }
-    if ($Tema_PracticoFramework=="spacelab") { $PCO_ColorFondoGeneral="#ffffff"; }
-    if ($Tema_PracticoFramework=="superhero") { $PCO_ColorFondoGeneral="#2b3e50"; }
-    if ($Tema_PracticoFramework=="united") { $PCO_ColorFondoGeneral="#ffffff"; }
-    if ($Tema_PracticoFramework=="yeti") { $PCO_ColorFondoGeneral="#2f2f2f"; }
-    if ($Tema_PracticoFramework=="amelia") { $PCO_ColorFondoGeneral="#108a93"; }
-    if ($Tema_PracticoFramework=="material") { $PCO_ColorFondoGeneral="#ffffff"; }
+    if ($Tema_PracticoFramework=="bootstrap")$PCO_ColorFondoGeneral="#ffffff";
+    if ($Tema_PracticoFramework=="cerulean") $PCO_ColorFondoGeneral="#ffffff";
+    if ($Tema_PracticoFramework=="cosmo")	 $PCO_ColorFondoGeneral="#060606";
+    if ($Tema_PracticoFramework=="cyborg")	 $PCO_ColorFondoGeneral="#060606";
+    if ($Tema_PracticoFramework=="darkly")	 $PCO_ColorFondoGeneral="#222222";
+    if ($Tema_PracticoFramework=="flatly")	 $PCO_ColorFondoGeneral="#2f324a";
+    if ($Tema_PracticoFramework=="journal")	 $PCO_ColorFondoGeneral="#ffffff";
+    if ($Tema_PracticoFramework=="lumen")	 $PCO_ColorFondoGeneral="#ffffff";
+    if ($Tema_PracticoFramework=="paper")	 $PCO_ColorFondoGeneral="#ffffff";
+    if ($Tema_PracticoFramework=="readable") $PCO_ColorFondoGeneral="#ffffff";
+    if ($Tema_PracticoFramework=="sandstone")$PCO_ColorFondoGeneral="#1a221c";
+    if ($Tema_PracticoFramework=="simplex")	 $PCO_ColorFondoGeneral="#fcfcfc";
+    if ($Tema_PracticoFramework=="slate")	 $PCO_ColorFondoGeneral="#272b30";
+    if ($Tema_PracticoFramework=="spacelab") $PCO_ColorFondoGeneral="#ffffff";
+    if ($Tema_PracticoFramework=="superhero")$PCO_ColorFondoGeneral="#2b3e50";
+    if ($Tema_PracticoFramework=="united")	 $PCO_ColorFondoGeneral="#ffffff";
+    if ($Tema_PracticoFramework=="yeti")	 $PCO_ColorFondoGeneral="#2f2f2f";
+    if ($Tema_PracticoFramework=="amelia")	 $PCO_ColorFondoGeneral="#108a93";
+    if ($Tema_PracticoFramework=="material") $PCO_ColorFondoGeneral="#ffffff";
 
     // Incluye encabezados, estilos y demas del HEAD
     include_once("core/marco_arriba_bs.php");
@@ -142,7 +140,7 @@
 
 		<?php
             //Presenta barra de navegacion superior solamente cuando hay una accion
-            if ($PCO_Accion!="") { }
+            // if ($PCO_Accion!="") { }
             
 			// Incluye marcos con barras de navegacion
 			include_once("core/marco_nav.php");
@@ -166,9 +164,7 @@
 							//Presenta advertencia sobre el modo de depuracion.  Se asume que debe estar siempre apagado en produccion
 							if ($ModoDepuracion)
 								PCO_Mensaje($MULTILANG_ModoDepuracion, "", '', 'fa fa-fw fa-2x fa-info-circle texto-blink', 'alert alert-dismissible alert-danger');
-						?>
 
-<?php 
 	//Incluye formularios de uso comun para transporte de datos
 	include_once("core/marco_forms.php");
 
@@ -183,36 +179,33 @@
 	//Carga marco de chat solamente si esta habilitado
 	if (isset($Activar_ModuloChat) && $Activar_ModuloChat>0 && @$_SESSION['username']!="")
 		include_once("core/marco_chat.php");
-?>
 
+		if ($PCOSESS_SesionAbierta && $PCO_Accion=="PCO_VerMenu") {
+			echo '<ul class="nav nav-pills btn-xs">';
+			// Carga las opciones del menu superior
 
-				<?php
-					if ($PCOSESS_SesionAbierta && $PCO_Accion=="PCO_VerMenu") {
-						echo '<ul class="nav nav-pills btn-xs">';
-						// Carga las opciones del menu superior
+			// Si el usuario es diferente al administrador agrega condiciones al query
+			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+				{
+					$Complemento_tablas=",".$TablasCore."usuario_menu";
+					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+				}
+			$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_arriba=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
 
-						// Si el usuario es diferente al administrador agrega condiciones al query
-						if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-							{
-								$Complemento_tablas=",".$TablasCore."usuario_menu";
-								$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
-							}
-						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_arriba=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
+			while($registro = $resultado->fetch())
+				PCO_ImprimirOpcionMenu($registro,'arriba');
+			echo '</ul>';
+		}
 
-						while($registro = $resultado->fetch())
-							PCO_ImprimirOpcionMenu($registro,'arriba');
-                        echo '</ul>';
-					}
+		// Si el usuario es administrador valida que ya haya cambiado al menos su correo
+		if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="PCO_VerMenu")
+			{
+				$registro_usuario=PCO_EjecutarSQL("SELECT correo FROM ".$TablasCore."usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
+				if ($registro_usuario["correo"]=="sucorreo@dominio.com" || $registro_usuario["correo"]=="unix4you2@gmail.com")
+					PCO_Mensaje($MULTILANG_Importante, $MULTILANG_UsrActualizarAdmin, '', 'fa fa-bell fa-3x', 'alert alert-danger alert-dismissible');
+			}
 
-                    // Si el usuario es administrador valida que ya haya cambiado al menos su correo
-                    if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="PCO_VerMenu")
-                        {
-                            $registro_usuario=PCO_EjecutarSQL("SELECT correo FROM ".$TablasCore."usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
-                            if ($registro_usuario["correo"]=="sucorreo@dominio.com" || $registro_usuario["correo"]=="unix4you2@gmail.com")
-                                PCO_Mensaje($MULTILANG_Importante, $MULTILANG_UsrActualizarAdmin, '', 'fa fa-bell fa-3x', 'alert alert-danger alert-dismissible');
-                        }
-
-				?>
+	?>
 	<div id="PCODIV_AbajoMenuSuperior"></div>
 
 	<!-- INICIO  DE CONTENIDOS DE APLICACION DISENADA POR EL USUARIO -->
