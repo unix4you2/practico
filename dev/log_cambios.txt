@@ -129,6 +129,7 @@ LogCambios="
 * Enhan [CORE]: @rafaelposadaf PR#32: optimizaciones marco_arriba https://github.com/unix4you2/practico/pull/32
 * Added [PCODER]: Funciones experimentales de IA para búsqueda de bugs de seguridad, optimización y documentación de código.  Operan inicialmente sobre selecciones cortas de código.
 * Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna, peso->PCOBD_Peso.  Esta tarea estará en progreso sobre los diferentes campos.
+* Added [CORE]: Nuevo parámetros de aplicación permite almacenar llaves de API para consumos de GoogleAI.  Por ahora no se contempla su consumo directo, sólo el almacenamiento.
 
 
 
@@ -317,6 +318,9 @@ ALTER TABLE core_parametros ADD url_openai varchar(255) NULL DEFAULT 'https://ap
 
 ALTER TABLE core_parametros ADD usuarios_desarroladores varchar(1024) NULL DEFAULT 'admin';
 ALTER TABLE core_parametros ADD usuarios_admin_kanban varchar(1024) NULL DEFAULT 'admin';
+
+ALTER TABLE core_parametros ADD api_googleai varchar(255) NULL DEFAULT '';
+ALTER TABLE core_parametros ADD url_googleai varchar(255) NULL DEFAULT 'https://';
 
 CREATE TABLE core_llaves_api_externas (
   id int(10) NOT NULL AUTO_INCREMENT,
