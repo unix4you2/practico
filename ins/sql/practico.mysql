@@ -474,6 +474,41 @@ CREATE TABLE core_llaves_api (
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+DROP TABLE IF EXISTS core_llaves_metodo;
+CREATE TABLE core_llaves_metodo (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  nombre varchar(250) NOT NULL,
+  descripcion varchar(250) NOT NULL,
+  tipo_ejecucion varchar(50) NOT NULL DEFAULT 'LIBRE',  # LIBRE,GET,POST,PUT,DELETE,PATCH
+  metodo_recepcion varchar(15) NOT NULL DEFAULT 'GET+POST',  # GET,POST,GET+JWT,POST+JWT,GET+POST,GET+POST+JWT
+  formato varchar(50) NOT NULL DEFAULT 'TXT', # TXT,HTML,XML,JSON,RAW,BINARY
+  script mediumtext,
+  ejemplo_salida mediumtext, # Suministra ejemplos para salidas codigos 200, 4XX, 5XX, etc.
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_llaves_metodoparametro;
+CREATE TABLE core_llaves_metodoparametro (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  metodo int(10) NOT NULL,
+  nombre varchar(50) NOT NULL,
+  descripcion varchar(250) NOT NULL,
+  tipo_dato varchar(50) NOT NULL,
+  longitud int(11),
+  obligatorio char(1), # S/N
+  observaciones text,
+  ejemplo_entrada mediumtext, # Suministra ejemplos de entrada para la variable
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+DROP TABLE IF EXISTS core_llaves_apimetodos;
+CREATE TABLE core_llaves_apimetodos (
+  id int(10) NOT NULL AUTO_INCREMENT,
+  api int(10) NOT NULL,
+  metodo int(10) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
 DROP TABLE IF EXISTS core_llaves_api_externas;
 CREATE TABLE core_llaves_api_externas (
   id int(10) NOT NULL AUTO_INCREMENT,
