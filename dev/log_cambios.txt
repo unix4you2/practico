@@ -127,8 +127,8 @@ LogCambios="
 * Fixed [CORE]: @foag Bug#23 https://github.com/unix4you2/practico/issues/23
 * Added [CORE]: Nuevo parámetros de aplicación permite almacenar llave de API para consumos de OpenAI desde las diferentes funciones del Framework.  Esto incluye funciones extendidas de I.A. hacia el editor {P}Coder como código predictivo, análsis de vulnerabilidades, documentación automatizadas, entre otros.  Nueva función PCO_OpenAI_CODEX se encuentra disponible también para llamados independientes por el desarrollador.
 * Enhan [CORE]: @rafaelposadaf PR#32: optimizaciones marco_arriba https://github.com/unix4you2/practico/pull/32
-
-
+* Added [PCODER]: Funciones experimentales de IA para búsqueda de bugs de seguridad, optimización y documentación de código.  Operan inicialmente sobre selecciones cortas de código.
+* Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna, peso->PCOBD_Peso.  Esta tarea estará en progreso sobre los diferentes campos.
 
 
 
@@ -139,19 +139,6 @@ LogCambios="
 
 
 
-* Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna, peso->PCOBD_Peso
-
-
-campo de camara no captura foto
-
-
-
-Falta:
-Texto "Valor de la etiqueta (será impresa en el formulario en formato HTML):"  justo arriba del campo de etiqueta.  Debajo del mensaje de Atención este tipo de controles debería ser almacenadodentro de campo texto largo....
-Espacio de vista previa actualizado dinamicamente
-
-Revisar uso de funciones apagadas:
-dl,exec,passthru,proc_open,proc_close,shell_exec,memory_limit,system,popen,show_source,symlink,link,leak,listen,diskfreespace,tmpfile,ignore_user_abord,highlight_file,source,show_source,fpaththru,virtual,posix_ctermid,posix_getcwd,posix_getegid,posix_geteuid,posix_getgid,posix_getgrgid,posix_getgrnam,posix_getgroups,posix_getlogin,posix_getpgid,posix_getpgrp,posix_getpid,posix,posix_getppid,posix_getpwnam,posix_getpwuid,posix_getrlimit,posix_getsid,posix_getuid,posix_isatty,posix_kill,posix_mkfifo,posix_setegid,posix_seteuid,posix_setgid,posix_setpgid,posix_setsid,posix_setid,posix_times,posix_ttyname,posix_uname,proc_get_status,proc_nice,proc_terminate	
 
 
 "
@@ -538,6 +525,13 @@ ScriptPHPAutorun=""
 ########################################################################
 #[TODO] No es usado por ningun proceso, solo un control de lo inmediatamente pendiente
 TODOList="
+
+TODO:
+Revisar uso de funciones apagadas:
+dl,exec,passthru,proc_open,proc_close,shell_exec,memory_limit,system,popen,show_source,symlink,link,leak,listen,diskfreespace,tmpfile,ignore_user_abord,highlight_file,source,show_source,fpaththru,virtual,posix_ctermid,posix_getcwd,posix_getegid,posix_geteuid,posix_getgid,posix_getgrgid,posix_getgrnam,posix_getgroups,posix_getlogin,posix_getpgid,posix_getpgrp,posix_getpid,posix,posix_getppid,posix_getpwnam,posix_getpwuid,posix_getrlimit,posix_getsid,posix_getuid,posix_isatty,posix_kill,posix_mkfifo,posix_setegid,posix_seteuid,posix_setgid,posix_setpgid,posix_setsid,posix_setid,posix_times,posix_ttyname,posix_uname,proc_get_status,proc_nice,proc_terminate	
+
+
+
 
 https://packagist.org/packages/filp/whoops
 http://phpdebugbar.com/
