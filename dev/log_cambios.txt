@@ -130,6 +130,7 @@ LogCambios="
 * Added [PCODER]: Funciones experimentales de IA para búsqueda de bugs de seguridad, optimización y documentación de código.  Operan inicialmente sobre selecciones cortas de código.
 * Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna, peso->PCOBD_Peso.  Esta tarea estará en progreso sobre los diferentes campos.
 * Added [CORE]: Nuevo parámetros de aplicación permite almacenar llaves de API para consumos de GoogleAI.  Por ahora no se contempla su consumo directo, sólo el almacenamiento.
+* Added [CORE]: Nuevas estructuras para definición y parametrización de servicios web como una segunda capa a la existente que no dejará de operar por compatibilidad.  En adelante cuando se llame al motor de servicios web primero será revisada la capa nueva y usada con sus parametrizaciones y en caso de no existir el método o estar vacío en su código la evaluación se hará mediante capa de compatibilidad hacia atráss.  Se recomienda generar todo servicio nuevo mediante la nueva capa y migrar aquellos existentes de ser posible.
 
 
 
