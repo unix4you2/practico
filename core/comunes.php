@@ -268,7 +268,7 @@ function PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie=0)
 ########################################################################
 /*
     Function: PCO_OpenAI_CODEX
-	Hace un llamado a la API de OpenAI, modelo CODEX
+	Hace un llamado a la API de OpenAI, inicialmente modelo CODEX
 
 	Variables de entrada:
 	
@@ -278,6 +278,8 @@ function PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie=0)
 		         code-cushman-001
 		         text-davinci-002
 		Prompt - El texto con el cual se alimenta el modelo
+		ConversacionPrevia - Una lista de historial de conversaciones util para el contexto en formato JSON. Ej: {"role": "assistant", "content": "Respuesta..."}
+		
 
 	Salida:
 		Resultado de llamado a la API
@@ -285,7 +287,7 @@ function PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie=0)
 	Vea tambien:
 	    <PCO_EjecutarPostFormulario> <https://beta.openai.com/docs/models/codex>
 */
-function PCO_OpenAI_Codex($Modelo,$Prompt,$MaximoTokens,$Temperatura,$TokenParada)
+function PCO_OpenAI_CODEX($Modelo,$Prompt,$MaximoTokens,$Temperatura,$TokenParada,$ConversacionPrevia)
     {
         global $TablasCore;
         $RespuestaAPI="";
@@ -295,48 +297,62 @@ function PCO_OpenAI_Codex($Modelo,$Prompt,$MaximoTokens,$Temperatura,$TokenParad
         
         if ($MaximoTokens=="") $MaximoTokens="100";
         if ($Temperatura=="") $Temperatura="0.7";
+        if ($ConversacionPrevia!="") $ConversacionPrevia.=",";
 
 		$PCO_RegistroAPI_OpenAI=PCO_EjecutarSQL("SELECT api_openai,url_openai FROM ".$TablasCore."parametros WHERE 1=1 LIMIT 0,1")->fetch();
 		$PCO_API_OpenAI=$PCO_RegistroAPI_OpenAI["api_openai"];
 		$PCO_URL_OpenAI=$PCO_RegistroAPI_OpenAI["url_openai"];
 		//Si encuentra un valor de API KEY sigue adelante
-        if ($PCO_API_OpenAI!="" && $Prompt!="")
+        if ($PCO_API_OpenAI!="")
             {
-                //La API puede ser usada para multiples cosas, aqui se establece para completación de chat solamente
-                $URLFinal=$PCO_URL_OpenAI."/v1/chat/completions";
-
-                $OpcionesCURL='{
-                                    CURLOPT_RETURNTRANSFER:true,
-                                    CURLOPT_ENCODING:"",
-                                    CURLOPT_MAXREDIRS:10,
-                                    CURLOPT_TIMEOUT:0,
-                                    CURLOPT_FOLLOWLOCATION:true,
-                                    CURLOPT_HTTP_VERSION:"CURL_HTTP_VERSION_1_1",
-                                    CURLOPT_CUSTOMREQUEST:"POST",
-                                }';
-
-                $CabecerasCURL=array(
-                                    "Content-Type: application/json",
-                                    "Authorization: Bearer ".$PCO_API_OpenAI
-                                );
-
-                $PostCURL='
-                                {
-                                    "model": "'.$Modelo.'",
-                                    "max_tokens": '.$MaximoTokens.',
-                                    "temperature": '.$Temperatura.',
-                                    "n": 1,
-                                    "stop": "'.$TokenParada.'",
-                                    "messages": [
-                                        {"role": "user", "content": "'.$Prompt.'"}
-                                    ]
-                                }';
-                                    /*
-                                        //Las respuestas previas pueden ser enviadas de manera acumulativa para mantener el hilo de la conversacion
-                                        {"role": "user", "content": "'.$Prompt.'"}
-                                        {"role": "assistant", "content": "Respuesta..."},
-                                    */
-                $RespuestaAPI=PCO_FileGetContents_CURL($URLFinal,$OpcionesCURL,$CabecerasCURL,$PostCURL);
+                if ($Prompt!="")
+                    {
+                        //La API puede ser usada para multiples cosas, aqui se establece para completación de chat solamente
+                        $URLFinal=$PCO_URL_OpenAI."/v1/chat/completions";
+        
+                        $OpcionesCURL='{
+                                            "CURLOPT_HEADER":0,
+                                            "CURLOPT_RETURNTRANSFER":true,
+                                            "CURLOPT_ENCODING":"",
+                                            "CURLOPT_MAXREDIRS":10,
+                                            "CURLOPT_TIMEOUT":0,
+                                            "CURLOPT_FOLLOWLOCATION":true,
+                                            "CURLOPT_HTTP_VERSION":"CURL_HTTP_VERSION_1_1",
+                                            "CURLOPT_CUSTOMREQUEST":"POST"
+                                        }';
+                                        
+                        $CabecerasCURL=array(
+                                            "Content-Type: application/json",
+                                            "Authorization: Bearer ".$PCO_API_OpenAI
+                                        );
+        
+                        $PostCURL='
+                                        {
+                                            "model": "'.$Modelo.'",
+                                            "max_tokens": '.$MaximoTokens.',
+                                            "temperature": '.$Temperatura.',
+                                            "n": 1,
+                                            "stop": "'.$TokenParada.'",
+                                            "messages": [
+                                                {"role": "user", "content": "'.$Prompt.'"}
+                                                '.$ConversacionPrevia.'
+                                            ]
+                                        }';
+                                            /*
+                                                //Las respuestas previas pueden ser enviadas de manera acumulativa para mantener el hilo de la conversacion
+                                                {"role": "user", "content": "'.$Prompt.'"}
+                                                {"role": "assistant", "content": "Respuesta..."},
+                                            */
+                        $RespuestaAPI=PCO_FileGetContents_CURL($URLFinal,$OpcionesCURL,$CabecerasCURL,$PostCURL);
+                    }
+                else
+                    {
+                        $RespuestaAPI='{"id":"Rta-LMQTP","object":"error.interno","created":000000,"model":"sin-modelo","usage":{"prompt_tokens":0,"completion_tokens":0,"total_tokens":0},"choices":[{"message":{"role":"assistant","content":"No se ha recibido un prompt de entrada"},"finish_reason":"error.api","index":0}]}';
+                    }
+            }
+        else
+            {
+                $RespuestaAPI='{"id":"Rta-LMQTP","object":"error.interno","created":000000,"model":"sin-modelo","usage":{"prompt_tokens":0,"completion_tokens":0,"total_tokens":0},"choices":[{"message":{"role":"assistant","content":"Usted no cuenta con una llave API de OpenAI definida en Configuraci&oacute;n de Pr&aacute;ctico -> Parametros de aplicaci&oacute;n -> Conexiones Externas y APIs"},"finish_reason":"error.api","index":0}]}';
             }
         return $RespuestaAPI;
     }
@@ -4889,10 +4905,10 @@ function PCO_FileGetContents_CURL($URLBase,$OpcionesJSON,$CabecerasArray,$PostJS
 				    curl_setopt($objeto_curl, CURLOPT_POSTFIELDS, $PostJSON);
 
 				curl_setopt($objeto_curl, CURLOPT_URL, $URLBase);
-
 				$datos_recibidos = curl_exec($objeto_curl);
 				curl_close($objeto_curl);
 			}
+        //$datos_recibidos='{"id":"chatcmpl-7JQGxRjF08wGL06cuzJNTOdJL8q33","object":"chat.completion","created":1684863579,"model":"gpt-3.5-turbo-0301","usage":{"prompt_tokens":34,"completion_tokens":71,"total_tokens":105},"choices":[{"message":{"role":"assistant","content":"El error de sintaxis en este código es que la variable $hora no tiene un valor válido asignado. La expresión \"34-\" no es un valor numérico válido en PHP. Para corregir este error, se debe asignar a la variable $hora un valor numérico válido, por ejemplo: $hora = 34;"},"finish_reason":"stop","index":0}]}';
 		return $datos_recibidos;
 	}
 
@@ -8108,7 +8124,7 @@ function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$for
 						</div>
 					</td>
 					<td valign=top>
-                        <i id="BotonCaptura_CANVAS_'.$registro_campos["campo"].'" class="fa fa-camera" OnClick="var context = canvas.getContext("2d"); context.drawImage(videoPCO_WebCam_'.$registro_campos["campo"].', 0, 0, '.$registro_campos["ancho"].', '.$registro_campos["alto"].');"></i>
+                        <i id="BotonCaptura_CANVAS_'.$registro_campos["campo"].'" class="fa fa-camera" OnClick="var context = canvas.getContext(\'2d\'); context.drawImage(videoPCO_WebCam_'.$registro_campos["campo"].', 0, 0, '.$registro_campos["ancho"].', '.$registro_campos["alto"].');"></i>
 						<br>
 						<canvas id="CANVAS_'.$registro_campos["campo"].'" width="'.(($registro_campos["ancho"])).'" height="'.(($registro_campos["alto"])).'" style="width: '.(($registro_campos["ancho"])).'px; height: '.(($registro_campos["alto"])).'px; background-color: #CCC; visibility:visible;"></canvas>
 					</td>

@@ -123,6 +123,10 @@ LogCambios="
 * Enhan [CORE]: Agregada variable de PCOSESS_LoginUsuario al scope cuando se establecen conexiones al motor de manera que este disponible como una variable más de SQL.
 * Added [FORMS]: Campos de tipo texto largo presentan (ya permitían) el establecimiento de su variable de valor predeterminado durante el diseño del campo.
 * Enhan [CORE]: @rafaelposadaf PR#24: mejoras estéticas css pmydb 3c773f0521112170e584ae40001b287373e9ad9e
+* Enhan [CORE]: @rafaelposadaf PR#30: optimizaciones marco_abajo https://github.com/unix4you2/practico/pull/30
+* Fixed [CORE]: @foag Bug#23 https://github.com/unix4you2/practico/issues/23
+* Added [CORE]: Nuevo parámetros de aplicación permite almacenar llave de API para consumos de OpenAI desde las diferentes funciones del Framework.  Esto incluye funciones extendidas de I.A. hacia el editor {P}Coder como código predictivo, análsis de vulnerabilidades, documentación automatizadas, entre otros.  Nueva función PCO_OpenAI_CODEX se encuentra disponible también para llamados independientes por el desarrollador.
+
 
 
 
@@ -130,7 +134,6 @@ LogCambios="
 * Added [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).
 
 
-* Added [CORE]: Nuevo parámetros de aplicación permite almacenar llave de API para consumos de OpenAI desde las diferentes funciones del Framework.  Esto incluye funciones extendidas de I.A. hacia el editor {P}Coder como código predictivo, análsis de vulnerabilidades, documentación automatizadas, entre otros.
 
 
 
