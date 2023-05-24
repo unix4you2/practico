@@ -11,10 +11,10 @@
 		<hora_exportacion>09:01</hora_exportacion>
 	</descripcion>
 	<core_informe>
-	<id>LTI3</id>
-	<titulo>e1B9Q29kZXIgLSBBcmNoaXZvcyBmcmVjdWVudGVzIChtw6FzIHRyYWJhamFkb3MgLyBtb3N0IHdvcmtlZCk=</titulo>
+	<id>LTU3</id>
+	<titulo>RGF0YVRhYmxlcyArIFBJRSBjb24gVG90YWxlcyBjYWxjdWxhZG9z</titulo>
 	<descripcion></descripcion>
-	<categoria>UHJhY3RpY29GcmFtZXdvcms=</categoria>
+	<categoria>VEVTVF9QcmFjdGljb0ZyYW1ld29yayAtIEJhbmNvIGRlIHBydWViYXM=</categoria>
 	<agrupamiento></agrupamiento>
 	<ordenamiento></ordenamiento>
 	<ancho></ancho>
@@ -25,24 +25,24 @@
 	<variables_filtro></variables_filtro>
 	<soporte_datatable>Uw==</soporte_datatable>
 	<formulario_filtrado></formulario_filtrado>
-	<tamano_paginacion>MTA=</tamano_paginacion>
-	<subtotales_columna></subtotales_columna>
-	<subtotales_formato></subtotales_formato>
+	<tamano_paginacion>NQ==</tamano_paginacion>
+	<subtotales_columna>MQ==</subtotales_columna>
+	<subtotales_formato>UGFnaW5hOl9UT1RBTF9QQUdJTkFfIENvbHVtbmE6IF9DT0xVTU5BXyBJbmZvcm1lOl9UT1RBTF9JTkZPUk1FXw==</subtotales_formato>
 	<conexion_origen_datos>UHJlZGV0ZXJtaW5hZG8gKE1pc21hIGNvbmV4acOzbiB1c2FkYSBwb3IgUHJhY3RpY28p</conexion_origen_datos>
-	<consulta_sql>U0VMRUNUIA0KQ09OQ0FUKCI8Zm9udCBzaXplPTE+IixhcmNoaXZvLCI8L2ZvbnQ+IikgYXMgIkFyY2hpdm8vRmlsZSIsIA0KQ09VTlQoKikgYXMgIkV2ZW50b3MiLCANCkZPUk1BVChBVkcobGluZWFzKSwwKSBhcyAiUHJvbV9MaW5lYXMiLA0KSUYoQVZHKGNhcmFjdGVyZXMpPjEwMjQwMDAsIENPTkNBVChGT1JNQVQoQVZHKGNhcmFjdGVyZXMpLzEwMjQwMDAsMCksIiBNYiIpLCBJRihBVkcoY2FyYWN0ZXJlcyk+MTAyNCxDT05DQVQoRk9STUFUKEFWRyhjYXJhY3RlcmVzKS8xMDI0LDApLCIgS2IiKSwNCkNPTkNBVChGT1JNQVQoQVZHKGNhcmFjdGVyZXMpLDApLCIgYnl0ZXMiKSkpIGFzICJQcm9tX1RhbWFuby9TaXplIg0KRlJPTSBjb3JlX3Bjb2Rlcl9oaXN0b3JpYWwNCkdST1VQIEJZIGFyY2hpdm8gT1JERVIgQlkgQ09VTlQoKikgREVTQw==</consulta_sql>
+	<consulta_sql>U0VMRUNUIGlkLGZlY2hhLGhvcmEsdXN1YXJpb19sb2dpbixhY2Npb24gRlJPTSBjb3JlX2F1ZGl0b3JpYSBXSEVSRSAxPTEgTElNSVQgMCwxMDA=</consulta_sql>
 	<tooltip_titulo>Tg==</tooltip_titulo>
-	<exportar_dtclp>Tg==</exportar_dtclp>
+	<exportar_dtclp>Uw==</exportar_dtclp>
 	<exportar_dtcsv>Tg==</exportar_dtcsv>
 	<exportar_dtxls>Tg==</exportar_dtxls>
-	<exportar_dtpdf>Tg==</exportar_dtpdf>
+	<exportar_dtpdf>Uw==</exportar_dtpdf>
 	<ocultar_encabezado>MA==</ocultar_encabezado>
-	<ocultar_piepagina>MQ==</ocultar_piepagina>
+	<ocultar_piepagina>MA==</ocultar_piepagina>
 	<anular_acciones>MA==</anular_acciones>
 	<encabezado_html></encabezado_html>
 	<tabla_responsive>Tg==</tabla_responsive>
 	<permitido_home>Tg==</permitido_home>
 	<javascript></javascript>
-	<pre_script>PD9waHAKZWNobyAiPGJyPiI7</pre_script>
+	<pre_script></pre_script>
 	<post_script></post_script>
 	<usar_ajax>MA==</usar_ajax>
 	<definir_cols>Tg==</definir_cols>
@@ -57,23 +57,7 @@
 	<pane_control_ordenar>Tg==</pane_control_ordenar>
 	<modulo>MA==</modulo>
 	</core_informe>
-	<core_informe_boton>
-	<id>NTUy</id>
-	<titulo>Q2FyZ2Fy</titulo>
-	<estilo>IGJ0biBidG4tc3VjY2VzcyAgYnRuLXhzIA==</estilo>
-	<informe>LTI3</informe>
-	<tipo_accion>ZXh0ZXJuYV9qYXZhc2NyaXB0</tipo_accion>
-	<accion_usuario>UENPREVSX0NhcmdhckFyY2hpdm8oZG9jdW1lbnQuRlJNQkFTRUlORk9STUUuUENPX1ZhbG9yLnZhbHVlKTsgJCgnI3Blc3RhbmFfZWRpdG9yX2FyY2hpdm9zJykudHJpZ2dlcignY2xpY2snKTs=</accion_usuario>
-	<visible>MA==</visible>
-	<peso>MQ==</peso>
-	<confirmacion_texto></confirmacion_texto>
-	<destino>X3NlbGY=</destino>
-	<pantalla_completa>MA==</pantalla_completa>
-	<precargar_estilos>MQ==</precargar_estilos>
-	<imagen>ZmEgZmEtcGVuY2ls</imagen>
-	<ubicar_principio>MA==</ubicar_principio>
-	</core_informe_boton>
-	<total_core_informe_boton><cantidad_objetos>1</cantidad_objetos></total_core_informe_boton>
+	<total_core_informe_boton><cantidad_objetos>0</cantidad_objetos></total_core_informe_boton>
 	<total_core_informe_campos><cantidad_objetos>0</cantidad_objetos></total_core_informe_campos>
 	<total_core_informe_condiciones><cantidad_objetos>0</cantidad_objetos></total_core_informe_condiciones>
 	<total_core_informe_tablas><cantidad_objetos>0</cantidad_objetos></total_core_informe_tablas>

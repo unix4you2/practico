@@ -11,8 +11,8 @@
 		<hora_exportacion>09:01</hora_exportacion>
 	</descripcion>
 	<core_informe>
-	<id>LTQ2</id>
-	<titulo>eyRNVUxUSUxBTkdfTW9kdWxvc30geyRNVUxUSUxBTkdfRXhpc3RlbnRlc30=</titulo>
+	<id>LTU1</id>
+	<titulo>eyRNVUxUSUxBTkdfRG9jdW1lbnRhcn0=</titulo>
 	<descripcion></descripcion>
 	<categoria>UHJhY3RpY29GcmFtZXdvcms=</categoria>
 	<agrupamiento></agrupamiento>
@@ -22,27 +22,27 @@
 	<formato_final>VA==</formato_final>
 	<formato_grafico>fCF8IXwhfGZhbHNlfGZhbHNlfGZhbHNlfHx8</formato_grafico>
 	<genera_pdf>Tg==</genera_pdf>
-	<variables_filtro>TVVMVElMQU5HX01vZHVsb3M=</variables_filtro>
+	<variables_filtro>b3JpZ2VuLGRldGFsbGVfb3JpZ2Vu</variables_filtro>
 	<soporte_datatable>Tg==</soporte_datatable>
 	<formulario_filtrado></formulario_filtrado>
 	<tamano_paginacion>MA==</tamano_paginacion>
 	<subtotales_columna></subtotales_columna>
 	<subtotales_formato></subtotales_formato>
-	<conexion_origen_datos></conexion_origen_datos>
-	<consulta_sql>U0VMRUNUDQogICAgaWQgYXMgSWQsDQogICAgbm9tYnJlIGFzIHskTVVMVElMQU5HX05vbWJyZX0sDQogICAgKFNFTEVDVCBDT1VOVCgqKSBGUk9NIGNvcmVfZm9ybXVsYXJpbyBXSEVSRSBtb2R1bG89Y29yZV9tb2R1bG9zX2FwcC5pZCkgYXMgRnJtLA0KICAgIChTRUxFQ1QgQ09VTlQoKikgRlJPTSBjb3JlX2luZm9ybWUgV0hFUkUgbW9kdWxvPWNvcmVfbW9kdWxvc19hcHAuaWQpIGFzIEluZiwNCiAgICBkZXNjcmlwY2lvbiBhcyB7JE1VTFRJTEFOR19EZXRhbGxlc30sDQogICAgZGVzYXJyb2xsYWRvcmVzIGFzICJ7JE1VTFRJTEFOR19Vc3Vhcmlvc0FkbWlufSINCkZST00NCiAgICBjb3JlX21vZHVsb3NfYXBwDQoNClVOSU9ODQoNClNFTEVDVA0KICAgICIwIiBhcyBJZCwNCiAgICAiPGI+X0hVRVJGQU5PU188L2I+IiBhcyB7JE1VTFRJTEFOR19Ob21icmV9LA0KICAgIChTRUxFQ1QgQ09VTlQoKikgRlJPTSBjb3JlX2Zvcm11bGFyaW8gV0hFUkUgbW9kdWxvPTAgQU5EIGlkPjApIGFzIEZybSwNCiAgICAoU0VMRUNUIENPVU5UKCopIEZST00gY29yZV9pbmZvcm1lIFdIRVJFIG1vZHVsbz0wIEFORCBpZD4wKSBhcyBJbmYsDQogICAgIjxmb250IGNvbG9yPXJlZD5FbGVtZW50b3MgdGlwbyBmb3JtdWxhcmlvIHkvbyBpbmZvcm1lIHNpbiBzZXIgYXNpZ25hZG9zIGEgdW4gbW9kdWxvPC9mb250PiIgYXMgeyRNVUxUSUxBTkdfRGV0YWxsZXN9LA0KICAgICIiIGFzICJ7JE1VTFRJTEFOR19Vc3Vhcmlvc0FkbWlufSINCg0K</consulta_sql>
+	<conexion_origen_datos>UHJlZGV0ZXJtaW5hZG8gKE1pc21hIGNvbmV4acOzbiB1c2FkYSBwb3IgUHJhY3RpY28p</conexion_origen_datos>
+	<consulta_sql>U0VMRUNUDQogICAgQ09OQ0FUKGlkLCd8Jyxmb3JtYXRvKSBhcyBJRCwNCiAgICB7JGxpc3RhX2NhbXBvc19kb2N1bWVudGFjaW9ufQ0KRlJPTSBjb3JlX2RvY3VtZW50YWNpb24NCldIRVJFDQpvcmlnZW49J3skb3JpZ2VufScgDQpBTkQgZGV0YWxsZV9vcmlnZW49J3skZGV0YWxsZV9vcmlnZW59Jw0K</consulta_sql>
 	<tooltip_titulo>Tg==</tooltip_titulo>
 	<exportar_dtclp>Tg==</exportar_dtclp>
 	<exportar_dtcsv>Tg==</exportar_dtcsv>
 	<exportar_dtxls>Tg==</exportar_dtxls>
 	<exportar_dtpdf>Tg==</exportar_dtpdf>
 	<ocultar_encabezado>MA==</ocultar_encabezado>
-	<ocultar_piepagina>MQ==</ocultar_piepagina>
+	<ocultar_piepagina>MA==</ocultar_piepagina>
 	<anular_acciones>MA==</anular_acciones>
-	<encabezado_html>PGRpdiBzdHlsZT0idGV4dC1hbGlnbjogY2VudGVyOyI+PGIgc3R5bGU9ImZvbnQtc2l6ZTogMThweDsiPnskTVVMVElMQU5HX01vZHVsb3N9IHskTVVMVElMQU5HX0V4aXN0ZW50ZXN9PC9iPjwvZGl2Pg==</encabezado_html>
+	<encabezado_html></encabezado_html>
 	<tabla_responsive>Tg==</tabla_responsive>
 	<permitido_home>Tg==</permitido_home>
 	<javascript></javascript>
-	<pre_script></pre_script>
+	<pre_script>PD9waHAKICAgICMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjCiAgICAjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwogICAgLy9WRVJJRklDQSBTRUdVUklEQUQ6IFBlcmZpbCBkZSBBZG1pbmlzdHJhZG9yIHJlcXVlcmlkbyBhbnRlcyBkZSBjb250aW51YXIKICAgIGdsb2JhbCAkUENPU0VTU19Mb2dpblVzdWFyaW8sJE1VTFRJTEFOR19FcnJvclRpdEF1dGgsJE1VTFRJTEFOR19XU0VycjA2OwogICAgaWYgKCFQQ09fRXNBZG1pbmlzdHJhZG9yKEAkUENPU0VTU19Mb2dpblVzdWFyaW8pKQogICAgICAgIHsKICAgICAgICAgICAgUENPX01lbnNhamUoInskTVVMVElMQU5HX0Vycm9yVGl0QXV0aH0iLCAieyRNVUxUSUxBTkdfV1NFcnIwNn0iLCAnJywgJ2ZhIGZhLWV4Y2xhbWF0aW9uLXRyaWFuZ2xlIGZhLTN4IHRleHRvLXJvam8gdGV4dG8tYmxpbmsnLCAnYWxlcnQgYWxlcnQtd2FybmluZyBhbGVydC1kaXNtaXNzaWJsZScpOwogICAgICAgICAgICBQQ09fQXVkaXRhcigiJFBDT1NFU1NfTG9naW5Vc3VhcmlvIEludGVudGEgYWNjZXNvIG5vIGF1dG9yaXphZG8gSW5mOi01NSIsIlNFQ0xvZzpldmVudCIpOwogICAgICAgICAgICBkaWUoKTsKICAgICAgICB9CiAgICAjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIwogICAgIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMKCgpnbG9iYWwgJG9yaWdlbiwkZGV0YWxsZV9vcmlnZW4sJGxpc3RhX2NhbXBvc19kb2N1bWVudGFjaW9uOwoKLy9BZ3JlZ2Egb3BjaW9uIHN1cGVyaW9yIHBhcmEgY3JlYXIgdW4gbnVldm8gZG9jdW1lbnRvCmVjaG8gIiAgPGEgY2xhc3M9J2J0biBidG4tc3VjY2VzcycgaHJlZj0namF2YXNjcmlwdDpwYXJlbnQuUENPSlNfRWRpdGFyRG9jdW1lbnRhY2lvbigwLFwiRW5yaXF1ZWNpZG9cIik7Jz48aSBjbGFzcz0nZmEgZmEtYm9vayBmYS1mdyc+PC9pPkFncmVnYXIgZG9jdW1lbnRvIGVucmlxdWVjaWRvPC9hPgogICAgICAgIDxhIGNsYXNzPSdidG4gYnRuLWluZm8nIGhyZWY9J2phdmFzY3JpcHQ6cGFyZW50LlBDT0pTX0VkaXRhckRvY3VtZW50YWNpb24oMCxcIkRpYWdyYW1hXCIpOyc+PGkgY2xhc3M9J2ZhIGZhLXBob3RvIGZhLWZ3Jz48L2k+QWdyZWdhciBkaWFncmFtYTwvYT4iOw==</pre_script>
 	<post_script></post_script>
 	<usar_ajax>MA==</usar_ajax>
 	<definir_cols>Tg==</definir_cols>
@@ -58,28 +58,28 @@
 	<modulo>MA==</modulo>
 	</core_informe>
 	<core_informe_boton>
-	<id>NTcz</id>
+	<id>NTc5</id>
 	<titulo>eyRNVUxUSUxBTkdfRWRpdGFyfQ==</titulo>
 	<estilo>IGJ0biBidG4tcHJpbWFyeSAgYnRuLXhzIA==</estilo>
-	<informe>LTQ2</informe>
-	<tipo_accion>aW50ZXJuYV9jYXJnYXI=</tipo_accion>
-	<accion_usuario>LTMyOjE6aWQ=</accion_usuario>
+	<informe>LTU1</informe>
+	<tipo_accion>ZXh0ZXJuYV9qYXZhc2NyaXB0</tipo_accion>
+	<accion_usuario>cGFyZW50LlBDT0pTX0VkaXRhckRvY3VtZW50YWNpb24oZG9jdW1lbnQuRlJNQkFTRUlORk9STUUuUENPX1ZhbG9yLnZhbHVlLCcnKTs=</accion_usuario>
 	<visible>MQ==</visible>
 	<peso>MQ==</peso>
 	<confirmacion_texto></confirmacion_texto>
 	<destino>X3NlbGY=</destino>
 	<pantalla_completa>MA==</pantalla_completa>
 	<precargar_estilos>MQ==</precargar_estilos>
-	<imagen>ZmEgZmEtcGVuY2lsIGZhLWZ3</imagen>
+	<imagen>ZmEgZmEtcGVuY2lsIGZhLWZ3IF9URVhUT0RFUl8=</imagen>
 	<ubicar_principio>MQ==</ubicar_principio>
 	</core_informe_boton>
 	<total_core_informe_boton><cantidad_objetos>1</cantidad_objetos></total_core_informe_boton>
 	<core_informe_campos>
-	<id>MjE0OA==</id>
-	<informe>LTQ2</informe>
+	<id>MjIwMA==</id>
+	<informe>LTU1</informe>
 	<valor_campo>aWQ=</valor_campo>
-	<valor_alias>SWQ=</valor_alias>
-	<peso>Mg==</peso>
+	<valor_alias>SUQ=</valor_alias>
+	<peso>MQ==</peso>
 	<visible>MA==</visible>
 	<editable>MA==</editable>
 	<titulo_arbitrario></titulo_arbitrario>

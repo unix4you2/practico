@@ -2,13 +2,13 @@
 <objetos_practicos>
 	<descripcion>
 		<tipo_objeto>Informe</tipo_objeto>
-		<version_practico>22.9</version_practico>
+		<version_practico></version_practico>
 		<tipo_exportacion>XML_IdEstatico</tipo_exportacion>
-		<sistema_origen>Framework</sistema_origen>
-		<version>21.5</version>
-		<usuario_generador>admin</usuario_generador>
-		<fecha_exportacion>2023-02-28</fecha_exportacion>
-		<hora_exportacion>07:48</hora_exportacion>
+		<sistema_origen></sistema_origen>
+		<version></version>
+		<usuario_generador></usuario_generador>
+		<fecha_exportacion>2023-05-24</fecha_exportacion>
+		<hora_exportacion>09:01</hora_exportacion>
 	</descripcion>
 	<core_informe>
 	<id>LTM1</id>
@@ -21,7 +21,7 @@
 	<alto></alto>
 	<formato_final>VA==</formato_final>
 	<formato_grafico>fCF8IXwhfGZhbHNlfGZhbHNlfGZhbHNlfHx8</formato_grafico>
-	<genera_pdf>QQ==</genera_pdf>
+	<genera_pdf>Tg==</genera_pdf>
 	<variables_filtro></variables_filtro>
 	<soporte_datatable>Uw==</soporte_datatable>
 	<formulario_filtrado></formulario_filtrado>
@@ -32,8 +32,8 @@
 	<consulta_sql>U0VMRUNUIGlkLGZlY2hhLGhvcmEsdXN1YXJpb19sb2dpbixhY2Npb24gRlJPTSBjb3JlX2F1ZGl0b3JpYSBXSEVSRSAxPTEg</consulta_sql>
 	<tooltip_titulo>Tg==</tooltip_titulo>
 	<exportar_dtclp>Uw==</exportar_dtclp>
-	<exportar_dtcsv>Uw==</exportar_dtcsv>
-	<exportar_dtxls>Uw==</exportar_dtxls>
+	<exportar_dtcsv>Tg==</exportar_dtcsv>
+	<exportar_dtxls>Tg==</exportar_dtxls>
 	<exportar_dtpdf>Uw==</exportar_dtpdf>
 	<ocultar_encabezado>MA==</ocultar_encabezado>
 	<ocultar_piepagina>MA==</ocultar_piepagina>

@@ -2,13 +2,13 @@
 <objetos_practicos>
 	<descripcion>
 		<tipo_objeto>Formulario</tipo_objeto>
-		<version_practico>22.9</version_practico>
+		<version_practico></version_practico>
 		<tipo_exportacion>XML_IdEstatico</tipo_exportacion>
-		<sistema_origen>Framework</sistema_origen>
-		<version>21.5</version>
-		<usuario_generador>admin</usuario_generador>
-		<fecha_exportacion>2023-02-28</fecha_exportacion>
-		<hora_exportacion>07:47</hora_exportacion>
+		<sistema_origen></sistema_origen>
+		<version></version>
+		<usuario_generador></usuario_generador>
+		<fecha_exportacion>2023-05-24</fecha_exportacion>
+		<hora_exportacion>09:01</hora_exportacion>
 	</descripcion>
 	<core_formulario>
 	<id>LTI2</id>
