@@ -227,7 +227,7 @@
 							</a>
 						</li>
 						<li>
-							<a data-toggle="modal" href="#myModalWEBSERVICES">
+							<a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-44:1">
 								<div>
 									<i class="fa fa-link fa-fw"></i> <?php echo $MULTILANG_WSConfigButt; ?>
 									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."llaves_api",""); ?></span>
