@@ -238,7 +238,7 @@
 							<a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-45:1">
 								<div>
 									<i class="fa fa-bolt fa-fw"></i> Endpoints de WebServices
-									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."llaves_apimetodos",""); ?></span>
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."llaves_metodo",""); ?></span>
 								</div>
 							</a>
 						</li>
