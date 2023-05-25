@@ -235,6 +235,14 @@
 							</a>
 						</li>
 						<li>
+							<a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-45:1">
+								<div>
+									<i class="fa fa-bolt fa-fw"></i> Endpoints de WebServices
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."llaves_apimetodos",""); ?></span>
+								</div>
+							</a>
+						</li>
+						<li>
 							<a href="javascript:document.PCO_VerTareasCron.submit();">
 								<div>
 									<i class="fa fa-clock-o fa-fw"></i> <?php echo $MULTILANG_CronTitulo; ?>
