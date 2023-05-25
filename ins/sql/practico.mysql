@@ -501,14 +501,6 @@ CREATE TABLE core_llaves_metodoparametro (
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
-DROP TABLE IF EXISTS core_llaves_apimetodos;
-CREATE TABLE core_llaves_apimetodos (
-  id int(10) NOT NULL AUTO_INCREMENT,
-  api int(10) NOT NULL,
-  metodo int(10) NOT NULL,
-  PRIMARY KEY (id)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
 DROP TABLE IF EXISTS core_llaves_api_externas;
 CREATE TABLE core_llaves_api_externas (
   id int(10) NOT NULL AUTO_INCREMENT,
