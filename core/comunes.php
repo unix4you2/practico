@@ -8422,7 +8422,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 
         //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
         $BotonSaltoEdicion='
-                    <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=PCO_EditarFormulario&popup_activo=&formulario='.$formulario.'">
+                    <a class="btn btn-default btn-xs" href="index.php?PCO_Accion=PCO_EditarFormulario&popup_activo=&formulario='.$formulario.'" id="PCO_BotonEdicionFormulario">
                         <div><i class="fa fa-pencil-square"></i> '.$MULTILANG_Editar.' '.$MULTILANG_Formularios.' <i>[ID='.$formulario.']</i></div>
                     </a>';
 		if (PCO_EsAdministrador($_SESSION['PCOSESS_LoginUsuario']) && ($formulario>=0 || $ModoDesarrolladorPractico==-10000) )
@@ -8473,6 +8473,11 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         if ($modo_diseno_formulario==1)
             {
         		echo '<script type="text/javascript">
+                        function PCOJS_LlamadoRemotoEditarFormulario()
+            				{
+            					document.getElementById("PCO_BotonEdicionFormulario").click();
+            				}
+				
                         function PCOJS_ActualizarControlFormulario(idformulario,idcontrol,pestana_activa){
                             //Salta a edicion de control
                             var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-36:0:id:"+idcontrol+"&Presentar_FullScreen=1&Precarga_EstilosBS=1&formulario="+idformulario+"&pestana_activa_apertura="+pestana_activa+"&PCO_TipoControlDirecto=";
