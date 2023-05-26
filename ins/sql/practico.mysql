@@ -484,6 +484,7 @@ CREATE TABLE core_llaves_metodo (
   formato varchar(50) NOT NULL DEFAULT 'TXT', # TXT,HTML,XML,JSON,RAW,BINARY
   script mediumtext,
   ejemplo_salida mediumtext, # Suministra ejemplos para salidas codigos 200, 4XX, 5XX, etc.
+  total_ejecuciones int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
