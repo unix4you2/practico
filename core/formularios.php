@@ -46,17 +46,12 @@
 				Title: Modulo formularios
 				Ubicacion *[/core/formularios.php]*.  Archivo de funciones relacionadas con la administracion de formularios de la aplicacion.
 			*/
-?>
-<?php
+
 			/*
 				Section: Operaciones basicas de administracion
 				Funciones asociadas al mantenimiento de formularios en el sistema.
 			*/
-?>
 
-
-
-<?php
 ########################################################################
 ########################################################################
 /*
@@ -1383,9 +1378,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 					}
 				echo '</tbody>
                 </table>';			
-			?>
 
-    <?php 
         $barra_herramientas_modal='
             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
         PCO_CerrarDialogoModal($barra_herramientas_modal);
@@ -1484,9 +1477,7 @@ if ($PCO_Accion=="PCO_EditarFormulario")
 				echo '
                     </tbody>
                 </table>';
-			?>
 
-    <?php 
         $barra_herramientas_modal='
             <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cancelar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
         PCO_CerrarDialogoModal($barra_herramientas_modal);
