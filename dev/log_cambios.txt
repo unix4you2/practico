@@ -133,6 +133,7 @@ LogCambios="
 * Added [CORE]: Nuevas estructuras para definición y parametrización de servicios web como una segunda capa a la existente que no dejará de operar por compatibilidad.  En adelante cuando se llame al motor de servicios web primero será revisada la capa nueva y usada con sus parametrizaciones y en caso de no existir el método o estar vacío en su código la evaluación se hará mediante capa de compatibilidad hacia atráss.  Se recomienda generar todo servicio nuevo mediante la nueva capa y migrar aquellos existentes de ser posible.
 * Enhan [CORE]: Reemplazado archivo de core/marco_wscfg.php por objetos internos ahorrando 13kb de peso.
 * Added [CORE]: Nueva opcion para definición de Endpoints asociados a webservices disponible en el menu de configuración.  La opción no sólo permite crear servicios web definidos por base de datos sino también parametrizar comportamientos, parámetros y generar exploradores automatizados de APIs de aplicación.
+* Enhan [CORE]: Conteo de opciones de menú al inicio del framework excluye aquellas cuya sección sea diferente de PCO_NoVisible para así evitar las que son usadas internamente por el framework.
 
 
 * Added [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).
