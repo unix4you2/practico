@@ -316,11 +316,11 @@
                                 $ColumnaTotales = intval(trim($TablasDataTableTotales[$i]))-1;
                                 $ColumnaTotalesVisual = trim($TablasDataTableTotales[$i]);
                                 $CadenaFormateadaTotales = trim($TablasDataTableFormatosTotales[$i]);
-                                $CadenaExportaCLP = trim($TablasDataTableExportaCLP[$i]) =="S" ? '{ extend: "copy",  className: "InformeBotonCopiar" },' : '';
-                                $CadenaExportaCSV = trim($TablasDataTableExportaCSV[$i]) =="S" ? '{ extend: "csv",   className: "InformeBotonCsv" },   ' : '';
-                                $CadenaExportaXLS = trim($TablasDataTableExportaXLS[$i]) =="S" ? '{ extend: "excel", className: "InformeBotonExcel",  title: "" }, ' : '';
-                                $CadenaExportaPDF = trim($TablasDataTableExportaPDF[$i]) =="S" ? '{ extend: "pdf",   className: "InformeBotonPdf" },   ' : '';
-                                $CadenaPersonalizarColumnas=trim($TablasDataTableDefineCOLS[$i]) =="S" ? '{ extend: "colvis",  text:"'.$MULTILANG_Columna.'(s)",  className: "InformeBotonCopiar" }, ' : '';
+                                $CadenaExportaCLP = trim($TablasDataTableExportaCLP[$i]) == "S" ? '{ extend: "copy",  className: "InformeBotonCopiar" },' : '';
+                                $CadenaExportaCSV = trim($TablasDataTableExportaCSV[$i]) == "S" ? '{ extend: "csv",   className: "InformeBotonCsv" },   ' : '';
+                                $CadenaExportaXLS = trim($TablasDataTableExportaXLS[$i]) == "S" ? '{ extend: "excel", className: "InformeBotonExcel",  title: "" }, ' : '';
+                                $CadenaExportaPDF = trim($TablasDataTableExportaPDF[$i]) == "S" ? '{ extend: "pdf",   className: "InformeBotonPdf" },   ' : '';
+                                $CadenaPersonalizarColumnas=trim($TablasDataTableDefineCOLS[$i]) == "S" ? '{ extend: "colvis",  text:"'.$MULTILANG_Columna.'(s)",  className: "InformeBotonCopiar" }, ' : '';
 
                                 //DEFINE CADENAS EN PANELES DE FILTRADO
                                 $CadenaPosicionPanelesArriba = $TablasDataTable_pane_activado[$i] == "S" ? "P" : "";
