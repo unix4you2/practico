@@ -312,37 +312,27 @@
                         //Agrega codigo para activacion de DataTable solamente cuando se tenga un ID de tabla valido
                         if ($TablasDataTable[$i]!="")
                             {
-                                $Paginacion=trim($TablasDataTablePaginaciones[$i]);
-                                $ColumnaTotales=intval(trim($TablasDataTableTotales[$i]))-1;
-                                $ColumnaTotalesVisual=trim($TablasDataTableTotales[$i]);
-                                $CadenaFormateadaTotales=trim($TablasDataTableFormatosTotales[$i]);
-                                $CadenaExportaCLP=trim($TablasDataTableExportaCLP[$i]); if ($CadenaExportaCLP=="S") $CadenaExportaCLP='{ extend: "copy",    className: "InformeBotonCopiar" },'; else $CadenaExportaCLP='';
-                                $CadenaExportaCSV=trim($TablasDataTableExportaCSV[$i]); if ($CadenaExportaCSV=="S") $CadenaExportaCSV='{ extend: "csv",     className: "InformeBotonCsv" },   '; else $CadenaExportaCSV='';
-                                $CadenaExportaXLS=trim($TablasDataTableExportaXLS[$i]); if ($CadenaExportaXLS=="S") $CadenaExportaXLS='{ extend: "excel",   className: "InformeBotonExcel" ,  title: "" }, '; else $CadenaExportaXLS='';
-                                $CadenaExportaPDF=trim($TablasDataTableExportaPDF[$i]); if ($CadenaExportaPDF=="S") $CadenaExportaPDF='{ extend: "pdf",     className: "InformeBotonPdf" },   '; else $CadenaExportaPDF='';
-                                $CadenaPersonalizarColumnas=trim($TablasDataTableDefineCOLS[$i]); if ($CadenaPersonalizarColumnas=="S") $CadenaPersonalizarColumnas='{ extend: "colvis",  text:"'.$MULTILANG_Columna.'(s)",  className: "InformeBotonCopiar" }, '; else $CadenaPersonalizarColumnas='';
+                                $Paginacion = trim($TablasDataTablePaginaciones[$i]);
+                                $ColumnaTotales = intval(trim($TablasDataTableTotales[$i]))-1;
+                                $ColumnaTotalesVisual = trim($TablasDataTableTotales[$i]);
+                                $CadenaFormateadaTotales = trim($TablasDataTableFormatosTotales[$i]);
+                                $CadenaExportaCLP = trim($TablasDataTableExportaCLP[$i]) =="S" ? '{ extend: "copy",  className: "InformeBotonCopiar" },' : '';
+                                $CadenaExportaCSV = trim($TablasDataTableExportaCSV[$i]) =="S" ? '{ extend: "csv",   className: "InformeBotonCsv" },   ' : '';
+                                $CadenaExportaXLS = trim($TablasDataTableExportaXLS[$i]) =="S" ? '{ extend: "excel", className: "InformeBotonExcel",  title: "" }, ' : '';
+                                $CadenaExportaPDF = trim($TablasDataTableExportaPDF[$i]) =="S" ? '{ extend: "pdf",   className: "InformeBotonPdf" },   ' : '';
+                                $CadenaPersonalizarColumnas=trim($TablasDataTableDefineCOLS[$i]) =="S" ? '{ extend: "colvis",  text:"'.$MULTILANG_Columna.'(s)",  className: "InformeBotonCopiar" }, ' : '';
 
                                 //DEFINE CADENAS EN PANELES DE FILTRADO
-                                $CadenaPosicionPanelesArriba="";
-                                $CadenaPosicionPanelesAbajo="";
-                                $Cadena_pane_cascada="";
-                                $Cadena_pane_colapsado="";
-                                $Cadena_pane_columnas="";
-                                $Cadena_pane_subtotalesrelativos="";
-                                $Cadena_pane_conteos="";
-                                $Cadena_pane_controles="";
-                                $Cadena_pane_control_colapsar="";
-                                $Cadena_pane_control_ordenar="";
-                                if ($TablasDataTable_pane_activado[$i]=="S") $CadenaPosicionPanelesArriba="P";
-                                if ($TablasDataTable_pane_activado[$i]=="I") $CadenaPosicionPanelesAbajo="P";
-                                if ($TablasDataTable_pane_cascada[$i]=="S") $Cadena_pane_cascada=" cascadePanes: true, ";
-                                if ($TablasDataTable_pane_colapsado[$i]=="S") $Cadena_pane_colapsado=" initCollapsed: true, ";
-                                if ($TablasDataTable_pane_columnas[$i]!="") $Cadena_pane_columnas=' layout: "columns-'.$TablasDataTable_pane_columnas[$i].'", ';
-                                if ($TablasDataTable_pane_subtotalesrelativos[$i]=="S") $Cadena_pane_subtotalesrelativos=" viewTotal: false, ";
-                                if ($TablasDataTable_pane_conteos[$i]!="S") $Cadena_pane_conteos=" viewCount: false, ";
-                                if ($TablasDataTable_pane_controles[$i]!="S") $Cadena_pane_controles=" controls: false, ";
-                                if ($TablasDataTable_pane_control_colapsar[$i]!="S") $Cadena_pane_control_colapsar=" collapse: false, ";
-                                if ($TablasDataTable_pane_control_ordenar[$i]!="S") $Cadena_pane_control_ordenar=" orderable: false, ";
+                                $CadenaPosicionPanelesArriba = $TablasDataTable_pane_activado[$i] == "S" ? "P" : "";
+                                $CadenaPosicionPanelesAbajo  = $TablasDataTable_pane_activado[$i] == "I" ? "P" : "";
+                                $Cadena_pane_cascada         = $TablasDataTable_pane_cascada[$i]  == "S" ? " cascadePanes: true, " : "";
+                                $Cadena_pane_colapsado       = $TablasDataTable_pane_colapsado[$i]== "S" ? " initCollapsed: true, " : "";
+                                $Cadena_pane_columnas        = $TablasDataTable_pane_columnas[$i] != ""  ? ' layout: "columns-'.$TablasDataTable_pane_columnas[$i].'", ' : "";
+                                $Cadena_pane_subtotalesrelativos = $TablasDataTable_pane_subtotalesrelativos[$i] == "S" ? " viewTotal: false, " : "";
+                                $Cadena_pane_conteos         = $TablasDataTable_pane_conteos[$i]  != "S" ? " viewCount: false, " : "";
+                                $Cadena_pane_controles       = $TablasDataTable_pane_controles[$i]!= "S" ? " controls: false, " : "";
+                                $Cadena_pane_control_colapsar= $TablasDataTable_pane_control_colapsar[$i]!= "S" ? " collapse: false, " : "";
+                                $Cadena_pane_control_ordenar = $TablasDataTable_pane_control_ordenar[$i] != "S" ? " orderable: false, " : "";
                                 $CadenaPanelesFiltrado='
                                             searchPanes:
                                                 {
