@@ -383,8 +383,7 @@
 							        if ($Activar_ModuloChat==1 && PCO_EsUsuarioInterno(@$PCOSESS_LoginUsuario))
     								    echo $ComplementoOpcionMenu;
     							}
-    					?>
-    					<?php
+
                             //Busca si tiene tableros kanban o le han compartido alguno
                             $RegistroTableros=PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND (login_admintablero='$PCOSESS_LoginUsuario' OR compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%') LIMIT 0,1 ")->fetch();
                             
@@ -397,9 +396,7 @@
                             
                             if ($RegistroTableros["id"]!="" || $PCOVAR_EsAdminKanban==1)
                                 echo '<li><a href="javascript:document.PCO_ExplorarTablerosKanban.submit();"><i class="fa fa-sticky-note fa-fw"></i> '.$MULTILANG_TablerosKanban.'</a></li>';
-                        ?>
 
-    					<?php
                             //Determina si el usurio puede o no cambiar el modo dia/noche segun estado en panel de configuracion
                             if ($PCO_PermitirUsuariosModoNoche=="1")
                                 {
@@ -409,9 +406,7 @@
                                     $IconoModoDiaNoche=$IconoModoActivo.' Activar modo oscuro';
                                     echo '<li><a href="javascript:document.PCO_CargarActualizarPefil.submit();">'.$IconoModoDiaNoche.'</a></li>';
                                 }
-                        ?>
 
-    					<?php
                             //Determina si esta en modo desarrollador del framework y agrega opcion para saltar al banco de pruebas interno
                             if ($ModoDesarrolladorPractico==-10000 && PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
                                 echo '<li><a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-25:1"><i class="fa fa-steam fa-fw"></i> <b>Banco de pruebas interno</b></a></li>';
@@ -466,7 +461,7 @@
             //Captura otros datos informativos de la aplicacion
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="TRAZAS DE APLICACION / APPLICATION DEBUG\n==================================================\n";
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="<?php echo $MULTILANG_TiempoCarga; ?>:"+$('#PCO_TCarga').text()+" seg.";
-            document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="      <?php echo $MULTILANG_TiempoCarga; ?> JS:"+$('#PCO_TCargaJS').text()+" seg.\n";
+            document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="<?php echo $MULTILANG_TiempoCarga; ?> JS:"+$('#PCO_TCargaJS').text()+" seg.\n";
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="<?php echo $MULTILANG_Instante; ?>: <?php echo $PCO_FechaOperacionGuiones;?> <?php echo $PCO_HoraOperacionPuntos;?>"+"\n";
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="<?php echo $MULTILANG_Accion; ?>: <?php echo $PCO_Accion;?>"+"\n";
             document.PCO_ReportarBugs.PCO_CapturaTrazas.value+="<?php echo $MULTILANG_Usuario; ?>:  <?php echo $PCOSESS_LoginUsuario;?>"+"\n";
