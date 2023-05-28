@@ -124,24 +124,15 @@
 								$PCOConnBaseDatos="../".$PCOConnBaseDatos;
 							$ConexionPDO = new PDO("sqlite:$PCOConnBaseDatos");  // SQLite 3??? $ConexionPDO = new PDO("sqlite::memory");	
 						}
-					if ($PCOConnMotorBD=="fbd")
-								$ConexionPDO = new PDO("firebird:dbname=$PCOConnServidorBD".":"."$PCOConnBaseDatos","$PCOConnUsuarioBD","$PCOConnPasswordBD");
-					if ($PCOConnMotorBD=="oracle")
-								$ConexionPDO = new PDO("OCI:dbname=$PCOConnBaseDatos;charset=UTF-8","$PCOConnUsuarioBD","$PCOConnPasswordBD");
-					if ($PCOConnMotorBD=="mssql")
-								$ConexionPDO = new PDO("mssql:dbname=$PCOConnBaseDatos;host=$PCOConnServidorBD","$PCOConnUsuarioBD","$PCOConnPasswordBD");
-					if ($PCOConnMotorBD=="sqlsrv")
-								$ConexionPDO = new PDO("sqlsrv:database=$PCOConnBaseDatos;server=$PCOConnServidorBD","$PCOConnUsuarioBD","$PCOConnPasswordBD");
-					if ($PCOConnMotorBD=="ibm")
-								$ConexionPDO = new PDO("ibm:DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$PCOConnBaseDatos; HOSTNAME=$PCOConnServidorBD; PORT=$PCOConnPuertoBD; PROTOCOL=TCPIP;","$PCOConnUsuarioBD","$PCOConnPasswordBD");
-					if ($PCOConnMotorBD=="dblib")
-								$ConexionPDO = new PDO("dblib:dbname=$PCOConnBaseDatos;host=$PCOConnServidorBD".":"."$PCOConnPuertoBD","$PCOConnUsuarioBD","$PCOConnPasswordBD");
-					if ($PCOConnMotorBD=="dblib_mssql")
-								$ConexionPDO = new PDO("dblib:dbname=$PCOConnBaseDatos;host=$PCOConnServidorBD".":"."$PCOConnPuertoBD","$PCOConnUsuarioBD","$PCOConnPasswordBD");
-					if ($PCOConnMotorBD=="odbc")
-								$ConexionPDO = new PDO("odbc:Driver={Microsoft Access Driver (*.mdb)};Dbq=C:\accounts.mdb;Uid=$PCOConnUsuarioBD");
-					if ($PCOConnMotorBD=="ifmx")
-								$ConexionPDO = new PDO("informix:DSN=InformixDB","$PCOConnUsuarioBD","$PCOConnPasswordBD");
+					if ($PCOConnMotorBD=="fbd")			$ConexionPDO = new PDO("firebird:dbname=$PCOConnServidorBD".":"."$PCOConnBaseDatos","$PCOConnUsuarioBD","$PCOConnPasswordBD");
+					if ($PCOConnMotorBD=="oracle")		$ConexionPDO = new PDO("OCI:dbname=$PCOConnBaseDatos;charset=UTF-8","$PCOConnUsuarioBD","$PCOConnPasswordBD");
+					if ($PCOConnMotorBD=="mssql")		$ConexionPDO = new PDO("mssql:dbname=$PCOConnBaseDatos;host=$PCOConnServidorBD","$PCOConnUsuarioBD","$PCOConnPasswordBD");
+					if ($PCOConnMotorBD=="sqlsrv")		$ConexionPDO = new PDO("sqlsrv:database=$PCOConnBaseDatos;server=$PCOConnServidorBD","$PCOConnUsuarioBD","$PCOConnPasswordBD");
+					if ($PCOConnMotorBD=="ibm")			$ConexionPDO = new PDO("ibm:DRIVER={IBM DB2 ODBC DRIVER};DATABASE=$PCOConnBaseDatos; HOSTNAME=$PCOConnServidorBD; PORT=$PCOConnPuertoBD; PROTOCOL=TCPIP;","$PCOConnUsuarioBD","$PCOConnPasswordBD");
+					if ($PCOConnMotorBD=="dblib")		$ConexionPDO = new PDO("dblib:dbname=$PCOConnBaseDatos;host=$PCOConnServidorBD".":"."$PCOConnPuertoBD","$PCOConnUsuarioBD","$PCOConnPasswordBD");
+					if ($PCOConnMotorBD=="dblib_mssql")	$ConexionPDO = new PDO("dblib:dbname=$PCOConnBaseDatos;host=$PCOConnServidorBD".":"."$PCOConnPuertoBD","$PCOConnUsuarioBD","$PCOConnPasswordBD");
+					if ($PCOConnMotorBD=="odbc")		$ConexionPDO = new PDO("odbc:Driver={Microsoft Access Driver (*.mdb)};Dbq=C:\accounts.mdb;Uid=$PCOConnUsuarioBD");
+					if ($PCOConnMotorBD=="ifmx")		$ConexionPDO = new PDO("informix:DSN=InformixDB","$PCOConnUsuarioBD","$PCOConnPasswordBD");
 
 
 					// Evita el SQLSTATE[HY000]: General error. presentado por PostgreSQL.  Se habilita solo para MySQL
