@@ -46,16 +46,12 @@
 		Title: Modulo sesion
 		Ubicacion *[/core/sesion.php]*.  Archivo de funciones relacionadas con la administracion de sesiones en el sistema.
 	*/
-?>
-<?php
+
 	/*
 		Section: Administracion de permisos
 		Funciones asociadas a la gestion de permisos, roles y demas posibilidades de acceso que puedan tener los usuarios en el aplicativo.
 	*/
-?>
 
-
-<?php
 
 
 /* ################################################################## */
