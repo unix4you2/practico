@@ -50,10 +50,7 @@
 	Ver tambien:
 		<Seccion inferior> | <Articulador>
 	*/
-?>
 
-
-<?php
 	//Presenta las opciones de la barra izquierda a los usuarios
 	if ($PCOSESS_SesionAbierta && @$PCOSESS_LoginUsuario!="")
 		{
