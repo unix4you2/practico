@@ -46,9 +46,7 @@
 		Title: Modulo menues
 		Ubicacion *[/core/menus.php]*.  Archivo de funciones relacionadas con la administracion de opciones de menu.
 	*/
-?>
 
-<?php
 	/*
 		Section: Operaciones basicas de administracion
 		Funciones asociadas al mantenimiento de menues en el sistema.
