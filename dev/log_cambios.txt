@@ -23,8 +23,14 @@ core/marco_abajo.php
 core/marco_arriba.php
 core/marco_arriba_bs.php
 core/marco_nav.php
+core/marco_navizq.php
 core/marco_admin.php
+core/menus.php
 core/formularios.php
+core/informes.php
+core/sesion.php
+core/usuarios.php
+core/tablas.php
 core/formularios_post.php
 core/kanban.php
 core/marco_abajo.php
@@ -134,6 +140,7 @@ LogCambios="
 * Enhan [CORE]: Reemplazado archivo de core/marco_wscfg.php por objetos internos ahorrando 13kb de peso.
 * Added [CORE]: Nueva opcion para definición de Endpoints asociados a webservices disponible en el menu de configuración.  La opción no sólo permite crear servicios web definidos por base de datos sino también parametrizar comportamientos, parámetros y generar exploradores automatizados de APIs de aplicación.
 * Enhan [CORE]: Conteo de opciones de menú al inicio del framework excluye aquellas cuya sección sea diferente de PCO_NoVisible para así evitar las que son usadas internamente por el framework.
+* Enhan [CORE]: @rafaelposadaf PR#30 a PR#43: optimizaciones generales de código
 
 
 * Added [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).
