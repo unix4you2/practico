@@ -46,16 +46,12 @@
 				Title: Modulo informes
 				Ubicacion *[/core/informes.php]*.  Archivo de funciones relacionadas con la gestion de informes de la aplicacion.
 			*/
-?>
-<?php
+
 			/*
 				Section: Operaciones Basicas de Administracion
 				Funciones asociadas al mantenimiento de informes en el sistema.
 			*/
-?>
 
-
-<?php 
 
 
 
@@ -222,72 +218,72 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 					//Establece tamano del papel
 					switch ($PCO_TamanoPapel)
 						{
-							case "PAPERSIZE_6_3_4_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_6_3_4_ENVELOPE); break;
-							case "PAPERSIZE_A2_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A2_PAPER); break;
-							case "PAPERSIZE_A3":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A3); break;
-							case "PAPERSIZE_A3_EXTRA_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A3_EXTRA_PAPER); break;
+							case "PAPERSIZE_6_3_4_ENVELOPE":$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_6_3_4_ENVELOPE); break;
+							case "PAPERSIZE_A2_PAPER":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A2_PAPER); break;
+							case "PAPERSIZE_A3":			$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A3); break;
+							case "PAPERSIZE_A3_EXTRA_PAPER":$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A3_EXTRA_PAPER); break;
 							case "PAPERSIZE_A3_EXTRA_TRANSVERSE_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A3_EXTRA_TRANSVERSE_PAPER); break;
-							case "PAPERSIZE_A3_TRANSVERSE_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A3_TRANSVERSE_PAPER); break;
-							case "PAPERSIZE_A4":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4); break;
-							case "PAPERSIZE_A4_EXTRA_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4_EXTRA_PAPER); break;
+							case "PAPERSIZE_A3_TRANSVERSE_PAPER":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A3_TRANSVERSE_PAPER); break;
+							case "PAPERSIZE_A4":			$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4); break;
+							case "PAPERSIZE_A4_EXTRA_PAPER":$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4_EXTRA_PAPER); break;
 							case "PAPERSIZE_A4_PLUS_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4_PLUS_PAPER); break;
-							case "PAPERSIZE_A4_SMALL":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4_SMALL); break;
-							case "PAPERSIZE_A4_TRANSVERSE_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4_TRANSVERSE_PAPER); break;
-							case "PAPERSIZE_A5":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A5); break;
-							case "PAPERSIZE_A5_EXTRA_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A5_EXTRA_PAPER); break;
-							case "PAPERSIZE_A5_TRANSVERSE_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A5_TRANSVERSE_PAPER); break;
-							case "PAPERSIZE_B4":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_B4); break;
+							case "PAPERSIZE_A4_SMALL":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4_SMALL); break;
+							case "PAPERSIZE_A4_TRANSVERSE_PAPER":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4_TRANSVERSE_PAPER); break;
+							case "PAPERSIZE_A5":			$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A5); break;
+							case "PAPERSIZE_A5_EXTRA_PAPER":$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A5_EXTRA_PAPER); break;
+							case "PAPERSIZE_A5_TRANSVERSE_PAPER":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A5_TRANSVERSE_PAPER); break;
+							case "PAPERSIZE_B4":			$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_B4); break;
 							case "PAPERSIZE_B4_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_B4_ENVELOPE); break;
-							case "PAPERSIZE_B5":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_B5); break;
+							case "PAPERSIZE_B5":			$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_B5); break;
 							case "PAPERSIZE_B5_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_B5_ENVELOPE); break;
 							case "PAPERSIZE_B6_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_B6_ENVELOPE); break;
-							case "PAPERSIZE_C":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_C); break;
+							case "PAPERSIZE_C":				$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_C); break;
 							case "PAPERSIZE_C3_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_C3_ENVELOPE); break;
 							case "PAPERSIZE_C4_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_C4_ENVELOPE); break;
 							case "PAPERSIZE_C5_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_C5_ENVELOPE); break;
 							case "PAPERSIZE_C6_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_C6_ENVELOPE); break;
 							case "PAPERSIZE_C65_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_C65_ENVELOPE); break;
-							case "PAPERSIZE_D":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_D); break;
+							case "PAPERSIZE_D":				$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_D); break;
 							case "PAPERSIZE_DL_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_DL_ENVELOPE); break;
-							case "PAPERSIZE_E":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_E); break;
-							case "PAPERSIZE_EXECUTIVE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_EXECUTIVE); break;
-							case "PAPERSIZE_FOLIO":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO); break;
-							case "PAPERSIZE_GERMAN_LEGAL_FANFOLD":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_GERMAN_LEGAL_FANFOLD); break;
+							case "PAPERSIZE_E":				$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_E); break;
+							case "PAPERSIZE_EXECUTIVE":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_EXECUTIVE); break;
+							case "PAPERSIZE_FOLIO":			$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_FOLIO); break;
+							case "PAPERSIZE_GERMAN_LEGAL_FANFOLD":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_GERMAN_LEGAL_FANFOLD); break;
 							case "PAPERSIZE_GERMAN_STANDARD_FANFOLD":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_GERMAN_STANDARD_FANFOLD); break;
-							case "PAPERSIZE_INVITE_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_INVITE_ENVELOPE); break;
-							case "PAPERSIZE_ISO_B4":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_ISO_B4); break;
-							case "PAPERSIZE_ISO_B5_EXTRA_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_ISO_B5_EXTRA_PAPER); break;
-							case "PAPERSIZE_ITALY_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_ITALY_ENVELOPE); break;
+							case "PAPERSIZE_INVITE_ENVELOPE":$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_INVITE_ENVELOPE); break;
+							case "PAPERSIZE_ISO_B4":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_ISO_B4); break;
+							case "PAPERSIZE_ISO_B5_EXTRA_PAPER":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_ISO_B5_EXTRA_PAPER); break;
+							case "PAPERSIZE_ITALY_ENVELOPE":$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_ITALY_ENVELOPE); break;
 							case "PAPERSIZE_JAPANESE_DOUBLE_POSTCARD":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_JAPANESE_DOUBLE_POSTCARD); break;
 							case "PAPERSIZE_JIS_B5_TRANSVERSE_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_JIS_B5_TRANSVERSE_PAPER); break;
-							case "PAPERSIZE_LEDGER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEDGER); break;
-							case "PAPERSIZE_LEGAL":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL); break;
-							case "PAPERSIZE_LEGAL_EXTRA_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL_EXTRA_PAPER); break;
-							case "PAPERSIZE_LETTER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER); break;
-							case "PAPERSIZE_LETTER_EXTRA_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER_EXTRA_PAPER); break;
+							case "PAPERSIZE_LEDGER":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEDGER); break;
+							case "PAPERSIZE_LEGAL":			$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL); break;
+							case "PAPERSIZE_LEGAL_EXTRA_PAPER":			$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LEGAL_EXTRA_PAPER); break;
+							case "PAPERSIZE_LETTER":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER); break;
+							case "PAPERSIZE_LETTER_EXTRA_PAPER":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER_EXTRA_PAPER); break;
 							case "PAPERSIZE_LETTER_EXTRA_TRANSVERSE_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER_EXTRA_TRANSVERSE_PAPER); break;
-							case "PAPERSIZE_LETTER_PLUS_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER_PLUS_PAPER); break;
+							case "PAPERSIZE_LETTER_PLUS_PAPER":			$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER_PLUS_PAPER); break;
 							case "PAPERSIZE_LETTER_SMALL":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER_SMALL); break;
 							case "PAPERSIZE_LETTER_TRANSVERSE_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_LETTER_TRANSVERSE_PAPER); break;
-							case "PAPERSIZE_MONARCH_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_MONARCH_ENVELOPE); break;
+							case "PAPERSIZE_MONARCH_ENVELOPE":			$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_MONARCH_ENVELOPE); break;
 							case "PAPERSIZE_NO9_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_NO9_ENVELOPE); break;
 							case "PAPERSIZE_NO10_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_NO10_ENVELOPE); break;
 							case "PAPERSIZE_NO11_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_NO11_ENVELOPE); break;
 							case "PAPERSIZE_NO12_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_NO12_ENVELOPE); break;
 							case "PAPERSIZE_NO14_ENVELOPE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_NO14_ENVELOPE); break;
-							case "PAPERSIZE_NOTE":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_NOTE); break;
-							case "PAPERSIZE_QUARTO":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_QUARTO); break;
+							case "PAPERSIZE_NOTE":			$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_NOTE); break;
+							case "PAPERSIZE_QUARTO":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_QUARTO); break;
 							case "PAPERSIZE_STANDARD_1":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_1); break;
 							case "PAPERSIZE_STANDARD_2":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_2); break;
-							case "PAPERSIZE_STANDARD_PAPER_1":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_PAPER_1); break;
-							case "PAPERSIZE_STANDARD_PAPER_2":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_PAPER_2); break;
-							case "PAPERSIZE_STANDARD_PAPER_3":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_PAPER_3); break;
-							case "PAPERSIZE_STATEMENT":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_STATEMENT); break;
+							case "PAPERSIZE_STANDARD_PAPER_1":$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_PAPER_1); break;
+							case "PAPERSIZE_STANDARD_PAPER_2":$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_PAPER_2); break;
+							case "PAPERSIZE_STANDARD_PAPER_3":$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_STANDARD_PAPER_3); break;
+							case "PAPERSIZE_STATEMENT":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_STATEMENT); break;
 							case "PAPERSIZE_SUPERA_SUPERA_A4_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_SUPERA_SUPERA_A4_PAPER); break;
 							case "PAPERSIZE_SUPERB_SUPERB_A3_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_SUPERB_SUPERB_A3_PAPER); break;
-							case "PAPERSIZE_TABLOID":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_TABLOID); break;
-							case "PAPERSIZE_TABLOID_EXTRA_PAPER":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_TABLOID_EXTRA_PAPER); break;
-							case "PAPERSIZE_US_STANDARD_FANFOLD":	$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_US_STANDARD_FANFOLD); break;
+							case "PAPERSIZE_TABLOID":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_TABLOID); break;
+							case "PAPERSIZE_TABLOID_EXTRA_PAPER":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_TABLOID_EXTRA_PAPER); break;
+							case "PAPERSIZE_US_STANDARD_FANFOLD":		$PCO_ObjetoPHPExcel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_US_STANDARD_FANFOLD); break;
 						}
 
 					//Autoajuste de impresion en contenidos
@@ -396,16 +392,11 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 					$PCO_ObjetoPHPExcel->setActiveSheetIndex(0);
 
 					// Redirecciona la salida al navegador del cliente
-					if ($PCO_Formato=="xls") //Exporta a Excel 5 (.XLS)
-						header('Content-Type: application/vnd.ms-excel');
-					if ($PCO_Formato=="xlsx") //Exporta a Excel 2007 (.XLSX)
-						header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-					if ($PCO_Formato=="ods") //Exporta a LibreOffice (.ODS)
-						header('Content-Type: application/vnd.oasis.opendocument.spreadsheet');
-					if ($PCO_Formato=="csv") //Exporta a valores separados por comas (.CSV)
-						header('Content-Type: application/csv; charset=UTF-8');
-					if ($PCO_Formato=="html") //Exporta a formato web (.HTML)
-						header('Content-Type: application/html; charset=UTF-8');
+					if ($PCO_Formato=="xls")  header('Content-Type: application/vnd.ms-excel'); //Exporta a Excel 5 (.XLS)
+					if ($PCO_Formato=="xlsx") header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'); //Exporta a Excel 2007 (.XLSX)
+					if ($PCO_Formato=="ods")  header('Content-Type: application/vnd.oasis.opendocument.spreadsheet'); //Exporta a LibreOffice (.ODS)
+					if ($PCO_Formato=="csv")  header('Content-Type: application/csv; charset=UTF-8'); //Exporta a valores separados por comas (.CSV)
+					if ($PCO_Formato=="html") header('Content-Type: application/html; charset=UTF-8'); //Exporta a formato web (.HTML)
 					
 					header('Content-Disposition: attachment;filename="'.$MULTILANG_Resultados.'_'.$PCO_FechaOperacionGuiones.'_'.$PCO_HoraOperacion.'.'.$PCO_Formato.'"');
 					header('Cache-Control: max-age=0');
@@ -417,16 +408,11 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 					header ('Cache-Control: cache, must-revalidate'); // HTTP/1.1
 					header ('Pragma: public'); // HTTP/1.0
 
-					if ($PCO_Formato=="xls") //Exporta a Excel 5 (.XLS)
-						$objWriter = PHPExcel_IOFactory::createWriter($PCO_ObjetoPHPExcel, 'Excel5');
-					if ($PCO_Formato=="xlsx") //Exporta a Excel 2007 (.XLSX)
-						$objWriter = PHPExcel_IOFactory::createWriter($PCO_ObjetoPHPExcel, 'Excel2007');
-					if ($PCO_Formato=="ods") //Exporta a LibreOffice (.ODS)
-						$objWriter = PHPExcel_IOFactory::createWriter($PCO_ObjetoPHPExcel, 'OpenDocument');
-					if ($PCO_Formato=="csv") //Exporta a valores separados por comas (.CSV)
-						$objWriter = PHPExcel_IOFactory::createWriter($PCO_ObjetoPHPExcel, 'CSV');
-					if ($PCO_Formato=="html") //Exporta a formato web (.HTML)
-						$objWriter = PHPExcel_IOFactory::createWriter($PCO_ObjetoPHPExcel, 'HTML');
+					if ($PCO_Formato=="xls") $objWriter = PHPExcel_IOFactory::createWriter($PCO_ObjetoPHPExcel, 'Excel5'); //Exporta a Excel 5 (.XLS)
+					if ($PCO_Formato=="xlsx")$objWriter = PHPExcel_IOFactory::createWriter($PCO_ObjetoPHPExcel, 'Excel2007'); //Exporta a Excel 2007 (.XLSX)
+					if ($PCO_Formato=="ods") $objWriter = PHPExcel_IOFactory::createWriter($PCO_ObjetoPHPExcel, 'OpenDocument'); //Exporta a LibreOffice (.ODS)
+					if ($PCO_Formato=="csv") $objWriter = PHPExcel_IOFactory::createWriter($PCO_ObjetoPHPExcel, 'CSV'); //Exporta a valores separados por comas (.CSV)
+					if ($PCO_Formato=="html")$objWriter = PHPExcel_IOFactory::createWriter($PCO_ObjetoPHPExcel, 'HTML'); //Exporta a formato web (.HTML)
 					
 					//Escribe el archivo hacia el navegador del usuario
 					$objWriter->save('php://output');
@@ -1021,9 +1007,7 @@ if ($PCO_Accion=="PCO_EditarInforme")
 							}
 						echo '</tbody>
                         </table>';
-				?>
 
-        <?php 
             $barra_herramientas_modal='
                 <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
             PCO_CerrarDialogoModal($barra_herramientas_modal);
@@ -1208,8 +1192,7 @@ if ($PCO_Accion=="PCO_EditarInforme")
 						echo '
                         </tbody>
                         </table>';
-				?>
-        <?php 
+
             $barra_herramientas_modal='
                 <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
             PCO_CerrarDialogoModal($barra_herramientas_modal);
@@ -1252,7 +1235,7 @@ if ($PCO_Accion=="PCO_EditarInforme")
                                             <option value=">="><?php echo $MULTILANG_InfMayorIgualQue; ?>: >= </option>
                                             <option value="<="><?php echo $MULTILANG_InfMenorIgualQue; ?>: <= </option>
                                             <option value="LIKE"><?php echo $MULTILANG_InfPatron; ?></option>
-                                            <option value="NOT LIKE"><?php echo $MULTILANG_No; ?> <?php echo $MULTILANG_InfPatron; ?></option>
+                                            <option value="NOT LIKE"><?php echo "$MULTILANG_No $MULTILANG_InfPatron"; ?></option>
                                 </select>
                                 <span class="input-group-addon">
                                     <a  href="#" data-toggle="tooltip" data-html="true"  title="<?php echo $MULTILANG_InfOperador; ?>"><i class="fa fa-question-circle  fa-fw icon-info"></i></a>
@@ -1389,8 +1372,7 @@ if ($PCO_Accion=="PCO_EditarInforme")
 									</tr>';
 							}
 						echo '</table>';
-                ?>
-                <?php 
+
                     $barra_herramientas_modal='
                         <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
                     PCO_CerrarDialogoModal($barra_herramientas_modal);
@@ -1433,7 +1415,7 @@ if ($PCO_Accion=="PCO_EditarInforme")
 						?>
 							<tr>
 								<td align="center" valign="TOP">
-									<label for="nombre_serie_<?php echo $cs; ?>"><?php echo $MULTILANG_InfNomSerie; ?> <?php echo $cs; ?>:</label>
+									<label for="nombre_serie_<?php echo $cs; ?>"><?php echo "$MULTILANG_InfNomSerie $cs"; ?>:</label>
 									<input type="text" name="nombre_serie_<?php echo $cs; ?>" id="nombre_serie_<?php echo $cs; ?>" value="<?php echo @$lista_nombre_series[$cs-1]; ?>" maxlength="20" size="20" class="form-control input-sm">
 								</td>
 								<td align="center" valign="TOP">
@@ -1925,20 +1907,15 @@ if ($PCO_Accion=="PCO_EditarInforme")
 				echo '
                     </tbody>
                 </table>';
-			?>
-            <?php 
+
                 $barra_herramientas_modal='
                     <button type="button" class="btn btn-default" data-dismiss="modal">'.$MULTILANG_Cerrar.' {<i class="fa fa-keyboard-o"></i> Esc}</button>';
                 PCO_CerrarDialogoModal($barra_herramientas_modal);
-            ?>
 
-
-
-		<?php
 			// Habilita el popup activo
-			if (@$popup_activo=="FormularioTablas")	echo '<script type="text/javascript">	AbrirPopUp("FormularioTablas"); </script>';
-			if (@$popup_activo=="FormularioCampos")	echo '<script type="text/javascript">	AbrirPopUp("FormularioCampos"); </script>';
-			if (@$popup_activo=="FormularioCondiciones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioCondiciones"); </script>';
+			if (@$popup_activo=="FormularioTablas")		echo '<script type="text/javascript">	AbrirPopUp("FormularioTablas"); </script>';
+			if (@$popup_activo=="FormularioCampos")		echo '<script type="text/javascript">	AbrirPopUp("FormularioCampos"); </script>';
+			if (@$popup_activo=="FormularioCondiciones")echo '<script type="text/javascript">	AbrirPopUp("FormularioCondiciones"); </script>';
 			if (@$popup_activo=="FormularioGraficos")	echo '<script type="text/javascript">	AbrirPopUp("FormularioGraficos"); </script>';
 			if (@$popup_activo=="FormularioAgrupacion")	echo '<script type="text/javascript">	AbrirPopUp("FormularioAgrupacion"); </script>';
 			if (@$popup_activo=="FormularioBotones")	echo '<script type="text/javascript">	AbrirPopUp("FormularioBotones"); </script>';
@@ -1947,9 +1924,7 @@ if ($PCO_Accion=="PCO_EditarInforme")
 
 <div class="row">
   <div class="col-md-3">
-	<?php 
-	    PCO_CargarFormulario("-13",1,"","",1,0);
-	?>
+	<?php PCO_CargarFormulario("-13",1,"","",1,0); ?>
   </div>    
   <div class="col-md-9">
 	<?php 
@@ -2027,9 +2002,7 @@ if ($PCO_Accion=="PCO_EditarInforme")
                 </div>
 			<?php
 				PCO_CerrarVentana();
-			?>
 
-	<?php
 		echo '
   </div>
 </div>        
