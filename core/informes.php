@@ -206,12 +206,12 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 
 					// Establece propiedades del documento
 					$PCO_ObjetoPHPExcel->getProperties()->setCreator("Practico Framework PHP")
-												 ->setLastModifiedBy($PCOSESS_LoginUsuario)
-												 ->setTitle($PCO_Titulo)
-												 ->setSubject("$Nombre_Aplicacion $PCO_FechaOperacionGuiones desde $PCO_DireccionAuditoria")
-												 ->setDescription("Reporte formato $PCO_Formato, generado por Practico Framework PHP. www.practico.org")
-												 ->setKeywords("$PCO_Formato Reporte Practico")
-												 ->setCategory("$PCO_Formato");
+										->setLastModifiedBy($PCOSESS_LoginUsuario)
+										->setTitle($PCO_Titulo)
+										->setSubject("$Nombre_Aplicacion $PCO_FechaOperacionGuiones desde $PCO_DireccionAuditoria")
+										->setDescription("Reporte formato $PCO_Formato, generado por Practico Framework PHP. www.practico.org")
+										->setKeywords("$PCO_Formato Reporte Practico")
+										->setCategory("$PCO_Formato");
 					
 					//Establece orientacion de la hoja
 					if ($PCO_Orientacion=="ORIENTATION_PORTRAIT")
@@ -377,14 +377,10 @@ function calcular_columna_hojacalculo($ColumnaDeseada)
 													if ($PCO_BordesCelda!="")
 														{
 															//Se distingue el lado del borde por TBLR (Top,Bottom,Left,Right)
-															if (!stripos($PCO_BordesCelda,"T")===FALSE)
-																$PCO_ObjetoPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getTop()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-															if (!stripos($PCO_BordesCelda,"B")===FALSE)
-																$PCO_ObjetoPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-															if (!stripos($PCO_BordesCelda,"L")===FALSE)
-																$PCO_ObjetoPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
-															if (!stripos($PCO_BordesCelda,"R")===FALSE)
-																$PCO_ObjetoPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+															if (!stripos($PCO_BordesCelda,"T")===FALSE) $PCO_ObjetoPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getTop()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+															if (!stripos($PCO_BordesCelda,"B")===FALSE) $PCO_ObjetoPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getBottom()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+															if (!stripos($PCO_BordesCelda,"L")===FALSE) $PCO_ObjetoPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getLeft()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
+															if (!stripos($PCO_BordesCelda,"R")===FALSE) $PCO_ObjetoPHPExcel->getActiveSheet()->getStyle("$ColumnaSalida$FilaActiva")->getBorders()->getRight()->setBorderStyle(PHPExcel_Style_Border::BORDER_THIN);
 														}
 												}
 										}
