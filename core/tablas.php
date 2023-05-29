@@ -46,17 +46,12 @@
 				Title: Modulo tablas
 				Ubicacion *[/core/tablas.php]*.  Archivo de funciones relacionadas con la administracion de tablas de la aplicacion.
 			*/
-?>
-<?php
+
 			/*
 				Section: Operaciones basicas de administracion
 				Funciones asociadas al mantenimiento de tablas en el sistema.
 			*/
-?>
 
-
-
-<?php
 /* ################################################################## */
 /* ################################################################## */
 /*
@@ -1594,11 +1589,9 @@ if ($PCO_Accion=="PCO_ImportarTabla")
 			$VerNavegacionIzquierdaResponsive=1; //Habilita la barra de navegacion izquierda por defecto
             PCO_CerrarVentana();
 	}
-?>
 
 
 
-<?php
 /* ################################################################## */
 /* ################################################################## */
 /* ################################################################## */
@@ -1738,15 +1731,7 @@ if ($PCO_Accion=="PCO_ImportarTabla")
 <?php
 			PCO_CerrarVentana();
 	}
-?>
 
-
-
-
-
-
-
-<?php
     function createBackup()
           {
             $key = "Tables_in_".$this->bdconfig["database"];
