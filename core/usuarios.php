@@ -46,8 +46,7 @@
 				Title: Modulo usuarios
 				Ubicacion *[/core/usuarios.php]*.  Archivo de funciones relacionadas con la administracion de usuarios y permisos del sistema.
 			*/
-?>
-<?php
+
 			/*
 				Section: Administracion de permisos
 				Funciones asociadas a la gestion de permisos, roles y demas posibilidades de acceso que puedan tener los usuarios en el aplicativo.
@@ -63,25 +62,15 @@
 	   return 0;
 	} 
 
-	function tiene_simbolos(texto){
-		return buscar_texto_en_plantilla(texto,"!#$%&*");
-	} 
+	function tiene_simbolos(texto){ return buscar_texto_en_plantilla(texto, "!#$%&*"); } 
 
-	function tiene_numeros(texto){
-		return buscar_texto_en_plantilla(texto,"0123456789");
-	} 
+	function tiene_numeros(texto){ return buscar_texto_en_plantilla(texto, "0123456789"); } 
 
-	function tiene_letras(texto){
-		return buscar_texto_en_plantilla(texto,"abcdefghyjklmnñopqrstuvwxyz");
-	} 
+	function tiene_letras(texto){ return buscar_texto_en_plantilla(texto, "abcdefghyjklmnñopqrstuvwxyz"); } 
 
-	function tiene_minusculas(texto){
-		return buscar_texto_en_plantilla(texto,"abcdefghyjklmnñopqrstuvwxyz");
-	} 
+	function tiene_minusculas(texto){ return buscar_texto_en_plantilla(texto, "abcdefghyjklmnñopqrstuvwxyz"); } 
 
-	function tiene_mayusculas(texto){
-		return buscar_texto_en_plantilla(texto,"ABCDEFGHYJKLMNÑOPQRSTUVWXYZ");
-	} 
+	function tiene_mayusculas(texto){ return buscar_texto_en_plantilla(texto,"ABCDEFGHYJKLMNÑOPQRSTUVWXYZ"); } 
 
 /* ################################################################## */
 /* ################################################################## */
@@ -174,14 +163,11 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="establecer_nueva_
 
         $PCO_MensajeError="";
 		// Verifica campos nulos
-		if ($clave1=="" || $clave2=="")
-			$PCO_MensajeError=$MULTILANG_UsrErrPW1.".<br>";
+		if ($clave1=="" || $clave2=="") $PCO_MensajeError=$MULTILANG_UsrErrPW1.".<br>";
 		// Verifica contrasena diferentes
-		if ($clave1 != $clave2)
-			$PCO_MensajeError.=$MULTILANG_UsrErrPW2.".<br>";
+		if ($clave1 != $clave2) $PCO_MensajeError.=$MULTILANG_UsrErrPW2.".<br>";
 		// Verifica nivel de seguridad
-		if ($seguridad < 81)
-			$PCO_MensajeError.=$MULTILANG_UsrErrPW3.".<br>";
+		if ($seguridad < 81) $PCO_MensajeError.=$MULTILANG_UsrErrPW3.".<br>";
         
         //Busca si realmente el usuario ha solicitado un restablecimiento de clave
         // y compara con la llave recibida para que sea correcta y no haya caducado
@@ -379,8 +365,7 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="formulario_recupe
         */
 		PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-info');
         PCO_Mensaje($MULTILANG_Importante,$MULTILANG_UsrResetAdmin,'','fa fa-key fa-4x','alert alert-info alert-dismissible');
-?>
-                <?php echo $MULTILANG_Opcion; ?> <span class="badge">1</span>
+		echo $MULTILANG_Opcion; ?> <span class="badge">1</span>
 				<form name="datos" action="<?php echo $ArchivoCORE; ?>" method="POST">
 					<input type="hidden" name="PCO_Accion" value="PCO_RecuperarContrasena">
                     <input type="hidden" name="PCO_SubAccion" value="enviar_correo_llave">
@@ -535,17 +520,13 @@ if ($PCO_Accion=="PCO_ActualizarContrasena")
         //Verifica que la contrasena actual recibida si sea
     	$ClaveEnMD5=hash("md5", $clave0);
     	$LoginValido=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario WHERE estado=1 AND login='$PCOSESS_LoginUsuario' AND clave='$ClaveEnMD5' ")->fetchColumn();
-		if ($LoginValido=="")
-			$mensaje_error=$MULTILANG_UsrErrPW4.".<br>";
+		if ($LoginValido=="") $mensaje_error=$MULTILANG_UsrErrPW4.".<br>";
 		// Verifica campos nulos
-		if ($clave1=="" || $clave2=="")
-			$mensaje_error=$MULTILANG_UsrErrPW1.".<br>";
+		if ($clave1=="" || $clave2=="") $mensaje_error=$MULTILANG_UsrErrPW1.".<br>";
 		// Verifica contrasena diferentes
-		if ($clave1 != $clave2)
-			$mensaje_error.=$MULTILANG_UsrErrPW2.".<br>";
+		if ($clave1 != $clave2) $mensaje_error.=$MULTILANG_UsrErrPW2.".<br>";
 		// Verifica nivel de seguridad
-		if ($seguridad < 81)
-			$mensaje_error.=$MULTILANG_UsrErrPW3.".<br>";
+		if ($seguridad < 81) $mensaje_error.=$MULTILANG_UsrErrPW3.".<br>";
 
 		if ($mensaje_error=="")
 			{
@@ -1234,19 +1215,15 @@ if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
             {
                 $resultado_usuario=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario WHERE login=? ","$login");
                 $registro_usuario = $resultado_usuario->fetch();
-                if ($registro_usuario["login"]!="")
-                    $mensaje_error=$MULTILANG_UsrErrCrea1;
+                if ($registro_usuario["login"]!="")  $mensaje_error=$MULTILANG_UsrErrCrea1;
             }
 
 			// Verifica campos nulos
-			if ($nombre=="" || $login=="" || $clave=="")
-				$mensaje_error=$MULTILANG_UsrErrCrea2;
+			if ($nombre=="" || $login=="" || $clave=="") $mensaje_error=$MULTILANG_UsrErrCrea2;
 
 			// Verifica contrasenas:  longitud e igualdad de la verificacion
-			if ($clave!=$clave1)
-				$mensaje_error=$MULTILANG_UsrErrPW2;
-			if (strlen($clave)<6)
-				$mensaje_error=$MULTILANG_UsrErrCrea3;
+			if ($clave!=$clave1) $mensaje_error=$MULTILANG_UsrErrPW2;
+			if (strlen($clave)<6) $mensaje_error=$MULTILANG_UsrErrCrea3;
 
 			if ($mensaje_error=="")
 				{
