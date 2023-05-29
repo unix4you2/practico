@@ -5512,7 +5512,7 @@ function PCO_VentanaLogin()
                               </div>
                               <div class="modal-footer">
                                 <button class="btn btn-info" type="button" data-dismiss="modal">
-                                    <?php echo $MULTILANG_LoginClasico; ?> <?php echo $NombreRAD; ?>
+                                    <?php echo "$MULTILANG_LoginClasico $NombreRAD"; ?>
                                     {<i class="fa fa-paypal"></i>}
                                 </button>
                                 <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $MULTILANG_Cerrar; ?> {<i class="fa fa-keyboard-o"></i> Esc}</button>
@@ -5539,207 +5539,202 @@ function PCO_VentanaLogin()
                                 <h3 class="panel-title"><?php echo $MULTILANG_TituloLogin; ?></h3>
                             </div>
                             <div align=center class="panel-body btn-xs">
-                    <?php echo $CadenaOcultamiento_LoginEstandarPRE; ?>
+                    <?php echo $CadenaOcultamiento_LoginEstandarPRE;
+					
+								//Genera nombres aleatorios para los campos de login y clave
+								$NombreCampoLogin=md5(PCO_TextoAleatorio(15));
+								$NombreCampoClave=md5(PCO_TextoAleatorio(15));
+								$_SESSION['NombreCampoLogin'] = (string)$NombreCampoLogin;
+								$_SESSION['NombreCampoClave'] = (string)$NombreCampoClave;
+								$PCO_FirmaLogin=md5($NombreCampoLogin." ".$NombreCampoClave." ".$_SESSION['captcha_temporal']);
+							?>
 
-                                    <?php
-                                        //Genera nombres aleatorios para los campos de login y clave
-                                        $NombreCampoLogin=md5(PCO_TextoAleatorio(15));
-                                        $NombreCampoClave=md5(PCO_TextoAleatorio(15));
-                                        $_SESSION['NombreCampoLogin'] = (string)$NombreCampoLogin;
-                                        $_SESSION['NombreCampoClave'] = (string)$NombreCampoClave;
-                                        $PCO_FirmaLogin=md5($NombreCampoLogin." ".$NombreCampoClave." ".$_SESSION['captcha_temporal']);
-                                    ?>
+							<form role="form" name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
+							<input type="Hidden" name="PCO_Accion" value="Iniciar_login">
+								<div class="form-group">
+									<img name="img_login" id="img_login" width="100%" style="max-width:232px; max-height:160px;" src="img/practico_login.png?<?php echo filemtime('img/practico_login.png'); ?>" alt="" border="0"><br><br>
+								</div>
+								<div class="form-group input-group">
+									<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+									<input name="<?php echo $NombreCampoLogin; ?>" value="<?php echo $AUTO_uid; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>" AutoCompleteType="Disabled" autocomplete="Off">
+								</div>
+								<div class="form-group input-group">
+									<span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+									<input name="<?php echo $NombreCampoClave; ?>" value="<?php echo $AUTO_clave; ?>" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>" AutoCompleteType="Disabled" autocomplete="Off">
+								</div>
 
-                                    <form role="form" name="login_usuario" method="POST" action="<?php echo $ArchivoCORE; ?>" style="margin-top: 0px; margin-bottom: 0px;" onsubmit="if (document.login_usuario.captcha.value=='' || document.login_usuario.uid.value=='' || document.login_usuario.clave.value=='') { alert('Debe diligenciar los valores necesarios (Usuario, Clave y Codigo de seguridad).'); return false; }">
-                                    <input type="Hidden" name="PCO_Accion" value="Iniciar_login">
-                                        <div class="form-group">
-                                            <img name="img_login" id="img_login" width="100%" style="max-width:232px; max-height:160px;" src="img/practico_login.png?<?php echo filemtime('img/practico_login.png'); ?>" alt="" border="0"><br><br>
-                                        </div>
-                                        <div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                            <input name="<?php echo $NombreCampoLogin; ?>" value="<?php echo $AUTO_uid; ?>" type="text" class="form-control" placeholder="<?php echo $MULTILANG_Usuario; ?>" AutoCompleteType="Disabled" autocomplete="Off">
-                                        </div>
-                                        <div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
-                                            <input name="<?php echo $NombreCampoClave; ?>" value="<?php echo $AUTO_clave; ?>" type="password" class="form-control" placeholder="<?php echo $MULTILANG_Contrasena; ?>" AutoCompleteType="Disabled" autocomplete="Off">
-                                        </div>
+								<div id="PCODIV_PostClaveLogin"></div>
 
-                                        <div id="PCODIV_PostClaveLogin"></div>
+								<?php
+									//Presenta selector de idiomas si esta habilitado
+									if ($IdiomaEnLogin==1)
+										{
+								?>
+									<div class="form-group input-group">
+										<span class="input-group-addon"><i class="fa fa-language fa-fw"></i></span>
+										<select id="idioma_login" name="idioma_login" class="selectpicker" >
+											<?php
+											// Incluye archivos de idioma para ser seleccionados
+											$path_idiomas="inc/practico/idiomas/";
+											$directorio_idiomas=opendir($path_idiomas);
+											$IdiomaPredeterminadoActual=$IdiomaPredeterminado;
+											while (($PCOVAR_Elemento=readdir($directorio_idiomas))!=false)
+												{
+													//Lo procesa solo si es un archivo diferente del index
+													if (!is_dir($path_idiomas.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!=".."  && $PCOVAR_Elemento!="index.html")
+														{
+															include($path_idiomas.$PCOVAR_Elemento);
+															//Establece espanol como predeterminado
+															$seleccion="";
+															$valor_opcion=str_replace(".php","",$PCOVAR_Elemento);
+															if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
+															//Presenta la opcion
+															echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$PCOVAR_Elemento.')</option>';
+														}
+												}
+											//Vuelve a cargar el predeterminado actual
+											include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
+											?>
+										</select>
+									</div>
+									<?php
+											}
 
-    									<?php
-    										//Presenta selector de idiomas si esta habilitado
-    										if ($IdiomaEnLogin==1)
-    											{
-    									?>
-        									<div class="form-group input-group">
-        									    <span class="input-group-addon"><i class="fa fa-language fa-fw"></i></span>
-        										<select id="idioma_login" name="idioma_login" class="selectpicker" >
-        											<?php
-        											// Incluye archivos de idioma para ser seleccionados
-        											$path_idiomas="inc/practico/idiomas/";
-        											$directorio_idiomas=opendir($path_idiomas);
-        											$IdiomaPredeterminadoActual=$IdiomaPredeterminado;
-        											while (($PCOVAR_Elemento=readdir($directorio_idiomas))!=false)
-        												{
-        													//Lo procesa solo si es un archivo diferente del index
-        													if (!is_dir($path_idiomas.$PCOVAR_Elemento) && $PCOVAR_Elemento!="." && $PCOVAR_Elemento!=".."  && $PCOVAR_Elemento!="index.html")
-        														{
-        															include($path_idiomas.$PCOVAR_Elemento);
-        															//Establece espanol como predeterminado
-        															$seleccion="";
-        															$valor_opcion=str_replace(".php","",$PCOVAR_Elemento);
-        															if ($valor_opcion==$IdiomaPredeterminadoActual) $seleccion="SELECTED";
-        															//Presenta la opcion
-        															echo '<option value="'.$valor_opcion.'" '.$seleccion.'>'.$MULTILANG_DescripcionIdioma.' ('.$PCOVAR_Elemento.')</option>';
-        														}
-        												}
-        											//Vuelve a cargar el predeterminado actual
-        											include("inc/practico/idiomas/".$IdiomaPredeterminado.".php");
-        											?>
-        										</select>
-        									</div>
-    										<?php
-    												}
-    										?>
+									//Si el captcha es tradicional
+									if ($CaracteresCaptcha>0 && ($TipoCaptchaLogin=="tradicional" || $TipoCaptchaLogin==""))
+										{
+											echo '<div class="well">
+												<div class="form-group col-xs-12">
+													'.$MULTILANG_CodigoSeguridad.':
+													<img src="core/captcha.php">
+												</div>
+												<div class="form-group input-group input-group-sm">
+													<span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
+													<input type="text" name="captcha" maxlength=6 class="form-control"  placeholder="'.$MULTILANG_IngreseCodigoSeguridad.'">
+												</div>
+												</div>';
+										}
 
+									//Si el captcha es visual
+									if ($CaracteresCaptcha>0 && $TipoCaptchaLogin=="visual")
+										{
+											//Llama de todas formas al archivo generador de captcha, solo que este se usa para la variable de sesion solamente
+											include ("core/captcha.php");
+										}
+								?>
 
-    									<?php
-    									    //Si el captcha es tradicional
-    										if ($CaracteresCaptcha>0 && ($TipoCaptchaLogin=="tradicional" || $TipoCaptchaLogin==""))
-    											{
-    											    echo '<div class="well">
-                										<div class="form-group col-xs-12">
-                											'.$MULTILANG_CodigoSeguridad.':
-                											<img src="core/captcha.php">
-                										</div>
-                										<div class="form-group input-group input-group-sm">
-                											<span class="input-group-addon"><i class="fa fa-hand-o-right fa-fw"></i></span>
-                											<input type="text" name="captcha" maxlength=6 class="form-control"  placeholder="'.$MULTILANG_IngreseCodigoSeguridad.'">
-                										</div>
-                										</div>';
-    											}
-
-    									    //Si el captcha es visual
-    										if ($CaracteresCaptcha>0 && $TipoCaptchaLogin=="visual")
-    											{
-    											    //Llama de todas formas al archivo generador de captcha, solo que este se usa para la variable de sesion solamente
-    											    include ("core/captcha.php");
-    											}
-    									?>
-
-                                        <div class="form-group input-group input-group-sm col-xs-12">
-                                            <a class="btn btn-success btn-block" href="javascript:document.login_usuario.submit();"><i class="fa fa-check-circle"></i> <?php echo $MULTILANG_Ingresar; ?></a>
-                                        </div>
-                                    </form>
+								<div class="form-group input-group input-group-sm col-xs-12">
+									<a class="btn btn-success btn-block" href="javascript:document.login_usuario.submit();"><i class="fa fa-check-circle"></i> <?php echo $MULTILANG_Ingresar; ?></a>
+								</div>
+							</form>
 
 
-                                        <?php
-                                            // Muestra boton de login por red social si aplica
-                                            if ($CadenaProveedoresOAuthDisponibles!="")
-                                                {
-                                        			//Si se desea ubicar las opciones oAuth a traves de un boton genera el marco flotante correspondiente
-                                        			if ($UbicacionProveedoresOAuth=='0')
-                                        			    {
-                                                            echo '<hr>
-                                                                <a id="boton_login_oauth" data-toggle="modal" href="#myModalLOGINOAUTH" class="btn btn-info  btn-block">
-                                                                    <div>
-                                                                        '.$MULTILANG_OauthLogin.'<br>
-                                                                        <i class="fa fa-2x fa-facebook-square"></i>
-                                                                        <i class="fa fa-2x fa-google-plus-square"></i>
-                                                                        <i class="fa fa-2x fa-twitter"></i>
-                                                                        <i class="fa fa-2x fa-linkedin-square"></i>
-                                                                        <i class="fa fa-2x fa-dropbox"></i>
-                                                                    </div>
-                                                                </a>';
+								<?php
+									// Muestra boton de login por red social si aplica
+									if ($CadenaProveedoresOAuthDisponibles!="")
+										{
+											//Si se desea ubicar las opciones oAuth a traves de un boton genera el marco flotante correspondiente
+											if ($UbicacionProveedoresOAuth=='0')
+												{
+													echo '<hr>
+														<a id="boton_login_oauth" data-toggle="modal" href="#myModalLOGINOAUTH" class="btn btn-info  btn-block">
+															<div>
+																'.$MULTILANG_OauthLogin.'<br>
+																<i class="fa fa-2x fa-facebook-square"></i>
+																<i class="fa fa-2x fa-google-plus-square"></i>
+																<i class="fa fa-2x fa-twitter"></i>
+																<i class="fa fa-2x fa-linkedin-square"></i>
+																<i class="fa fa-2x fa-dropbox"></i>
+															</div>
+														</a>';
 
-                                                            //Si esta predeterminado mostrar las opciones al comienzo entonces hace el trigger sobre el enlace
-                                                            if ($Auth_PresentarOauthInicio==1)
-                                                                {
-                                                                    echo '<script language="JavaScript">
-                                                                    $( document ).ready(function() {
-                                                                        $("#boton_login_oauth").trigger("click");
-                                                                        });
-                                                                    </script>';
-                                                                }
-                                                        }
+													//Si esta predeterminado mostrar las opciones al comienzo entonces hace el trigger sobre el enlace
+													if ($Auth_PresentarOauthInicio==1)
+														{
+															echo '<script language="JavaScript">
+															$( document ).ready(function() {
+																$("#boton_login_oauth").trigger("click");
+																});
+															</script>';
+														}
+												}
 
-                                                    //Si se desean las opciones directamente en el login
-                                                    if ($UbicacionProveedoresOAuth=='1')
-                                                        {
-                                                            echo '
-                                                                <table class="table">
-                                                                        <tr><td align="center">';
-                                                                        echo "<b><i><font color=lightgray>".$MULTILANG_OauthLogin.":</font></i></b><br>";
-                                                            echo $CadenaProveedoresOAuthDisponibles;
-                                                            echo '
-                                                                        </td></tr>
-                                                                </table>';
-                                                        }
-                                                }
-                                        ?>
-                                    <?php
-                                        //PCO_Mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'','fa fa-info-circle fa-3x texto-azul','alert alert-info');
-                                    ?>
+											//Si se desean las opciones directamente en el login
+											if ($UbicacionProveedoresOAuth=='1')
+												{
+													echo '
+														<table class="table">
+																<tr><td align="center">';
+																echo "<b><i><font color=lightgray>".$MULTILANG_OauthLogin.":</font></i></b><br>";
+													echo $CadenaProveedoresOAuthDisponibles;
+													echo '
+																</td></tr>
+														</table>';
+												}
+										}
 
-                                    <div class="row">
-                                        <div class="col-md-6">
-    										<?php
-    											//Presenta opciones de recuperacion solamente cuando el motor de autenticacion sea practico
-    											if ($Auth_TipoMotor=="practico" && $Auth_PermitirAutoRegistro==1)
-    												{
-    										?>
-    													<br>
-    													<form name="auto_registro" id="auto_registro" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    													<input type="Hidden" name="PCO_Accion" value="PCO_AgregarUsuarioAutoregistro">
-    													</form>
-    													<a class="btn btn-xs" onClick="document.auto_registro.submit();">
-    														<i class="typcn fa typcn-user-add"></i>
-    														<?php echo $MULTILANG_Registrarme; ?>
-    													</a>
-    										<?php
-    												}
-    										?>
-                                        </div>
-                                        <div class="col-md-6">
-    										<?php
-    											//Presenta opciones de recuperacion solamente cuando el motor de autenticacion sea practico
-    											if ($Auth_TipoMotor=="practico" && $Auth_PermitirReseteoClaves==1)
-    												{
-    										?>
-    													<br>
-    													<form name="recuperacion" id="recuperacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-    													<input type="Hidden" name="PCO_Accion" value="PCO_RecuperarContrasena">
-    													<input type="Hidden" name="PCO_SubAccion" value="formulario_recuperacion">
-    													</form>
-    													<a class="btn btn-xs" onClick="document.recuperacion.submit();">
-    														<i class="fa fa-unlock-alt"></i>
-    														<?php echo $MULTILANG_OlvideClave; ?>
-    													</a>
-    										<?php
-    												}
-    										?>
-                                        </div>
-                                    </div>
+								//PCO_Mensaje($MULTILANG_Importante,$MULTILANG_AccesoExclusivo,'','fa fa-info-circle fa-3x texto-azul','alert alert-info');
+							?>
+
+							<div class="row">
+								<div class="col-md-6">
+									<?php
+										//Presenta opciones de recuperacion solamente cuando el motor de autenticacion sea practico
+										if ($Auth_TipoMotor=="practico" && $Auth_PermitirAutoRegistro==1)
+											{
+									?>
+												<br>
+												<form name="auto_registro" id="auto_registro" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+												<input type="Hidden" name="PCO_Accion" value="PCO_AgregarUsuarioAutoregistro">
+												</form>
+												<a class="btn btn-xs" onClick="document.auto_registro.submit();">
+													<i class="typcn fa typcn-user-add"></i>
+													<?php echo $MULTILANG_Registrarme; ?>
+												</a>
+									<?php
+											}
+									?>
+								</div>
+								<div class="col-md-6">
+									<?php
+										//Presenta opciones de recuperacion solamente cuando el motor de autenticacion sea practico
+										if ($Auth_TipoMotor=="practico" && $Auth_PermitirReseteoClaves==1)
+											{
+									?>
+												<br>
+												<form name="recuperacion" id="recuperacion" action="<?php echo $ArchivoCORE; ?>" method="POST"  style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
+												<input type="Hidden" name="PCO_Accion" value="PCO_RecuperarContrasena">
+												<input type="Hidden" name="PCO_SubAccion" value="formulario_recuperacion">
+												</form>
+												<a class="btn btn-xs" onClick="document.recuperacion.submit();">
+													<i class="fa fa-unlock-alt"></i>
+													<?php echo $MULTILANG_OlvideClave; ?>
+												</a>
+									<?php
+											}
+									?>
+								</div>
+							</div>
 
 
-                            <script language="JavaScript"> login_usuario.uid.focus(); </script>
+					<script language="JavaScript"> login_usuario.uid.focus(); </script>
 
-                    <?php echo $CadenaOcultamiento_LoginEstandarPOS; ?>
-                    <div id="PCO_MarcoLoginSAML">
-                        <?php echo $CadenaOpcionesSAML; ?>    
-                    </div>
-                    
+			<?php echo $CadenaOcultamiento_LoginEstandarPOS; ?>
+			<div id="PCO_MarcoLoginSAML">
+				<?php echo $CadenaOpcionesSAML; ?>    
+			</div>
+			
 
-                            </div> <!-- /panel-body -->
-                        </div>
-                    </div>  <!--FIN Class EnfasisLoginZoom -->
+					</div> <!-- /panel-body -->
+				</div>
+			</div>  <!--FIN Class EnfasisLoginZoom -->
 
-                    <div id="PCODIV_AbajoLogin"></div>
+			<div id="PCODIV_AbajoLogin"></div>
 
-                    </div>  <!--FIN Class col -->
-                </div>  <!--FIN Class row -->
-                <!--FIN Login Estandar-->
-                <div id="PCODIV_BarraAbajoLogin"></div>
+			</div>  <!--FIN Class col -->
+		</div>  <!--FIN Class row -->
+		<!--FIN Login Estandar-->
+		<div id="PCODIV_BarraAbajoLogin"></div>
 
 <?php
     }
@@ -8103,8 +8098,8 @@ function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$for
             {
                 $salida.= '<span class="input-group-addon">';
                 // Muestra indicadores de obligatoriedad o ayuda
-                if ($registro_campos["obligatorio"]) $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
-                if ($registro_campos["ayuda_titulo"] != "") $salida.= '<a href="#"   data-toggle="tooltip" data-html="true"  data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"],$registro_datos_formulario).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"],$registro_datos_formulario).'"><i class="fa fa-question-circle"></i></a>';
+                if ($registro_campos["obligatorio"])	$salida.= '<a href="#" data-toggle="tooltip" data-html="true" data-placement="auto" title="<b>'.$MULTILANG_TitObligatorio.'</b><br>'.$MULTILANG_DesObligatorio.'"><i class="fa fa-exclamation-triangle icon-orange"></i></a>';
+                if ($registro_campos["ayuda_titulo"])	$salida.= '<a href="#" data-toggle="tooltip" data-html="true" data-placement="auto" title="<b>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_titulo"],$registro_datos_formulario).'</b><br>'.PCO_ReemplazarVariablesPHPEnCadena($registro_campos["ayuda_texto"],$registro_datos_formulario).'"><i class="fa fa-question-circle"></i></a>';
                 $salida.= '</span>';
             }
         //Cierra marco del control de datos
@@ -8352,10 +8347,8 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                             <div style="display: inline-block; vertical-align:top;">
                                 <a class="btn btn-xs" data-toggle="tooltip" data-html="true"  data-placement="top" title="<div align=left><font color=yellow>'.$MULTILANG_Detalles.' <i>('.$MULTILANG_MnuPropiedad.')</i></font><br>ID HTML: <b>'.$registro_campos["id_html"].'</b><br>'.$MULTILANG_FrmCampo.': <b>'.$registro_campos["campo"].'</b><br>'.$MULTILANG_FrmPredeterminado.': <b>'.$registro_campos["valor_predeterminado"].'</b><br>'.$MULTILANG_FrmValida.': <b>'.$registro_campos["validacion_datos"].'</b> Extra: <b>'.$registro_campos["validacion_extras"].'</b></div>" href=\'#\'><i class="fa fa-info-circle"></i></a>';
                             //Si el objeto es un formulario o informe embebido agrega enlace para su edicion directa
-                            if ($registro_campos["tipo"]=="form_consulta")
-                                $salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&formulario='.$registro_campos["formulario_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'<br>'.$Complemento_NombreEmbebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
-                            if ($registro_campos["tipo"]=="informe")
-                                $salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarInforme&informe='.$registro_campos["informe_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'<br>'.$Complemento_NombreEmbebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
+                            if ($registro_campos["tipo"]=="form_consulta") 	$salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarFormulario&formulario='.$registro_campos["formulario_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'<br>'.$Complemento_NombreEmbebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
+                            if ($registro_campos["tipo"]=="informe") 		$salida.='<br><a onclick=\'return confirm("'.$MULTILANG_SaltoEdicion.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=PCO_EditarInforme&informe='.$registro_campos["informe_vinculado"].'&popup_activo=\' class="btn btn-primary btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Editar.' '.$MULTILANG_Embebido.'<br>'.$Complemento_NombreEmbebido.'"><i class="fa fa fa-object-ungroup"></i></a>';
                 $salida.='</div>
                             <div style="display: inline-block;">
                                 <a class="btn btn-xs " data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Cerrar.'" href="javascript:OcultarOpcionesEdicion(this,\'#PCOEditorContenedor_'.$registro_campos["id"].'\');"><i class="fa fa-times"></i></a>
@@ -8875,10 +8868,10 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                             //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
                                                                             $PCO_ValorCampoPadre=@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]];
                                                                             //Si no se encuentra el dato o registro entonces mira si vienen desde un boton de busqueda y usa su valor
-                                                                            if($PCO_ValorCampoPadre=="" && $PCO_ValorBusquedaBD!="")
+                                                                            /* if($PCO_ValorCampoPadre=="" && $PCO_ValorBusquedaBD!="")
                                                                                 {
                                                                                     //$PCO_ValorCampoPadre=$PCO_ValorBusquedaBD;
-                                                                                }
+                                                                                } */
                                                                             //Si no obtiene ningun valor entonces lo pone en cero para evitar error de sintaxis en Bind de SQL
                                                                             if($PCO_ValorCampoPadre=="") $PCO_ValorCampoPadre=0;
                                                                             $PCO_CampoForaneoSubform=$registro_campos["formulario_campo_foraneo"];
@@ -9014,10 +9007,10 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                         //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
                                                         $PCO_ValorCampoPadre=@$registro_datos_formulario[$registro_campos["formulario_campo_vinculo"]];
                                                         //Si no se encuentra el dato o registro entonces mira si vienen desde un boton de busqueda y usa su valor
-                                                        if($PCO_ValorCampoPadre=="" && $PCO_ValorBusquedaBD!="")
+                                                        /* if($PCO_ValorCampoPadre=="" && $PCO_ValorBusquedaBD!="")
                                                             {
                                                                 //$PCO_ValorCampoPadre=$PCO_ValorBusquedaBD;
-                                                            }
+                                                            } */
                                                         //Si no obtiene ningun valor entonces lo pone en cero para evitar error de sintaxis en Bind de SQL
                                                         if($PCO_ValorCampoPadre=="") $PCO_ValorCampoPadre=0;
                                                         $PCO_CampoForaneoSubform=$registro_campos["formulario_campo_foraneo"];
@@ -9362,11 +9355,9 @@ function PCO_GenerarBotonesInforme($informe,$Ubicacion=0)
 						        $Cadena_Ayuda=''; //En cualquier caso donde se pida imprimir texto se elimina el tooltip
 						        $Cadena_Imagen="<i class='fa ".$registro_botones["imagen"]."'></i>";
 					            //Si se detecta el texto a la izquierda ajusta las variables para tal impresion
-        					    if( strrpos ( $registro_botones["imagen"], "_TEXTOIZQ_" )!==false)
-						            $Cadena_BotonIzq=$registro_botones["titulo"]." ";
+        					    if( strrpos ( $registro_botones["imagen"], "_TEXTOIZQ_" )!==false) $Cadena_BotonIzq=$registro_botones["titulo"]." ";
 					            //Si se detecta el texto a la derecha ajusta las variables para tal impresion
-        					    if( strrpos ( $registro_botones["imagen"], "_TEXTODER_" )!==false)
-						            $Cadena_BotonDer=" ".$registro_botones["titulo"];
+        					    if( strrpos ( $registro_botones["imagen"], "_TEXTODER_" )!==false) $Cadena_BotonDer=" ".$registro_botones["titulo"];
 					        }
 					}
                 $Cadena_BotonIzq=PCO_ReemplazarVariablesPHPEnCadena($Cadena_BotonIzq);
@@ -10260,8 +10251,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 				if ($nombre_serie_3!="") $CadenaEtiquetas.=",'$nombre_serie_3'";
 				if ($nombre_serie_4!="") $CadenaEtiquetas.=",'$nombre_serie_4'";
 				if ($nombre_serie_5!="") $CadenaEtiquetas.=",'$nombre_serie_5'";
-            ?>
-            <?php
+
                 //Determina si se debe o no crear cadena para el tooltipo con titulo del informe
                 $CadenaComplementoToolTipTitulo="";
                 if ( $registro_informe["tooltip_titulo"] == 'S' )
