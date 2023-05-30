@@ -8483,7 +8483,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                             var URLPopUp="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-36:0:id:"+idcontrol+"&Presentar_FullScreen=1&Precarga_EstilosBS=1&formulario="+idformulario+"&pestana_activa_apertura="+pestana_activa+"&PCO_TipoControlDirecto=";
                             PCOJS_MostrarMensaje("'.$MULTILANG_FrmMsj1.'","Cargando...","modal-wide oculto_impresion");
                             $("#PCO_Modal_MensajeCuerpo").html(\'<iframe id="IFrameEmbebido" scrolling="yes" style="margin:10px; border:0px;" height=500 width=100% src="\'+URLPopUp+\'"></iframe>\');
-                            $("#PCO_Modal_MensajeBotones").html(\'<button id="boton_filtrar" type="button" class="btn btn-outline btn-info" data-dismiss="modal" onclick="CargarFormulario();" >Cerrar</button></a>\');
+                            $("#PCO_Modal_MensajeBotones").html(\'<button id="boton_filtrar" type="button" class="btn btn-outline btn-info" data-dismiss="modal" onclick="PCOJS_LlamadoRemotoEditarFormulario();" >Cerrar</button></a>\');
                         }
         		    </script>';
             }
