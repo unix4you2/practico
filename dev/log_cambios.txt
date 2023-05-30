@@ -141,6 +141,7 @@ LogCambios="
 * Added [CORE]: Nueva opcion para definición de Endpoints asociados a webservices disponible en el menu de configuración.  La opción no sólo permite crear servicios web definidos por base de datos sino también parametrizar comportamientos, parámetros y generar exploradores automatizados de APIs de aplicación.
 * Enhan [CORE]: Conteo de opciones de menú al inicio del framework excluye aquellas cuya sección sea diferente de PCO_NoVisible para así evitar las que son usadas internamente por el framework.
 * Enhan [CORE]: @rafaelposadaf PR#30 a PR#43: optimizaciones generales de código
+* Added [INFORMES]: @jaimeaba3 La lista de informes disponibles presenta ahora la descripción debajo de su título, de manera que se facilite localizar un informe en sistemas cuya cantidad de informes diseñados es alta.
 
 
 * Added [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).
