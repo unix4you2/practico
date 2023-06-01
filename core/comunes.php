@@ -7740,7 +7740,7 @@ function PCO_CargarObjetoArchivoAdjunto($registro_campos,$registro_datos_formula
 		$adjunto_url_archivo=$partes_adjunto_archivo[0];
 		$adjunto_tipo_archivo=$partes_adjunto_archivo[1];
 		if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="" && $registro_datos_formulario["$nombre_campo"]!="")
-			$salida.='<a target="_BLANK" href="'.$adjunto_url_archivo.'"><i class="fa fa-search"></i><b>'.$MULTILANG_FrmArchivoLink.'</b><i class="fa fa-floppy-o fa-fw"></i></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>('.$MULTILANG_Tipo.': '.$adjunto_tipo_archivo.')</i><br>';
+			$salida.='<a target="_BLANK" id="PCO_EnlaceAdjunto_'.$registro_campos["id_html"].'" href="'.$adjunto_url_archivo.'"><i class="fa fa-search"></i><b>'.$MULTILANG_FrmArchivoLink.'</b><i class="fa fa-floppy-o fa-fw"></i></a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i>('.$MULTILANG_Tipo.': '.$adjunto_tipo_archivo.')</i><br>';
 
         //Agrega etiqueta del campo si es diferente de vacio
 		if ($registro_campos["titulo"]!="" && $registro_campos["ocultar_etiqueta"]=="0")
