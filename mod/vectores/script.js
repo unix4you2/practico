@@ -59,8 +59,8 @@
     $("#reg_disp").show();
     $("#tries").html("Intentos Restantes : " + PCOJS_CantidadMuestras)
     $("#capture").click(async function(){
-      var LlaveParent=parent.ConocerLlaveRegistro();
-      console.log("Tu llave en parent es: "+LlaveParent);
+      var LlaveParent=parent.PCO_ObtenerLlaveRegistro();
+      //console.log("Tu llave en parent es: "+LlaveParent);
       var data = LlaveParent;
       const label = data;
         if(PCOJS_CantidadMuestras > 0 ){
@@ -86,18 +86,21 @@
             PCOJS_CantidadMuestras--;
             $("#tries").html("Intentos Restantes : " + PCOJS_CantidadMuestras)
             if(PCOJS_CantidadMuestras == 0){
-              //guardar imagen
+              //guardar imagen, ver sobre ajax php la ruta
+
+		/*
               $.ajax({
                   type: "POST",
                   url: "ajax.php",
                   data: {image: img.src ,path: data}
               }).done(function(o) {
               });
+		*/
 
               var postData = new faceapi.LabeledFaceDescriptors(label, descrip);
               var vectores = (JSON.stringify(postData))
-              console.log("fotos capturadas1:" + JSON.stringify(postData))//variable donde captura los parametros de la cara
-              parent.AsignarValorVectores(vectores);//comunicacion con practico
+              //console.log("fotos capturadas1:" + JSON.stringify(postData))//variable donde captura los parametros de la cara
+              parent.PCO_AsignarVectoresFaciales(vectores);//comunicacion con practico
             }          
           }
         }
