@@ -43,6 +43,7 @@ inc/d3js/*
 inc/facebook/*
 inc/mxgraph/javascript/scripts/grapheditor/www/index.php
 ins/core/marco_abajo.php
+mod/fileman/cargas/practico_biometria
 
 xml/*
 inc/autoload.php
