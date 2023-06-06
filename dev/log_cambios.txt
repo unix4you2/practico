@@ -21,7 +21,6 @@ core/codigobarras.php
 core/conexiones.php
 core/marco_abajo.php
 core/marco_arriba.php
-core/marco_arriba_bs.php
 core/marco_nav.php
 core/marco_navizq.php
 core/marco_admin.php
@@ -44,6 +43,12 @@ inc/facebook/*
 inc/mxgraph/javascript/scripts/grapheditor/www/index.php
 ins/core/marco_abajo.php
 mod/fileman/cargas/practico_biometria
+
+core/marco_arriba_bs.php
+inc/face-detect/*
+
+
+
 
 xml/*
 inc/autoload.php
@@ -336,6 +341,12 @@ ALTER TABLE core_parametros ADD usuarios_admin_kanban varchar(1024) NULL DEFAULT
 
 ALTER TABLE core_parametros ADD api_googleai varchar(255) NULL DEFAULT '';
 ALTER TABLE core_parametros ADD url_googleai varchar(255) NULL DEFAULT 'https://';
+
+ALTER TABLE core_parametros ADD facialrec_habilitar char(1) DEFAULT 'N';
+ALTER TABLE core_parametros ADD facialrec_nromuestras int(10) DEFAULT '1';
+ALTER TABLE core_parametros ADD facialrec_anchocam int(10) DEFAULT '320';
+ALTER TABLE core_parametros ADD facialrec_altocam int(10) DEFAULT '240';
+
 
 CREATE TABLE core_llaves_api_externas (
   id int(10) NOT NULL AUTO_INCREMENT,

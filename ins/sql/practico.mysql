@@ -26,6 +26,10 @@ CREATE TABLE core_parametros (
   usuarios_admin_kanban varchar(1024) NULL DEFAULT 'admin',
   api_googleai varchar(255) NULL DEFAULT '',
   url_googleai varchar(255) NULL DEFAULT 'https://',
+  facialrec_habilitar char(1) DEFAULT 'N',
+  facialrec_nromuestras int(10) DEFAULT '1',
+  facialrec_anchocam int(10) DEFAULT '320',
+  facialrec_altocam int(10) DEFAULT '240',
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

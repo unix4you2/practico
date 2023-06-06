@@ -315,6 +315,14 @@
     <script src="inc/facebook/react/react.production.min.js" crossorigin></script>  <!-- react.production.min.js | react.development.js -->
     <script src="inc/facebook/react-dom/react-dom.production.min.js" crossorigin></script>
 
+    <!-- FaceAPI -->
+    <?php
+        //Determina si se debe incluir scripts de reconocimiento facial
+        $PCO_RegistroParametrosAplicacion=PCO_EjecutarSQL("SELECT * FROM {$TablasCore}parametros WHERE 1=1 LIMIT 0,1 ")->fetch();
+        if ($PCO_RegistroParametrosAplicacion["facialrec_habilitar"]=="S")
+                echo '<script src="inc/face-detect/face-api.min.js"></script>';
+    ?>
+
     <?php
         // Agrega soporte para PWA si aplica
         if ($PWA_Activa=="1")
