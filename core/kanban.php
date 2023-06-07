@@ -195,9 +195,10 @@
 */
 	if ($PCO_Accion=="EliminarTareaKanban")
 		{
+            $TituloTarea=PCO_EjecutarSQL("SELECT titulo FROM ".$TablasCore."kanban WHERE id=$IdTareaKanban")->fetchColumn();
 			// Elimina los datos
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."kanban WHERE id=?","$IdTareaKanban");
-			PCO_Auditar("Elimina tarea Kanban $IdTareaKanban");
+			PCO_Auditar("Elimina tarea Kanban {$TituloTarea} ID={$IdTareaKanban}");
 			PCO_RedireccionATableroKanban($ID_TableroKanban);
 		}
 
@@ -261,11 +262,15 @@
 */
 	if ($PCO_Accion=="EliminarTableroKanban")
 		{
+            //Busca detalles del tablero para auditoria
+            $CantidadTareas=0;
+            $CantidadTareas=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM ".$TablasCore."kanban WHERE tablero=$ID_TableroKanban")->fetchColumn();
+            $TituloTablero=PCO_EjecutarSQL("SELECT titulo FROM ".$TablasCore."kanban WHERE id=$ID_TableroKanban")->fetchColumn();
 			$mensaje_error="";
 			// Elimina los datos
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."kanban WHERE id=$ID_TableroKanban ");
 			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."kanban WHERE tablero=$ID_TableroKanban ");
-			PCO_Auditar("Elimina Tablero Kanban $ID_TableroKanban");
+			PCO_Auditar("Elimina Tablero Kanban: {$TituloTablero} ID={$ID_TableroKanban} con {$CantidadTareas} tarea(s)");
 			PCO_RedireccionATableroKanbanResumido();
 		}
 
