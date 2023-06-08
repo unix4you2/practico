@@ -30,6 +30,8 @@ CREATE TABLE core_parametros (
   facialrec_nromuestras int(10) DEFAULT '1',
   facialrec_anchocam int(10) DEFAULT '320',
   facialrec_altocam int(10) DEFAULT '240',
+  facialrec_tiempomuestreo int(10) DEFAULT '3',
+  facialrec_precision DECIMAL(2,1) DEFAULT '0.5',
   PRIMARY KEY  (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

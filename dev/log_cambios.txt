@@ -347,6 +347,8 @@ ALTER TABLE core_parametros ADD facialrec_habilitar char(1) DEFAULT 'N';
 ALTER TABLE core_parametros ADD facialrec_nromuestras int(10) DEFAULT '1';
 ALTER TABLE core_parametros ADD facialrec_anchocam int(10) DEFAULT '320';
 ALTER TABLE core_parametros ADD facialrec_altocam int(10) DEFAULT '240';
+ALTER TABLE core_parametros ADD facialrec_tiempomuestreo int(10) DEFAULT '3';
+ALTER TABLE core_parametros ADD facialrec_precision DECIMAL(2,1) DEFAULT '0.5';
 
 
 CREATE TABLE core_llaves_api_externas (
