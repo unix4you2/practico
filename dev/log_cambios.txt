@@ -150,8 +150,6 @@ LogCambios="
 * Enhan [CORE]: @rafaelposadaf PR#30 a PR#43: optimizaciones generales de código
 * Added [INFORMES]: @jaimeaba3 La lista de informes disponibles presenta ahora la descripción debajo de su título, de manera que se facilite localizar un informe en sistemas cuya cantidad de informes diseñados es alta.
 * Added [FORMS]: Los controles de formulario tipo adjunto cuentan con un identificador único extra cuando se está recuperando información y que direcciona al archivo como tal asociado al registro.  Esto permite revisar valores asociados al adjunto precio que se haya podido tener.  El identificador es PCO_EnlaceAdjunto_SUIDHTML de manera que puede ser accesado mediante $("#PCO_EnlaceAdjunto_SUIDHTML")[0].href
-
-
 * Added [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).  Su aplicación se da inicialmente sobre la ficha de usuarios siempre y cuando se habilite el módulo a través de la parametrización del framework.   Esto deja la puerta abierta para que el módulo pueda ser aplicado a formularios propios en cualquier contexto.
 
 

@@ -126,8 +126,82 @@
 																{
 																	@ob_clean(); //Limpia salida antes de llamar los WS
 																	include_once("core/ws_funciones.php");
-																	if (PCO_BuscarErroresSintaxisPHP("mod/personalizadas_ws.php")==0)
-																	    include_once("mod/personalizadas_ws.php");
+																	
+																	//Determina si el endpoint/metodo a ejecutar esta definido en BD de metodos
+																	//y si lo encuentra lo prefiere por encima de cualquier inclusion desde archivo
+																	//En caso de no encontrarlo hace la inclusion tradicional del archivo por compatibilidad
+																	$PCO_RegistroMetodoEnBD=PCO_EjecutarSQL("SELECT * FROM core_llaves_metodo WHERE nombre='{$PCO_WSId}' ")->fetch();
+																	if ($PCO_RegistroMetodoEnBD["id"]!="")
+																	    {
+																	        $PCO_ListaErrores_Parametros="";    //Contiene los errores encontrados en los parametros recibidos
+																	        
+																	        //Busca si el endpoint o servicio cuenta con parametros definidos y hace las validaciones correspondientes a cada uno
+																	        $IdEndpointWS=$PCO_RegistroMetodoEnBD["id"];
+																	        $PCO_ResultadoParametros=PCO_EjecutarSQL("SELECT * FROM core_llaves_metodoparametro WHERE metodo='{$IdEndpointWS}' ");
+																	        //Recorre todos los parametros, los pasa a globales para su uso y valida sus restricciones
+																	        while ($PCO_RegistroParametrosWS=$PCO_ResultadoParametros->fetch())
+																	            {
+																	                if (trim($PCO_RegistroParametrosWS["nombre"])!="")
+																	                    {
+																	                        global ${$PCO_RegistroParametrosWS["nombre"]};
+																	                        
+																	                        //Valida obligatoriedad
+																	                        if ($PCO_RegistroParametrosWS["obligatorio"]=="S" && trim(${$PCO_RegistroParametrosWS["nombre"]})=="")
+																	                            $PCO_ListaErrores_Parametros=$PCO_RegistroParametrosWS["nombre"].": es obligatorio";
+																	                        
+																	                        //Valida longitud maxima
+																	                        if ($PCO_RegistroParametrosWS["longitud"]!="0" && strlen(trim(${$PCO_RegistroParametrosWS["nombre"]}))>$PCO_RegistroParametrosWS["longitud"])
+																	                            $PCO_ListaErrores_Parametros=$PCO_RegistroParametrosWS["nombre"].": longitud maxima permitida es ".$PCO_RegistroParametrosWS["longitud"];
+																	                        
+																	                        //Valida los tipos de dato recibidos
+																	                        if ($PCO_RegistroParametrosWS["tipo_dato"]!="Cualquiera")
+																	                            {
+																	                                if ($PCO_RegistroParametrosWS["tipo_dato"]=="Cadena" && gettype(${$PCO_RegistroParametrosWS["nombre"]})!="string")
+																	                                    $PCO_ListaErrores_Parametros=$PCO_RegistroParametrosWS["nombre"].": tipo de dato no es ".$PCO_RegistroParametrosWS["tipo_dato"];
+
+																	                                if ($PCO_RegistroParametrosWS["tipo_dato"]=="Booleano (0-1)" && trim(${$PCO_RegistroParametrosWS["nombre"]})!="0" && trim(${$PCO_RegistroParametrosWS["nombre"]})!="1")
+																	                                    $PCO_ListaErrores_Parametros=$PCO_RegistroParametrosWS["nombre"].": tipo de dato no es ".$PCO_RegistroParametrosWS["tipo_dato"];
+
+																	                                if ($PCO_RegistroParametrosWS["tipo_dato"]=="Entero" && !is_numeric(${$PCO_RegistroParametrosWS["nombre"]}))
+																	                                    $PCO_ListaErrores_Parametros=$PCO_RegistroParametrosWS["nombre"].": tipo de dato no es ".$PCO_RegistroParametrosWS["tipo_dato"];
+
+																	                                if ($PCO_RegistroParametrosWS["tipo_dato"]=="Decimal" && !is_numeric(${$PCO_RegistroParametrosWS["nombre"]}))
+																	                                    $PCO_ListaErrores_Parametros=$PCO_RegistroParametrosWS["nombre"].": tipo de dato no es ".$PCO_RegistroParametrosWS["tipo_dato"];
+
+																	                                if ($PCO_RegistroParametrosWS["tipo_dato"]=="JSON" && json_decode(${$PCO_RegistroParametrosWS["nombre"]})==null)
+																	                                    $PCO_ListaErrores_Parametros=$PCO_RegistroParametrosWS["nombre"].": tipo de dato no es ".$PCO_RegistroParametrosWS["tipo_dato"];
+																	                                    
+																	                               // TODO: Validar que sea un XML valido
+																	                               // if ($PCO_RegistroParametrosWS["tipo_dato"]=="XML" && json_decode(${$PCO_RegistroParametrosWS["nombre"]})==null)
+																	                               //     {
+																	                               //         $ContenidoXML = new XMLReader();
+																	                               //         if (!$ContenidoXML->xml(trim(${$PCO_RegistroParametrosWS["nombre"]}), NULL, LIBXML_DTDVALID))
+    																	                           //             $PCO_ListaErrores_Parametros=$PCO_RegistroParametrosWS["nombre"].": tipo de dato no es ".$PCO_RegistroParametrosWS["tipo_dato"];
+																	                               //     }
+																	                            }
+																	                    }
+																	            }
+																	        
+																	        //Ejecuta el codigo asociado al servicio si no se encontraron errores
+																	        if ($PCO_ListaErrores_Parametros=="")
+																	            {
+                                                                    		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
+                                                                    		        $ComplementoInicioScript="";
+                                                                    		        if (substr(trim($PCO_RegistroMetodoEnBD["script"]),0,5)!='<?php')
+                                                                    		            $ComplementoInicioScript="<?php\n";
+                                                                    		        PCO_EvaluarCodigo($ComplementoInicioScript.$PCO_RegistroMetodoEnBD["script"],1,"Detalles: EndPoint ID=".$PCO_RegistroMetodoEnBD["nombre"],0);
+																	            }
+																	        else
+																	            {
+                                                                                    PCO_Mensaje($MULTILANG_WSErrTitulo."[Cod. 09] en parametros",$PCO_ListaErrores_Parametros, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+																	            }
+																	    }
+																    else
+																        {
+                                                                            //Hace la inclusion tradicional del archivo por compatibilidad hacia atras
+        																	if (PCO_BuscarErroresSintaxisPHP("mod/personalizadas_ws.php")==0)
+        																	    include_once("mod/personalizadas_ws.php");
+																	    }
 																}
 															// Lleva a auditoria
 															PCO_Auditar("$PCO_WSId","API.".$nombre_cliente);
