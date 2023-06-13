@@ -185,6 +185,9 @@
 																	        //Ejecuta el codigo asociado al servicio si no se encontraron errores
 																	        if ($PCO_ListaErrores_Parametros=="")
 																	            {
+                                                                                    //Aumenta estadistica de ejecucion
+																	                PCO_EjecutarSQLUnaria("UPDATE core_llaves_metodo SET total_ejecuciones=total_ejecuciones+1 WHERE id='{$IdEndpointWS}' ");
+
                                                                     		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
                                                                     		        $ComplementoInicioScript="";
                                                                     		        if (substr(trim($PCO_RegistroMetodoEnBD["script"]),0,5)!='<?php')
