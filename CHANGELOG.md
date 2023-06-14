@@ -7,6 +7,96 @@
             |___/ 
 ```
 
+
+## Versión 23.6 (2023-06-18)
+* Added [CORE]: Capacidad de multilenguaje.  Ahora el Framweork permite interactuar con múltiples lenguajes de programación, configurables por sus parámetros y mediante los cuales se podría tener una aplicación desarrollada en múltiples lenguajes a la vez, donde todos convergen al mismo punto.   La sintaxis de variables en notacion PHP y su reemplazo dinámico sobre cada script permite además que variables de PHP sean pasadas de manera transparente a cualquier otro lenguaje de programción disponible del lado del servidor.
+* Added [CORE]: Nueva función PCOJS_ValidarExistenciaURL permite validar si una URL existe o no.  Util para procesar solicitudes AJAX o similares revisando primero que el destino exista.
+* Added [CORE]: Formulario de parámetros incluye acceso a nueva sección para definir proveedores genéricos para posibles API de integración, permitiendo definir su nombre, llave, secretos, URL base de consumo y scripts.  Esta información podría ser usada directamente desde cualquier script de Práctico teniendo así un sitio para almacenar llaves sin quedar expuestas por código.
+* Added [CORE]: Módulo complementario para despacho de correos electrónicos mediante API de Twilio Sendgrid se encuentra disponible sobre la carpeta complementaria.  Quien lo desee habilitar puede mover la carpeta a su carpeta de módulos de la instalación y pegar el código del servicio web asociado o crear su propio código.
+* Added [CORE]: Nuevo parámetros de aplicación permite almacenar llaves de API para consumos de GoogleAI.  Por ahora no se contempla su consumo directo, sólo el almacenamiento.
+* Added [CORE]: Nuevas estructuras para definición y parametrización de servicios web como una segunda capa a la existente que no dejará de operar por compatibilidad.  En adelante cuando se llame al motor de servicios web primero será revisada la capa nueva y usada con sus parametrizaciones y en caso de no existir el método o estar vacío en su código la evaluación se hará mediante capa de compatibilidad hacia atráss.  Se recomienda generar todo servicio nuevo mediante la nueva capa y migrar aquellos existentes de ser posible.
+* Added [CORE]: Nueva opcion para definición de Endpoints asociados a webservices disponible en el menu de configuración.  La opción no sólo permite crear servicios web definidos por base de datos sino también parametrizar comportamientos, parámetros y generar exploradores automatizados de APIs de aplicación.
+* Added [CORE]: Nuevas funciones PCO_Base64UrlEncode() y PCO_Base64UrlDecode() permiten realizar conversiones en base 64 más consistentes cuando la información debe ser transferida mediante URLs donde la cadena final tenga caracteres no permitidos como + y / así como cualquier caracter de igual (=) al final de la cadena.
+* Added [CORE]: Llaves de consumo de servicios web / APIs cuentan con estadísticas de conteo sobre su uso general.  Puede ser visualizado a través del panel de analítica de aplicación.
+* Added [CORE]: Panel de analítica cuenta con estadísticas generales de consumo de APIs en los últimos 15 días.
+* Added [CORE]: Nueva URL pública sobre coer/doc_api.php puede ser llamada directamente para presentar documentación de las API expuestas y creadas en el backend por el framework, sus parámetros, ejemplos de uso y demás información útil en procesos de integración.
+* Added [CORE]: Agregadas tablas de documentacion de sistema.  A través de estas se podrá almacenar toda la documentación interna asociada a procesos de desarrollo y documentación visible para usuarios finales bajo diferentes tipos de formato.  Por ahora se deja disponible en formularios pero su funcionalidad es extensible al resto de módulos del Framework.   Un botón de documentación será presentado automáticamente al usuario final cuando se cargue un formulario que contenga documentos asociados y visibles a usuario final.
+* Added [CORE]: Nuevo parámetros de aplicación permite almacenar llave de API para consumos de OpenAI desde las diferentes funciones del Framework.  Esto incluye funciones extendidas de I.A. hacia el editor {P}Coder como código predictivo, análsis de vulnerabilidades, documentación automatizadas, entre otros.  Nueva función PCO_OpenAI_CODEX se encuentra disponible también para llamados independientes por el desarrollador.
+* Added [FORMS]: Controles tipo lista de seleccion reemplazan variables dinámicas PHP en aquellos tags tipo OPTGROUP
+* Added [FORMS]: Controles tipo lista de seleccion permiten la insercion de TAGS extra en cada opción (esto incluye a los tipos de etiqueta OPTION y OPTGROUP).  Util para indicar cosas como data-icon para especificar imágenes en cada opción, data-lang, data-cualquiercosa que usted necesite.  Esto se logra mediante la inclusión automática del valor de un campo llamado tags_extra que si se encuentra disponible en la tabla o vista desde la cual se carga la lista será usado para tomar su valor e inyectarlo como TAGS adicionales al option.
+* Added [FORMS]: Controles tipo check soportan textos de ayuda.  Serán presentados como icono al lado derecho del texto que acompaña al check.
+* Added [FORMS]: Eliminadas sobre código acciones de adicion de controles a formularios.  Ahora son realizadas directamente por el formulario interno -36
+* Added [FORMS]: Edición de eventos sobre controles de formulario es realizada sobre nuevo editor de PCoder, permitiendo heredar funcionalidades clave como backups automáticos, visor de diferencias, entre otros.
+* Added [FORMS]: @foag Creada nueva palabra clave sobre controles de texto libre que permite transformarlos en contenedores de Tags separados por coma automáticamente.  Para esto simplemente agregar la palabra clave PCO_Tags en la personalización del control.
+* Added [FORMS]: Edición de eventos de controles de formulario se hace ahora mediante el nuevo {P}Coder
+* Added [FORMS]: Informes básicos de analítica de aplicación son reemplazados por objetos internos en lugar de código.  Se agregan además los informes de usos sobre edición de código.
+* Added [FORMS]: Campos de tipo texto largo presentan (ya permitían) el establecimiento de su variable de valor predeterminado durante el diseño del campo.
+* Added [FORMS]: Los controles de formulario tipo adjunto cuentan con un identificador único extra cuando se está recuperando información y que direcciona al archivo como tal asociado al registro.  Esto permite revisar valores asociados al adjunto precio que se haya podido tener.  El identificador es PCO_EnlaceAdjunto_SUIDHTML de manera que puede ser accesado mediante $("#PCO_EnlaceAdjunto_SUIDHTML")[0].href
+* Added [INFORMES]: @jaimeaba3 La lista de informes disponibles presenta ahora la descripción debajo de su título, de manera que se facilite localizar un informe en sistemas cuya cantidad de informes diseñados es alta.
+* Added [KANBAN]: Formulario de parámetros permite especificar usuarios que son administradores de tableros Kanban, los cuales tendrán acceso a la herramienta con la posibilidad de crear tableros aún sin ser administradores generales o desarrolladores.
+* Added [KANBAN]: Editor de diagramas Kanban detecta si el usuario tiene acceso a la tarea en modo de edición y le permite su edición de diagrama asociado.
+* Added [KANBAN]: Tableros kanban cuentan con filtro adicional en la parte superior que permite visualizar sobre el tablero sólo aquellas tareas que cumplan con los criterios deseados.
+* Added [KANBAN]: Tableros Kanban permiten crear categorias personalizadas para la clasificación y filtrado posterior de tareas.
+* Added [KANBAN]: Auditoría de eliminación en tableros Kanban completos y tareas individuales incluyen su titulo.  En el caso de tableros se incluye además la cantidad de tareas asociadas.
+* Added [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).  Su aplicación se da inicialmente sobre la ficha de usuarios siempre y cuando se habilite el módulo a través de la parametrización del framework.   Esto deja la puerta abierta para que el módulo pueda ser aplicado a formularios propios en cualquier contexto.
+* Added [MODULOS]: Para informes y formularios registrados bajo un módulo se presentan sólo aquellos a los cuales el usuario desarrollador tiene acceso.  Aquellos elementos no asociados a ningún módulo (huérfanos) serán siempre presentados.  Esto permite la segmentación de funciones entre desarrolladores de una misma aplicación.  Usuario admin siempre verá el 100% de los elementos para evitar ocultamientos por error.
+* Added [PCODER]: Funciones experimentales de IA para búsqueda de bugs de seguridad, optimización y documentación de código.  Operan inicialmente sobre selecciones cortas de código.
+* Enhan [DEV]: Las funciones automáticas de regeneración de elementos desde los XML y ejecución de scripts no son llamadas en entornos de desarrollo del framework.  Esto permitirá trazabilidad sobre archivos específicos.
+* Enhan [COMP]: Actualizado Guzzle a 7.4.5 en componente de auto-trading-bot. (CVE-2022-27776,CVE-2022-29248,CVE-2022-31043,CVE-2022-31042,CVE-2022-31090,CVE-2022-31091) (RFC9110 Section 15.4, RFC6265 Section 5.3, RFC9110 Section 15.4)* Enhan [FORMS]: Actualizados algunos de los campos internos de la tabla de core_formulario para evitar colisiones con nombres de campo de usuario.  En caso que se tengan programaciones manuales o referencias a dichos campos se deben actualizar a su nombre nuevo.  Cambios que han cambiado:  columna->PCOBD_Columna, peso->PCOBD_Peso.  Esta tarea estará en progreso sobre los diferentes campos.
+* Enhan [CHAT]: Agregado índice a campo que indica si un chat ha sido leído o no por el destinatario.
+* Enhan [KANBAN]: Reporte de tareas archivadas por tablero es ahora exportable en excel.
+* Enhan [KANBAN]: Se agrega nuevo boton con reporte de tareas activas en el tablero con posibilidad de descarga.
+* Enhan [KANBAN]: Agregados campos de historial y fecha de inicio a informes exportables de tareas activas y archivadas por tablero.
+* Enhan [KANBAN]: Ajustado informe interno de tareas archivadas (-3) para generarse a través de consulta directa y no de elementos individuales.
+* Enhan [KANBAN]: @jaimeaba3 Imágen de encabezado de informe es independiente de URL externa.
+* Enhan [KANBAN]: @jaimeaba3 Issue #21.  Permisos de archivado de tareas sobre tableros de otro propietario.
+* Enhan [KANBAN]: Nuevos índices por fechas en tablas para actividades Kanban.
+* Enhan [CORE]: Agregada variable de PCOSESS_LoginUsuario al scope cuando se establecen conexiones al motor de manera que este disponible como una variable más de SQL.
+* Enhan [CORE]: @rafaelposadaf PR#24: mejoras estéticas css pmydb 3c773f0521112170e584ae40001b287373e9ad9e
+* Enhan [CORE]: @rafaelposadaf PR#30: optimizaciones marco_abajo https://github.com/unix4you2/practico/pull/30
+* Enhan [CORE]: @rafaelposadaf PR#32: optimizaciones marco_arriba https://github.com/unix4you2/practico/pull/32
+* Enhan [CORE]: Reemplazado archivo de core/marco_wscfg.php por objetos internos ahorrando 13kb de peso.
+* Enhan [CORE]: Conteo de opciones de menú al inicio del framework excluye aquellas cuya sección sea diferente de PCO_NoVisible para así evitar las que son usadas internamente por el framework.
+* Enhan [CORE]: @rafaelposadaf PR#30 a PR#43: optimizaciones generales de código
+* Enhan [CORE]: Inclusion de Composer sobre el nucleo de desarrollo
+* Enhan [CORE]: Adicion y actualizacion de jquery/jquery version 3.6.0 a 3.6.1 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
+* Enhan [CORE]: Adicion de jbdemonte/barcode como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
+* Enhan [CORE]: Adicion de D3JS como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
+* Enhan [CORE]: Adicion y actualizacion de jquery/migrate version 3.3.2 a 3.4.0 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
+* Enhan [CORE]: Eliminacion dependencia innecesaria JQuery-UI 1.8.  Cualquier uso manual de la misma continúa con compatibilidad en versiones actualizadas, versiones nuevas no la traerán por defecto.
+* Enhan [CORE]: Adicion y actualizacion de facebook/react version 17.0.2 a 18.2.0 como dependencia de composer y no como libreria independiente.  Cualquier llamado manual a la ubicacion anterior deberia ser actualizada al nuevo path.
+* Enhan [CORE]: Incluido script que retorna estado general del sistema en JSON, conectividad, motor de base de datos, etc. todo basado en una sesion particular.
+* Enhan [CORE]: Agregada alerta sobre no existencia o instalacion de las funciones POSIX de PHP sobre el servidor que corre el Framework.
+* Enhan [CORE]: Agregados entornos adicionales al archivo de despliegue de Vagrant
+* Enhan [CORE]: Nombres de campo aleatorios en formulario de login.  Esto permite evitar ataques automatizados de fuerza bruta cuando el atacante conoce los nombres de los campos y la acción del formulario.
+* Enhan [CORE]: @oscarcaldering Mejora a editor de código, explorador de archivos y funciones internas de evaluación de código.  Se permite que en hostings compartidos que bloquean o deshabilitan algunas funciones Posix y de creación de archivos temporales se evite el uso de dichas funciones para que la operatividad del Framework continúe.
+* Enhan [CORE]: Nueva funcion PCO_GenerarArchivoTemporal() permite crear punteros de manera dinámica hacia archivos temporales según su tipo de instalación.
+* Enhan [CORE]: Actualizados enlaces en navegación hacia foros de desarrolladores (Github/Discuccions)
+* Enhan [CORE]: Adevertencia desplegada para instalaciones sin soporte a funciones PHP tmpfile y que requieren hacer uso de PMyDB/Adminer deben usar el modulo de versiones 22.3 o inferiores que no requieren dicha funcion.  Simplemente se sobreescribe el contenido del index del módulo.
+* Enhan [CORE]: Parametros de aplicacion son ahora gestionados desde objeto interno FRM -39.  Se elimina todo el código asociado equivalente a 560K
+* Enhan [CORE]: Nuevos parámetros de aplicación contienen los créditos del autor o empresa, el texto de licencia asociado a la aplicación y un campo para indicar si los usuarios en su primer ingreso tienen que aceptar la licencia o no.
+* Enhan [CORE]: Sobre motores MySQL/MariaDB El framework agrega como comentario a todos los queries enviados de manera que se pueda visualizar por logs del motor qué usuario envía cada consulta.
+* Enhan [CORE]: La funcion PCO_FileGetContents_CURL puede recibir ademas de la URL otros parámetros en JSON con la lista de opciones que serán utilizadas para inicializar el objeto cURL.  De esta manera cada llamada puede ser personalizada por el desarrollador cuando consuma orígenes o servicios externos.  Los parámetros extra considerados son: OpcionesJSON para establecer los curl_setopt, CabecerasJSON que establecen el arreglo de CURLOPT_HTTPHEADER y PostJSON que establece los valores de CURLOPT_POSTFIELDS cuando aplique.   Cualquier llamado previo a dicha funcion deberá incluir los parámetros nuevos, aún cuando sean vacíos.
+* Enhan [CORE]: Actualizado D3JS de 7.3.0 a 7.6.1  (CWE-400: Uncontrolled Resource Consumption)
+* Enhan [CORE]: Compatibilidad PHP 8+ Actualizada sintaxis en generacion de cadenas aleatorias en notacion de arreglos
+* Enhan [CORE]: Compatibilidad PHP 8+ Ajustada sintaxis obsoleta de funcion PCO_BackupObtenerDatosTabla, parámetro vacío de PCO_NombreTabla
+* Enhan [CORE]: Compatibilidad PHP 8+ Ajustada sintaxis obsoleta de funcion PCO_BackupObtenerTablasBD, parámetro vacío de PCO_ListaTablas
+* Enhan [CORE]: Compatibilidad PHP 8+ Ajustada sintaxis obsoleta de funcion PCO_BackupObtenerTablasBD, parámetro vacío de TipoDeCopia
+* Enhan [CORE]: Compatibilidad PHP 8+ Ajustada sintaxis obsoleta de funcion PCO_BuscarActualizaciones, parámetro vacío de PCOSESS_LoginUsuario
+* Enhan [CORE]: Compatibilidad PHP 8+ Ajustada sintaxis obsoleta de funcion PCO_Mensaje, parámetro vacío de DEPRECATED_ancho
+* Enhan [CORE]: Compatibilidad PHP 8+ Ajustada sintaxis obsoleta de funcion PCO_GenerarEtiquetasConsulta, parámetro vacío de ConsultaSQL
+* Enhan [CORE]: Compatibilidad PHP 8+ Ajustada sintaxis obsoleta de variable no definida NombreRAD
+* Enhan [CORE]: Compatibilidad PHP 8+ Retirado el uso de funciones get_loaded_extensions(), ini_get_all(), debug_backtrace(), getallheaders() usadas en la funcion de reporte de Bugs PCO_CargarReportarBugs()
+* Fixed [CORE]: Compatibilidad PHP 8+ Eliminados errores de sintaxis incompatible en definición de arreglos asociativos mediante constantes
+* Fixed [CORE]: Compatibilidad PHP 8+ Eliminados errores de sintaxis incompatible para funciones in_array que obligan a que su segundo parametro sea un dato tipo arreglo.
+* Fixed [CORE]: Compatibilidad PHP 8+ Compatibilidad entre operaciones aritméticas de tipos string e integer
+* Fixed [CORE]: Compatibilidad PHP 8+ Arreglos con llaves constantes en lugar de cadenas para editor PCoder
+* Fixed [CORE]: @foag Validacion de escenarios de despliegue a entornos vagabundos
+* Fixed [CORE]: @foag Bug#23 https://github.com/unix4you2/practico/issues/23
+* Fixed [USUARIOS]: @jaimeaba3 Correccion en ficha de usuarios que no recuperaba correctamente la plantilla asignada en procesos de actualizacion.
+* Fixed [PCODER]: @jaimeaba3 Al intentar almacenar valores vacíos en scripts PRE,POS y JS se obtiene mensaje de error de BD al no recibir valor para almacenar.
+
+
 ## Versión 22.9 (2022-09-18)
 * Added [CORE]: Se cuenta con archivo de inclusión general para código JS ubicado en mod/personalizadas_js.js.  Cualquier código allí incluído se tendrá en cuenta en todas las cargas de página.
 * Added [USUARIOS]: Desde edición de usuarios se permite regresar al listado de usuarios.
