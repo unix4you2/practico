@@ -477,6 +477,8 @@ CREATE TABLE core_llaves_api (
   dominio_autorizado varchar(255) NOT NULL,
   ip_autorizada varchar(255) NOT NULL,
   funciones_autorizadas text,
+  total_ejecuciones int(11) NOT NULL DEFAULT '0',
+  cifrado_openssl varchar(20) NOT NULL DEFAULT '',
   PRIMARY KEY (id)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 

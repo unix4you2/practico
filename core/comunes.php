@@ -64,10 +64,10 @@
 	Salida:
 		Cadena codificada en base 64 pero reemplazando caracteres no estandar para URL
 */
-function PCO_Base64UrlEncode(string $data): string
+function PCO_Base64UrlEncode($Cadena)
     {
-        $base64Url = strtr(base64_encode($data), '+/', '-_');
-        return rtrim($base64Url, '=');
+        $CadenaEnBase64URL = strtr(base64_encode($Cadena), '+/', '-_');
+        return rtrim($CadenaEnBase64URL, '=');
     }
 
 
@@ -84,9 +84,9 @@ function PCO_Base64UrlEncode(string $data): string
 	Salida:
 		Cadena decodificada
 */
-function PCO_Base64UrlDecode(string $base64Url): string
+function PCO_Base64UrlDecode($CadenaEnBase64URL)
     {
-        return base64_decode(strtr($base64Url, '-_', '+/'));
+        return base64_decode(strtr($CadenaEnBase64URL, '-_', '+/'));
     }
 
 
