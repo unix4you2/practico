@@ -144,7 +144,7 @@
 																	                if (trim($PCO_RegistroParametrosWS["nombre"])!="")
 																	                    {
 																	                        global ${$PCO_RegistroParametrosWS["nombre"]};
-																	                        
+
 																	                        //Valida obligatoriedad
 																	                        if ($PCO_RegistroParametrosWS["obligatorio"]=="S" && trim(${$PCO_RegistroParametrosWS["nombre"]})=="")
 																	                            $PCO_ListaErrores_Parametros=$PCO_RegistroParametrosWS["nombre"].": es obligatorio";

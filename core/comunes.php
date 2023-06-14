@@ -51,6 +51,44 @@
 	*/
 
 
+########################################################################
+########################################################################
+/*
+	Function: PCO_Base64UrlEncode
+	Permite codificar de manera mas consistente la informacion cuando debe ser transmitida por URL y la cadena resultante cuenta con caracteres no permitidos por estandar RFC para las URL.
+
+	Variables de entrada:
+
+		Cadena - Cadena que se desea codificar
+
+	Salida:
+		Cadena codificada en base 64 pero reemplazando caracteres no estandar para URL
+*/
+function PCO_Base64UrlEncode(string $data): string
+    {
+        $base64Url = strtr(base64_encode($data), '+/', '-_');
+        return rtrim($base64Url, '=');
+    }
+
+
+########################################################################
+########################################################################
+/*
+	Function: PCO_Base64UrlDecode
+	Funciin inversa a la codificacion de informacion cuando debe ser transmitida por URL y la cadena resultante cuenta con caracteres no permitidos por estandar RFC para las URL.
+
+	Variables de entrada:
+
+		Cadena - Cadena codificada mediante PCO_Base64UrlEncode
+
+	Salida:
+		Cadena decodificada
+*/
+function PCO_Base64UrlDecode(string $base64Url): string
+    {
+        return base64_decode(strtr($base64Url, '-_', '+/'));
+    }
+
 
 ########################################################################
 ########################################################################
