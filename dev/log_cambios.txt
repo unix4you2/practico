@@ -153,7 +153,7 @@ LogCambios="
 * Added [USUARIOS]: @foag Creado nuevo campo llamado vectores_faciales para escenarios de autenticacion por biometria (Reconocimiento facial).  Su aplicación se da inicialmente sobre la ficha de usuarios siempre y cuando se habilite el módulo a través de la parametrización del framework.   Esto deja la puerta abierta para que el módulo pueda ser aplicado a formularios propios en cualquier contexto.
 * Added [CORE]: Nuevas funciones PCO_Base64UrlEncode() y PCO_Base64UrlDecode() permiten realizar conversiones en base 64 más consistentes cuando la información debe ser transferida mediante URLs donde la cadena final tenga caracteres no permitidos como + y / así como cualquier caracter de igual (=) al final de la cadena.
 * Added [CORE]: Llaves de consumo de servicios web / APIs cuentan con estadísticas de conteo sobre su uso general.  Puede ser visualizado a través del panel de analítica de aplicación.
-
+* Added [CORE]: Panel de analítica cuenta con estadísticas generales de consumo de APIs en los últimos 15 días.
 
 
 PDTE:

@@ -126,7 +126,10 @@
 																{
 																	@ob_clean(); //Limpia salida antes de llamar los WS
 																	include_once("core/ws_funciones.php");
-																	
+
+                                                                    //Aumenta estadistica de consumo de la API 
+													                PCO_EjecutarSQLUnaria("UPDATE core_llaves_api SET total_ejecuciones=total_ejecuciones+1 WHERE llave='{$PCO_WSKey}' ");
+
 																	//Determina si el endpoint/metodo a ejecutar esta definido en BD de metodos
 																	//y si lo encuentra lo prefiere por encima de cualquier inclusion desde archivo
 																	//En caso de no encontrarlo hace la inclusion tradicional del archivo por compatibilidad
