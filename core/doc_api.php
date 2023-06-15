@@ -153,11 +153,21 @@
 <br>
 <div class="alert alert-warning" align=center>
     <font size=6><b>API <?php echo $ParametrosAplicacion["nombre_aplicacion"]; ?> </b> <font size=3><i>ver. <?php echo $ParametrosAplicacion["version"]; ?></font></i></font><br>
-    <font size=2><i>Tecnolog&iacute;a de web services basada en <i class="fa fa-rocket fa-fw"></i> <a href="https://www.practico.org" target="_blank"><b>Pr&aacute;ctico Framework</b></a></i></font>
+    <font size=2><i>Tecnolog&iacute;a de servicios web basada en <i class="fa fa-rocket fa-fw"></i> <a href="https://www.practico.org" target="_blank"><b>Pr&aacute;ctico Framework</b></a></i></font>
 </div>
 
 
 <?php
+    $TotalMetodos=PCO_EjecutarSQL("SELECT COUNT(*) FROM core_llaves_metodo WHERE 1=1")->fetchColumn();
+    
+    //Presenta total de servicios publicados
+        echo '<div align=center class="" style="font-size:18px; color:white; margin-left:40px; margin-right:40px; margin-bottom:15px;">';
+        if ($TotalMetodos==0)
+            echo '<i class="fa fa-info-circle fa-fw fa-1x"></i>  <b>No se han encontrado Endpoints y/o Servicios publicados en este sistema</b>';
+        else
+            echo '<i class="fa fa-info-circle fa-fw"></i>  Total Endpoints y/o Servicios publicados en este sistema: <div class="btn btn-success"><b>'.$TotalMetodos.'</b></div>';
+        echo '</div>';
+
     $ResultadoServicios=PCO_EjecutarSQL("SELECT * FROM core_llaves_metodo WHERE 1=1 ORDER BY nombre");
     while ($RegistroServicios=$ResultadoServicios->fetch())
         {
@@ -271,7 +281,9 @@
             echo '
                 </details>
                 </div>';
+            $TotalMetodos++;
         }
+
 ?>
 
 
