@@ -7,8 +7,8 @@
 		<sistema_origen></sistema_origen>
 		<version></version>
 		<usuario_generador></usuario_generador>
-		<fecha_exportacion>2023-06-14</fecha_exportacion>
-		<hora_exportacion>15:36</hora_exportacion>
+		<fecha_exportacion>2023-06-15</fecha_exportacion>
+		<hora_exportacion>07:14</hora_exportacion>
 	</descripcion>
 	<core_formulario>
 	<id>LTQy</id>
@@ -285,7 +285,7 @@
 	<lista_opciones></lista_opciones>
 	<origen_lista_opciones></origen_lista_opciones>
 	<origen_lista_valores></origen_lista_valores>
-	<valor_etiqueta>PGhyPg==</valor_etiqueta>
+	<valor_etiqueta>PHA+PGJyPjwvcD48cD48aHI+PC9wPg==</valor_etiqueta>
 	<url_iframe></url_iframe>
 	<objeto_en_ventana>MA==</objeto_en_ventana>
 	<informe_vinculado>MA==</informe_vinculado>

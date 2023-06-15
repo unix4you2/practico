@@ -7,8 +7,8 @@
 		<sistema_origen></sistema_origen>
 		<version></version>
 		<usuario_generador></usuario_generador>
-		<fecha_exportacion>2023-06-14</fecha_exportacion>
-		<hora_exportacion>15:36</hora_exportacion>
+		<fecha_exportacion>2023-06-15</fecha_exportacion>
+		<hora_exportacion>07:14</hora_exportacion>
 	</descripcion>
 	<core_informe>
 	<id>LTI5</id>
@@ -42,7 +42,7 @@
 	<tabla_responsive>Tg==</tabla_responsive>
 	<permitido_home>Tg==</permitido_home>
 	<javascript></javascript>
-	<pre_script>PD9waHAKZWNobyAiPGJyPiI7</pre_script>
+	<pre_script>PD9waHAKZWNobyAiPGJyPjxicj4iOw==</pre_script>
 	<post_script></post_script>
 	<usar_ajax>MA==</usar_ajax>
 	<definir_cols>Tg==</definir_cols>
