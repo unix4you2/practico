@@ -1064,7 +1064,7 @@ INSERT INTO `core_scripts_lenguajes` (`id`, `nombre`, `extensiones`, `comando_co
 (7,	'AutoHotKey',	'ahk',	'',	'',	''),
 (8,	'BatchFile',	'bat|cmd|pif|wsf',	'',	'',	''),
 (9,	'C9Search',	'c9search_results',	'',	'',	''),
-(10,	'C_Cpp',	'c|cpp|cc|cxx|h|hh|hpp|bcp|tcc',	'gcc -o {$PCO_ArchivoScript}.out',	'./{$PCO_ArchivoScript}.out',	'#include <stdio.h>\r\nint main(void)\r\n{\r\n    printf(\"Practico Framework! Prueba de lenguaje C/CPP generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\n}\r\n'),
+(10,	'C_Cpp',	'c|cpp|cc|cxx|h|hh|hpp|bcp|tcc',	'gcc -o {$PCO_ArchivoScript}.out {$PCO_ArchivoScript}.c',	'./{$PCO_ArchivoScript}.out',	'#include <stdio.h>\r\nint main(void)\r\n{\r\n    printf(\"Practico Framework! Prueba de lenguaje C/CPP generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\");\r\n}\r\n'),
 (11,	'Cirru',	'cirru|cr',	'',	'',	''),
 (12,	'Clojure',	'clj|cljs',	'',	'',	'(println \"Practico Framework! Prueba de lenguaje CLOJURE generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\")'),
 (13,	'Cobol',	'CBL|COB',	'',	'',	'	program-id. hello.\r\n	procedure division.\r\n		display \"Practico Framework! Prueba de lenguaje COBOL generada por el usuario {$PCOSESS_LoginUsuario} {$PCO_FechaOperacionGuiones} {$PCO_HoraOperacionPuntos}\".\r\n		stop run.'),

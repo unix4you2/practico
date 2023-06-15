@@ -155,32 +155,29 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                         fwrite ( $ArchivoInclusionTemporal, $Script_CUERPO );
 
                         //Hace una copia del archivo temporal sobre la carpeta temporal del framework que se garantiza escritura para proceso de compilacion
-                        $ArchivoAleatorio=PCO_TextoAleatorio(20);
-                        $RutaArchivoFuente = "tmp/".$ArchivoAleatorio.".".$Lenguaje_PRIMERAEXTENSION;
+                        $ArchivoAleatorio="PCOScript_".PCO_TextoAleatorio(20);
+                        $RutaArchivoFuente = "tmp/practico_scripts/".$ArchivoAleatorio.".".$Lenguaje_PRIMERAEXTENSION;
                         @copy($RutaArchivoTemporal, $RutaArchivoFuente);
 
                         //Si el lenguaje esta configurado para ser compilado entonces hace proceso de compilacion
-                        if ($Lenguaje_CMD_COMPILACION!="")
+                        //TODO
+                        if (trim($Lenguaje_CMD_COMPILACION)!="")
                             {
                                 //Ejecuta reemplazo de variable PCO_ArchivoScript dentro de los compandos en caso que se requiera
                                 $PCO_ArchivoScript=$RutaArchivoFuente; //Asigna ruta generada temporal a la variable para que sea reemplazada en el comando
                                 $Lenguaje_CMD_COMPILACION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_COMPILACION);
-
-
+                                echo "Compilando mediante {$Lenguaje_CMD_COMPILACION}  <br>Espere...<br>";
 
                                 //Su ubica en el path de instalacion del Framework para correr desde alli los comandos de compilacion
-                                chdir(getcwd()."/tmp");
+                                chdir(getcwd()."/tmp/practico_scripts");
                                 //echo system("cd ".getcwd()."/tmp"."; ".$Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
                                 
-                                
-                                
-                                system("gcc -o {$ArchivoAleatorio}.out {$ArchivoAleatorio}.c ");
-                                system("./{$ArchivoAleatorio}.out");
+                                //system("gcc -o {$ArchivoAleatorio}.out {$ArchivoAleatorio}.c ");
+                                //system("./{$ArchivoAleatorio}.out");
 
 
-
-
-                                // $ResultadoCompilacion=system($Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
+                                $ResultadoCompilacion=system($Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
+                                echo $Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente;
                                 
 // echo "Temp=".$RutaArchivoTemporal;
 // echo "Comp=".$RutaArchivoFuente;

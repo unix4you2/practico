@@ -146,7 +146,21 @@ if ($PCO_Accion=="limpiar_temporales")
         						$TotalAhorro+=$Archivo["Tamano"];
         					}
         			}
-        
+
+        		//Presenta el listado de archivos
+        		echo PCO_ListadoExploracionArchivosVisual("tmp/practico_scripts/","",$MULTILANG_ArchivosLimpiados,0);
+        		
+        		//Elimina tambien archivos de scripts externos
+        		$ListadoArchivosEliminar=PCO_ListadoExploracionArchivos("tmp/practico_scripts/","");
+        		foreach ($ListadoArchivosEliminar as $Archivo)
+        			{
+        				if ($Archivo["Nombre"]!="index.html")
+        					{
+        						@unlink($Archivo["Enlace"]);
+        						$TotalAhorro+=$Archivo["Tamano"];
+        					}
+        			}
+
         		PCO_AbrirBarraEstado();
         		echo '<div align=center><h3>'.$MULTILANG_EspacioLiberado.': <b>'.$TotalAhorro.' Kb</b></h3></div>
         		<a class="btn btn-warning btn-block" href="javascript:window.close();"><i class="fa fa-times"></i> '.$MULTILANG_Cerrar.'</a>';
