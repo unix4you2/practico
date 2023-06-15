@@ -163,10 +163,11 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                         //TODO
                         if (trim($Lenguaje_CMD_COMPILACION)!="")
                             {
+                                echo "Scripts externos compilados no disponibles en este sistema.";
+                                /*
                                 //Ejecuta reemplazo de variable PCO_ArchivoScript dentro de los compandos en caso que se requiera
                                 $PCO_ArchivoScript=$RutaArchivoFuente; //Asigna ruta generada temporal a la variable para que sea reemplazada en el comando
                                 $Lenguaje_CMD_COMPILACION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_COMPILACION);
-                                echo "Compilando mediante {$Lenguaje_CMD_COMPILACION}  <br>Espere...<br>";
 
                                 //Su ubica en el path de instalacion del Framework para correr desde alli los comandos de compilacion
                                 chdir(getcwd()."/tmp/practico_scripts");
@@ -177,8 +178,7 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
 
 
                                 $ResultadoCompilacion=system($Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
-                                echo $Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente;
-                                
+
 // echo "Temp=".$RutaArchivoTemporal;
 // echo "Comp=".$RutaArchivoFuente;
 // echo "CMD=".$Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente;
@@ -188,7 +188,7 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
 
                                 //Elimina archivo fuente copiado para compilacio
                                 @unlink ($RutaArchivoFuente);
-
+                                */
                             }
 
                     
