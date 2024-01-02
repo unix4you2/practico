@@ -1,0 +1,18 @@
+###[NombreTabla:UnaLinea]
+Eventos
+###[Descripcion_Tabla:UnaLinea]
+Estructura para almacenar una programaci&oacute;n de eventos generales
+###[DetalleCampos SIN Campo de ID:Multilinea:Descripcion|campo|tipo(longitud)|modificadores]
+Fecha inicio|fechainicio|date||
+Hora inicio|horainicio|time||
+Espacios disponibles|espaciosdisponibles|varchar|200|
+Confirmacion|confirmacion|int|1|
+Costo por persona|costoporpersona|int|11|
+Fecha fin|fechafin|date||
+Hora fin|horafin|time||
+Descripcion actividad|descripcionactividad|varchar|250|
+Nombre actividad|nombreactividad|varchar|50|
+Ubicacion|ubicacion|varchar|200|
+Notas|notas|text||
+Personal requerido|personalrequerido|varchar|20|
+Cupo maximo|cupomaximo|int|3|

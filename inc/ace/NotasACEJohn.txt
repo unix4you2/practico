@@ -1,0 +1,4 @@
+Recordar en descarga de ACE Editor:
+* Descargar desde el builds repository: https://github.com/ajaxorg/ace-builds/
+* Tomar el src-min-noconflict
+

@@ -1,0 +1,18 @@
+###[NombreTabla:UnaLinea]
+Activos
+###[Descripcion_Tabla:UnaLinea]
+Tabla que permite el almacenamiento de activos de una compa&ntilde;&iacute;a
+###[DetalleCampos SIN Campo de ID:Multilinea:Descripcion|campo|tipo(longitud)|modificadores]
+Codigo de barras|codigodebarras|varchar|50|
+Comentarios|comentarios|varchar|250|
+Valor actual|valoractual|int|10|
+Fecha compra|fechacompra|date||
+Fecha venta|fechaventa|date||
+Vida Amortizable|vidaamortizable|int|10|
+Metodo depreciacion|metododepreciacion|varchar|20|
+Descripcion|descripcion|varchar|250|
+Marca|marca|varchar|50|
+Modelo|modelo|varchar|20|
+Proximo mantenimiento|proximomantenimiento|date||
+Precio compra|preciocompra|int|10|
+Numero serial|numeroserial|varchar|30|

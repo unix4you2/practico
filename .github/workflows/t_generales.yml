@@ -1,0 +1,125 @@
+#
+#	 _
+#	|_) _ _  _ _|_. _ _					  	Copyright (C) 2012-2022
+#	|  | (_|(_  | |(_(_) 				  	John F. Arroyave Gutiérrez
+#	  www.practico.org					  	unix4you2@gmail.com
+#                                            All rights reserved.
+#   
+#	====================================
+#	   Set de pruebas: CodeQL y Otros
+#	====================================
+#	DESCRIPCION:    Archivo de definicion de pruebas automatizadas CodeQL+Github Actions+Otros
+#	                Se provee como reemplazo a las pruebas realizadas anteriormente en TravisCI
+#
+name: "PruebasGenerales"
+#  with:
+#    queries: security-extended,security-and-quality
+
+on:
+#  push:
+#    branches: [ "master" ]
+#  pull_request:
+#    branches: [ "master" ]
+#  schedule:
+#    - cron: '42 14 * * 0'
+  workflow_dispatch:
+    branches: [ "master" ]
+
+jobs:
+  Trabajo01:
+    name: Pruebas Generales
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: PRE-Pruebas - Instalando BaseOS+DEVTools
+      shell: bash
+      run: | 
+        sudo apt-get -y update; sudo apt-get -y upgrade
+        sudo apt-get -y install git
+
+    - name: PRE-Pruebas - Activacion servicios basicos
+      shell: bash
+      run: | 
+        sudo systemctl stop mono-xsp4
+        sudo systemctl start apache2
+        sudo systemctl status apache2
+        sudo systemctl start mysql.service
+
+    - name: PRE-Pruebas - Revision de versiones y paquetes
+      shell: bash
+      run: | 
+        apache2 -v
+        php -v
+        git --version
+
+    - name: PRE-Pruebas - Clonacion Repositorio
+      shell: bash
+      working-directory: /var/www/html
+      env:
+         Vble: MiVBLE
+      run: | 
+        pwd
+        sudo rm -rf *
+        sudo git clone https://github.com/unix4you2/practico.git
+        sudo chmod -R 777 *
+        cp /var/www/html/practico/dev/test/ga_configuracion.php /var/www/html/practico/configuracion.php
+
+    - name: IN-Pruebas - Generacion de Base de Datos
+      shell: bash
+      working-directory: /var/www/html/practico/dev/test
+      run: | 
+        pwd
+        mysql -uroot -p'root' -e 'CREATE DATABASE practico_testqa;'
+        php ga_basedatos.php
+#        mysql -uroot -p'root' -e 'GRANT ALL PRIVILEGES ON practico.* TO root@localhost IDENTIFIED BY "root" '
+#        sudo wget 'http://localhost/practico/dev/test/ga_basedatos.php'
+
+
+
+
+
+
+    - name: IN-Sintaxis - Verificacion de compatibilidad versiones emergentes
+      shell: bash
+      working-directory: /var/www/html/practico
+      run: | 
+        pwd
+        sh dev/test/t_sintaxis.sh
+
+    - name: IN-FuncionesObsoletas - Verificacion funciones obsoletas - deprecated
+      shell: bash
+      working-directory: /var/www/html/practico
+      run: | 
+        pwd
+        php dev/test/t_obsoletas.php
+
+    - name: IN-ArchivosNucleares
+      shell: bash
+      working-directory: /var/www/html/practico
+      run: | 
+        pwd
+        php dev/test/t_archivos.php
+
+
+
+
+
+
+#Para chequeos de sintaxis JS y CSS revisar repo https://github.com/elementary/website
+#  - dev/parche2zip.sh                 # Script para generacion de parches entre versiones
+#  - dev/practico2zip.sh              # Script para empaquetado y distribución de nuevas versiones
+
+    - name: POST-Pruebas - Impresion exploratoria
+      shell: bash
+      run: | 
+        pwd
+        echo "Configuracion de basse para el Framework de pruebas"; cat /var/www/html/practico/configuracion.php
+        echo "Paqueteria y versiones disponibles de PHP"; apt-cache search php
+
+
+
+# CodeQL de supervivencia
+# WorkFlow Syntax:          https://docs.github.com/es/actions/using-workflows/workflow-syntax-for-github-actions
+# Analisis de seguridad:    https://docs.github.com/es/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning
+# Paquetes Runner-Image:    https://github.com/actions/runner-images/blob/main/images/linux/Ubuntu2004-Readme.md
+# Validador Sintaxis YAML:  https://jsonformatter.org/yaml-validator

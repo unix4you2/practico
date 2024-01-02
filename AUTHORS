@@ -1,0 +1,106 @@
+Practico Framework for PHP
+========================================================================
+Copyright (c) 2022 John F. Arroyave Gutiérrez unix4you2@gmail.com
+                                              www.practico.org
+
+Licensed under GPLv2 terms. See the LICENSE file for details
+That is the license for the whole package.
+
+------------------------------------------------------------------------
+Important: All source files in this project should be  UTF-8 Without BOM
+------------------------------------------------------------------------
+
+Practico uses a lot of tools to build and deploy its applications, parts
+of the package are under other, compatible licenses:
+
+PCLZip (PhpConcept Library - Zip Module 2.8.2):
+	Location: inc/pclzip/pclzip.lib.php:
+	License: GNU GPL versión 2
+	Made by: Vincent Blavet - August 2009
+	http://www.phpconcept.net
+
+CKEditor
+	Location: inc/ckeditor/*
+	License: GNU GPL License version 2, or at your choice as LGPL ó MPL
+	Made by: Frederico Knabben - Copyright © 2003-2011, CKSource
+	http://ckeditor.com
+	See inc/ckeditor/LICENSE.html for details
+
+OAuth 1.0 y 2.0 Class
+	Location: inc/oauth/*
+	License: BSD license style
+	Made by: Copyright (c) 2012-2013, Manuel Lemos
+	mlemos-at-acm.org
+	See inc/oauth/LICENSE for details
+
+HTTP Client
+	Location: inc/http/*
+	License: BSD license style
+	Made by: Copyright (c) 2012-2013, Manuel Lemos
+	mlemos-at-acm.org
+	See inc/http/LICENSE.txt for details
+
+QR Code encoder
+	Location: inc/qrcode/*
+	License: GNU General Public License Version 3
+	Made by: Copyright (C) 2010, Dominik Dzienia
+	deltalab at poczta dot fm
+
+BarCode Coder Library (BCC Library)
+	Location: inc/jbdemonte/barcode/*
+	License: GNU General Public License Version 3
+	Made by: DEMONTE Jean-Baptiste - 2013-01-06
+	jbdemonte at gmail.com
+	http://barcode-coder.com/
+	See inc/http/LICENSE.txt for details
+
+Gantti - A simple PHP Gantt Class
+	Location: mod/gantti/*
+	License: MIT License
+	Made by: Copyright (C) Bastian Allgeier
+	http://bastianallgeier.com/gantti
+	bastianallgeier dot com
+	See mod/gantti/readme.mdown for details
+
+Chat
+	Location: inc/chat/*
+	Made by: Copyright (c) 2009 Anant Garg
+	See (anantgarg dot com | inscripts dot com)
+
+Font-Awesome
+	Location: inc/font-awesome/fonts/*
+	Font License: SIL OFL 1.1
+	URL: http://scripts.sil.org/OFL
+	Location: Applies to all CSS and LESS files in the following
+	          directories: font-awesome/css/, font-awesome/less/,
+	          and font-awesome/scss/.
+	Code License: MIT License
+	URL: http://opensource.org/licenses/mit-license.html
+
+Bootstrap
+	Location: inc/bootstrap/*
+	License: MIT License
+    License docs: Creative Commons  
+    URL: http://getbootstrap.com/
+	Copyright 2011-2014 Twitter, Inc.
+
+TCPDF
+	Location: inc/tcpdf_min/*
+	License: GNU Lesser Public License
+    URL: http://www.tcpdf.org/
+
+SummerNote
+	Location: inc/summernote/*
+	License: MIT License
+    URL: http://summernote.org/
+	Created and Maintained by Summernote team
+
+Media files and CSS files under:
+		img/*
+		skin/*
+		ins/img/*
+		ins/skin/*
+	License: Free Art License or the GNU GPLv2
+	Made by: John F. Arroyave Gutiérrez
+			 or Edited from images released to the public domain
+	http://sourceforge.net/projects/practico/

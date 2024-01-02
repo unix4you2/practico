@@ -1,0 +1,11 @@
+###[NombreTabla:UnaLinea]
+Productos
+###[Descripcion_Tabla:UnaLinea]
+Almacenamiento de informacion b&aacute;sica de productos
+###[DetalleCampos SIN Campo de ID:Multilinea:Descripcion|campo|tipo|longitud(si aplica)|]
+Codigo|codigo|varchar|20|
+Nombre|nombre|varchar|150|
+Descripcion|descripcion|varchar|255|
+Precio venta|precioventa|int|11|
+Existencia|existencia|int|11|
+Costo|costo|int|11|

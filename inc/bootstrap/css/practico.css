@@ -1,0 +1,590 @@
+/*
+	 _
+	|_) _ _  _ _|_. _ _					  	Copyright (C) 2012-2022
+	|  | (_|(_  | |(_(_) 				  	John F. Arroyave Gutiérrez
+	  www.practico.org					  	unix4you2@gmail.com
+                                            All rights reserved.
+    
+	 This program is free software: you can redistribute it and/or modify
+	 it under the terms of the GNU General Public License as published by
+	 the Free Software Foundation, either version 3 of the License, or
+	 (at your option) any later version.
+
+	 This program is distributed in the hope that it will be useful,
+	 but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	 GNU General Public License for more details.
+
+	 You should have received a copy of the GNU General Public License
+	 along with this program.  If not, see <http://www.gnu.org/licenses/>
+	 
+	            --- TRADUCCION NO OFICIAL DE LA LICENCIA ---
+
+     Esta es una traducción no oficial de la Licencia Pública General de
+     GNU al español. No ha sido publicada por la Free Software Foundation
+     y no establece los términos jurídicos de distribución del software 
+     publicado bajo la GPL 3 de GNU, solo la GPL de GNU original en inglés
+     lo hace. De todos modos, esperamos que esta traducción ayude a los
+     hispanohablantes a comprender mejor la GPL de GNU:
+	 
+     Este programa es software libre: puede redistribuirlo y/o modificarlo
+     bajo los términos de la Licencia General Pública de GNU publicada por
+     la Free Software Foundation, ya sea la versión 3 de la Licencia, o 
+     (a su elección) cualquier versión posterior.
+
+     Este programa se distribuye con la esperanza de que sea útil pero SIN
+     NINGUNA GARANTÍA; incluso sin la garantía implícita de MERCANTIBILIDAD
+     o CALIFICADA PARA UN PROPÓSITO EN PARTICULAR. Vea la Licencia General
+     Pública de GNU para más detalles.
+
+     Usted ha debido de recibir una copia de la Licencia General Pública de
+     GNU junto con este programa. Si no, vea <http://www.gnu.org/licenses/>
+
+
+
+    ESTILOS ADICIONALES PARA BOOTSTRAP
+*/
+
+/*@import "../less/datepicker/datepicker.less";*/
+
+/* Definicion para los marcos que no deben aparecer a la hora de imprimir */
+@media print {
+*.oculto_impresion
+    {
+        display: none !important;
+        width: 0px;
+    }
+}
+
+/* Define estilo especial para los dialogos modales de manera que se oscurezca el fondo */
+.modal-backdrop.in
+{
+    opacity:0.8 !important;
+    position:fixed;// This makes it cover the entire scrollable page, not just browser height
+    height:100%;
+}
+
+
+
+*.icon-white {color: white}
+*.icon-red {color: red}
+*.icon-green {color: green}
+*.icon-blue {color: blue}
+*.icon-yellow {color: yellow}
+*.icon-gray {color: gray}
+*.icon-orange {color: #FF8040}
+
+
+*.texto-blanco {color: white}
+*.texto-rojo {color: red}
+*.texto-verde {color: green}
+*.texto-azul {color: blue}
+*.texto-amarillo {color: yellow}
+*.texto-gris {color: gray}
+*.texto-naranja {color: #FF8040}
+
+
+/* Estilo adicional para tablas sin bordes */
+*.table-unbordered>thead>tr>th, 
+*.table-unbordered>tbody>tr>th, 
+*.table-unbordered>tfoot>tr>th, 
+*.table-unbordered>thead>tr>td, 
+*.table-unbordered>tbody>tr>td, 
+*.table-unbordered>tfoot>tr>td {
+  border-top: none; 
+}
+
+
+/* Dialogos modales mas amplios*/
+.modal-wide .modal-dialog {
+  width: 90%;
+}
+
+/* Boton del menu responsive siempre visible */
+/*.navbar-toggle { display:block; }
+.navbar-collapse.collapse {
+    display: none !important;
+}*/
+
+/* ANIMACIONES */
+*.texto-blink {
+    -moz-animation: blink 2s infinite linear;
+    -o-animation: blink 2s infinite linear;
+    -webkit-animation: blink 2s infinite linear;
+    animation: blink 2s infinite linear;
+}
+@-moz-keyframes blink {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+@-webkit-keyframes blink {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+@-o-keyframes blink {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+@-ms-keyframes blink {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+@keyframes blink {
+  0% {opacity: 1;}
+  50% {opacity: .1;}
+  100% {opacity: 1;}
+}
+
+
+/* SOBREESCRITURA estilos de BootStrap */
+@media(min-width:0px) {
+    #page-wrapper {
+        position: inherit;
+        margin: 0 0 0 0px;  /*Original: 0 0 0 250px  - Aumenta zona de trabajo*/
+        padding: 0 30px;
+        border-left: 1px solid #e7e7e7;
+    }
+}
+
+@media(min-width:0px) {
+    .sidebar {
+        z-index: 1;
+        position: absolute;
+        width: 250px;  /*250px*/
+        margin-top: 51px;
+        visibility: hidden; /*Original: visible  -  Oculta barra de navegacion*/
+    }
+    .navbar-top-links .dropdown-messages,
+    .navbar-top-links .dropdown-tasks,
+    .navbar-top-links .dropdown-alerts {
+        margin-left: auto;
+    }
+}
+
+/* Enfasis de la caja de login */
+.EnfasisLoginZoom {
+	transition: .6s; -webkit-transition: .6s;
+	transform:scale(0.95,.95); -webkit-transform:scale(.95);
+}
+.EnfasisLoginZoom:hover {
+	transition: .6s; -webkit-transition: .6s;
+	-webkit-transform:scale(1); transform:scale(1,1);
+}
+
+/* Estilo predeterminado para los tooltips */
+.tooltip-inner {
+	max-width: 350px;
+	font-size: 11px;
+}
+
+/* Estilos especiales para apariencia en controles tipo toggle */
+.toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20px; }
+.toggle.ios .toggle-handle { border-radius: 20px; }
+.toggle.android { border-radius: 0px;}
+.toggle.android .toggle-handle { border-radius: 0px; }
+
+/*
+body {
+background-image:url(img/fondo.jpg);
+background-color: #726d6d;
+font-family: Tahoma, Verdana, sans-serif;
+color: #FFFFFF;
+font-size: 10px;
+font-weight: normal;
+margin-top: 0px;
+margin-right: 0px;
+margin-bottom: 2px;
+margin-left: 0px;
+}
+
+table.EstiloBotones {
+background-color: #06F;
+color: #FFF;
+font-size: 14px;
+border-radius:8px;
+height:40px;
+border:2px solid #ccc;
+}
+
+table.EstiloBotones:hover {
+background-color: #03F;
+color: #FFF;
+font-size: 14px;
+border-radius:8px;
+height:40px;
+border:2px solid #ccc;
+}
+
+table.TextosEscritorio {
+font-family: Tahoma, Verdana, sans-serif;
+color: #FFFFFF;
+font-size: 10px;
+font-weight: normal;
+}
+
+img.IconosEscritorio {
+   border:0px solid #726d6d;
+   margin-top: 20px;
+   margin-right: 20px;
+   margin-bottom: 20px;
+   margin-left: 20px;
+}
+
+img.IconosEscritorio:hover {
+   XXborder:1px solid #9D7777;
+   XXbackground-color:#726d6d;
+}
+
+table.EstiloVentana {
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+font-weight: normal;
+padding: 10px;
+}
+
+table.TextosVentana {
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+font-weight: normal;
+padding: 0px;
+}
+
+table.EstiloBarraEstado {
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+font-weight: normal;
+padding: 0px;
+background-image:url(img/barra_estado.jpg);
+}
+
+table.MarcoSuperior {
+background-image:url(img/fondo_superior.jpg);
+background-color: #000000;
+font-family: Tahoma, Verdana, sans-serif;
+color: #FFFFFF;
+font-size: 10px;
+font-weight: normal;
+}
+
+table.MarcoInferior {
+background-color: #726d6d;
+font-family: Tahoma, Verdana, sans-serif;
+color: #FFFFFF;
+font-size: 10px;
+font-weight: normal;
+}
+
+table.MenuSuperior {
+background-image:url(img/fondo_menu.jpg);
+background-color: #362D2D;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffffff;
+font-size: 10px;
+font-weight: normal;
+}
+
+table.MenuSuperior a{
+text-decoration: none;
+color: #ffffff;
+}
+
+table.MenuSuperior a:hover{
+color: #000000;
+font-weight: bold;
+border:1px solid #000000;
+}
+*/
+
+
+/* TABLAS PARA GENERADOR DE INFORMES */
+/*
+table.Informes {
+width:100%;
+height:100%;
+margin:0px;
+padding:0px;
+color: #000000;
+font-family: Tahoma, Verdana, sans-serif;
+font-size: 12px;
+*/
+/* SOMBRA DE LA TABLA */
+/* box-shadow: 10px 10px 5px #888888 */
+/*}
+
+
+table.Informes thead{
+font-weight:bold;
+text-align:center;
+}
+
+table.Informes td{
+padding: 0px 5px;
+border:solid #665A65;
+border-width:0px 1px 1px 0px;
+*/
+
+/*border-right: 1px solid #BBBBBB;*/
+/*background:#FFFFFF;
+background-color:#FFFFFF;
+text-align:left;*/
+/*height: 30px;*/
+}
+
+/* REDONDEO DE TABLA */
+/*
+table.Informes tr:last-child td:last-child{
+	-moz-border-radius-bottomright:9px;
+	-webkit-border-bottom-right-radius:9px;
+	border-bottom-right-radius:9px;
+}
+
+table.Informes tr:first-child td:first-child {
+	-moz-border-radius-topleft:9px;
+	-webkit-border-top-left-radius:9px;
+	border-top-left-radius:9px;
+}
+
+table.Informes tr:first-child td:last-child {
+	-moz-border-radius-topright:9px;
+	-webkit-border-top-right-radius:9px;
+	border-top-right-radius:9px;
+}
+
+table.Informes tr:last-child td:first-child{
+	-moz-border-radius-bottomleft:9px;
+	-webkit-border-bottom-left-radius:9px;
+	border-bottom-left-radius:9px;
+}
+* */
+
+
+
+/* DEFINICIONES PARA FORMULARIOS EN GENERAL */
+/* Estilo general para todos los input que no tengan estilo definido */
+/*
+input {
+background-color: #D4D4D4;
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+border-width: 1px;
+border-radius: 5px  1px;
+padding: 2px;
+}
+*/
+
+/* DEFINICIONES PARA FORMULARIOS EN GENERAL */
+/*
+input.CampoTexto {
+background-color: #D4D4D4;
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+border-width: 1px;
+border-radius: 5px  1px;
+padding: 2px;
+}
+
+input.Botones {
+background-color: #A2A4B6;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffffff;
+font-size: 10px;
+border-width: 2px;
+border-radius: 1px  10px;
+padding: 2px;
+cursor: pointer;
+}
+
+input.BotonesGoogle {
+background-color: #275bca;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffffff;
+font-size: 11px;
+border-width: 2px;
+border-radius: 5px 5px 5px 5px;
+padding: 4px;
+cursor: hand;
+}
+
+input.BotonesCuidado {
+background-color: #ff0000;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffff00;
+font-size: 10px;
+border-width: 2px;
+border-radius: 1px  10px;
+padding: 2px;
+cursor: pointer;
+}
+
+input.BotonesADM {
+background-color: #0400BE;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffff00;
+font-size: 10px;
+border-width: 2px;
+border-radius: 1px  10px;
+padding: 1px;
+cursor: pointer;
+}
+
+input.BotonesEstado {
+background-color: #A2A4B6;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffffff;
+font-size: 10px;
+border-width: 1px;
+border-radius: 5px 5px;
+padding: 0px;
+margin-top: 2px;
+margin-right: 10px;
+margin-bottom: 2px;
+margin-left: 10px;
+font-weight: bold;
+cursor: pointer;
+}
+
+input.BotonesEstadoCuidado {
+background-color: #ff0000;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffff00;
+font-size: 10px;
+border-width: 1px;
+border-radius: 5px 5px;
+padding: 0px;
+margin-top: 2px;
+margin-right: 10px;
+margin-bottom: 2px;
+margin-left: 10px;
+font-weight: bold;
+cursor: pointer;
+}
+
+input.BotonesEstadoADM {
+background-color: #0400BE;
+font-family: Tahoma, Verdana, sans-serif;
+color: #ffff00;
+font-size: 10px;
+border-width: 1px;
+border-radius: 5px 5px;
+padding: 0px;
+margin-top: 2px;
+margin-right: 10px;
+margin-bottom: 2px;
+margin-left: 10px;
+font-weight: bold;
+cursor: pointer;
+}
+
+TEXTAREA {
+background-color: #D4D4D4;
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+border-width: 1px;
+border-radius: 5px  1px;
+padding: 2px;
+}
+
+SELECT {
+font-family: Verdana, Tahoma, Arial;
+font-size: 10px;
+font-weight: normal;
+background-color: #D4D4D4;
+}
+
+SELECT.Combos {
+background-color: #D4D4D4;
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+border-width: 1px;
+border-radius: 5px  1px;
+padding: 0px;
+}
+
+SELECT option {
+background-color: #D4D4D4;
+font-family: Tahoma, Verdana, sans-serif;
+color: #000000;
+font-size: 10px;
+border-width: 1px;
+}
+
+input.Radios {
+vertical-align: middle;
+margin: 0px;
+}
+
+input:hover,
+textarea:hover,
+select:hover,
+input:focus,
+textarea:focus,
+select:focus {
+  background-color: #3A3B44;
+  color: #ffffff;
+}
+*/
+
+/*
+div.nicetitle {
+    position: absolute; */ /*absolute (default), relative, fixed, inherit, static*/
+/*    padding: 4px;
+    top: 0px;
+    left: 0px;
+    color: yellow;
+    font-size: 10px;
+    font-family: Verdana, Helvetica, Arial, sans-serif;
+    width: 25em;
+    font-weight: bold;
+    background: url(img/tooltips_back.png);*/
+    /* Mozilla proprietary */
+  /*  -moz-border-radius: 12px;
+    z-index:999;
+}
+
+div.nicetitle p {
+    margin: 0; padding: 0 3px;
+}
+
+div.nicetitle p.destination {
+    font-size: 9px;
+    text-align: left;
+    padding-top: 3px;
+    font-weight: normal;
+}
+
+.FormularioPopUps
+{
+   padding:0;
+   position:absolute;
+   z-index:999;
+   cursor:default;   
+   display:none;
+}
+
+.FondoOscuroPopUps
+{
+   position: fixed; 
+   top:0; 
+   left:0; 
+   bottom:0; 
+   right:0;
+   
+   background:#000000;
+   opacity: .5;
+   -moz-opacity: .5;
+   filter: alpha(opacity=50);
+   z-index:1;
+   display:none;
+}
+*/

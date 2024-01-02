@@ -1,0 +1,23 @@
+###[NombreTabla:UnaLinea]
+Entregas
+###[Descripcion_Tabla:UnaLinea]
+Permite almacenar los campos b&aacute;sicos asociados a una entrega de mercanc&iacute;as
+###[DetalleCampos SIN Campo de ID:Multilinea:Descripcion|campo|tipo(longitud)|modificadores]
+Fecha llegada|fechallegada|date||
+Hora llegada|horallegada|time||
+Lugar actual|lugaractual|varchar|50|
+Direccion destino|direcciondestino|varchar|200|
+Ciudad destino|ciudaddestino|varchar|30|
+Pais destino|paisdestino|varchar|30|
+Cod postal destino|codpostaldestino|varchar|10|
+Cargo por coste|cargo_por_coste|int|11|
+Notas|notas|text||
+Dimension esenvase|dimensionesenvase|varchar|30|
+Peso envase|peso_envase|int|5|
+Fecha recogida|fecharecogida|date||
+Hora recogida|horarecogida|time||
+Lugar recogida|lugarrecogida|varchar|200|
+Recibido por|recibidopor|varchar|50|
+Fecha envio|fechaenvio|date||
+Nombre remitente|nombreremitente|varchar|50|
+Telefono remitente|telefonoremitente|varchar|20|

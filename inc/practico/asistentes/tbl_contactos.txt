@@ -1,0 +1,22 @@
+###[NombreTabla:UnaLinea]
+Contactos
+###[Descripcion_Tabla:UnaLinea]
+Tabla que almacena datos generales de contactos
+###[DetalleCampos SIN Campo de ID:Multilinea:Descripcion|campo|tipo(longitud)|modificadores]
+Primer nombre|primernombre|varchar|50|
+Segundo nombre|segundonombre|varchar|50|
+Primer apellido|primerapellido|varchar|50|
+Segundo apellido|segundoapellido|varchar|50|
+Telefono fijo|telefonofijo|varchar|20|
+Telefono movil|telefonomovil|varchar|20|
+Telefono fax|telefonofax|varchar|20|
+Email|email|varchar|100|
+Direccion|direccion|varchar|50|
+Ciudad|ciudad|varchar|20|
+Estado o provincia|estado_provincia|varchar|20|
+Pais|pais|varchar|30|
+Estado civil|estadocivil|varchar|20|
+Notas|notas|text||
+Codigo postal|codigopostal|varchar|10|
+Saludo|saludo|varchar|10|
+Cargo|cargo|varchar|30|
