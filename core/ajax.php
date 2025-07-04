@@ -90,10 +90,13 @@ if ($PCO_Accion=="PCO_ExportacionQueryCacheCSV" )
         include_once '../inc/practico/def_basedatos.php';
         // Incluye archivo con algunas funciones comunes usadas por la herramienta
         include_once '../core/comunes.php';
+        // Genera conexiones individuales o conexiones para replicacion de transacciones
+        include_once '../core/conexiones_extra.php';
         
         $RegistroCacheSQL=PCO_EjecutarSQL("SELECT * FROM core_informe_cache WHERE id='{$IdRegistro_CacheSQL}' AND usuario='".$_SESSION["PCOSESS_LoginUsuario"]."' ")->fetch();
         $ConsultaCacheada=trim($RegistroCacheSQL["script_sql"]);
         $ListaColumnasCache=trim($RegistroCacheSQL["columnas"]);
+        $ConexionCache=trim($RegistroCacheSQL["conexion"]);
 
         //Continua adelante solo si realmente encontro el informe cacheado y coincidente entre id y usuario
         if ($ConsultaCacheada!="")
@@ -112,9 +115,20 @@ if ($PCO_Accion=="PCO_ExportacionQueryCacheCSV" )
 		
                 //Agrega las columnas como encabezados
                 fputcsv($ArchivoDestino, $PCO_ColumnasVisibles);
-                //Agrega los datos de cada registro
-                $ResultadoConsulta=PCO_EjecutarSQL($ConsultaCacheada);
-                
+
+                //Determina si el informe obtiene los datosw de conexion local o remota. Si es remota llama la variable global de la conexion pra ser usada
+                if ($ConexionCache=="")
+                    {
+                        //Agrega los datos de cada registro
+                        $ResultadoConsulta=PCO_EjecutarSQL($ConsultaCacheada);
+                    }
+                else
+                    {
+                        //Agrega los datos de cada registro
+                        global ${$ConexionCache};
+                        $ResultadoConsulta=PCO_EjecutarSQL($ConsultaCacheada,"",${$ConexionCache});
+                    }
+
                 while ($Registro = $ResultadoConsulta->fetch(PDO::FETCH_ASSOC))
                     fputcsv($ArchivoDestino, $Registro);
                 //Cierra la salida
@@ -547,7 +561,7 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
 ########################################################################
 ########################################################################
 /*
-	Function: opciones_combo_box
+	Function: PCO_ObtenerOpcionesComboBox
 	Hace una consulta a la base de datos y retorna las opciones a desplegar en una lista de seleccion o combobox
 
 	Variables de entrada:
@@ -564,8 +578,8 @@ if ($PCO_Accion=="PCO_RecuperarRecordsetJSON_DataTable" )
 		Lista de elementos < option > usados en el combo
 
 */
-if ($PCO_Accion=="opciones_combo_box") 
-    {           
+if ($PCO_Accion=="PCO_ObtenerOpcionesComboBox") 
+    {
         $PCO_MensajeError="";
         $PCO_SalidaCombos="";
         //Valida variables minimas para la consulta
@@ -575,6 +589,18 @@ if ($PCO_Accion=="opciones_combo_box")
                 if (@$origen_lista_tablas=="") $PCO_MensajeError.='<option>[Causa] Falta origen_lista_tablas</option>';
                 if (@$origen_lista_opciones=="") $PCO_MensajeError.='<option>[Causa] Falta origen_lista_opciones</option>';
                 if (@$origen_lista_valores=="") $PCO_MensajeError.='<option>[Causa] Falta origen_lista_valores</option>';
+            }
+
+        //Decodifica variables si aplica
+        if ($PCO_UsandoBase64==1)
+            {
+                $origen_lista_tablas=base64_decode($origen_lista_tablas);
+                $origen_lista_opciones=base64_decode($origen_lista_opciones);
+                $origen_lista_valores=base64_decode($origen_lista_valores);
+                $condicion_filtrado_listas=base64_decode($condicion_filtrado_listas);
+                $PCO_Prefijo=base64_decode($PCO_Prefijo);
+                $PCO_Infijo=base64_decode($PCO_Infijo);
+                $PCO_Posfijo=base64_decode($PCO_Posfijo);
             }
 
         //Pendiente proteger tablas o campos CORE
@@ -591,13 +617,11 @@ if ($PCO_Accion=="opciones_combo_box")
 					$PCO_SalidaCombos.=$PCO_Prefijo.$registro_opciones_combo['valor'].$PCO_Infijo.$registro_opciones_combo['opcion'].$PCO_Posfijo;
             }
 
-        //echo '<select class="selectpicker show-tick">';
         //Retorna el resultado final
         if ($PCO_MensajeError!="")
             echo $PCO_MensajeError;
         else
             echo $PCO_SalidaCombos;
-        //echo "</select>";
     }
 
 
@@ -673,7 +697,7 @@ if (@$PCO_Accion=="cambiar_estado_campo")
 				if (@$PCO_CambioEstado_CampoLlave=="")	$PCO_CambioEstado_CampoLlave="id";
 				
 				//Algunas operaciones requieren por defecto usar los prefijos Core.  Si se desea pueden anularse con el parametro en 1
-				$PrefijoTablas=$TablasCore;
+				$PrefijoTablas="core_";
 				if ($PCO_CambioEstado_NoUsarCore==1) $PrefijoTablas="";
 				
 				PCO_EjecutarSQLUnaria("UPDATE ".$PrefijoTablas."$tabla SET $campo = '$valor' WHERE $PCO_CambioEstado_CampoLlave = ? ","$id");
@@ -741,10 +765,10 @@ if (@$PCO_Accion=="PCO_ObtenerOpcionesAjaxSelect")
                     {
                         $Resultados.='
                             {
-                                "V": "'.$Registro[0].'",
-                                "T": "'.$Registro[1].'",
-                                "S": "'.$Registro[2].'",
-                                "I": "'.$Registro[3].'"
+                                "V": "'.trim($Registro[0]).'",
+                                "T": "'.trim($Registro[1]).'",
+                                "S": "'.trim($Registro[2]).'",
+                                "I": "'.trim($Registro[3]).'"
                             },';
                         $HayResultados=1;
                     }
@@ -759,5 +783,177 @@ if (@$PCO_Accion=="PCO_ObtenerOpcionesAjaxSelect")
 
         //Devuelve el JSON generado con los resultados
         echo $Resultados;
+        die();
+	}
+
+
+########################################################################
+########################################################################
+/*
+	Function: PCO_ObtenerEstadoServidorWeb
+	Retorna estado formateado con información básica del servidor web que corre el Framework
+
+	Salida:
+
+		HTML formateado con: Carga, Uptime, Almacenamiento y RAM
+*/
+if (@$PCO_Accion=="PCO_ObtenerEstadoServidorWeb")
+	{
+	    //Presenta estadisticas del servidor solo a usuarios administradores
+    	if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+            {
+                //Presenta estado solo el linux y unix-like
+                if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
+                    {
+                        //Verifica funcion exec habilitada
+                        if (function_exists('exec'))
+                            {
+                                echo "<div class='well well-sm'><div align=center class='well well-sm'><b><i class='fa fa-fw fa-spinner fa-spin'></i> <font color=red> Estado del servidor web </font></b> <i><font size=1>(5 seg)</font></i></div>";
+                                echo "<div class='row'>";
+                                
+                                    //Carga promedio del sistema
+                                    echo "<div class='col col-xs-12 col-sm-12 col-md-4 col-lg-4'>";
+                                                $ComandoUptime = @exec('uptime');  
+                                                preg_match("/averages?: ([0-9\.]+),[\s]+([0-9\.]+),[\s]+([0-9\.]+)/",$ComandoUptime,$Promedios);
+                                                echo "<b><i class='fa fa-fw fa-dashboard'></i> Carga promedio:</b> <span class='badge badge-secondary'> ".$Promedios[1]."</span> <span class='badge badge-secondary'>" .$Promedios[2]. "</span> <span class='badge badge-secondary'>".$Promedios[3]."</span>";
+                                                
+                                                //Tiempo de encendido
+                                                $ComandoUptime = @exec('uptime');  
+                                                $TiempoEncendido = explode(' up ', $ComandoUptime);
+                                                $TiempoEncendido = explode(',', $TiempoEncendido[1]);
+                                                $TiempoEncendido = $TiempoEncendido[0].', '.$TiempoEncendido[1];
+                                                echo "<br><br><b><i class='fa fa-fw fa-power-off'></i> Tiempo en l&iacute;nea:</b> {$TiempoEncendido}";
+                                    echo "</div>";
+                                
+                                
+                                    echo "<div class='col col-xs-12 col-sm-12 col-md-4 col-lg-4'>";
+                                                //Estado de los discos
+                                                function ObtenerUnidadesMedida($bytes)
+                                                    {
+                                                    	$symbol = array('B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB');
+                                                    	$exp = floor(log($bytes)/log(1024));
+                                                    	
+                                                    	return sprintf('%.2f<small>'.$symbol[$exp].'</small>', ($bytes/pow(1024, floor($exp))));
+                                                    }
+                                                $ArregloDiscos = array();
+                                                $ArregloDiscos[] = array("name" => "Local" , "path" => getcwd()) ;
+                                                //$ArregloDiscos[] = array("name" => "Otro disco 1" , "path" => '/run') ;
+                                                //$ArregloDiscos[] = array("name" => "Otro disco 2" , "path" => '/var/log') ;
+                                                
+                                                $ResumenDiscos="";
+                                                foreach($ArregloDiscos as $Disco)
+                                                    {
+                                                        $TamanoTotalDisco = disk_total_space($Disco["path"]);
+                                                        $TamanoDisponibleDisco = disk_free_space($Disco["path"]);
+                                                        $PorcentajeDiscoDisponible = 100 - round($TamanoDisponibleDisco*1.0 / $TamanoTotalDisco*100, 2);
+                                                        $ResumenDiscos .= "<br><span class='badge badge-secondary'>Disco " .$Disco['name'].'</span> '. ObtenerUnidadesMedida($TamanoDisponibleDisco) . '/'. ObtenerUnidadesMedida($TamanoTotalDisco);
+                                                        $ResumenDiscos .= '
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-striped progress-bar-animated role="progressbar" style="width: '.$PorcentajeDiscoDisponible.'%;" aria-valuenow="'.$PorcentajeDiscoDisponible.'" aria-valuemin="0" aria-valuemax="100">'.$PorcentajeDiscoDisponible.'%</div>
+                                                            </div>';
+                                                    }
+                                                echo "<b><i class='fa fa-fw fa-hdd-o'></i> Almacenamiento:</b> " . $ResumenDiscos;
+                                    echo "</div>";
+                                    
+                                    //Memoria RAM
+                                    echo "<div class='col col-xs-12 col-sm-12 col-md-4 col-lg-4'>";
+                                                $TotalMemoriaRAM = preg_split('/ +/', @exec('grep MemTotal /proc/meminfo'));
+                                                $TotalMemoriaRAM = $TotalMemoriaRAM[1];
+                                                $MemoriaLibre = preg_split('/ +/', @exec('grep MemFree /proc/meminfo'));
+                                                $MemoriaCache = preg_split('/ +/', @exec('grep ^Cached /proc/meminfo'));
+                                                $MemoriaLibre = $MemoriaLibre[1] + $MemoriaCache[1];
+                                                        $PorcentajeMemoriaUsada = round($MemoriaLibre*100 / $TotalMemoriaRAM*1.0, 2);
+                                                        $ResumenMemoria .= "<br>".  ObtenerUnidadesMedida($MemoriaLibre*1024). '/'. ObtenerUnidadesMedida($TotalMemoriaRAM*1024-$MemoriaLibre);
+                                                        $ResumenMemoria .= '
+                                                            <div class="progress">
+                                                                <div class="progress-bar progress-bar-striped progress-bar-animated role="progressbar" style="width: '.$PorcentajeMemoriaUsada.'%;" aria-valuenow="'.$PorcentajeMemoriaUsada.'" aria-valuemin="0" aria-valuemax="100">'.$PorcentajeMemoriaUsada.'%</div>
+                                                            </div>';
+                                                echo "<b><i class='fa fa-fw fa-area-chart'></i> Memoria RAM:</b> " . $ResumenMemoria;
+                                    echo "</div>";
+                                
+                                echo "</div></div><br>"; //Cierra Div de row y well
+                            }
+                        else
+                            {
+                                PCO_Mensaje($MULTILANG_Atencion.": Funci&oacute;n exec() de PHP deshabilitada","No se presentar&aacute; el estado del servidor web en tiempo real", '', 'fa fa-exclamation-triangle texto-rojo texto-blink', 'alert alert-warning');
+                            }
+                    }
+                else
+                    {
+                        PCO_Mensaje($MULTILANG_Atencion.": Sistema operativo no soportado","El m&oacute;dulo es compatible con servidores BSD, Unix-like o Linux. No se presentar&aacute; el estado del servidor web en tiempo real", '', 'fa fa-exclamation-triangle texto-rojo texto-blink', 'alert alert-warning');
+                    }
+            }
+        die();
+	}
+
+
+########################################################################
+########################################################################
+/*
+	Function: PCO_ObtenerEstadoMotorBasedatos
+	Retorna estado formateado con información básica del servidor de bases de datos que corre el Framework
+
+	Salida:
+
+		HTML formateado con: Procesos
+*/
+if (@$PCO_Accion=="PCO_ObtenerEstadoMotorBasedatos")
+	{
+	    //Si se solicita matar un proceso solamente ejecuta dicha accion
+	    if ($PCO_SubAccion=="PCO_MatarProcesoBD")
+	        {
+	            PCO_EjecutarSQLUnaria("KILL {$IdProcesoBD}");
+	            die();
+	        }
+	    
+	    //Presenta estadisticas del servidor solo a usuarios administradores
+    	if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+            {
+                echo "<div class='well well-sm'><div align=center class='well well-sm'><b><i class='fa fa-fw fa-spinner fa-spin'></i> <font color=red> Estado del motor de base de datos </font></b> <i><font size=1>(2 seg)</font></i>
+                    <a class='btn btn-xs btn-info' href='javascript:PausarActualizacionProcesosBD=1;'><i class='fa fa-pause fa-fw'></i></a>
+                    <a class='btn btn-xs btn-success' href='javascript:PausarActualizacionProcesosBD=0;'><i class='fa fa-play fa-fw'></i></a>
+                    
+                </div>";
+                echo "<div class='row'>";
+                
+                    //Variables de estado del motor
+                    echo "<div class='col col-xs-12 col-sm-12 col-md-4 col-lg-4'>";
+                                echo "<b><i class='fa fa-fw fa-wifi'></i> Comunicaciones:</b> ";
+                                $ComandoSQL="
+                                    SELECT VARIABLE_NAME as Transmitido, CONCAT( FORMAT(ROUND((((VARIABLE_VALUE/1024)/1024)),1),0) , ' MB (<b>',FORMAT(ROUND((((VARIABLE_VALUE/1024)/1024)/1024),1),1),' GB</b>)') as Total FROM performance_schema.global_status WHERE VARIABLE_NAME='Bytes_received' OR VARIABLE_NAME='Bytes_sent' ";
+                                echo PCO_CargarInforme(0,0,"htm","Informes",1,0,1,1,"{$ComandoSQL}");
+
+                                echo "<b><i class='fa fa-fw fa-cogs'></i> Variables:</b> ";
+                                $ComandoSQL="
+                                    SHOW STATUS WHERE Value<>0 AND 
+                                        (Variable_name='Aborted_clients' OR 
+                                        Variable_name='Aborted_connects' OR 
+                                        Variable_name='Connections' OR 
+                                        Variable_name='Key_read_requests' OR 
+                                        Variable_name='Key_write_requests' OR 
+                                        Variable_name='Last_query_cost' OR 
+                                        Variable_name='Max_used_connections' OR 
+                                        Variable_name='Max_used_connections_time' OR 
+                                        Variable_name='Queries' OR 
+                                        Variable_name='Threads_cached' OR 
+                                        Variable_name='Threads_connected' OR 
+                                        Variable_name='Threads_running') ";
+                                echo PCO_CargarInforme(0,0,"htm","Informes",1,0,1,1,"{$ComandoSQL}");
+                    echo "</div>";
+
+                    //Consutas - Procesos
+                    echo "<div class='col col-xs-12 col-sm-12 col-md-8 col-lg-8'>";
+                                echo "<b><i class='fa fa-fw fa-database'></i> Procesos:</b> <div class='btn-xs'>";
+                                $CondicionesProcesosSQL="
+                                    SELECT COMMAND as Comando,TIME as Segundos,STATE as Estado,INFO as Detalles FROM information_schema.processlist WHERE
+                                    INFO<>''
+                                    AND INFO NOT LIKE '%information_schema.processlist%'
+                                ";
+                                PCO_CargarInforme(-66,0);
+
+                    echo "</div></div>";
+                    
+                echo "</div></div><br>"; //Cierra Div de row y well
+            }
         die();
 	}
