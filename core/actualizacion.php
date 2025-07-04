@@ -55,6 +55,19 @@
 */
 if ($PCO_Accion=="actualizar_practico")
 	{
+        ##########################################################################
+        ##########################################################################
+        //VERIFICA SEGURIDAD: Perfil de Administrador requerido antes de continuar
+        global $PCOSESS_LoginUsuario,$MULTILANG_ErrorTitAuth,$MULTILANG_WSErr06;
+        if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+            {
+                PCO_Mensaje("{$MULTILANG_ErrorTitAuth}", "{$MULTILANG_WSErr06}", '', 'fa fa-exclamation-triangle fa-3x texto-rojo texto-blink', 'alert alert-warning alert-dismissible');
+                PCO_Auditar("$PCOSESS_LoginUsuario Intenta acceso no autorizado PCO_Accion: actualizar_practico","SECLog:event");
+                die();
+            }
+        ##########################################################################
+        ##########################################################################
+    
 		PCO_AbrirVentana($NombreRAD.' - '.$MULTILANG_Actualizacion,'panel-info');
 ?>
 
