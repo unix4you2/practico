@@ -135,7 +135,7 @@ if ($PCO_Accion=="actualizar_practico")
 				<?php
 					// Busca por las auditorias asociadas a actualizacion de plataforma:
 					// Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
-					$resultado=@PCO_EjecutarSQL("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE (accion LIKE '%Actualiza version de plataforma%' OR accion LIKE '%_Actualizacion_%' OR accion LIKE '%Analiza archivo tmp/Practico%' OR accion LIKE '%Carga archivo en carpeta tmp - Practico%') ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+					$resultado=@PCO_EjecutarSQL("SELECT $ListaCamposSinID_auditoria FROM core_auditoria WHERE (accion LIKE '%Actualiza version de plataforma%' OR accion LIKE '%_Actualizacion_%' OR accion LIKE '%Analiza archivo tmp/Practico%' OR accion LIKE '%Carga archivo en carpeta tmp - Practico%') ORDER BY fecha DESC, hora DESC LIMIT 0,30");
 					while($registro = $resultado->fetch())
 						{
 							echo '<tr>
@@ -466,7 +466,7 @@ if ($PCO_Accion=="aplicar_parche")
 						try
 							{
 								//Cambia el prefijo predeterminado en caso que haya sido personalizado en la instalacion
-								$consulta=str_replace('core_',$TablasCore,$consulta);
+								$consulta=str_replace('core_',"core_",$consulta); // PREVIO:  $consulta=str_replace('core_',$TablasCore,$consulta);
 								//Ejecuta el query
 								$consulta_enviar = $ConexionPDO->prepare($consulta);
 								$estado_ok = $consulta_enviar->execute();
