@@ -71,23 +71,27 @@
 /* ################################################################## */
 
 	//Busca conexiones adicionales definidas y genera la variable correspondiente
-	$PCO_ConexionesExtra=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE 1=1 ");
-	while($registro = $PCO_ConexionesExtra->fetch())
+	$PCO_ConexionesExtra=PCO_EjecutarSQL("SELECT * FROM core_replicasbd WHERE 1=1 ");
+	while($PCOVAR_RegistroConexionExtra = $PCO_ConexionesExtra->fetch())
 		{
 		    //Obtiene los datos de configuracion para la conexion sin importar su tipo
-			$ConexExtra_id=$registro["id"];
-			$ConexExtra_nombre=$registro["nombre"];
-			$ConexExtra_servidorbd=$registro["servidorbd"];
-			$ConexExtra_basedatos=$registro["basedatos"];
-			$ConexExtra_usuariobd=$registro["usuariobd"];
-			$ConexExtra_passwordbd=$registro["passwordbd"];
-			$ConexExtra_motorbd=$registro["motorbd"];
-			$ConexExtra_puertobd=$registro["puertobd"];
-			$ConexExtra_tipo_replica=$registro["tipo_replica"];
+			$ConexExtra_id=$PCOVAR_RegistroConexionExtra["id"];
+			$ConexExtra_nombre=$PCOVAR_RegistroConexionExtra["nombre"];
+			$ConexExtra_servidorbd=$PCOVAR_RegistroConexionExtra["servidorbd"];
+			$ConexExtra_basedatos=$PCOVAR_RegistroConexionExtra["basedatos"];
+			$ConexExtra_usuariobd=$PCOVAR_RegistroConexionExtra["usuariobd"];
+			$ConexExtra_passwordbd=$PCOVAR_RegistroConexionExtra["passwordbd"];
+			$ConexExtra_motorbd=$PCOVAR_RegistroConexionExtra["motorbd"];
+			$ConexExtra_puertobd=$PCOVAR_RegistroConexionExtra["puertobd"];
+			$ConexExtra_tipo_replica=$PCOVAR_RegistroConexionExtra["tipo_replica"];
 			
-		    //Determina si la conexion es para motores estandar o NoSQL y genera la variable de conexion
-		    if ($ConexExtra_motorbd!="couchbase")
-        		${$ConexExtra_nombre}=PCO_NuevaConexionBD($ConexExtra_motorbd,$ConexExtra_puertobd,$ConexExtra_basedatos,$ConexExtra_servidorbd,$ConexExtra_usuariobd,$ConexExtra_passwordbd);
-		    else
-                ${$ConexExtra_nombre}=PCO_ConexionNoSQL($ConexExtra_motorbd,$ConexExtra_servidorbd,$ConexExtra_puertobd,$ConexExtra_basedatos,$ConexExtra_usuariobd,$ConexExtra_passwordbd);
+			//Genera una conexion solamente si se requiere y no esta marcada como evitar 
+			if ($PCOVAR_RegistroConexionExtra["verificar_siempre"]=="1")
+			    {
+        		    //Determina si la conexion es para motores estandar o NoSQL y genera la variable de conexion
+        		    if ($ConexExtra_motorbd!="couchbase")
+                		${$ConexExtra_nombre}=PCO_NuevaConexionBD($ConexExtra_motorbd,$ConexExtra_puertobd,$ConexExtra_basedatos,$ConexExtra_servidorbd,$ConexExtra_usuariobd,$ConexExtra_passwordbd);
+        		    else
+                        ${$ConexExtra_nombre}=PCO_ConexionNoSQL($ConexExtra_motorbd,$ConexExtra_servidorbd,$ConexExtra_puertobd,$ConexExtra_basedatos,$ConexExtra_usuariobd,$ConexExtra_passwordbd);
+			    }
 		}
