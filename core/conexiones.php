@@ -144,6 +144,8 @@
 					
 					if ($PCOConnMotorBD=="mysql")
 						{
+						    //ALERTA! - Motores MySQL con soporte -falso- a UTF8
+						    //Para uso de utf8 considerar que es de solo tres bytes.  el utf8 real es utf8mb4 disponible desde MySQL 5.5.3.  En motores con dicho soporte las tablas o campos deben tener dicho collation, sino una alternativa es usar campos BLOB (65Kb), TINYBLOB (256b), MEDIUMBLOB (16Mb), LONGBLOB (4GB)
 							$ConexionPDO->setAttribute(PDO::MYSQL_ATTR_INIT_COMMAND, "SET NAMES 'utf8'");
 							$ConexionPDO->exec("SET NAMES 'utf8';");
 							$ConexionPDO->exec("SET NAMES utf8;"); //Forzado UTF8 - Collation recomendada: utf8_general_ci
