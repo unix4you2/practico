@@ -109,7 +109,10 @@
     <link href="../inc/bootstrap/css/practico.min.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="../inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../inc/fortawesome/font-awesome/css/fontawesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../inc/fortawesome/font-awesome/css/brands.min.css" rel="stylesheet" type="text/css">
+    <link href="../inc/fortawesome/font-awesome/css/solid.min.css" rel="stylesheet" type="text/css">
+    <link href="../inc/fortawesome/font-awesome/css/v4-shims.min.css" rel="stylesheet" type="text/css"> <!-- Compatibilidad v4.7 -->
 
 	<script language="JavaScript">
 		function PCO_VentanaPopup(theURL,winName,features)
@@ -165,18 +168,21 @@
         if ($TotalMetodos==0)
             echo '<i class="fa fa-info-circle fa-fw fa-1x"></i>  <b>No se han encontrado Endpoints y/o Servicios publicados en este sistema</b>';
         else
-            echo '<i class="fa fa-info-circle fa-fw"></i>  Total Endpoints y/o Servicios publicados en este sistema: <div class="btn btn-success"><b>'.$TotalMetodos.'</b></div>';
+            echo '<i class="fa fa-info-circle fa-fw"></i>  Total Endpoints y/o Servicios publicados: <div class="btn btn-success"><b>'.$TotalMetodos.'</b></div>';
         echo '</div>';
         
-        
         //Determina si recibio APIKey y APISecret de pruebas y son validas, sino las borra
-        $MensajeVerificacionAPI="";
-        $ResultadoConsultaAPI=PCO_EjecutarSQL("SELECT * FROM core_llaves_api WHERE llave=? AND secreto=? ","$APIKeyUsuario$_SeparadorCampos_$APISecretUsuario")->fetch();
-        if ($ResultadoConsultaAPI["id"]=="")
+        $MensajeVerificacionAPI=">";
+        if ($APIKeyUsuario!="" && $APISecretUsuario!="")
             {
-                $APIKeyUsuario="";
-                $APISecretUsuario="";
-                $MensajeVerificacionAPI="<font color=red><b>Las llaves suministradas no son v&aacute;lidas.  Verifique e intente nuevamente</b></font><br>";
+                $MensajeVerificacionAPI="";
+                $ResultadoConsultaAPI=PCO_EjecutarSQL("SELECT * FROM core_llaves_api WHERE llave=? AND secreto=? ","$APIKeyUsuario$_SeparadorCampos_$APISecretUsuario")->fetch();
+                if ($ResultadoConsultaAPI["id"]=="")
+                    {
+                        $APIKeyUsuario="";
+                        $APISecretUsuario="";
+                        $MensajeVerificacionAPI="<font color=red><b>Las llaves suministradas no son v&aacute;lidas.  Verifique e intente nuevamente</b></font><br>";
+                    }
             }
 
         //Agrega campos para pruebas directas de la API
@@ -201,6 +207,9 @@
          $URLBaseSistema = "https://";
     else
          $URLBaseSistema = "http://";
+
+     $URLBaseSistema = "https://";
+
     $URLBaseSistema.= $_SERVER['HTTP_HOST'];
     $URLBaseSistema.= $_SERVER['REQUEST_URI'];
     $URLBaseSistema = explode("/core/",$URLBaseSistema);
@@ -217,6 +226,11 @@
             if ($RegistroServicios["tipo_ejecucion"]=="DELETE") $EstiloTipoEjecucion="danger";
             if ($RegistroServicios["tipo_ejecucion"]=="PATCH") $EstiloTipoEjecucion="info";
 
+            $TextoComplementarioCabeceras="";
+            if (trim($RegistroServicios["formato_respuesta"])!="")
+                $TextoComplementarioCabeceras='<i style="font-size:10px; color:black;">(MIME Content-Type: '.$RegistroServicios["formato_respuesta"].')</i>';
+
+
             echo '
                 <div class="alert alert-info" role="alert">
                 <details>
@@ -228,7 +242,7 @@
                             </div>
                             <div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2">
                                 <div class="pull-right">
-                                    <span class="btn badge"><font size=2>Salida: <font color="yellow"><b>'.$RegistroServicios["formato"].'</b></font></font></span>
+                                    <span class="btn badge"><font size=2>Salida: <font color="yellow"><b>'.$RegistroServicios["formato"].'</b> </font></font> '.$TextoComplementarioCabeceras.' </span>
                                 </div>
                             </div>
                         </div>
@@ -255,8 +269,8 @@
                     if (trim($RegistroServicios["ejemplo_salida"])!="")
                     echo '
                         <div class="well well-sm" style="margin-left:40px; margin-top:15px;">
-                            <i class="fa fa-desktop fa-fw"></i>  <b>Ejemplo de salida:</b>
-                            <pre style="border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px; height:200px;">'.$RegistroServicios["ejemplo_salida"].'</pre>
+                            <i class="fa fa-desktop fa-fw"></i>  <b>Ejemplo de salida:</b><br>
+                            <textarea class="form-control" readonly style="width:70%; margin-left: 22px; margin-right: 80px; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px; height:150px;">'.$RegistroServicios["ejemplo_salida"].'</textarea>
                         </div>';
     
                         //Busca posibles parametros
@@ -321,14 +335,679 @@
                     if ($MensajeVerificacionAPI=="")
                         echo '<table style="margin-left:40px;"><tr><td><button class="btn btn-success btn-sm" type="submit"><i class="fa fa-cog fa-fw fa-spin"></i> Lanzar prueba de servicio!</button></td></tr></table>';
                                     
+                    //Define valores de APIKEY y SECRET cuando no fueron recibidos
+                    if ($APIKeyUsuario=="") $APIKeyUsuario="_AQUI_SU_KEY_";
+                    if ($APISecretUsuario=="") $APISecretUsuario="_AQUI_SU_SECRET_";
+                    
+                    //CONSTRUYE LOS EJEMPLOS DE LLAMADO
+                    $URLBaseSistemaEjemplo = $URLBaseSistema[0]."/index.php?PCO_WSOn=1&PCO_WSKey={$APIKeyUsuario}&PCO_WSSecret={$APISecretUsuario}&PCO_WSId=".$RegistroServicios["nombre"];
 
-                    $URLBaseSistemaEjemplo = $URLBaseSistema[0]."/?PCO_WSOn=1&PCO_WSKey=XXXXXXXX&PCO_WSSecret=YYYYYYY&PCO_WSId=".$RegistroServicios["nombre"];
+                    $Ejemplo_LLAMADO_php_cURL='
+                        $curl = curl_init();
+                        
+                        curl_setopt_array($curl, array(
+                          CURLOPT_URL => \''.$URLBaseSistema[0].'/index.php\',
+                          CURLOPT_RETURNTRANSFER => true,
+                          CURLOPT_ENCODING => \'\',
+                          CURLOPT_MAXREDIRS => 10,
+                          CURLOPT_TIMEOUT => 0,
+                          CURLOPT_FOLLOWLOCATION => true,
+                          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                          CURLOPT_CUSTOMREQUEST => \'POST\',
+                          CURLOPT_POSTFIELDS => array(\'PCO_WSOn\' => \'1\',\'PCO_WSKey\' => \''.$APIKeyUsuario.'\',\'PCO_WSSecret\' => \''.$APISecretUsuario.'\',\'PCO_WSId\' => \''.$RegistroServicios["nombre"].'\'),
+                        ));
+                        
+                        $response = curl_exec($curl);
+                        
+                        curl_close($curl);
+                        echo $response;';
+                    
+                    $Ejemplo_LLAMADO_CS_HttpClient='
+                        var client = new HttpClient();
+                        var request = new HttpRequestMessage(HttpMethod.Post, "'.$URLBaseSistema[0].'/index.php");
+                        var content = new MultipartFormDataContent();
+                        content.Add(new StringContent("1"), "PCO_WSOn");
+                        content.Add(new StringContent("'.$APIKeyUsuario.'"), "PCO_WSKey");
+                        content.Add(new StringContent("'.$APISecretUsuario.'"), "PCO_WSSecret");
+                        content.Add(new StringContent("'.$RegistroServicios["nombre"].'"), "PCO_WSId");
+                        request.Content = content;
+                        var response = await client.SendAsync(request);
+                        response.EnsureSuccessStatusCode();
+                        Console.WriteLine(await response.Content.ReadAsStringAsync());';
+                    
+                    $Ejemplo_LLAMADO_CS_RestSharp='
+                        var options = new RestClientOptions("")
+                        {
+                          MaxTimeout = -1,
+                        };
+                        var client = new RestClient(options);
+                        var request = new RestRequest("'.$URLBaseSistema[0].'/index.php", Method.Post);
+                        request.AlwaysMultipartFormData = true;
+                        request.AddParameter("PCO_WSOn", "1");
+                        request.AddParameter("PCO_WSKey", "'.$APIKeyUsuario.'");
+                        request.AddParameter("PCO_WSSecret", "'.$APISecretUsuario.'");
+                        request.AddParameter("PCO_WSId", "'.$RegistroServicios["nombre"].'");
+                        RestResponse response = await client.ExecuteAsync(request);
+                        Console.WriteLine(response.Content);';
+                    
+                    $Ejemplo_LLAMADO_cURL='
+                        curl --location \''.$URLBaseSistema[0].'/index.php\' \
+                        --form \'PCO_WSOn="1"\' \
+                        --form \'PCO_WSKey="'.$APIKeyUsuario.'"\' \
+                        --form \'PCO_WSSecret="'.$APISecretUsuario.'"\' \
+                        --form \'PCO_WSId="'.$RegistroServicios["nombre"].'"\'';
+                    
+                    $Ejemplo_LLAMADO_DartDio='
+                        var data = FormData.fromMap({
+                          \'PCO_WSOn\': \'1\',
+                          \'PCO_WSKey\': \''.$APIKeyUsuario.'\',
+                          \'PCO_WSSecret\': \''.$APISecretUsuario.'\',
+                          \'PCO_WSId\': \''.$RegistroServicios["nombre"].'\'
+                        });
+                        
+                        var dio = Dio();
+                        var response = await dio.request(
+                          \''.$URLBaseSistema[0].'/index.php\',
+                          options: Options(
+                            method: \'POST\',
+                          ),
+                          data: data,
+                        );
+                        
+                        if (response.statusCode == 200) {
+                          print(json.encode(response.data));
+                        }
+                        else {
+                          print(response.statusMessage);
+                        }';
+                    
+                    $Ejemplo_LLAMADO_DartHttp='
+                        var request = http.MultipartRequest(\'POST\', Uri.parse(\''.$URLBaseSistema[0].'/index.php\'));
+                        request.fields.addAll({
+                          \'PCO_WSOn\': \'1\',
+                          \'PCO_WSKey\': \''.$APIKeyUsuario.'\',
+                          \'PCO_WSSecret\': \''.$APISecretUsuario.'\',
+                          \'PCO_WSId\': \''.$RegistroServicios["nombre"].'\'
+                        });
+
+                        http.StreamedResponse response = await request.send();
+                        
+                        if (response.statusCode == 200) {
+                          print(await response.stream.bytesToString());
+                        }
+                        else {
+                          print(response.reasonPhrase);
+                        }';
+                    
+                    $Ejemplo_LLAMADO_GoNative='
+                        package main
+                        
+                        import (
+                          "fmt"
+                          "bytes"
+                          "mime/multipart"
+                          "net/http"
+                          "io/ioutil"
+                        )
+                        
+                        func main() {
+                        
+                          url := "'.$URLBaseSistema[0].'/index.php"
+                          method := "POST"
+                        
+                          payload := &bytes.Buffer{}
+                          writer := multipart.NewWriter(payload)
+                          _ = writer.WriteField("PCO_WSOn", "1")
+                          _ = writer.WriteField("PCO_WSKey", "'.$APIKeyUsuario.'")
+                          _ = writer.WriteField("PCO_WSSecret", "'.$APISecretUsuario.'")
+                          _ = writer.WriteField("PCO_WSId", "'.$RegistroServicios["nombre"].'")
+                          err := writer.Close()
+                          if err != nil {
+                            fmt.Println(err)
+                            return
+                          }
+                        
+                          client := &http.Client {
+                          }
+                          req, err := http.NewRequest(method, url, payload)
+                        
+                          if err != nil {
+                            fmt.Println(err)
+                            return
+                          }
+                          req.Header.Set("Content-Type", writer.FormDataContentType())
+                          res, err := client.Do(req)
+                          if err != nil {
+                            fmt.Println(err)
+                            return
+                          }
+                          defer res.Body.Close()
+                        
+                          body, err := ioutil.ReadAll(res.Body)
+                          if err != nil {
+                            fmt.Println(err)
+                            return
+                          }
+                          fmt.Println(string(body))
+                        }';
+                    
+                    $Ejemplo_LLAMADO_JavaOkHttp='
+                        OkHttpClient client = new OkHttpClient().newBuilder()
+                          .build();
+                        MediaType mediaType = MediaType.parse("text/plain");
+                        RequestBody body = new MultipartBody.Builder().setType(MultipartBody.FORM)
+                          .addFormDataPart("PCO_WSOn","1")
+                          .addFormDataPart("PCO_WSKey","'.$APIKeyUsuario.'")
+                          .addFormDataPart("PCO_WSSecret","'.$APISecretUsuario.'")
+                          .addFormDataPart("PCO_WSId","'.$RegistroServicios["nombre"].'")
+                          .build();
+                        Request request = new Request.Builder()
+                          .url("'.$URLBaseSistema[0].'/index.php")
+                          .method("POST", body)
+                          .build();
+                        Response response = client.newCall(request).execute();';
+                    
+                    $Ejemplo_LLAMADO_JavaUnirest='
+                        Unirest.setTimeouts(0, 0);
+                        HttpResponse<String> response = Unirest.post("'.$URLBaseSistema[0].'/index.php")
+                          .multiPartContent()
+                          .field("PCO_WSOn", "1")
+                          .field("PCO_WSKey", "'.$APIKeyUsuario.'")
+                          .field("PCO_WSSecret", "'.$APISecretUsuario.'")
+                          .field("PCO_WSId", "'.$RegistroServicios["nombre"].'")
+                          .asString();';
+                    
+                    $Ejemplo_LLAMADO_JavascriptFetch='
+                        var formdata = new FormData();
+                        formdata.append("PCO_WSOn", "1");
+                        formdata.append("PCO_WSKey", "'.$APIKeyUsuario.'");
+                        formdata.append("PCO_WSSecret", "'.$APISecretUsuario.'");
+                        formdata.append("PCO_WSId", "'.$RegistroServicios["nombre"].'");
+                        
+                        var requestOptions = {
+                          method: \'POST\',
+                          body: formdata,
+                          redirect: \'follow\'
+                        };
+                        
+                        fetch("'.$URLBaseSistema[0].'/index.php", requestOptions)
+                          .then(response => response.text())
+                          .then(result => console.log(result))
+                          .catch(error => console.log(\'error\', error));';
+                    
+                    $Ejemplo_LLAMADO_JavascriptJQuery='
+                        var form = new FormData();
+                        form.append("PCO_WSOn", "1");
+                        form.append("PCO_WSKey", "'.$APIKeyUsuario.'");
+                        form.append("PCO_WSSecret", "'.$APISecretUsuario.'");
+                        form.append("PCO_WSId", "'.$RegistroServicios["nombre"].'");
+                        
+                        var settings = {
+                          "url": "'.$URLBaseSistema[0].'/index.php",
+                          "method": "POST",
+                          "timeout": 0,
+                          "processData": false,
+                          "mimeType": "multipart/form-data",
+                          "contentType": false,
+                          "data": form
+                        };
+                        
+                        $.ajax(settings).done(function (response) {
+                          console.log(response);
+                        });';
+                    
+                    $Ejemplo_LLAMADO_JavascriptXHR='
+                        // WARNING: For POST requests, body is set to null by browsers.
+                        var data = new FormData();
+                        data.append("PCO_WSOn", "1");
+                        data.append("PCO_WSKey", "'.$APIKeyUsuario.'");
+                        data.append("PCO_WSSecret", "'.$APISecretUsuario.'");
+                        data.append("PCO_WSId", "'.$RegistroServicios["nombre"].'");
+                        
+                        var xhr = new XMLHttpRequest();
+                        xhr.withCredentials = true;
+                        
+                        xhr.addEventListener("readystatechange", function() {
+                          if(this.readyState === 4) {
+                            console.log(this.responseText);
+                          }
+                        });
+                        
+                        xhr.open("POST", "'.$URLBaseSistema[0].'/index.php");
+                        
+                        xhr.send(data);';
+                    
+                    $Ejemplo_LLAMADO_KotlinOkHttp='
+                        val client = OkHttpClient()
+                        val mediaType = "text/plain".toMediaType()
+                        val body = MultipartBody.Builder().setType(MultipartBody.FORM)
+                          .addFormDataPart("PCO_WSOn","1")
+                          .addFormDataPart("PCO_WSKey","'.$APIKeyUsuario.'")
+                          .addFormDataPart("PCO_WSSecret","'.$APISecretUsuario.'")
+                          .addFormDataPart("PCO_WSId","'.$RegistroServicios["nombre"].'")
+                          .build()
+                        val request = Request.Builder()
+                          .url("'.$URLBaseSistema[0].'/index.php")
+                          .post(body)
+                          .build()
+                        val response = client.newCall(request).execute()';
+                    
+                    $Ejemplo_LLAMADO_C_Libcurl='
+                        CURL *curl;
+                        CURLcode res;
+                        curl = curl_easy_init();
+                        if(curl) {
+                          curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "POST");
+                          curl_easy_setopt(curl, CURLOPT_URL, "'.$URLBaseSistema[0].'/index.php");
+                          curl_easy_setopt(curl, CURLOPT_FOLLOWLOCATION, 1L);
+                          curl_easy_setopt(curl, CURLOPT_DEFAULT_PROTOCOL, "https");
+                          struct curl_slist *headers = NULL;
+                          curl_easy_setopt(curl, CURLOPT_HTTPHEADER, headers);
+                          curl_mime *mime;
+                          curl_mimepart *part;
+                          mime = curl_mime_init(curl);
+                          part = curl_mime_addpart(mime);
+                          curl_mime_name(part, "PCO_WSOn");
+                          curl_mime_data(part, "1", CURL_ZERO_TERMINATED);
+                          part = curl_mime_addpart(mime);
+                          curl_mime_name(part, "PCO_WSKey");
+                          curl_mime_data(part, "'.$APIKeyUsuario.'", CURL_ZERO_TERMINATED);
+                          part = curl_mime_addpart(mime);
+                          curl_mime_name(part, "PCO_WSSecret");
+                          curl_mime_data(part, "'.$APISecretUsuario.'", CURL_ZERO_TERMINATED);
+                          part = curl_mime_addpart(mime);
+                          curl_mime_name(part, "PCO_WSId");
+                          curl_mime_data(part, "'.$RegistroServicios["nombre"].'", CURL_ZERO_TERMINATED);
+                          curl_easy_setopt(curl, CURLOPT_MIMEPOST, mime);
+                          res = curl_easy_perform(curl);
+                          curl_mime_free(mime);
+                        }
+                        curl_easy_cleanup(curl);';
+                    
+                    $Ejemplo_LLAMADO_NodeJsAxios='
+                        const axios = require(\'axios\');
+                        const FormData = require(\'form-data\');
+                        let data = new FormData();
+                        data.append(\'PCO_WSOn\', \'1\');
+                        data.append(\'PCO_WSKey\', \''.$APIKeyUsuario.'\');
+                        data.append(\'PCO_WSSecret\', \''.$APISecretUsuario.'\');
+                        data.append(\'PCO_WSId\', \''.$RegistroServicios["nombre"].'\');
+                        
+                        let config = {
+                          method: \'post\',
+                          maxBodyLength: Infinity,
+                          url: \''.$URLBaseSistema[0].'/index.php\',
+                          headers: { 
+                            ...data.getHeaders()
+                          },
+                          data : data
+                        };
+                        
+                        axios.request(config)
+                        .then((response) => {
+                          console.log(JSON.stringify(response.data));
+                        })
+                        .catch((error) => {
+                          console.log(error);
+                        });';
+                    
+                    $Ejemplo_LLAMADO_NodeJsRequest='
+                        var request = require(\'request\');
+                        var options = {
+                          \'method\': \'POST\',
+                          \'url\': \''.$URLBaseSistema[0].'/index.php\',
+                          \'headers\': {
+                          },
+                          formData: {
+                            \'PCO_WSOn\': \'1\',
+                            \'PCO_WSKey\': \''.$APIKeyUsuario.'\',
+                            \'PCO_WSSecret\': \''.$APISecretUsuario.'\',
+                            \'PCO_WSId\': \''.$RegistroServicios["nombre"].'\'
+                          }
+                        };
+                        request(options, function (error, response) {
+                          if (error) throw new Error(error);
+                          console.log(response.body);
+                        });';
+                    
+                    $Ejemplo_LLAMADO_NodeJsUnirest='
+                        var unirest = require(\'unirest\');
+                        var req = unirest(\'POST\', \''.$URLBaseSistema[0].'/index.php\')
+                          .field(\'PCO_WSOn\', \'1\')
+                          .field(\'PCO_WSKey\', \''.$APIKeyUsuario.'\')
+                          .field(\'PCO_WSSecret\', \''.$APISecretUsuario.'\')
+                          .field(\'PCO_WSId\', \''.$RegistroServicios["nombre"].'\')
+                          .end(function (res) { 
+                            if (res.error) throw new Error(res.error); 
+                            console.log(res.raw_body);
+                          });';
+                    
+                    $Ejemplo_LLAMADO_php_Guzzle='
+                        $client = new Client();
+                        $options = [
+                          \'multipart\' => [
+                            [
+                              \'name\' => \'PCO_WSOn\',
+                              \'contents\' => \'1\'
+                            ],
+                            [
+                              \'name\' => \'PCO_WSKey\',
+                              \'contents\' => \''.$APIKeyUsuario.'\'
+                            ],
+                            [
+                              \'name\' => \'PCO_WSSecret\',
+                              \'contents\' => \''.$APISecretUsuario.'\'
+                            ],
+                            [
+                              \'name\' => \'PCO_WSId\',
+                              \'contents\' => \''.$RegistroServicios["nombre"].'\'
+                            ]
+                        ]];
+                        $request = new Request(\'POST\', \''.$URLBaseSistema[0].'/index.php\');
+                        $res = $client->sendAsync($request, $options)->wait();
+                        echo $res->getBody();';
+                    
+                    $Ejemplo_LLAMADO_php_HTTPRequest2='
+                        require_once \'HTTP/Request2.php\';
+                        $request = new HTTP_Request2();
+                        $request->setUrl(\''.$URLBaseSistema[0].'/index.php\');
+                        $request->setMethod(HTTP_Request2::METHOD_POST);
+                        $request->setConfig(array(
+                          \'follow_redirects\' => TRUE
+                        ));
+                        $request->addPostParameter(array(
+                          \'PCO_WSOn\' => \'1\',
+                          \'PCO_WSKey\' => \''.$APIKeyUsuario.'\',
+                          \'PCO_WSSecret\' => \''.$APISecretUsuario.'\',
+                          \'PCO_WSId\' => \''.$RegistroServicios["nombre"].'\'
+                        ));
+                        try {
+                          $response = $request->send();
+                          if ($response->getStatus() == 200) {
+                            echo $response->getBody();
+                          }
+                          else {
+                            echo \'Unexpected HTTP status: \' . $response->getStatus() . \' \' .
+                            $response->getReasonPhrase();
+                          }
+                        }
+                        catch(HTTP_Request2_Exception $e) {
+                          echo \'Error: \' . $e->getMessage();
+                        }';
+                    
+                    $Ejemplo_LLAMADO_php_PeclHTTP='
+                        $client = new http\Client;
+                        $request = new http\Client\Request;
+                        $request->setRequestUrl(\''.$URLBaseSistema[0].'/index.php\');
+                        $request->setRequestMethod(\'POST\');
+                        $body = new http\Message\Body;
+                        $body->addForm(array(
+                          \'PCO_WSOn\' => \'1\',
+                          \'PCO_WSKey\' => \''.$APIKeyUsuario.'\',
+                          \'PCO_WSSecret\' => \''.$APISecretUsuario.'\',
+                          \'PCO_WSId\' => \''.$RegistroServicios["nombre"].'\'
+                        ), array(
+                        
+                        ));
+                        $request->setBody($body);
+                        $request->setOptions(array());
+                        
+                        $client->enqueue($request)->send();
+                        $response = $client->getResponse();
+                        echo $response->getBody();';
+                    
+                    $Ejemplo_LLAMADO_PythonRequests='
+                        import requests
+                        
+                        url = "'.$URLBaseSistema[0].'/index.php"
+                        
+                        payload = {\'PCO_WSOn\': \'1\',
+                        \'PCO_WSKey\': \''.$APIKeyUsuario.'\',
+                        \'PCO_WSSecret\': \''.$APISecretUsuario.'\',
+                        \'PCO_WSId\': \''.$RegistroServicios["nombre"].'\'}
+                        files=[
+                        
+                        ]
+                        headers = {}
+                        
+                        response = requests.request("POST", url, headers=headers, data=payload, files=files)
+                        
+                        print(response.text)';
+                    
+                    $Ejemplo_LLAMADO_RHttr='
+                        library(httr)
+                        
+                        body = list(
+                          \'PCO_WSOn\' = \'1\',
+                          \'PCO_WSKey\' = \''.$APIKeyUsuario.'\',
+                          \'PCO_WSSecret\' = \''.$APISecretUsuario.'\',
+                          \'PCO_WSId\' = \''.$RegistroServicios["nombre"].'\'
+                        )
+                        
+                        res <- VERB("POST", url = "'.$URLBaseSistema[0].'/index.php", body = body, encode = \'multipart\')
+                        
+                        cat(content(res, \'text\'))';
+                    
+                    $Ejemplo_LLAMADO_RCurl='
+                        library(RCurl)
+                        params = c(
+                          "PCO_WSOn" = "1",
+                          "PCO_WSKey" = "'.$APIKeyUsuario.'",
+                          "PCO_WSSecret" = "'.$APISecretUsuario.'",
+                          "PCO_WSId" = "'.$RegistroServicios["nombre"].'"
+                        )
+                        res <- postForm("'.$URLBaseSistema[0].'/index.php", .params = params, .opts=list(followlocation = TRUE), style = "httppost")
+                        cat(res)';
+                    
+                    $Ejemplo_LLAMADO_RubyNetHTTP='
+                        require "uri"
+                        require "net/http"
+                        
+                        url = URI("'.$URLBaseSistema[0].'/index.php")
+                        
+                        https = Net::HTTP.new(url.host, url.port)
+                        https.use_ssl = true
+                        
+                        request = Net::HTTP::Post.new(url)
+                        form_data = [[\'PCO_WSOn\', \'1\'],[\'PCO_WSKey\', \''.$APIKeyUsuario.'\'],[\'PCO_WSSecret\', \''.$APISecretUsuario.'\'],[\'PCO_WSId\', \''.$RegistroServicios["nombre"].'\']]
+                        request.set_form form_data, \'multipart/form-data\'
+                        response = https.request(request)
+                        puts response.read_body';
+                    
+                    $Ejemplo_LLAMADO_RustReqwest='
+                        #[tokio::main]
+                        async fn main() -> Result<(), Box<dyn std::error::Error>> {
+                            let client = reqwest::Client::builder()
+                                .build()?;
+                        
+                            let form = reqwest::multipart::Form::new()
+                                .text("PCO_WSOn", "1")
+                                .text("PCO_WSKey", "'.$APIKeyUsuario.'")
+                                .text("PCO_WSSecret", "'.$APISecretUsuario.'")
+                                .text("PCO_WSId", "'.$RegistroServicios["nombre"].'");
+                        
+                            let request = client.request(reqwest::Method::POST, "'.$URLBaseSistema[0].'/index.php")
+                                .multipart(form);
+                        
+                            let response = request.send().await?;
+                            let body = response.text().await?;
+                        
+                            println!("{}", body);
+                        
+                            Ok(())';
+                    
+                    $Ejemplo_LLAMADO_ShellWget='
+                        wget --no-check-certificate --quiet \
+                          --method POST \
+                          --timeout=0 \
+                          --header \'\' \
+                          --body-data \'PCO_WSOn=1&PCO_WSKey='.$APIKeyUsuario.'&PCO_WSSecret='.$APISecretUsuario.'&PCO_WSId='.$RegistroServicios["nombre"].'\' \
+                           \''.$URLBaseSistema[0].'/index.php\'';
+
+                    //Presenta ejemplos de llamado
                     echo '
-                        <div class="well well-sm" style="margin-left:40px; margin-top:15px;">
-                            <i class="fa fa-globe fa-fw"></i>  <b>Ejemplo URL de llamado:</b> <font size=1><i>(complete con sus par&aacute;metros cuando aplique)</i></font>
-                            <br><font size=1><a href="'.$URLBaseSistemaEjemplo.'" target="_blank">'.$URLBaseSistemaEjemplo.'</a></font>
-                        </div>';
-                
+                            <div class="well well-sm" style="margin-left:40px; margin-top:15px;">
+                            <i class="fa fa-rocket fa-fw"></i>  <b>Ejemplos de llamado al servicio:</b><br>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">URL Directa</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Recuerde completar con sus llaves y/o par&aacute;metros extra cuando aplique.</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$URLBaseSistemaEjemplo).'</pre></div>
+                            </details>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">C# - HttpClient</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_CS_HttpClient).'</pre></div>
+                            </details>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">C# - RestSharp</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_CS_RestSharp).'</pre></div>
+                            </details>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">cURL</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_cURL).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">Dart - dio</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_DartDio).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">Dart - http</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_DartHttp).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">Go - Native</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_GoNative).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">Java - OkHttp</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_JavaOkHttp).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">Java - Unirest</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_JavaUnirest).'</pre></div>
+                            </details>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">Javascript - Fetch</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_JavascriptFetch).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">JavaScript - JQuery</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_JavascriptJQuery).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">JavaScript - XHR</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_JavascriptXHR).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">Kotlin - Okhttp</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_KotlinOkHttp).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">C - Libcurl</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_C_Libcurl).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">NodeJS - Axios</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_NodeJsAxios).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">NodeJS - Request</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_NodeJsRequest).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">NodeJS - Unirest</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_NodeJsUnirest).'</pre></div>
+                            </details>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">PHP - cURL</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_php_cURL).'</pre></div>
+                            </details>
+                            
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">PHP - Guzzle</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_php_Guzzle).'</pre></div>
+                            </details>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">PHP - PECL HTTP</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_php_PeclHTTP).'</pre></div>
+                            </details>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">Python - Requests</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_PythonRequests).'</pre></div>
+                            </details>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">R - HTTR</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_RHttr).'</pre></div>
+                            </details>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">R - RCurl</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_RCurl).'</pre></div>
+                            </details>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">Ruby - NetHTTP</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_RubyNetHTTP).'</pre></div>
+                            </details>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">Rust - Reqwest</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_RustReqwest).'</pre></div>
+                            </details>
+
+                            <details style="display:inline-block !important;">
+                                <summary class="btn btn-default btn-xs">Shell - wget</summary>
+                                <br><i class="fa fa-info-circle fa-fw"></i>  <i> <font color=red>Debe completar con sus llaves o par&aacute;metros seg&uacute;n aplique</font></i>:
+                                <div class="btn-group btn-group-justified"><pre style="text-align:left; font-size:11px; font-family: terminal,console,monospace;  border-radius:10px; background-color:#2F2F47; color:white; margin-top:5px;">'.str_replace('      ',"",$Ejemplo_LLAMADO_ShellWget).'</pre></div>
+                            </details>
+
+                        </div>
+                        ';
+
                 //Cierra formulario de pruebas cuando hay llaves activas
                 if ($MensajeVerificacionAPI=="")
                     echo '</form>';
