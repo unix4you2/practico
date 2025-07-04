@@ -54,6 +54,9 @@
 	$ByPassWS=0;
 	if (@$PCO_WSId=='PCO_AutenticacionOauth')
 		$ByPassWS=1;
+		
+	//Determina el formato de salida por defecto para los mensajes del motor
+	if (@$PCO_WSFormato=='' || (@$PCO_WSFormato!='xml' && @$PCO_WSFormato!='json' && @$PCO_WSFormato!='html')) $PCO_WSFormato='xml';
 
 	// Verifica si se trata de un llamado por web-services
 	$ModoWSActivado=0;
@@ -80,7 +83,7 @@
 							else
 								{
 									// Valida si la llave esta en la BD de API
-									$consulta_llave=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_llaves_api." FROM ".$TablasCore."llaves_api WHERE llave=? ","$PCO_WSKey");
+									$consulta_llave=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_llaves_api." FROM core_llaves_api WHERE llave=? ","$PCO_WSKey");
 									// Si no se retorno error en la consulta y tiene datos hace el fetch
 									if($consulta_llave!="1" && $consulta_llave!="")
 										$registro_llave = $consulta_llave->fetch();
@@ -98,7 +101,8 @@
 												}
 											else
 												{
-													PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr02, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+												    if ($PCO_WSFormato=='xml' || $PCO_WSFormato=='json') header('Content-Type: application/'.$PCO_WSFormato.'; charset=utf-8');
+													PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr02, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible',$PCO_WSFormato);
 												}
 										}
 								}
@@ -121,7 +125,10 @@
 														{
 															//Todo OK a este punto
 															if (!file_exists("core/ws_funciones.php"))
-                                                                PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr03, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+                                                                {
+                                                                    if ($PCO_WSFormato=='xml' || $PCO_WSFormato=='json') header('Content-Type: application/'.$PCO_WSFormato.'; charset=utf-8');
+                                                                    PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr03, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible',$PCO_WSFormato);
+                                                                }
 															else
 																{
 																	@ob_clean(); //Limpia salida antes de llamar los WS
@@ -156,8 +163,8 @@
 																	                        if ($PCO_RegistroParametrosWS["longitud"]!="0" && strlen(trim(${$PCO_RegistroParametrosWS["nombre"]}))>$PCO_RegistroParametrosWS["longitud"])
 																	                            $PCO_ListaErrores_Parametros=$PCO_RegistroParametrosWS["nombre"].": longitud maxima permitida es ".$PCO_RegistroParametrosWS["longitud"];
 																	                        
-																	                        //Valida los tipos de dato recibidos
-																	                        if ($PCO_RegistroParametrosWS["tipo_dato"]!="Cualquiera")
+																	                        //Valida los tipos de dato recibidos siempre y cuandop se haya recibido la variable
+																	                        if ($PCO_RegistroParametrosWS["tipo_dato"]!="Cualquiera" && trim(${$PCO_RegistroParametrosWS["nombre"]})!="")
 																	                            {
 																	                                if ($PCO_RegistroParametrosWS["tipo_dato"]=="Cadena" && gettype(${$PCO_RegistroParametrosWS["nombre"]})!="string")
 																	                                    $PCO_ListaErrores_Parametros=$PCO_RegistroParametrosWS["nombre"].": tipo de dato no es ".$PCO_RegistroParametrosWS["tipo_dato"];
@@ -191,6 +198,10 @@
                                                                                     //Aumenta estadistica de ejecucion
 																	                PCO_EjecutarSQLUnaria("UPDATE core_llaves_metodo SET total_ejecuciones=total_ejecuciones+1 WHERE id='{$IdEndpointWS}' ");
 
+                                                                    		        //Si se detecta un tipo de formato especifico para el servicio entonces agrega la cebecera correspondiente
+                                                                    		        if (trim($PCO_RegistroMetodoEnBD["formato_respuesta"])!='')
+                                                                                        header('Content-Type: '.$PCO_RegistroMetodoEnBD["formato_respuesta"].'; charset=utf-8');
+
                                                                     		        //Evalua si el codigo ya inicia con <?php y sino lo agrega
                                                                     		        $ComplementoInicioScript="";
                                                                     		        if (substr(trim($PCO_RegistroMetodoEnBD["script"]),0,5)!='<?php')
@@ -199,7 +210,8 @@
 																	            }
 																	        else
 																	            {
-                                                                                    PCO_Mensaje($MULTILANG_WSErrTitulo."[Cod. 09] en parametros",$PCO_ListaErrores_Parametros, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+                                                                                    if ($PCO_WSFormato=='xml' || $PCO_WSFormato=='json') header('Content-Type: application/'.$PCO_WSFormato.'; charset=utf-8');
+                                                                                    PCO_Mensaje($MULTILANG_WSErrTitulo."[Cod. 09] en parametros",$PCO_ListaErrores_Parametros, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible',$PCO_WSFormato);
 																	            }
 																	    }
 																    else
@@ -214,26 +226,39 @@
 														}
 													else
 														{
-                                                            PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr08.$_SERVER['REMOTE_HOST'], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+                                                            if ($PCO_WSFormato=='xml' || $PCO_WSFormato=='json') header('Content-Type: application/'.$PCO_WSFormato.'; charset=utf-8');
+                                                            PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr08.$_SERVER['REMOTE_HOST'], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible',$PCO_WSFormato);
 														}
 												}
 											else
 												{
-													PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr07.$_SERVER['REMOTE_ADDR'], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+												    if ($PCO_WSFormato=='xml' || $PCO_WSFormato=='json') header('Content-Type: application/'.$PCO_WSFormato.'; charset=utf-8');
+													PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr07.$_SERVER['REMOTE_ADDR'], '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible',$PCO_WSFormato);
 												}
 										}
 									else
 										{
-											PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr06.$PCO_WSId, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+										    if ($PCO_WSFormato=='xml' || $PCO_WSFormato=='json') header('Content-Type: application/'.$PCO_WSFormato.'; charset=utf-8');
+											PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr06.$PCO_WSId, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible',$PCO_WSFormato);
 										}		
 								}
 							else
-								PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr01, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+							    {
+								    if ($PCO_WSFormato=='xml' || $PCO_WSFormato=='json') header('Content-Type: application/'.$PCO_WSFormato.'; charset=utf-8');
+								    PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr01, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible',$PCO_WSFormato);
+							    }
 						}
 					else
-						PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr05, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+					    {
+						    if ($PCO_WSFormato=='xml' || $PCO_WSFormato=='json') header('Content-Type: application/'.$PCO_WSFormato.'; charset=utf-8');
+						    PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr05, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible',$PCO_WSFormato);
+					    }
 				}
 			else
-				PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr04, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+				{
+				    if ($PCO_WSFormato=='xml' || $PCO_WSFormato=='json') header('Content-Type: application/'.$PCO_WSFormato.'; charset=utf-8');
+				    PCO_Mensaje($MULTILANG_WSErrTitulo,$MULTILANG_WSErr04, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible',$PCO_WSFormato);
+				}
+				
 			die(); // Finaliza script para presentar solo el resultado del WebService ejecutado
 		}
