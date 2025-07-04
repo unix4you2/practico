@@ -60,7 +60,7 @@
 		Tarea - codigo alfanumerico que identifica la tarea a ejecutar
 
 	(start code)
-		SELECT * FROM ".$TablasCore."tareascron WHERE codigo_tarea='$Tarea'
+		SELECT * FROM core_tareascron WHERE codigo_tarea='$Tarea'
 		CORRER contenido de script_php
 	(end)
 
@@ -72,14 +72,14 @@
 			if ($Tarea!="")
 			    {
         			// Busca el registro de la tarea
-        			$RegistroTarea=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_tareascron." FROM ".$TablasCore."tareascron WHERE habilitado=1 AND codigo_tarea=?","$Tarea")->fetch();
+        			$RegistroTarea=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_tareascron." FROM core_tareascron WHERE habilitado=1 AND codigo_tarea=?","$Tarea")->fetch();
         			//Si encuentra una tarea busca sus datos para ejecutarla
                     if ($RegistroTarea["id"]!="")
                         {
                             PCO_EvaluarCodigo($RegistroTarea["script_php"]);
                             //Lleva el historico de ejecucion
                             $HistoricoEjecucion=$RegistroTarea["historial_ejecucion"];
-                            PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."tareascron SET historial_ejecucion=RIGHT(CONCAT('".$PCO_FechaOperacionGuiones." ".$PCO_HoraOperacionPuntos."\n',historial_ejecucion),1000) WHERE id=".$RegistroTarea["id"]);
+                            PCO_EjecutarSQLUnaria("UPDATE core_tareascron SET historial_ejecucion=RIGHT(CONCAT('".$PCO_FechaOperacionGuiones." ".$PCO_HoraOperacionPuntos."\n',historial_ejecucion),1000) WHERE id=".$RegistroTarea["id"]);
                             //Lleva auditoria de la ejecucion
                             PCO_Auditar("Ejecucion tarea $Tarea","PCO.Cron");
                         }
