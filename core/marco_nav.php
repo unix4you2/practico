@@ -142,14 +142,18 @@
     ?>
 				<li class="dropdown" id="PCODIV_IconoAlertasBarraSuperior">
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
-						<i class="fa fa-bell fa-fw text-success"></i> <span class="badge" id="PCODIV_ConteoAlertasBarraSuperior"></span> <i class="fa fa-caret-down text-success pull-right"></i>
+						<i class="fa fa-bell fa-shake fa-fw text-success"></i> <span class="badge" id="PCODIV_ConteoAlertasBarraSuperior"></span> <i class="fa fa-caret-down text-success pull-right"></i>
 						
 					</a>
 					<ul class="dropdown-menu dropdown-alerts">
 						<li id="PCODIV_MarcoContenidoAlertas">
                             <?php
                                 //Presenta informes marcados como de publicacion automatica en el home para el usuario actual.  PILAS. esto no aplica para el admin a menos que -por debajo- se haga la insercion del registro de permisos a modo pruebas
-                                $InformesHome=PCO_EjecutarSQL("SELECT ".$TablasCore."informe.id,ancho FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario' AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND (permitido_home='B' OR permitido_home='A') ORDER BY titulo ");
+                                $InformesHome=PCO_EjecutarSQL("SELECT * FROM (
+                                                                SELECT core_informe.id,core_informe.ancho,core_informe.titulo FROM core_informe,core_usuario_informe WHERE core_usuario_informe.usuario='$PCOSESS_LoginUsuario' AND core_usuario_informe.informe=core_informe.id AND (permitido_home='B' OR permitido_home='A') 
+                                                                UNION
+                                                                SELECT core_informe.id,core_informe.ancho,core_informe.titulo FROM core_informe WHERE permitido_home='B*' OR permitido_home='A*'
+                                                                ) as Informes ORDER BY titulo ");
                                 $PCO_ConteoRegistrosAlertas=0;
                                 while ($RegistroInformeHome=$InformesHome->fetch())
                                     {
@@ -175,8 +179,23 @@
 				</script>
 
     <?php
-			//Despliega opciones de configuracion
+    
+            //Genera opcion especial de configuracion unicamente para el administrador
+			$PCOVAR_OpcionConfigAdministrador="";
 			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+			    {
+			        $PCOVAR_OpcionConfigAdministrador='
+						<li>
+							<a data-toggle="modal" href="#myModalCONFIGURACION">
+								<div>
+									<i class="fa fa-wrench fa-fw"></i> '.$MULTILANG_ConfiguracionGeneral.'
+								</div>
+							</a>
+						</li>';
+			    }
+
+			//Despliega opciones de configuracion
+			if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) || PCO_EsDesplegador(@$PCOSESS_LoginUsuario) || PCO_EsEmpaquetador(@$PCOSESS_LoginUsuario))
 			{
     ?>
 
@@ -184,17 +203,12 @@
 					<a class="dropdown-toggle" data-toggle="dropdown" href="#">
 						<i class="fa fa-cog fa-fw text-danger"></i> <i class="fa fa-caret-down text-danger"></i>
 					</a>
-					<ul class="dropdown-menu dropdown-alerts">
+					<ul class="dropdown-menu dropdown-alerts" >
+
                         <h6 class="dropdown-header"><?php echo ($MULTILANG_Configuracion); ?>:</h6>
+                        <?php echo $PCOVAR_OpcionConfigAdministrador; ?>
 						<li>
-							<a data-toggle="modal" href="#myModalCONFIGURACION">
-								<div>
-									<i class="fa fa-wrench fa-fw"></i> <?php echo $MULTILANG_ConfiguracionGeneral; ?>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="javascript:document.PCO_EditarConfiguracionOAuth.submit();">
+							<a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-5:1">
 								<div>
 									<i class="fa fa-soundcloud fa-fw"></i> <?php echo $MULTILANG_OauthButt; ?>
 									<span class="pull-right badge"><?php echo PCO_ContarProveedoresOAuthConfigurados(); ?></span>
@@ -210,10 +224,10 @@
 							</a>
 						</li>
 						<li>
-							<a href="javascript:document.PCO_VerReplicaciones.submit();">
+							<a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-10:1">
 								<div>
 									<i class="fa fa-cubes fa-fw"></i> <?php echo $MULTILANG_ReplicaTitulo; ?>
-									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."replicasbd",""); ?></span>
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla("core_replicasbd",""); ?></span>
 								</div>
 							</a>
 						</li>
@@ -230,7 +244,7 @@
 							<a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-44:1">
 								<div>
 									<i class="fa fa-link fa-fw"></i> <?php echo $MULTILANG_WSConfigButt; ?>
-									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."llaves_api",""); ?></span>
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla("core_llaves_api",""); ?></span>
 								</div>
 							</a>
 						</li>
@@ -238,15 +252,15 @@
 							<a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-45:1">
 								<div>
 									<i class="fa fa-bolt fa-fw"></i> Endpoints de WebServices
-									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."llaves_metodo",""); ?></span>
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla("core_llaves_metodo",""); ?></span>
 								</div>
 							</a>
 						</li>
 						<li>
-							<a href="javascript:document.PCO_VerTareasCron.submit();">
+							<a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-16:1">
 								<div>
 									<i class="fa fa-clock-o fa-fw"></i> <?php echo $MULTILANG_CronTitulo; ?>
-									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."tareascron",""); ?></span>
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla("core_tareascron",""); ?></span>
 								</div>
 							</a>
 						</li>
@@ -254,18 +268,37 @@
 							<a href="javascript:document.PCO_VerMonitoreo.submit();">
 								<div>
 									<i class="fa fa-lightbulb-o fa-fw"></i> <?php echo $MULTILANG_MonTitulo; ?>
-									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."monitoreo",""); ?></span>
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla("core_monitoreo",""); ?></span>
 								</div>
 							</a>
 						</li>
 						<li>
-							<a href="javascript:document.PCO_AcortadorDirecciones.submit();">
+							<a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-19:1">
 								<div>
 									<i class="fa fa-external-link fa-fw"></i> Generador de URLs cortas
-									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla($TablasCore."acortadorurls",""); ?></span>
+									<span class="pull-right badge"><?php echo PCO_ContarRegistrosTabla("core_acortadorurls",""); ?></span>
 								</div>
 							</a>
 						</li>
+						<li class="divider"></li>
+
+
+						<li>
+							<a href="javascript:document.PCO_Empaquetamiento.submit();">
+								<div>
+									<i class="fa fa-file-zip-o fa-fw"></i> Empaquetado / Packaging
+								</div>
+							</a>
+						</li>
+						<li>
+							<a href="javascript:document.PCO_AppDespliegue.submit();">
+								<div>
+									<i class="fa fa-rocket fa-fw"></i> Despliegue / Deployment
+								</div>
+							</a>
+						</li>
+
+						
 						<li class="divider"></li>
                         <h6 class="dropdown-header"><?php echo ($MULTILANG_Otros); ?>:</h6>
                         <?php
@@ -323,7 +356,7 @@
 				    <?php
 				        $ComplementoImagenPerfil='<i class="fa fa-user fa-fw"></i>';
 				        //Busca si el usuario tiene imagen de perfil
-				        $PartesFotoUsuario=explode("|",PCO_EjecutarSQL("SELECT avatar FROM {$TablasCore}usuario WHERE login='$PCOSESS_LoginUsuario' ")->fetchColumn());
+				        $PartesFotoUsuario=explode("|",PCO_EjecutarSQL("SELECT avatar FROM core_usuario WHERE login='$PCOSESS_LoginUsuario' ")->fetchColumn());
 				        $RutaFotoUsuario=$PartesFotoUsuario[0];
 				        if ($RutaFotoUsuario!="")
     				        $ComplementoImagenPerfil="<img src='{$RutaFotoUsuario}' style='width:30px; height:30px; border-radius: 50%; margin-top:0px; margin-bottom:0px;'>";
@@ -333,17 +366,17 @@
 						<?php echo $ComplementoImagenPerfil; ?> <i class="fa fa-caret-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-user">
-						<li><a href="javascript:document.PCO_CargarActualizarPefil.submit();"><?php echo $ComplementoImagenPerfil; ?> <?php echo $Nombre_usuario;?></a><hr style="margin-top:0px; margin-bottom:0px;"></li>
+						<li id="PCODIV_OpcionPerfil"><a href="javascript:document.PCO_CargarActualizarPefil.submit();"><?php echo $ComplementoImagenPerfil; ?> <?php echo $Nombre_usuario;?></a><hr style="margin-top:0px; margin-bottom:0px;"></li>
 
                             <?php
                                 //AGREGA OPCIONES DE MENU DE USUARIO
                     			// Si el usuario es diferente al administrador agrega condiciones al query
                     			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
                     				{
-                    					$Complemento_tablas=",".$TablasCore."usuario_menu";
-                    					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+                    					$Complemento_tablas=",core_usuario_menu";
+                    					$Complemento_condicion=" AND core_usuario_menu.menu=core_menu.hash_unico AND core_usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
                     				}
-                    			$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_usuario=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
+                    			$resultado=PCO_EjecutarSQL("SELECT core_menu.id as id,$ListaCamposSinID_menu FROM core_menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_usuario=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
                                 //Crea la tabla para disponer los resultados solamente si encuentra opciones para el usuario
                     			if($resultado->rowCount()>0) 
                     			    {
@@ -351,12 +384,12 @@
                             				PCO_ImprimirOpcionMenu($registro,'usuario');
                     			    }
                     			//Deterina si se tuvo al menos una opcion para agregar un separador
-                    			$CantidadOpciones=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_usuario=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ")->fetchColumn();
+                    			$CantidadOpciones=PCO_EjecutarSQL("SELECT COUNT(*) FROM core_menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_usuario=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ")->fetchColumn();
                     			if ($CantidadOpciones>0)
                 			        echo '<li class="divider"></li>';
                             ?>
 
-						<li><a href="javascript:document.reseteo_clave.submit();"><i class="fa fa-key fa-fw"></i> <?php echo $MULTILANG_UsrReset; ?></a></li>
+						<li id="PCODIV_OpcionReseteoClave"><a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-18:1"><i class="fa fa-key fa-fw"></i> <?php echo $MULTILANG_UsrReset; ?></a></li>
 	                    <?php
 							/*Carga opcion de chat solamente si esta habilitado
 							  0=Apagado
@@ -366,7 +399,7 @@
 							  4=Exclusivo admin             */
 							if (isset($Activar_ModuloChat) && $Activar_ModuloChat>0)
     							{
-    							    $ComplementoOpcionMenu='<li><a data-toggle="modal" href="#Dialogo_Chat"><i class="fa fa-comment fa-fw"></i> Chat</a></li>';
+    							    $ComplementoOpcionMenu='<li id="PCODIV_OpcionChat"><a data-toggle="modal" href="#Dialogo_Chat"><i class="fa fa-comment fa-fw"></i> Chat</a></li>';
     							    //Verifica si el chat es activo solo para admin
 							        if ($Activar_ModuloChat==4 && PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
     								    echo $ComplementoOpcionMenu;
@@ -386,17 +419,17 @@
     					?>
     					<?php
                             //Busca si tiene tableros kanban o le han compartido alguno
-                            $RegistroTableros=PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND (login_admintablero='$PCOSESS_LoginUsuario' OR compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%') LIMIT 0,1 ")->fetch();
+                            $RegistroTableros=PCO_EjecutarSQL("SELECT id FROM core_kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND (login_admintablero='$PCOSESS_LoginUsuario' OR compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%') LIMIT 0,1 ")->fetch();
                             
                             //Busca si es un administrador de tableros Kanban
                             $PCOVAR_EsAdminKanban=0;
-                            $RegistroAdminTableros=PCO_EjecutarSQL("SELECT usuarios_admin_kanban FROM ".$TablasCore."parametros WHERE 1=1 LIMIT 0,1 ")->fetchColumn();
+                            $RegistroAdminTableros=PCO_EjecutarSQL("SELECT usuarios_admin_kanban FROM core_parametros WHERE 1=1 LIMIT 0,1 ")->fetchColumn();
                             $RegistroAdminTableros=",".$RegistroAdminTableros.","; //Concatena siempre comas para facilitar la busqueda
                             if (strpos($RegistroAdminTableros,$PCOSESS_LoginUsuario)!=false)
                                 $PCOVAR_EsAdminKanban=1;
                             
                             if ($RegistroTableros["id"]!="" || $PCOVAR_EsAdminKanban==1)
-                                echo '<li><a href="javascript:document.PCO_ExplorarTablerosKanban.submit();"><i class="fa fa-sticky-note fa-fw"></i> '.$MULTILANG_TablerosKanban.'</a></li>';
+                                echo '<li id="PCODIV_OpcionKanban"><a href="javascript:document.PCO_ExplorarTablerosKanban.submit();"><i class="fa fa-sticky-note fa-fw"></i> '.$MULTILANG_TablerosKanban.'</a></li>';
                         ?>
 
     					<?php
@@ -407,25 +440,25 @@
                                     if ($PCO_TransformacionColores=="inverso")
                                         $IconoModoActivo='<i class="fa fa-toggle-on fa-fw fa-1x"></i>';
                                     $IconoModoDiaNoche=$IconoModoActivo.' Activar modo oscuro';
-                                    echo '<li><a href="javascript:document.PCO_CargarActualizarPefil.submit();">'.$IconoModoDiaNoche.'</a></li>';
+                                    echo '<li id="PCODIV_OpcionModoNoche"><a href="javascript:document.PCO_CargarActualizarPefil.submit();">'.$IconoModoDiaNoche.'</a></li>';
                                 }
                         ?>
 
     					<?php
                             //Determina si esta en modo desarrollador del framework y agrega opcion para saltar al banco de pruebas interno
                             if ($ModoDesarrolladorPractico==-10000 && PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
-                                echo '<li><a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-25:1"><i class="fa fa-steam fa-fw"></i> <b>Banco de pruebas interno</b></a></li>';
+                                echo '<li id="PCODIV_OpcionBancoPruebas"><a href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-25:1"><i class="fa fa-steam fa-fw"></i> <b>Banco de pruebas interno</b></a></li>';
                         ?>
 
 						<li class="divider"></li>
-						<li><a href="javascript:cerrar_sesion.submit();"><i class="fa fa-sign-out fa-fw texto-blink"></i> <?php echo $MULTILANG_CerrarSesion; ?> (<?php echo $MULTILANG_Aplicacion; ?>)</a></li>
+						<li id="PCODIV_OpcionCerrarSesion"><a href="javascript:cerrar_sesion.submit();"><i class="fa fa-sign-out fa-fw texto-blink"></i> <?php echo $MULTILANG_CerrarSesion; ?> (<?php echo $MULTILANG_Aplicacion; ?>)</a></li>
 						
 						<?php
 						    //Verifica si existe una sesion SAML activada y presenta la opcion para hacer cierre de sesion general
 						    if ($_SESSION['samlSessionIndex']!="" && $_SESSION['samlNameId']!="")
 						        {
 						?>
-    						<li><a href="javascript:PCOForm_CerrarSesionSAML.submit();"><i class="fa fa-sign-out fa-fw texto-blink"></i> <?php echo $MULTILANG_CerrarSesion; ?> (Todo el SSO)</a></li>
+    						<li id="PCODIV_OpcionCerrarSAML"><a href="javascript:PCOForm_CerrarSesionSAML.submit();"><i class="fa fa-sign-out fa-fw texto-blink"></i> <?php echo $MULTILANG_CerrarSesion; ?> (Todo el SSO)</a></li>
 						<?php
 		                        } //Fin si es sesion SAML
 						?>
