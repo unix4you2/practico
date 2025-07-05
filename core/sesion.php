@@ -104,7 +104,7 @@
 			if ($Auth_MotorWS!=1)
     		    {
     				$ClaveEnMD5=hash("md5", $clave);
-    				$RegistroUsuario=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE estado=1 AND login='$uid' AND clave='$ClaveEnMD5' ")->fetch();
+    				$RegistroUsuario=PCO_EjecutarSQL("SELECT * FROM core_usuario WHERE estado=1 AND login='$uid' AND clave='$ClaveEnMD5' ","$uid$_SeparadorCampos_$ClaveEnMD5")->fetch();
     				//Si encuentra el usuario activa bandera y genera XML de datos correspondiente
     				if ($RegistroUsuario["login"]!="")
     				    {
@@ -205,11 +205,11 @@
 				  {
 
 						// Busca datos del usuario Practico, sin importar metodo de autenticacion para tener configuraciones de permisos y parametros propios de la herramienta
-						$resultado_usuario=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$uid' AND es_plantilla=0 ");
+						$resultado_usuario=PCO_EjecutarSQL("SELECT * FROM core_usuario WHERE login='$uid' AND es_plantilla=0 ");
 						$registro = $resultado_usuario->fetch();
 						
 						// Se buscan datos de la aplicacion
-						$consulta_parametros=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_parametros." FROM ".$TablasCore."parametros");
+						$consulta_parametros=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_parametros." FROM core_parametros");
 						$registro_parametros = $consulta_parametros->fetch();
 
 						// Actualiza las variables de sesion con el registro
@@ -255,7 +255,7 @@
 						// Lleva a auditoria con query manual por la falta de $Login_Usuario
 						PCO_Auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$uid);
 						// Actualiza fecha del ultimo ingreso para el usuario
-						PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid");
+						PCO_EjecutarSQLUnaria("UPDATE core_usuario SET ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid");
 
 						//Copia permisos de la plantilla si aplica
 						if ($registro["plantilla_permisos"]!="")
