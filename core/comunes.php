@@ -107,7 +107,7 @@ function PCO_Base64UrlDecode($CadenaEnBase64URL)
 */
 function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
     {
-        global $PCO_ArchivoScript;
+        global $PCO_ArchivoScript,$PCOSESS_LoginUsuario;
         
         //Determina si debe o no silenciar la salida de la ejecucion.  Cualquier valor silencia la salida
         $SilenciarSalida="No";
@@ -117,11 +117,11 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
         $ResultadoEvaluacionScript="";
         
         //Recupera detalles del script 
-        $RegistroScript=PCO_EjecutarSQL("SELECT * FROM core_scripts WHERE codigo_script='$CodigoUnicoScript'")->fetch();
+        $RegistroScript=PCO_EjecutarSQL("SELECT * FROM core_scripts WHERE codigo='$CodigoUnicoScript'")->fetch();
         if ($RegistroScript["id"]!="")
             {
                 //Lleva estadística de ejecuciones 
-                PCO_EjecutarSQLUnaria("UPDATE core_scripts SET ejecuciones=ejecuciones+1 WHERE codigo_script='$CodigoUnicoScript'");
+                PCO_EjecutarSQLUnaria("UPDATE core_scripts SET ejecuciones=ejecuciones+1 WHERE codigo='$CodigoUnicoScript'");
     
                 //Sin importar el lenguaje, reemplaza cualquier variable en notacion PHP sobre el script deseado dando asi compatibilidad al transporte de variables entre lenguajes
                 $Script_CUERPO=PCO_ReemplazarVariablesPHPEnCadena($RegistroScript["cuerpo"]);
@@ -147,100 +147,111 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
                 //Valida que el lenguaje si este configurado para ejecutarse en el entorno actual
                 if ($Lenguaje_CMD_EJECUCION!="")
                     {
-                        //Crea un archivo temporal con el contenido del script
-                    	$ArchivoInclusionTemporal=PCO_GenerarArchivoTemporal();
-                    	$MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
-                    	$RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
-
-                        fwrite ( $ArchivoInclusionTemporal, $Script_CUERPO );
-
-                        //Hace una copia del archivo temporal sobre la carpeta temporal del framework que se garantiza escritura para proceso de compilacion
-                        $ArchivoAleatorio="PCOScript_".PCO_TextoAleatorio(20);
-                        $RutaArchivoFuente = "tmp/practico_scripts/".$ArchivoAleatorio.".".$Lenguaje_PRIMERAEXTENSION;
-                        @copy($RutaArchivoTemporal, $RutaArchivoFuente);
-
-                        //Si el lenguaje esta configurado para ser compilado entonces hace proceso de compilacion
-                        //TODO
-                        if (trim($Lenguaje_CMD_COMPILACION)!="")
+                        //Si el lenguaje es PHP no usa el metodo externo, se redirecciona al interno para tomar todos los contextos y funciones del framework
+                        if($Script_LENGUAJE=="PHP")
                             {
-                                echo "Scripts externos compilados no disponibles en este sistema.";
-                                /*
-                                //Ejecuta reemplazo de variable PCO_ArchivoScript dentro de los compandos en caso que se requiera
-                                $PCO_ArchivoScript=$RutaArchivoFuente; //Asigna ruta generada temporal a la variable para que sea reemplazada en el comando
-                                $Lenguaje_CMD_COMPILACION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_COMPILACION);
-
-                                //Su ubica en el path de instalacion del Framework para correr desde alli los comandos de compilacion
-                                chdir(getcwd()."/tmp/practico_scripts");
-                                //echo system("cd ".getcwd()."/tmp"."; ".$Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
-                                
-                                //system("gcc -o {$ArchivoAleatorio}.out {$ArchivoAleatorio}.c ");
-                                //system("./{$ArchivoAleatorio}.out");
-
-
-                                $ResultadoCompilacion=system($Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
-
-// echo "Temp=".$RutaArchivoTemporal;
-// echo "Comp=".$RutaArchivoFuente;
-// echo "CMD=".$Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente;
-                                // $RutaArchivoTemporal=$RutaArchivoTemporal.".out";
-                                // $Lenguaje_CMD_EJECUCION="./";
-                                // $ResultadoEvaluacionScript=system($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
-
-                                //Elimina archivo fuente copiado para compilacio
-                                @unlink ($RutaArchivoFuente);
-                                */
+                                PCO_Auditar("Usuario={$PCOSESS_LoginUsuario} EjecutaScript={$CodigoUnicoScript} Lenguaje={$Script_LENGUAJE}","SQLog:scripts");
+                                PCO_EvaluarCodigo($Script_CUERPO);
                             }
-
-                    
-                        //Ejecuta el script
-                        try
+                        else
                             {
-                                //Ejecuta reemplazo de variable PCO_ArchivoScript dentro de los compandos en caso que se requiera
-                                $PCO_ArchivoScript=$RutaArchivoTemporal; //Asigna ruta generada temporal a la variable para que sea reemplazada en el comando
-                                $Lenguaje_CMD_EJECUCION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_EJECUCION);
-
-                                //TODO OPCIONAL: intentar la ejecucion del comando base para determinar su codigo de salida y posible error previamente
-
-                                //Por ahora asume comando solo de ejecucion (lenguajes interpretados)
-                                PCO_Auditar("{$PCOSESS_LoginUsuario} Ejecuta Script={$CodigoUnicoScript} Lenguaje={$Script_LENGUAJE} Modo={$Script_MODOEJECUCION} Comando={$Lenguaje_CMD_EJECUCION} Archivo={$RutaArchivoTemporal}","SQLog:admin");
-                                if ($Script_MODOEJECUCION=="shell_exec")
+                                //Crea un archivo temporal con el contenido del script
+                            	$ArchivoInclusionTemporal=PCO_GenerarArchivoTemporal();
+                            	$MetadatosArchivoCreado = stream_get_meta_data ( $ArchivoInclusionTemporal );
+                            	$RutaArchivoTemporal = $MetadatosArchivoCreado ['uri'];
+        
+                                fwrite ( $ArchivoInclusionTemporal, $Script_CUERPO );
+        
+                                //Hace una copia del archivo temporal sobre la carpeta temporal del framework que se garantiza escritura para proceso de compilacion
+                                $ArchivoAleatorio="PCOScript_".PCO_TextoAleatorio(20);
+                                $RutaArchivoFuente = "tmp/practico_scripts/".$ArchivoAleatorio.".".$Lenguaje_PRIMERAEXTENSION;
+                                @copy($RutaArchivoTemporal, $RutaArchivoFuente);
+        
+                                //Si el lenguaje esta configurado para ser compilado entonces hace proceso de compilacion
+                                //TODO
+                                if (trim($Lenguaje_CMD_COMPILACION)!="")
                                     {
-                                    	if (function_exists('shell_exec'))
-                                            $ResultadoEvaluacionScript=shell_exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
-                                        else
-                                            echo "Su instalacion de PHP en el servidor no tiene soporte para la funcion shell_exec";
+                                        echo "Scripts externos compilados no disponibles en este sistema.";
+                                        /*
+                                        //Ejecuta reemplazo de variable PCO_ArchivoScript dentro de los compandos en caso que se requiera
+                                        $PCO_ArchivoScript=$RutaArchivoFuente; //Asigna ruta generada temporal a la variable para que sea reemplazada en el comando
+                                        $Lenguaje_CMD_COMPILACION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_COMPILACION);
+        
+                                        //Su ubica en el path de instalacion del Framework para correr desde alli los comandos de compilacion
+                                        chdir(getcwd()."/tmp/practico_scripts");
+                                        //echo system("cd ".getcwd()."/tmp"."; ".$Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
+                                        
+                                        //system("gcc -o {$ArchivoAleatorio}.out {$ArchivoAleatorio}.c ");
+                                        //system("./{$ArchivoAleatorio}.out");
+        
+        
+                                        $ResultadoCompilacion=system($Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente);
+        
+        // echo "Temp=".$RutaArchivoTemporal;
+        // echo "Comp=".$RutaArchivoFuente;
+        // echo "CMD=".$Lenguaje_CMD_COMPILACION." ".$RutaArchivoFuente;
+                                        // $RutaArchivoTemporal=$RutaArchivoTemporal.".out";
+                                        // $Lenguaje_CMD_EJECUCION="./";
+                                        // $ResultadoEvaluacionScript=system($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+        
+                                        //Elimina archivo fuente copiado para compilacio
+                                        @unlink ($RutaArchivoFuente);
+                                        */
                                     }
-                                if ($Script_MODOEJECUCION=="exec")
+        
+                            
+                                //Ejecuta el script
+                                try
                                     {
-                                        if (function_exists('exec'))
-                                            $ResultadoEvaluacionScript=exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
-                                        else
-                                            echo "Su instalacion de PHP en el servidor no tiene soporte para la funcion exec";
+                                        //Ejecuta reemplazo de variable PCO_ArchivoScript dentro de los compandos en caso que se requiera
+                                        $PCO_ArchivoScript=$RutaArchivoTemporal; //Asigna ruta generada temporal a la variable para que sea reemplazada en el comando
+                                        $Lenguaje_CMD_EJECUCION=PCO_ReemplazarVariablesPHPEnCadena($Lenguaje_CMD_EJECUCION);
+        
+                                        //TODO OPCIONAL: intentar la ejecucion del comando base para determinar su codigo de salida y posible error previamente
+        
+                                        //Por ahora asume comando solo de ejecucion (lenguajes interpretados)
+                                        PCO_Auditar("Usuario={$PCOSESS_LoginUsuario} EjecutaScript={$CodigoUnicoScript} Lenguaje={$Script_LENGUAJE} Modo={$Script_MODOEJECUCION} Comando={$Lenguaje_CMD_EJECUCION} Archivo={$ArchivoAleatorio}","SQLog:scripts");
+        
+        
+                                                if ($Script_MODOEJECUCION=="shell_exec")
+                                                    {
+                                                    	if (function_exists('shell_exec'))
+                                                            $ResultadoEvaluacionScript=shell_exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+                                                        else
+                                                            echo "Su instalacion de PHP en el servidor no tiene soporte para la funcion shell_exec";
+                                                    }
+                                                if ($Script_MODOEJECUCION=="exec")
+                                                    {
+                                                        if (function_exists('exec'))
+                                                            $ResultadoEvaluacionScript=exec($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+                                                        else
+                                                            echo "Su instalacion de PHP en el servidor no tiene soporte para la funcion exec";
+                                                    }
+                                                if ($Script_MODOEJECUCION=="system")
+                                                    {
+                                                        if (function_exists('system'))
+                                                            $ResultadoEvaluacionScript=system($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+                                                        else
+                                                            echo "Su instalacion de PHP en el servidor no tiene soporte para la funcion system";
+                                                    }
+                                                if ($Script_MODOEJECUCION=="passthru")
+                                                    {
+                                                        if (function_exists('passthru'))
+                                                            $ResultadoEvaluacionScript=passthru($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
+                                                        else
+                                                            echo "Su instalacion de PHP en el servidor no tiene soporte para la funcion passthru";
+                                                    }
                                     }
-                                if ($Script_MODOEJECUCION=="system")
+                                catch (Exception $e)
                                     {
-                                        if (function_exists('system'))
-                                            $ResultadoEvaluacionScript=system($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
-                                        else
-                                            echo "Su instalacion de PHP en el servidor no tiene soporte para la funcion system";
+                                        $MensajeErrorEjecucion="Usuario={$PCOSESS_LoginUsuario} ErrorDeScript={$CodigoUnicoScript} Lenguaje={$Script_LENGUAJE} Archivo={$ArchivoAleatorio}: ".$e->getMessage();
+                                        echo $MensajeErrorEjecucion;
+                                        PCO_Auditar($MensajeErrorEjecucion,"SECLog:event");
                                     }
-                                if ($Script_MODOEJECUCION=="passthru")
-                                    {
-                                        if (function_exists('passthru'))
-                                            $ResultadoEvaluacionScript=passthru($Lenguaje_CMD_EJECUCION." ".$RutaArchivoTemporal);
-                                        else
-                                            echo "Su instalacion de PHP en el servidor no tiene soporte para la funcion passthru";
-                                    }
-                            }
-                        catch (Exception $e)
-                            {
-                                $MensajeErrorEjecucion="{$PCOSESS_LoginUsuario} Error de ejecucion Script={$CodigoUnicoScript} Lenguaje={$Script_LENGUAJE} Archivo={$RutaArchivoTemporal}: ".$e->getMessage();
-                                echo $MensajeErrorEjecucion;
-                                PCO_Auditar($MensajeErrorEjecucion,"SECLog:event");
-                            }
-                    
-                        //Cierra el archivo de script y ademas lo elimina
-                        fclose ( $ArchivoInclusionTemporal );
+                            
+                                //Cierra el archivo de script y ademas lo elimina
+                                fclose ( $ArchivoInclusionTemporal );
+                            } //Fin Si no es PHP
                     }
                 else
                     {
@@ -281,11 +292,11 @@ function PCO_EvaluarCodigoExterno($CodigoUnicoScript,$Silenciar)
 */
 function PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie=0)
     {
-        global $LlaveDePaso,$TablasCore;
+        global $LlaveDePaso;
 		if ($LlaveDePaso==$Llave && $Formulario!="")
 		    {
     			// Busca el registro del formulario
-    			$RegistroFormulario=PCO_EjecutarSQL("SELECT id,post_script,titulo FROM ".$TablasCore."formulario WHERE id=? ","$Formulario")->fetch();
+    			$RegistroFormulario=PCO_EjecutarSQL("SELECT id,post_script,titulo FROM core_formulario WHERE id=? ","$Formulario")->fetch();
     			//Si encuentra codigo lo ejecuta
                 if ($RegistroFormulario["id"]!="")
                     {
@@ -324,7 +335,6 @@ function PCO_EjecutarCodigoPOST($Formulario,$Llave,$ByPassDie=0)
 */
 function PCO_OpenAI_CODEX($Modelo,$Prompt,$MaximoTokens,$Temperatura,$TokenParada,$ConversacionPrevia)
     {
-        global $TablasCore;
         $RespuestaAPI="";
         
         //Si no define un modelo se usa el mas completo
@@ -334,7 +344,7 @@ function PCO_OpenAI_CODEX($Modelo,$Prompt,$MaximoTokens,$Temperatura,$TokenParad
         if ($Temperatura=="") $Temperatura="0.7";
         if ($ConversacionPrevia!="") $ConversacionPrevia.=",";
 
-		$PCO_RegistroAPI_OpenAI=PCO_EjecutarSQL("SELECT api_openai,url_openai FROM ".$TablasCore."parametros WHERE 1=1 LIMIT 0,1")->fetch();
+		$PCO_RegistroAPI_OpenAI=PCO_EjecutarSQL("SELECT api_openai,url_openai FROM core_parametros WHERE 1=1 LIMIT 0,1")->fetch();
 		$PCO_API_OpenAI=$PCO_RegistroAPI_OpenAI["api_openai"];
 		$PCO_URL_OpenAI=$PCO_RegistroAPI_OpenAI["url_openai"];
 		//Si encuentra un valor de API KEY sigue adelante
@@ -706,15 +716,15 @@ function PCO_Minimizador_OptimizarJS($CodigoJS)
 */
 	function PCO_SAML_CrearUsuario($login_chk='',$nombre_chk='',$correo_chk='',$interno_chk=0,$plantilla_permisos_chk='')
 		{
-			global $TablasCore,$LlaveDePaso,$PCO_FechaOperacion,$ListaCamposSinID_usuario;
+			global $LlaveDePaso,$PCO_FechaOperacion,$ListaCamposSinID_usuario;
 			// Inserta datos del usuario
 			$clavemd5=MD5(PCO_TextoAleatorio(20));
 			$pasomd5=MD5($LlaveDePaso);
 			$descripcion="Auth:SAML";
 			//Agrega el registro de usuario si aun no existe
-			if (!PCO_ExisteValor($TablasCore."usuario","login",$login_chk))
+			if (!PCO_ExisteValor("core_usuario","login",$login_chk))
 				{
-					@PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno,plantilla_permisos,descripcion) VALUES ('$login_chk','$clavemd5','$nombre_chk',1,'$correo_chk','$PCO_FechaOperacion','$pasomd5','$interno_chk','$plantilla_permisos_chk','$descripcion')");
+					@PCO_EjecutarSQLUnaria("INSERT INTO core_usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno,plantilla_permisos,descripcion) VALUES ('$login_chk','$clavemd5','$nombre_chk',1,'$correo_chk','$PCO_FechaOperacion','$pasomd5','$interno_chk','$plantilla_permisos_chk','$descripcion')");
 					PCO_Auditar("OAuth:Agregado usuario $login_chk para SAML");
 				}
 		}
@@ -736,13 +746,13 @@ function PCO_Minimizador_OptimizarJS($CodigoJS)
 */
 	function PCO_SAML_EjecutarLogin($login_chk)
 		{
-			global $TablasCore,$uid,$ListaCamposSinID_usuario,$ListaCamposSinID_parametros,$ListaCamposSinID_parametros,$ListaCamposSinID_auditoria,$PCO_DireccionAuditoria,$PCO_HoraOperacion,$PCO_FechaOperacion,$ArchivoCORE;
+			global $uid,$ListaCamposSinID_usuario,$ListaCamposSinID_parametros,$ListaCamposSinID_parametros,$ListaCamposSinID_auditoria,$PCO_DireccionAuditoria,$PCO_HoraOperacion,$PCO_FechaOperacion,$ArchivoCORE;
 			$nombre_chk=$login_chk;
 			$correo_chk="";
             $plantilla_origen_permisos=PCO_EjecutarSQL("SELECT usuario_plantilla FROM core_samlconector WHERE activado='S' ORDER BY nombre_conector LIMIT 0,1 ")->fetchColumn();
 
 			// Busca datos del usuario Practico, segun tipo de servicio OAuth para tener configuraciones de permisos y parametros propios de la herramienta
-			$consulta_busqueda_usuario_oauth="SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$login_chk' AND descripcion LIKE '%Auth:$OAuth_servicio%' ";
+			$consulta_busqueda_usuario_oauth="SELECT $ListaCamposSinID_usuario FROM core_usuario WHERE login='$login_chk' AND descripcion LIKE '%Auth:$OAuth_servicio%' ";
 			$registro=PCO_EjecutarSQL($consulta_busqueda_usuario_oauth)->fetch();
 
 			// Agrega el usuario cuando es primer login desde el servicio
@@ -762,7 +772,7 @@ function PCO_Minimizador_OptimizarJS($CodigoJS)
 				}
 
 			// Se buscan datos de la aplicacion
-			$consulta_parametros=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_parametros." FROM ".$TablasCore."parametros");
+			$consulta_parametros=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_parametros." FROM core_parametros");
 			$registro_parametros = $consulta_parametros->fetch();
 
 			// Actualiza las variables de sesion con el registro
@@ -788,7 +798,7 @@ function PCO_Minimizador_OptimizarJS($CodigoJS)
 			// Lleva a auditoria con query manual por la falta de $PCOSESS_LoginUsuario
 			PCO_Auditar("Ingresa al sistema desde $PCO_DireccionAuditoria",$_SESSION["PCOSESS_LoginUsuario"]);
 			// Actualiza fecha del ultimo ingreso para el usuario
-			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET ultimo_acceso='$PCO_FechaOperacion' WHERE login='".$registro["login"]."'");
+			PCO_EjecutarSQLUnaria("UPDATE core_usuario SET ultimo_acceso='$PCO_FechaOperacion' WHERE login='".$registro["login"]."'");
 
 			// Redirecciona al menu
 			header("Location: ../../../index.php");
@@ -814,6 +824,9 @@ function PCO_GenerarNombreAdjunto($nombre_archivo,$campo_tabla,$extension_archiv
 {
     global $PCO_FechaOperacion,$PCO_HoraOperacion,$PCOSESS_LoginUsuario;
 
+    //Si el path cuenta con la palabra especial para ignorar el fileman entonces suprime su ruta
+    if (strpos($path_final_archivo,"_NOFILEMAN_")!==FALSE) $path_final_archivo=str_replace("mod/fileman/cargas/", "", $path_final_archivo);
+
     $valores_buscar_rem_array = array
         (
               array("_ORIGINAL_",$nombre_archivo),
@@ -823,13 +836,17 @@ function PCO_GenerarNombreAdjunto($nombre_archivo,$campo_tabla,$extension_archiv
               array("_HORAINTERNET_",date('B')),
               array("_USUARIO_",$PCOSESS_LoginUsuario),
               array("_MICRO_",date('u')),
-              array("_EXTENSION_",$extension_archivo)
+              array("_EXTENSION_",$extension_archivo),
+              array("_NOFILEMAN_","")
         );
 
     foreach ($valores_buscar_rem_array as $valores_buscar_rem) {
 
         if (strpos($path_final_archivo,$valores_buscar_rem[0])!==FALSE) $path_final_archivo=str_replace($valores_buscar_rem[0], $valores_buscar_rem[1], $path_final_archivo); // Booleana requiere === o !==
     }
+
+    //Reemplaza cualquier valor de variable recibido en el proceso
+    $path_final_archivo=PCO_ReemplazarVariablesPHPEnCadena($path_final_archivo);
 
 	return $path_final_archivo;
 }
@@ -847,9 +864,9 @@ function PCO_GenerarNombreAdjunto($nombre_archivo,$campo_tabla,$extension_archiv
 */
 function PCO_AgregarFaroAnalytics()
     {
-        global $PCO_Accion,$TablasCore,$CodigoGoogleAnalytics;
+        global $PCO_Accion,$CodigoGoogleAnalytics;
         $PosfijoGA=$_SERVER['SERVER_NAME'].'/ACT/'.$PCO_Accion.'/SCR'.$_SERVER['PHP_SELF'];
-        $RegistroParam=PCO_EjecutarSQL("SELECT nombre_empresa_corto,nombre_aplicacion FROM {$TablasCore}parametros LIMIT 0,1")->fetch();
+        $RegistroParam=PCO_EjecutarSQL("SELECT nombre_empresa_corto,nombre_aplicacion FROM core_parametros LIMIT 0,1")->fetch();
         $InfoAppGA=$RegistroParam["nombre_empresa_corto"]." - ".$RegistroParam["nombre_aplicacion"];
         // Este valor indica un ID generico de GA UA-847800-9 No edite esta linea sobre el codigo
         // Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie
@@ -973,7 +990,7 @@ function PCO_EvaluarCodigo($CadenaCodigoPHP,$ByPassSintaxis=0,$DescComplemento="
 */
 function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
     {
-        global $ArchivoCORE,$PCOSESS_LoginUsuario,$TablasCore;
+        global $ArchivoCORE,$PCOSESS_LoginUsuario;
 
         //Verifica si se trata de una opcion simple o de una agrupadora.  Si es agrupadora recorre sus opciones hijas
         if ($RegistroOpcion['tipo_menu']=='grp')
@@ -981,17 +998,17 @@ function PCO_ImprimirOpcionMenu($RegistroOpcion,$Ubicacion='',$PreUbicacion='')
     			// Si el usuario es diferente al administrador agrega condiciones al query
     			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && $Ubicacion!='formulario')
     				{
-    					$Complemento_tablas=",".$TablasCore."usuario_menu";
-    					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+    					$Complemento_tablas=",core_usuario_menu";
+    					$Complemento_condicion=" AND core_usuario_menu.menu=core_menu.hash_unico AND core_usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
     				}
 
     			if ($Ubicacion=='formulario')
-    				$Complemento_condicion=" AND ".$TablasCore."menu.formulario_vinculado=".$RegistroOpcion["formulario_vinculado"]."";  // AND nivel>0
+    				$Complemento_condicion=" AND core_menu.formulario_vinculado=".$RegistroOpcion["formulario_vinculado"]."";  // AND nivel>0
 
     			if ($Ubicacion=='lateral')
     				$Complemento_AnchoLateral=' style="width: 100%; font-size:0.95em;" ';  // Agrega porcentaje de 100% ancho a las opciones laterales
 
-    			$ResultadoOpcionesAnidadas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE padre='".$RegistroOpcion['hash_unico']."' ".@$Complemento_condicion." ORDER BY peso");
+    			$ResultadoOpcionesAnidadas=PCO_EjecutarSQL("SELECT * FROM core_menu ".@$Complemento_tablas." WHERE padre='".$RegistroOpcion['hash_unico']."' ".@$Complemento_condicion." ORDER BY peso");
     			$CadenaPreOpcion='
                     <div class="btn-group" '.$Complemento_AnchoLateral.'>
                       <button type="button" '.$Complemento_AnchoLateral.' class="btn dropdown-toggle '.$RegistroOpcion["clase_contenedor"].' " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -1383,9 +1400,9 @@ function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIcon
 		informe - ID unico de identificacion del formulario a eliminar
 
 	(start code)
-		DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'
-		DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'
-		DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario
+		DELETE FROM core_formulario WHERE id='$formulario'
+		DELETE FROM core_formulario_objeto WHERE formulario='$formulario'
+		DELETE FROM core_formulario_boton WHERE formulario=? ","$formulario
 	(end)
 
 	Salida:
@@ -1396,15 +1413,14 @@ function PCO_ImprimirPanelSimpleDashboard($ClaseColumnas,$EstiloPanel,$ClaseIcon
 */
 function PCOFUNC_EliminarInforme($informe="")
 	{
-		global $TablasCore;
 		if ($informe!="")
 			{
-				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."informe WHERE id=? ","$informe");
-				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."informe_campos WHERE informe=? ","$informe");
-				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
-				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."informe_condiciones WHERE informe=? ","$informe");
-				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."informe_boton WHERE informe=? ","$informe");
-				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? ","$informe");
+				PCO_EjecutarSQLUnaria("DELETE FROM core_informe WHERE id=? ","$informe");
+				PCO_EjecutarSQLUnaria("DELETE FROM core_informe_campos WHERE informe=? ","$informe");
+				PCO_EjecutarSQLUnaria("DELETE FROM core_informe_tablas WHERE informe=? ","$informe");
+				PCO_EjecutarSQLUnaria("DELETE FROM core_informe_condiciones WHERE informe=? ","$informe");
+				PCO_EjecutarSQLUnaria("DELETE FROM core_informe_boton WHERE informe=? ","$informe");
+				PCO_EjecutarSQLUnaria("DELETE FROM core_usuario_informe WHERE informe=? ","$informe");
 				PCO_Auditar("Elimina informe $informe");
 			}
 	}
@@ -1421,9 +1437,9 @@ function PCOFUNC_EliminarInforme($informe="")
 		formulario - ID unico de identificacion del formulario a eliminar
 
 	(start code)
-		DELETE FROM ".$TablasCore."formulario WHERE id='$formulario'
-		DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario'
-		DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario
+		DELETE FROM core_formulario WHERE id='$formulario'
+		DELETE FROM core_formulario_objeto WHERE formulario='$formulario'
+		DELETE FROM core_formulario_boton WHERE formulario=? ","$formulario
 	(end)
 
 	Salida:
@@ -1434,19 +1450,18 @@ function PCOFUNC_EliminarInforme($informe="")
 */
 function PCO_EliminarFormulario($formulario="")
 	{
-		global $TablasCore;
 		if ($formulario!="")
 			{
 			    //Elimina los eventos relacionados con sus objetos
-				$EventosFormulario=PCO_EjecutarSQL("SELECT ".$TablasCore."evento_objeto.id FROM ".$TablasCore."evento_objeto,".$TablasCore."formulario_objeto WHERE ".$TablasCore."formulario_objeto.formulario=$formulario AND ".$TablasCore."formulario_objeto.id=".$TablasCore."evento_objeto.objeto ","");
+				$EventosFormulario=PCO_EjecutarSQL("SELECT core_evento_objeto.id FROM core_evento_objeto,core_formulario_objeto WHERE core_formulario_objeto.formulario=$formulario AND core_formulario_objeto.id=core_evento_objeto.objeto ","");
 	            while($RegistroEventosFormulario=$EventosFormulario->fetch())
-		            PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."evento_objeto WHERE id=? ",$RegistroEventosFormulario["id"]);
+		            PCO_EjecutarSQLUnaria("DELETE FROM core_evento_objeto WHERE id=? ",$RegistroEventosFormulario["id"]);
 
-				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."formulario WHERE id=? ","$formulario");
+				PCO_EjecutarSQLUnaria("DELETE FROM core_formulario WHERE id=? ","$formulario");
 
-				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."formulario_objeto WHERE formulario=? ","$formulario");
-				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."formulario_boton WHERE formulario=? ","$formulario");
-				PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE formulario_vinculado=? ","$formulario");
+				PCO_EjecutarSQLUnaria("DELETE FROM core_formulario_objeto WHERE formulario=? ","$formulario");
+				PCO_EjecutarSQLUnaria("DELETE FROM core_formulario_boton WHERE formulario=? ","$formulario");
+				PCO_EjecutarSQLUnaria("DELETE FROM core_menu WHERE formulario_vinculado=? ","$formulario");
 				PCO_Auditar("Elimina formulario $formulario");
 			}
 	}
@@ -1561,7 +1576,7 @@ function PCO_ImportarScriptsPHP($ByPassControlDesarrollo)
 */
 function PCO_ExportarDefinicionesXML($TipoElementos,$ListaElementos,$tipo_copia_objeto)
     {
-        global $ModoDesarrolladorPractico,$PCO_FechaOperacion,$PCO_HoraOperacion,$TablasCore;
+        global $ModoDesarrolladorPractico,$PCO_FechaOperacion,$PCO_HoraOperacion;
         $ArregloElementosExportacion=PCO_ParsearListasElementos($ListaElementos);
         foreach ($ArregloElementosExportacion as $ElementoExportar)
             {
@@ -1580,7 +1595,7 @@ function PCO_ExportarDefinicionesXML($TipoElementos,$ListaElementos,$tipo_copia_
                         if ($TipoElementos=="Inf")
                             {
                                 //Verifica primero que si exista el ID de informe asociado antes de proceder
-                                $RegistroElemento=@PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."informe WHERE id = '$ElementoExportar' ")->fetch();
+                                $RegistroElemento=@PCO_EjecutarSQL("SELECT id FROM core_informe WHERE id = '$ElementoExportar' ")->fetch();
                                 if ($RegistroElemento["id"]!="")
                                     {
                                         $PCO_NombreArchivoXML=$PrefijoPath."RepID_".$ElementoExportar.$InfijoPath.".xml";
@@ -1590,12 +1605,23 @@ function PCO_ExportarDefinicionesXML($TipoElementos,$ListaElementos,$tipo_copia_
                         //Exporta elementos tipo formulario
                         if ($TipoElementos=="Frm")
                             {
-                                //Verifica primero que si exista el ID de informe asociado antes de proceder
-                                $RegistroElemento=@PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."formulario WHERE id = '$ElementoExportar' ")->fetch();
+                                //Verifica primero que si exista el ID de formulario asociado antes de proceder
+                                $RegistroElemento=@PCO_EjecutarSQL("SELECT id FROM core_formulario WHERE id = '$ElementoExportar' ")->fetch();
                                 if ($RegistroElemento["id"]!="")
                                     {
                                         $PCO_NombreArchivoXML=$PrefijoPath."FormID_".$ElementoExportar.$InfijoPath.".xml";
                                         PCO_ExportarXMLFormulario($ElementoExportar,$tipo_copia_objeto,$PCO_NombreArchivoXML);
+                                    }
+                            }
+                        //Exporta elementos tipo script personalizado
+                        if ($TipoElementos=="Scr")
+                            {
+                                //Verifica primero que si exista el codigo de script asociado antes de proceder
+                                $RegistroElemento=@PCO_EjecutarSQL("SELECT codigo FROM core_scripts WHERE codigo = '$ElementoExportar' ")->fetch();
+                                if ($RegistroElemento["codigo"]!="")
+                                    {
+                                        $PCO_NombreArchivoXML=$PrefijoPath."ScriptID_".$ElementoExportar.$InfijoPath.".xml";
+                                        PCO_ExportarXMLScript($ElementoExportar,$PCO_NombreArchivoXML);
                                     }
                             }
                     }
@@ -1682,7 +1708,7 @@ function PCO_ParsearListasElementos($ListaElementos)
                 else
                     {
                         //Revisa que el rango si sea un numero antero antes de seguir
-                        if (is_numeric($Rango))
+                        //if (is_numeric($Rango))   //Previo a exportacion de scripts validaba elementos individuales para ver si eran numeros ID de elementos.  En scripts son cadenas.
                             $ArregloElementos[]=$Rango;
                     }
             }
@@ -1706,7 +1732,7 @@ function PCO_ParsearListasElementos($ListaElementos)
 */
 function PCO_ImportarXMLFormulario($xml_importado)
     {
-        global $ListaCamposSinID_menu,$ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$TablasCore,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
+        global $ListaCamposSinID_menu,$ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
         $xml_importado = @simplexml_load_string($xml_importado); // Usa SimpleXML Directamente para interpretar cadena
 
 				//Si es tipo estatico elimina el formulario existente con el mismo ID
@@ -1741,7 +1767,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 				$post_script=base64_decode($xml_importado->core_formulario[0]->post_script);
 				$modulo=base64_decode($xml_importado->core_formulario[0]->modulo);
 				// Inserta el nuevo objeto al form
-				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposParaID.$ListaCamposSinID_formulario.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$modulo");
+				PCO_EjecutarSQLUnaria("INSERT INTO core_formulario (".$ListaCamposParaID.$ListaCamposSinID_formulario.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$modulo");
 
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
@@ -1771,7 +1797,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
 						//Inserta el nuevo objeto al form
-						PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+						PCO_EjecutarSQLUnaria("INSERT INTO core_formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 
                         //Determina cual fue el ID para el ultimo elemento insertado
 						$idObjetoInsertadoParaEvento=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
@@ -1788,7 +1814,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
                                 if ($RegistroEvento_objeto==$IDOriginalObjeto)
                                     {
     									$CadenaValoresEventos="{$idObjetoInsertadoParaEvento}{$_SeparadorCampos_}{$RegistroEvento_evento}{$_SeparadorCampos_}{$RegistroEvento_javascript}";
-    									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."evento_objeto ($ListaCamposSinID_evento_objeto) VALUES (?,?,?) ","$CadenaValoresEventos");
+    									PCO_EjecutarSQLUnaria("INSERT INTO core_evento_objeto ($ListaCamposSinID_evento_objeto) VALUES (?,?,?) ","$CadenaValoresEventos");
                                     }
         					}
 					}
@@ -1814,7 +1840,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
 						//Inserta el nuevo objeto al form
-						PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+						PCO_EjecutarSQLUnaria("INSERT INTO core_formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 					}
 
 				//Determina cuantos campos tiene la tabla
@@ -1838,7 +1864,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
 						//Inserta el nuevo objeto al form
-						PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu ($ListaCamposSinID_menu) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+						PCO_EjecutarSQLUnaria("INSERT INTO core_menu ($ListaCamposSinID_menu) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 					}
 
         return $idObjetoInsertado;
@@ -1865,7 +1891,7 @@ function PCO_ImportarXMLFormulario($xml_importado)
 */
 function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArchivoXML="")
     {
-        global $ArchivoCORE,$ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$TablasCore,$ListaCamposSinID_menu,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
+        global $ArchivoCORE,$ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$ListaCamposSinID_menu,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
         global $MULTILANG_ErrorDatos,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_FrmMsjCopia,$MULTILANG_FrmTipoCopiaExporta,$MULTILANG_FrmCopiaFinalizada,$MULTILANG_IrEscritorio,$MULTILANG_Descargar;
         global $PCO_VersionActual,$Nombre_Aplicacion,$Version_Aplicacion,$PCOSESS_LoginUsuario,$PCO_FechaOperacionGuiones,$PCO_HoraOperacionPuntos,$PCO_FechaOperacion,$PCO_HoraOperacion;
         global $MULTILANG_Editar,$MULTILANG_Objeto;
@@ -1884,7 +1910,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 					if ($tipo_copia_objeto=="EnLinea")
 						{
 							// Busca datos y Crea copia del formulario
-							$consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
+							$consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM core_formulario WHERE id=?","$formulario");
 							$registro = $consulta->fetch();
 							// Establece valores para cada campo a insertar en el nuevo form
 							/* ##########################################################################################################*/
@@ -1906,7 +1932,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$post_script=$registro["post_script"];
 							$modulo=$registro["modulo"];
 							// Inserta el nuevo objeto al form
-							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$modulo");
+							PCO_EjecutarSQLUnaria("INSERT INTO core_formulario (".$ListaCamposSinID_formulario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$ayuda_titulo$_SeparadorCampos_$ayuda_texto$_SeparadorCampos_$tabla_datos$_SeparadorCampos_$columnas$_SeparadorCampos_$javascript$_SeparadorCampos_$borde_visible$_SeparadorCampos_$estilo_pestanas$_SeparadorCampos_$id_html$_SeparadorCampos_$tipo_maquetacion$_SeparadorCampos_$css_columnas$_SeparadorCampos_$estilo_ventana$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$modulo");
 							$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
 							// Busca los elementos que componen el formulario para hacerles la copia
@@ -1914,7 +1940,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$ArregloCampos=explode(',',$ListaCamposSinID_formulario_objeto);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de formulario_objeto
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER by PCOBD_Peso,id","$formulario");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_formulario_objeto WHERE formulario=? ORDER by PCOBD_Peso,id","$formulario");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -1931,13 +1957,13 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al form
-									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+									PCO_EjecutarSQLUnaria("INSERT INTO core_formulario_objeto ($ListaCamposSinID_formulario_objeto) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 
 									//Por cada elemento busca si tiene eventos y los copia tambien
 									$idObjetoInsertadoParaEvento=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 									$ArregloCamposEvento=explode(',',$ListaCamposSinID_evento_objeto);
 							        $TotalCamposEvento=count($ArregloCamposEvento);
-        							$consulta_eventos=PCO_EjecutarSQL("SELECT ".$TablasCore."evento_objeto.* FROM ".$TablasCore."evento_objeto WHERE ".$TablasCore."evento_objeto.objeto=? ",$registro["id"]);
+        							$consulta_eventos=PCO_EjecutarSQL("SELECT core_evento_objeto.* FROM core_evento_objeto WHERE core_evento_objeto.objeto=? ",$registro["id"]);
         							while($registro_eventos = $consulta_eventos->fetch())
         								{
         									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -1951,7 +1977,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
         											$CadenaValoresEventos.=$_SeparadorCampos_.$registro_eventos[$PCOCampoEvento+1];
         										}
         									//Inserta el nuevo objeto al form
-        									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."evento_objeto ($ListaCamposSinID_evento_objeto) VALUES ($CadenaInterrogantesEventos) ","$CadenaValoresEventos");
+        									PCO_EjecutarSQLUnaria("INSERT INTO core_evento_objeto ($ListaCamposSinID_evento_objeto) VALUES ($CadenaInterrogantesEventos) ","$CadenaValoresEventos");
         								}
 								}
 
@@ -1959,7 +1985,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$ArregloCampos=explode(',',$ListaCamposSinID_formulario_boton);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de formulario_boton
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ORDER BY peso,id","$formulario");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_formulario_boton WHERE formulario=? ORDER BY peso,id","$formulario");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -1976,7 +2002,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al form
-									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+									PCO_EjecutarSQLUnaria("INSERT INTO core_formulario_boton ($ListaCamposSinID_formulario_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 								}
 
 
@@ -1984,8 +2010,8 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$ArregloCampos=explode(',',$ListaCamposSinID_menu);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de formulario_boton
-							//$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu WHERE formulario_vinculado=? AND padre=0 ORDER BY peso,id","$formulario");
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu WHERE formulario_vinculado=? ORDER BY peso,id","$formulario");
+							//$consulta=PCO_EjecutarSQL("SELECT * FROM core_menu WHERE formulario_vinculado=? AND padre=0 ORDER BY peso,id","$formulario");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_menu WHERE formulario_vinculado=? ORDER BY peso,id","$formulario");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -2002,7 +2028,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta los menues correspondientes al form
-									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."menu ($ListaCamposSinID_menu) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+									PCO_EjecutarSQLUnaria("INSERT INTO core_menu ($ListaCamposSinID_menu) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 								}
 
 
@@ -2040,13 +2066,13 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$Contenido_XML .= "
 	<core_formulario>";
 							// Busca datos y genera XML de cada registro
-							$consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario");
+							$consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM core_formulario WHERE id=?","$formulario");
 							$registro = $consulta->fetch();
 							$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_formulario);
 							$Contenido_XML .= "
 	</core_formulario>";
 							// Registros de formulario_objeto
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario=? ORDER BY PCOBD_Peso,id","$formulario");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_formulario_objeto WHERE formulario=? ORDER BY PCOBD_Peso,id","$formulario");
 							$conteo_elementos_xml=0;
 							while($registro = $consulta->fetch())
 								{
@@ -2064,7 +2090,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$conteo_elementos_xml=0;
 
 							// Registros de eventos por formulario_objeto
-							$consulta=PCO_EjecutarSQL("SELECT ".$TablasCore."evento_objeto.* FROM ".$TablasCore."evento_objeto,".$TablasCore."formulario_objeto WHERE ".$TablasCore."formulario_objeto.id=".$TablasCore."evento_objeto.objeto  AND ".$TablasCore."formulario_objeto.formulario=?","$formulario");
+							$consulta=PCO_EjecutarSQL("SELECT core_evento_objeto.* FROM core_evento_objeto,core_formulario_objeto WHERE core_formulario_objeto.id=core_evento_objeto.objeto  AND core_formulario_objeto.formulario=?","$formulario");
 							$conteo_elementos_xml=0;
 							while($registro = $consulta->fetch())
 								{
@@ -2082,7 +2108,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$conteo_elementos_xml=0;
 
 							// Registros de formulario_boton
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario=? ORDER BY peso,id","$formulario");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_formulario_boton WHERE formulario=? ORDER BY peso,id","$formulario");
 							while($registro = $consulta->fetch())
 								{
 									//Exporta la tabla de core_formulario_objeto
@@ -2099,7 +2125,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 							$conteo_elementos_xml=0;
 
 							// Registros de menu
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu WHERE formulario_vinculado=? ORDER BY peso,id","$formulario");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_menu WHERE formulario_vinculado=? ORDER BY peso,id","$formulario");
 							while($registro = $consulta->fetch())
 								{
 									//Exporta la tabla de core_menu
@@ -2151,6 +2177,90 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 ########################################################################
 ########################################################################
 /*
+	Function: PCO_ExportarXMLScript
+	Exporta las especificaciones de un script personalizado a una cadena XML valida dentro de un archivo especificado
+
+	Variables de entrada:
+
+		codigo - Identificador unico del script personalizado que se desea exportar
+
+	Salida:
+
+		Archivo con el elemento exportado
+*/
+function PCO_ExportarXMLScript($codigo,$PCO_NombreArchivoXML="")
+    {
+        global $ArchivoCORE,$_SeparadorCampos_,$ListaCamposSinID_scripts,$ConexionPDO;
+        global $MULTILANG_ErrorDatos,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Descargar;
+        global $PCO_VersionActual,$Nombre_Aplicacion,$Version_Aplicacion,$PCOSESS_LoginUsuario,$PCO_FechaOperacionGuiones,$PCO_HoraOperacionPuntos,$PCO_FechaOperacion,$PCO_HoraOperacion;
+
+			$mensaje_error="";
+			if ($codigo=="")
+				$mensaje_error=$MULTILANG_ErrorTiempoEjecucion.".  No ingreso ID de Script personalizado / Custom Script ID not entered";
+			$tipo_copia_objeto=="XML_IdEstatico";
+
+			$Contenido_XML="";
+
+			if ($mensaje_error=="")
+				{
+							// Inicia el archivo XML
+							$Contenido_XML.="<?xml version=\"1.0\" encoding=\"utf-8\" ?>
+<objetos_practicos>
+	<descripcion>
+		<tipo_objeto>Script</tipo_objeto>
+		<version_practico>$PCO_VersionActual</version_practico>
+		<tipo_exportacion>$tipo_copia_objeto</tipo_exportacion>
+		<sistema_origen>$Nombre_Aplicacion</sistema_origen>
+		<version>$Version_Aplicacion</version>
+		<usuario_generador>$PCOSESS_LoginUsuario</usuario_generador>
+		<fecha_exportacion>$PCO_FechaOperacionGuiones</fecha_exportacion>
+		<hora_exportacion>$PCO_HoraOperacionPuntos</hora_exportacion>
+	</descripcion>";
+							// Exporta tabla core_scripts
+							$Contenido_XML .= "
+	<core_scripts>";
+							// Busca datos y genera XML de cada registro
+							$consulta=PCO_EjecutarSQL("SELECT id,$ListaCamposSinID_scripts FROM core_scripts WHERE codigo=?","$codigo");
+							$registro = $consulta->fetch();
+							$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_scripts);
+							$Contenido_XML .= "
+	</core_scripts>";
+							// Finaliza el archivo XML
+							$Contenido_XML .= "
+</objetos_practicos>";
+
+							PCO_Auditar("Crea copia $tipo_copia_objeto de script personalizado $codigo");
+
+							//Guarda la cadena generada en el archivo XML
+							if ($PCO_NombreArchivoXML=="")
+        						$PCO_NombreArchivoXML="tmp/ScriptID_".$codigo."_".$PCO_FechaOperacion."_".$PCO_HoraOperacion.".xml";
+							$PCO_PunteroArchivo = fopen($PCO_NombreArchivoXML, "w");
+							if($PCO_PunteroArchivo==false)
+								die("No se puede abrir el archivo de exportacion");
+							fputs ($PCO_PunteroArchivo, $Contenido_XML);
+							fclose ($PCO_PunteroArchivo);
+
+							//Presenta la ventana con informacion y enlace de descarga
+							?>
+								<a class="btn btn-success btn-block" href="<?php echo $PCO_NombreArchivoXML; ?>" target="_BLANK" download><i class="fa fa-floppy-o"></i> <?php echo $MULTILANG_Descargar." ".$PCO_NombreArchivoXML; ?></a>
+							<?php
+				}
+			else
+				{
+					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
+						<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
+						<input type="Hidden" name="PCO_Objeto" value="frm:-38:1">
+						<input type="Hidden" name="PCO_ErrorTitulo" value="'.$MULTILANG_ErrorDatos.'">
+						<input type="Hidden" name="PCO_ErrorDescripcion" value="'.$mensaje_error.'">
+						</form>
+						<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
+				}
+    }
+
+
+########################################################################
+########################################################################
+/*
 	Function: PCO_ImportarXMLInforme
 	Importa una cadena XML con la especificacion de un informe al sistema
 
@@ -2164,7 +2274,7 @@ function PCO_ExportarXMLFormulario($formulario,$tipo_copia_objeto,$PCO_NombreArc
 */
 function PCO_ImportarXMLInforme($xml_importado)
     {
-        global $_SeparadorCampos_,$TablasCore,$ListaCamposSinID_informe,$ConexionPDO,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_boton;
+        global $_SeparadorCampos_,$ListaCamposSinID_informe,$ConexionPDO,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_boton;
         $xml_importado = @simplexml_load_string($xml_importado); // Usa SimpleXML Directamente para interpretar cadena
 				//Si es tipo estatico elimina el informe existente con el mismo ID
 				$ListaCamposParaID="";
@@ -2228,7 +2338,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 				$modulo=base64_decode($xml_importado->core_informe[0]->modulo);
 
 				// Inserta el nuevo informe
-				PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$permitido_home$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$usar_ajax$_SeparadorCampos_$definir_cols$_SeparadorCampos_$pane_activado$_SeparadorCampos_$pane_cascada$_SeparadorCampos_$pane_colapsado$_SeparadorCampos_$pane_columnas$_SeparadorCampos_$pane_subtotalesrelativos$_SeparadorCampos_$pane_conteos$_SeparadorCampos_$pane_controles$_SeparadorCampos_$pane_control_colapsar$_SeparadorCampos_$pane_control_ordenar$_SeparadorCampos_$modulo");
+				PCO_EjecutarSQLUnaria("INSERT INTO core_informe (".$ListaCamposParaID.$ListaCamposSinID_informe.") VALUES (".$InterroganteParaID."?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$ValorInsercionParaID$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$permitido_home$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$usar_ajax$_SeparadorCampos_$definir_cols$_SeparadorCampos_$pane_activado$_SeparadorCampos_$pane_cascada$_SeparadorCampos_$pane_colapsado$_SeparadorCampos_$pane_columnas$_SeparadorCampos_$pane_subtotalesrelativos$_SeparadorCampos_$pane_conteos$_SeparadorCampos_$pane_controles$_SeparadorCampos_$pane_control_colapsar$_SeparadorCampos_$pane_control_ordenar$_SeparadorCampos_$modulo");
 
 				//Determina el ID del registro
 				if ($xml_importado->descripcion[0]->tipo_exportacion=="XML_IdEstatico")
@@ -2258,7 +2368,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
 						//Inserta el nuevo objeto al informe
-						PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_condiciones ($ListaCamposSinID_informe_condiciones) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+						PCO_EjecutarSQLUnaria("INSERT INTO core_informe_condiciones ($ListaCamposSinID_informe_condiciones) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 					}
 
 				//Determina cuantos campos tiene la tabla
@@ -2282,7 +2392,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
 						//Inserta el nuevo objeto al informe
-						PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_tablas ($ListaCamposSinID_informe_tablas) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+						PCO_EjecutarSQLUnaria("INSERT INTO core_informe_tablas ($ListaCamposSinID_informe_tablas) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 					}
 
 				//Determina cuantos campos tiene la tabla
@@ -2306,7 +2416,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
 						//Inserta el nuevo objeto al informe
-						PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_campos ($ListaCamposSinID_informe_campos) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+						PCO_EjecutarSQLUnaria("INSERT INTO core_informe_campos ($ListaCamposSinID_informe_campos) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 					}
 
 				//Determina cuantos campos tiene la tabla
@@ -2330,7 +2440,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 									$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 							}
 						//Inserta el nuevo objeto al informe
-						PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_boton ($ListaCamposSinID_informe_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+						PCO_EjecutarSQLUnaria("INSERT INTO core_informe_boton ($ListaCamposSinID_informe_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 					}
         return $idObjetoInsertado;
     }
@@ -2356,7 +2466,7 @@ function PCO_ImportarXMLInforme($xml_importado)
 */
 function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXML="")
     {
-        global $ArchivoCORE,$ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$TablasCore,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
+        global $ArchivoCORE,$ListaCamposSinID_evento_objeto,$_SeparadorCampos_,$ListaCamposSinID_formulario,$ConexionPDO,$ListaCamposSinID_formulario_objeto,$ListaCamposSinID_formulario_boton;
         global $MULTILANG_ErrorDatos,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_FrmMsjCopia,$MULTILANG_FrmTipoCopiaExporta,$MULTILANG_FrmCopiaFinalizada,$MULTILANG_IrEscritorio,$MULTILANG_Descargar;
         global $PCO_VersionActual,$Nombre_Aplicacion,$Version_Aplicacion,$PCOSESS_LoginUsuario,$PCO_FechaOperacionGuiones,$PCO_HoraOperacionPuntos,$PCO_FechaOperacion,$PCO_HoraOperacion;
         global $ListaCamposSinID_informe,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_boton;
@@ -2376,7 +2486,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 					if ($tipo_copia_objeto=="EnLinea")
 						{
 							// Busca datos y Crea copia del informe
-							$consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=?","$informe");
+							$consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM core_informe WHERE id=?","$informe");
 							$registro = $consulta->fetch();
 							// Establece valores para cada campo a insertar en el nuevo informe
 							/* ##########################################################################################################*/
@@ -2428,7 +2538,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							$modulo=$registro["modulo"];
 
 							// Inserta el nuevo informe
-							PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$permitido_home$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$usar_ajax$_SeparadorCampos_$definir_cols$_SeparadorCampos_$pane_activado$_SeparadorCampos_$pane_cascada$_SeparadorCampos_$pane_colapsado$_SeparadorCampos_$pane_columnas$_SeparadorCampos_$pane_subtotalesrelativos$_SeparadorCampos_$pane_conteos$_SeparadorCampos_$pane_controles$_SeparadorCampos_$pane_control_colapsar$_SeparadorCampos_$pane_control_ordenar$_SeparadorCampos_$modulo");
+							PCO_EjecutarSQLUnaria("INSERT INTO core_informe (".$ListaCamposSinID_informe.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ","$titulo$_SeparadorCampos_$descripcion$_SeparadorCampos_$categoria$_SeparadorCampos_$agrupamiento$_SeparadorCampos_$ordenamiento$_SeparadorCampos_$ancho$_SeparadorCampos_$alto$_SeparadorCampos_$formato_final$_SeparadorCampos_$formato_grafico$_SeparadorCampos_$genera_pdf$_SeparadorCampos_$variables_filtro$_SeparadorCampos_$soporte_datatable$_SeparadorCampos_$formulario_filtrado$_SeparadorCampos_$tamano_paginacion$_SeparadorCampos_$subtotales_columna$_SeparadorCampos_$subtotales_formato$_SeparadorCampos_$conexion_origen_datos$_SeparadorCampos_$consulta_sql$_SeparadorCampos_$tooltip_titulo$_SeparadorCampos_$exportar_dtclp$_SeparadorCampos_$exportar_dtcsv$_SeparadorCampos_$exportar_dtxls$_SeparadorCampos_$exportar_dtpdf$_SeparadorCampos_$ocultar_encabezado$_SeparadorCampos_$ocultar_piepagina$_SeparadorCampos_$anular_acciones$_SeparadorCampos_$encabezado_html$_SeparadorCampos_$tabla_responsive$_SeparadorCampos_$permitido_home$_SeparadorCampos_$javascript$_SeparadorCampos_$pre_script$_SeparadorCampos_$post_script$_SeparadorCampos_$usar_ajax$_SeparadorCampos_$definir_cols$_SeparadorCampos_$pane_activado$_SeparadorCampos_$pane_cascada$_SeparadorCampos_$pane_colapsado$_SeparadorCampos_$pane_columnas$_SeparadorCampos_$pane_subtotalesrelativos$_SeparadorCampos_$pane_conteos$_SeparadorCampos_$pane_controles$_SeparadorCampos_$pane_control_colapsar$_SeparadorCampos_$pane_control_ordenar$_SeparadorCampos_$modulo");
 
 							$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 
@@ -2437,7 +2547,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_condiciones);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de informe_condiciones
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe=? ORDER BY peso,id","$informe");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_informe_condiciones WHERE informe=? ORDER BY peso,id","$informe");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -2454,14 +2564,14 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al informe
-									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_condiciones ($ListaCamposSinID_informe_condiciones) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+									PCO_EjecutarSQLUnaria("INSERT INTO core_informe_condiciones ($ListaCamposSinID_informe_condiciones) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 								}
 
 							//Determina cuantos tablas tiene la tabla
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_tablas);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de informe_tablas
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_informe_tablas WHERE informe=? ","$informe");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -2478,7 +2588,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al informe
-									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_tablas ($ListaCamposSinID_informe_tablas) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+									PCO_EjecutarSQLUnaria("INSERT INTO core_informe_tablas ($ListaCamposSinID_informe_tablas) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 								}
 
 
@@ -2486,7 +2596,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_campos);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de informe_campos
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso,id","$informe");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_informe_campos WHERE informe=? ORDER BY peso,id","$informe");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -2503,14 +2613,14 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al informe
-									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_campos ($ListaCamposSinID_informe_campos) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+									PCO_EjecutarSQLUnaria("INSERT INTO core_informe_campos ($ListaCamposSinID_informe_campos) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 								}
 
 							//Determina cuantos botones tiene la tabla
 							$ArregloCampos=explode(',',$ListaCamposSinID_informe_boton);
 							$TotalCampos=count($ArregloCampos);
 							// Registros de informe_boton
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe_boton WHERE informe=? ORDER BY peso,id","$informe");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_informe_boton WHERE informe=? ORDER BY peso,id","$informe");
 							while($registro = $consulta->fetch())
 								{
 									//Genera cadena de interrogantes y valores segun cantidad de campos
@@ -2527,7 +2637,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 												$CadenaValores.=$_SeparadorCampos_.$idObjetoInsertado;
 										}
 									//Inserta el nuevo objeto al informe
-									PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."informe_boton ($ListaCamposSinID_informe_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
+									PCO_EjecutarSQLUnaria("INSERT INTO core_informe_boton ($ListaCamposSinID_informe_boton) VALUES ($CadenaInterrogantes) ","$CadenaValores");
 								}
 
 							PCO_Auditar("Crea copia de informe $informe");
@@ -2564,13 +2674,13 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							$Contenido_XML .= "
 	<core_informe>";
 							// Busca datos y genera XML de cada registro
-							$consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=?","$informe");
+							$consulta=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM core_informe WHERE id=?","$informe");
 							$registro = $consulta->fetch();
 							$Contenido_XML .=PCO_ConvertirRegistroXML($registro,"id,".$ListaCamposSinID_informe);
 							$Contenido_XML .= "
 	</core_informe>";
 							// Registros de informe_boton
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe_boton WHERE informe=? ORDER BY peso,id","$informe");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_informe_boton WHERE informe=? ORDER BY peso,id","$informe");
 							$conteo_elementos_xml=0;
 							while($registro = $consulta->fetch())
 								{
@@ -2588,7 +2698,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							$conteo_elementos_xml=0;
 
 							// Registros de informe_campos
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso,id","$informe");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_informe_campos WHERE informe=? ORDER BY peso,id","$informe");
 							while($registro = $consulta->fetch())
 								{
 									//Exporta la tabla de core_informe_campos
@@ -2605,7 +2715,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							$conteo_elementos_xml=0;
 
 							// Registros de informe_condiciones
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe=? ORDER BY peso,id","$informe");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_informe_condiciones WHERE informe=? ORDER BY peso,id","$informe");
 							while($registro = $consulta->fetch())
 								{
 									//Exporta la tabla de core_informe_condiciones
@@ -2622,7 +2732,7 @@ function PCO_ExportarXMLInforme($informe,$tipo_copia_objeto,$PCO_NombreArchivoXM
 							$conteo_elementos_xml=0;
 
 							// Registros de informe_tablas
-							$consulta=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe_tablas WHERE informe=?","$informe");
+							$consulta=PCO_EjecutarSQL("SELECT * FROM core_informe_tablas WHERE informe=?","$informe");
 							while($registro = $consulta->fetch())
 								{
 									//Exporta la tabla de core_informe_tablas
@@ -2968,8 +3078,8 @@ function PCO_EsDispositivoMovil()
 */
 function PCO_EsUsuarioInterno($Usuario)
 	{
-	    global $ListaCamposSinID_usuario,$TablasCore;
-	    $RegistroUsuario=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login='$Usuario' ")->fetch();
+	    global $ListaCamposSinID_usuario;
+	    $RegistroUsuario=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM core_usuario WHERE login='$Usuario' ")->fetch();
 	    return $RegistroUsuario["usuario_interno"];
 	}
 
@@ -2990,7 +3100,13 @@ function PCO_EsUsuarioInterno($Usuario)
 function PCO_EsAdministrador($Usuario)
 	{
 		global $PCOVAR_Administradores;
-		$ArregloAdmins=explode(",",$PCOVAR_Administradores);
+		$ListaAdministradores=$PCOVAR_Administradores;
+
+		$PCOVAR_ListaUsuarios=PCO_EjecutarSQL("SELECT usuarios_desarroladores FROM core_parametros WHERE 1=1 LIMIT 0,1")->fetchColumn();
+		if ($PCOVAR_ListaUsuarios!="")
+		    $ListaAdministradores=$ListaAdministradores.",".$PCOVAR_ListaUsuarios;
+
+		$ArregloAdmins=explode(",",$ListaAdministradores);
 
 		//Recorre el arreglo de super-usuarios
 		$Resultado = 0;
@@ -2998,6 +3114,66 @@ function PCO_EsAdministrador($Usuario)
 			foreach ($ArregloAdmins as $UsuarioAdmin)
 				{
 					if (trim($UsuarioAdmin)==$Usuario)
+						$Resultado = 1;
+				}
+		return $Resultado;
+	}
+
+
+########################################################################
+########################################################################
+/*
+	// Function: PCO_EsDesplegador
+	Determina si un login de usuario es desplegador (deployer) de plataforma o no
+
+	Variables de entrada:
+
+		Usuario - Login de usuario a verificar
+
+	Salida:
+		Cero (0) o uno (1) segun la pertenencia o no del usuario al grupo de deployers
+*/
+function PCO_EsDesplegador($Usuario)
+	{
+		$PCOVAR_ListaUsuarios=PCO_EjecutarSQL("SELECT usuarios_desplegadores FROM core_parametros WHERE 1=1 LIMIT 0,1")->fetchColumn();
+		$ArregloUsuario=explode(",",$PCOVAR_ListaUsuarios);
+
+		//Recorre el arreglo de super-usuarios
+		$Resultado = 0;
+		if ($Usuario!="")
+			foreach ($ArregloUsuario as $UsuarioEvaluado)
+				{
+					if (trim($UsuarioEvaluado)==$Usuario)
+						$Resultado = 1;
+				}
+		return $Resultado;
+	}
+
+
+########################################################################
+########################################################################
+/*
+	// Function: PCO_EsEmpaquetador
+	Determina si un login de usuario es empaquetador (packager) de plataforma o no
+
+	Variables de entrada:
+
+		Usuario - Login de usuario a verificar
+
+	Salida:
+		Cero (0) o uno (1) segun la pertenencia o no del usuario al grupo de deployers
+*/
+function PCO_EsEmpaquetador($Usuario)
+	{
+		$PCOVAR_ListaUsuarios=PCO_EjecutarSQL("SELECT usuarios_empaquetadores FROM core_parametros WHERE 1=1 LIMIT 0,1")->fetchColumn();
+		$ArregloUsuario=explode(",",$PCOVAR_ListaUsuarios);
+
+		//Recorre el arreglo de super-usuarios
+		$Resultado = 0;
+		if ($Usuario!="")
+			foreach ($ArregloUsuario as $UsuarioEvaluado)
+				{
+					if (trim($UsuarioEvaluado)==$Usuario)
 						$Resultado = 1;
 				}
 		return $Resultado;
@@ -3217,17 +3393,17 @@ function PCO_SegmentarSQL($sql)
 */
 function PCO_CopiarPermisos($usuario_origen="",$usuario_destino="")
     {
-		global $TablasCore,$ListaCamposSinID_usuario_menu,$_SeparadorCampos_;
+		global $ListaCamposSinID_usuario_menu,$_SeparadorCampos_;
 		// Elimina opciones existentes
-		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$usuario_destino");
+		PCO_EjecutarSQLUnaria("DELETE FROM core_usuario_menu WHERE usuario=? ","$usuario_destino");
 		// Copia permisos si el usuario origen es diferente de vacio, sino lo deja sin nada
         if ($usuario_origen!="")
             {
-                $resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario='$usuario_origen' ");
+                $resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_usuario_menu." FROM core_usuario_menu WHERE usuario='$usuario_origen' ");
                 while($registro = $resultado->fetch())
                     {
                         $menuinsertar=$registro["menu"];
-                        PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuario_destino$_SeparadorCampos_$menuinsertar");
+                        PCO_EjecutarSQLUnaria("INSERT INTO core_usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuario_destino$_SeparadorCampos_$menuinsertar");
                     }
             }
     }
@@ -3249,17 +3425,17 @@ function PCO_CopiarPermisos($usuario_origen="",$usuario_destino="")
 */
 function PCO_CopiarInformes($usuario_origen="",$usuario_destino="")
     {
-		global $TablasCore,$ListaCamposSinID_usuario_informe,$_SeparadorCampos_;
+		global $ListaCamposSinID_usuario_informe,$_SeparadorCampos_;
 		// Elimina opciones existentes
-		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$usuario_destino");
+		PCO_EjecutarSQLUnaria("DELETE FROM core_usuario_informe WHERE usuario=? ","$usuario_destino");
 		// Copia permisos si el usuario origen es diferente de vacio, sino lo deja sin nada
         if ($usuario_origen!="")
             {
-                $resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario='$usuario_origen' ");
+                $resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_usuario_informe." FROM core_usuario_informe WHERE usuario='$usuario_origen' ");
                 while($registro = $resultado->fetch())
                     {
                         $menuinsertar=$registro["informe"];
-                        PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuario_destino$_SeparadorCampos_$menuinsertar");
+                        PCO_EjecutarSQLUnaria("INSERT INTO core_usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuario_destino$_SeparadorCampos_$menuinsertar");
                     }
             }
     }
@@ -3583,7 +3759,7 @@ function PCO_DatatableDesdeHojaCalculo($PathArchivo,$NroLineas)
 */
 function PCO_PermisoHeredadoAccion($PCO_Accion)
 	{
-		global $PCOSESS_LoginUsuario,$TablasCore;
+		global $PCOSESS_LoginUsuario;
 		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 		$retorno=0;
 
@@ -3616,21 +3792,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
         if ($PCO_Accion== "PCO_ActualizarPerfilUsuario")		$retorno = 1;
         if ($PCO_Accion== "PCO_GuardarPerfilUsuario")			$retorno = 1;
 		if ($PCO_Accion== "PCO_ActualizarContrasena")			$retorno = PCO_PermisoHeredadoAccion("PCO_CambiarContrasena");
-/*
-		if ($PCO_Accion== "PCO_ResetearContrasena")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-		if ($PCO_Accion== "PCO_AgregarUsuario")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-		if ($PCO_Accion== "PCO_GuardarUsuario")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-		if ($PCO_Accion== "PCO_EliminarUsuario")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-		if ($PCO_Accion== "PCO_CambiarEstadoUsuario")			$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-		if ($PCO_Accion== "PCO_PermisosUsuario")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-		if ($PCO_Accion== "PCO_AgregarPermiso")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-		if ($PCO_Accion== "PCO_EliminarPermiso")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-		if ($PCO_Accion== "PCO_InformesUsuario")				$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-		if ($PCO_Accion== "PCO_AgregarInformeUsuario")			$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-		if ($PCO_Accion== "PCO_EliminarInformeUsuario")			$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-        if ($PCO_Accion== "PCO_CopiarPermisos")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-        if ($PCO_Accion== "PCO_CopiarInformes")					$retorno = PCO_PermisoAgregadoAccion("PCO_ListarUsuarios");
-*/
+
         if ($PCO_Accion== "PCO_AgregarUsuarioAutoregistro")		$retorno = 1;
         if ($PCO_Accion== "PCO_GuardarUsuarioAutoregistro")		$retorno = 1;
 
@@ -3681,13 +3843,12 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
 		if ($PCO_Accion== "Mensaje_cierre_sesion")				$retorno = 1;
 		// Funciones en core/objetos.php
 		if ($PCO_Accion== "PCO_CargarObjeto")					$retorno = 1;
-		if ($PCO_Accion== "cargar_objeto")						$retorno = 1; //Eliminar despues de version 18.9
 		// Funciones en core/actualizacion.php
 		if ($PCO_Accion== "cargar_archivo")						$retorno = PCO_PermisoAgregadoAccion("actualizar_practico");
 		if ($PCO_Accion== "analizar_parche")					$retorno = PCO_PermisoAgregadoAccion("actualizar_practico");
 		if ($PCO_Accion== "aplicar_parche")						$retorno = PCO_PermisoAgregadoAccion("actualizar_practico");
 		// Funciones en core/ajax.php
-		if ($PCO_Accion== "opciones_combo_box")					$retorno = 1;
+		if ($PCO_Accion== "PCO_ObtenerOpcionesComboBox")		$retorno = 1;
 		if ($PCO_Accion== "valor_campo_tabla")					$retorno = 1;
 		if ($PCO_Accion== "PCO_ObtenerOpcionesAjaxSelect")		$retorno = 1;
 
@@ -3696,7 +3857,6 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
         if ($PCO_Accion=="PCO_ExplorarTablerosGantt")           $retorno = 1;
         if ($PCO_Accion=="EliminarTableroKanban")               $retorno = 1; //PCO_PermisoAgregadoAccion("PCO_ExplorarTablerosKanban")
         if ($PCO_Accion=="GuardarCreacionKanban")               $retorno = 1;
-        if ($PCO_Accion=="VerTareasArchivadas")                 $retorno = 1;
         if ($PCO_Accion=="ArchivarTareaKanban")                 $retorno = 1;
         if ($PCO_Accion=="GuardarTareaKanban")                  $retorno = 1;
         if ($PCO_Accion=="EliminarTareaKanban")                 $retorno = 1;
@@ -3714,7 +3874,7 @@ function PCO_PermisoHeredadoAccion($PCO_Accion)
         if ($PCO_Accion=="cambiar_estado_campo")
             {
                 //Valida si el usuario tiene  al menos un kanban, si la accion es sobre la tabla de kanban
-                $RegistroTableros=PCO_EjecutarSQL("SELECT id FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND (login_admintablero='$PCOSESS_LoginUsuario' OR compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%') LIMIT 0,1 ")->fetch();
+                $RegistroTableros=PCO_EjecutarSQL("SELECT id FROM core_kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND (login_admintablero='$PCOSESS_LoginUsuario' OR compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%') LIMIT 0,1 ")->fetch();
                 if ($RegistroTableros["id"]!="" && $tabla="kanban")
                     $retorno = 1;
             }
@@ -3799,9 +3959,9 @@ function PCO_PermisoAgregadoAccion($PCO_Accion)
 	{
 		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 		$retorno=0;
-		global $ConexionPDO,$TablasCore,$PCOSESS_LoginUsuario;
+		global $ConexionPDO,$PCOSESS_LoginUsuario;
 
-		$consulta = $ConexionPDO->prepare("SELECT ".$TablasCore."menu.id FROM ".$TablasCore."usuario_menu,".$TablasCore."menu WHERE ".$TablasCore."menu.id=".$TablasCore."usuario_menu.menu AND usuario='$PCOSESS_LoginUsuario' AND ".$TablasCore."menu.comando='$PCO_Accion' ");
+		$consulta = $ConexionPDO->prepare("SELECT core_menu.id FROM core_usuario_menu,core_menu WHERE core_menu.id=core_usuario_menu.menu AND usuario='$PCOSESS_LoginUsuario' AND core_menu.comando='$PCO_Accion' ");
 		$consulta->execute();
 		$registro = $consulta->fetch();
 		if ($registro[0]!="")
@@ -3861,7 +4021,7 @@ function PCO_ConvertirRegistroXML($Registro_BD,$ListaCampos,$CodificarBase64=1)
 */
 function PCO_PermisoAccion($PCO_Accion)
 	{
-		global $PCOSESS_LoginUsuario,$TablasCore;
+		global $PCOSESS_LoginUsuario;
 		// Variable que determina el estado de aceptacion o rechazo del permiso 0=no permiso 1=ok permiso
 		$retorno=0;
 
@@ -3882,7 +4042,7 @@ function PCO_PermisoAccion($PCO_Accion)
 				//Si no encuentra en los heredados busca en preautorizados por configuracion
 				if (!$retorno)
 					{
-						$resultado=PCO_EjecutarSQL("SELECT id from ".$TablasCore."parametros WHERE funciones_personalizadas LIKE '%$PCO_Accion%' ");
+						$resultado=PCO_EjecutarSQL("SELECT id from core_parametros WHERE funciones_personalizadas LIKE '%$PCO_Accion%' ");
 						$parametros = $resultado->fetch();
 						//Si encuentra un registro con la accion preautorizada entonces autoriza al usuario
 						if ($parametros["id"]!="")
@@ -3988,7 +4148,7 @@ function PCO_LimpiarEntradas()
 				$informe=PCO_EscaparContenido($informe);
 			}
 
-		if ($PCO_Accion=="PCO_ListarUsuarios")
+		if ($PCO_Accion=="PCO_CargarObjeto" && $PCO_Objeto=="frm:-8:1") //Usuarios
 			{
 				global $login_filtro,$nombre_filtro;
 				$login_filtro=PCO_EscaparContenido($login_filtro);
@@ -4393,7 +4553,7 @@ function PCO_EjecutarNoSQL($ConexionNoSQL,$LlaveRegistro="")
     { echo "ERROR: Llamado a funcion obsoleta del framework ejecutar_sql_unaria().  En su lugar utilice PCO_EjecutarSQLUnaria() "; }
 function PCO_EjecutarSQLUnaria($query,$lista_parametros="",$ConexionBD="",$ReplicaRecursiva=1,$EvitarLogSQL=0)
 	{
-		global $ListaCamposSinID_replicasbd,$TablasCore,$DepuracionSQL,$MotorBD,$PCOSESS_LoginUsuario;
+		global $DepuracionSQL,$MotorBD,$PCOSESS_LoginUsuario;
 
 		//Agrega comentario al query con nombre del usuario si aplica
 		if (@$PCOSESS_LoginUsuario!="" && @$MotorBD=="mysql")
@@ -4403,7 +4563,7 @@ function PCO_EjecutarSQLUnaria($query,$lista_parametros="",$ConexionBD="",$Repli
 		if ($ReplicaRecursiva==1)
 			{
 				//Busca conexiones configuradas como replica
-				$ConexionesReplica=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE tipo_replica=1 ");
+				$ConexionesReplica=PCO_EjecutarSQL("SELECT * FROM core_replicasbd WHERE tipo_replica=1 ");
 				//Recorre cada conexion de replica encontrada para realizar la operacion
 				while ($registro_conexion = $ConexionesReplica->fetch())
 					{
@@ -4534,7 +4694,7 @@ function PCO_ProcedimientoSQL($procedimiento,$ConexionBD="")
     { echo "ERROR: Llamado a funcion obsoleta del framework auditar().  En su lugar utilice PCO_Auditar() "; }
 function PCO_Auditar($PCO_Accion,$usuario="")
 	{
-		global $ArchivoCORE,$TablasCore;
+		global $ArchivoCORE;
 		global $ListaCamposSinID_auditoria,$_SeparadorCampos_;
 		global $PCOSESS_LoginUsuario,$PCO_FechaOperacion,$PCO_HoraOperacion;
 		//Establece el usuario para el registro
@@ -4543,7 +4703,7 @@ function PCO_Auditar($PCO_Accion,$usuario="")
 		else
 			$usuario_auditar=$usuario;
 		//Lleva el registro
-		PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar$_SeparadorCampos_$PCO_Accion$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$PCO_HoraOperacion","","",1,1);
+		PCO_EjecutarSQLUnaria("INSERT INTO core_auditoria (".$ListaCamposSinID_auditoria.") VALUES (?,?,?,?)","$usuario_auditar$_SeparadorCampos_$PCO_Accion$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$PCO_HoraOperacion","","",1,1);
 	}
 
 
@@ -4840,6 +5000,29 @@ function PCO_ConsultarColumnas($tabla,$ConexionAlterna="",$MotorAlterno="",$Base
 ########################################################################
 ########################################################################
 /*
+	Function: PCO_ExisteTablaBD
+	Determina si una tabla existe dentro de una base de datos
+
+	Variables de entrada:
+
+		tabla - Nombre de la tabla a chequear
+
+	Salida:
+		verdadero o falso dependiendo de si existe o no la tabla
+*/
+function PCO_ExisteTablaBD($tabla)
+	{
+        $ResultadoConsulta=PCO_EjecutarSQL("SHOW TABLES LIKE '{$tabla}'")->fetchColumn();
+        if ($ResultadoConsulta!="" && trim($ResultadoConsulta)==$tabla)
+            return true;
+        else
+            return false;
+	}
+	
+	
+########################################################################
+########################################################################
+/*
 	Function: PCO_ExisteCampoTabla
 	Determina si un campo dado existe dentro de una tabla especifica
 
@@ -5100,13 +5283,6 @@ function PCO_VerificarExtensionesPHP()
 		if (!extension_loaded('mbstring'))
 			PCO_Mensaje($MULTILANG_ErrExtension,'<b>mbstring:</b> '.$MULTILANG_ErrExtensionGenerica, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
-		//Verifica soporte para funciones POSIX
-		if (!extension_loaded('posix'))
-			PCO_Mensaje($MULTILANG_ErrExtension,'<b>posix:</b> '.$MULTILANG_ErrExtensionGenerica, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
-
-
-		// Bloqueos por IP/pais http://stackoverflow.com/questions/15835274/file-get-contents-failed-to-open-stream-connection-refused
-
 		// Verifica el soporte para funciones especificas PHP
 		$funcion_evaluada='file_get_contents';
 		if (!function_exists($funcion_evaluada))
@@ -5122,15 +5298,23 @@ function PCO_VerificarExtensionesPHP()
 		if (!function_exists($funcion_evaluada))
             PCO_Mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
-		// Verifica el soporte para funciones especificas PHP
-		$funcion_evaluada='posix_getpwuid';
-		if (!function_exists($funcion_evaluada))
-            PCO_Mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+        //Evita verificacion de extensiones no disponibles para sistemas windows
+		if (strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN')
+			{
+        		//Verifica soporte para funciones POSIX
+        		if (!extension_loaded('posix'))
+        			PCO_Mensaje($MULTILANG_ErrExtension,'<b>posix:</b> '.$MULTILANG_ErrExtensionGenerica, '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
 
-		// Verifica el soporte para funciones especificas PHP
-		$funcion_evaluada='posix_getgrgid';
-		if (!function_exists($funcion_evaluada))
-            PCO_Mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+        		// Verifica el soporte para funciones especificas PHP
+        		$funcion_evaluada='posix_getpwuid';
+        		if (!function_exists($funcion_evaluada))
+                    PCO_Mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+        
+        		// Verifica el soporte para funciones especificas PHP
+        		$funcion_evaluada='posix_getgrgid';
+        		if (!function_exists($funcion_evaluada))
+                    PCO_Mensaje($MULTILANG_ErrExtension,$MULTILANG_ErrFuncion.'<b>'.$funcion_evaluada.'</b>', '', 'fa fa-times fa-5x icon-red texto-blink', 'alert alert-danger alert-dismissible');
+			}
 	}
 
 
@@ -5985,7 +6169,7 @@ function PCO_Mensaje($titulo,$texto,$DEPRECATED_ancho,$icono,$estilo)
 function PCO_SelectorObjetosMenu()
     {
         global $MULTILANG_SeleccioneUno,$MULTILANG_Formularios,$MULTILANG_MnuHlpComandoInf,$MULTILANG_Si,$MULTILANG_No,$MULTILANG_Informes,$MULTILANG_FrmVentana,$MULTILANG_Guardar,$MULTILANG_Cerrar;
-        global $ListaCamposSinID_formulario,$ListaCamposSinID_informe,$TablasCore;
+        global $ListaCamposSinID_formulario,$ListaCamposSinID_informe;
         global $registro_informes;
         ?>
             <!-- Modal Selector de objetos -->
@@ -6005,14 +6189,14 @@ function PCO_SelectorObjetosMenu()
                             <option value=""><?php echo $MULTILANG_SeleccioneUno; ?></option>
                             <optgroup label="<?php echo $MULTILANG_Formularios; ?>">
                                 <?php
-                                    $consulta_forms=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id>=0 ORDER BY titulo");
+                                    $consulta_forms=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM core_formulario WHERE id>=0 ORDER BY titulo");
                                     while($registro_forms = $consulta_forms->fetch())
                                         echo '<option value="frm:'.$registro_forms["id"].'">(Id.'.$registro_forms["id"].') '.$registro_forms["titulo"].'</option>';
                                 ?>
                             </optgroup>
                             <optgroup label="<?php echo $MULTILANG_Informes; ?>">
                                 <?php
-                                    $consulta_informs=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id>=0 ORDER BY titulo");
+                                    $consulta_informs=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM core_informe WHERE id>=0 ORDER BY titulo");
                                     while($registro_informes = $consulta_informs->fetch())
                                         echo '<option value="inf:'.$registro_informes["id"].'">(Id.'.$registro_informes["id"].') '.$registro_informes["titulo"].'</option>';
                                 ?>
@@ -6119,13 +6303,13 @@ function PCO_SelectorIconosAwesome()
 */
 function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 	{
-		global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
         global $funciones_activacion_datepickers;
 		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_Contrasena;
 		global $TabIndex_Elemento;
 
         //Busca datos del formulario
-        $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
+        $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM core_formulario WHERE id=?", "$formulario")->fetch();
         $IdHTMLFormulario=$RegistroDisenoFormulario["id_html"];
 
 		$salida='';
@@ -6171,13 +6355,48 @@ function PCO_CargarObjetoTextoCorto($registro_campos,$registro_datos_formulario,
     			$valor_variable_escapada=$registro_datos_formulario["$nombre_campo"];
     			//$valor_variable_escapada=addslashes ( '"'.$valor_variable_escapada.'"' );
     			//$valor_variable_escapada=urlencode($valor_variable_escapada);
-    			
-    			
-    			//Agregado 23.4
-    			$valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_QUOTES); //Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
     			//Metodo Opcional: Determinar si la cadena tiene comilla doble y encerrar en comilla simple.  Determinar si tiene comilla simple y encerrar en dobles.
-    			
-    			
+
+    			//Valida los parametros de aplicacion para saber si se aplica alguna conversion de cartacteres
+    			//Presenta la cadena como caracteres especiales HTML para ayudar a presentar correctamente tildes, comillas y barras
+    			$RegistroParamAplicacion=PCO_EjecutarSQL("SELECT * FROM core_parametros WHERE 1=1 LIMIT 0,1")->fetch();
+    			if ($RegistroParamAplicacion["htmlentities_flags"]!="" || $RegistroParamAplicacion["htmlentities_charsets"]!="")
+    			    {
+                        switch ($RegistroParamAplicacion["htmlentities_flags"]) {
+                            case "ENT_COMPAT":
+                                $valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_COMPAT,$RegistroParamAplicacion["htmlentities_charsets"]);
+                                break;
+                            case "ENT_QUOTES":
+                                $valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_QUOTES,$RegistroParamAplicacion["htmlentities_charsets"]);
+                                break;
+                            case "ENT_NOQUOTES":
+                                $valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_NOQUOTES,$RegistroParamAplicacion["htmlentities_charsets"]);
+                                break;
+                            case "ENT_IGNORE":
+                                $valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_IGNORE,$RegistroParamAplicacion["htmlentities_charsets"]);
+                                break;
+                            case "ENT_SUBSTITUTE":
+                                $valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_SUBSTITUTE,$RegistroParamAplicacion["htmlentities_charsets"]);
+                                break;
+                            case "ENT_DISALLOWED":
+                                $valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_DISALLOWED,$RegistroParamAplicacion["htmlentities_charsets"]);
+                                break;
+                            case "ENT_HTML401":
+                                $valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_HTML401,$RegistroParamAplicacion["htmlentities_charsets"]);
+                                break;
+                            case "ENT_XML1":
+                                $valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_XML1,$RegistroParamAplicacion["htmlentities_charsets"]);
+                                break;
+                            case "ENT_XHTML":
+                                $valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_XHTML,$RegistroParamAplicacion["htmlentities_charsets"]);
+                                break;
+                            case "ENT_HTML5":
+                                $valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_HTML5,$RegistroParamAplicacion["htmlentities_charsets"]);
+                                break;
+                            default:
+                               $valor_variable_escapada=htmlentities($valor_variable_escapada,ENT_QUOTES);
+                        }
+    			    }
     			if ($PCO_CampoBusquedaBD!="" && $PCO_ValorBusquedaBD!="") $cadena_valor=' value="'.$valor_variable_escapada.'" ';
     	    }
 
@@ -6817,13 +7036,13 @@ function PCO_CargarObjetoTextoFormato($registro_campos,$registro_datos_formulari
 */
 function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 	{
-		global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 		global $PCO_ScriptsListaCombosPostCarga,$PCO_ListaCombosMultiplesJoin;
 		global $MULTILANG_Cargando,$MULTILANG_Buscar,$MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio,$MULTILANG_SeleccioneUno,$MULTILANG_FrmActualizaAjax;
         global $TabIndex_Elemento;
 
         //Busca datos del formulario
-        $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
+        $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM core_formulario WHERE id=?", "$formulario")->fetch();
         $IdHTMLFormulario=$RegistroDisenoFormulario["id_html"];
 
 		$salida='';
@@ -6883,6 +7102,12 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
             //Genera Script Ajax y DIV para cambio de opciones en caliente
             $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_opciones"]);
             $nombre_tabla_opciones = $nombre_tabla_opciones[0];
+            // Verifica si la tabla obtenida desde la lista de opciones existe, si no es asi intenta generarla desde la lista de valores|
+            // if (!PCO_ExisteTablaBD($nombre_tabla_opciones))
+            //     {
+            //         $nombre_tabla_opciones = explode(".", $registro_campos["origen_lista_valores"]);
+            //         $nombre_tabla_opciones = $nombre_tabla_opciones[0];
+            //     }
 
             //Define algunas variables de construccion de la cadena final
             $PCO_Prefijo='';
@@ -6953,7 +7178,8 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
 
                             //enviamos las variables al archivo get_combo2.php
                             //xmlhttp.send();
-                            xmlhttp.send("PCO_Accion=opciones_combo_box&Presentar_FullScreen=1&origen_lista_tablas='.$nombre_tabla_opciones.'&origen_lista_opciones='.$registro_campos["origen_lista_opciones"].'&origen_lista_valores='.$registro_campos["origen_lista_valores"].'&condicion_filtrado_listas='.str_replace('"','\"',$registro_campos["condicion_filtrado_listas"]).'&PCO_Prefijo='.$PCO_Prefijo.'&PCO_Infijo='.$PCO_Infijo.'&PCO_Posfijo='.$PCO_Posfijo.'");
+                            //ANTES DE CODIFICAR.  ELIMINAR EN VERSION 24.3 xmlhttp.send("PCO_Accion=PCO_ObtenerOpcionesComboBox&Presentar_FullScreen=1&origen_lista_tablas='.$nombre_tabla_opciones.'&origen_lista_opciones='.$registro_campos["origen_lista_opciones"].'&origen_lista_valores='.$registro_campos["origen_lista_valores"].'&condicion_filtrado_listas='.str_replace('"','\"',$registro_campos["condicion_filtrado_listas"]).'&PCO_Prefijo='.$PCO_Prefijo.'&PCO_Infijo='.$PCO_Infijo.'&PCO_Posfijo='.$PCO_Posfijo.'");
+                            xmlhttp.send("PCO_Accion=PCO_ObtenerOpcionesComboBox&Presentar_FullScreen=1&PCO_UsandoBase64=1&origen_lista_tablas='.base64_encode($nombre_tabla_opciones).'&origen_lista_opciones='.base64_encode($registro_campos["origen_lista_opciones"]).'&origen_lista_valores='.base64_encode($registro_campos["origen_lista_valores"]).'&condicion_filtrado_listas='.base64_encode(str_replace('"','\"',$registro_campos["condicion_filtrado_listas"])).'&PCO_Prefijo='.base64_encode($PCO_Prefijo).'&PCO_Infijo='.base64_encode($PCO_Infijo).'&PCO_Posfijo='.base64_encode($PCO_Posfijo).'");
                         }
                 </script>
 
@@ -7268,6 +7494,7 @@ function PCO_CargarObjetoListaSeleccion($registro_campos,$registro_datos_formula
 	}
 
 
+
 ########################################################################
 ########################################################################
 /*
@@ -7577,13 +7804,13 @@ function PCO_CargarObjetoListaRadio($registro_campos,$registro_datos_formulario,
 */
 function PCO_CargarObjetoCasillaCheck($registro_campos,$registro_datos_formulario,$formulario,$en_ventana)
 	{
-		global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$IdiomaPredeterminado;
         global $funciones_activacion_datepickers;
 		global $MULTILANG_TitValorUnico,$MULTILANG_DesValorUnico,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
 		global $TabIndex_Elemento;
 
         //Busca datos del formulario
-        $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
+        $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM core_formulario WHERE id=?", "$formulario")->fetch();
         $IdHTMLFormulario=$RegistroDisenoFormulario["id_html"];
 
 		$salida='';
@@ -7820,12 +8047,12 @@ function PCO_CargarObjetoArchivoAdjunto($registro_campos,$registro_datos_formula
 */
 function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$formulario)
 	{
-		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD,$TablasCore;
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 		global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_TitObligatorio,$MULTILANG_DesObligatorio;
         global $funciones_activacion_canvas;
 
         //Busca datos del formulario
-        $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
+        $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM core_formulario WHERE id=?", "$formulario")->fetch();
         $IdHTMLFormulario=$RegistroDisenoFormulario["id_html"];
 
 		$salida='';
@@ -8025,11 +8252,11 @@ function PCO_CargarObjetoCanvas($registro_campos,$registro_datos_formulario,$for
 */
 function PCO_CargarObjetoCamara($registro_campos,$registro_datos_formulario,$formulario)
 	{
-		global $TablasCore,$PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
+		global $PCO_CampoBusquedaBD,$PCO_ValorBusquedaBD;
 		global $MULTILANG_Cerrar,$MULTILANG_FrmCanvasLink,$MULTILANG_Capturar,$MULTILANG_FrmErrorCam,$MULTILANG_DesObligatorio,$MULTILANG_TitObligatorio;
 
         //Busca datos del formulario
-        $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."formulario WHERE id=?", "$formulario")->fetch();
+        $RegistroDisenoFormulario=PCO_EjecutarSQL("SELECT * FROM core_formulario WHERE id=?", "$formulario")->fetch();
         $IdHTMLFormulario=$RegistroDisenoFormulario["id_html"];
 
 		$salida='';
@@ -8311,7 +8538,7 @@ function PCO_CargarObjetoBotonComando($registro_campos,$registro_datos_formulari
 */
 function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario,$tipo_elemento)
 	{
-	    global $MULTILANG_FrmEstaSeguro,$MULTILANG_FrmDesplazarObjetos,$MULTILANG_SaltoEdicion,$MULTILANG_Embebido,$MULTILANG_FrmValida,$MULTILANG_FrmPredeterminado,$MULTILANG_FrmCampo,$MULTILANG_MnuPropiedad,$MULTILANG_Detalles,$MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
+	    global $MULTILANG_FrmEstaSeguro,$MULTILANG_FrmDesplazarObjetos,$MULTILANG_SaltoEdicion,$MULTILANG_Embebido,$MULTILANG_FrmValida,$MULTILANG_FrmPredeterminado,$MULTILANG_FrmCampo,$MULTILANG_MnuPropiedad,$MULTILANG_Detalles,$MULTILANG_Evento,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
 		$salida='';
         if ($tipo_elemento=="ComplementoDisenoElemento")
             {
@@ -8332,11 +8559,11 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
 
                 //Busca si el elemento tiene o no eventos para poner un boton de enlace
                 $ComplementoBotonEventos="";
-                $RegistroConteoEventos=PCO_EjecutarSQL("SELECT COUNT(*) as conteo_eventos FROM ".$TablasCore."evento_objeto WHERE objeto=? ",$registro_campos["id"])->fetch();
+                $RegistroConteoEventos=PCO_EjecutarSQL("SELECT COUNT(*) as conteo_eventos FROM core_evento_objeto WHERE objeto=? ",$registro_campos["id"])->fetch();
                 if($RegistroConteoEventos["conteo_eventos"]>0)
                     {
                         //Listado de eventos
-                        $ResultadoEventos=PCO_EjecutarSQL("SELECT evento,LENGTH(javascript) as bytes_codigo FROM ".$TablasCore."evento_objeto WHERE objeto=? ",$registro_campos["id"]);
+                        $ResultadoEventos=PCO_EjecutarSQL("SELECT evento,LENGTH(javascript) as bytes_codigo FROM core_evento_objeto WHERE objeto=? ",$registro_campos["id"]);
                         $CadenaDetalleEventos="";
                         $ConteoEventos=1;
                         while ($RegistroEventos=$ResultadoEventos->fetch())
@@ -8353,13 +8580,13 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
                 if ($registro_campos["tipo"]=="informe")
                     {
                         $IdentificadorBusqueda=$registro_campos["informe_vinculado"];
-                        $RegistroEmbebido=PCO_EjecutarSQL("SELECT id,titulo FROM ".$TablasCore."informe WHERE id=$IdentificadorBusqueda ")->fetch();
+                        $RegistroEmbebido=PCO_EjecutarSQL("SELECT id,titulo FROM core_informe WHERE id=$IdentificadorBusqueda ")->fetch();
                         $Complemento_NombreEmbebido="Inf ID ".$RegistroEmbebido["id"].": <b>".$RegistroEmbebido["titulo"]."</b>";
                     }
                 if ($registro_campos["tipo"]=="form_consulta")
                     {
                         $IdentificadorBusqueda=$registro_campos["formulario_vinculado"];
-                        $RegistroEmbebido=PCO_EjecutarSQL("SELECT id,titulo FROM ".$TablasCore."formulario WHERE id=$IdentificadorBusqueda ")->fetch();
+                        $RegistroEmbebido=PCO_EjecutarSQL("SELECT id,titulo FROM core_formulario WHERE id=$IdentificadorBusqueda ")->fetch();
                         $Complemento_NombreEmbebido="Frm ID ".$RegistroEmbebido["id"].": <b>".$RegistroEmbebido["titulo"]."</b>";
                     }
 
@@ -8419,13 +8646,13 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
 		modo_diseno_formulario - Opcional, indica si se esta disenando el formulario para presentar algunos controles extra
 
 	(start code)
-		SELECT * FROM ".$TablasCore."formulario WHERE id='$formulario'
-		SELECT id,PCOBD_Peso,visible FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY PCOBD_Peso
-		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 AND PCOBD_Peso >'$limite_inferior' AND PCOBD_Peso <='$limite_superior' ORDER BY PCOBD_Peso
+		SELECT * FROM core_formulario WHERE id='$formulario'
+		SELECT id,PCOBD_Peso,visible FROM core_formulario_objeto WHERE formulario='$formulario' AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY PCOBD_Peso
+		SELECT * FROM core_formulario_objeto WHERE formulario='$formulario' AND columna='$cl' AND visible=1 AND PCOBD_Peso >'$limite_inferior' AND PCOBD_Peso <='$limite_superior' ORDER BY PCOBD_Peso
 		Por cada registro
 			Llamar creacion de objeto correspondiente
-		SELECT * FROM ".$TablasCore."formulario_objeto WHERE formulario='$formulario' AND id='$ultimo_id'
-		SELECT * FROM ".$TablasCore."formulario_boton WHERE formulario='$formulario' AND visible=1 ORDER BY peso
+		SELECT * FROM core_formulario_objeto WHERE formulario='$formulario' AND id='$ultimo_id'
+		SELECT * FROM core_formulario_boton WHERE formulario='$formulario' AND visible=1 ORDER BY peso
 	(end)
 
 	Salida:
@@ -8441,7 +8668,7 @@ function PCO_AgregarFuncionesEdicionObjeto($registro_campos,$registro_formulario
 function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",$PCO_ValorBusquedaBD="",$anular_form=0,$modo_diseno_formulario=0,$ComplementoPestanas="")
   {
         global $ModoDesarrolladorPractico,$PCO_RegistroDatosFormulario;
-        global $ConexionPDO,$ArchivoCORE,$TablasCore,$LlaveDePaso;
+        global $ConexionPDO,$ArchivoCORE,$LlaveDePaso;
         global $PCO_InformeFiltro,$PCO_FuncionesJSInternasFORM;
 		global $_SeparadorCampos_;
 		// Carga variables de definicion de tablas
@@ -8453,7 +8680,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		global $TabIndex_Elemento;
 
 		// Busca datos del formulario
-		$registro_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM ".$TablasCore."formulario WHERE id=?","$formulario")->fetch();
+		$registro_formulario=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario." FROM core_formulario WHERE id=?","$formulario")->fetch();
 
         //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
         $BotonSaltoEdicion='
@@ -8662,7 +8889,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		if ($en_ventana) PCO_AbrirVentana(PCO_ReemplazarVariablesPHPEnCadena($registro_formulario["titulo"]).$ComplementoTituloFormulario.$ComplementoIdObjetoEnTitulo,$registro_formulario["estilo_ventana"],'',$PCO_BarraHerramientasFormulario);
 
         //Busca las posibles opciones de menu agregadas al formulario
-        $RegistroCantidadMenues=PCO_EjecutarSQL("SELECT COUNT(*) as CantidadMenues FROM ".$TablasCore."menu WHERE formulario_vinculado='$formulario' AND padre=0")->fetch();
+        $RegistroCantidadMenues=PCO_EjecutarSQL("SELECT COUNT(*) as CantidadMenues FROM core_menu WHERE formulario_vinculado='$formulario' AND padre=0")->fetch();
         if ($RegistroCantidadMenues["CantidadMenues"]>0)
             {
         		echo '<!-- Boton expansible para menu en dispositivos moviles -->
@@ -8673,7 +8900,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
     						</button>
     					</div>
             		    <div class="collapse navbar-collapse" id="MENU_FORMULARIO_'.$formulario.'">';
-                            $resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu WHERE formulario_vinculado='$formulario' AND padre=0 ORDER BY peso");
+                            $resultado=PCO_EjecutarSQL("SELECT core_menu.id as id,$ListaCamposSinID_menu FROM core_menu WHERE formulario_vinculado='$formulario' AND padre=0 ORDER BY peso");
                             $ConteoOpciones=1;
                             while($registro = $resultado->fetch())
                                 {
@@ -8712,7 +8939,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 
         // Inicio de la generacion de encabezados pestanas
         //Cuenta las pestanas segun los objetos del form y ademas mira si es solo una con valor vacio (sin pestanas)
-        $consulta_conteo_pestanas=      PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+        $consulta_conteo_pestanas=      PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM core_formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
         $conteo_pestanas=0;
         $conteo_pestanas_ocultas=0;
         while($registro_conteo_pestanas = @$consulta_conteo_pestanas->fetch())
@@ -8735,7 +8962,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 				if($registro_formulario["estilo_pestanas"]=="")
 					$CadenaEstiloPestanas="visibility:hidden; height:0px;"; //Oculta las pestanas
 
-                $consulta_formulario_pestana=   PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                $consulta_formulario_pestana=   PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM core_formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
                 echo '<ul class="nav '.$registro_formulario["estilo_pestanas"].' nav-justified oculto_impresion" style="'.$CadenaEstiloPestanas.'">';
                 $estado_activa_primera_pestana=' class="active" ';
                 $pestana_activa=1;
@@ -8758,7 +8985,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         $UltimaClaseColumna="";
         if ($conteo_pestanas>0)
             {
-                $consulta_formulario_pestana=   PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
+                $consulta_formulario_pestana=   PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM core_formulario_objeto WHERE formulario=? AND visible=1 GROUP BY pestana_objeto ORDER BY pestana_objeto","$formulario");
                 $estado_activa_primera_pestana='in active';
                 $pestana_activa=1;
 
@@ -8785,7 +9012,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                 $constante_limite_superior=+9999;
                                 $limite_superior=$constante_limite_superior; // Peso superior a tener en cuenta en el query
                                 //Busca todos los objetos marcados como fila_unica=1 y agrega un registro mas con el limite superior
-                                $consulta_obj_fila_unica=PCO_EjecutarSQL("SELECT id,PCOBD_Peso,visible FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY PCOBD_Peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario");
+                                $consulta_obj_fila_unica=PCO_EjecutarSQL("SELECT id,PCOBD_Peso,visible FROM core_formulario_objeto WHERE pestana_objeto=? AND formulario=? AND fila_unica='1' AND visible=1 UNION SELECT 0,$limite_superior,0 ORDER BY PCOBD_Peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario");
                                 //Define si debe o no dibujar borde de las celdas
                                 $estilo_bordes="table-unbordered";
                                 $ancho_bordes="border-width: 0px;";
@@ -8819,7 +9046,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                         for ($cl=1;$cl<=$registro_formulario["columnas"];$cl++)
                                             {
                                                 //Busca los elementos de la coumna actual del formulario con PCOBD_Peso menor o igual al PCOBD_Peso del objeto fila_unica de la fila unica_actual pero que no son fila_unica
-                                                $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE pestana_objeto=? AND formulario=? AND PCOBD_Columna=? AND visible=1 AND PCOBD_Peso >? AND PCOBD_Peso <=? ORDER BY PCOBD_Peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
+                                                $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM core_formulario_objeto WHERE pestana_objeto=? AND formulario=? AND PCOBD_Columna=? AND visible=1 AND PCOBD_Peso >? AND PCOBD_Peso <=? ORDER BY PCOBD_Peso","$titulo_pestana_formulario$_SeparadorCampos_$formulario$_SeparadorCampos_$cl$_SeparadorCampos_$limite_inferior$_SeparadorCampos_$limite_superior");
 
                                                     //Define tipo_maquetacion JJJ
                                                     if($registro_formulario["tipo_maquetacion"]=="responsive")
@@ -8899,12 +9126,12 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                                     //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
                                                                     //padre el valor del campo foraneo del form hijo para llamar a buscar form con
                                                                     //el valor de Id correspondiente. Ademas valida si el form existe
-                                                                    if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && PCO_ExisteValor($TablasCore."formulario","id",$registro_campos["formulario_vinculado"]))
+                                                                    if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && PCO_ExisteValor("core_formulario","id",$registro_campos["formulario_vinculado"]))
                                                                         {
                                                                             //Busca la tabla principal del subformulario anidado
                                                                             $PCO_ValorCampoBind=$registro_campos["formulario_vinculado"];
                                                                             if($PCO_ValorCampoBind=="") $PCO_ValorCampoBind="";
-                                                                            $consulta_tabla_subform=PCO_EjecutarSQL("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$PCO_ValorCampoBind")->fetch();
+                                                                            $consulta_tabla_subform=PCO_EjecutarSQL("SELECT tabla_datos FROM core_formulario WHERE id=? ","$PCO_ValorCampoBind")->fetch();
                                                                             $PCO_TablaSubform=$consulta_tabla_subform["tabla_datos"];
 
                                                                             //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
@@ -8971,7 +9198,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                             }
 
                                         //Busca datos del registro de fila_unica
-                                        $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND id=? ","$formulario$_SeparadorCampos_$ultimo_id");
+                                        $consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM core_formulario_objeto WHERE formulario=? AND id=? ","$formulario$_SeparadorCampos_$ultimo_id");
                                         $registro_campos = $consulta_campos->fetch();
 
                                         //Agrega el campo de fila unica cuando no se trata del agregado de peso 9999
@@ -9038,12 +9265,12 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
                                                 //Ademas si es subformulario debe consultar en ese registro de ID buscado del form
                                                 //padre el valor del campo foraneo del form hijo para llamar a buscar form con
                                                 //el valor de Id correspondiente. Ademas valida si el form existe
-                                                if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && PCO_ExisteValor($TablasCore."formulario","id",$registro_campos["formulario_vinculado"]))
+                                                if ($tipo_de_objeto=="form_consulta" && $registro_campos["formulario_vinculado"]!=$formulario && PCO_ExisteValor("core_formulario","id",$registro_campos["formulario_vinculado"]))
                                                     {
                                                         //Busca la tabla principal del subformulario anidado
                                                         $PCO_ValorCampoBind=$registro_campos["formulario_vinculado"];
                                                         if($PCO_ValorCampoBind=="") $PCO_ValorCampoBind="";
-                                                        $consulta_tabla_subform=PCO_EjecutarSQL("SELECT tabla_datos FROM ".$TablasCore."formulario WHERE id=? ","$PCO_ValorCampoBind")->fetch();
+                                                        $consulta_tabla_subform=PCO_EjecutarSQL("SELECT tabla_datos FROM core_formulario WHERE id=? ","$PCO_ValorCampoBind")->fetch();
                                                         $PCO_TablaSubform=$consulta_tabla_subform["tabla_datos"];
 
                                                         //Determina el valor del campo a vincular en el registro padre (el actual).  Deberia dar el id que se va a buscar
@@ -9112,7 +9339,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		echo '</div> <!-- cierra PCO_MarcoImpresion'.$formulario.' -->';
 
 	//Busca los campos definidos como visilbe=0 (o NO) para agregarlos como hidden
-	$consulta_ocultos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND visible=0 ","$formulario");
+	$consulta_ocultos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM core_formulario_objeto WHERE formulario=? AND visible=0 ","$formulario");
 	while ($registro_ocultos = $consulta_ocultos->fetch())
 		{
 			// Formatea cada campo de acuerdo a su tipo
@@ -9123,7 +9350,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		}
 
 	// Si tiene botones agrega barra de estado y los ubica
-	$consulta_botones = PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_boton." FROM ".$TablasCore."formulario_boton WHERE formulario=? AND visible=1 ORDER BY peso","$formulario");
+	$consulta_botones = PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_boton." FROM core_formulario_boton WHERE formulario=? AND visible=1 ORDER BY peso","$formulario");
 
 	if($consulta_botones->rowCount()>0 || $PCO_InformeFiltro!="") //Crea la barra incluso si no hay botones en diseno pero se encuentra que el llamado es desde un informe que requiere filtro
 		{
@@ -9192,7 +9419,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 		echo '</form>';
 
 	//Carga todos los eventos asociados a los controles de formulario
-	$eventos_controles_formulario=PCO_EjecutarSQL("SELECT ".$TablasCore."evento_objeto.*,".$TablasCore."formulario_objeto.id_html FROM ".$TablasCore."evento_objeto,".$TablasCore."formulario_objeto WHERE ".$TablasCore."evento_objeto.objeto=".$TablasCore."formulario_objeto.id  AND ".$TablasCore."formulario_objeto.formulario=$formulario ");
+	$eventos_controles_formulario=PCO_EjecutarSQL("SELECT core_evento_objeto.*,core_formulario_objeto.id_html FROM core_evento_objeto,core_formulario_objeto WHERE core_evento_objeto.objeto=core_formulario_objeto.id  AND core_formulario_objeto.formulario=$formulario ");
 	while($registro_eventos_definidos = $eventos_controles_formulario->fetch())
 		{
 		    //Limpia el metodo, asume no conocerlo
@@ -9253,7 +9480,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
         		</script>';
 
         //Busca la lista de campos marcados como obligatorios sobre el form
-        $consulta_campos_obligatorios=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM ".$TablasCore."formulario_objeto WHERE formulario=? AND obligatorio=1","$formulario");
+        $consulta_campos_obligatorios=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_formulario_objeto." FROM core_formulario_objeto WHERE formulario=? AND obligatorio=1","$formulario");
         $ListaCamposObligatorios="";
         $ListaTitulosObligatorios="";
         while ($registro_campos_obligatorios=$consulta_campos_obligatorios->fetch())
@@ -9287,7 +9514,7 @@ function PCO_CargarFormulario($formulario,$en_ventana=1,$PCO_CampoBusquedaBD="",
 */
 function PCO_GenerarBotonesInforme($informe,$Ubicacion=0)
 	{
-		global $ConexionPDO,$ArchivoCORE,$TablasCore,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
+		global $ConexionPDO,$ArchivoCORE,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 
@@ -9299,7 +9526,7 @@ function PCO_GenerarBotonesInforme($informe,$Ubicacion=0)
 		$cadena_generica_botones='';
 
 		// Busca si el informe tiene acciones (botones), los cuenta y prepara dentro de un arreglo para repetir en cada registro
-		$consulta_botones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_boton." FROM ".$TablasCore."informe_boton WHERE informe=? AND visible=1 $ComplementoUbicacion ORDER BY peso","$informe");
+		$consulta_botones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_boton." FROM core_informe_boton WHERE informe=? AND visible=1 $ComplementoUbicacion ORDER BY peso","$informe");
 		while($registro_botones=$consulta_botones->fetch())
 			{
 				$destino_formulario=$registro_botones["destino"];
@@ -9431,12 +9658,11 @@ function PCO_GenerarBotonesInforme($informe,$Ubicacion=0)
 */
 function PCO_DeterminarCamposOcultos($informe)
 	{
-		global $TablasCore;
 		// Carga variables de definicion de tablas
 		global $ListaCamposSinID_informe_campos;
 
 		//Busca los CAMPOS definidos para el informe
-		$consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso","$informe");
+		$consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_campos." FROM core_informe_campos WHERE informe=? ORDER BY peso","$informe");
 
 		$PCO_ColumnasOcultas=array();
 		while ($registro_campos = $consulta_campos->fetch())
@@ -9480,7 +9706,7 @@ function PCO_DeterminarCamposOcultos($informe)
 */
 function PCO_ConstruirConsultaInforme($informe,$evitar_campos_ocultos=0)
 	{
-		global $ConexionPDO,$ArchivoCORE,$TablasCore,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
+		global $ConexionPDO,$ArchivoCORE,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
 		global $PCOSESS_LoginUsuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario,$PCO_FechaOperacion;
 		// Carga variables de definicion de tablas
@@ -9494,7 +9720,7 @@ function PCO_ConstruirConsultaInforme($informe,$evitar_campos_ocultos=0)
 			$numero_columnas=0;
 			//Busca los CAMPOS definidos para el informe
 			$consulta="SELECT ";
-			$consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso,id","$informe");
+			$consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_campos." FROM core_informe_campos WHERE informe=? ORDER BY peso,id","$informe");
 
 			while ($registro_campos = $consulta_campos->fetch())
 				{
@@ -9521,7 +9747,7 @@ function PCO_ConstruirConsultaInforme($informe,$evitar_campos_ocultos=0)
 
 			//Busca las TABLAS definidas para el informe
 			$consulta.=" FROM ";
-			$consulta_tablas=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_tablas." FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
+			$consulta_tablas=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_tablas." FROM core_informe_tablas WHERE informe=? ","$informe");
 			while ($registro_tablas = $consulta_tablas->fetch())
 				{
 					//Si tiene alias definido lo agrega
@@ -9535,7 +9761,7 @@ function PCO_ConstruirConsultaInforme($informe,$evitar_campos_ocultos=0)
 
 			// Busca las CONDICIONES para el informe
 			$consulta.=" WHERE ";
-			$consulta_condiciones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_condiciones." FROM ".$TablasCore."informe_condiciones WHERE informe=? ORDER BY peso,id","$informe");
+			$consulta_condiciones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_condiciones." FROM core_informe_condiciones WHERE informe=? ORDER BY peso,id","$informe");
 			$hay_condiciones=0;
 			while ($registro_condiciones = $consulta_condiciones->fetch())
 				{
@@ -9553,7 +9779,7 @@ function PCO_ConstruirConsultaInforme($informe,$evitar_campos_ocultos=0)
 			$consulta.=" 1 ";
 
 			//Busca si debe ser ordenado o agrupado
-			$registro_informe=PCO_EjecutarSQL("SELECT agrupamiento,ordenamiento FROM ".$TablasCore."informe WHERE id=? ","$informe")->fetch();
+			$registro_informe=PCO_EjecutarSQL("SELECT agrupamiento,ordenamiento FROM core_informe WHERE id=? ","$informe")->fetch();
 			if (@$registro_informe["agrupamiento"]!="")
 				{
 					$campoagrupa=$registro_informe["agrupamiento"];
@@ -9590,7 +9816,7 @@ function PCO_ConstruirConsultaInforme($informe,$evitar_campos_ocultos=0)
 */
 function PCO_GenerarEtiquetasConsulta($ConsultaSQL,$informe)
 	{
-		global $ConexionPDO,$ArchivoCORE,$TablasCore,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
+		global $ConexionPDO,$ArchivoCORE,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 
@@ -9599,7 +9825,7 @@ function PCO_GenerarEtiquetasConsulta($ConsultaSQL,$informe)
 
 		// Busca datos del informe
         if ($informe!="")
-        	$registro_informe=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe")->fetch();
+        	$registro_informe=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM core_informe WHERE id=? ","$informe")->fetch();
 
         //Si encuentra que el informe usa conexion alterna accesa la variable de conexion como global
         if($registro_informe["conexion_origen_datos"]!="")
@@ -9667,13 +9893,13 @@ function PCO_GenerarEtiquetasConsulta($ConsultaSQL,$informe)
 */
 function PCO_CamposRealesInforme($informe)
 	{
-		global $ConexionPDO,$ArchivoCORE,$TablasCore;
+		global $ConexionPDO,$ArchivoCORE;
 		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas;
 
 		// Busca datos del informe
         if ($informe!="")
             {
-        		$consulta_informe=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
+        		$consulta_informe=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM core_informe WHERE id=? ","$informe");
         		$registro_informe=$consulta_informe->fetch();
 
         		if ($registro_informe["conexion_origen_datos"]!="")
@@ -9685,7 +9911,7 @@ function PCO_CamposRealesInforme($informe)
 			$ListaCampos_NombreSimple=array();		//Lado izquierdo solamente cuando se cuenta con Alias
 			$ListaTablas_NombreSimple=array();		//Nombre de la tabla de donde sale el campo
 			$ListaCampos_PermitirEdicion=array();	//Guarda los estados de edicion en linea para el campo
-			$consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? ORDER BY peso,id","$informe");
+			$consulta_campos=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_campos." FROM core_informe_campos WHERE informe=? ORDER BY peso,id","$informe");
 			while ($registro_campos = $consulta_campos->fetch())
 				{
 					//Si tiene alias definido lo agrega
@@ -9728,7 +9954,7 @@ function PCO_CamposRealesInforme($informe)
 						{
 							$nombre_tabla_simple="";
 							//Busca en las TABLAS definidas para el informe
-							$consulta_tablas=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_tablas." FROM ".$TablasCore."informe_tablas WHERE informe=? ","$informe");
+							$consulta_tablas=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_tablas." FROM core_informe_tablas WHERE informe=? ","$informe");
 							while ($registro_tablas = $consulta_tablas->fetch())
 								{
 									$tabla_actual=$registro_tablas["valor_tabla"];
@@ -9778,10 +10004,10 @@ function PCO_CamposRealesInforme($informe)
 		embebido - Determina si el informe es presentado dentro de otro objeto o no, como por ejemplo un formulario
 
 	(start code)
-		SELECT * FROM ".$TablasCore."informe WHERE id='$informe'
-		SELECT * FROM ".$TablasCore."informe_campos WHERE informe='$informe'
-		SELECT * FROM ".$TablasCore."informe_tablas WHERE informe='$informe'
-		SELECT * FROM ".$TablasCore."informe_condiciones WHERE informe='$informe' ORDER BY peso
+		SELECT * FROM core_informe WHERE id='$informe'
+		SELECT * FROM core_informe_campos WHERE informe='$informe'
+		SELECT * FROM core_informe_tablas WHERE informe='$informe'
+		SELECT * FROM core_informe_condiciones WHERE informe='$informe' ORDER BY peso
 	(end)
 
 	Salida:
@@ -9796,17 +10022,17 @@ function PCO_CamposRealesInforme($informe)
     { echo "ERROR: Llamado a funcion obsoleta del framework cargar_informe().  En su lugar utilice PCO_CargarInforme() "; }
 function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Informes",$embebido=0,$anular_acciones=0,$anular_piepagina=0,$anular_encabezado=0,$SQLPuro="")
 	{
-		global $ConexionPDO,$ArchivoCORE,$TablasCore,$Nombre_Aplicacion,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
+		global $ConexionPDO,$ArchivoCORE,$Nombre_Aplicacion,$PCO_ValorBusquedaBD,$PCO_CampoBusquedaBD;
 		// Carga variables de sesion por si son comparadas en alguna condicion.  De todas formas pueden ser cargadas por el usuario en el diseno del informe
 		global $PCOSESS_LoginUsuario,$Nombre_usuario,$Descripcion_usuario,$Nivel_usuario,$Correo_usuario,$LlaveDePasoUsuario,$PCO_FechaOperacion;
 		// Carga variables de definicion de tablas
-		global $ListaCamposSinID_replicasbd,$ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
+		global $ListaCamposSinID_informe,$ListaCamposSinID_informe_campos,$ListaCamposSinID_informe_tablas,$ListaCamposSinID_informe_condiciones,$ListaCamposSinID_informe_boton;
 		global $MULTILANG_Editar,$MULTILANG_Informes,$MULTILANG_Exportar,$MULTILANG_TotalRegistros,$MULTILANG_ContacteAdmin,$MULTILANG_ObjetoNoExiste,$MULTILANG_ErrorTiempoEjecucion,$MULTILANG_Informes,$MULTILANG_IrEscritorio,$MULTILANG_ErrorDatos,$MULTILANG_InfErrTamano,$MULTILANG_MonCommSQL;
 		global $IdiomaPredeterminado;
         global $PCO_InformesListaColumnasDT,$PCO_InformesRecuperacionAJAX,$PCO_InformesIdCache,$PCO_InformesDataTable,$PCO_InformesDataTablePaginaciones,$PCO_InformesDataTableTotales,$PCO_InformesDataTableFormatoTotales,$PCO_InformesDataTableExrpotaCLP,$PCO_InformesDataTableExrpotaCSV,$PCO_InformesDataTableExrpotaXLS,$PCO_InformesDataTableExrpotaPDF,$PCO_InformesDataTableDefineCOLS,$PCO_InformesDataTable_pane_activado,$PCO_InformesDataTable_pane_cascada,$PCO_InformesDataTable_pane_colapsado,$PCO_InformesDataTable_pane_columnas,$PCO_InformesDataTable_pane_subtotalesrelativos,$PCO_InformesDataTable_pane_conteos,$PCO_InformesDataTable_pane_controles,$PCO_InformesDataTable_pane_control_colapsar,$PCO_InformesDataTable_pane_control_ordenar;
         global $ModoDepuracion,$ModoDesarrolladorPractico;
         global $PCO_InformesGraficosSinDatos,$PCOVAR_ConteoRegistrosUltimoInforme;
-        global $PCO_FuncionesJSInternasFORM;
+        global $PCO_FuncionesJSInternasFORM,$PCOVAR_InformeEmbebido;
         
         //Determina si el usuario es un disenador de aplicacion para mostrar el ID de objeto a manera informativa y un boton de salto a edicion
         $BotonSaltoEdicion='
@@ -9820,7 +10046,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
         		    $ComplementoIdObjetoEnTitulo="  $BotonSaltoEdicion";
 
         		// Busca datos del informe
-        		$consulta_informe=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM ".$TablasCore."informe WHERE id=? ","$informe");
+        		$consulta_informe=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe." FROM core_informe WHERE id=? ","$informe");
         		$registro_informe=$consulta_informe->fetch();
         		$Identificador_informe=$registro_informe["id"];
 
@@ -9863,7 +10089,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
                 //Si el informe usa una conexion externa busca su configuracion
                 if($registro_informe["conexion_origen_datos"]!="")
                     {
-        		        $registro_conexiones=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_replicasbd." FROM ".$TablasCore."replicasbd WHERE nombre='".$registro_informe["conexion_origen_datos"]."' ")->fetch();
+        		        $registro_conexiones=PCO_EjecutarSQL("SELECT * FROM core_replicasbd WHERE nombre='".$registro_informe["conexion_origen_datos"]."' ")->fetch();
                     	global ${$registro_conexiones["nombre"]};
                     	$NombreConexionExtra=${$registro_conexiones["nombre"]};
                     }
@@ -9920,7 +10146,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 				if ($en_ventana)
 					{
 						//Cuando es embebido (=1) no imprime el boton de retorno pues se asume dentro de un formulario
-						if (!$embebido)
+						if (!$embebido && !$PCOVAR_InformeEmbebido)
 							echo '<div align=center id="PCOContenedor_BotonEscritorio"><button type="Button" onclick="document.PCO_FormVerMenu.submit()" class="btn btn-warning"><i class="fa fa-home fa-fw"></i> '.$MULTILANG_IrEscritorio.'</button></div><br>';
 
 						$TituloVentanaInforme=PCO_ReemplazarVariablesPHPEnCadena($registro_informe["titulo"]);
@@ -9959,7 +10185,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 					echo '<DIV style="DISPLAY: block; OVERFLOW: auto; POSITION: relative; WIDTH: '.$registro_informe["ancho"].' !important; HEIGHT: '.$registro_informe["alto"].' !important">';
 
 				//Genera enlaces a las opciones de descarga
-				if (($registro_informe["genera_pdf"]=='S' || $registro_informe["genera_pdf"]=='A')  && $embebido!=1)
+				if (($registro_informe["genera_pdf"]=='S' || $registro_informe["genera_pdf"]=='A')  && ($embebido!=1 && $PCOVAR_InformeEmbebido!=1))
 					include_once("core/marco_export.php");
 
 					//DEPRECATED echo '	<html>		<body leftmargin="0" topmargin="0" rightmargin="0" bottommargin="0" marginwidth="0" marginheight="0" style="font-size: 12px; font-family: Arial, Verdana, Tahoma;">';
@@ -10003,7 +10229,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 					//Genera HTML con las columnas
                     //Busca los campos definidos en el informe como visibles y luego determina si el campo tiene o no titulo arbitrario
         			$ListaCampos_TitutloArbitrario=array();
-        			$consulta_titulosarbitrarios=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_campos." FROM ".$TablasCore."informe_campos WHERE informe=? AND visible=1 ORDER BY peso,id","$informe");
+        			$consulta_titulosarbitrarios=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_informe_campos." FROM core_informe_campos WHERE informe=? AND visible=1 ORDER BY peso,id","$informe");
         			while ($registro_titulosarbitrarios = $consulta_titulosarbitrarios->fetch())
         					$ListaCampos_TitutloArbitrario[]=$registro_titulosarbitrarios["titulo_arbitrario"];
 				    $ConteoPosicionColumna=0;   //Utilizado para conocer la columna actual y luego buscar si tiene titulo arbitrario
@@ -10043,7 +10269,7 @@ function PCO_CargarInforme($informe,$en_ventana=1,$formato="htm",$estilo="Inform
 
                     //Lleva informe a la cache siempre y cuando no sea un informe interno del framework
                     $IdCacheInformes=0;
-                    PCO_EjecutarSQLUnaria("INSERT INTO {$TablasCore}informe_cache (informe,usuario,conexion,script_sql,columnas) VALUES('{$informe}','{$PCOSESS_LoginUsuario}','{$NombreConexionExtra}',?,'{$ListaColumnasInforme}') ","{$consulta}");
+                    PCO_EjecutarSQLUnaria("INSERT INTO core_informe_cache (informe,usuario,conexion,script_sql,columnas) VALUES('{$informe}','{$PCOSESS_LoginUsuario}','{$NombreConexionExtra}',?,'{$ListaColumnasInforme}') ","{$consulta}");
                     $IdCacheInformes=PCO_ObtenerUltimoIDInsertado();
 
                     //Ahora que se tiene una cache, determina si se requiere boton de exportacion CSV por AJAX y lo agrega
