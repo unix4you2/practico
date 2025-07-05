@@ -110,17 +110,21 @@ function IntercambiarPantallaCompleta()
 
 
 							</li>
-
 							<!-- BOTONES INDEPENDIENTES -->
-							<li><a style="cursor:pointer;" OnClick="EstadoPausa=1;" data-toggle="tooltip" data-placement="bottom" title="Pausa en esta ventana / Pause this window"><i class="fa fa-pause fa-fw text-danger "></i> <?php echo $MULTILANG_Pausar; ?></a></li>
-							<li><a style="cursor:pointer;" OnClick="document.formulario_monitoreo.Pagina.value='<?php echo $PaginaMonitoreo; ?>'; document.formulario_monitoreo.PaginaRecurrente.value='<?php echo $PaginaMonitoreo; ?>';" data-toggle="tooltip" data-placement="bottom" title="Permanecer y actualizar solo esta pagina / Stay and upgrade only this page"><i class="fa fa-refresh fa-fw text-warning "></i> <?php echo $MULTILANG_Recurrente; ?></a></li>
-							<li><a style="cursor:pointer;" OnClick="document.formulario_monitoreo.Pagina.value=(document.formulario_monitoreo.Pagina.value)*1-1; EstadoPausa=0; document.formulario_monitoreo.PaginaRecurrente.value=''; actualizar();" data-toggle="tooltip" data-placement="bottom" title="Continuar monitoreo / Resume monitoring"><i class="fa fa-play fa-fw text-success"></i> <?php echo $MULTILANG_Continuar; ?></a></li>
+							<li><a style="cursor:pointer;" OnClick="document.getElementById('PCODIV_ResultadosMonitoreo').contentWindow.EstadoPausa=1;" data-toggle="tooltip" data-placement="bottom" title="Pausa en esta ventana / Pause this window"><i class="fa fa-pause fa-fw text-danger "></i> <?php echo $MULTILANG_Pausar; ?></a></li>
+							<!--<li><a style="cursor:pointer;" OnClick="document.getElementById('PCODIV_ResultadosMonitoreo').contentWindow.document.formulario_monitoreo.PaginaRecurrente.value=document.getElementById('PCODIV_ResultadosMonitoreo').contentWindow.document.formulario_monitoreo.Pagina.value;" data-toggle="tooltip" data-placement="bottom" title="Permanecer y actualizar solo esta pagina / Stay and upgrade only this page"><i class="fa fa-refresh fa-fw text-warning "></i> <?php echo $MULTILANG_Recurrente; ?></a></li>-->
+							<li><a style="cursor:pointer;" OnClick="document.getElementById('PCODIV_ResultadosMonitoreo').contentWindow.document.formulario_monitoreo.Pagina.value=(document.getElementById('PCODIV_ResultadosMonitoreo').contentWindow.document.formulario_monitoreo.Pagina.value)*1-1; document.getElementById('PCODIV_ResultadosMonitoreo').contentWindow.EstadoPausa=0; document.getElementById('PCODIV_ResultadosMonitoreo').contentWindow.document.formulario_monitoreo.PaginaRecurrente.value=''; document.getElementById('PCODIV_ResultadosMonitoreo').contentWindow.actualizar();" data-toggle="tooltip" data-placement="bottom" title="Continuar monitoreo / Resume monitoring"><i class="fa fa-play fa-fw text-success"></i> <?php echo $MULTILANG_Continuar; ?></a></li>
 							<li><a style="cursor:pointer;" OnClick="IntercambiarPantallaCompleta();" data-toggle="tooltip" data-placement="bottom" title="Pantalla completa / FullScreen"> <i class="fa fa-desktop fa-fw text-default"></i>&nbsp;</a></li>
 
 							<li><a data-toggle="tooltip" data-placement="bottom" title="Tiempo antes de saltar / Time before jump"><i class="fa fa-clock-o fa-fw text-info"></i> <div id="MarcoCronometro" style="display: inline!important;">0s</div></a></li>
 
 						</ul>
-							
+
+                        <ul class="nav navbar-nav navbar-right">
+							<div style='color:white; margin-top:3px;'><?php echo $MULTILANG_MonAcerca; ?></div>
+                        </ul>
+
+                        <!--
 						<ul class="nav navbar-nav navbar-right">
 							<li class="dropdown">
 								<a style="cursor:pointer;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-question-circle text-info"></i> <span class="caret"></span></a>
@@ -128,8 +132,8 @@ function IntercambiarPantallaCompleta()
 									<li><a style="cursor:pointer;"><i class="fa fa-info fa-fw"></i> <?php echo $MULTILANG_Ayuda; ?></a></li>
 								</ul>
 							</li>
-
 						</ul>
+					    -->
 
 					</div><!-- /.navbar-collapse -->
 				</div><!-- /.container-fluid -->

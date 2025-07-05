@@ -224,30 +224,30 @@ function DibujarEstadoMaquina($Maquina,$estado_final,$Separador_DosPuntos,$estil
 	    //Si el modo de presentacion es NORMAL
 	    if($Maquina["modo_compacto"]==0)
 	        {
+	            $AnchoControlXS=$AnchoControl*2;
+	            $AnchoControlSM=$AnchoControl*2;
     			echo '
-    				<div class="col-xs-'.$AnchoControl.' col-sm-'.$AnchoControl.' col-md-'.$AnchoControl.' col-lg-'.$AnchoControl.'">
+    				<div class="col-xs-'.$AnchoControlXS.' col-sm-'.$AnchoControlSM.' col-md-'.$AnchoControl.' col-lg-'.$AnchoControl.'">
     					<div class="panel '.$estilo_caja_estado.'">
     						<div class="panel-heading">
     							<div class="row">
-    								<div class="col-md-1 col-lg-1">
-    									<i class="fa fa-desktop fa-2x "></i>
-    								</div>
-    								<div class="col-md-10 col-lg-10 text-right">
+    								<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-right">
+    								    <i class="fa fa-desktop fa-2x pull-left"></i>
     									<div>'.$Maquina["nombre"].'<br>
     									<font size=1>('.$Maquina["host"].$Separador_DosPuntos.$Maquina["puerto"].')</font> 
     									</div>
     								</div>
     							</div>
     						</div>
-    						<a href="#">
+    						
     							<div class="panel-footer">
     								<span class="pull-left '.$estilo_texto_estado.'" >
-    									<font><b>'.$estado_final.'</b></font>
+    									<a href="'.$Maquina["host"].'" target=_blank><font><b>'.$estado_final.'</b></font></a>
     								</span>
     								<span class="pull-right">  '.$IconoAlertaSonora.'  '.$IconoAlertaVibracion.'  <i class="fa fa-bar-chart '.$estilo_texto_estado.'"></i></span>
     								<div class="clearfix"></div>
     							</div>
-    						</a>
+    						
     					</div>
     				</div>';
 	        }
@@ -304,7 +304,7 @@ function DibujarEstadoMaquina($Maquina,$estado_final,$Separador_DosPuntos,$estil
 */
 function PresentarEstadoMaquina($IDRegistroMonitor)
 	{
-		global $ListaCamposSinID_monitoreo,$TablasCore;
+		global $ListaCamposSinID_monitoreo;
 		global $Imagen_fallo,$Imagen_ok;
 		global $ErroresMonitoreoPractico; 			// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay errores
 		global $ErroresMonitoreoAlertaAuditiva; 	// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay error en el monitor y este tiene activada la alerta sonora
@@ -314,7 +314,7 @@ function PresentarEstadoMaquina($IDRegistroMonitor)
 		global $MULTILANG_MonLinea,$MULTILANG_MonCaido;
 		
 		//Busca los datos del monitor
-		$Maquina=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
+		$Maquina=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM core_monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
 		
 		//Verifica estado de la maquina y servicio
 		$estado_actual=ServicioOnline($Maquina["host"],$Maquina["puerto"],$Maquina["tipo_ping"]);
@@ -350,7 +350,7 @@ function PresentarEstadoMaquina($IDRegistroMonitor)
 					PCO_EnviarCorreo("noreply@practico.org",$Maquina["correo_alerta"],$Maquina["nombre"]." $EstadoMonitor [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Maquina["nombre"]." [".$Maquina["host"].":".$Maquina["puerto"]."] -> ".$Maquina["tipo_ping"]);
 			
 				//Actualiza el estado actual del monitor
-				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."monitoreo SET ultimo_estado='$EstadoMonitor' WHERE id='$IDRegistroMonitor' ");
+				PCO_EjecutarSQLUnaria("UPDATE core_monitoreo SET ultimo_estado='$EstadoMonitor' WHERE id='$IDRegistroMonitor' ");
 			}
 		
 		//Determina si a la maquina o servicio es validado por socket
@@ -380,7 +380,7 @@ function PresentarEstadoMaquina($IDRegistroMonitor)
 */
 function PresentarSensorRango($IDRegistroMonitor,$PresentarEnFormatoMaquina=0)
 	{
-		global $ListaCamposSinID_monitoreo,$TablasCore;
+		global $ListaCamposSinID_monitoreo;
 		global $Imagen_fallo,$Imagen_ok;
 		global $ErroresMonitoreoPractico; 			// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay errores
 		global $ErroresMonitoreoAlertaAuditiva; 	// Una variable global que inciada en cero, cambia su valor en esta funcion cuando hay error en el monitor y este tiene activada la alerta sonora
@@ -391,7 +391,7 @@ function PresentarSensorRango($IDRegistroMonitor,$PresentarEnFormatoMaquina=0)
 		global $MULTILANG_FrmValorMinimo,$MULTILANG_FrmValorMaximo;
 		
 		//Busca los datos del monitor
-		$Sensor=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
+		$Sensor=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM core_monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
 
         //Obtiene el valor de acuerdo al tipo de comando
         $Palabras = explode(' ',trim($Sensor["comando"]));
@@ -456,7 +456,7 @@ function PresentarSensorRango($IDRegistroMonitor,$PresentarEnFormatoMaquina=0)
 					PCO_EnviarCorreo("noreply@practico.org",$Sensor["correo_alerta"],$Sensor["nombre"]." $EstadoMonitor [$PCO_FechaOperacionGuiones $PCO_HoraOperacionPuntos] ",$Sensor["nombre"]);
 			
 				//Actualiza el estado actual del monitor
-				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."monitoreo SET ultimo_estado='$EstadoMonitor' WHERE id='$IDRegistroMonitor' ");
+				PCO_EjecutarSQLUnaria("UPDATE core_monitoreo SET ultimo_estado='$EstadoMonitor' WHERE id='$IDRegistroMonitor' ");
 			}
 
         //Define cadena de colores cuando el sensor esta fuera de rango
@@ -547,10 +547,10 @@ function PresentarSensorRango($IDRegistroMonitor,$PresentarEnFormatoMaquina=0)
 */
 function PresentarEstadoSQL($IDRegistroMonitor,$color_fondo_estado_sql,$color_texto_estado_sql)
 	{
-		global $Imagen_generica_sql,$Tamano_iconos,$MULTILANG_MonCommSQL,$ListaCamposSinID_monitoreo,$TablasCore;
+		global $Imagen_generica_sql,$Tamano_iconos,$MULTILANG_MonCommSQL,$ListaCamposSinID_monitoreo;
 
 		//Busca los datos del monitor
-		$ComandoSQL=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
+		$ComandoSQL=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM core_monitoreo WHERE id='$IDRegistroMonitor' ")->fetch();
 
         //Si usa una conexion externa usa su configuracion
         if($ComandoSQL["conexion_origen_datos"]!="")
@@ -760,7 +760,7 @@ function EjecutarComando($comando_ejecutar)
 
 /* ################################################################## */
 /* ################################################################## */
-function PresentarEtiqueta($texto_etiqueta,$ancho_etiqueta)
+function PresentarEtiqueta($texto_etiqueta,$ancho_etiqueta,$tamano_resultado)
 	{
 		/*
 			Function: PresentarEtiqueta
@@ -770,7 +770,7 @@ function PresentarEtiqueta($texto_etiqueta,$ancho_etiqueta)
 		echo '
 			<div class="col-lg-'.$ancho_etiqueta.' col-md-'.$ancho_etiqueta.'">
 						<div class="alert alert-inverse alert-sm" style="top-margin:0px;">
-							<b>'.$texto_etiqueta.'</b>
+							<b style="font-size:'.$tamano_resultado.'px;">'.$texto_etiqueta.'</b>
 		 			</div>
 			</div>
 		';
@@ -808,24 +808,32 @@ if ($PCO_Accion=="PCO_VerMonitoreo")
 
 	<!-- Estilos especificos Monitoreo -->
     <link href="inc/bootstrap/css/monitoreo.min.css" rel="stylesheet"  media="screen">
-    
-    <!-- Custom Fonts -->
-    <link href="inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    
+
+    <!-- Custom Fonts Font Awesome Solid + Brands -->
+    <link href="inc/fortawesome/font-awesome/css/fontawesome.min.css" rel="stylesheet" type="text/css">
+    <link href="inc/fortawesome/font-awesome/css/brands.min.css" rel="stylesheet" type="text/css">
+    <link href="inc/fortawesome/font-awesome/css/solid.min.css" rel="stylesheet" type="text/css">
+    <link href="inc/fortawesome/font-awesome/css/v4-shims.min.css" rel="stylesheet" type="text/css"> <!-- Compatibilidad v4.7 -->
+
     <!-- Estilos selector de color -->
     <link href="inc/bootstrap/css/plugins/select/bootstrap-select.min.css" rel="stylesheet">
 
     <!-- jQuery -->
-	<script type="text/javascript" src="inc/jquery/jquery-2.2.4.min.js"></script>
+	<script type="text/javascript" src="inc/jquery/jquery/jquery-3.6.1.min.js"></script>
 </head>
 
-		<body oncontextmenu="return false;" style="font-family: Verdana, Tahoma, Arial; font-size: 11px;">
+        <?php
+            //Oculta las barras de desplazamiento solo en la pagina de maquetacion
+            $ComplementoBarrasDesplazamiento="";
+		    if ($PCO_SubAccion!="PCOMonitoreo_VerResultados")
+                $ComplementoBarrasDesplazamiento="overflow: hidden;";
+        ?>
 
-
+		<body oncontextmenu="return false;" style="font-family: Verdana, Tahoma, Arial; font-size: 11px; <?php echo $ComplementoBarrasDesplazamiento; ?>">
 		
 		<?php
 			//Busa la mayor y menor pagina definida
-			$resultado=PCO_EjecutarSQL("SELECT MIN(pagina) as minimo,MAX(pagina) as maximo FROM ".$TablasCore."monitoreo ");
+			$resultado=PCO_EjecutarSQL("SELECT MIN(pagina) as minimo,MAX(pagina) as maximo FROM core_monitoreo ");
 			$registro = $resultado->fetch();
 			$PaginaInicio=$registro["minimo"];
 			$MaximoPaginas=$registro["maximo"];
@@ -840,186 +848,220 @@ if ($PCO_Accion=="PCO_VerMonitoreo")
 			if($PaginaRecurrente!="") $SiguientePagina=$PaginaMonitoreo;
 			
 			//Busca cuantos milisegundos esperar segun la pagina definida y sus elementos
-			$resultado=PCO_EjecutarSQL("SELECT SUM(milisegundos_lectura) as total_espera FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ");
+			$resultado=PCO_EjecutarSQL("SELECT SUM(milisegundos_lectura) as total_espera FROM core_monitoreo WHERE pagina='$PaginaMonitoreo' ");
 			$registro = $resultado->fetch();
 			$MilisegundosPagina=$registro["total_espera"]+1;			
 		?>
 
-        <form name="formulario_monitoreo" action="index.php" style="visibility: hidden; display: none;">
-            <input type="hidden" name="PCO_Accion" value="PCO_VerMonitoreo">
-            <input type="hidden" name="Presentar_FullScreen" value="1">
-            <input type="hidden" name="Pagina" value="<?php echo $SiguientePagina; ?>">
-            <input type="hidden" name="PaginaRecurrente" value="<?php if($PaginaRecurrente!="") echo $PaginaMonitoreo; ?>">
-        </form>
 
-		<script language="JavaScript">
-			var EstadoPausa=0;
-			var ValorCronometro=<?php echo round($MilisegundosPagina/1000); ?>;
-			function actualizar()
-				{
-					if (EstadoPausa==0)
-					    document.formulario_monitoreo.submit();
-						//document.location="index.php?PCO_Accion=PCO_VerMonitoreo&Presentar_FullScreen=1&Pagina=<?php echo $SiguientePagina; ?>";
-				}
-			window.setTimeout("actualizar()",<?php echo $MilisegundosPagina; ?>);
 
-			//Actualiza el cronometro en la parte superior
-			function actualizar_reloj()
-				{
-					$("#MarcoCronometro").html(ValorCronometro+"s");
-					//MarcoCronometro
-						window.setTimeout("actualizar_reloj()",1000);
-					if (EstadoPausa==0)
-						ValorCronometro--;	
-					if (ValorCronometro<=-10)
-					    document.formulario_monitoreo.submit();
-				}
-			actualizar_reloj();
-		</script>
 
 
 
 	<!-- ################# INICIO DE LA MAQUETACION ################ -->
-		<?php include_once ("core/monitoreo_superior.php"); 	?>
-		<DIV class="row">
-			<div class="col-md-12" style="margin:0px;">
+		<?php 
+		    if ($EvitarTituloMonitoreo!="1")
+		        {
+		            include_once ("core/monitoreo_superior.php"); 	
+		?>
+            		<DIV class="row">
+            			<div class="col-md-12" style="margin:0px;">
+            
+            				<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="color:white;">
+            					<tr>
+            						<td width="100%" height="100%" valign="TOP" align="center">
+                                        <iframe name="PCODIV_ResultadosMonitoreo" id="PCODIV_ResultadosMonitoreo" width="100%" border=2 style="border:5px;" height="100%" src="index.php?PCO_Accion=PCO_VerMonitoreo&Presentar_FullScreen=1&Pagina=<?php echo $PaginaMonitoreo; ?>&PaginaRecurrente=<?php echo $PaginaRecurrente; ?>&EvitarTituloMonitoreo=1&PCO_SubAccion=PCOMonitoreo_VerResultados"></iframe>
+            				    </td></tr>
+            				</table>
 
-				<!-- INICIA LA TABLA PRINCIPAL -->
-				<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="color:white;">
-					<tr>
-						<td align="right">
-							<!-- NOTA COPYRIGHT	 -->
-							<font color="#CACACA" size=1><i><?php echo $MULTILANG_MonAcerca; ?></i>&nbsp;&nbsp;<br><br></font>
-						</td>
-					</tr>
-					<tr>
-						<td width="100%" height="100%" valign="TOP" align="center">
-
-							<?php
-								$ErroresMonitoreoPractico=0;
-								$ErroresMonitoreoAlertaAuditiva=0;
-								$ErroresMonitoreoAlertaVibratoria=0;
-
-								//Path imagenes e iconos y sus propiedades
-								$Imagen_fallo='<i class="fa fa-exclamation-triangle icon-orange"></i>';
-								$Imagen_ok='<i class="fa fa-check-circle icon-green"></i>';
-								$Imagen_generica='<i class="fa fa-certificate"></i>';
-								$Tamano_iconos=" width=20 heigth=20 ";
-								$Imagen_generica_sql='<i class="fa fa-database"></i>';
-								$Imagen_generica_shell='<i class="fa fa-terminal"></i>';
-								$Sonido_alarma="inc/practico/sonidos/alarma.ogg";
-
-								// Valores de presentacion predeterminados
-								$color_fondo_estado="#CAF9CB";
-								$color_texto_estado="green";
-
-								$color_fondo_estado_sql="#CAF9CB";
-								$color_texto_estado_sql="green";
-
-								$color_fondo_ascii="transparent"; 	//Transparent o el codigo de color
-								$color_texto_ascii="#FFFFFF";
-								$barras_texto_ascii="hidden";		//hidden|auto
-
-								$PosicionImagenes=0; //La posicion global para saber que imagen sigue
-
-								//Limpia los arreglos de monitores
-								unset($Maquinas);
-								unset($ComandosShell);
-								unset($ComandosSQL);
-								unset($Imagenes);
-								//Recorre la pagina en cuestion
-								$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM ".$TablasCore."monitoreo WHERE pagina='$PaginaMonitoreo' ORDER BY peso ");
-								while($registro = $resultado->fetch())
-									{
-										//Evalua elementos tipo Etiqueta
-										if ($registro["tipo"]=="Etiqueta")
-											{
-												PresentarEtiqueta($registro["nombre"],$registro["ancho"]);
-											}
-										//Evalua elementos tipo Maquina o host
-										if ($registro["tipo"]=="Maquina")
-											{
-												PresentarEstadoMaquina($registro["id"]);
-											}
-										//Evalua elementos tipo Comando shell
-										if ($registro["tipo"]=="ComandoShell")
-											{
-												$ComandosShell[]=array(Nombre => $registro["nombre"],	Comando=>$registro["comando"],	Ancho=>$registro["ancho"],	Alto=>$registro["alto"]);
-												EjecutarComando($ComandosShell[count($ComandosShell)-1]);
-											}
-										//Evalua elementos tipo Consulta SQL
-										if ($registro["tipo"]=="ComandoSQL")
-											{
-												PresentarEstadoSQL($registro["id"],$color_fondo_estado_sql,$color_texto_estado_sql);
-											}
-										//Evalua elementos tipo Imagen
-										if ($registro["tipo"]=="Imagen")
-											{
-												$Imagenes[]=array(Nombre => $registro["nombre"],	Path=>$registro["path"],	Ancho=>$registro["ancho"],	Alto=>$registro["alto"],	Salto=>"0");	
-												PresentarImagen($Imagenes[count($Imagenes)-1]);
-											}
-										//Evalua elementos tipo Embebido
-										if ($registro["tipo"]=="Embebido")
-											{
-												PresentarEmbebido($registro["nombre"],$registro["path"],$registro["ancho"],$registro["alto"]);
-											}
-										//Evalua elementos tipo SensorRango
-										if ($registro["tipo"]=="SensorRango")
-											{
-												PresentarSensorRango($registro["id"]);
-											}
-										//Evalua elementos tipo SensorMaquina que es en esencia un sensor en rango presentado finalmente como formato de maquina
-										if ($registro["tipo"]=="SensorMaquina")
-											{
-												PresentarSensorRango($registro["id"],1);
-											}
-										//Agrega los saltos de linea
-										for ($i=0;$i<$registro["saltos"];$i++) echo "<br>";
-									}
-
-								// Si encuentra algun error en el monitoreo reproduce la alarma
-								if ($ErroresMonitoreoPractico)
-									{
-										//Si alguno de los monitores con error tenia activada la alerta auditiva
-										if ($ErroresMonitoreoAlertaAuditiva==1)
-											{
-                                    			if(empty($_SERVER["HTTPS"]))
-                                    				$protocolo_webservice="http://";
-                                    			else
-                                    				$protocolo_webservice="https://";
-												$Ruta_Servidor=$protocolo_webservice.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
-												$Ruta_Servidor=str_replace(basename($_SERVER['PHP_SELF']),"",$Ruta_Servidor);
-												$Ruta_Servidor.=$Sonido_alarma;
-												//Tipos de reproduccion
-												//echo '<embed height="50" width="100" src="'.$Sonido_alarma.'">';
-												//echo '<object height="50" width="100" data="'.$Sonido_alarma.'"></object>';
-												//echo '<bgsound src="'.$Sonido_alarma.'" loop="1"></bgsound>';
-												//echo '<audio autoplay id="bgsound"><source src="'.$Sonido_alarma.'" type="audio/mp3"><p>Navegador no soporta Audio en HTML5</p></audio>';
-												echo '<iframe src="'.$Ruta_Servidor.'" width="0" height="0"></iframe>';
-											}
-
-										//Si alguno de los monitores con error tenia activada la alerta auditiva
-										if ($ErroresMonitoreoAlertaVibratoria==1)
-											{
-												echo '
-													<script>
-														navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
-														if (navigator.vibrate) {
-														navigator.vibrate([100, 50, 100, 50, 100, 250]);
-														//Vibra,Pausa,Vibra...
-														}
-													</script>';
-											}
-									}
-
-							?>
-
-				<!-- FINALIZA LA TABLA PRINCIPAL -->
-				</td></tr></table>
-
-			</div>
-		</DIV>
+            			</div>
+            		</DIV>
+		<?php 
+		        }  // FIN if ($EvitarTituloMonitoreo!="1")
+		?>
 	<!-- ################## FIN DE LA MAQUETACION ################## -->
+
+
+	<!-- ################# INICIO DE RESULTADOS ################ -->
+		<?php 
+		    if ($PCO_SubAccion=="PCOMonitoreo_VerResultados")
+		        {
+		?>
+
+    		<script language="JavaScript">
+    			var EstadoPausa=0;
+    			var ValorCronometro=<?php echo round($MilisegundosPagina/1000); ?>;
+    			function actualizar()
+    				{
+    					if (EstadoPausa==0)
+    					    document.formulario_monitoreo.submit();
+    						//document.location="index.php?PCO_Accion=PCO_VerMonitoreo&Presentar_FullScreen=1&Pagina=<?php echo $SiguientePagina; ?>";
+    				}
+    			window.setTimeout("actualizar()",<?php echo $MilisegundosPagina; ?>);
+    
+    			//Actualiza el cronometro en la parte superior
+    			function actualizar_reloj()
+    				{
+    					parent.document.getElementById("MarcoCronometro").innerHTML=ValorCronometro+"s";
+    					//MarcoCronometro
+    						window.setTimeout("actualizar_reloj()",1000);
+    					if (EstadoPausa==0)
+    						ValorCronometro--;	
+    					if (ValorCronometro<=-10)
+    					    document.formulario_monitoreo.submit();
+    				}
+    			actualizar_reloj();
+    		</script>
+
+            <form name="formulario_monitoreo" target="PCODIV_ResultadosMonitoreo" action="index.php" style="visibility: hidden; display: none;">
+                <input type="hidden" name="PCO_Accion" value="PCO_VerMonitoreo">
+                <input type="hidden" name="Presentar_FullScreen" value="1">
+                <input type="hidden" name="Pagina" value="<?php echo $SiguientePagina; ?>">
+                <input type="hidden" name="PaginaRecurrente" value="<?php if($PaginaRecurrente!="") echo $PaginaMonitoreo; ?>">
+                <input type="hidden" name="PCO_SubAccion" value="PCOMonitoreo_VerResultados">
+                <input type="hidden" name="EvitarTituloMonitoreo" value="1">
+            </form>
+
+            		<DIV class="row">
+            			<div class="col-md-12" style="margin:0px;">
+            
+            				<!-- INICIA LA TABLA PRINCIPAL -->
+            				<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="color:white;">
+            					<tr>
+            						<td width="100%" height="100%" valign="TOP" align="center">
+            
+            							
+            							<?php
+            
+                        								$ErroresMonitoreoPractico=0;
+                        								$ErroresMonitoreoAlertaAuditiva=0;
+                        								$ErroresMonitoreoAlertaVibratoria=0;
+                        
+                        								//Path imagenes e iconos y sus propiedades
+                        								$Imagen_fallo='<i class="fa fa-exclamation-triangle icon-orange"></i>';
+                        								$Imagen_ok='<i class="fa fa-check-circle icon-green"></i>';
+                        								$Imagen_generica='<i class="fa fa-certificate"></i>';
+                        								$Tamano_iconos=" width=20 heigth=20 ";
+                        								$Imagen_generica_sql='<i class="fa fa-database"></i>';
+                        								$Imagen_generica_shell='<i class="fa fa-terminal"></i>';
+                        								$Sonido_alarma="inc/practico/sonidos/alarma.ogg";
+                        
+                        								// Valores de presentacion predeterminados
+                        								$color_fondo_estado="#CAF9CB";
+                        								$color_texto_estado="green";
+                        
+                        								$color_fondo_estado_sql="#CAF9CB";
+                        								$color_texto_estado_sql="green";
+                        
+                        								$color_fondo_ascii="transparent"; 	//Transparent o el codigo de color
+                        								$color_texto_ascii="#FFFFFF";
+                        								$barras_texto_ascii="hidden";		//hidden|auto
+                        
+                        								$PosicionImagenes=0; //La posicion global para saber que imagen sigue
+                        
+                        								//Limpia los arreglos de monitores
+                        								unset($Maquinas);
+                        								unset($ComandosShell);
+                        								unset($ComandosSQL);
+                        								unset($Imagenes);
+                        								//Recorre la pagina en cuestion
+                        								$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_monitoreo." FROM core_monitoreo WHERE pagina='$PaginaMonitoreo' ORDER BY peso ");
+                        								while($registro = $resultado->fetch())
+                        									{
+                        										//Evalua elementos tipo Etiqueta
+                        										if ($registro["tipo"]=="Etiqueta")
+                        											{
+                        												PresentarEtiqueta($registro["nombre"],$registro["ancho"],$registro["tamano_resultado"]);
+                        											}
+                        										//Evalua elementos tipo Maquina o host
+                        										if ($registro["tipo"]=="Maquina")
+                        											{
+                        												PresentarEstadoMaquina($registro["id"]);
+                        											}
+                        										//Evalua elementos tipo Comando shell
+                        										if ($registro["tipo"]=="ComandoShell")
+                        											{
+                        												$ComandosShell[]=array(Nombre => $registro["nombre"],	Comando=>$registro["comando"],	Ancho=>$registro["ancho"],	Alto=>$registro["alto"]);
+                        												EjecutarComando($ComandosShell[count($ComandosShell)-1]);
+                        											}
+                        										//Evalua elementos tipo Consulta SQL
+                        										if ($registro["tipo"]=="ComandoSQL")
+                        											{
+                        												PresentarEstadoSQL($registro["id"],$color_fondo_estado_sql,$color_texto_estado_sql);
+                        											}
+                        										//Evalua elementos tipo Imagen
+                        										if ($registro["tipo"]=="Imagen")
+                        											{
+                        												$Imagenes[]=array(Nombre => $registro["nombre"],	Path=>$registro["path"],	Ancho=>$registro["ancho"],	Alto=>$registro["alto"],	Salto=>"0");	
+                        												PresentarImagen($Imagenes[count($Imagenes)-1]);
+                        											}
+                        										//Evalua elementos tipo Embebido
+                        										if ($registro["tipo"]=="Embebido")
+                        											{
+                        												PresentarEmbebido($registro["nombre"],$registro["path"],$registro["ancho"],$registro["alto"]);
+                        											}
+                        										//Evalua elementos tipo SensorRango
+                        										if ($registro["tipo"]=="SensorRango")
+                        											{
+                        												PresentarSensorRango($registro["id"]);
+                        											}
+                        										//Evalua elementos tipo SensorMaquina que es en esencia un sensor en rango presentado finalmente como formato de maquina
+                        										if ($registro["tipo"]=="SensorMaquina")
+                        											{
+                        												PresentarSensorRango($registro["id"],1);
+                        											}
+                        										//Agrega los saltos de linea
+                        										for ($i=0;$i<$registro["saltos"];$i++) echo "<br>";
+                        									}
+                        
+                        								// Si encuentra algun error en el monitoreo reproduce la alarma
+                        								if ($ErroresMonitoreoPractico)
+                        									{
+                        										//Si alguno de los monitores con error tenia activada la alerta auditiva
+                        										if ($ErroresMonitoreoAlertaAuditiva==1)
+                        											{
+                                                            			if(empty($_SERVER["HTTPS"]))
+                                                            				$protocolo_webservice="http://";
+                                                            			else
+                                                            				$protocolo_webservice="https://";
+                        												$Ruta_Servidor=$protocolo_webservice.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'];
+                        												$Ruta_Servidor=str_replace(basename($_SERVER['PHP_SELF']),"",$Ruta_Servidor);
+                        												$Ruta_Servidor.=$Sonido_alarma;
+                        												//Tipos de reproduccion
+                        												//echo '<embed height="50" width="100" src="'.$Sonido_alarma.'">';
+                        												//echo '<object height="50" width="100" data="'.$Sonido_alarma.'"></object>';
+                        												//echo '<bgsound src="'.$Sonido_alarma.'" loop="1"></bgsound>';
+                        												//echo '<audio autoplay id="bgsound"><source src="'.$Sonido_alarma.'" type="audio/mp3"><p>Navegador no soporta Audio en HTML5</p></audio>';
+                        												echo '<iframe src="'.$Ruta_Servidor.'" width="0" height="0"></iframe>';
+                        											}
+                        
+                        										//Si alguno de los monitores con error tenia activada la alerta auditiva
+                        										if ($ErroresMonitoreoAlertaVibratoria==1)
+                        											{
+                        												echo '
+                        													<script>
+                        														navigator.vibrate = navigator.vibrate || navigator.webkitVibrate || navigator.mozVibrate || navigator.msVibrate;
+                        														if (navigator.vibrate) {
+                        														navigator.vibrate([100, 50, 100, 50, 100, 250]);
+                        														//Vibra,Pausa,Vibra...
+                        														}
+                        													</script>';
+                        											}
+                        									}
+            
+            
+            							?>
+            
+            				<!-- FINALIZA LA TABLA PRINCIPAL -->
+            				</td></tr></table>
+            
+            			</div>
+            		</DIV>
+	<!-- ################## FIN DE LA MAQUETACION ################## -->
+    <?php
+		        } //FIN $PCO_SubAccion=="PCOMonitoreo_VerResultados"
+    ?>
+
 
 
     <!-- Bootstrap Core JavaScript -->
@@ -1049,17 +1091,10 @@ if ($PCO_Accion=="PCO_VerMonitoreo")
 	</script>
 
 		<?php
-			// Estadisticas de uso anonimo con GABeacon
-			$PrefijoGA='<img src="https://rastreador-visitas.appspot.com/';
-			$PosfijoGA='/Practico/'.$PCO_Accion.'?pixel" border=0 ALT=""/>';
-			// Este valor indica un ID generico de GA UA-847800-9 No edite esta linea sobre el codigo
-			// Para validar que su ID es diferente al generico de seguimiento.  En lugar de esto cambie
-			// su valor a traves del panel de configuracion de Practico con el entregado como ID de GoogleAnalytics
-			$Infijo=base64_decode("VUEtODQ3ODAwLTk=");
-			echo $PrefijoGA.$Infijo.$PosfijoGA;
-			if(@$CodigoGoogleAnalytics!="")
-				echo $PrefijoGA.$CodigoGoogleAnalytics.$PosfijoGA;	
+			// Estadisticas de uso anonimo con GABeacon(Deprecated) Directo por Google Analytics
+            PCO_AgregarFaroAnalytics();
 		?>
+		
 		</body>
 		</html>
 <?php
