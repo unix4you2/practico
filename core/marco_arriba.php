@@ -57,10 +57,10 @@
 		(start code)
 			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{
-					$Complemento_tablas=",".$TablasCore."usuario_menu";
-					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+					$Complemento_tablas=",core_usuario_menu";
+					$Complemento_condicion=" AND core_usuario_menu.menu=core_menu.id AND core_usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			SELECT * FROM ".$TablasCore."menu ".$Complemento_tablas." WHERE posible_arriba ".$Complemento_condicion
+			SELECT * FROM core_menu ".$Complemento_tablas." WHERE posible_arriba ".$Complemento_condicion
 		(end)
 
 	Salida:
@@ -152,8 +152,7 @@
         <div id="page-wrapper" style="background-color: <?php echo $PCO_ColorFondoGeneral; ?>; <?php echo $PCOVAR_CadenaImagenFondo; ?> ">  <!-- page-content-wrapper -->
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-12">
-                        
+                    <div class="col col-xs-12 col-sm-12 col-md-12 col-lg-12">
 						<?php
 							//Agrega un enter minimo para las paginas si hay sesion activa
 							if ($PCOSESS_SesionAbierta)
@@ -186,10 +185,10 @@
 			// Si el usuario es diferente al administrador agrega condiciones al query
 			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{
-					$Complemento_tablas=",".$TablasCore."usuario_menu";
-					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+					$Complemento_tablas=",core_usuario_menu";
+					$Complemento_condicion=" AND core_usuario_menu.menu=core_menu.hash_unico AND core_usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_arriba=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
+			$resultado=PCO_EjecutarSQL("SELECT core_menu.id as id,$ListaCamposSinID_menu FROM core_menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_arriba=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
 
 			while($registro = $resultado->fetch())
 				PCO_ImprimirOpcionMenu($registro,'arriba');
@@ -199,7 +198,7 @@
 		// Si el usuario es administrador valida que ya haya cambiado al menos su correo
 		if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$Presentar_FullScreen!=1 && $PCO_Accion=="PCO_VerMenu")
 			{
-				$registro_usuario=PCO_EjecutarSQL("SELECT correo FROM ".$TablasCore."usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
+				$registro_usuario=PCO_EjecutarSQL("SELECT correo FROM core_usuario WHERE login=? ","$PCOSESS_LoginUsuario")->fetch();
 				if ($registro_usuario["correo"]=="sucorreo@dominio.com" || $registro_usuario["correo"]=="unix4you2@gmail.com")
 					PCO_Mensaje($MULTILANG_Importante, $MULTILANG_UsrActualizarAdmin, '', 'fa fa-bell fa-3x', 'alert alert-danger alert-dismissible');
 			}
