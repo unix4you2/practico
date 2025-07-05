@@ -96,10 +96,10 @@
                             	// Si el usuario es diferente al administrador agrega condiciones al query
                             	if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
                             		{
-                            			$Complemento_tablas=",".$TablasCore."usuario_menu";
-                            			$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+                            			$Complemento_tablas=",core_usuario_menu";
+                            			$Complemento_condicion=" AND core_usuario_menu.menu=core_menu.hash_unico AND core_usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
                             		}
-                            	$ResultadoConteoSecciones=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_izquierda=1 AND formulario_vinculado=0 ".@$Complemento_condicion." GROUP BY seccion ORDER BY peso,seccion");
+                            	$ResultadoConteoSecciones=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,seccion FROM core_menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_izquierda=1 AND formulario_vinculado=0 ".@$Complemento_condicion." GROUP BY seccion ORDER BY peso,seccion");
                             	// Imprime las secciones encontradas para el usuario
                             	while($RegistroConteoSecciones = $ResultadoConteoSecciones->fetch())
                             		{
@@ -115,10 +115,10 @@
                             			// Si el usuario es diferente al administrador agrega condiciones al query
                             			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
                             				{
-                            					$Complemento_tablas=",".$TablasCore."usuario_menu";
-                            					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+                            					$Complemento_tablas=",core_usuario_menu";
+                            					$Complemento_condicion=" AND core_usuario_menu.menu=core_menu.hash_unico AND core_usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
                             				}
-                            			$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_izquierda=1 AND formulario_vinculado=0 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso,texto");
+                            			$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT core_menu.id as id,$ListaCamposSinID_menu FROM core_menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_izquierda=1 AND formulario_vinculado=0 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso,texto");
                             			while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
                             				PCO_ImprimirOpcionMenu($registro_opciones_acordeon,'lateral');
                             		}
