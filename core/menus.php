@@ -66,8 +66,8 @@ if ($PCO_Accion=="PCO_EliminarMenu")
 				id - Identificador unico en la tabla de menu
 
 			(start code)
-				DELETE FROM ".$TablasCore."menu WHERE id=$id
-				DELETE FROM ".$TablasCore."usuario_menu WHERE menu=$id
+				DELETE FROM core_menu WHERE id=$id
+				DELETE FROM core_usuario_menu WHERE menu=$id
 			(end)
 
 			Salida:
@@ -78,7 +78,7 @@ if ($PCO_Accion=="PCO_EliminarMenu")
 		*/
 		
 		//Obtiene el hash de la opcion
-		$RegistroMenu=PCO_EjecutarSQL("SELECT hash_unico,texto FROM ".$TablasCore."menu WHERE id=? ","$id")->fetch();
+		$RegistroMenu=PCO_EjecutarSQL("SELECT hash_unico,texto FROM core_menu WHERE id=? ","$id")->fetch();
 		
 		//Si hay un formulario activo lo agrega a la condicion de eliminado para evitar borrar otros que tienen mismo hash de otro formulario
 		$CondicionFormulario='';
@@ -86,13 +86,13 @@ if ($PCO_Accion=="PCO_EliminarMenu")
 		
 		
 		// Elimina los datos de la opcion
-		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE id=? $CondicionFormulario ","$id");
+		PCO_EjecutarSQLUnaria("DELETE FROM core_menu WHERE id=? $CondicionFormulario ","$id");
 
 		// Elimina opciones hijas
-		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."menu WHERE padre='".$RegistroMenu["hash_unico"]."' $CondicionFormulario ","$id");
+		PCO_EjecutarSQLUnaria("DELETE FROM core_menu WHERE padre='".$RegistroMenu["hash_unico"]."' $CondicionFormulario ","$id");
 		
 		// Elimina el enlace para todos los usuarios que utilizan esa opcion
-		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? ",$RegistroMenu["hash_unico"]);
+		PCO_EjecutarSQLUnaria("DELETE FROM core_usuario_menu WHERE menu=? ",$RegistroMenu["hash_unico"]);
 
 		PCO_Auditar("Elimina menu $id ".$RegistroMenu["texto"]);
         //Redirecciona nuevamente a la edicion del menu
@@ -119,8 +119,8 @@ if ($PCO_Accion=="PCO_EliminarMenu")
 */
 function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0,$CondicionFormulario='')
     {
-        global $PCO_FormularioActivoEdicionMenu,$TablasCore,$ListaCamposSinID_menu,$MULTILANG_MnuAdvElimina,$MULTILANG_Editar,$MULTILANG_Eliminar,$ArchivoCORE;
-		$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_menu." FROM ".$TablasCore."menu WHERE 1=1 AND $CondicionFiltrado $CondicionFormulario ORDER BY seccion,peso");
+        global $PCO_FormularioActivoEdicionMenu,$ListaCamposSinID_menu,$MULTILANG_MnuAdvElimina,$MULTILANG_Editar,$MULTILANG_Eliminar,$ArchivoCORE;
+		$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_menu." FROM core_menu WHERE 1=1 AND $CondicionFiltrado $CondicionFormulario ORDER BY seccion,peso");
 		while($registro = $resultado->fetch())
 			{
 				echo '<tr>';
@@ -198,7 +198,7 @@ function PCO_PresentarOpcionesArbolMenu($CondicionFiltrado='',$Sangria=0,$Condic
 				Identificador del formulario del cual se esta editando las entradas del menu
 
 			(start code)
-				SELECT * FROM ".$TablasCore."menu WHERE 1
+				SELECT * FROM core_menu WHERE 1
 			(end)
 
 			Salida:
@@ -340,10 +340,10 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 							// Si el usuario es diferente al administrador agrega condiciones al query
 							if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 								{
-									$Complemento_tablas=",".$TablasCore."usuario_menu";
-									$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.id AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";
+									$Complemento_tablas=",core_usuario_menu";
+									$Complemento_condicion=" AND core_usuario_menu.menu=core_menu.id AND core_usuario_menu.usuario='$PCOSESS_LoginUsuario'";
 								}
-							$resultado=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
+							$resultado=PCO_EjecutarSQL("SELECT * FROM core_menu ".@$Complemento_tablas." WHERE 1 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
 
 							// Imprime las opciones con sus formularios
 							$conteo_opciones=0;
@@ -394,10 +394,10 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 							// Si el usuario es diferente al administrador agrega condiciones al query
 							if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 								{
-									$Complemento_tablas=",".$TablasCore."usuario_informe";
-									$Complemento_condicion=" AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario'";
+									$Complemento_tablas=",core_usuario_informe";
+									$Complemento_condicion=" AND core_usuario_informe.informe=core_informe.id AND core_usuario_informe.usuario='$PCOSESS_LoginUsuario'";
 								}
-							$resultado=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."informe ".@$Complemento_tablas." WHERE ".$TablasCore."informe.id>0 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
+							$resultado=PCO_EjecutarSQL("SELECT * FROM core_informe ".@$Complemento_tablas." WHERE core_informe.id>0 AND ( $complemento_palabras_like) ".@$Complemento_condicion);
 
 							// Imprime las opciones con sus formularios
 							while($registro = $resultado->fetch())
@@ -470,7 +470,11 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 	if ($PCO_Accion=="PCO_VerMenu" && $PCOSESS_SesionAbierta)
 		{ 
             //Presenta informes marcados como de publicacion automatica en el home para el usuario actual.  PILAS. esto no aplica para el admin a menos que -por debajo- se haga la insercion del registro de permisos a modo pruebas
-            $InformesHome=PCO_EjecutarSQL("SELECT ".$TablasCore."informe.id,ancho FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.usuario='$PCOSESS_LoginUsuario' AND ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND (permitido_home='E' OR permitido_home='A') ORDER BY titulo ");
+            $InformesHome=PCO_EjecutarSQL("SELECT * FROM (
+                                            SELECT core_informe.id,core_informe.ancho,core_informe.titulo FROM core_informe,core_usuario_informe WHERE core_usuario_informe.usuario='$PCOSESS_LoginUsuario' AND core_usuario_informe.informe=core_informe.id AND (permitido_home='E' OR permitido_home='A') 
+                                            UNION
+                                            SELECT core_informe.id,core_informe.ancho,core_informe.titulo FROM core_informe WHERE permitido_home='E*' OR permitido_home='A*'
+                                            ) as Informes ORDER BY titulo ");
             while ($RegistroInformeHome=$InformesHome->fetch())
                 {
                     if ($RegistroInformeHome["ancho"]!="")
@@ -486,10 +490,10 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 			// Si el usuario es diferente al administrador agrega condiciones al query
 			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{
-					$Complemento_tablas=",".$TablasCore."usuario_menu";
-					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+					$Complemento_tablas=",core_usuario_menu";
+					$Complemento_condicion=" AND core_usuario_menu.menu=core_menu.hash_unico AND core_usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_escritorio=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
+			$resultado=PCO_EjecutarSQL("SELECT core_menu.id as id,$ListaCamposSinID_menu FROM core_menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_escritorio=1 AND formulario_vinculado=0 ".@$Complemento_condicion." ORDER BY peso");
             //Crea la tabla para disponer los resultados solamente si encuentra opciones para el usuario
 			if($resultado->rowCount()>0) 
 			    {
@@ -505,10 +509,10 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 			// Si el usuario es diferente al administrador agrega condiciones al query
 			if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 				{
-					$Complemento_tablas=",".$TablasCore."usuario_menu";
-					$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+					$Complemento_tablas=",core_usuario_menu";
+					$Complemento_condicion=" AND core_usuario_menu.menu=core_menu.hash_unico AND core_usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 				}
-			$ResultadoConteoSecciones=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,seccion FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_centro=1 AND formulario_vinculado=0 ".@$Complemento_condicion." GROUP BY seccion ORDER BY seccion");
+			$ResultadoConteoSecciones=PCO_EjecutarSQL("SELECT COUNT(*) as conteo,seccion FROM core_menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_centro=1 AND formulario_vinculado=0 ".@$Complemento_condicion." GROUP BY seccion ORDER BY seccion");
 			// Imprime las secciones encontradas para el usuario
 			while($RegistroConteoSecciones = $ResultadoConteoSecciones->fetch())
 				{
@@ -521,10 +525,10 @@ if ($PCO_Accion=="PCOFUNC_AdministrarMenu")
 					// Si el usuario es diferente al administrador agrega condiciones al query
 					if (!PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 						{
-							$Complemento_tablas=",".$TablasCore."usuario_menu";
-							$Complemento_condicion=" AND ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
+							$Complemento_tablas=",core_usuario_menu";
+							$Complemento_condicion=" AND core_usuario_menu.menu=core_menu.hash_unico AND core_usuario_menu.usuario='$PCOSESS_LoginUsuario'";  // AND nivel>0
 						}
-					$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.id as id,$ListaCamposSinID_menu FROM ".$TablasCore."menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_centro=1 AND formulario_vinculado=0 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso");
+					$resultado_opciones_acordeon=PCO_EjecutarSQL("SELECT core_menu.id as id,$ListaCamposSinID_menu FROM core_menu ".@$Complemento_tablas." WHERE (padre=0 OR padre='') AND posible_centro=1 AND formulario_vinculado=0 AND seccion='".$seccion_menu_activa."' ".@$Complemento_condicion." ORDER BY peso");
 
 					while($registro_opciones_acordeon = $resultado_opciones_acordeon->fetch())
 						PCO_ImprimirOpcionMenu($registro_opciones_acordeon,'centro');
