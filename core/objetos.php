@@ -51,7 +51,7 @@
 
 /* ################################################################## */
 /* ################################################################## */
-	if ($PCO_Accion=="cargar_objeto" || $PCO_Accion=="PCO_CargarObjeto")
+	if ($PCO_Accion=="PCO_CargarObjeto")
 		{
 			/*
 				Function: PCO_CargarObjeto
@@ -112,10 +112,8 @@
                             //Si detecta que se trata del form interno para edicion de menues agrega funciones extra
                             if ($partes_objeto[1]=="-12")
                                 {
-                                    PCO_SelectorIconosAwesome();
                                     PCO_SelectorObjetosMenu();
                                 }
-
 							PCO_CargarFormulario($partes_objeto[1],@$en_ventana,@$PCO_CampoBusquedaBD,@$PCO_ValorBusquedaBD);
 						}
 					//Si es un informe lo llama con sus parámetros
@@ -355,10 +353,7 @@ $salida=sprintf("<?php
 	\$_SeparadorCampos_='%s';
 	
 	// Define si la plataforma se encuentra activa para realizar desarrollo interno de PracticoFramework
-	\$ModoDesarrolladorPractico=%s; // [0=Inactivo|-10000=Activo]
-
-	// Define cadena separada por comas con usuarios administradores de la aplicacion
-	\$PCOVAR_Administradores='%s';",$ServidorNEW,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$PermitirReporteBugsNEW,$DepuracionSQLNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$IdiomaEnLoginNEW,$Tema_PracticoFrameworkNEW,$PCO_ArchivoImagenFondoNEW,$PCO_TransformacionColoresNEW,$PCO_PermitirUsuariosModoNocheNEW,$TipoCaptchaLoginNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_PresentarOauthInicioNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$PWA_ActivaNEW,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PWA_FCMSenderIDNEW,$PWA_ScopeNEW,$PWA_AutorizacionGPSNEW,$PWA_AutorizacionFCMNEW,$PWA_AutorizacionCAMNEW,$PWA_AutorizacionMICNEW,$PWA_OcultarBarrasHerramientasNEW,$_SeparadorCampos_NEW,$ModoDesarrolladorPracticoNEW,$PCOVAR_AdministradoresNEW);
+	\$ModoDesarrolladorPractico=%s; // [0=Inactivo|-10000=Activo]",$ServidorNEW,$BaseDatos,$UsuarioBD,$PasswordBD,$MotorBD,$PuertoBD,$NombreRADNEW,$TablasCoreNEW,$TablasAppNEW,$LlaveDePasoNEW,$ModoDepuracionNEW,$PermitirReporteBugsNEW,$DepuracionSQLNEW,$BuscarActualizacionesNEW,$ZonaHorariaNEW,$IdiomaPredeterminadoNEW,$IdiomaEnLoginNEW,$Tema_PracticoFrameworkNEW,$PCO_ArchivoImagenFondoNEW,$PCO_TransformacionColoresNEW,$PCO_PermitirUsuariosModoNocheNEW,$TipoCaptchaLoginNEW,$CaracteresCaptchaNEW,$CodigoGoogleAnalyticsNEW,$Auth_TipoMotorNEW,$Auth_ProtoTransporteNEW,$Auth_PermitirReseteoClavesNEW,$Auth_PermitirAutoRegistroNEW,$Auth_PlantillaAutoRegistroNEW,$Auth_PresentarOauthInicioNEW,$Auth_TipoEncripcionNEW,$Auth_LDAPServidorNEW,$Auth_LDAPPuertoNEW,$Auth_LDAPDominioNEW,$Auth_LDAPOUNEW,$Activar_ModuloChatNEW,$PWA_ActivaNEW,$PWA_DireccionTextoNEW,$PWA_DisplayNEW,$PWA_OrientacionNEW,$PWA_FCMSenderIDNEW,$PWA_ScopeNEW,$PWA_AutorizacionGPSNEW,$PWA_AutorizacionFCMNEW,$PWA_AutorizacionCAMNEW,$PWA_AutorizacionMICNEW,$PWA_OcultarBarrasHerramientasNEW,$_SeparadorCampos_NEW,$ModoDesarrolladorPracticoNEW);
 			// Escribe el archivo de configuracion
 			$archivo_config=fopen("core/configuracion.php","w");
 			if($archivo_config==null)
@@ -1047,7 +1042,7 @@ $salida=sprintf("<?php
 
 				Variables de entrada:
 
-					TipoElementos - Indica el tipo de elementos que deben ser exportados:  Inf o Frm
+					TipoElementos - Indica el tipo de elementos que deben ser exportados:  Inf, Frm o Scr
 					ListaElementos - Una lista de los elementos de ese tipo que deben ser exportados en un formato similar a la impresion  EJ: 1,2,5-6,8,12-30
 					tipo_copia_objeto - Indica si los objetos seran generados con ID estatico o dinamico: XML_IdEstatico | XML_IdDinamico
 
@@ -1061,7 +1056,7 @@ $salida=sprintf("<?php
 
 			$mensaje_error="";
 			//Verifica todas las variables obligatorias
-			if ($TipoElementos!="Frm" && $TipoElementos!="Inf")  $mensaje_error="Tipo de elementos a exportar incorrectos";
+			if ($TipoElementos!="Frm" && $TipoElementos!="Inf" && $TipoElementos!="Scr")  $mensaje_error="Tipo de elementos a exportar incorrectos";
 			if ($ListaElementos=="")  $mensaje_error="No se ha provisto una lista de elementos a exportar valida";
 
 			if ($mensaje_error=="")
