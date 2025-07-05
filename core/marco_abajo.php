@@ -155,16 +155,6 @@
     <script type="text/javascript" src="inc/bootstrap/js/plugins/collapse.js"></script>
     <script type="text/javascript" src="inc/bootstrap/js/plugins/slider/bootstrap-slider.js"></script>
     <script type="text/javascript" src="inc/bootstrap/js/plugins/metisMenu/metisMenu.min.js"></script>
-    <!-- Bootstrap-Iconpicker Fuentes de iconos -->
-    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-fontawesome-4.2.0.min.js"></script>
-    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-glyphicon.min.js"></script>
-    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-ionicon-1.5.2.min.js"></script>
-    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-octicon-2.1.2.min.js"></script>
-    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-typicon-2.0.6.min.js"></script>
-    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-weathericon-1.2.0.min.js"></script>
-    <!--<script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-elusiveicon-2.0.0.min.js"></script>-->
-    <!--<script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/iconset/iconset-mapicon-2.1.0.min.js"></script>-->
-    <script type="text/javascript" src="inc/bootstrap/js/plugins/iconpicker/bootstrap-iconpicker.min.js"></script>
 
     <!-- Plugins JavaScript requeridos por DateTimePicker -->
     <script src="inc/bootstrap/js/plugins/datepicker/bootstrap-datetimepicker.min.js"></script>
@@ -197,14 +187,26 @@
     <script src="inc/bootstrap/js/sb-admin-2.js"></script>
     <script src="inc/bootstrap/js/practico.min.js?<?php echo filemtime('inc/bootstrap/js/practico.min.js'); ?>"></script>
     <?php
-    	//Carga marco de chat solamente si esta habilitado
-    	if (isset($Activar_ModuloChat) && $Activar_ModuloChat>0 && @$_SESSION['username']!="")
-        	{
+    	//Carga marco de chat solamente si esta habilitado y si la accion no es cargar algun elemento embebido donde pueda estorbar el chat
+    	if (   $PCO_Objeto!="frm:-52:0"     //Selector Emojis Unicode
+    	    && $PCO_Objeto!="frm:-51:0"     //Selector Iconos FontAwesome
+    	    && $PCO_Objeto!="frm:-33:0"     //PCoder
+    	    && $PCO_Objeto!="frm:-34:0"     //Administrador de archivos
+    	    && $PCO_Objeto!="frm:-36:0"     //Editor de objetos de formularios
+    	   )
+        	if (isset($Activar_ModuloChat) && $Activar_ModuloChat>0 && @$_SESSION['username']!="")
+            	{
 	?>
                 <!-- Chat -->
                 <script type="text/javascript" src="inc/chat/js/chat.js"></script>
+                <script type="text/javascript">
+                    function PCOJS_AsignarIconoUNICODE_CHAT(IdHTMLCampo,Valor) 
+                        {
+                            document.getElementById(IdHTMLCampo).value=document.getElementById(IdHTMLCampo).value+Valor;
+                        }
+                </script>
     <?php
-    	    }
+    	        }
 
         //Si el usuario es admin por defecto presenta la barra lateral activa
         // DEPRECATED: (PCO_EsAdministrador(@$PCOSESS_LoginUsuario) && @$PCOSESS_SesionAbierta && @$PCO_Accion=="PCO_VerMenu") || 
@@ -408,7 +410,7 @@ $(document).ready( function() {
                                     {
                                         //Genera la definicion requerida por DT con la lista de columnas 
                                         $ListaCamposDT=explode(",",$TablasDataTableColumnas[$i]); //Genera arreglo para los campos
-                                        //FORMA OPCIONAL: Recuperar la lista de columnas directo desde la cache (menos rapido): $ListaCamposDT=explode(",",PCO_EjecutarSQL("SELECT columnas FROM {$TablasCore}informe_cache WHERE id='".$TablasDataTableIdCache[$i]."' ")->fetchColumn());
+                                        //FORMA OPCIONAL: Recuperar la lista de columnas directo desde la cache (menos rapido): $ListaCamposDT=explode(",",PCO_EjecutarSQL("SELECT columnas FROM coreinforme_cache WHERE id='".$TablasDataTableIdCache[$i]."' ")->fetchColumn());
                                         $CadenaCamposDT="";
                                         foreach ($ListaCamposDT as $CampoDT)
                                             $CadenaCamposDT.="{ data: '{$CampoDT}' } ,";
@@ -548,10 +550,13 @@ $(document).ready( function() {
     <?php
         //Carga las funciones activadoras de diferentes tipos de control (si fue encontrado algun campo de ese tipo)
         //DatePicker
+        global $funciones_activacion_datepickers;
         if (@$funciones_activacion_datepickers!="") echo '<script type="text/javascript">'.$funciones_activacion_datepickers.'</script>';
         //Deslizadores
+        global $funciones_activacion_sliders;
         if (@$funciones_activacion_sliders!="") echo '<script type="text/javascript">'.$funciones_activacion_sliders.'</script>';
         //Canvas
+        global $funciones_activacion_canvas;
         if (@$funciones_activacion_canvas!="") echo '<script type="text/javascript">'.$funciones_activacion_canvas.'</script>';
 
         // Calcula tiempos de ejecucion del script
@@ -566,40 +571,6 @@ $(document).ready( function() {
     </script>
 
     <?php
-        //Si se requiere selector de iconos genera los eventos
-        if (@$PCO_Accion=="PCOFUNC_AdministrarMenu")
-            {
-    ?>
-        <script language="JavaScript">
-            //Crea evento para el selector de iconos (cuando aplica)
-            $('#lib_glyphicon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value='glyphicon '+e.icon;
-            });
-            $('#lib_ionicon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value='fa '+e.icon;
-            });
-            $('#lib_fontawesome').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value='fa '+e.icon;
-            });
-            $('#lib_weathericon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value='wi fa '+e.icon;
-            });
-            $('#lib_mapicon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value=e.icon;
-            });
-            $('#lib_octicon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value='octicon '+e.icon;
-            });
-            $('#lib_typicon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value='typcn fa '+e.icon;
-            });
-            $('#lib_elusiveicon').iconpicker().on('change', function(e) {
-                document.PCO_FormItemMenu.imagen.value=e.icon;
-            });
-        </script>
-    <?php
-            } //Fin de eventos para selector de iconos
-
         // Si existe el directorio para el editor ACE lo incluye
         if (@file_exists("inc/ace"))
             {
@@ -788,8 +759,9 @@ $(document).ready( function() {
         </script> ';
 
 		//Si existen funciones JavaScript generadas por algun formulario del usuario entonces las imprime
+		global $PCO_FuncionesJSInternasFORM;
 		if(@$PCO_FuncionesJSInternasFORM!="")
-			echo $PCO_FuncionesJSInternasFORM;
+			echo "<!-- FUNCIONES JS DE USUARIO -->{$PCO_FuncionesJSInternasFORM}";
 
         //Agrega funcion para verificar periodicamente la conectividad del cliente
         if (@$PCOSESS_SesionAbierta)
