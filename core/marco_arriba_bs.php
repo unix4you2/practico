@@ -112,7 +112,6 @@
     <link href="inc/bootstrap/css/plugins/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/slider/slider.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/select/bootstrap-select.min.css?<?php echo filemtime('inc/bootstrap/css/plugins/select/bootstrap-select.min.css'); ?>" rel="stylesheet">
-    <link href="inc/bootstrap/css/plugins/iconpicker/bootstrap-iconpicker.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/dataTables.bootstrap.min.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/simple-sidebar.css" rel="stylesheet">
     <link href="inc/bootstrap/css/plugins/toggle/bootstrap-toggle.css" rel="stylesheet">
@@ -235,24 +234,14 @@
 
     <link href="inc/summernote/summernote.min.css" rel="stylesheet">
     <!-- CSS Personalizado (Plantilla y Practico) -->
-    <?php 
-        //Evita el cargue si se trata de una opcion especifica
-        if ($PCO_Accion!="PCOMOD_CargarPcoder") {
-    ?>
-        <link href="inc/bootstrap/css/sb-admin-2.css" rel="stylesheet">
-        <link href="inc/bootstrap/css/practico.min.css" rel="stylesheet">
-    <?php 
-        }
-    ?>
+    <link href="inc/bootstrap/css/sb-admin-2.css" rel="stylesheet">
+    <link href="inc/bootstrap/css/practico.min.css" rel="stylesheet">
 
-    <!-- Custom Fonts -->
-    <link href="inc/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="inc/ionicons/css/ionicons.min.css" rel="stylesheet" type="text/css">
-    <link href="inc/octicons/octicons.css" rel="stylesheet" type="text/css">
-    <link href="inc/typicons/typicons.css" rel="stylesheet" type="text/css">
-    <link href="inc/weather-icons/css/weather-icons.min.css" rel="stylesheet" type="text/css">
-    <!--<link href="inc/elusive-iconfont/css/elusive-webfont.css" rel="stylesheet" type="text/css">-->
-    <!--<link href="inc/map-icons/css/map-icons.css" rel="stylesheet" type="text/css">-->
+    <!-- Custom Fonts Font Awesome Solid + Brands -->
+    <link href="inc/fortawesome/font-awesome/css/fontawesome.min.css" rel="stylesheet" type="text/css">
+    <link href="inc/fortawesome/font-awesome/css/brands.min.css" rel="stylesheet" type="text/css">
+    <link href="inc/fortawesome/font-awesome/css/solid.min.css" rel="stylesheet" type="text/css">
+    <link href="inc/fortawesome/font-awesome/css/v4-shims.min.css" rel="stylesheet" type="text/css"> <!-- Compatibilidad v4.7 -->
 
     <!-- JavaScript Personalizado -->
 	<script type="text/javascript" src="inc/practico/javascript/validaform.js"></script>
@@ -318,7 +307,7 @@
     <!-- FaceAPI -->
     <?php
         //Determina si se debe incluir scripts de reconocimiento facial
-        $PCO_RegistroParametrosAplicacion=PCO_EjecutarSQL("SELECT * FROM {$TablasCore}parametros WHERE 1=1 LIMIT 0,1 ")->fetch();
+        $PCO_RegistroParametrosAplicacion=PCO_EjecutarSQL("SELECT * FROM core_parametros WHERE 1=1 LIMIT 0,1 ")->fetch();
         if ($PCO_RegistroParametrosAplicacion["facialrec_habilitar"]=="S")
                 echo '<script src="inc/face-detect/face-api.min.js"></script>';
     ?>
