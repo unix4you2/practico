@@ -150,10 +150,7 @@
                         <br><?php echo $MULTILANG_DesUsuarios; ?>
                         </td>
                         <td>
-                            <form action="" method="post">
-                                <input type="hidden" name="PCO_Accion" value="PCO_ListarUsuarios">
-                                <button type="button" class="btn btn-warning" onclick="document.PCO_ListarUsuarios.submit();" ><i class="fa fa-user fa-fw fa-4x"></i></button>
-                            </form>
+                            <a type="button" class="btn btn-warning" href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-8:1&FiltroLoginUsuario=_|_&FiltroNombreUsuario=_|_" ><i class="fa fa-user fa-fw fa-4x"></i></a>
                         </td>
                     </tr>
                 </table>
@@ -205,7 +202,8 @@
 									   $PCO_EnlacePCODER="javascript:PCOJS_MostrarMensaje('".$MULTILANG_TitDemo."','".$MULTILANG_MsjDemo."');";
 								?>
 								<div class="row">
-    								<div class="col col-xs-12 col-sm-12 col-md-12 col-lg-12"><a class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: {P}Coder</a></div>
+    								<div class="col col-xs-6 col-sm-6 col-md-9 col-lg-9"><a class="btn btn-primary btn-block" href="<?php echo $PCO_EnlacePCODER; ?>"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: {P}Coder</a></div>
+    								<div class="col col-xs-6 col-sm-6 col-md-3 col-lg-3"><a data-toggle='tooltip' data-placement='bottom' title='Buscador de c&oacute;digo' class="btn btn-info btn-block" href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-5001:1"><i class="fa fa-search fa-fw"></i></a></div>
     								<!--<div class="col col-xs-12 col-sm-12 col-md-10 col-lg-10"><a class="btn btn-primary btn-block" href="javascript:var LMQTP=OperacionFS_AbrirArchivo();"><i class="fa fa-file-code-o fa-fw"></i> <?php echo $MULTILANG_DefPcoder; ?>: {P}Coder</a></div>-->
     								<!--<div class="col col-xs-12 col-sm-12 col-md-2 col-lg-2"><a data-toggle='tooltip' data-placement='bottom' title='Limpiar almacenamiento local de sesiones de archivo' class="btn btn-info btn-block" href="javascript:localStorage.clear();"><i class="fa fa-trash fa-fw"></i></a></div>-->
 								</div>
@@ -257,7 +255,7 @@
 								<a class="btn btn-info btn-block" href="javascript:document.PCO_ExplorarTablerosKanban.submit();"><i class="fa fa-thumb-tack fa-fw"></i> <?php echo $MULTILANG_TablerosKanban; ?></a>
                                 <br>
                                 
-								<a class="btn btn-danger btn-block" href="javascript:document.PCO_BugTrackingForm.submit();"><i class="fa fa-bug fa-fw"></i> <?php echo $MULTILANG_BTPanel; ?></a>
+								<a class="btn btn-danger btn-block" href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-4:1"><i class="fa fa-bug fa-fw"></i> <?php echo $MULTILANG_BTPanel; ?></a>
                                 <br>
 
 								<a class="btn btn-primary btn-block" href="index.php?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=frm:-32:1"><i class="fa fa-cubes fa-fw"></i> <?php echo $MULTILANG_Modulos.' '.$MULTILANG_Aplicacion; ?></a>
@@ -295,9 +293,9 @@
 											<a class="btn btn-danger btn-block" OnClick="if (confirm('<?php echo $MULTILANG_Confirma; ?>')) { PCO_VentanaPopup('index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas=<?php echo $TablasApp; ?>&PCO_TipoOperacion=REPAIR&Presentar_FullScreen=1&Precarga_EstilosBS=1','Mantenimiento','toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500'); }"><i class="fa fa-wrench fa-fw"></i> <?php echo $MULTILANG_TblReparar; ?>: <b><?php echo $MULTILANG_Aplicacion; ?></b></a>
 										</div>
 										<div class="col-md-6">
-											<a class="btn btn-info btn-block" OnClick="if (confirm('<?php echo $MULTILANG_Confirma; ?>')) { PCO_VentanaPopup('index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas=<?php echo $TablasCore; ?>&PCO_TipoOperacion=ANALYZE&Presentar_FullScreen=1&Precarga_EstilosBS=1','Mantenimiento','toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500'); }"><i class="fa fa-eye fa-fw"></i> <?php echo $MULTILANG_TblAnaliza; ?>: <b><?php echo $NombreRAD; ?></b></a>
-											<a class="btn btn-primary btn-block" OnClick="if (confirm('<?php echo $MULTILANG_Confirma; ?>')) { PCO_VentanaPopup('index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas=<?php echo $TablasCore; ?>&PCO_TipoOperacion=OPTIMIZE&Presentar_FullScreen=1&Precarga_EstilosBS=1','Mantenimiento','toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500'); }"><i class="fa fa-line-chart fa-fw"></i> <?php echo $MULTILANG_TblOptimizar; ?>: <b><?php echo $NombreRAD; ?></b></a>
-											<a class="btn btn-danger btn-block" OnClick="if (confirm('<?php echo $MULTILANG_Confirma; ?>')) { PCO_VentanaPopup('index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas=<?php echo $TablasCore; ?>&PCO_TipoOperacion=REPAIR&Presentar_FullScreen=1&Precarga_EstilosBS=1','Mantenimiento','toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500'); }"><i class="fa fa-wrench fa-fw"></i> <?php echo $MULTILANG_TblReparar; ?>: <b><?php echo $NombreRAD; ?></b></a>
+											<a class="btn btn-info btn-block" OnClick="if (confirm('<?php echo $MULTILANG_Confirma; ?>')) { PCO_VentanaPopup('index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas=core_&PCO_TipoOperacion=ANALYZE&Presentar_FullScreen=1&Precarga_EstilosBS=1','Mantenimiento','toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500'); }"><i class="fa fa-eye fa-fw"></i> <?php echo $MULTILANG_TblAnaliza; ?>: <b><?php echo $NombreRAD; ?></b></a>
+											<a class="btn btn-primary btn-block" OnClick="if (confirm('<?php echo $MULTILANG_Confirma; ?>')) { PCO_VentanaPopup('index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas=core_&PCO_TipoOperacion=OPTIMIZE&Presentar_FullScreen=1&Precarga_EstilosBS=1','Mantenimiento','toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500'); }"><i class="fa fa-line-chart fa-fw"></i> <?php echo $MULTILANG_TblOptimizar; ?>: <b><?php echo $NombreRAD; ?></b></a>
+											<a class="btn btn-danger btn-block" OnClick="if (confirm('<?php echo $MULTILANG_Confirma; ?>')) { PCO_VentanaPopup('index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas=core_&PCO_TipoOperacion=REPAIR&Presentar_FullScreen=1&Precarga_EstilosBS=1','Mantenimiento','toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500'); }"><i class="fa fa-wrench fa-fw"></i> <?php echo $MULTILANG_TblReparar; ?>: <b><?php echo $NombreRAD; ?></b></a>
 										</div>
 									</div>
 								<?php
