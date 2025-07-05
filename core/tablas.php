@@ -78,7 +78,7 @@
 			$mensaje_error="";
 			
 			// Busca si existen formularios utilizando el campo de la tabla antes de ser eliminado
-			//$consulta = "SELECT * FROM ".$TablasCore."formulario_objeto WHERE id='$formulario'";
+			//$consulta = "SELECT * FROM core_formulario_objeto WHERE id='$formulario'";
 			//$resultado = mysql_query($consulta,$mysql_enlace);
 			//$registro = mysql_fetch_array($resultado);
 
@@ -1080,7 +1080,7 @@ if ($PCO_Accion=="PCO_EscogerTablaImportacionCSV")
 								while ($registro = $resultado->fetch())
 									{
 										// Imprime solamente las tablas de aplicacion, es decir, las que no cumplen prefijo de internas de Practico
-										if (strpos($registro[0],$TablasCore)===FALSE)  // Booleana requiere === o !==
+										if (strpos($registro[0],"core_")===FALSE)  // Booleana requiere === o !==
 											echo '<option value="'.$registro[0].'" >'.str_replace($TablasApp,'',$registro[0]).'</option>';
 									}
 						?>
@@ -1184,7 +1184,7 @@ if ($PCO_Accion=="PCO_ImportarTabla")
                     <?php
                         // Busca por las auditorias asociadas a actualizacion de plataforma:
                         // Acciones:  Actualiza version de plataforma | _Actualizacion_ | Analiza archivo tmp/Practico | Carga archivo en carpeta tmp - Practico
-                        $resultado=@PCO_EjecutarSQL("SELECT $ListaCamposSinID_auditoria FROM ".$TablasCore."auditoria WHERE accion LIKE '%Import%' AND accion LIKE '%.gz%' ORDER BY fecha DESC, hora DESC LIMIT 0,30");
+                        $resultado=@PCO_EjecutarSQL("SELECT $ListaCamposSinID_auditoria FROM core_auditoria WHERE accion LIKE '%Import%' AND accion LIKE '%.gz%' ORDER BY fecha DESC, hora DESC LIMIT 0,30");
                         while($registro = $resultado->fetch())
                             {
                                 echo '<tr>
@@ -1294,9 +1294,9 @@ if ($PCO_Accion=="PCO_ImportarTabla")
 				{
 					$total_registros=PCO_ContarRegistrosTabla($registro["0"]);
 
-					if (strpos($registro[0],$TablasCore)!==FALSE) // Booleana requiere === o !==
+					if (strpos($registro[0],"core_")!==FALSE) // Booleana requiere === o !==
 						{
-							$PrefijoRegistro=$TablasCore;
+							$PrefijoRegistro="core_";
 						}
 					else
 						{
@@ -1316,7 +1316,7 @@ if ($PCO_Accion=="PCO_ImportarTabla")
 									</form>';					
 								
 								//Determina si activa o no el boton de editar
-								if ($PrefijoRegistro!=$TablasCore)
+								if ($PrefijoRegistro!="core_")
 									echo '<form action="'.$ArchivoCORE.'" method="POST" style="display:inline;">
 											<input type="hidden" name="PCO_Accion" value="PCO_EditarTabla">
 											<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
@@ -1345,7 +1345,7 @@ if ($PCO_Accion=="PCO_ImportarTabla")
 						//ZONA DE PELIGRO
 						//Inhabilita las tablas del nucleo
 						$EstadoActivacion=' ';
-						if ($PrefijoRegistro==$TablasCore) $EstadoActivacion=' disabled="disabled" ';
+						if ($PrefijoRegistro=="core_") $EstadoActivacion=' disabled="disabled" ';
 						echo '<td class="danger">';
 								echo '<form style="display:inline;">
 										<a class="btn btn-danger btn-xs" '.$EstadoActivacion.'  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_Truncar.'"  OnClick=\'if (confirm("'.$MULTILANG_Confirma.'")) { PCO_VentanaPopup("index.php?PCO_Accion=mantenimiento_tablas&PCO_PrefijoTablas='.$registro["0"].'&PCO_TipoOperacion=TRUNCATE&Presentar_FullScreen=1&Precarga_EstilosBS=1","Mantenimiento","toolbar=no, location=no, directories=no, status=no, menubar=no ,scrollbars=yes, resizable=yes, fullscreen=no, width=700, height=500"); }\'><i class="fa fa-eraser fa-fw"></i></a>
@@ -1355,7 +1355,7 @@ if ($PCO_Accion=="PCO_ImportarTabla")
 									</form>';
 
 								//Determina si activar o no el boton de eliminar
-								if ($PrefijoRegistro!=$TablasCore && $total_registros==0)							
+								if ($PrefijoRegistro!="core_" && $total_registros==0)							
 									echo '<form action="'.$ArchivoCORE.'" method="POST" name="f'.$registro["0"].'" id="f'.$registro["0"].'" style="display:inline;">
 											<input type="hidden" name="PCO_Accion" value="PCO_EliminarTabla">
 											<input type="hidden" name="nombre_tabla" value="'.$registro["0"].'">
@@ -1705,7 +1705,7 @@ if ($PCO_Accion=="PCO_ImportarTabla")
 		 <?php
 				$mysql_enlace = mysql_connect($Servidor, $UsuarioBD, $PasswordBD);
 				mysql_select_db($BaseDatos, $mysql_enlace);
-				$consulta = "SHOW TABLE STATUS FROM $BaseDatos WHERE Name LIKE '$TablasCore%'";
+				$consulta = "SHOW TABLE STATUS FROM $BaseDatos WHERE Name LIKE 'core_%'";
 				$resultado = mysql_query($consulta,$mysql_enlace);
 				while($registro = mysql_fetch_array($resultado))
 					{
