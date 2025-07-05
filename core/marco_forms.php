@@ -98,10 +98,6 @@
 <form name="PCO_ExplorarTablerosKanban"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
 	<input type="Hidden" name="PCO_Accion" value="PCO_ExplorarTablerosKanbanResumido">
 </form>
-<form name="PCO_BugTrackingForm"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
-	<input type="Hidden" name="PCO_Objeto" value="frm:-4:1">
-</form>
 
 <?php
 //Formularios exclusivos para administradores
@@ -111,10 +107,6 @@ if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
 		<form name="actualizarad" class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST">
 			<input type="Hidden" name="PCO_Accion" value="actualizar_practico">
 		</form>
-        <form method="POST" name="PCO_EditarConfiguracionOAuth"  class="oculto_impresion" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-        	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
-        	<input type="Hidden" name="PCO_Objeto" value="frm:-5:1">
-        </form>
         <form name="PCO_AdministrarTablas"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
         	<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarTablas">
         </form>
@@ -128,27 +120,9 @@ if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
         <form name="PCO_AdministrarInformes"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
         	<input type="Hidden" name="PCO_Accion" value="PCO_AdministrarInformes">
         </form>
-        <form name="PCO_ListarUsuarios"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-        	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto"> <!-- PCO_ListarUsuarios-->
-        	<input type="Hidden" name="PCO_Objeto" value="frm:-8:1">
-            <input type="Hidden" name="FiltroLoginUsuario" value="_|_">
-            <input type="Hidden" name="FiltroNombreUsuario" value="_|_">
-        </form>
-        <form name="PCO_VerTareasCron"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-        	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
-        	<input type="Hidden" name="PCO_Objeto" value="frm:-16:1">
-        </form>
-        <form name="PCO_VerReplicaciones"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-        	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
-        	<input type="Hidden" name="PCO_Objeto" value="frm:-10:1">
-        </form>
         <form name="PCO_VerMonitoreo"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
         	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
         	<input type="Hidden" name="PCO_Objeto" value="frm:-11:1">
-        </form>
-        <form name="PCO_AcortadorDirecciones"  class="oculto_impresion" action="<?php echo $ArchivoCORE; ?>" method="POST" style="display:inline; height: 0px; border-width: 0px; width: 0px; padding: 0; margin: 0;">
-        	<input type="Hidden" name="PCO_Accion" value="PCO_CargarObjeto">
-        	<input type="Hidden" name="PCO_Objeto" value="frm:-19:1">
         </form>
 <?php
 	}
