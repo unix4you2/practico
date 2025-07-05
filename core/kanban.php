@@ -134,7 +134,7 @@
 	if ($PCO_Accion=="GuardarPersonalizacionKanban")
 		{
 			// Actualiza los datos
-			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."kanban SET historial='$categorias_personalizadas',descripcion='$titulos_columnas',compartido_rw='$compartido_rw'    WHERE categoria='[PRACTICO][ColumnasTablero]' AND id='$ID_TableroKanban'  ");
+			PCO_EjecutarSQLUnaria("UPDATE core_kanban SET historial='$categorias_personalizadas',descripcion='$titulos_columnas',compartido_rw='$compartido_rw'    WHERE categoria='[PRACTICO][ColumnasTablero]' AND id='$ID_TableroKanban'  ");
 			PCO_Auditar("Actualiza propiedades de tablero Kanban $ID_TableroKanban");
 			PCO_RedireccionATableroKanban($ID_TableroKanban);
 		}
@@ -159,7 +159,7 @@
 			if ($TipoPrueba=="PNF") $Campo="aceptacion_pnf";
 			
 			// Actualiza los datos
-			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."kanban SET $Campo='Si' WHERE id=?","$IdTareaKanban");
+			PCO_EjecutarSQLUnaria("UPDATE core_kanban SET $Campo='Si' WHERE id=?","$IdTareaKanban");
 			PCO_Auditar("Acepta pruebas $TipoPrueba tarea Kanban $IdTareaKanban");
 			if ($Retorno=="")
 			    PCO_RedireccionATableroKanban($ID_TableroKanban);
@@ -195,9 +195,9 @@
 */
 	if ($PCO_Accion=="EliminarTareaKanban")
 		{
-            $TituloTarea=PCO_EjecutarSQL("SELECT titulo FROM ".$TablasCore."kanban WHERE id=$IdTareaKanban")->fetchColumn();
+            $TituloTarea=PCO_EjecutarSQL("SELECT titulo FROM core_kanban WHERE id=$IdTareaKanban")->fetchColumn();
 			// Elimina los datos
-			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."kanban WHERE id=?","$IdTareaKanban");
+			PCO_EjecutarSQLUnaria("DELETE FROM core_kanban WHERE id=?","$IdTareaKanban");
 			PCO_Auditar("Elimina tarea Kanban {$TituloTarea} ID={$IdTareaKanban}");
 			PCO_RedireccionATableroKanban($ID_TableroKanban);
 		}
@@ -217,10 +217,26 @@
 */
 	if ($PCO_Accion=="ArchivarTareaKanban")
 		{
-			// Elimina los datos
-			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."kanban SET archivado=1 WHERE id=?","$IdTareaKanban");
-			PCO_Auditar("Archiva tarea Kanban $IdTareaKanban");
-			PCO_RedireccionATableroKanban($ID_TableroKanban);
+			// Archiva tareas individuales
+			if ($ArchivadoMasivo=="0" || $ArchivadoMasivo=="")
+			    {
+        			PCO_EjecutarSQLUnaria("UPDATE core_kanban SET archivado=1 WHERE id=?","$IdTareaKanban");
+        			PCO_Auditar("Archiva tarea Kanban $IdTareaKanban");
+        			PCO_RedireccionATableroKanban($ID_TableroKanban);
+			    }
+			
+			//Archiva tareas grupales por la ultima columna
+			if ($ArchivadoMasivo=="1")
+			    {
+                    $PCOVAR_TareasActivasUltimaColumna=PCO_EjecutarSQL("SELECT id FROM core_kanban WHERE tablero='{$ID_TableroKanban}' AND archivado=0 AND columna>0 AND columna='{$ColumnaTablero}'");
+                    while ($PCOVAR_RegistroTarea=$PCOVAR_TareasActivasUltimaColumna->fetch())
+                        {
+                            $IdTareaKanban=$PCOVAR_RegistroTarea["id"];
+                			PCO_EjecutarSQLUnaria("UPDATE core_kanban SET archivado=1 WHERE id=?","$IdTareaKanban");
+                			PCO_Auditar("Archiva tarea Kanban $IdTareaKanban");
+                			PCO_RedireccionATableroKanban($ID_TableroKanban);
+                        }
+			    }
 		}
 
 
@@ -240,7 +256,7 @@
 		{
 			$mensaje_error="";
 			// Agrega los datos
-			PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw,historial) VALUES ('$PCOSESS_LoginUsuario','$titulo_tablero','$titulos_columnas','','[PRACTICO][ColumnasTablero]','-2','0','','20000101','0','','$categorias_personalizadas') ");
+			PCO_EjecutarSQLUnaria("INSERT INTO core_kanban (login_admintablero,titulo,descripcion,asignado_a,categoria,columna,peso,estilo,fecha,archivado,compartido_rw,historial) VALUES ('$PCOSESS_LoginUsuario','$titulo_tablero','$titulos_columnas','','[PRACTICO][ColumnasTablero]','-2','0','','20000101','0','','$categorias_personalizadas') ");
 			$idObjetoInsertado=PCO_ObtenerUltimoIDInsertado($ConexionPDO);
 			PCO_Auditar("Agrega Tablero Kanban $titulo_tablero Id:$idObjetoInsertado");
 			$_SESSION["PCOSESS_TableroKanbanActivo"]=(string)$idObjetoInsertado;
@@ -264,56 +280,14 @@
 		{
             //Busca detalles del tablero para auditoria
             $CantidadTareas=0;
-            $CantidadTareas=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM ".$TablasCore."kanban WHERE tablero=$ID_TableroKanban")->fetchColumn();
-            $TituloTablero=PCO_EjecutarSQL("SELECT titulo FROM ".$TablasCore."kanban WHERE id=$ID_TableroKanban")->fetchColumn();
+            $CantidadTareas=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM core_kanban WHERE tablero=$ID_TableroKanban")->fetchColumn();
+            $TituloTablero=PCO_EjecutarSQL("SELECT titulo FROM core_kanban WHERE id=$ID_TableroKanban")->fetchColumn();
 			$mensaje_error="";
 			// Elimina los datos
-			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."kanban WHERE id=$ID_TableroKanban ");
-			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."kanban WHERE tablero=$ID_TableroKanban ");
+			PCO_EjecutarSQLUnaria("DELETE FROM core_kanban WHERE id=$ID_TableroKanban ");
+			PCO_EjecutarSQLUnaria("DELETE FROM core_kanban WHERE tablero=$ID_TableroKanban ");
 			PCO_Auditar("Elimina Tablero Kanban: {$TituloTablero} ID={$ID_TableroKanban} con {$CantidadTareas} tarea(s)");
 			PCO_RedireccionATableroKanbanResumido();
-		}
-
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: VerTareasArchivadas
-	Presenta una lista de todas las tareas archivadas sobre un tablero kanban
-
-	Salida:
-		Reporte ID -3
-
-	Ver tambien:
-		<PCO_ExplorarTablerosKanban>
-*/
-	if ($PCO_Accion=="VerTareasArchivadas")
-		{
-		    $BotonRetorno = '<a class="btn btn-info" data-toggle="tooltip" data-html="true" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'\'><i class="fa fa-arrow-left"></i> '.$MULTILANG_TablerosKanban.'</a><br><br>';
-		    echo $BotonRetorno;
-		    PCO_CargarInforme(-3,1,"","",1);
-		    echo $BotonRetorno;
-		}
-
-
-/* ################################################################## */
-/* ################################################################## */
-/*
-	Function: VerTareasActivas
-	Presenta una lista de todas las tareas activas sobre un tablero kanban
-
-	Salida:
-		Reporte ID -3
-
-	Ver tambien:
-		<PCO_ExplorarTablerosKanban>
-*/
-	if ($PCO_Accion=="VerTareasActivas")
-		{
-		    $BotonRetorno = '<a class="btn btn-info" data-toggle="tooltip" data-html="true" href=\''.$ArchivoCORE.'?PCO_Accion=PCO_ExplorarTablerosKanban&ID_TableroKanban='.$ID_TableroKanban.'\'><i class="fa fa-arrow-left"></i> '.$MULTILANG_TablerosKanban.'</a><br><br>';
-		    echo $BotonRetorno;
-		    PCO_CargarInforme(-50,1,"","",1);
-		    echo $BotonRetorno;
 		}
 
 
@@ -337,7 +311,7 @@
 */
 	function PCO_AgregarFuncionesEdicionTarea($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban,$ResultadoColumnas)
 		{
-		    global $PCOSESS_LoginUsuario,$LlaveDePaso,$MULTILANG_ArchivarTareaAdv,$MULTILANG_Error,$MULTILANG_ArchivarTarea,$MULTILANG_DelKanban,$MULTILANG_Evento,$TablasCore,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
+		    global $PCOSESS_LoginUsuario,$LlaveDePaso,$MULTILANG_ArchivarTareaAdv,$MULTILANG_Error,$MULTILANG_ArchivarTarea,$MULTILANG_DelKanban,$MULTILANG_Evento,$MULTILANG_Cerrar,$ArchivoCORE,$MULTILANG_Editar,$MULTILANG_FrmAdvDelCampo,$MULTILANG_Eliminar,$MULTILANG_FrmAumentaPeso,$MULTILANG_FrmDisminuyePeso,$MULTILANG_Anterior,$MULTILANG_Columna,$MULTILANG_Siguiente;
 			$salida='';
             //Determina estados de activacion o no para controles segun valores actuales del registro
             $EstadoDeshabilitadoMoverIzquierda="";
@@ -422,8 +396,9 @@
 //Presenta una tarea especifica tomando la informacion desde un registro de BD
 	function PCO_PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban,$ResultadoColumnas)
 		{
-		    global $PCO_FechaOperacion,$TablasCore;
+		    global $PCO_FechaOperacion;
 		    global $MULTILANG_FechaLimite,$MULTILANG_AsignadoA,$MULTILANG_InfCategoria,$MULTILANG_DelKanban,$MULTILANG_Finalizado;
+		    global $PCOVAR_FILTRO_TipoVistaTarea;
             
             $EtiquetaIconoTareas=  "<i href='javascript:return false;' class='fa fa-fw fa-thumb-tack' data-toggle='tooltip' data-placement='top' title='".$RegistroTareas["categoria"]."' ></i>";
             $EtiquetaPersonas=  "<i href='javascript:return false;' class='fa fa-fw fa-users' data-toggle='tooltip' data-placement='top' title='".$MULTILANG_AsignadoA.": ".$RegistroTareas["asignado_a"]."' ></i>";
@@ -432,7 +407,7 @@
 			//Busca avatar del responsable
 	        $ComplementoImagenPerfil='<i class="fa fa-user-circle-o fa-fw fa-2x"></i>';
 	        //Busca si el usuario tiene imagen de perfil
-	        $PartesFotoUsuario=explode("|",PCO_EjecutarSQL("SELECT avatar FROM {$TablasCore}usuario WHERE login='".$RegistroTareas["asignado_a"]."' ")->fetchColumn());
+	        $PartesFotoUsuario=explode("|",PCO_EjecutarSQL("SELECT avatar FROM core_usuario WHERE login='".$RegistroTareas["asignado_a"]."' ")->fetchColumn());
 	        $RutaFotoUsuario=$PartesFotoUsuario[0];
 	        if ($RutaFotoUsuario!="")
 		        $ComplementoImagenPerfil="<img src='{$RutaFotoUsuario}' style='width:25px; height:25px; border-radius: 50%; margin-top:0px; margin-bottom:0px;'>";
@@ -449,11 +424,42 @@
             $(\'#PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'\').css({\'display\':\'block\'}); "
             onmouseleave="$(this).css(\'border\', \'0px solid\'); $(\'#PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'\').css({\'visibility\':\'hidden\'}); $(\'#PCOEditorContenedor_Col'.$RegistroTareas["columna"].'_'.$RegistroTareas["id"].'\').css({\'display\':\'none\'});  "';
 
+            //Define cadenas de complementos para Tags tipo details segun el tipo de vista de la tarea
+            if ($PCOVAR_FILTRO_TipoVistaTarea=="Completo")
+                {
+                    $ComplementoTipoVista_01="";
+                    $ComplementoTipoVista_02="";
+                    $ComplementoTipoVista_03="";
+                    $ComplementoTipoVista_04="";
+                }
+            if ($PCOVAR_FILTRO_TipoVistaTarea=="Resumido")
+                {
+                    $ComplementoTipoVista_01="<details><summary>";
+                    $ComplementoTipoVista_02="";
+                    $ComplementoTipoVista_03="</summary>";
+                    $ComplementoTipoVista_04="</details>";
+                }
+            if ($PCOVAR_FILTRO_TipoVistaTarea=="Compacto")
+                {
+                    $ComplementoTipoVista_01="<details><summary>";
+                    $ComplementoTipoVista_02="</summary>";
+                    $ComplementoTipoVista_03="";
+                    $ComplementoTipoVista_04="</details>";
+                }
+
             $Salida = '
                 <div id="Dragable'.$RegistroTareas["id"].'" draggable="true" ondragstart="Arrastrar(event,'.$RegistroTareas["id"].')">
                 <div class="panel panel-'.$EstiloCuadro.'" '.$EventoComplemento.'>
                     <div class="panel-heading">
                         <div class="row">
+                            '.$ComplementoTipoVista_01.'
+                            <div class="text-center">
+                                <div class="btn-xs">
+                                <b>'.$RegistroTareas["titulo"].'</b>
+                                <hr style="border-top: 1px dotted; margin:0; padding:0;">
+                                </div>
+                            </div>
+                            '.$ComplementoTipoVista_02.'
                             <div>&nbsp;
                                 '.$ComplementoImagenPerfil.'
                                 '.$EtiquetaIconoTareas.'
@@ -470,11 +476,7 @@
                                     }
             $Salida .='         </select>
                             </div>
-                            <div class="text-center">
-                                <div class="btn-xs">
-                                <b>'.$RegistroTareas["titulo"].'</b>
-                                </div>
-                            </div>
+                            '.$ComplementoTipoVista_03.'
                             <div class="text-left" style="overflow: auto;">
                                 <div class="btn-xs">
                                 <hr style="border-top: 1px dotted; margin:0; padding:0;">
@@ -484,6 +486,7 @@
                             <div class="text-center">
                                 '.$AccionesTarea.'
                             </div>
+                            '.$ComplementoTipoVista_04.'
                         </div>
                     </div>
                 </div>
@@ -497,7 +500,7 @@
 //Presenta un tablero completo de Kanban
 function PCO_PresentarTableroKanban($ID_TableroKanban)
 	{
-		    global $ArchivoCORE,$PCO_FechaOperacion,$TablasCore,$PCOSESS_LoginUsuario;
+		    global $ArchivoCORE,$PCO_FechaOperacion,$PCOSESS_LoginUsuario;
 		    global $MULTILANG_Descargar,$MULTILANG_ZonaPeligro,$MULTILANG_Confirma,$MULTILANG_TablerosKanban,$MULTILANG_Eliminar,$MULTILANG_TareasArchivadas,$MULTILANG_Atencion,$MULTILANG_Configuracion;
             global $MULTILANG_ArrastrarTarea,$MULTILANG_AgregarNuevaTarea,$MULTILANG_CrearTablero,$MULTILANG_FechaLimite;
             global $MULTILANG_Personalizado,$MULTILANG_ListaColumnas,$MULTILANG_FrmDesLista2,$MULTILANG_TitObligatorio,$MULTILANG_ListaCategorias,$MULTILANG_CompartirCon;
@@ -506,13 +509,13 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
             global $MULTILANG_Historia1,$MULTILANG_Historia2,$MULTILANG_Historia3,$PCO_FechaOperacionGuiones,$MULTILANG_Columna;
             global $funciones_activacion_datepickers,$IdiomaPredeterminado,$MULTILANG_FrmEstilo,$MULTILANG_InfCategoria,$MULTILANG_Finalizado;
             global $MULTILANG_BtnEstiloPredeterminado,$MULTILANG_BtnEstiloPrimario,$MULTILANG_BtnEstiloFinalizado,$MULTILANG_BtnEstiloInformacion,$MULTILANG_BtnEstiloAdvertencia,$MULTILANG_BtnEstiloPeligro;
-            global $MULTILANG_AsignadoA,$MULTILANG_SeleccioneUno,$MULTILANG_AsignadoADes,$MULTILANG_Peso,$MULTILANG_Prioridad;
+            global $MULTILANG_AsignadoA,$MULTILANG_SeleccioneUno,$MULTILANG_AsignadoADes,$MULTILANG_Peso,$MULTILANG_Prioridad,$MULTILANG_ArchivarTareaAdv;
             global $CadenaTablerosDisponibles,$MULTILANG_Actualizar,$MULTILANG_InfDataTableRegTotal,$MULTILANG_Tareas,$MULTILANG_ListaCategorias;
             
             global $CadenaFiltradoTareasKanban;
             
             //Busca las columnas definidas en el tablero
-            $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo,historial FROM ".$TablasCore."kanban WHERE id='$ID_TableroKanban' ")->fetch();
+            $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo,historial FROM core_kanban WHERE id='$ID_TableroKanban' ")->fetch();
             $ArregloColumnasTablero=explode(",",$ResultadoColumnas["descripcion"]);
 
 
@@ -569,8 +572,8 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
             $ComplementoHerramientasEliminacion='<div class="pull-right">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a onclick=\'return confirm(" '.$MULTILANG_Atencion.'  '.$MULTILANG_Atencion.'  '.$MULTILANG_Atencion.' \\n---------------------------------------------\\n '.$MULTILANG_Eliminar.' '.$MULTILANG_TablerosKanban.'\\n\\n\\n'.$MULTILANG_Confirma.'");\' href=\''.$ArchivoCORE.'?PCO_Accion=EliminarTableroKanban&ID_TableroKanban='.$ID_TableroKanban.'\' class="btn btn-danger btn-xs"  data-toggle="tooltip" data-html="true"  data-placement="top" title="'.$MULTILANG_ZonaPeligro.'!!!<br><b>'.$MULTILANG_Eliminar.' '.$MULTILANG_TablerosKanban.'</b>"><i class="fa fa-trash"></i></a></div>';
 
         //Cuenta el numero de tareas en el tablero
-        $CantidadTareasTotal=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' ")->fetchColumn();
-        $CantidadTareasArchivadas=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE archivado=1 AND tablero='$ID_TableroKanban' ")->fetchColumn();
+        $CantidadTareasTotal=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM core_kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' ")->fetchColumn();
+        $CantidadTareasArchivadas=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM core_kanban WHERE archivado=1 AND tablero='$ID_TableroKanban' ")->fetchColumn();
         $PorcentajeTotalAvance=0;
         if ($CantidadTareasTotal!=0)
             $PorcentajeTotalAvance=round($CantidadTareasArchivadas*100/$CantidadTareasTotal);
@@ -579,13 +582,13 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
         if ($ID_TableroKanban!="")
             {
                 $ComplementoHerramientasArchivadas="<div class='pull-left'>
-                                                    <a class='btn btn-default btn-xs' href='".$ArchivoCORE."?PCO_Accion=VerTareasArchivadas&ID_TableroKanban=$ID_TableroKanban'>
+                                                    <a class='btn btn-default btn-xs' href='".$ArchivoCORE."?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=inf:-3:1&ID_TableroKanban={$ID_TableroKanban}&PCOVAR_InformeEmbebido=1'>
                                                         <i class='fa fa-archive fa-fw fa-1x'></i> $MULTILANG_TareasArchivadas <b>($CantidadTareasArchivadas $MULTILANG_InfDataTableRegTotal)</b>
                                                     </a>
                                                 </div>";
 
                 $ComplementoHerramientasSINArchivar="<div class='pull-left'>
-                                                    <a class='btn btn-default btn-xs' href='".$ArchivoCORE."?PCO_Accion=VerTareasActivas&ID_TableroKanban=$ID_TableroKanban'>
+                                                    <a class='btn btn-default btn-xs' href='".$ArchivoCORE."?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=inf:-50:1&ID_TableroKanban={$ID_TableroKanban}&PCOVAR_InformeEmbebido=1'>
                                                         <i class='fa fa-file-excel-o fa-fw fa-1x'></i> $MULTILANG_Descargar
                                                     </a>
                                                 </div>";
@@ -605,7 +608,7 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                 </div>
                 <div class='row'>
                     <div class='col col-md-5 col-sm-5 col-lg-5 col-xs-5'>
-                        <div class='pull-left btn-xs'> <a class='btn btn-primary btn-xs' onclick='document.recarga_tablero_kanban.CadenaTablerosAVisualizar.value=$ID_TableroKanban; document.recarga_tablero_kanban.submit();'><i class='fa fa-refresh'></i> $MULTILANG_Actualizar</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        <div class='pull-left btn-xs'> <a class='btn btn-primary btn-xs' onclick='document.recarga_tablero_tareas.CadenaTablerosAVisualizar.value=$ID_TableroKanban; document.recarga_tablero_tareas.submit();'><i class='fa fa-refresh'></i> $MULTILANG_Actualizar</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
                         $ComplementoHerramientasArchivadas
                     </div>
                     <div class='col col-md-2 col-sm-2 col-lg-2 col-xs-2'>
@@ -638,12 +641,12 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                     <tr>
                         <td valign=top align=center>
                             <b><i class='fa fa-tags fa-fw fa-2x'></i>Actividades por categor&iacute;a / Activities by cathegory</b><br>";
-                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT categoria as '{$MULTILANG_ListaCategorias}', COUNT(*) as '{$MULTILANG_Tareas}'  FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' {$CadenaFiltradoTareasKanban} GROUP BY categoria ORDER BY categoria ");
+                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT categoria as '{$MULTILANG_ListaCategorias}', COUNT(*) as '{$MULTILANG_Tareas}'  FROM core_kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' {$CadenaFiltradoTareasKanban} GROUP BY categoria ORDER BY categoria ");
         echo "          </td>
                         <td>&nbsp;&nbsp;</td>
                         <td valign=top align=center>
                             <b><i class='fa fa-user fa-fw fa-2x'></i>Tareas por usuario / Tasks by user</b><br>";
-                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT asignado_a as '{$MULTILANG_AsignadoA}', COUNT(*) as '{$MULTILANG_Tareas}' FROM {$TablasCore}kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' {$CadenaFiltradoTareasKanban} GROUP BY asignado_a ORDER BY asignado_a ");
+                            PCO_CargarInforme(0,0,"","",1,0,0,0,"SELECT asignado_a as '{$MULTILANG_AsignadoA}', COUNT(*) as '{$MULTILANG_Tareas}' FROM core_kanban WHERE tablero='$ID_TableroKanban' AND categoria<>'[PRACTICO][ColumnasTablero]' {$CadenaFiltradoTareasKanban} GROUP BY asignado_a ORDER BY asignado_a ");
         echo "          </td>
                     </tr>
                 </table>";
@@ -675,7 +678,7 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
 
                             foreach ($ArregloColumnasTablero as $NombreColumna) {
                                 //Cuenta el numero de tareas en esta columna VS la cantidad de tareas activas en el tablero para obtener el porcentaje de representacion en el tablero
-                                $CantidadTareasColumna=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE columna=$ConteoColumna AND archivado=0 AND tablero='$ID_TableroKanban' ")->fetchColumn();
+                                $CantidadTareasColumna=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM core_kanban WHERE columna=$ConteoColumna AND archivado=0 AND tablero='$ID_TableroKanban' ")->fetchColumn();
                                 $PorcentajeTotalAvanceColumna=0;
                                 if ($CantidadTareasTotal-$CantidadTareasArchivadas!=0)
                                     $PorcentajeTotalAvanceColumna=round($CantidadTareasColumna*100/($CantidadTareasTotal-$CantidadTareasArchivadas));
@@ -683,13 +686,16 @@ function PCO_PresentarTableroKanban($ID_TableroKanban)
                                 echo "<div class='{$CadenaColumnas}' ondrop='Soltar(event,$ConteoColumna)' ondragover='PermitirSoltar(event,$ConteoColumna)' id='MarcoBotonOcultar".$ConteoColumna."' style='border-left:1px solid; border-color:lightgray;' >";
                                     echo "<div data-toggle='tooltip' data-html='true' data-placement='top' title='".$MULTILANG_ArrastrarTarea."' class='btn pull-left' ><i class='fa-1x'><i class='fa fa-stack-overflow'></i> <b>".$NombreColumna."</b> <font color=red>{$PorcentajeTotalAvanceColumna}%</font></i></div>";
                                             //echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='$(\"#myModalActividadKanban$ID_TableroKanban\").modal(\"show\"); document.datosfield$ID_TableroKanban.columna.value=$ConteoColumna;'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
-                                            echo "<div data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='PCO_CargarPopUP($ID_TableroKanban,$ConteoColumna,0);'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
-                                            echo "<br>";
+                                            echo "<div class='text-nowrap' data-toggle='tooltip' data-html='true'  data-placement='top' title='<b>".$MULTILANG_AgregarNuevaTarea.":</b> ".$NombreColumna."' class='btn text-primary btn-xs pull-right' onclick='PCO_CargarPopUP($ID_TableroKanban,$ConteoColumna,0);'><i class='fa fa-plus fa-fw fa-2x'></i></div>";
+
+                                            //Si es la ultima columna muestra opcion para archivar todo
+                                            if ($ConteoColumna==count($ArregloColumnasTablero))
+                                                echo "<div class='row'><div align=center class='col-xs-12 col-sm-12 col-md-12 col-lg-12'><a onclick='return confirm(\"{$MULTILANG_ArchivarTareaAdv}\");' href='{$ArchivoCORE}?PCO_Accion=ArchivarTareaKanban&ArchivadoMasivo=1&ID_TableroKanban={$ID_TableroKanban}&ColumnaTablero={$ConteoColumna}' class='btn btn-xs btn-warning'><i class='fa fa-archive fa-fw'></i> Archivar TODO</a></div></div>";
 
                                             echo "<div id='MarcoTareasColumna$ConteoColumna'>
-                                            <br><br><div id='ColumnaKanbanMarcoArrastre".$ConteoColumna."'></div>";
+                                            <br><div id='ColumnaKanbanMarcoArrastre".$ConteoColumna."'></div>";
                                             //Busca las tarjetas de la columna siempre y cuando no esten ya archivadas
-                                            $ResultadoTareas=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND columna=$ConteoColumna AND tablero='$ID_TableroKanban' {$CadenaFiltradoTareasKanban} ORDER BY peso ASC, id ASC ");
+                                            $ResultadoTareas=PCO_EjecutarSQL("SELECT * FROM core_kanban WHERE columna=$ConteoColumna AND tablero='$ID_TableroKanban' {$CadenaFiltradoTareasKanban} ORDER BY peso ASC, id ASC ");
                                             while ($RegistroTareas=$ResultadoTareas->fetch())
                                                 echo PCO_PresentarTareaKanban($RegistroTareas,$ColumnasDisponibles,$ID_TableroKanban,$ResultadoColumnas);
                                     echo "</div>";
@@ -752,13 +758,13 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
             </div>';
 
             //Busca las columnas definidas en el tablero
-            $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo FROM ".$TablasCore."kanban WHERE id='$PCO_Valor' ")->fetch();
+            $ResultadoColumnas=PCO_EjecutarSQL("SELECT descripcion,compartido_rw,login_admintablero,titulo FROM core_kanban WHERE id='$PCO_Valor' ")->fetch();
             $ArregloColumnasTablero=explode(",",$ResultadoColumnas["descripcion"]);
 
 
         //Cuenta el numero de tareas en el tablero
-        $CantidadTareasTotal=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE tablero='$PCO_Valor' AND categoria<>'[PRACTICO][ColumnasTablero]' ")->fetchColumn();
-        $CantidadTareasArchivadas=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM {$TablasCore}kanban WHERE archivado=1 AND tablero='$PCO_Valor' ")->fetchColumn();
+        $CantidadTareasTotal=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM core_kanban WHERE tablero='$PCO_Valor' AND categoria<>'[PRACTICO][ColumnasTablero]' {$CadenaFiltradoTareasKanban} ")->fetchColumn();
+        $CantidadTareasArchivadas=PCO_EjecutarSQL("SELECT COUNT(*) as conteo FROM core_kanban WHERE archivado=1 AND tablero='$PCO_Valor' {$CadenaFiltradoTareasKanban} ")->fetchColumn();
         $PorcentajeTotalAvance=0;
         if ($CantidadTareasTotal!=0)
             $PorcentajeTotalAvance=round($CantidadTareasArchivadas*100/$CantidadTareasTotal);
@@ -767,11 +773,20 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
         if ($PCO_Valor!="")
             {
                 $ComplementoHerramientasArchivadas="<div class='pull-left'>
-                                                    <a class='btn btn-default btn-xs' href='".$ArchivoCORE."?PCO_Accion=VerTareasArchivadas&ID_TableroKanban=$PCO_Valor'>
+                                                    <a class='btn btn-default btn-xs' href='".$ArchivoCORE."?PCO_Accion=PCO_CargarObjeto&PCO_Objeto=inf:-3:1&ID_TableroKanban={$PCO_Valor}&PCOVAR_InformeEmbebido=1'>
                                                         <i class='fa fa-archive fa-fw fa-1x'></i> $MULTILANG_TareasArchivadas <b>($CantidadTareasArchivadas $MULTILANG_InfDataTableRegTotal)</b>
                                                     </a>
                                                 </div>";
             }
+
+
+        //Carga formulario para construir variable general de filtrado para las tareas a visualizar
+        echo "<div class='well well-sm'>";
+        global $PCOVAR_NombreTableroKanban;
+        $PCOVAR_NombreTableroKanban=$ResultadoColumnas["titulo"];
+        PCO_CargarFormulario(-41,0);
+        echo "</div>";
+
 
         if ($PCO_CantidadFilasGantt=="") $PCO_CantidadFilasGantt=15;
         if ($PCO_TipoScrollGantt=="") $PCO_TipoScrollGantt="scroll";
@@ -791,7 +806,7 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                 </div>
                 <div class='row'>
                     <div class='col col-md-5 col-sm-5 col-lg-5 col-xs-5'>
-                        <div class='pull-left btn-xs'> <a class='btn btn-primary btn-xs' onclick='document.recarga_tablero_kanban.CadenaTablerosAVisualizar.value=$PCO_Valor; document.recarga_tablero_kanban.submit();'><i class='fa fa-refresh'></i> $MULTILANG_Actualizar</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        <div class='pull-left btn-xs'> <a class='btn btn-primary btn-xs' onclick='document.recarga_tablero_tareas.CadenaTablerosAVisualizar.value=$PCO_Valor; document.recarga_tablero_tareas.submit();'><i class='fa fa-refresh'></i> $MULTILANG_Actualizar</a>&nbsp;&nbsp;&nbsp;&nbsp;</div>
                         $ComplementoHerramientasArchivadas
                     </div>
                     <div class='col col-md-2 col-sm-2 col-lg-2 col-xs-2'>
@@ -806,11 +821,12 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                 </div>
                 <div class='row'>
                     <div style='font-size:18px;' class='col col-md-12 col-sm-12 col-lg-12 col-xs-12'>
-                        <form name='recarga_tablero_kanban' action='$ArchivoCORE' method='POST' style='font-size:13px; display: inline!important;'>
+                        <form name='recarga_tablero_tareas' action='$ArchivoCORE' method='POST' style='font-size:13px; display: inline!important;'>
                             <input type='Hidden' name='PCO_Accion' value='PCO_ExplorarTablerosGantt'>
                             <input type='Hidden' name='PCO_Valor' value='{$PCO_Valor}'>
                             <input type='Hidden' name='CadenaTablerosAVisualizar' value='{$CadenaTablerosAVisualizar}'>
                             <input type='Hidden' name='CadenaFiltradoTareasKanban' value=''>
+                            <input type='Hidden' name='PCOVAR_FILTRO_TipoVistaTarea' value=''>
                             <input placeholder='Filas Gantt' type='number' step='1' min='5' class='btn btn-sm' size='5' name='PCO_CantidadFilasGantt' id='PCO_CantidadFilasGantt' value='{$PCO_CantidadFilasGantt}' style='display:inline !important; width:100px;'>
 
                             Navegaci&oacute;n:<select name='PCO_TipoScrollGantt' class='btn btn-sm'>
@@ -845,8 +861,8 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                             </select>&nbsp;&nbsp;
 
                             GuardarCookie?:<select name='PCO_GuardarCookieGantt' class='btn btn-sm'>
-                                <option value='false'>No</option>
                                 <option value='true' >Si</option>
+                                <option value='false'>No</option>
                             </select>&nbsp;&nbsp;
                         </form>
                     </div>
@@ -902,7 +918,7 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosGantt")
                         //Define titulo de columna actual
                         $Columna="<div class='btn btn-xs btn-success' onclick='PCO_CargarPopUP({$PCO_Valor},{$PosicionColumna},0);'><i class='fa fa-plus fa-fw' ></i></div> ".$Columna;
 
-                        $TareasTablero=PCO_EjecutarSQL("SELECT * FROM {$TablasCore}kanban WHERE archivado = 0 AND tablero = '{$PCO_Valor}' AND columna='{$PosicionColumna}'  ORDER BY peso, id  ");
+                        $TareasTablero=PCO_EjecutarSQL("SELECT * FROM core_kanban WHERE archivado = 0 AND tablero = '{$PCO_Valor}' AND columna='{$PosicionColumna}' {$CadenaFiltradoTareasKanban} ORDER BY peso, id  ");
                         while ($RegistroTarea=$TareasTablero->fetch())
                             {
                                 //Define los valores a presentar en el grafico                                
@@ -1017,11 +1033,11 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
                 <br><br>
             </div>';
 
-
-        echo "<form name='recarga_tablero_kanban' action='$ArchivoCORE' method='POST' style='display: inline!important;'>
+        echo "<form name='recarga_tablero_tareas' action='$ArchivoCORE' method='POST' style='display: inline!important;'>
             <input type='Hidden' name='PCO_Accion' value='PCO_ExplorarTablerosKanban'>
             <input type='Hidden' name='CadenaTablerosAVisualizar' value='{$CadenaTablerosAVisualizar}'>
             <input type='Hidden' name='CadenaFiltradoTareasKanban' value=''>
+            <input type='Hidden' name='PCOVAR_FILTRO_TipoVistaTarea' value=''>
             </form>";
     ?>
 
@@ -1083,11 +1099,11 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanban")
         if ($CadenaTablerosAVisualizar=="")
             {
                 //Tableros propios
-                $ResultadoTableros=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND login_admintablero='$PCOSESS_LoginUsuario' ORDER BY titulo ASC ");
+                $ResultadoTableros=PCO_EjecutarSQL("SELECT * FROM core_kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND login_admintablero='$PCOSESS_LoginUsuario' ORDER BY titulo ASC ");
                 while ($RegistroTableros=$ResultadoTableros->fetch())
                     $CadenaTablerosAVisualizar.=$RegistroTableros["id"]."|";
                 //Tableros compartidos
-                $ResultadoTablerosCompartidos=PCO_EjecutarSQL("SELECT * FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%' ORDER BY titulo ASC ");
+                $ResultadoTablerosCompartidos=PCO_EjecutarSQL("SELECT * FROM core_kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%' ORDER BY titulo ASC ");
                 while ($RegistroTablerosCompartidos=$ResultadoTablerosCompartidos->fetch())
                     $CadenaTablerosAVisualizar.=$RegistroTablerosCompartidos["id"]."|";
             }
@@ -1176,8 +1192,8 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanbanResumido")
 
 
 <?php
-        $ResultadoTablerosPropios=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND login_admintablero='$PCOSESS_LoginUsuario' ")->fetchColumn();
-        $ResultadoTablerosCompartidos=PCO_EjecutarSQL("SELECT COUNT(*) FROM ".$TablasCore."kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%' ")->fetchColumn();
+        $ResultadoTablerosPropios=PCO_EjecutarSQL("SELECT COUNT(*) FROM core_kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND login_admintablero='$PCOSESS_LoginUsuario' ")->fetchColumn();
+        $ResultadoTablerosCompartidos=PCO_EjecutarSQL("SELECT COUNT(*) FROM core_kanban WHERE archivado<>1 AND categoria='[PRACTICO][ColumnasTablero]' AND compartido_rw LIKE '%|$PCOSESS_LoginUsuario|%' ")->fetchColumn();
 
         //Verifica si tiene tableros compartidos y agrega el/los botones para explorar globalmente tareas de cada tablero
         if (PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
@@ -1193,7 +1209,7 @@ if (@$PCO_Accion=="PCO_ExplorarTablerosKanbanResumido")
 
         //Busca si es un administrador de tableros Kanban
         $PCOVAR_EsAdminKanban=0;
-        $RegistroAdminTableros=PCO_EjecutarSQL("SELECT usuarios_admin_kanban FROM ".$TablasCore."parametros WHERE 1=1 LIMIT 0,1 ")->fetchColumn();
+        $RegistroAdminTableros=PCO_EjecutarSQL("SELECT usuarios_admin_kanban FROM core_parametros WHERE 1=1 LIMIT 0,1 ")->fetchColumn();
         $RegistroAdminTableros=",".$RegistroAdminTableros.","; //Concatena siempre comas para facilitar la busqueda
         if (strpos($RegistroAdminTableros,$PCOSESS_LoginUsuario)!=false)
             $PCOVAR_EsAdminKanban=1;
