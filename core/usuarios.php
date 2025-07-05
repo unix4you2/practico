@@ -172,7 +172,7 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="establecer_nueva_
         //Busca si realmente el usuario ha solicitado un restablecimiento de clave
         // y compara con la llave recibida para que sea correcta y no haya caducado
         $Llave_esperada="PCO".substr(strtoupper(md5($PCO_UsuarioRestablecimiento.date("u"))),5,20);
-        $registro_usuario=PCO_EjecutarSQL("SELECT ".$ListaCamposSinID_usuario." FROM ".$TablasCore."usuario WHERE login=? AND llave_recuperacion=? AND llave_recuperacion=? ","$PCO_UsuarioRestablecimiento$_SeparadorCampos_$PCO_llave$_SeparadorCampos_$Llave_esperada")->fetch();
+        $registro_usuario=PCO_EjecutarSQL("SELECT * FROM core_usuario WHERE login=? AND llave_recuperacion=? AND llave_recuperacion=? ","$PCO_UsuarioRestablecimiento$_SeparadorCampos_$PCO_llave$_SeparadorCampos_$Llave_esperada")->fetch();
         if ($registro_usuario["login"]=="")
             $PCO_MensajeError.=$MULTILANG_ErrorDatos.".<br>";
 		
@@ -182,8 +182,8 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="establecer_nueva_
 				//Limpia de nuevo la llave de recuperacion
                 $LlaveRecuperacion="";
                 //Actualiza registros
-                PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$PCO_UsuarioRestablecimiento");
-                PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$PCO_UsuarioRestablecimiento");
+                PCO_EjecutarSQLUnaria("UPDATE core_usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$PCO_UsuarioRestablecimiento");
+                PCO_EjecutarSQLUnaria("UPDATE core_usuario SET clave=MD5('$clave1') WHERE login=? ","$PCO_UsuarioRestablecimiento");
                 PCO_Mensaje($MULTILANG_UsrResetCuenta,$MULTILANG_UsrResetOK,'','fa fa-unlock-alt fa-4x','alert alert-info alert-dismissible');
                 PCO_Auditar("Restablece clave de acceso desde $PCO_DireccionAuditoria",$PCO_UsuarioRestablecimiento);
             }
@@ -282,13 +282,13 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="enviar_correo_lla
         */
 		PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-primary');
         //Busca si realmente hay un usuario registrado con ese login y le envia el mensaje
-        if (PCO_ExisteValor($TablasCore."usuario","login",$usuario) && $usuario!="")
+        if (PCO_ExisteValor("core_usuario","login",$usuario) && $usuario!="")
             {
                 //Busca los datos del usuario
-                $registro=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE login=?","$usuario")->fetch();
+                $registro=PCO_EjecutarSQL("SELECT * FROM core_usuario WHERE login=?","$usuario")->fetch();
 				//Genera la llave unica de recuperacion y la lleva al usuario
                 $LlaveRecuperacion="PCO".substr(strtoupper(md5($usuario.date("u"))),5,20);
-                PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$usuario");
+                PCO_EjecutarSQLUnaria("UPDATE core_usuario SET llave_recuperacion=? WHERE login=?","$LlaveRecuperacion$_SeparadorCampos_$usuario");
 
                 //Genera el enlace de recuperacion
                 // Determina si la conexion actual de Practico esta encriptada
@@ -300,7 +300,7 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="enviar_correo_lla
                 $EnlaceRecuperacion.="?PCO_Accion=PCO_RecuperarContrasena&PCO_SubAccion=ingresar_clave_nueva&usuario=$usuario&llave=".$LlaveRecuperacion;
                 //Datos para el correo
                 $cuenta_destinatario="___".substr($registro["correo"],3,strlen($registro["correo"])-6)."_____";
-                $remitente=PCO_EjecutarSQL("SELECT correo FROM ".$TablasCore."usuario WHERE login=?","admin")->fetchColumn();
+                $remitente=PCO_EjecutarSQL("SELECT correo FROM core_usuario WHERE login=?","admin")->fetchColumn();
                 $destinatario=$registro["correo"];
                 $asunto="[".$NombreRAD."] ".$MULTILANG_UsrAsuntoReset;
                 $cuerpo_mensaje="<br><br>".$MULTILANG_UsrResetLink.":<br><b><a href=$EnlaceRecuperacion>$EnlaceRecuperacion</a></b>";
@@ -330,12 +330,12 @@ if ($PCO_Accion=="PCO_RecuperarContrasena" && $PCO_SubAccion=="enviar_correo_con
         */
 		PCO_AbrirVentana($MULTILANG_OlvideClave, 'panel-info');
         //Busca si realmente hay un usuario registrado con ese correo y le envia el mensaje
-        if (PCO_ExisteValor($TablasCore."usuario","correo",$correo) && $correo!="")
+        if (PCO_ExisteValor("core_usuario","correo",$correo) && $correo!="")
             {
                 //Busca los datos del usuario y los envia al correo registrado
-                $registro=PCO_EjecutarSQL("SELECT $ListaCamposSinID_usuario FROM ".$TablasCore."usuario WHERE correo=?","$correo")->fetch();
+                $registro=PCO_EjecutarSQL("SELECT * FROM core_usuario WHERE correo=?","$correo")->fetch();
 				
-                $remitente=PCO_EjecutarSQL("SELECT correo FROM ".$TablasCore."usuario WHERE login=?","admin")->fetchColumn();
+                $remitente=PCO_EjecutarSQL("SELECT correo FROM core_usuario WHERE login=?","admin")->fetchColumn();
                 $destinatario=$registro["correo"];
                 $asunto="[".$NombreRAD."] ".$MULTILANG_UsrAsuntoReset;
                 $cuerpo_mensaje="<br><br>".$MULTILANG_Usuario." ".$NombreRAD.": <b>".$registro["login"]."</b>";
@@ -499,7 +499,7 @@ if ($PCO_Accion=="PCO_CambiarContrasena")
 		seguridad - Nivel de seguridad calculado para la contrasena
 
 		(start code)
-			"UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login='$PCOSESS_LoginUsuario'"
+			"UPDATE core_usuario SET clave=MD5('$clave1') WHERE login='$PCOSESS_LoginUsuario'"
 		(end)
 
 	Salida:
@@ -519,7 +519,7 @@ if ($PCO_Accion=="PCO_ActualizarContrasena")
 		$mensaje_error="";
         //Verifica que la contrasena actual recibida si sea
     	$ClaveEnMD5=hash("md5", $clave0);
-    	$LoginValido=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario WHERE estado=1 AND login='$PCOSESS_LoginUsuario' AND clave='$ClaveEnMD5' ")->fetchColumn();
+    	$LoginValido=PCO_EjecutarSQL("SELECT login FROM core_usuario WHERE estado=1 AND login='$PCOSESS_LoginUsuario' AND clave='$ClaveEnMD5' ")->fetchColumn();
 		if ($LoginValido=="") $mensaje_error=$MULTILANG_UsrErrPW4.".<br>";
 		// Verifica campos nulos
 		if ($clave1=="" || $clave2=="") $mensaje_error=$MULTILANG_UsrErrPW1.".<br>";
@@ -530,7 +530,7 @@ if ($PCO_Accion=="PCO_ActualizarContrasena")
 
 		if ($mensaje_error=="")
 			{
-				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$clave1') WHERE login=? ","$PCOSESS_LoginUsuario");
+				PCO_EjecutarSQLUnaria("UPDATE core_usuario SET clave=MD5('$clave1') WHERE login=? ","$PCOSESS_LoginUsuario");
 				PCO_Auditar("Actualiza clave de acceso");
 				echo '<script language="javascript"> document.PCO_FormVerMenu.submit(); </script>';
 			}
@@ -572,7 +572,7 @@ if ($PCO_Accion=="PCO_ActualizarContrasena")
 if ($PCO_Accion=="PCO_EliminarInformeUsuario")
 	{
 		// Elimina el informe
-		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_informe WHERE informe=? AND usuario=? ","$informe$_SeparadorCampos_$usuario");
+		PCO_EjecutarSQLUnaria("DELETE FROM core_usuario_informe WHERE informe=? AND usuario=? ","$informe$_SeparadorCampos_$usuario");
 		PCO_Auditar("Elimina informe $informe a $usuario");
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_InformesUsuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
 				<script type="" language="JavaScript"> document.cancelar.submit();  </script>';
@@ -592,8 +592,8 @@ if ($PCO_Accion=="PCO_EliminarInformeUsuario")
 		informe - ID del informe que se desea agregar al perfil del usuario
 
 		(start code)
-			SELECT * FROM ".$TablasCore."usuario_informe WHERE usuario='$usuario' AND informe='$informe'
-			INSERT INTO ".$TablasCore."usuario_informe VALUES (0,'$usuario','$informe')
+			SELECT * FROM core_usuario_informe WHERE usuario='$usuario' AND informe='$informe'
+			INSERT INTO core_usuario_informe VALUES (0,'$usuario','$informe')
 		(end)
 
 	Salida:
@@ -606,7 +606,7 @@ if ($PCO_Accion=="PCO_EliminarInformeUsuario")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
-			$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_usuario_informe." FROM ".$TablasCore."usuario_informe WHERE usuario=? AND informe=? ","$usuario$_SeparadorCampos_$informe");
+			$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_usuario_informe." FROM core_usuario_informe WHERE usuario=? AND informe=? ","$usuario$_SeparadorCampos_$informe");
 			$registro_menu = $resultado->fetch();
 			if($registro_menu["informe"]!="")
 				$mensaje_error=$MULTILANG_UsrErrInf;
@@ -614,7 +614,7 @@ if ($PCO_Accion=="PCO_EliminarInformeUsuario")
 			if ($mensaje_error=="")
 				{
 					// Guarda el permiso para el usuario
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuario$_SeparadorCampos_$informe");
+					PCO_EjecutarSQLUnaria("INSERT INTO core_usuario_informe (".$ListaCamposSinID_usuario_informe.") VALUES (?,?)","$usuario$_SeparadorCampos_$informe");
 					PCO_Auditar("Agrega informe $informe al usuario $usuario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="PCO_Accion" value="PCO_InformesUsuario">
@@ -644,8 +644,8 @@ if ($PCO_Accion=="PCO_EliminarInformeUsuario")
 		usuario - UID/Login de usuario al que se desea agregar el permiso
 
 		(start code)
-			SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe WHERE nivel_usuario<=".$Nivel_usuario
-			SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario='$usuario'
+			SELECT core_informe.* FROM core_informe WHERE nivel_usuario<=".$Nivel_usuario
+			SELECT core_informe.* FROM core_informe,core_usuario_informe WHERE core_usuario_informe.informe=core_informe.id AND core_usuario_informe.usuario='$usuario'
 		(end)
 
 	Salida:
@@ -671,7 +671,7 @@ if ($PCO_Accion=="PCO_InformesUsuario")
 				<select name="usuarioo" class="selectpicker " data-live-search=true data-size=5 data-style="btn btn-default btn-xs ">
 						<option value=""><?php echo $MULTILANG_UsrDelPer; ?></option>
 						<?php
-							$resultado=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario WHERE login<>? ORDER BY login","$usuario");
+							$resultado=PCO_EjecutarSQL("SELECT login FROM core_usuario WHERE login<>? ORDER BY login","$usuario");
 							while($registro = $resultado->fetch())
 								{
 									echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
@@ -690,7 +690,7 @@ if ($PCO_Accion=="PCO_InformesUsuario")
 					<?php
 						//Despliega opciones de informes para agregar, aunque solamente las que este por debajo del perfil del usuario
 						//No se permite agregar opciones por encima del perfil actual del usuario
-						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe WHERE id>=0 ");
+						$resultado=PCO_EjecutarSQL("SELECT core_informe.* FROM core_informe WHERE id>=0 ");
 						while($registro = $resultado->fetch())
 							{
 								echo '<option  data-icon="glyphicon glyphicon-list-alt fa-fw"  value="'.$registro["id"].'">'.$registro["titulo"].'</option>';
@@ -719,7 +719,7 @@ if ($PCO_Accion=="PCO_InformesUsuario")
                 <tbody>
                 ';
 
-			$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."informe.* FROM ".$TablasCore."informe,".$TablasCore."usuario_informe WHERE ".$TablasCore."usuario_informe.informe=".$TablasCore."informe.id AND ".$TablasCore."usuario_informe.usuario=? ","$usuario");
+			$resultado=PCO_EjecutarSQL("SELECT core_informe.* FROM core_informe,core_usuario_informe WHERE core_usuario_informe.informe=core_informe.id AND core_usuario_informe.usuario=? ","$usuario");
 			while($registro = $resultado->fetch())
 				{
 					echo '<tr>
@@ -771,7 +771,7 @@ if ($PCO_Accion=="PCO_EliminarPermiso")
 	    $menu=$PartesCampos[0];
 	    $usuario=$PartesCampos[1];
 		// Elimina los datos de la opcion
-		PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE menu=? AND usuario=? ","$menu$_SeparadorCampos_$usuario");
+		PCO_EjecutarSQLUnaria("DELETE FROM core_usuario_menu WHERE menu=? AND usuario=? ","$menu$_SeparadorCampos_$usuario");
 		PCO_Auditar("Elimina permiso $menu a $usuario");
 
 		echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST"><input type="Hidden" name="PCO_Accion" value="PCO_PermisosUsuario"><input type="Hidden" name="usuario" value="'.$usuario.'"></form>
@@ -792,8 +792,8 @@ if ($PCO_Accion=="PCO_EliminarPermiso")
 		menu - ID del menu que se desea agregar del perfil del usuario
 
 		(start code)
-			SELECT * FROM ".$TablasCore."usuario_menu WHERE usuario='$usuario' AND menu='$menu'
-			INSERT INTO ".$TablasCore."usuario_menu VALUES (0,'$usuario','$menu')
+			SELECT * FROM core_usuario_menu WHERE usuario='$usuario' AND menu='$menu'
+			INSERT INTO core_usuario_menu VALUES (0,'$usuario','$menu')
 		(end)
 
 	Salida:
@@ -806,7 +806,7 @@ if ($PCO_Accion=="PCO_EliminarPermiso")
 		{
 			$mensaje_error="";
 			// Busca si existe ese permiso para el usuario
-			$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_usuario_menu." FROM ".$TablasCore."usuario_menu WHERE usuario=? AND menu=? ","$usuario$_SeparadorCampos_$menu");
+			$resultado=PCO_EjecutarSQL("SELECT id,".$ListaCamposSinID_usuario_menu." FROM core_usuario_menu WHERE usuario=? AND menu=? ","$usuario$_SeparadorCampos_$menu");
 			$registro_menu = $resultado->fetch();
 			if($registro_menu["menu"]!="")
 				$mensaje_error=$MULTILANG_UsrErrInf;
@@ -814,7 +814,7 @@ if ($PCO_Accion=="PCO_EliminarPermiso")
 			if ($mensaje_error=="")
 				{
 					// Guarda el permiso para el usuario
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuario$_SeparadorCampos_$menu");
+					PCO_EjecutarSQLUnaria("INSERT INTO core_usuario_menu (".$ListaCamposSinID_usuario_menu.") VALUES (?,?)","$usuario$_SeparadorCampos_$menu");
 					PCO_Auditar("Agrega permiso $menu al usuario $usuario");
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
 							<input type="Hidden" name="PCO_Accion" value="PCO_PermisosUsuario">
@@ -866,7 +866,7 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 				<select name="usuarioo" class="selectpicker " data-live-search=true data-size=5 data-style="btn btn-default btn-xs ">
 						<option value=""><?php echo $MULTILANG_UsrDelPer; ?></option>
 						<?php
-							$resultado=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario WHERE login<>? ORDER BY login","$usuario");
+							$resultado=PCO_EjecutarSQL("SELECT login FROM core_usuario WHERE login<>? ORDER BY login","$usuario");
 							while($registro = $resultado->fetch())
 								{
 									echo '<option value="'.$registro["login"].'">'.$registro["login"].'</option>';
@@ -886,12 +886,12 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 						if ($PCO_PlantillaFijaPermisos=="")
 						    {
         						//Despliega opciones de menu para agregar, Solamente las que no pertenecen a formularios Y CUANDO NO SE TIENE UNA PLANTILLA FIJA
-        						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE (padre=0 OR padre='') AND formulario_vinculado=0 ");
+        						$resultado=PCO_EjecutarSQL("SELECT core_menu.* FROM core_menu WHERE (padre=0 OR padre='') AND formulario_vinculado=0 ");
         						while($registro = $resultado->fetch())
         							{
         								echo '<option data-icon="'.$registro["imagen"].' fa-fw" value="'.$registro["hash_unico"].'">'.$registro["texto"].'</option>';
         								//Busca posibles opciones de segundo nivel y las agrega
-        								$resultadohijas=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu WHERE (padre='".$registro["hash_unico"]."') AND formulario_vinculado=0 ");
+        								$resultadohijas=PCO_EjecutarSQL("SELECT core_menu.* FROM core_menu WHERE (padre='".$registro["hash_unico"]."') AND formulario_vinculado=0 ");
         								if ($resultadohijas->rowCount()>0)
         								    echo '<optgroup label="Opciones de/Childs of: '.$registro["texto"].'">';
                 						while($registrohija = $resultadohijas->fetch())
@@ -905,12 +905,12 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 					    else
 					        {
         						//Despliega opciones de menu para agregar, cuando se necesita cruzar con una plantilla
-        						$resultado=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='{$PCO_PlantillaFijaPermisos}' AND (padre=0 OR padre='') AND formulario_vinculado=0 ");
+        						$resultado=PCO_EjecutarSQL("SELECT core_menu.* FROM core_menu,core_usuario_menu WHERE core_usuario_menu.menu=core_menu.hash_unico AND core_usuario_menu.usuario='{$PCO_PlantillaFijaPermisos}' AND (padre=0 OR padre='') AND formulario_vinculado=0 ");
         						while($registro = $resultado->fetch())
         							{
         								echo '<option data-icon="'.$registro["imagen"].' fa-fw" value="'.$registro["hash_unico"].'">'.$registro["texto"].'</option>';
         								//Busca posibles opciones de segundo nivel y las agrega
-        								$resultadohijas=PCO_EjecutarSQL("SELECT ".$TablasCore."menu.* FROM ".$TablasCore."menu,".$TablasCore."usuario_menu WHERE ".$TablasCore."usuario_menu.menu=".$TablasCore."menu.hash_unico AND ".$TablasCore."usuario_menu.usuario='{$PCO_PlantillaFijaPermisos}' AND (padre='".$registro["hash_unico"]."') AND formulario_vinculado=0 ");
+        								$resultadohijas=PCO_EjecutarSQL("SELECT core_menu.* FROM core_menu,core_usuario_menu WHERE core_usuario_menu.menu=core_menu.hash_unico AND core_usuario_menu.usuario='{$PCO_PlantillaFijaPermisos}' AND (padre='".$registro["hash_unico"]."') AND formulario_vinculado=0 ");
         								if ($resultadohijas->rowCount()>0)
         								    echo '<optgroup label="Opciones de/Childs of: '.$registro["texto"].'">';
                 						while($registrohija = $resultadohijas->fetch())
@@ -957,8 +957,8 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 
 				Proceso simplificado:
 					(start code)
-						DELETE FROM ".$TablasCore."usuario WHERE login='$uid_especifico'
-						DELETE FROM ".$TablasCore."usuario_menu WHERE usuario='$uid_especifico'
+						DELETE FROM core_usuario WHERE login='$uid_especifico'
+						DELETE FROM core_usuario_menu WHERE usuario='$uid_especifico'
 					(end)
 
 				Salida de la funcion:
@@ -967,9 +967,9 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 				Ver tambien:
 					<PCO_AgregarUsuario> | <PCO_CambiarEstadoUsuario>
 			*/
-			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario WHERE login=? ","$uid_especifico");
-			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_menu WHERE usuario=? ","$uid_especifico");
-			PCO_EjecutarSQLUnaria("DELETE FROM ".$TablasCore."usuario_informe WHERE usuario=? ","$uid_especifico");
+			PCO_EjecutarSQLUnaria("DELETE FROM core_usuario WHERE login=? ","$uid_especifico");
+			PCO_EjecutarSQLUnaria("DELETE FROM core_usuario_menu WHERE usuario=? ","$uid_especifico");
+			PCO_EjecutarSQLUnaria("DELETE FROM core_usuario_informe WHERE usuario=? ","$uid_especifico");
 			PCO_Auditar("Elimina el usuario $uid_especifico");
 			echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 		}
@@ -991,9 +991,9 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 				Proceso simplificado:
 					(start code)
 						if ($estado==1)
-							$consulta = "UPDATE ".$TablasCore."usuario SET estado=0 WHERE login='$uid_especifico'";
+							$consulta = "UPDATE core_usuario SET estado=0 WHERE login='$uid_especifico'";
 						else
-							$consulta = "UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso='$PCO_FechaOperacion' WHERE login='$uid_especifico'";
+							$consulta = "UPDATE core_usuario SET estado=1, ultimo_acceso='$PCO_FechaOperacion' WHERE login='$uid_especifico'";
 					(end)
 
 				Salida de la funcion:
@@ -1003,9 +1003,9 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 					<PCO_EliminarUsuario>
 			*/
 			if ($estado==1)
-				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET estado=0 WHERE login=? ","$uid_especifico");
+				PCO_EjecutarSQLUnaria("UPDATE core_usuario SET estado=0 WHERE login=? ","$uid_especifico");
 			else
-				PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET estado=1, ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid_especifico");
+				PCO_EjecutarSQLUnaria("UPDATE core_usuario SET estado=1, ultimo_acceso=? WHERE login=? ","$PCO_FechaOperacion$_SeparadorCampos_$uid_especifico");
 			PCO_Auditar("Cambia estado del usuario $uid_especifico");
 			echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 		}
@@ -1029,7 +1029,7 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 				Ver tambien:
 					<PCO_EliminarUsuario>
 			*/
-			PCO_EjecutarSQLUnaria("UPDATE ".$TablasCore."usuario SET clave=MD5('$nueva_clave') WHERE login=? ","$uid_especifico");
+			PCO_EjecutarSQLUnaria("UPDATE core_usuario SET clave=MD5('$nueva_clave') WHERE login=? ","$uid_especifico");
 			PCO_Auditar("Restablece clave de acceso para $uid_especifico");
 			echo '<script type="" language="JavaScript"> document.PCO_FormVerMenu.submit();  </script>';
 		}
@@ -1066,7 +1066,7 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 			// Verifica que no existe el usuario
 			if ($login!="")
 				{
-					$resultado_usuario=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario WHERE login=? ","$login");
+					$resultado_usuario=PCO_EjecutarSQL("SELECT login FROM core_usuario WHERE login=? ","$login");
 					$registro_usuario = $resultado_usuario->fetch();
 					if ($registro_usuario["login"]!="")
 						$mensaje_error=$MULTILANG_UsrErrCrea1;
@@ -1082,7 +1082,7 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
                     $Llave_recuperacion="";
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno,llave_recuperacion,es_plantilla,plantilla_permisos,descripcion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos$_SeparadorCampos_$descripcion_usuario");
+					PCO_EjecutarSQLUnaria("INSERT INTO core_usuario (login,clave,nombre,estado,correo,ultimo_acceso,llave_paso,usuario_interno,llave_recuperacion,es_plantilla,plantilla_permisos,descripcion) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos$_SeparadorCampos_$descripcion_usuario");
 					PCO_Auditar("Agrega usuario $login para $nombre",$login);
 
                     // Construye la URL del sistema para enviarla por correo
@@ -1096,7 +1096,7 @@ if ($PCO_Accion=="PCO_PermisosUsuario")
 
 					//Envia correo informativo
 					$cuerpo_mensaje="<br>".$MULTILANG_Bienvenido." ".$nombre.",<br><hr>Login: <b>".$login."</b><br>Password: <b>".$clave."</b><br><br><b><a href=".$URLAcceso.">[".$MULTILANG_TituloLogin."]</a></b><br><br>";
-	                $remitente=PCO_EjecutarSQL("SELECT correo FROM ".$TablasCore."usuario WHERE login=?","admin")->fetchColumn();
+	                $remitente=PCO_EjecutarSQL("SELECT correo FROM core_usuario WHERE login=?","admin")->fetchColumn();
 					PCO_EnviarCorreo($remitente,$correo,$MULTILANG_Bienvenido." [$NombreRAD]",$cuerpo_mensaje);
                     //Presenta mensaje final
 					echo "<br>";
@@ -1198,8 +1198,8 @@ if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
 
 				Proceso simplificado:
 					(start code)
-						SELECT login as uid_db FROM ".$TablasCore."usuario WHERE login='$login'
-						INSERT INTO ".$TablasCore."usuario VALUES ('$login','$clavemd5','$nombre','$descripcion',$estado,'$nivel','$correo','$PCO_FechaOperacion','$pasomd5')"
+						SELECT login as uid_db FROM core_usuario WHERE login='$login'
+						INSERT INTO core_usuario VALUES ('$login','$clavemd5','$nombre','$descripcion',$estado,'$nivel','$correo','$PCO_FechaOperacion','$pasomd5')"
 					(end)
 
 				Salida de la funcion:
@@ -1213,7 +1213,7 @@ if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
 			// Verifica que no existe el usuario
 			if ($login!="")
             {
-                $resultado_usuario=PCO_EjecutarSQL("SELECT login FROM ".$TablasCore."usuario WHERE login=? ","$login");
+                $resultado_usuario=PCO_EjecutarSQL("SELECT login FROM core_usuario WHERE login=? ","$login");
                 $registro_usuario = $resultado_usuario->fetch();
                 if ($registro_usuario["login"]!="")  $mensaje_error=$MULTILANG_UsrErrCrea1;
             }
@@ -1231,7 +1231,7 @@ if ($PCO_Accion=="PCO_AgregarUsuarioAutoregistro")
 					$clavemd5=MD5($clave);
 					$pasomd5=MD5($LlaveDePaso);
                     $Llave_recuperacion="";
-					PCO_EjecutarSQLUnaria("INSERT INTO ".$TablasCore."usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'','','',?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos$_SeparadorCampos_$descripcion_usuario$_SeparadorCampos_$redes_permitidas");
+					PCO_EjecutarSQLUnaria("INSERT INTO core_usuario (".$ListaCamposSinID_usuario.") VALUES (?,?,?,?,?,?,?,?,?,?,?,?,'','','',?)","$login$_SeparadorCampos_$clavemd5$_SeparadorCampos_$nombre$_SeparadorCampos_$estado$_SeparadorCampos_$correo$_SeparadorCampos_$PCO_FechaOperacion$_SeparadorCampos_$pasomd5$_SeparadorCampos_$usuario_interno$_SeparadorCampos_$Llave_recuperacion$_SeparadorCampos_$es_plantilla$_SeparadorCampos_$plantilla_permisos$_SeparadorCampos_$descripcion_usuario$_SeparadorCampos_$redes_permitidas");
 					PCO_Auditar("Agrega usuario $login para $nombre");
                     //Redirecciona a la lista de usuarios con el usuario prefiltrado por si se le quiere asignar permisos
 					echo '<form name="cancelar" action="'.$ArchivoCORE.'" method="POST">
