@@ -113,12 +113,17 @@
     // Establece la zona horaria por defecto para la aplicacion
     date_default_timezone_set($ZonaHoraria);
 
-    // Datos de fecha, hora y direccion IP para algunas operaciones
+    // Datos de fecha, hora para algunas operaciones
     $PCO_FechaOperacion=date('Ymd');
     $PCO_FechaOperacionGuiones=date('Y-m-d');
     $PCO_HoraOperacion=date('His');
     $PCO_HoraOperacionPuntos=date('H:i');
-    $PCO_DireccionAuditoria=$_SERVER['REMOTE_ADDR'];
+
+    //Detecta version PHP para determinar algunas operaciones asociadas a versiones de dependencias diferenciales
+    $PCO_ArregloVersionPHP=explode(".",PHP_VERSION);
+    $PCO_VersionMayorPHP=$PCO_ArregloVersionPHP[0];
+    $PCO_VersionMenorPHP=$PCO_ArregloVersionPHP[1];
+    $PCO_VersionGeneralPHP=$PCO_VersionMayorPHP.'.'.$PCO_VersionMenorPHP;
 
     // Define cadena con usuarios Administradores/disenadores.  Obsoleta desde 16.2  Confirmada eliminacion en 17.1
     if (!isset($PCOVAR_Administradores)) $PCOVAR_Administradores="admin";
@@ -157,6 +162,9 @@
 
     // Incluye archivo con algunas funciones comunes usadas por la herramienta
     include_once 'core/comunes.php';
+    // Datos direccion IP para algunas operaciones
+    $PCO_DireccionAuditoria=PCO_ObtenerIPCliente();
+
 
     //Ejecuta cualquier posible enlace corto que se reciba
     if (isset($_GET["e"])  || isset($_POST["e"]) )
@@ -194,7 +202,7 @@
         $tiempo_inicio_script = PCO_ObtenerMicrotime();
 
     // Importa autmaticamente definiciones de elementos internos en XML cuando encuentra alguna dentro de xml/
-    if(PCO_EsAdministrador(@$PCOSESS_LoginUsuario))
+    if(PCO_EsAdministrador(@$PCOSESS_LoginUsuario) || PCO_EsDesplegador(@$PCOSESS_LoginUsuario))
         { PCO_ImportarDefinicionesXML(0);  PCO_ImportarScriptsPHP(0); }
 
     // Incluye configuraciones OAuth
@@ -258,8 +266,8 @@
 				<div id="page-wrapper">  <!-- ANTES page-wrapper-->
 					<div class="container-fluid">
 						<div class="row">
-							<div class="col-lg-12">
-								<br>';
+							<div class="col col-xs-12 col-sm-12 col-md-12 col-lg-12">
+								<!--<br>-->';
 		}
 
     // Prueba que todas las extensiones requeridas se encuentren habilitadas
@@ -303,17 +311,17 @@
         { include "core/menus.php"; }
     if ($PCO_Accion=="Iniciar_login" || $PCO_Accion=="Terminar_sesion" || $PCO_Accion=="Mensaje_cierre_sesion")
         { include "core/sesion.php"; }
-    if ($PCO_Accion=="PCO_CargarObjeto" || $PCO_Accion=="cargar_objeto" || $PCO_Accion=="guardar_configuracion" || $PCO_Accion=="PCO_GuardarConfiguracionOAuth" || $PCO_Accion=="exportacion_masiva_objetos")
+    if ($PCO_Accion=="PCO_CargarObjeto" || $PCO_Accion=="guardar_configuracion" || $PCO_Accion=="PCO_GuardarConfiguracionOAuth" || $PCO_Accion=="exportacion_masiva_objetos")
         { include "core/objetos.php"; }
     if ($PCO_Accion=="actualizar_practico" || $PCO_Accion=="cargar_archivo" || $PCO_Accion=="analizar_parche" || $PCO_Accion=="aplicar_parche")
         { include "core/actualizacion.php"; }
     if ($PCO_Accion=="PCO_VerMonitoreo")
         { include "core/monitoreo.php"; }
-    if ($PCO_Accion=="cambiar_estado_campo" || $PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="opciones_combo_box" || $PCO_Accion=="PCO_ObtenerOpcionesAjaxSelect")
+    if ($PCO_Accion=="cambiar_estado_campo" || $PCO_Accion=="valor_campo_tabla" || $PCO_Accion=="PCO_ObtenerOpcionesComboBox" || $PCO_Accion=="PCO_ObtenerOpcionesAjaxSelect" || $PCO_Accion=="PCO_ObtenerEstadoServidorWeb" || $PCO_Accion=="PCO_ObtenerEstadoMotorBasedatos")
         { include "core/ajax.php"; }
     if ($PCO_Accion=="PCO_LimpiarCacheSQL" || $PCO_Accion=="PCO_ReportarBugs" || $PCO_Accion=="mantenimiento_tablas" || $PCO_Accion=="limpiar_temporales" || $PCO_Accion=="limpiar_backups")
         { include "core/mantenimiento.php"; }
-    if ($PCO_Accion=="VerTareasActivas" || $PCO_Accion=="PCO_ExplorarTablerosGantt" || $PCO_Accion=="PCO_ExplorarTablerosKanbanResumido" || $PCO_Accion=="AceptarPruebasTareaKanban" || $PCO_Accion=="EliminarTableroKanban" || $PCO_Accion=="GuardarCreacionKanban" || $PCO_Accion=="VerTareasArchivadas" || $PCO_Accion=="ArchivarTareaKanban" || $PCO_Accion=="PCO_ExplorarTablerosKanban" || $PCO_Accion=="EliminarTareaKanban" || $PCO_Accion=="GuardarPersonalizacionKanban")
+    if ($PCO_Accion=="PCO_ExplorarTablerosGantt" || $PCO_Accion=="PCO_ExplorarTablerosKanbanResumido" || $PCO_Accion=="AceptarPruebasTareaKanban" || $PCO_Accion=="EliminarTableroKanban" || $PCO_Accion=="GuardarCreacionKanban" || $PCO_Accion=="ArchivarTareaKanban" || $PCO_Accion=="PCO_ExplorarTablerosKanban" || $PCO_Accion=="EliminarTareaKanban" || $PCO_Accion=="GuardarPersonalizacionKanban")
         { include "core/kanban.php"; }
 
 

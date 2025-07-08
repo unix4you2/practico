@@ -54,6 +54,52 @@
 ########################################################################
 ########################################################################
 /*
+    Function: PCO_ObtenerIPCliente
+    Retorna la direccion IP del clienteReturns the real client IP address, taking into account reverse proxies like
+    Cloudflare or NGINX (as in OPNsense + NAXSI setups). It safely parses and validates 
+    headers that may contain the original IP, and falls back to REMOTE_ADDR if necessary.
+    
+    The function checks the following headers in order of trust:
+      - CF-Connecting-IP       (set by Cloudflare)
+      - X-Forwarded-For        (may contain multiple IPs, returns the first valid)
+      - X-Real-IP              (commonly set by NGINX)
+      - REMOTE_ADDR            (last resort, direct connection IP)
+    
+    It filters out invalid IP addresses and trims whitespace.
+    
+    Returns:
+      (string) The first valid client IP found, or '0.0.0.0' if none are valid.
+    
+    Example:
+      > $ip = getRealIpSafe();
+      > echo $ip; // e.g., '203.0.113.42'
+*/
+function PCO_ObtenerIPCliente()
+    {
+        $headers = array(
+            'HTTP_CF_CONNECTING_IP',
+            'HTTP_X_FORWARDED_FOR',
+            'HTTP_X_REAL_IP',
+            'REMOTE_ADDR'
+        );
+        foreach ($headers as $key) {
+            if (!empty($_SERVER[$key])) {
+                $ipList = explode(',', $_SERVER[$key]);
+                foreach ($ipList as $ip) {
+                    $ip = trim($ip);
+                    if (filter_var($ip, FILTER_VALIDATE_IP)) {
+                        return $ip;
+                    }
+                }
+            }
+        }
+        return '0.0.0.0';
+    }
+
+
+########################################################################
+########################################################################
+/*
 	Function: PCO_Base64UrlEncode
 	Permite codificar de manera mas consistente la informacion cuando debe ser transmitida por URL y la cadena resultante cuenta con caracteres no permitidos por estandar RFC para las URL.
 
